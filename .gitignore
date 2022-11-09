@@ -4,17 +4,67 @@ APIStuff.hx
 art/build_x32-officialrelease.bat
 art/build_x64-officialrelease.bat
 art/test_x64-debug-officialrelease.bat
+# Newgrounds IO Stuff
+source/NGio.hx
+source/io/
+# Misc
+Preloader.hx
+
+### FNF-Bot
+FNFBot.exe
+
+### GameJolt-Specific
+source/GJKeys.hx
+source/GameJolt.hx
+
+### Android-Specific
+source/SUtil.hx
+source/android/
+source/mobile/
+assets/android/
+assets/images/androidcontrols/
+art/dependencyFiles/android/
+
+### Appveyor-Specific
+appveyor.yml
+appveyor-win32.yml
+
+### Git-Specific
+.gitconfig
+.gitmodules
+
+### Stage Editor-Related
+assets/images/stageborder.png
+source/editors/StageEditorState.hx
+source/LayerFile.hx
+
+### Stepmania Stuff
+assets/sm/
+source/smTools/
+
+### Add these regardless of them getting ignored.
+!appveyor-linux.yml
+!appveyor-macos.yml
+!appveyor-windows.yml
+!azure-pipelines.yml
+!.DS_Store
+!Thumbs.db
+!*.hxml
+!*.hxproj
 
 ### VS Code
 export/*
 .vscode/*
-*.code-workspace
+.vscode/.temp
 # Local history which shouldn't be shared.
-.history
+desktop.ini
+.history/
 .ionide
-# ! means a file should be added regardless of it it gets ignored prior.
+# ! means a file should be added regardless of it getting ignored prior.
 # Including to allow others to use already set-up configuration tweaked for the project.
+!.code-workspace
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.vs/*
