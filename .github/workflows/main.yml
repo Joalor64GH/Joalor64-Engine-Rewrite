@@ -18,12 +18,12 @@ jobs:
   # This workflow contains a single job called "build"
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
       - uses: krdlab/setup-haxe@master
         with:
@@ -31,8 +31,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
+          sudo apt-get update
+          sudo apt-get install gcc-multilib g++-multilib haxe -y
           sudo apt-get install libvlc-dev
           sudo apt-get install libvlccore-dev
+          sudo apt-get install vlc-bin
+          sudo apt-get -y install libidn12
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
           haxelib install lime
@@ -47,17 +51,21 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxelib run lime rebuild extension-webm windows
           haxelib install hxcpp-debug-server
+          haxelib install actuate
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
         run: haxelib run lime build Project.xml linux --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@main
         with:
           name: linuxBuild
           path: 'export/release/linux/bin'
@@ -66,7 +74,7 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2.3.0
+      - uses: actions/checkout@main
 
       - uses: krdlab/setup-haxe@master
         with:
@@ -88,10 +96,14 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxelib run lime rebuild extension-webm mac
           haxelib install hxcpp-debug-server
+          haxelib install actuate
           haxelib list
         shell: cmd
       - name: Create Version Tag
@@ -99,7 +111,7 @@ jobs:
       - name: Compile
         run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@main
         with:
           name: windowsBuild
           path: export/release/windows/bin
@@ -108,7 +120,7 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
       - uses: krdlab/setup-haxe@master
         with:
@@ -130,17 +142,19 @@ jobs:
           haxelib install hxjsonast
           haxelib install hxCodec
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
+          haxelib install actuate
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
         run: haxelib run lime build mac --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@main
         with:
           name: macBuild
           path: export/release/macos/bin
