@@ -24,6 +24,7 @@ source/mobile/
 assets/android/
 assets/images/androidcontrols/
 art/dependencyFiles/android/
+mobile/
 
 ### Appveyor-Specific
 appveyor.yml
