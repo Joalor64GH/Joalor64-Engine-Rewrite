@@ -129,7 +129,7 @@
 	<define name="hscriptPos" />
 
 	<haxelib name="actuate"/>
-	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
+	<haxelib name="extension-webm" if="WEBM_ALLOWED || VIDEOS_ALLOWED"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />

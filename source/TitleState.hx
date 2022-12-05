@@ -639,9 +639,9 @@ class TitleState extends MusicBeatState
 					addMoreText('Bot 404', 15);
 					addMoreText('PE Devs', 15);
 					#elseif PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
+					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
-					addMoreText('shubs', 15);
+					addMoreText('Yoshubs', 15);
 					#else
 					addMoreText('present');
 					#end
