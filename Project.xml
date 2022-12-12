@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project>
+<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" packageName="com.joalor64gh.j64enginere" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
@@ -23,17 +24,17 @@
 	<!--These window settings apply to all targets-->
 	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
 
-	<!--HTML5-specific-->
+	<!--HTML5-->
 	<window if="html5" resizable="true" />
 
-	<!--Desktop-specific-->
+	<!--Desktop-->
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
-	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<!--macOS-->
+	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" />
 
-	<!--Switch-specific-->
-	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
+	<!--Mobile-->
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -52,16 +53,12 @@
 	<define name="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="CHECK_FOR_UPDATES" if="desktop"/>
+	<define name="PRELOAD_ALL" unless="web" />
+	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4"  unless="web"/>
-
-	<!-- DONT ENABLE THIS -->
-	<define name="CHECK_FOR_UPDATES" if="desktop"/>
-
-	<!-- <define name="PRELOAD_ALL" /> -->
-	<define name="PRELOAD_ALL" unless="web" />
-	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 	
 	<library name="videos"        preload="true" />
 	<section if="PRELOAD_ALL">
@@ -173,4 +170,9 @@
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>
 	<icon path="art/iconOG.png" />
+
+	<!-- ________________________ Import Linux Stuff _____________________________ -->
+	<target id="haxe" tool="linker" if="linux">
+		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" />
+	</target>
 </project>

@@ -83,16 +83,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['boowomp', 0.2], //From 0% to 19%
+		['WATAFAC', 0.4], //From 20% to 39%
+		['Dammit', 0.5], //From 40% to 49%
+		['spunchbob', 0.6], //From 50% to 59%
+		['wha', 0.69], //From 60% to 68%
+		['Me and who?', 0.7], //69%
+		['Aight homie', 0.8], //From 70% to 79%
+		['Yey', 0.9], //From 80% to 89%
+		['Not Bad!', 1], //From 90% to 99%
+		['Kanpeki!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 
 	//event variables
@@ -2069,8 +2069,16 @@ class PlayState extends MusicBeatState
 	function cacheCountdown()
 	{
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-		introAssets.set('default', ['ready', 'set', 'go']);
-		introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+		introAssets.set('default', [
+			'ready', 
+		    'set', 
+		    'go'
+		]);
+		introAssets.set('pixel', [
+			'pixelUI/ready-pixel', 
+			'pixelUI/set-pixel', 
+			'pixelUI/date-pixel'
+		]);
 
 		var introAlts:Array<String> = introAssets.get('default');
 		if (isPixelStage) introAlts = introAssets.get('pixel');
@@ -2144,8 +2152,16 @@ class PlayState extends MusicBeatState
 				}
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-				introAssets.set('default', ['ready', 'set', 'go']);
-				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+				introAssets.set('default', [
+					'ready', 
+					'set', 
+					'go'
+				]);
+				introAssets.set('pixel', [
+					'pixelUI/ready-pixel', 
+					'pixelUI/set-pixel', 
+					'pixelUI/date-pixel'
+				]);
 
 				var introAlts:Array<String> = introAssets.get('default');
 				var antialias:Bool = ClientPrefs.globalAntialiasing;
@@ -2302,8 +2318,8 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		scoreTxt.text = 'Score: ' + songScore
-		+ ' | Misses: ' + songMisses
-		+ ' | Rating: ' + ratingName
+		+ ' // Combo Breaks: ' + songMisses
+		+ ' // Rating: ' + ratingName
 		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
