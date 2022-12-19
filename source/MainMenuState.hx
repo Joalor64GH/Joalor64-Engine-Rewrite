@@ -139,7 +139,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-        var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
+        var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

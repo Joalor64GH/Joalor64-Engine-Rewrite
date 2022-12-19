@@ -29,6 +29,7 @@ class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var VIDEO_EXT = "mp4";
+	inline public static var WEBM_EXT = "webm";
 
 	#if MODS_ALLOWED
 	public static var ignoreModFolders:Array<String> = [
@@ -200,6 +201,17 @@ class Paths
 		}
 		#end
 		return 'assets/videos/$key.$VIDEO_EXT';
+	}
+
+	static public function webm(key:String)
+	{
+		#if MODS_ALLOWED
+		var file:String = modsWebm(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return 'assets/videos/$key.$WEBM_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Sound
@@ -410,6 +422,10 @@ class Paths
 
 	inline static public function modsVideo(key:String) {
 		return modFolders('videos/' + key + '.' + VIDEO_EXT);
+	}
+
+	inline static public function modsWebm(key:String) {
+		return modFolders('videos/' + key + '.' + WEBM_EXT);
 	}
 
 	inline static public function modsSounds(path:String, key:String) {

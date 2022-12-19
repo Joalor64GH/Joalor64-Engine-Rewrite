@@ -392,6 +392,11 @@ class TitleState extends MusicBeatState
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.0.0 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		if (initialized)
@@ -637,7 +642,6 @@ class TitleState extends MusicBeatState
 					#if JOALOR64_WATERMARKS
 					addMoreText('Joalor64 YT', 15);
 					addMoreText('Bot 404', 15);
-					addMoreText('PE Devs', 15);
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
@@ -653,13 +657,19 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 6:
-					#if (JOALOR64_WATERMARKS || PSYCH_WATERMARKS)
+					#if JOALOR64_WATERMARKS
 					createCoolText(['Powered', 'with'], -40);
-					#else
+					#elseif PSYCH_WATERMARKS
 					createCoolText(['Not in association', 'with'], -40);
+					#else
+					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
+				    #if JOALOR64_WATERMARKS
 					addMoreText('Psych Engine', -40);
+					#else
+					addMoreText('Newgrounds', -40);
+					#end
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 9:
