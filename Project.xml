@@ -50,6 +50,7 @@
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
 	<define name="WEBM_ALLOWED" if="windows || mac" />
+	<define name="PYTHON_SCRIPTING" if="windows" />
 	<define name="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release" />
@@ -83,6 +84,7 @@
 		<library name="week7"         preload="false" />
 	</section>
 	
+	<assets path="dlls/"                rename=''               if="PYTHON_SCRIPTING"/>
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4" unless="web"/>
