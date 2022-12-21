@@ -74,8 +74,8 @@ class Main extends Sprite
 
 		if (zoom == -1)
 		{
-			var ratioX:Float = stageWidth / gameWidth;
-			var ratioY:Float = stageHeight / gameHeight;
+			final ratioX:Float = stageWidth / gameWidth;
+			final ratioY:Float = stageHeight / gameHeight;
 			zoom = Math.min(ratioX, ratioY);
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
@@ -91,6 +91,27 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
+
+		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+
+		#if web
+		var str1:String = "HTML CRAP";
+		var vHandler = new VideoHandler();
+		vHandler.init1();
+		vHandler.video.name = str1;
+		addChild(vHandler.video);
+		vHandler.init2();
+		GlobalVideo.setVid(vHandler);
+		vHandler.source(ourSource);
+		#elseif WEBM_EXTENSION
+		var str1:String = "WEBM SHIT";
+		var webmHandle = new WebmHandler();
+		webmHandle.source(ourSource);
+		webmHandle.makePlayer();
+		webmHandle.webm.name = str1;
+		addChild(webmHandle.webm);
+		GlobalVideo.setWebm(webmHandle);
+		#end
 
 		#if html5
 		FlxG.autoPause = false;
