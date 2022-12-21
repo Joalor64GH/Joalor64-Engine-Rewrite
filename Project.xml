@@ -48,7 +48,6 @@
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="LUA_ALLOWED" if="desktop" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="MULTIMEDIA_PLUGIN" if="VIDEOS_ALLOWED"/>
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
 	<define name="WEBM_ALLOWED" if="desktop" />
 	<define name="MKV_ALLOWED" if="MULTIMEDIA_PLUGIN"/>
@@ -141,7 +140,6 @@
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
-	<haxelib name="extension-ffmpeg" if="MULTIMEDIA_PLUGIN"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="hxcpp-debug-server" if="desktop"/>
