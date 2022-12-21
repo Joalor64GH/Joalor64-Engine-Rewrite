@@ -2066,6 +2066,7 @@ class ChartingState extends MusicBeatState
 		reloadGridLayer();
 	}
 
+    /*
 	function loadAudioBuffer() {
 		if(audioBuffers[0] != null) {
 			audioBuffers[0].dispose();
@@ -2158,6 +2159,7 @@ class ChartingState extends MusicBeatState
 		}
 		#end
 	}
+	*/
 
 	var lastSecBeats:Float = 0;
 	var lastSecBeatsNext:Float = 0;
