@@ -42,7 +42,6 @@ import MainMenuState;
 using StringTools;
 typedef TitleData =
 {
-
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -52,6 +51,7 @@ typedef TitleData =
 	backgroundSprite:String,
 	bpm:Int
 }
+
 class TitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
@@ -668,7 +668,7 @@ class TitleState extends MusicBeatState
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
-				    #if JOALOR64_WATERMARKS
+				        #if JOALOR64_WATERMARKS
 					addMoreText('Psych Engine', -40);
 					#else
 					addMoreText('Newgrounds', -40);
@@ -695,11 +695,11 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				if (leDate.getDay() == 5 && leDate.getHours() >= 18)
 				{
-					//trace('oh wow just like the game');
 				    case 14:
 					    addMoreText('Getting Freaky on a');
 				        // credTextShit.visible = true;
 				    case 15:
+					    trace('oh wow just like the game');
 					    addMoreText('Friday Night');
 				        // credTextShit.text += '\nNight';
 				    case 16:
