@@ -695,7 +695,7 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				if (leDate.getDay() == 5 && leDate.getHours() >= 18)
 				{
-					trace('oh wow just like the game');
+					//trace('oh wow just like the game');
 				    case 14:
 					    addMoreText('Getting Freaky on a');
 				        // credTextShit.visible = true;

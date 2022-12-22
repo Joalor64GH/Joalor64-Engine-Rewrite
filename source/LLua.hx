@@ -66,7 +66,8 @@ class LLua
 		return 0;
 	}
 
-	public function set(variable:String, data:Dynamic):Void
+	// pretty sure this can't have inline iirc
+	inline public function set(variable:String, data:Dynamic):Void
 	{
 		if (isNull())
 			return;
@@ -75,6 +76,7 @@ class LLua
 		Lua.setglobal(lua, variable);
 	}
 
+	// this can't have inline due to it having a not final return
 	public function isAllowed(lua:State, result:Null<Int>):Null<Bool>
 	{
 		switch (Lua.type(lua, result))
@@ -86,7 +88,7 @@ class LLua
 		return false;
 	}
 
-	public function destroy():Void
+	inline public function destroy():Void
 	{
 		if (isNull())
 			return;
@@ -95,7 +97,7 @@ class LLua
 		lua = null;
 	}
 
-	public function isNull():Bool
+	inline public function isNull():Bool
 	{
 		return lua == null;
 	}

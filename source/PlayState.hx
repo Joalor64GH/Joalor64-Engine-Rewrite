@@ -62,6 +62,7 @@ import FunkinSScript;
 import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
+import LLua;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
