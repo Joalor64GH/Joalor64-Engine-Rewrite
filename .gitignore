@@ -16,6 +16,7 @@ FNFBot.exe
 ### GameJolt-Specific
 source/GJKeys.hx
 source/GameJolt.hx
+source/gamejolt/
 
 ### Android-Specific
 source/SUtil.hx
@@ -51,6 +52,7 @@ source/smTools/
 !Thumbs.db
 !*.hxml
 !*.hxproj
+!*.hxp
 
 ### VS Code
 export/*
