@@ -37,7 +37,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import MainMenuState.leDate;
 
 using StringTools;
 typedef TitleData =
@@ -694,28 +693,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
 				case 14:
-				    if (leDate.getDay() == 5 && leDate.getHours() >= 18) 
-					{
-					    addMoreText('Getting Freaky on A');
-					} else {
-						addMoreText('Friday Night Funkin');
-					}
+					addMoreText('Friday Night Funkin');
 				        // credTextShit.visible = true;
 				case 15:
-					if (leDate.getDay() == 5 && leDate.getHours() >= 18) 
-					{
-					    addMoreText('Friday Night');
-					} else {
-						addMoreText('Joalor64 Engine');
-					}
+					addMoreText('Joalor64 Engine');
 				        // credTextShit.text += '\nNight';
 				case 16:
-					if (leDate.getDay() == 5 && leDate.getHours() >= 18) 
-					{
-					    addMoreText('Yeah');
-					} else {
-						addMoreText('Rewritten');
-					} // credTextShit.text += '\nFunkin';
+					addMoreText('Rewritten'); // credTextShit.text += '\nFunkin';
 
 				case 17:
 					skipIntro();
