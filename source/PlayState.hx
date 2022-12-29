@@ -2021,6 +2021,7 @@ class PlayState extends MusicBeatState
 			hscriptMap.get(i).variables.set(variable, arg);
 		}
 		#end
+	}
 
 	function startCharacterLua(name:String)
 	{
