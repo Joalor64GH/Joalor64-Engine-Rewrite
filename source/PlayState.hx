@@ -58,6 +58,7 @@ import animateatlas.AtlasFrameMaker;
 import Achievements;
 import StageData;
 import FunkinLua;
+import FunkinHscript;
 import FunkinSScript;
 import DialogueBoxPsych;
 import Conductor.Rating;
@@ -80,6 +81,10 @@ import vlc.MP4Handler;
 
 #if PYTHON_SCRIPTING
 import pythonUtil.Python;
+#end
+
+#if HSCRIPT_ALLOWED
+import hscript.*;
 #end
 
 using StringTools;
@@ -906,6 +911,39 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		#if HSCRIPT_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('scripts/'));
+		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
+
+		for(mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if(FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if(file.endsWith('.hscript') && !filesPushed.contains(file))
+					{
+						var expr = file;
+						var parser = new hscript.Parser();
+						var ast = parser.parseString(expr);
+						var interp = new hscript.Interp();
+						trace(interp.execute(ast));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
+
 		#if SCRIPT_EXTENSION
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
@@ -1337,6 +1375,39 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		#if HSCRIPT_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
+		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
+
+		for(mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if(FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if(file.endsWith('.hscript') && !filesPushed.contains(file))
+					{
+						var expr = file;
+						var parser = new hscript.Parser();
+						var ast = parser.parseString(expr);
+						var interp = new hscript.Interp();
+						trace(interp.execute(ast));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
+
 		#if SCRIPT_EXTENSION
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
@@ -1495,6 +1566,9 @@ class PlayState extends MusicBeatState
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
+		#if HSCRIPT_ALLOWED
+		postSetHscript();
+		#end
 		callOnLuas('onCreatePost', []);
 
 		super.create();
@@ -1675,6 +1749,278 @@ class PlayState extends MusicBeatState
 				}
 		}
 	}
+	#if HSCRIPT_ALLOWED
+	var hscriptMap:Map<String, FunkinHscript> = new Map();
+	public function addHscript(path:String) {
+		var parser = new ParserEx();
+		try {
+			var program = parser.parseString(Paths.getContent(path));
+			var interp = new FunkinHscript();
+
+			//FUNCTIONS
+			interp.variables.set('add', PlayState.instance.add);
+			interp.variables.set('insert', PlayState.instance.insert);
+			interp.variables.set('remove', remove);
+			interp.variables.set('addBehindChars', function(obj:FlxBasic) {
+				var index = members.indexOf(gfGroup);
+				if (members.indexOf(dadGroup) < index) {
+					index = members.indexOf(dadGroup);
+				}
+				if (members.indexOf(boyfriendGroup) < index) {
+					index = members.indexOf(boyfriendGroup);
+				}
+				insert(index, obj);
+			});
+			interp.variables.set('addOverChars', function(obj:FlxBasic) {
+				var index = members.indexOf(boyfriendGroup);
+				if (members.indexOf(dadGroup) > index) {
+					index = members.indexOf(dadGroup);
+				}
+				if (members.indexOf(gfGroup) > index) {
+					index = members.indexOf(gfGroup);
+				}
+				insert(index + 1, obj);
+			});
+			interp.variables.set('getObjectOrder', function(obj:Dynamic) {
+				if ((obj is String)) {
+					var basic:FlxBasic = Reflect.getProperty(this, obj);
+					if (basic != null) {
+						return members.indexOf(basic);
+					}
+					return -1;
+				} else {
+					return members.indexOf(obj);
+				}
+			});
+			interp.variables.set('setObjectOrder', function(obj:Dynamic, pos:Int = 0) {
+				if ((obj is String)) {
+					var basic:FlxBasic = Reflect.getProperty(this, obj);
+					if (basic != null) {
+						if (members.indexOf(basic) > -1) {
+							remove(basic);
+						}
+						insert(pos, basic);
+					}
+				} else {
+					if (members.indexOf(obj) > -1) {
+						remove(obj);
+					}
+					insert(pos, obj);
+				}
+			});
+			interp.variables.set('openSubState', openSubState);
+			interp.variables.set('closeSubState', closeSubState);
+			interp.variables.set('getProperty', function(variable:String) {
+				return Reflect.getProperty(this, variable);
+			});
+			interp.variables.set('setProperty', function(variable:String, value:Dynamic) {
+				Reflect.setProperty(this, variable, value);
+			});
+			interp.variables.set('getPropertyFromClass', function(classVar:String, variable:String) {
+				return Reflect.getProperty(Type.resolveClass(classVar), variable);
+			});
+			interp.variables.set('setPropertyFromClass', function(classVar:String, variable:String, value:Dynamic) {
+				Reflect.setProperty(Type.resolveClass(classVar), variable, value);
+			});
+			interp.variables.set('addScript', function(name:String, ?ignoreAlreadyRunning:Bool = false) {
+				var cervix = '$name.hscript';
+				var doPush = false;
+				#if MODS_ALLOWED
+				if (FileSystem.exists(Paths.modFolders(cervix))) {
+					cervix = Paths.modFolders(cervix);
+					doPush = true;
+				} else {
+				#end
+					cervix = Paths.getPreloadPath(cervix);
+					if (OpenFlAssets.exists(cervix)) {
+						doPush = true;
+					}
+				#if MODS_ALLOWED	
+				}
+				#end
+
+				if (doPush)
+				{
+					if (!ignoreAlreadyRunning && hscriptMap.exists(cervix))
+					{
+						addTextToDebug('The script "$cervix" is already running!');
+						return;
+					}
+					addHscript(cervix);
+					return;
+				}
+				addTextToDebug("Script doesn't exist!");
+			});
+			interp.variables.set('removeScript', function(name:String) {
+				var cervix = '$name.hscript';
+				var doPush = false;
+				#if MODS_ALLOWED
+				if (FileSystem.exists(Paths.modFolders(cervix))) {
+					cervix = Paths.modFolders(cervix);
+					doPush = true;
+				} else {
+				#end
+					cervix = Paths.getPreloadPath(cervix);
+					if (OpenFlAssets.exists(cervix)) {
+						doPush = true;
+					}
+				#if MODS_ALLOWED	
+				}
+				#end
+
+				if (doPush)
+				{
+					if (hscriptMap.exists(cervix))
+					{
+						var hscript = hscriptMap.get(cervix);
+						hscriptMap.remove(cervix);
+						hscript = null;
+						return;
+					}
+					return;
+				}
+				addTextToDebug("Script doesn't exist!");
+			});
+			interp.variables.set('debugPrint', function(text:Dynamic) {
+				addTextToDebug('$text');
+				trace(text);
+			});
+
+			//EVENTS
+			var funcs = [
+				'onStepHit',
+				'onBeatHit',
+				'onStartCountdown',
+				'onSongStart',
+				'onEndSong',
+				'onSkipCutscene',
+				'onBPMChange',
+				'onOpenChartEditor',
+				'onOpenCharacterEditor',
+				'onPause',
+				'onResume',
+				'onGameOver',
+				'onRecalculateRating'
+			];
+			for (i in funcs)
+				interp.variables.set(i, function() {});
+			interp.variables.set('onCountdownTick', function(counter) {});
+			interp.variables.set('onNextDialogue', function(line) {});
+			interp.variables.set('onSkipDialogue', function(line) {});
+			interp.variables.set('goodNoteHit', function(id, direction, noteType, isSustainNote) {});
+			interp.variables.set('opponentNoteHit', function(id, direction, noteType, isSustainNote) {});
+			interp.variables.set('noteMissPress', function(direction) {});
+			interp.variables.set('noteMiss', function(id, direction, noteType, isSustainNote) {});
+			interp.variables.set('onMoveCamera', function(focus) {});
+			interp.variables.set('onEvent', function(name, value1, value2) {});
+			interp.variables.set('eventPushed', function(name, strumTime, value1, value2) {});
+			interp.variables.set('eventEarlyTrigger', function(name) {});
+
+			interp.execute(program);
+			hscriptMap.set(path, interp);
+			callHscript(path, 'onCreate', []);
+		} catch (e) {
+			trace(e);
+			addTextToDebug('$e');
+			addTextToDebug('Could not load script $path');
+		}
+	}
+
+	function callHscript(name:String, func:String, args:Array<Dynamic>) {
+		if (!hscriptMap.exists(name) || !hscriptMap.get(name).variables.exists(func)) {
+			return FunkinLua.Function_Continue;
+		}
+		var method = hscriptMap.get(name).variables.get(func);
+		var ret:Dynamic = null;
+		//need a better way for this ;v;
+		switch(args.length) {
+			case 0:
+				ret = method();
+			case 1:
+				ret = method(args[0]);
+			case 2:
+				ret = method(args[0], args[1]);
+			case 3:
+				ret = method(args[0], args[1], args[2]);
+			case 4:
+				ret = method(args[0], args[1], args[2], args[3]);
+			case 5:
+				ret = method(args[0], args[1], args[2], args[3], args[4]);
+		}
+		if (ret != null && ret != FunkinLua.Function_Continue) {
+			return ret;
+		}
+		return FunkinLua.Function_Continue;
+	}
+
+	function postSetHscript() {
+		setOnHscripts('boyfriend', boyfriend);
+		setOnHscripts('dad', dad);
+		setOnHscripts('gf', gf);
+		setOnHscripts('strumLineNotes', strumLineNotes);
+		setOnHscripts('playerStrums', playerStrums);
+		setOnHscripts('opponentStrums', opponentStrums);
+		setOnHscripts('iconP1', iconP1);
+		setOnHscripts('iconP2', iconP2);
+		setOnHscripts('grpNoteSplashes', grpNoteSplashes);
+		setOnHscripts('scoreTxt', scoreTxt);
+		setOnHscripts('healthBar', healthBar);
+		setOnHscripts('botplayTxt', botplayTxt);
+		setOnHscripts('timeBar', timeBar);
+		setOnHscripts('timeTxt', timeTxt);
+		setOnHscripts('boyfriendGroup', boyfriendGroup);
+		setOnHscripts('dadGroup', dadGroup);
+		setOnHscripts('gfGroup', gfGroup);
+		setOnHscripts('camGame', camGame);
+		setOnHscripts('camHUD', camHUD);
+		setOnHscripts('camOther', camOther);
+		setOnHscripts('camFollow', camFollow);
+		setOnHscripts('camFollowPos', camFollowPos);
+		setOnHscripts('strumLine', strumLine);
+	}
+
+	/*
+	var modules:Array<String> = [];
+	function setupModules() {
+		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('scripts/classes/classList.txt'));
+		var filesPushed:Array<String> = [];
+		for (script in sexList) {
+			var file = Paths.getPreloadPath('scripts/classes/$script.hscript');
+			if (OpenFlAssets.exists(file) && !filesPushed.contains(file))
+			{
+				modules.push(Paths.getContent(file));
+				filesPushed.push(file);
+			}
+		}
+		#if MODS_ALLOWED
+		var foldersToCheck:Array<String> = [Paths.mods('scripts/classes/')];
+		if (Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods('${Paths.currentModDirectory}/scripts/classes/'));
+		for (folder in foldersToCheck)
+		{
+			if (FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if (file.endsWith('.hscript') && !filesPushed.contains(file))
+					{
+						modules.push(Paths.getContent(folder + file));
+						filesPushed.push(folder + file);
+					}
+				}
+			}
+		}
+		#end
+	}
+	*/
+	#end
+
+	function setOnHscripts(variable:String, arg:Dynamic) {
+		#if HSCRIPT_ALLOWED
+		for (i in hscriptMap.keys()) {
+			hscriptMap.get(i).variables.set(variable, arg);
+		}
+		#end
 
 	function startCharacterLua(name:String)
 	{

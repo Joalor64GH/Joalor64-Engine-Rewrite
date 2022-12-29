@@ -191,6 +191,10 @@ class Paths
 	{
 		return getPath('$key.lua', TEXT, library);
 	}
+	inline static public function hscript(key:String, ?library:String)
+	{
+		return getPath('$key.hscript', TEXT, library);
+	}
 	inline static public function hx(key:String, ?library:String)
 	{
 		return getPath('$key.hx', TEXT, library);
