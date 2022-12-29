@@ -1693,7 +1693,7 @@ class PlayState extends MusicBeatState
 		return value;
 	}
 
-	public function addTextToDebug(text:String, color:FlxColor) {
+	public function addTextToDebug(text:String, color:FlxColor = FlxColor.WHITE) {
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
 			spr.y += 20;
