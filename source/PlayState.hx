@@ -932,11 +932,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.hscript') && !filesPushed.contains(file))
 					{
-						var expr = file;
-						var parser = new hscript.Parser();
-						var ast = parser.parseString(expr);
-						var interp = new hscript.Interp();
-						trace(interp.execute(ast));
+						addHscript(folder + file);
 						filesPushed.push(file);
 					}
 				}
@@ -1019,6 +1015,23 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			luaArray.push(new FunkinLua(luaFile));
+		#end
+
+		#if (MODS_ALLOWED && HSCRIPT_ALLOWED)
+		var doPush:Bool = false;
+		var hscriptFile:String = 'stages/' + curStage + '.hscript';
+		if(FileSystem.exists(Paths.modFolders(hscriptFile))) {
+			hscriptFile = Paths.modFolders(hscriptFile);
+			doPush = true;
+		} else {
+			hscriptFile = Paths.getPreloadPath(hscriptFile);
+			if(FileSystem.exists(hscriptFile)) {
+				doPush = true;
+			}
+		}
+
+		if(doPush)
+			addHscript(hscriptFile);
 		#end
 
 		var gfVersion:String = SONG.gfVersion;
@@ -1340,6 +1353,32 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+		#if HSCRIPT_ALLOWED
+		for (event in eventPushedMap.keys())
+		{
+			#if MODS_ALLOWED
+			var hscriptToLoad:String = Paths.modFolders('custom_events/' + event + '.hscript');
+			if(FileSystem.exists(hscriptToLoad))
+			{
+				addHscript(hscriptToLoad);
+			}
+			else
+			{
+				hscriptToLoad = Paths.getPreloadPath('custom_events/' + event + '.hscript');
+				if(FileSystem.exists(hscriptToLoad))
+				{
+					addHscript(hscriptToLoad);
+				}
+			}
+			#elseif sys
+			var hscriptToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.hscript');
+			if(OpenFlAssets.exists(hscriptToLoad))
+			{
+				addHscript(hscriptToLoad);
+			}
+			#end
+		}
+		#end
 		noteTypeMap.clear();
 		noteTypeMap = null;
 		eventPushedMap.clear();
@@ -1396,12 +1435,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.hscript') && !filesPushed.contains(file))
 					{
-						var expr = file;
-						var parser = new hscript.Parser();
-						var ast = parser.parseString(expr);
-						var interp = new hscript.Interp();
-						trace(interp.execute(ast));
-						filesPushed.push(file);
+						addHscript(hscriptFile);
 					}
 				}
 			}
@@ -1915,6 +1949,8 @@ class PlayState extends MusicBeatState
 			interp.variables.set('onEvent', function(name, value1, value2) {});
 			interp.variables.set('eventPushed', function(name, strumTime, value1, value2) {});
 			interp.variables.set('eventEarlyTrigger', function(name) {});
+			interp.variables.set('onTweenCompleted', function(tag) {});
+			interp.variables.set('onTimerCompleted', function(tag, loops, loopsLeft) {});
 
 			interp.execute(program);
 			hscriptMap.set(path, interp);

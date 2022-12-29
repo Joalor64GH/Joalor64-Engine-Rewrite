@@ -3,9 +3,10 @@
 .png
 .mp4
 .webm
-.mkv
 .lua
 .py
+.hx
+.hscript
 .txt
 .xml
 .json

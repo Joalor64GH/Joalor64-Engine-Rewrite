@@ -1,0 +1,20 @@
+{
+    "skipDebugScreen" : true
+   ,"stressTankmen" : false
+   ,"style" : true
+   ,"useCustomInput" : true
+   ,"showSongPos" : true
+   ,"emuOsuLifts" : false
+   ,"skipModifierMenu" : false
+   ,"ignoreUnlocks" : false
+   ,"showComboBreaks" : true
+   ,"preferJudgement" : 1
+   ,"judge" : 9
+   ,"downscroll" : false
+   ,"alwaysDoCutscenes" : false
+   ,"skipVictoryScreen" : true
+   ,"newJudgementPos" : false
+   ,"preferredSave" : 0
+   ,"allowEditOptions" : true
+   ,"useSaveDataMenu" : true
+}
