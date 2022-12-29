@@ -206,7 +206,7 @@ class Paths
 	{
 		#if MODS_ALLOWED
 		var file:String = modsVideo(key);
-		if (FileSystem.exists(file)) {
+		if(FileSystem.exists(file)) {
 			return file;
 		}
 		#end

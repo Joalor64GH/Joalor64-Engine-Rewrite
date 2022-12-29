@@ -1435,7 +1435,8 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.hscript') && !filesPushed.contains(file))
 					{
-						addHscript(hscriptFile);
+						addHscript(folder + file);
+						filesPushed.push(file);
 					}
 				}
 			}
