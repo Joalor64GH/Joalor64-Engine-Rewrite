@@ -1,3 +1,3 @@
-Add your custom event's .txt file and .lua file here
+Add your custom event's .txt and .lua file here!
 
-The .txt file is the event's description on Chart Editor
+The .txt file is the event's description in Chart Editor.

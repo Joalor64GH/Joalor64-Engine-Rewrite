@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="ringSplashes.png"><SubTexture name="note splash blue 0000" x="204" y="615" width="196" height="188" frameX="-62" frameY="-66" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0001" x="524" y="321" width="222" height="219" frameX="-49" frameY="-50" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0002" x="0" y="321" width="286" height="294" frameX="-18" frameY="-14" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0003" x="616" y="0" width="294" height="304" frameX="-13" frameY="-8" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0004" x="0" y="615" width="204" height="212" frameX="-58" frameY="-54" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0005" x="286" y="321" width="238" height="242" frameX="-41" frameY="-39" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0006" x="316" y="0" width="300" height="316" frameX="-11" frameY="-2" frameWidth="321" frameHeight="321" />
+<SubTexture name="note splash blue 0007" x="0" y="0" width="316" height="321" frameX="0" frameY="0" frameWidth="321" frameHeight="321" />
+</TextureAtlas>

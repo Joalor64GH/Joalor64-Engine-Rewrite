@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="BSOD_NOTES_ASSETS.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="blue0000" x="0" y="0" width="206" height="192"/>
+	<SubTexture name="blue0001" x="221" y="0" width="206" height="192"/>
+	<SubTexture name="blue0002" x="442" y="0" width="206" height="192"/>
+	<SubTexture name="blue0003" x="663" y="0" width="206" height="192"/>
+	<SubTexture name="green0000" x="0" y="207" width="209" height="188"/>
+	<SubTexture name="green0001" x="224" y="207" width="209" height="188"/>
+	<SubTexture name="green0002" x="448" y="207" width="209" height="188"/>
+	<SubTexture name="green0003" x="672" y="207" width="209" height="188"/>
+	<SubTexture name="purple0000" x="816" y="410" width="180" height="198"/>
+	<SubTexture name="purple0001" x="0" y="631" width="180" height="198"/>
+	<SubTexture name="purple0002" x="195" y="631" width="180" height="198"/>
+	<SubTexture name="purple0003" x="390" y="631" width="180" height="198"/>
+	<SubTexture name="red0000" x="0" y="410" width="189" height="206"/>
+	<SubTexture name="red0001" x="204" y="410" width="189" height="206"/>
+	<SubTexture name="red0002" x="408" y="410" width="189" height="206"/>
+	<SubTexture name="red0003" x="612" y="410" width="189" height="206"/>
+</TextureAtlas>
