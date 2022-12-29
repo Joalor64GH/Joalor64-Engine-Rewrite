@@ -418,6 +418,14 @@ class Paths
 		return currentTrackedSounds.get(gottenPath);
 	}
 
+	inline public static function getContent(path:String) {
+		#if sys
+		return File.getContent(path);
+		#else
+		return OpenFlAssets.getText(path);
+		#end
+	}
+
 	#if MODS_ALLOWED
 	inline static public function mods(key:String = '') {
 		return 'mods/' + key;
