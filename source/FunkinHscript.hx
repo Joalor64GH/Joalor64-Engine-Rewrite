@@ -76,7 +76,12 @@ import Character;
 using StringTools;
 
 class FunkinHscript extends InterpEx {
-    public function new() {
+	public var scriptName:String = '';
+	public var closed:Bool = false;
+
+     public function new(path:String) {
+        super();
+		scriptName = path.split('/')[path.split('/').length - 1];
         super();
         //CLASSES
         //THIS IS PROBABLY MORE THAN ANYONE EVER NEEDS AND YOU CAN IMPORT CLASSES MANUALLY ANYWAYS BUT WHATEVER
@@ -286,6 +291,8 @@ class FunkinHscript extends InterpEx {
 		variables.set('noteOffset', ClientPrefs.noteOffset);
 		variables.set('noResetButton', ClientPrefs.noReset);
 		variables.set('lowQuality', ClientPrefs.lowQuality);
+
+		variables.set("scriptName", scriptName);
 
 		#if windows
 		variables.set('buildTarget', 'windows');
