@@ -89,7 +89,8 @@
 		<library name="week6"         preload="false" />
 		<library name="week7"         preload="false" />
 	</section>
-	
+
+	<assets path="assets/scripts"       library="scripts"/>
 	<assets path="dlls/"                rename=''               if="PYTHON_SCRIPTING"/>
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>

@@ -1354,6 +1354,30 @@ class PlayState extends MusicBeatState
 		}
 		#end
 		#if HSCRIPT_ALLOWED
+		for (notetype in noteTypeMap.keys())
+		{
+			#if MODS_ALLOWED
+			var hscriptToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hscript');
+			if(FileSystem.exists(hscriptToLoad))
+			{
+				addHscript(hscriptToLoad);
+			}
+			else
+			{
+				hscriptToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hscript');
+				if(FileSystem.exists(hscriptToLoad))
+				{
+					addHscript(hscriptToLoad);
+				}
+			}
+			#elseif sys
+			var hscriptToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hscript');
+			if(OpenFlAssets.exists(hscriptToLoad))
+			{
+				addHscript(hscriptToLoad);
+			}
+			#end
+		}
 		for (event in eventPushedMap.keys())
 		{
 			#if MODS_ALLOWED
@@ -2091,6 +2115,29 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(luaFile));
 		}
 		#end
+
+		#if HSCRIPT_ALLOWED
+		var doPush:Bool = false;
+		var hscriptFile:String = 'characters/$name.hscript';
+		#if MODS_ALLOWED
+		if (FileSystem.exists(Paths.modFolders(hscriptFile))) {
+			hscriptFile = Paths.modFolders(hscriptFile);
+			doPush = true;
+		} else {
+		#end
+			hscriptFile = Paths.getPreloadPath(hscriptFile);
+			if (OpenFlAssets.exists(hscriptFile)) {
+				doPush = true;
+			}
+		#if MODS_ALLOWED
+		}
+		#end
+		
+		if (doPush && !hscriptMap.exists(hscriptFile))
+		{
+			addHscript(hscriptFile);
+		}
+		#end
 	}
 
 	public function getLuaObject(tag:String, text:Bool=true):FlxSprite {
@@ -2110,7 +2157,7 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String)
+	public function startVideo(namef:String)
 	{
 		#if VIDEOS_ALLOWED
 		inCutscene = true;
@@ -2622,10 +2669,12 @@ class PlayState extends MusicBeatState
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
+				setOnHscripts('playerStrums', playerStrums);
 			}
 			for (i in 0...opponentStrums.length) {
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
+				setOnHscripts('opponentStrums', opponentStrums);
 				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 			}
 
@@ -4276,6 +4325,7 @@ class PlayState extends MusicBeatState
 							iconP1.changeIcon(boyfriend.healthIcon);
 						}
 						setOnLuas('boyfriendName', boyfriend.curCharacter);
+						setOnHscripts('boyfriend', boyfriend);
 
 					case 1:
 						if(dad.curCharacter != value2) {
@@ -4298,6 +4348,7 @@ class PlayState extends MusicBeatState
 							iconP2.changeIcon(dad.healthIcon);
 						}
 						setOnLuas('dadName', dad.curCharacter);
+						setOnHscripts('dad', dad);
 
 					case 2:
 						if(gf != null)
@@ -4315,6 +4366,7 @@ class PlayState extends MusicBeatState
 								gf.alpha = lastAlpha;
 							}
 							setOnLuas('gfName', gf.curCharacter);
+							setOnHscripts('gf', gf);
 						}
 				}
 				reloadHealthBarColors();
@@ -5519,6 +5571,15 @@ class PlayState extends MusicBeatState
 			lua.stop();
 		}
 		luaArray = [];
+		#if HSCRIPT_ALLOWED
+		for (i in hscriptMap.keys()) {
+			callHscript(i, 'onDestroy', []);
+			var hscript = hscriptMap.get(i);
+			hscriptMap.remove(i);
+			hscript = null;
+		}
+		hscriptMap.clear();
+		#end
 
 		#if hscript
 		if(FunkinLua.hscript != null) FunkinLua.hscript = null;
@@ -5732,6 +5793,21 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+
+		#if HSCRIPT_ALLOWED
+			for (script in hscriptMap.keys()) {
+				var hscript = hscriptMap.get(script);
+				if(hscript.closed || exclusions.contains(hscript.scriptName))
+					continue;
+
+				var ret:Dynamic = callHscript(script, event, args);
+				if(ret == FunkinLua.Function_StopLua && !ignoreStops)
+					break;
+
+				if (ret != FunkinLua.Function_Continue)
+					returnVal = ret;
+			}
+			#end
 		//trace(event, returnVal);
 		return returnVal;
 	}
@@ -5744,6 +5820,10 @@ class PlayState extends MusicBeatState
 			luaArray[i].set(variable, arg);
 		}
 		#end
+
+		#if HSCRIPT_ALLOWED
+			setOnHscripts(variable, arg);
+			#end
 	}
 
 	function StrumPlayAnim(isDad:Bool, id:Int, time:Float) {
