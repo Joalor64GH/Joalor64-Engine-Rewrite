@@ -64,6 +64,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var psychSpr:FlxSprite;
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -384,6 +385,15 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
+        #if JOALOR64_WATERMARKS
+		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psych_logo'));
+		add(psychSpr);
+		psychSpr.visible = false;
+		psychSpr.setGraphicSize(Std.int(psychSpr.width * 0.8));
+		psychSpr.updateHitbox();
+		psychSpr.screenCenter(X);
+		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		#else
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
 		ngSpr.visible = false;
@@ -391,6 +401,7 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		#end
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.0.0 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
 		versionShit.scrollFactor.set();
@@ -669,14 +680,19 @@ class TitleState extends MusicBeatState
 				case 8:
 				        #if JOALOR64_WATERMARKS
 					addMoreText('Psych Engine', -40);
+					psychSpr.visible = true;
 					#else
 					addMoreText('Newgrounds', -40);
-					#end
 					ngSpr.visible = true;
+					#end
 				// credTextShit.text += '\nNewgrounds';
 				case 9:
 					deleteCoolText();
+					#if JOALOR64_WATERMARKS
+					psychSpr.visible = false;
+					#else
 					ngSpr.visible = false;
+					#end
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
@@ -733,6 +749,7 @@ class TitleState extends MusicBeatState
 
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
+						remove(psychSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
@@ -749,6 +766,7 @@ class TitleState extends MusicBeatState
 					new FlxTimer().start(3.2, function(tmr:FlxTimer)
 					{
 						remove(ngSpr);
+						remove(psychSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
@@ -757,6 +775,7 @@ class TitleState extends MusicBeatState
 				else
 				{
 					remove(ngSpr);
+					remove(psychSpr);
 					remove(credGroup);
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
@@ -770,6 +789,7 @@ class TitleState extends MusicBeatState
 			else //Default! Edit this one!!
 			{
 				remove(ngSpr);
+				remove(psychSpr);
 				remove(credGroup);
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 

@@ -81,6 +81,18 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		    ['Joalor64 Engine Creators'],
+			['Joalor64 YT',         '',             'Project leader, Programmer',                                  		'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',  '00FFF6'],
+			['Bot 404',              '',             'Tiny little helper, Drew his own icon',                                     	    'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg',            'FF0040'],
+			[''],
+			['Special Thanks'],
+			['PE Discord Server Members',             'discord',             'They made the Scripts lmao',                       		'https://discord.gg/2ka77eMXDv',          '6732E3'],
+			['BeastlyGhost',             '',             'Customizable Main Menu with .JSON\nPrepare Sprite',                       		'https://github.com/BeastlyGhost',          '8CC4FF'],
+			['Stilic',             '',             'Restored Combo Script',                       		'https://github.com/Stilic',          'C74B22'],
+			['TheWorldMachinima',             '',             'SScript',                       		'https://github.com/TheWorldMachinima',          '638F5B'],
+			['magnumsrt',             '',             'Python Support',                       		'https://github.com/magnumsrt',          '0000FF'],
+			['You',             '',             'For playing :)',                       		'https://joalor64.itch.io/',          '7E00FF'],			
+			[''],
 			['Psych Engine Team'],
 			['ShadowMario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
