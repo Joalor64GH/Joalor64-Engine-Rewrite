@@ -1814,7 +1814,7 @@ class PlayState extends MusicBeatState
 		var parser = new ParserEx();
 		try {
 			var program = parser.parseString(Paths.getContent(path));
-			var interp = new FunkinHscript();
+			var interp = new FunkinHscript(path);
 
 			//FUNCTIONS
 			interp.variables.set('add', PlayState.instance.add);
