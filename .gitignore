@@ -43,9 +43,6 @@ source/LayerFile.hx
 assets/sm/
 source/smTools/
 
-### Misc
-.haxelib/
-
 ### Add these regardless of them getting ignored.
 !appveyor-linux.yml
 !appveyor-macos.yml
