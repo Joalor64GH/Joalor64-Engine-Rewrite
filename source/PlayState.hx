@@ -5822,8 +5822,8 @@ class PlayState extends MusicBeatState
 		#end
 
 		#if HSCRIPT_ALLOWED
-			setOnHscripts(variable, arg);
-			#end
+		setOnHscripts(variable, arg);
+		#end
 	}
 
 	function StrumPlayAnim(isDad:Bool, id:Int, time:Float) {
@@ -5879,10 +5879,10 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
+			if (sicks > 0) ratingFC = "PFC";
+			if (goods > 0) ratingFC = "NFC";
+			if (bads > 0 || shits > 0) ratingFC = "OFC";
+			if (songMisses > 0 && songMisses < 10) ratingFC = "SDM";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
@@ -5942,7 +5942,7 @@ class PlayState extends MusicBeatState
 							}
 						}
 					case 'toastie':
-						if(/*ClientPrefs.framerate <= 60 &&*/ !ClientPrefs.shaders && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
+						if(!ClientPrefs.shaders && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
 							unlock = true;
 						}
 					case 'debugger':

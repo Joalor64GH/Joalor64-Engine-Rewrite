@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" packageName="com.joalor64gh.j64enginere" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
+	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
         <app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
@@ -63,7 +63,7 @@
 
 	<classpath name="source" />
 
-    <assets path="assets/fonts" embed='true'/>
+        <assets path="assets/fonts" embed='true'/>
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4"  unless="web"/>
 	
