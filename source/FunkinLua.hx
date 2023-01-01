@@ -73,7 +73,7 @@ class FunkinLua {
 	public var closed:Bool = false;
 
 	#if hscript
-	public static var hscript:HScript = null;
+	public var hscript:HScript = null;
 	#end
 	
 	public function new(script:String) {
@@ -3292,6 +3292,9 @@ class FunkinLua {
 
 		Lua.close(lua);
 		lua = null;
+		#if hscript
+		hscript = null;
+		#end
 		#end
 	}
 
