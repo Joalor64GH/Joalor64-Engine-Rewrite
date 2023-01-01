@@ -28,14 +28,14 @@ Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), 
 
 ## Credits:
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
-* [RiverOaken](https://twitter.com/RiverOaken) - Main Artist/Animator
-* [Yoshubs](https://github.com/Yoshubs) - Aditional Programmer + Epic Input System + OG Forever Asset Manager
+* [RiverOaken](https://twitter.com/RiverOaken) - Main Artist + Animator
+* [Yoshubs](https://github.com/Yoshubs) - Aditional Programmer + Epic Input System
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
-* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs/Extension WebM
-* [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time, also made the Dialogue Sounds
+* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM
+* [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations
 * [Smokey](https://twitter.com/Smokey_5_) - Sprite Atlas Support
