@@ -1,8 +1,8 @@
 {
 	"songs": [
-		["Pico", "pico", [148, 22, 83]],
-		["Philly Nice", "pico", [148, 22, 83]],
-		["Blammed", "pico", [148, 22, 83]]
+		["Pico", "pico", [10, 145, 0]],
+		["Philly Nice", "pico", [10, 145, 0]],
+		["Blammed", "pico", [10, 145, 0]]
 	],
 
 	"weekCharacters": [

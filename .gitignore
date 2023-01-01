@@ -53,11 +53,13 @@ source/smTools/
 !*.hxml
 !*.hxproj
 !*.hxp
+!*.jsonc
 
 ### VS Code
 export/*
 .vscode/*
 .vscode/.temp
+source/.vscode/launch.json
 # Local history which shouldn't be shared.
 desktop.ini
 .history/

@@ -1,6 +1,6 @@
 {
 	"songs": [
-		["Tutorial", "gf", [165, 0, 77]]
+		["Tutorial", "gf", [120, 11, 62]]
 	],
 
 	"weekCharacters": [
@@ -10,7 +10,7 @@
 	],
 	"weekBackground": "stage",
 
-	"storyName": "",
+	"storyName": "How to Get Funky",
 	"weekBefore": "tutorial",
 	"weekName": "Tutorial",
 	"startUnlocked": true,
