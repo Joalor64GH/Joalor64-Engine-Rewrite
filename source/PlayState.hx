@@ -3486,7 +3486,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (useVideo && GlobalVideo.get() != null && !stopUpdate)
+		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
 			{
