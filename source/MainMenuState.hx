@@ -251,6 +251,7 @@ class MainMenuState extends MusicBeatState
 		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 
 		changeItem();
+		tipTextStartScrolling();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
