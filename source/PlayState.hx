@@ -352,6 +352,8 @@ class PlayState extends MusicBeatState
 		// for lua
 		instance = this;
 
+		removedVideo = false;
+
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 		PauseSubState.songName = null; //Reset to default
@@ -2959,9 +2961,12 @@ class PlayState extends MusicBeatState
 	var lastReportedPlayheadPosition:Int = 0;
 	var songTime:Float = 0;
 
+	public var songStarted = false;
+
 	function startSong():Void
 	{
 		startingSong = false;
+		songStarted = true;
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -2970,6 +2975,9 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = finishSong.bind();
 		vocals.play();
+
+		if (useVideo)
+			GlobalVideo.get().resume();
 
 		if(startOnTime > 0)
 		{
@@ -3474,12 +3482,19 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
+	public var removedVideo = false;
+
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
+		if (useVideo && GlobalVideo.get() != null && !stopUpdate)
 		{
-			iconP1.swapOldIcon();
-		}*/
+			if (GlobalVideo.get().ended && !removedVideo)
+			{
+				remove(videoSprite);
+				removedVideo = true;
+			}
+		}
+
 		callOnLuas('onUpdate', [elapsed]);
 
 		switch (curStage)
@@ -3955,6 +3970,13 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
+		if (useVideo)
+		{
+			GlobalVideo.get().stop();
+			remove(videoSprite);
+			removedVideo = true;
+		}
+
 		persistentUpdate = false;
 		paused = true;
 		cancelMusicFadeTween();
@@ -4503,6 +4525,12 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
+		if (useVideo)
+		{
+			GlobalVideo.get().stop();
+			PlayState.instance.remove(PlayState.instance.videoSprite);
+		}
+
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
@@ -5112,6 +5140,8 @@ class PlayState extends MusicBeatState
 		}
 		return ret;
 	}
+
+	public var useVideo = false;
 
 	public static var webmHandler:WebmHandler;
 
