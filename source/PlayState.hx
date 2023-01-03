@@ -79,6 +79,10 @@ import sys.io.File;
 import vlc.MP4Handler;
 #end
 
+#if WEBM_ALLOWED
+import webm.WebmPlayer;
+#end
+
 #if PYTHON_SCRIPTING
 import pythonUtil.Python;
 #end
@@ -2676,6 +2680,7 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				setOnHscripts('opponentStrums', opponentStrums);
 				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
+				setOnHscripts('opponentStrums', opponentStrums);
 			}
 
 			startedCountdown = true;
@@ -5107,6 +5112,66 @@ class PlayState extends MusicBeatState
 		}
 		return ret;
 	}
+
+	public static var webmHandler:WebmHandler;
+
+	public var videoSprite:FlxSprite;
+
+	public function backgroundVideo(source:String) // for background videos
+	{
+		#if WEBM_ALLOWED
+		useVideo = true;
+
+		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+		// WebmPlayer.SKIP_STEP_LIMIT = 90;
+		var str1:String = "WEBM SHIT";
+		webmHandler = new WebmHandler();
+		webmHandler.source(ourSource);
+		webmHandler.makePlayer();
+		webmHandler.webm.name = str1;
+
+		GlobalVideo.setWebm(webmHandler);
+
+		GlobalVideo.get().source(source);
+		GlobalVideo.get().clearPause();
+		if (GlobalVideo.isWebm)
+		{
+			GlobalVideo.get().updatePlayer();
+		}
+		GlobalVideo.get().show();
+
+		if (GlobalVideo.isWebm)
+		{
+			GlobalVideo.get().restart();
+		}
+		else
+		{
+			GlobalVideo.get().play();
+		}
+
+		var data = webmHandler.webm.bitmapData;
+
+		videoSprite = new FlxSprite(-470, -30).loadGraphic(data);
+
+		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
+
+		remove(gf);
+		remove(boyfriend);
+		remove(dad);
+		add(videoSprite);
+		add(gf);
+		add(boyfriend);
+		add(dad);
+
+		trace('poggers');
+
+		if (!songStarted)
+			webmHandler.pause();
+		else
+			webmHandler.resume();
+		#end
+	}
+
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove

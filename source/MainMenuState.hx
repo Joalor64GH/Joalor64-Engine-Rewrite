@@ -64,11 +64,17 @@ class MainMenuState extends MusicBeatState
 	
 	var optionShit:Array<String> = [];
 
+	var tipTextMargin:Float = 10;
+	var tipTextScrolling:Bool = false;
+
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
+
+	var tipBackground:FlxSprite;
+	var tipText:FlxText;
 
 	var menuJSON:MenuData;
 
@@ -211,8 +217,8 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-        // Joalor64 Engine
-            var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
+            // Joalor64 Engine
+                var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -229,7 +235,19 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		// NG.core.calls.event.logEvent('swag').send();
+		tipBackground = new FlxSprite();
+		tipBackground.scrollFactor.set();
+		tipBackground.alpha = 0.7;
+		add(tipBackground);
+
+		tipText = new FlxText(0, 0, 0,
+			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thank you!");
+		tipText.scrollFactor.set();
+		tipText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT);
+		tipText.updateHitbox();
+		add(tipText);
+
+		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 
 		changeItem();
 
@@ -369,6 +387,21 @@ class MainMenuState extends MusicBeatState
 		{
 			if (menuJSON.centerOptions)
 				spr.screenCenter(X);
+		});
+	}
+
+	function tipTextStartScrolling()
+	{
+		tipText.x = tipTextMargin;
+		tipText.y = -tipText.height;
+
+		new FlxTimer().start(1.0, function(timer:FlxTimer)
+		{
+			FlxTween.tween(tipText, {y: tipTextMargin}, 0.3);
+			new FlxTimer().start(2.25, function(timer:FlxTimer)
+			{
+				tipTextScrolling = true;
+			});
 		});
 	}
 
