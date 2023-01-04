@@ -64,6 +64,9 @@ import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
 import LLua;
+import modcharting.ModchartFuncs;
+import modcharting.NoteMovement;
+import modcharting.PlayfieldRenderer;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -113,6 +116,8 @@ class PlayState extends MusicBeatState
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
+
+	public var playfieldRenderer:PlayfieldRenderer;
 
 	#if (haxe >= "4.0.0")
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
@@ -409,6 +414,11 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+
+		playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
+        playfieldRenderer.cameras = [camHUD];
+        add(playfieldRenderer);
+        add(grpNoteSplashes);
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -1631,6 +1641,9 @@ class PlayState extends MusicBeatState
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
+
+		ModchartFuncs.loadLuaFunctions();
+
 		#if HSCRIPT_ALLOWED
 		postSetHscript();
 		#end
@@ -2672,6 +2685,7 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			NoteMovement.getDefaultStrumPos(this);
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
