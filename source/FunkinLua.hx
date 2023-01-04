@@ -73,7 +73,7 @@ class FunkinLua {
 	public var closed:Bool = false;
 
 	#if hscript
-	public var hscript:HScript = null;
+	public static var hscript:HScript = null;
 	#end
 	
 	public function new(script:String) {
