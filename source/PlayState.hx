@@ -416,9 +416,9 @@ class PlayState extends MusicBeatState
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 
 		playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
-        playfieldRenderer.cameras = [camHUD];
-        add(playfieldRenderer);
-        add(grpNoteSplashes);
+                playfieldRenderer.cameras = [camHUD];
+                add(playfieldRenderer);
+                add(grpNoteSplashes);
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
