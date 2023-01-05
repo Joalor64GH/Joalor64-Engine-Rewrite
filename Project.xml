@@ -104,7 +104,7 @@
 
 	<section if="VIDEOS_ALLOWED || WEBM_ALLOWED">
 	    <assets path="assets/videos"        library="videos" />
-    </section>
+        </section>
 
     <!-- PATH DEFINITIONS -->
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
