@@ -418,7 +418,6 @@ class PlayState extends MusicBeatState
 		playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
                 playfieldRenderer.cameras = [camHUD];
                 add(playfieldRenderer);
-                add(grpNoteSplashes);
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
