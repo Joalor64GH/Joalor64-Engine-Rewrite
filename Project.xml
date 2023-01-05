@@ -99,14 +99,14 @@
 	</section>
 
 	<section if="PYTHON_SCRIPTING">
-	    <assets path="dlls/"                rename='' />
+	        <assets path="dlls/"                rename='' />
 	</section>
 
 	<section if="VIDEOS_ALLOWED || WEBM_ALLOWED">
-	    <assets path="assets/videos"        library="videos" />
+	        <assets path="assets/videos"        library="videos" />
         </section>
 
-    <!-- PATH DEFINITIONS -->
+        <!-- PATH DEFINITIONS -->
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4" unless="web"/>
 	<assets path="assets/shared"        library="shared"        exclude="*.ogg" if="web"/>

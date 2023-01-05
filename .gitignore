@@ -54,6 +54,7 @@ source/smTools/
 !*.hxproj
 !*.hxp
 !*.jsonc
+!source/spine/
 
 ### VS Code
 export/*
