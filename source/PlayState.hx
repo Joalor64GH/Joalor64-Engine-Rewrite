@@ -63,10 +63,11 @@ import FunkinSScript;
 import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
-import LLua;
+import LLua; // this doesn't even do anything
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+import DynamicShaderHandler;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -113,6 +114,9 @@ class PlayState extends MusicBeatState
 		['Not Bad!', 1], //From 90% to 99%
 		['Kanpeki!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
+
+	//something about shaders idk
+	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
@@ -353,6 +357,11 @@ class PlayState extends MusicBeatState
 	{
 		//trace('Playback Rate: ' + playbackRate);
 		Paths.clearStoredMemory();
+
+		for (shader in animatedShaders)
+        {
+	        shader.update(elapsed);
+        }
 
 		// for lua
 		instance = this;
