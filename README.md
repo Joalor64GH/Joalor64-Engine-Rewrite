@@ -21,7 +21,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Latin Alphabet Support
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
-* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript
+* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript + Cocoa Code
 * [stevecodergh](https://github.com/stevecodergh) - Python Support
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
 

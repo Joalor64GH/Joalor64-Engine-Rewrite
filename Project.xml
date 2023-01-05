@@ -138,7 +138,7 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
 	<haxelib name="hscript-ex" />
-	<define name="hscriptPos" />
+	<define  name="hscriptPos" />
 	<haxelib name="actuate"/>
 	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
 	<haxelib name="tjson" />

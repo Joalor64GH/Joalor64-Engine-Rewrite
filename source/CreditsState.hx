@@ -89,7 +89,7 @@ class CreditsState extends MusicBeatState
 			['PE Discord Server Members',             'discord',             'They made the Scripts lmao',                       		'https://discord.gg/2ka77eMXDv',          '6732E3'],
 			['BeastlyGhost',             'beastly',             'Customizable Main Menu with .JSON\nPrepare Sprite',                       		'https://github.com/BeastlyGhost',          '8CC4FF'],
 			['Stilic',             'stilic',             'Restored Combo Script',                       		'https://github.com/Stilic',          'C74B22'],
-			['TheWorldMachinima',             'machinima',             'SScript',                       		'https://github.com/TheWorldMachinima',          '638F5B'],
+			['TheWorldMachinima',             'machinima',             'SScript\nCocoa Code',                       		'https://github.com/TheWorldMachinima',          '638F5B'],
 			['stevecodergh',             'steve',             'Python Support',                       		'https://github.com/stevecodergh',          '0000FF'],
 			['TheZoroForce240',             'zoro',             'Special Modcharting System',                       		'https://github.com/TheZoroForce240',          'FFD900'],
 			['You',             'face',             'For playing :)',                       		'https://joalor64.itch.io/',          '7E00FF'],			
