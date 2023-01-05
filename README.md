@@ -11,7 +11,6 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * MP4/WebM Video Support
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
-* Better Shader Support
 
 # Downloads
 * [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
@@ -25,7 +24,6 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript
 * [stevecodergh](https://github.com/stevecodergh) - Python Support
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
-* [kem0x](https://twitter.com/xkem0x) - Shader Handler
 
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
