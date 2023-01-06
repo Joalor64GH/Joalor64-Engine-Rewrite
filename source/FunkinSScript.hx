@@ -23,7 +23,7 @@ import openfl.Assets;
 import openfl.Lib;
 import options.ControlsSubState.InputFormatter;
 
-final class FunkinScript extends SScript
+final class FunkinSScript extends SScript
 {
 	override public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
 	{
