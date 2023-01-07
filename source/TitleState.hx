@@ -65,6 +65,10 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+	#if JOALOR64_WATERMARKS
+	var credIcon1:FlxSprite;
+	var credIcon2:FlxSprite;
+	#end
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -385,7 +389,6 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
-        #if JOALOR64_WATERMARKS
 		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psych_logo'));
 		add(psychSpr);
 		psychSpr.visible = false;
@@ -393,7 +396,7 @@ class TitleState extends MusicBeatState
 		psychSpr.updateHitbox();
 		psychSpr.screenCenter(X);
 		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
-		#else
+
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
 		ngSpr.visible = false;
@@ -401,6 +404,18 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+
+		#if JOALOR64_WATERMARKS
+		credIcon1 = new FlxSprite(150,150).loadGraphic(Paths.image('credits/joalor'));
+		add(credIcon1);
+		credIcon1.antialiasing = ClientPrefs.globalAntialiasing;
+		credIcon1.visible = false;
+
+		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/bot'));
+		add(credIcon2);
+		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
+		credIcon2.visible = false;
+		credIcon2.flipX = true;
 		#end
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.0.0 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
@@ -653,6 +668,8 @@ class TitleState extends MusicBeatState
 				// credTextShit.visible = true;
 				case 4:
 					#if JOALOR64_WATERMARKS
+					credIcon1.visible = true;
+					credIcon2.visible = true;
 					addMoreText('Joalor64 YT', 15);
 					addMoreText('Bot 404', 15);
 					#elseif PSYCH_WATERMARKS
@@ -665,6 +682,10 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 5:
+				    #if JOALOR64_WATERMARKS
+				    credIcon1.destroy();
+					credIcon2.destroy();
+					#end
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
@@ -751,6 +772,10 @@ class TitleState extends MusicBeatState
 						remove(ngSpr);
 						remove(psychSpr);
 						remove(credGroup);
+						#if JOALOR64_WATERMARKS
+			            credIcon1.destroy();
+			            credIcon2.destroy();
+			            #end
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
@@ -768,6 +793,10 @@ class TitleState extends MusicBeatState
 						remove(ngSpr);
 						remove(psychSpr);
 						remove(credGroup);
+						#if JOALOR64_WATERMARKS
+			            credIcon1.destroy();
+			            credIcon2.destroy();
+			            #end
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
 					});
@@ -777,6 +806,10 @@ class TitleState extends MusicBeatState
 					remove(ngSpr);
 					remove(psychSpr);
 					remove(credGroup);
+					#if JOALOR64_WATERMARKS
+			        credIcon1.destroy();
+			        credIcon2.destroy();
+			        #end
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
@@ -791,6 +824,10 @@ class TitleState extends MusicBeatState
 				remove(ngSpr);
 				remove(psychSpr);
 				remove(credGroup);
+				#if JOALOR64_WATERMARKS
+			    credIcon1.destroy();
+			    credIcon2.destroy();
+			    #end
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
