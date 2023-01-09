@@ -10,6 +10,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import core.ToastCore;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -36,6 +37,8 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
 
+	public static var toast:ToastCore; // credits go to MAJigsaw77
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -55,6 +58,9 @@ class Main extends Sprite
 		{
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
+
+		toast = new ToastCore();
+		addChild(toast);
 	}
 
 	public static var webmHandler:WebmHandler;

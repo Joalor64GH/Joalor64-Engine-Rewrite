@@ -64,6 +64,7 @@ class MainMenuState extends MusicBeatState
 	public static var finishedFunnyMove:Bool = false;
 	
 	var optionShit:Array<String> = [];
+	var linkArray:Array<Array<String>> = [];
 
 	var tipTextMargin:Float = 10;
 	var tipTextScrolling:Bool = false;
@@ -71,11 +72,14 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
+
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
 
 	var tipBackground:FlxSprite;
 	var tipText:FlxText;
+
+	var invalidPosition:Null<Int> = null;
 
 	var menuJSON:MenuData;
 
@@ -107,18 +111,30 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		if (menuJSON.options != null && menuJSON.options.length > 0) {
+		if (menuJSON.options != null && menuJSON.options.length > 0 && menuJSON.options.length < 13)
+		{
 			optionShit = menuJSON.options;
-		} else {
+		}
+		else
+		{
 			optionShit = [
 				'story_mode',
 				'freeplay',
-				#if MODS_ALLOWED 'mods', #end
-				#if ACHIEVEMENTS_ALLOWED 'awards', #end
+				#if MODS_ALLOWED 'mods',
+				#end
+				#if ACHIEVEMENTS_ALLOWED
+				'awards',
+				#end
 				'credits',
-				#if !switch 'donate', #end
+				#if !switch 'donate',
+				#end
 				'options'
 			];
+		}
+
+		for (i in menuJSON.links)
+		{
+			linkArray.push(i);
 		}
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
@@ -130,8 +146,13 @@ class MainMenuState extends MusicBeatState
 		else
 			bg.loadGraphic(Paths.image('menuBG'));
 
-		bg.x = menuJSON.bgX;
-		bg.y = menuJSON.bgY;
+		if (menuJSON.bgX != invalidPosition)
+			bg.x = menuJSON.bgX;
+		if (menuJSON.bgY != invalidPosition)
+			bg.y = menuJSON.bgY;
+		else
+			bg.y = -80;
+
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
@@ -151,8 +172,13 @@ class MainMenuState extends MusicBeatState
 		else
 			magenta.loadGraphic(Paths.image('menuDesat'));
 
-		magenta.x = menuJSON.bgX;
-		magenta.y = menuJSON.bgY;
+		if (menuJSON.bgX != invalidPosition)
+			magenta.x = menuJSON.bgX;
+		if (menuJSON.bgY != invalidPosition)
+			magenta.y = menuJSON.bgY;
+		else
+			magenta.y = -80;
+
 		magenta.scrollFactor.set(0, yScroll);
 		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
 		magenta.updateHitbox();
@@ -177,12 +203,15 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
-			
-			if (menuJSON.optionX != invalidPosition) menuItem.x = menuJSON.optionX;
-			if (menuJSON.optionY != invalidPosition) menuItem.y = menuJSON.optionY;
+			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 
-			if (menuJSON.angle != invalidPosition) menuItem.angle = menuJSON.angle;
+			if (menuJSON.optionX != invalidPosition)
+				menuItem.x = menuJSON.optionX;
+			if (menuJSON.optionY != invalidPosition)
+				menuItem.y = menuJSON.optionY;
+
+			if (menuJSON.angle != invalidPosition)
+				menuItem.angle = menuJSON.angle;
 
 			if (menuJSON.scaleX != invalidPosition)
 				menuItem.scale.x = menuJSON.scaleX;
@@ -335,7 +364,8 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+					if (ClientPrefs.flashing)
+						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -389,6 +419,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new ModsMenuState());
 			}
 			#end
+
 			if (controls.RESET && menuJSON.enableReloadKey)
 				FlxG.resetState();
 		}
