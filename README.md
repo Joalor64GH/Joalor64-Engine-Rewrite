@@ -13,7 +13,6 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Epic Modcharting Tools
 
 # Planned Features
-* [ ] Colorblind Filters
 * [ ] Funni Credits Sounds
 
 # Downloads
