@@ -11,6 +11,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * MP4/WebM Video Support
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
+* Softcoded Achievements
 
 # Planned Features
 * [ ] Funni Credits Sounds
@@ -25,7 +26,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Prepare Sprite + Customizable Main Menu via JSON
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
-* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript + Cocoa Code
+* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Cocoa Code + Softcoded Achievements
 * [stevecodergh](https://github.com/stevecodergh) - Python Support
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
 

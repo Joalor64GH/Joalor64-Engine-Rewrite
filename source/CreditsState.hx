@@ -122,7 +122,7 @@ class CreditsState extends MusicBeatState
 			[
 				'TheWorldMachinima',             
 				'machinima',             
-				'SScript\nCocoa Code',                       		
+				'SScript and Cocoa Code\nSoftcoded Achievements',                       		
 				'https://github.com/TheWorldMachinima',          
 				'638F5B'
 			],
