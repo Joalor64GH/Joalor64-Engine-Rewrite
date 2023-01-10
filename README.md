@@ -13,6 +13,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Epic Modcharting Tools
 
 # Downloads
+* [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
 * [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
 
 # Credits
