@@ -78,7 +78,7 @@ class FunkinLua {
 
 	public var scriptCode:String;
 	
-	public function new(script:String) {
+	public function new(script:String, ?scriptCode:String) {
 		#if LUA_ALLOWED
 		lua = LuaL.newstate();
 		LuaL.openlibs(lua);
