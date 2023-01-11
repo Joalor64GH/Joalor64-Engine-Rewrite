@@ -47,7 +47,8 @@ class Paths
 		'fonts',
 		'scripts',
 		'libs',
-		'achievements'
+		'achievements',
+		'art'
 	];
 	#end
 
@@ -176,6 +177,16 @@ class Paths
 	inline static public function json(key:String, ?library:String)
 	{
 		return getPath('data/$key.json', TEXT, library);
+	}
+
+	inline static public function fla(key:String, ?library:String)
+	{
+		return getPath('art/$key.fla', BINARY, library);
+	}
+
+	inline static public function flp(key:String, ?library:String)
+	{
+		return getPath('art/$key.flp', BINARY, library);
 	}
 
 	inline static public function shaderFragment(key:String, ?library:String)
@@ -463,6 +474,14 @@ class Paths
 
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
+	}
+
+	inline static public function modsFla(key:String) {
+		return modFolders('art/' + key + '.fla');
+	}
+
+	inline static public function modsFlp(key:String) {
+		return modFolders('art/' + key + '.flp');
 	}
 
 	inline static public function modsAchievements(key:String) {
