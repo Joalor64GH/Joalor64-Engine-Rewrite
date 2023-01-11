@@ -57,6 +57,9 @@ class MainMenuState extends MusicBeatState
 	public static var psychGitBuild:String = 'eb79a80';  
 	public static var curSelected:Int = 0;
 
+	var cocoaShit:FlxText;
+	var cocoaColor:FlxTween;
+
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
@@ -65,6 +68,17 @@ class MainMenuState extends MusicBeatState
 	
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
+
+	var colors:Array<FlxColor> = [
+		FlxColor.RED,
+		FlxColor.ORANGE,
+		FlxColor.YELLOW,
+		FlxColor.CYAN,
+		FlxColor.GREEN,
+		FlxColor.BLUE,
+		FlxColor.fromRGB(75, 0, 130),
+		FlxColor.fromRGB(252, 43, 240),
+	];
 
 	var tipTextMargin:Float = 10;
 	var tipTextScrolling:Bool = false;
@@ -248,10 +262,10 @@ class MainMenuState extends MusicBeatState
 		FlxG.camera.follow(camFollowPos, null, 1);
 
                 // Joalor64 Engine
-                var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+                var cocoaShit = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
+		cocoaShit.scrollFactor.set();
+		cocoaShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(cocoaShit);
 
 		// Psych Engine
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion + ' [$psychGitBuild]', 12);
@@ -473,5 +487,18 @@ class MainMenuState extends MusicBeatState
 				spr.centerOffsets();
 			}
 		});
+	}
+
+	override function stepHit()
+	{
+		super.stepHit();
+
+		if (curStep % 2 == 0)
+		{
+			if (cocoaColor != null)
+				cocoaColor.cancel();
+
+			cocoaColor = FlxTween.color(cocoaShit, 0.4, cocoaShit.color, colors[curStep % 8], {onComplete: function(twn) cocoaColor = null});
+		}
 	}
 }
