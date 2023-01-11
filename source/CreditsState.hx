@@ -80,72 +80,89 @@ class CreditsState extends MusicBeatState
 		}
 		#end
 
-		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var pisspoop:Array<Array<String>> = [
+			/**
+			 * Name
+			 * Icon name
+			 * Description
+			 * Link
+			 * BG Color
+			 * Sound
+			**/
 		    ['Joalor64 Engine Creators'],
 			[
 				'Joalor64 YT',         
 				'joalor',             
-				'Project leader\nMain Programmer',                                  		
+				'Project leader\nMain Programmer\n"I do things"',                                  		
 				'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',  
-				'00FFF6'
+				'00FFF6',
+				'noweyyy'
 			],
 			[
 				'Bot 404',              
 				'bot',             
-				'Tiny little helper, Drew his own icon',                                     	    
+				'Tiny little helper, Drew his own icon\n"expected more"',                                     	    
 				'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg',            
-				'FF0040'
+				'FF0040',
+				'slipperyahhfloor'
 			],
 			[''],
 			['Special Thanks'],
 			[
 				'PE Discord Server Members',             
 				'discord',             
-				'They made the Scripts lmao',                       		
+				'They made the Scripts lmao\n"I got banned tho lmao"',                       		
 				'https://discord.gg/2ka77eMXDv',          
-				'6732E3'
+				'6732E3',
+				'discordo'
 			],
 			[
 				'BeastlyGhost',             
 				'beastly',             
-				'Customizable Main Menu with .JSON\nPrepare Sprite',                       		
+				'Customizable Main Menu with .JSON\nPrepare Sprite\n"just happy to be here!"',                       		
 				'https://github.com/BeastlyGhost',          
-				'8CC4FF'
+				'8CC4FF',
+				'Ghost'
 			],
 			[
 				'Stilic',             
 				'stilic',             
-				'Restored Combo Script',                       		
+				'Restored Combo Script\n"French Programmer"',                       		
 				'https://github.com/Stilic',          
-				'C74B22'
+				'C74B22',
+				'meowmeowmeowAAAA'
 			],
 			[
 				'TheWorldMachinima',             
 				'machinima',             
-				'SScript and Cocoa Code\nSoftcoded Achievements',                       		
+				'SScript and Cocoa Code\nSoftcoded Achievements\n"Banger PR"',                       		
 				'https://github.com/TheWorldMachinima',          
-				'638F5B'
+				'638F5B',
+				'nyaw'
 			],
 			[
 				'stevecodergh',             
 				'steve',             
-				'Python Support',                       		
+				'Python Support\n"Mag Engine is discontinued FRICK"',                       		
 				'https://github.com/stevecodergh',          
-				'0000FF'
+				'0000FF',
+				'squeak'
 			],
 			[
 				'TheZoroForce240',             
 				'zoro',             
-				'Special Modcharting System',                       		
+				'Special Modcharting System\n"Not alot to say about this guy"',                       		
 				'https://github.com/TheZoroForce240',          
-				'FFD900'
+				'FFD900',
+				'goofyahhphone'
 			],
 			[
 				'You',             
 				'face',             
-				'For playing :)',                       		
+				'For playing :)\n"You're Welcome! -You"',                       		
 				'https://joalor64.itch.io/',          
-				'7E00FF'
+				'7E00FF',
+				''
 			],			
 			[''],
 			['Psych Engine Team'],
@@ -154,21 +171,24 @@ class CreditsState extends MusicBeatState
 				'shadowmario',		
 				'Main Programmer of Psych Engine',								
 				'https://twitter.com/Shadow_Mario_',	
-				'444444'
+				'444444',
+				''
 			],
 			[
 				'RiverOaken',			
 				'river',			
 				'Main Artist/Animator of Psych Engine',							
 				'https://twitter.com/RiverOaken',		
-				'B42F71'
+				'B42F71',
+				''
 			],
 			[
 				'Yoshubs',				
 				'shubs',			
 				'Additional Programmer of Psych Engine\nEpic Input System',						
 				'https://twitter.com/yoshubs',			
-				'5E99DF'
+				'5E99DF',
+				''
 			],
 			[''],
 			['Former Engine Members'],
@@ -177,7 +197,8 @@ class CreditsState extends MusicBeatState
 				'bb',				
 				'Ex-Programmer of Psych Engine',								
 				'https://twitter.com/bbsub3',			
-				'3E813A'
+				'3E813A',
+				''
 			],
 			[''],
 			['Engine Contributors'],
@@ -186,56 +207,64 @@ class CreditsState extends MusicBeatState
 				'flicky',			
 				'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		
 				'https://twitter.com/flicky_i',			
-				'9E29CF'
+				'9E29CF',
+				''
 			],
 			[
 				'gedehari',			
 				'sqirra',			
 				'Crash Handler and Base code for\nChart Editor\'s Waveform',	
 				'https://twitter.com/gedehari',			
-				'E1843A'
+				'E1843A',
+				''
 			],
 			[
 				'EliteMasterEric',		
 				'mastereric',		
 				'Runtime Shaders support',										
 				'https://twitter.com/EliteMasterEric',	
-				'FFBD40'
+				'FFBD40',
+				''
 			],
 			[
 				'PolybiusProxy',		
 				'proxy',			
 				'Creator of hxCodec',							
 				'https://twitter.com/polybiusproxy',	
-				'DCD294'
+				'DCD294',
+				''
 			],
 			[
 				'KadeDev',				
 				'kade',				
 				'Fixed Chart Editor and other PRs\nExtension WebM',			
 				'https://twitter.com/kade0912',			
-				'64A250'
+				'64A250',
+				''
 			],
 			[
 				'Keoiki',				
 				'keoiki',			
 				'Note Splash Animations',										
 				'https://twitter.com/Keoiki_',			
-				'D2D2D2'
+				'D2D2D2',
+				''
 			],
 			[
 				'Nebula the Zorua',	
 				'nebula',			
 				'LUA JIT Fork and some Lua reworks',							
 				'https://twitter.com/Nebula_Zorua',		
-				'7D40B2'
+				'7D40B2',
+				''
 			],
 			[
 				'Smokey',				
 				'smokey',			
 				'Sprite Atlas Support',											
 				'https://twitter.com/Smokey_5_',		
-				'483D92'
+				'483D92',
+				''
 			],
 			[''],
 			["Funkin' Crew"],
@@ -244,28 +273,32 @@ class CreditsState extends MusicBeatState
 				'ninjamuffin99',	
 				"Programmer/Creator of Friday Night Funkin'",							
 				'https://twitter.com/ninja_muffin99',	
-				'CF2D2D'
+				'CF2D2D',
+				''
 			],
 			[
 				'PhantomArcade',		
 				'phantomarcade',	
 				"Animator of Friday Night Funkin'",								
 				'https://twitter.com/PhantomArcade3K',	
-				'FADC45'
+				'FADC45',
+				''
 			],
 			[
 				'evilsk8r',			
 				'evilsk8r',			
 				"Artist of Friday Night Funkin'",								
 				'https://twitter.com/evilsk8r',			
-				'5ABD4B'
+				'5ABD4B',
+				''
 			],
 			[
 				'kawaisprite',			
 				'kawaisprite',		
 				"Composer of Friday Night Funkin'",								
 				'https://twitter.com/kawaisprite',		
-				'378FC7'
+				'378FC7',
+				''
 			]
 		];
 		
@@ -312,11 +345,21 @@ class CreditsState extends MusicBeatState
 		add(descBox);
 
 		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
-		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
+		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 		descText.scrollFactor.set();
 		//descText.borderSize = 2.4;
 		descBox.sprTracker = descText;
 		add(descText);
+
+		var blackBox:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 80, FlxColor.BLACK);
+		blackBox.scrollFactor.set();
+		blackBox.alpha = 0.6;
+		add(blackBox);
+
+		var keyText:FlxText = new FlxText(0, 4, FlxG.width, "SPACE // PLAY PERSON'S SOUND\nENTER // ACCESS SOCIALS", 32);
+		keyText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+		keyText.scrollFactor.set();
+		add(keyText);
 
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
@@ -369,6 +412,9 @@ class CreditsState extends MusicBeatState
 
 			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			}
+			if(FlxG.keys.justPressed.SPACE) {
+				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
 			}
 			if (controls.BACK)
 			{
