@@ -53,7 +53,7 @@ class MusicBeatState extends FlxUIState
 
 		if (oldStep != curStep)
 		{
-			if(curStep >= 0)
+			if(curStep > 0)
 				stepHit();
 
 			if(PlayState.SONG != null)
