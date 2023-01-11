@@ -159,7 +159,7 @@ class CreditsState extends MusicBeatState
 			[
 				'You',             
 				'face',             
-				'For playing :)\n"You're Welcome! -You"',                       		
+				'For playing :)\n"No problem! -You"',                       		
 				'https://joalor64.itch.io/',          
 				'7E00FF',
 				''
