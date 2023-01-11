@@ -57,8 +57,8 @@ class MainMenuState extends MusicBeatState
 	public static var psychGitBuild:String = 'eb79a80';  
 	public static var curSelected:Int = 0;
 
-	var cocoaShit:FlxText;
-	var cocoaColor:FlxTween;
+	var joalor64Shit:FlxText;
+	var joalor64Color:FlxTween;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -262,10 +262,10 @@ class MainMenuState extends MusicBeatState
 		FlxG.camera.follow(camFollowPos, null, 1);
 
                 // Joalor64 Engine
-                var cocoaShit = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
-		cocoaShit.scrollFactor.set();
-		cocoaShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(cocoaShit);
+                var joalor64Shit = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
+		joalor64Shit.scrollFactor.set();
+		joalor64Shit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(joalor64Shit);
 
 		// Psych Engine
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion + ' [$psychGitBuild]', 12);
@@ -495,10 +495,10 @@ class MainMenuState extends MusicBeatState
 
 		if (curStep % 2 == 0)
 		{
-			if (cocoaColor != null)
-				cocoaColor.cancel();
+			if (joalor64Color != null)
+				joalor64Color.cancel();
 
-			cocoaColor = FlxTween.color(cocoaShit, 0.4, cocoaShit.color, colors[curStep % 8], {onComplete: function(twn) cocoaColor = null});
+			joalor64Color = FlxTween.color(joalor64Shit, 0.4, joalor64Shit.color, colors[curStep % 8], {onComplete: function(twn) joalor64Color = null});
 		}
 	}
 }

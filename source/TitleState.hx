@@ -461,13 +461,13 @@ class TitleState extends MusicBeatState
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		if (FlxG.keys.justPressed.ESCAPE)
-        {
-	        FlxG.sound.music.fadeOut(0.3);
-	        FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
-	        {
+                {
+	            FlxG.sound.music.fadeOut(0.3);
+	            FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+	            {
 		        Sys.exit(0);
-	        }, false);
-        }
+	            }, false);
+                }
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 
