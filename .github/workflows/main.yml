@@ -59,7 +59,7 @@ jobs:
         with:
           name: linuxBuild
           path: 'export/release/linux/bin'
-  buildWindows:
+  buildWindows64:
     runs-on: windows-latest
 
     steps:
@@ -104,13 +104,6 @@ jobs:
         with:
           name: windows64Build
           path: export/release/windows/bin
-        - name: Compile 32 bit
-        run: haxelib run lime build windows -D32bit -32
-      - name: Publish 32bit
-        uses: actions/upload-artifact@main
-        with:
-          name: windows32Build
-          path: export/32bit/windows/bin
   buildMacOS:
     runs-on: macos-latest
 
