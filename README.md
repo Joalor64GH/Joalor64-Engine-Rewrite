@@ -14,7 +14,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
-* [ ] Funni Credits Sounds
+* [X] Funni Credits Sounds **[yes]**
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
