@@ -3,6 +3,7 @@ package horny;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxState;
+import horny.*;
 
 class HornyState extends FlxState {
     public var script:HornyScript;

@@ -1,5 +1,7 @@
 package horny;
 
+import horny.*;
+
 class HornyClass {
 	
 	public var script:HornyScript;
