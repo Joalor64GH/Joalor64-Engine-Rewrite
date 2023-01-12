@@ -1,4 +1,7 @@
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
 import flixel.FlxG;
 import Discord;
 import Conductor;
@@ -8,6 +11,10 @@ import Paths;
 import CoolUtil;
 import Highscore;
 import PlayerSettings;
+import MusicBeatState;
+import MusicBeatSubstate;
+import PlayState;
+import Controls;
 
 using CoolUtil;
 using StringTools;
