@@ -99,6 +99,7 @@ import pythonUtil.Python;
 
 #if HSCRIPT_ALLOWED
 import hscript.*;
+import horny.*
 #end
 
 using StringTools;
