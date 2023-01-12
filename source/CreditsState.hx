@@ -119,7 +119,7 @@ class CreditsState extends MusicBeatState
 			[
 				'BeastlyGhost',             
 				'beastly',             
-				'Customizable Main Menu with .JSON\nPrepare Sprite\n"just happy to be here!"',                       		
+				'Customizable Main Menu with .JSON\nPrepare Sprite\nCredits Sounds\n"just happy to be here!"',                       		
 				'https://github.com/BeastlyGhost',          
 				'8CC4FF',
 				'Ghost'
@@ -410,7 +410,7 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(FlxG.keys.justPressed.ENTER && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
 			if(FlxG.keys.justPressed.SPACE) {
