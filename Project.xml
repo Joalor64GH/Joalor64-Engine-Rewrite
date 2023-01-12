@@ -38,6 +38,7 @@
 
 	<!-- JOALOR64 ENGINE CUSTOMIZATION -->
 	<define name="MODS_ALLOWED" if="desktop" />
+	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="LUA_ALLOWED" if="desktop" />
 	<define name="HSCRIPT_ALLOWED" if="desktop"/>
 	<define name="SCRIPT_EXTENSION" if="desktop"/>
@@ -126,7 +127,7 @@
 	<assets path="assets/week7"         library="week7"         exclude="*.ogg" if="web"/>
 	<assets path="assets/week7"         library="week7"         exclude="*.mp3|*.mp4" unless="web"/>
 	
-	<section if="MODS_ALLOWED">
+	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt' rename='' />
 	</section>
@@ -147,6 +148,7 @@
 	<haxelib name="hxjsonast" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="flixel-tools" />
+	<haxelib name="polymod" if="FUTURE_POLYMOD"/>
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>

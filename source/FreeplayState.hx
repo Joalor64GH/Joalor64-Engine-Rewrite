@@ -18,7 +18,7 @@ import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
-#if MODS_ALLOWED
+#if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end
 
@@ -358,7 +358,7 @@ class FreeplayState extends MusicBeatState
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-			/*#if MODS_ALLOWED
+			/*#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
 			#else
 			if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {

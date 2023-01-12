@@ -24,7 +24,7 @@ import flixel.input.keyboard.FlxKey;
 import openfl.Assets;
 import haxe.Json;
 
-#if MODS_ALLOWED
+#if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -85,7 +85,7 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		Paths.pushGlobalMods();
 		#end
 		WeekData.loadTheFirstEnabledMod();
@@ -120,7 +120,7 @@ class MainMenuState extends MusicBeatState
 			optionShit = [
 				'story_mode',
 				'freeplay',
-				#if MODS_ALLOWED 'mods',
+				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
 				#end
 				#if ACHIEVEMENTS_ALLOWED
 				'awards',
@@ -391,7 +391,7 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									#if MODS_ALLOWED
+									#if (MODS_ALLOWED && FUTURE_POLYMOD)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
@@ -407,7 +407,7 @@ class MainMenuState extends MusicBeatState
 					});
 				}
 			}
-			#if MODS_ALLOWED
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;

@@ -35,7 +35,7 @@ import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import lime.system.Clipboard;
 import flixel.animation.FlxAnimation;
 
-#if MODS_ALLOWED
+#if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end
 
@@ -1044,7 +1044,7 @@ class CharacterEditorState extends MusicBeatState
 	function reloadCharacterDropDown() {
 		var charsLoaded:Map<String, Bool> = new Map();
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		characterList = [];
 		var directories:Array<String> = [Paths.mods('characters/'), Paths.mods(Paths.currentModDirectory + '/characters/'), Paths.getPreloadPath('characters/')];
 		for(mod in Paths.getGlobalMods())

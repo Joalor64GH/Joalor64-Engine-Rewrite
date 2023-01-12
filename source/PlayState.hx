@@ -927,7 +927,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//CUSTOM ACHIVEMENTS
-		#if (MODS_ALLOWED && LUA_ALLOWED && ACHIEVEMENTS_ALLOWED)
+		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED && ACHIEVEMENTS_ALLOWED)
 		var luaFiles:Array<String> = Achievements.getModAchievements().copy();
 		if(luaFiles.length > 0)
 		{
@@ -973,7 +973,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
@@ -1002,7 +1002,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
@@ -1031,7 +1031,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
@@ -1060,7 +1060,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
@@ -1087,7 +1087,7 @@ class PlayState extends MusicBeatState
 
 
 		// STAGE SCRIPTS
-		#if (MODS_ALLOWED && LUA_ALLOWED)
+		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED)
 		var doPush:Bool = false;
 		var luaFile:String = 'stages/' + curStage + '.lua';
 		if(FileSystem.exists(Paths.modFolders(luaFile))) {
@@ -1104,7 +1104,7 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(luaFile));
 		#end
 
-		#if (MODS_ALLOWED && HSCRIPT_ALLOWED)
+		#if (MODS_ALLOWED && FUTURE_POLYMOD && HSCRIPT_ALLOWED)
 		var doPush:Bool = false;
 		var hscriptFile:String = 'stages/' + curStage + '.hscript';
 		if(FileSystem.exists(Paths.modFolders(hscriptFile))) {
@@ -1397,7 +1397,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
-			#if MODS_ALLOWED
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var luaToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
@@ -1421,7 +1421,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventPushedMap.keys())
 		{
-			#if MODS_ALLOWED
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var luaToLoad:String = Paths.modFolders('custom_events/' + event + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
@@ -1447,7 +1447,7 @@ class PlayState extends MusicBeatState
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
-			#if MODS_ALLOWED
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hscriptToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
@@ -1471,7 +1471,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventPushedMap.keys())
 		{
-			#if MODS_ALLOWED
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hscriptToLoad:String = Paths.modFolders('custom_events/' + event + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
@@ -1504,7 +1504,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
@@ -1533,7 +1533,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
@@ -1562,7 +1562,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
@@ -1591,7 +1591,7 @@ class PlayState extends MusicBeatState
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
@@ -1752,7 +1752,7 @@ class PlayState extends MusicBeatState
 	{
 		if(!ClientPrefs.shaders) return new FlxRuntimeShader();
 
-		#if (!flash && MODS_ALLOWED && sys)
+		#if (!flash && MODS_ALLOWED && FUTURE_POLYMOD && sys)
 		if(!runtimeShaders.exists(name) && !initLuaShader(name))
 		{
 			FlxG.log.warn('Shader $name is missing!');
@@ -1978,7 +1978,7 @@ class PlayState extends MusicBeatState
 			interp.variables.set('addScript', function(name:String, ?ignoreAlreadyRunning:Bool = false) {
 				var cervix = '$name.hscript';
 				var doPush = false;
-				#if MODS_ALLOWED
+				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				if (FileSystem.exists(Paths.modFolders(cervix))) {
 					cervix = Paths.modFolders(cervix);
 					doPush = true;
@@ -1988,7 +1988,7 @@ class PlayState extends MusicBeatState
 					if (OpenFlAssets.exists(cervix)) {
 						doPush = true;
 					}
-				#if MODS_ALLOWED	
+				#if (MODS_ALLOWED && FUTURE_POLYMOD)	
 				}
 				#end
 
@@ -2007,7 +2007,7 @@ class PlayState extends MusicBeatState
 			interp.variables.set('removeScript', function(name:String) {
 				var cervix = '$name.hscript';
 				var doPush = false;
-				#if MODS_ALLOWED
+				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				if (FileSystem.exists(Paths.modFolders(cervix))) {
 					cervix = Paths.modFolders(cervix);
 					doPush = true;
@@ -2017,7 +2017,7 @@ class PlayState extends MusicBeatState
 					if (OpenFlAssets.exists(cervix)) {
 						doPush = true;
 					}
-				#if MODS_ALLOWED	
+				#if (MODS_ALLOWED && FUTURE_POLYMOD)	
 				}
 				#end
 
@@ -2147,7 +2147,7 @@ class PlayState extends MusicBeatState
 				filesPushed.push(file);
 			}
 		}
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		var foldersToCheck:Array<String> = [Paths.mods('scripts/classes/')];
 		if (Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods('${Paths.currentModDirectory}/scripts/classes/'));
@@ -2183,7 +2183,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
 		var luaFile:String = 'characters/' + name + '.lua';
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		if(FileSystem.exists(Paths.modFolders(luaFile))) {
 			luaFile = Paths.modFolders(luaFile);
 			doPush = true;
@@ -2213,7 +2213,7 @@ class PlayState extends MusicBeatState
 		#if HSCRIPT_ALLOWED
 		var doPush:Bool = false;
 		var hscriptFile:String = 'characters/$name.hscript';
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		if (FileSystem.exists(Paths.modFolders(hscriptFile))) {
 			hscriptFile = Paths.modFolders(hscriptFile);
 			doPush = true;
@@ -2223,7 +2223,7 @@ class PlayState extends MusicBeatState
 			if (OpenFlAssets.exists(hscriptFile)) {
 				doPush = true;
 			}
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		}
 		#end
 		
@@ -3147,7 +3147,7 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
-		#if MODS_ALLOWED
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
 		if (OpenFlAssets.exists(file)) {
