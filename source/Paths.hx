@@ -458,6 +458,12 @@ class Paths
 		return modFolders('data/' + key + '.jsonc');
 	}
 
+    #if FUTURE_POLYMOD
+	inline static public function polymodTxt(key:String) {
+		return modFolders('_append/data/' + key + '.txt');
+	}
+	#end
+
 	static public function modsVideo(key:String) {
 		for (i in VIDEO_EXT) {
 			var path = modFolders('videos/$key.$i');

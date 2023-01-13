@@ -172,7 +172,7 @@ class CreditsState extends MusicBeatState
 				'Main Programmer of Psych Engine',								
 				'https://twitter.com/Shadow_Mario_',	
 				'444444',
-				''
+				'JingleShadow'
 			],
 			[
 				'RiverOaken',			
@@ -180,7 +180,7 @@ class CreditsState extends MusicBeatState
 				'Main Artist/Animator of Psych Engine',							
 				'https://twitter.com/RiverOaken',		
 				'B42F71',
-				''
+				'JingleRiver'
 			],
 			[
 				'Yoshubs',				
@@ -188,7 +188,7 @@ class CreditsState extends MusicBeatState
 				'Additional Programmer of Psych Engine\nEpic Input System',						
 				'https://twitter.com/yoshubs',			
 				'5E99DF',
-				''
+				'JingleShubs'
 			],
 			[''],
 			['Former Engine Members'],
@@ -198,7 +198,7 @@ class CreditsState extends MusicBeatState
 				'Ex-Programmer of Psych Engine',								
 				'https://twitter.com/bbsub3',			
 				'3E813A',
-				''
+				'JingleBB'
 			],
 			[''],
 			['Engine Contributors'],

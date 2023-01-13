@@ -1,6 +1,6 @@
 package;
 
-#if ((MODS_ALLOWED && FUTURE_POLYMOD) && FUTURE_POLYMOD)
+#if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;
 #end
