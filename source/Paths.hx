@@ -179,6 +179,11 @@ class Paths
 		return getPath('data/$key.json', TEXT, library);
 	}
 
+	inline static public function tjson(key:String, ?library:String)
+	{
+		return getPath('data/$key.jsonc', TEXT, library);
+	}
+
 	inline static public function fla(key:String, ?library:String)
 	{
 		return getPath('art/$key.fla', BINARY, library);
@@ -449,6 +454,10 @@ class Paths
 		return modFolders('data/' + key + '.json');
 	}
 
+	inline static public function modsTjson(key:String) {
+		return modFolders('data/' + key + '.jsonc');
+	}
+
 	static public function modsVideo(key:String) {
 		for (i in VIDEO_EXT) {
 			var path = modFolders('videos/$key.$i');
@@ -523,7 +532,7 @@ class Paths
 				if (dat[1] == "1")
 				{
 					var folder = dat[0];
-					var path = Paths.mods(folder + '/pack.json');
+					var path = Paths.mods(folder + '/#if FUTURE_POLYMOD _polymod_meta.json #else pack.json #end');
 					if(FileSystem.exists(path)) {
 						try{
 							var rawJson:String = File.getContent(path);
