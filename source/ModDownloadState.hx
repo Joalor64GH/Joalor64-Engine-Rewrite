@@ -303,7 +303,7 @@ class ModDownloadState extends MusicBeatState
 					if (FileSystem.exists('mods/$folder'))
 					{
 						if (FileSystem.readDirectory('mods/$folder/') != null
-							&& !FileSystem.readDirectory('mods/$folder/').contains('pack.json'))
+							&& !FileSystem.readDirectory('mods/$folder/').contains('#if FUTURE_POLYMOD _polymod_meta.json #else pack.json #end'))
 						{
 							coolText.text = 'This Is Not A Psych Engine Mod!';
 
