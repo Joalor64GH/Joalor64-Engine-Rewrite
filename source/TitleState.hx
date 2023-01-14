@@ -289,12 +289,37 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
+		var path = "mods/" + Paths.currentModDirectory + "/images/logoBumpin.png";
+		// trace(path, FileSystem.exists(path));
+		if (!FileSystem.exists(path))
+		{
+			path = "mods/images/logoBumpin.png";
+		}
+		// trace(path, FileSystem.exists(path));
+		if (!FileSystem.exists(path))
+		{
+			path = "assets/images/logoBumpin.png";
+		}
+		// trace(path, FileSystem.exists(path));
+		logoBl.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path), File.getContent(StringTools.replace(path, ".png", ".xml")));
+		#else
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		#end
 
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
+		logoBl.setGraphicSize(Std.int(logoBl.width * 0.9));
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.alpha = 0;
+		logoBl.angle = 0;
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+		FlxTween.tween(logoBl, {
+			y: logoBl.y + 120,
+			x: logoBl.x + 120,
+			angle: -4,
+			alpha: 1
+		}, 1.4, {ease: FlxEase.expoInOut});
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
@@ -563,6 +588,8 @@ class TitleState extends MusicBeatState
 				transitioning = true;
 				// FlxG.sound.music.stop();
 
+				gfDance.animation.play('Hey');
+				candance = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate) {
