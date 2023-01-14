@@ -162,7 +162,7 @@ class CreditsState extends MusicBeatState
 				'For playing :)\n"No problem! -You"',                       		
 				'https://joalor64.itch.io/',          
 				'7E00FF',
-				''
+				'stolethisfromGamerEnginelol'
 			],			
 			[''],
 			['Psych Engine Team'],
