@@ -86,7 +86,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
-import VideoHandler;
+import vlc.MP4Handler;
 #end
 
 #if WEBM_ALLOWED
