@@ -293,18 +293,9 @@ class TitleState extends MusicBeatState
 		#end
 
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
-		logoBl.setGraphicSize(Std.int(logoBl.width * 0.9));
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.alpha = 0;
-		logoBl.angle = 0;
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		FlxTween.tween(logoBl, {
-			y: logoBl.y + 120,
-			x: logoBl.x + 120,
-			angle: -4,
-			alpha: 1
-		}, 1.4, {ease: FlxEase.expoInOut});
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
