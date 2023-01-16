@@ -32,7 +32,10 @@ class Paths
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
 	public static var ignoreModFolders:Array<String> = [
-		#if FUTURE_POLYMOD '_append', #end
+		#if FUTURE_POLYMOD 
+		'_append', 
+		'_merge', 
+		#end
 		'characters',
 		'custom_events',
 		'custom_notetypes',
@@ -460,8 +463,44 @@ class Paths
 	}
 
     	#if FUTURE_POLYMOD
-	inline static public function polymodTxt(key:String) {
+	inline static public function appendTxt(key:String) {
 		return modFolders('_append/data/' + key + '.txt');
+	}
+
+	inline static public function appendJson(key:String) {
+		return modFolders('_append/data/' + key + '.json');
+	}
+
+	inline static public function appendCsv(key:String) {
+		return modFolders('_append/data/' + key + '.csv');
+	}
+
+	inline static public function appendXml(key:String) {
+		return modFolders('_append/data/' + key + '.xml');
+	}
+
+	inline static public function mergeTxt(key:String) {
+		return modFolders('_merge/data/' + key + '.txt');
+	}
+
+	inline static public function mergeJson(key:String) {
+		return modFolders('_merge/data/' + key + '.json');
+	}
+
+	inline static public function mergeCsv(key:String) {
+		return modFolders('_merge/data/' + key + '.csv');
+	}
+
+	inline static public function mergeTsv(key:String) {
+		return modFolders('_merge/data/' + key + '.tsv');
+	}
+
+	inline static public function mergeXml(key:String) {
+		return modFolders('_merge/data/' + key + '.xml');
+	}
+
+	inline static public function tsv(key:String) {
+		return modFolders(key + '.tsv');
 	}
 	#end
 
