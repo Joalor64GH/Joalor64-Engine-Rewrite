@@ -32,6 +32,7 @@ class Paths
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
 	public static var ignoreModFolders:Array<String> = [
+		#if FUTURE_POLYMOD '_append', #end
 		'characters',
 		'custom_events',
 		'custom_notetypes',

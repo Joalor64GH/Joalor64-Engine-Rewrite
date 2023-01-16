@@ -1,4 +1,4 @@
-package handlers;
+package;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
