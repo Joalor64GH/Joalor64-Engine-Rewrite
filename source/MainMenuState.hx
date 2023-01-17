@@ -22,6 +22,7 @@ import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 import openfl.Assets;
+import openfl.media.Video;
 import haxe.Json;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -417,6 +418,13 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new ModsMenuState());
+			}
+			#end
+
+            #if debug
+			if (FlxG.keys.justPressed.FOUR)
+			{
+				MusicBeatState.switchState(new VideoState("assets/videos/cutscenetest/video.webm", new MainMenuState()));
 			}
 			#end
 
