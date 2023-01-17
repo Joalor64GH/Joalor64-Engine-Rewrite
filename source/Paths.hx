@@ -483,10 +483,6 @@ class Paths
 		return modFolders('_merge/data/' + key + '.txt');
 	}
 
-	inline static public function mergeJson(key:String) {
-		return modFolders('_merge/data/' + key + '.json');
-	}
-
 	inline static public function mergeCsv(key:String) {
 		return modFolders('_merge/data/' + key + '.csv');
 	}

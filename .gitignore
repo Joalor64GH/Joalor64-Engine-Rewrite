@@ -48,6 +48,7 @@ source/smTools/
 !appveyor-macos.yml
 !appveyor-windows.yml
 !azure-pipelines.yml
+!modchartexample.mc
 !.DS_Store
 !Thumbs.db
 !*.hxml
