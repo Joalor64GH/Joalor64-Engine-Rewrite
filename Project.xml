@@ -134,7 +134,7 @@
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt' rename='' />
 	</section>
-	<assets path='art/readme.txt' rename='do NOT readme.txt' />
+	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	
 	<!-- _______________________________ Libraries ______________________________ -->
