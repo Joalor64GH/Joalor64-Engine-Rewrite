@@ -11,7 +11,7 @@ class TheSpecialState extends MusicBeatState
     public static var vidPaths:Array<String> = [
 	'test',
         'test2'
-];
+    ];
 
     override function create()
     {
@@ -27,8 +27,8 @@ class TheSpecialState extends MusicBeatState
     }
 
     public static function randomizeVideo()
-{
+    {
 	var chance:Int = FlxG.random.int(0, vidPaths.length - 1);
 	return Paths.video('The Special/${vidPaths[chance]}');
-}
+    }
 }
