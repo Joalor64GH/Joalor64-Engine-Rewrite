@@ -35,7 +35,7 @@ jobs:
           haxelib run lime setup
           haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hxCodec
@@ -80,7 +80,7 @@ jobs:
           haxelib run lime setup
           haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hxCodec
@@ -126,7 +126,7 @@ jobs:
           haxelib run lime setup
           haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hxCodec
