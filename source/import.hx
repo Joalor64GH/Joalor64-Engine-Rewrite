@@ -1,3 +1,4 @@
+// This just contains global imports.
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
@@ -17,6 +18,9 @@ import MusicBeatState;
 import MusicBeatSubstate;
 import PlayState;
 import Controls;
+#if (polymod && FUTURE_POLYMOD)
+import polymod.Polymod;
+#end
 
 using CoolUtil;
 using StringTools;
