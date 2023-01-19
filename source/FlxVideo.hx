@@ -11,7 +11,6 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 
 class FlxVideo extends FlxBasic {
-	#if VIDEOS_ALLOWED
 	public var finishCallback:Void->Void;
 	
 	#if desktop
@@ -128,6 +127,5 @@ class FlxVideo extends FlxBasic {
 				finishCallback();
 			}
 		}
-	#end
 	#end
 }
