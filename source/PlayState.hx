@@ -87,7 +87,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
-import VideoHandler;
+import FlxVideo;
 #end
 
 #if WEBM_ALLOWED
@@ -2269,7 +2269,7 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler();
+		var video:FlxVideo = new FlxVideo();
 		video.playVideo(filepath);
 		video.finishCallback = function()
 		{
