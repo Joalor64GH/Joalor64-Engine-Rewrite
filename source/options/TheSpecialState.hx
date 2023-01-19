@@ -10,34 +10,34 @@ class TheSpecialState extends MusicBeatState
     var video:FlxVideo;
     public static var vidPaths:Array<String> = [
 	'a',
-    'albion online',
-    'amogus',
-    'among',
-    'apple',
-    'asterisk',
-    'beluga',
-    'cheating',
-    'death',
-    'disobedient',
-    'fart',
-    'funi',
-    'gun',
-    'heavy',
-    'here i come',
-    'hey alvin',
-    'ip',
-    'jijijija',
-    'poopy',
-    'sonic',
-    'stove',
-    'toddler',
-    'xbox live',
-    'yo mama'
+        'albion online',
+        'amogus',
+        'among',
+        'apple',
+        'asterisk',
+        'beluga',
+        'cheating',
+        'death',
+        'disobedient',
+        'fart',
+        'funi',
+        'gun',
+        'heavy',
+        'here i come',
+        'hey alvin',
+        'ip',
+        'jijijija',
+        'poopy',
+        'sonic',
+        'stove',
+        'toddler',
+        'xbox live',
+        'yo mama'
     ];
 
     override function create()
     {
-        video = new FlxVideo(randomizeVideo);
+        video = new FlxVideo(randomizeVideo());
         video.finishCallback = () -> done();
 
         super.create();
