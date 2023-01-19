@@ -9,8 +9,30 @@ class TheSpecialState extends MusicBeatState
 {
     var video:FlxVideo;
     public static var vidPaths:Array<String> = [
-	'test',
-        'test2'
+	'a',
+    'albion online',
+    'amogus',
+    'among',
+    'apple',
+    'asterisk',
+    'beluga',
+    'cheating',
+    'death',
+    'disobedient',
+    'fart',
+    'funi',
+    'gun',
+    'heavy',
+    'here i come',
+    'hey alvin',
+    'ip',
+    'jijijija',
+    'poopy',
+    'sonic',
+    'stove',
+    'toddler',
+    'xbox live',
+    'yo mama'
     ];
 
     override function create()
@@ -23,6 +45,8 @@ class TheSpecialState extends MusicBeatState
 
     function done() 
     {
+        video.kill();
+        video.destroy();
         Sys.exit(0);
     }
 
