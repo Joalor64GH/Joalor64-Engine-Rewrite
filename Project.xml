@@ -66,7 +66,7 @@
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
-	<classpath name="source" />
+	<source path="source" />
 
         <section if="EMBED_ASSETS">
                 <assets path="presets" embed='true'/>
