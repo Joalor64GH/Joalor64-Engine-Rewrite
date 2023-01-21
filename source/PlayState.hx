@@ -106,7 +106,7 @@ import horny.*;
 
 using StringTools;
 
-class PlayState extends MusicBeatState
+class PlayState extends MusicBeatState /*implements IHook*/
 {
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
