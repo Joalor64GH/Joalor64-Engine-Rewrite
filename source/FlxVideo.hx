@@ -5,7 +5,7 @@ import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 #else
 import openfl.events.Event;
-import vlc.VlcBitmap;
+import hxcodec.vlc.VlcBitmap;
 #end
 import flixel.FlxBasic;
 import flixel.FlxG;
