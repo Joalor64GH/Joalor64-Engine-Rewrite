@@ -733,8 +733,8 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 5:
-				    #if JOALOR64_WATERMARKS
-				    credIcon1.destroy();
+				    	#if JOALOR64_WATERMARKS
+				    	credIcon1.destroy();
 					credIcon2.destroy();
 					#end
 					deleteCoolText();
@@ -824,9 +824,9 @@ class TitleState extends MusicBeatState
 						remove(psychSpr);
 						remove(credGroup);
 						#if JOALOR64_WATERMARKS
-			            credIcon1.destroy();
-			            credIcon2.destroy();
-			            #end
+			            		credIcon1.destroy();
+			            		credIcon2.destroy();
+			            		#end
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
@@ -845,9 +845,9 @@ class TitleState extends MusicBeatState
 						remove(psychSpr);
 						remove(credGroup);
 						#if JOALOR64_WATERMARKS
-			            credIcon1.destroy();
-			            credIcon2.destroy();
-			            #end
+			            		credIcon1.destroy();
+			            		credIcon2.destroy();
+			            		#end
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
 					});
@@ -858,9 +858,9 @@ class TitleState extends MusicBeatState
 					remove(psychSpr);
 					remove(credGroup);
 					#if JOALOR64_WATERMARKS
-			        credIcon1.destroy();
-			        credIcon2.destroy();
-			        #end
+			        		credIcon1.destroy();
+			        		credIcon2.destroy();
+			        		#end
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
@@ -876,9 +876,9 @@ class TitleState extends MusicBeatState
 				remove(psychSpr);
 				remove(credGroup);
 				#if JOALOR64_WATERMARKS
-			    credIcon1.destroy();
-			    credIcon2.destroy();
-			    #end
+			    	credIcon1.destroy();
+			    	credIcon2.destroy();
+			    	#end
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
