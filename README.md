@@ -3,6 +3,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 
 # Features
+* Polymod Support
 * HX and Hscript Support
 * Python Support
 * 3D Notes
@@ -14,7 +15,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
-* [X] Funni Credits Sounds **[yes]**
+* [ ] Extra Notes (If not now, probably next update.)
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
