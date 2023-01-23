@@ -2274,9 +2274,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			return;
 		}
 
-        #if WEBM_ALLOWED
-		openSubState(new VideoState(name, startAndEnd));
-		#else
 		var video:VideoHandler = new VideoHandler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2284,7 +2281,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			startAndEnd();
 			return;
 		}
-		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
@@ -5319,59 +5315,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		else
 			webmHandler.resume();
 		#end
-	}
-
-	public function makeBackgroundTheVideo(source:String, with:Dynamic):Void // for background videos
-	{
-		useVideo = true;
-
-		webmHandler = new WebmHandler();
-		webmHandler.source = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
-		webmHandler.makePlayer();
-		webmHandler.webm.name = "WEBM SHIT";
-
-		BackgroundVideo.setWebm(webmHandler);
-		var ourVideo:Dynamic = BackgroundVideo.get();
-
-		ourVideo.source(Paths.video(source));
-		ourVideo.clearPause();
-
-		if (BackgroundVideo.isWebm) {
-			ourVideo.updatePlayer();
-		}
-
-		ourVideo.show();
-
-		if (BackgroundVideo.isWebm) {
-			ourVideo.restart();
-		}
-		else {
-			ourVideo.play();
-		}
-
-		var data = webmHandler.webm.bitmapData;
-
-		videoSprite = new FlxSprite(0, 0);
-		videoSprite.loadGraphic(data);
-		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.4));
-		videoSprite.scrollFactor.set();
-
-		switch (with)
-		{
-			case 'before' | 'in front of' | 'afore' | 'ere' | 'front' | 'head' | true | 'true':
-				add(videoSprite);
-			case 'dad' | 'opponent':
-				addBehindDad(videoSprite);
-			case 'bf' | 'boyfriend':
-				addBehindBF(videoSprite);
-			default:
-				addBehindGF(videoSprite);
-		}
-
-		if (startingSong)
-			webmHandler.pause();
-		else
-			webmHandler.resume();
 	}
 
 	public function endBGVideo():Void
