@@ -93,6 +93,8 @@ import hxcodec.VideoSprite;
 
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
+import BackgroundVideo;
+import VideoState;
 #end
 
 #if PYTHON_SCRIPTING
@@ -347,6 +349,8 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
 	private var debugKeysCharacter:Array<FlxKey>;
+
+	public var videoSprite:FlxSprite;
 
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
@@ -2255,7 +2259,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
 	public function startVideo(name:String)
 	{
-		#if VIDEOS_ALLOWED
+		#if (VIDEOS_ALLOWED && WEBM_ALLOWED)
 		inCutscene = true;
 
 		var filepath:String = Paths.video(name);
@@ -2270,6 +2274,9 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			return;
 		}
 
+        #if WEBM_ALLOWED
+		openSubState(new VideoState(name, startAndEnd));
+		#elseif VIDEOS_ALLOWED
 		var video:VideoHandler = new VideoHandler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -3056,6 +3063,8 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
 	function startSong():Void
 	{
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
 		startingSong = false;
 		songStarted = true;
 
@@ -3577,6 +3586,8 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
 	override public function update(elapsed:Float)
 	{
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
@@ -4622,6 +4633,8 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			PlayState.instance.remove(PlayState.instance.videoSprite);
 		}
 
+		endBGVideo();
+
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
@@ -5307,6 +5320,69 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		#end
 	}
 
+	public function makeBackgroundTheVideo(source:String, with:Dynamic):Void // for background videos
+	{
+		useVideo = true;
+
+		webmHandler = new WebmHandler();
+		webmHandler.source = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+		webmHandler.makePlayer();
+		webmHandler.webm.name = "WEBM SHIT";
+
+		BackgroundVideo.setWebm(webmHandler);
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
+		ourVideo.source(Paths.video(source));
+		ourVideo.clearPause();
+
+		if (BackgroundVideo.isWebm) {
+			ourVideo.updatePlayer();
+		}
+
+		ourVideo.show();
+
+		if (BackgroundVideo.isWebm) {
+			ourVideo.restart();
+		}
+		else {
+			ourVideo.play();
+		}
+
+		var data = webmHandler.webm.bitmapData;
+
+		videoSprite = new FlxSprite(0, 0);
+		videoSprite.loadGraphic(data);
+		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.4));
+		videoSprite.scrollFactor.set();
+
+		switch (with)
+		{
+			case 'before' | 'in front of' | 'afore' | 'ere' | 'front' | 'head' | true | 'true':
+				add(videoSprite);
+			case 'dad' | 'opponent':
+				addBehindDad(videoSprite);
+			case 'bf' | 'boyfriend':
+				addBehindBF(videoSprite);
+			default:
+				addBehindGF(videoSprite);
+		}
+
+		if (startingSong)
+			webmHandler.pause();
+		else
+			webmHandler.resume();
+	}
+
+	public function endBGVideo():Void
+	{
+		var video:Dynamic = BackgroundVideo.get();
+
+		if (useVideo && video != null)
+		{
+			video.stop();
+			remove(videoSprite);
+		}
+	}
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
