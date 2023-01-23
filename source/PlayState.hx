@@ -2276,7 +2276,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
         #if WEBM_ALLOWED
 		openSubState(new VideoState(name, startAndEnd));
-		#elseif VIDEOS_ALLOWED
+		#else
 		var video:VideoHandler = new VideoHandler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2284,6 +2284,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			startAndEnd();
 			return;
 		}
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
