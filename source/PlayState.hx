@@ -5260,8 +5260,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
 	public static var webmHandler:WebmHandler;
 
-	public var videoSprite:FlxSprite;
-
 	public function backgroundVideo(source:String) // for background videos
 	{
 		#if WEBM_ALLOWED
