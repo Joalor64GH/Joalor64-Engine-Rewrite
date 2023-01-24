@@ -2,11 +2,6 @@ package;
 
 import Song.SwagSong;
 
-/**
- * ...
- * @author
- */
-
 typedef BPMChangeEvent =
 {
 	var stepTime:Int;

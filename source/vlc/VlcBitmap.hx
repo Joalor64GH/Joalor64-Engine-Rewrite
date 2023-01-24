@@ -14,7 +14,7 @@ import openfl.errors.Error;
 import openfl.events.Event;
 import openfl.geom.Rectangle;
 import haxe.io.Bytes;
-import vlc.LibVLC;
+import hxcodec.vlc.LibVLC;
 
 /**
  * ...

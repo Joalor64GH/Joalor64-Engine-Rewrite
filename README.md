@@ -1,5 +1,5 @@
 # Joalor64 Engine Rewritten
-A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine).
+A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine). Not everything is perfect, so contributions and/or [pull requests](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pulls) would be nice! Be sure to report bugs in [issues](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues) also!
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 
 # Features
@@ -15,7 +15,8 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
-* [ ] Extra Notes (If not now, probably next update.)
+* [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
+* [ ] Animate Atlas Support
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)

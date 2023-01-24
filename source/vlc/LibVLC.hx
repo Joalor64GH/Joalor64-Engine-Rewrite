@@ -13,7 +13,7 @@ import cpp.UInt8;
 /**
  * This class lets you to use the c++ code of libvlc as a extern class which you can use in HaxeFlixel
  */
-@:buildXml("<include name='${haxelib:hxCodec}/src/vlc/LibVLCBuild.xml' />")
+@:buildXml("<include name='${haxelib:hxCodec}/hxcodec/vlc/LibVLCBuild.xml' />")
 @:include("LibVLC.h")
 @:unreflective
 @:keep

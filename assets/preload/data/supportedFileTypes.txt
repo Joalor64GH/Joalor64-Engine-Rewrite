@@ -21,3 +21,5 @@
 .ico
 .exe
 .dat
+.fla
+.flp
