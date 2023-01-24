@@ -350,8 +350,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	private var debugKeysChart:Array<FlxKey>;
 	private var debugKeysCharacter:Array<FlxKey>;
 
-	public var videoSprite:FlxSprite;
-
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 	private var controlArray:Array<String>;
@@ -5259,6 +5257,8 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	public var useVideo = false;
 
 	public static var webmHandler:WebmHandler;
+
+	public var videoSprite:FlxSprite;
 
 	public function backgroundVideo(source:String) // for background videos
 	{
