@@ -206,15 +206,15 @@ class Paths
 
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
+		var returnPath = '$library:assets/$library/$file';
 		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
 		{
 			return File.getContent('mods/mainMods/_append/$library/$file');
 		}
 		else
 		{
-			var returnPath = '$library:assets/$library/$file';
+			return returnPath;
 		}
-		return returnPath;
 	}
 
 	inline static function getSoundPathForce(file:String, library:String):FlxSoundAsset
