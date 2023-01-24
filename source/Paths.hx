@@ -1,5 +1,7 @@
 package;
 
+import flixel.system.FlxAssets.FlxSoundAsset;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
 import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
@@ -19,6 +21,7 @@ import sys.FileSystem;
 #end
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
+import openfl.utils.ByteArray;
 import haxe.Json;
 
 import flash.media.Sound;
@@ -36,6 +39,7 @@ class Paths
 		'_append', 
 		'_merge', 
 		#end
+		'mainMods',
 		'characters',
 		'custom_events',
 		'custom_notetypes',
@@ -147,20 +151,134 @@ class Paths
 		return getPreloadPath(file);
 	}
 
+	static function getPathImage(file:String, type:AssetType, library:Null<String>):FlxGraphicAsset
+	{
+		if (library != null)
+			return getImageLibraryPath(file, library);
+
+		if (currentLevel != null)
+		{
+			var levelPath = getLibraryPathForce(file, currentLevel);
+			if (OpenFlAssets.exists(levelPath, type))
+				return BitmapData.fromBytes(ByteArray.fromBytes(File.getBytes(levelPath)));
+
+			levelPath = getLibraryPathForce(file, "shared");
+			if (OpenFlAssets.exists(levelPath, type))
+				return BitmapData.fromBytes(ByteArray.fromBytes(File.getBytes(levelPath)));
+		}
+
+		return getImagePath(file);
+	}
+
+	static function getPathSound(file:String, type:AssetType, library:Null<String>):FlxSoundAsset
+	{
+		if (library != null)
+			return getSoundLibraryPath(file, library);
+
+		if (currentLevel != null)
+		{
+			var levelPath:openfl.media.Sound = getSoundPathForce(file, currentLevel);
+			if (OpenFlAssets.exists(levelPath.toString(), type))
+				return levelPath;
+
+			levelPath = getSoundPathForce(file, "shared");
+			if (OpenFlAssets.exists(levelPath.toString(), type))
+				return levelPath;
+		}
+
+		return getSoundPath(file);
+	}
+
 	static public function getLibraryPath(file:String, library = "preload")
 	{
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
 
+	static public function getImageLibraryPath(file:String, library = "preload"):FlxGraphicAsset
+	{
+		return if (library == "preload" || library == "default") getImagePath(file); else getImagePathForce(file, library);
+	}
+
+	static public function getSoundLibraryPath(file:String, library = "preload"):FlxSoundAsset
+	{
+		return if (library == "preload" || library == "default") getSoundPath(file); else getSoundPathForce(file, library);
+	}
+
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
-		var returnPath = '$library:assets/$library/$file';
+		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
+		{
+			return File.getContent('mods/mainMods/_append/$library/$file');
+		}
+		else
+		{
+			var returnPath = '$library:assets/$library/$file';
+		}
 		return returnPath;
+	}
+
+	inline static function getSoundPathForce(file:String, library:String):FlxSoundAsset
+	{
+		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
+		{
+			return Sound.fromFile('mods/mainMods/_append/$library/$file');
+		}
+		else
+		{
+			return Sound.fromFile('assets/$library/$file');
+		}
+	}
+
+	inline static function getSoundPath(file:String):FlxSoundAsset
+	{
+		if (FileSystem.exists('mods/mainMods/_append/$file'))
+		{
+			return Sound.fromFile('mods/mainMods/_append/$file');
+		}
+		else
+		{
+			return Sound.fromFile('assets/$file');
+		}
+	}
+
+	inline static function getImagePathForce(file:String, library:String):FlxGraphicAsset
+	{
+		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
+		{
+			var rawPic = File.getBytes('mods/mainMods/_append/$library/$file');
+			return BitmapData.fromBytes(ByteArray.fromBytes(rawPic));
+		}
+		else
+		{
+			var rawPic = File.getBytes('assets/$library/$file');
+			return BitmapData.fromBytes(ByteArray.fromBytes(rawPic));
+		}
+	}
+
+	inline static function getImagePath(file:String):FlxGraphicAsset
+	{
+		if (FileSystem.exists('mods/mainMods/_append/$file'))
+		{
+			var rawPic = File.getBytes('mods/mainMods/_append/$file');
+			return BitmapData.fromBytes(ByteArray.fromBytes(rawPic));
+		}
+		else
+		{
+			var rawPic = File.getBytes('assets/$file');
+			return BitmapData.fromBytes(ByteArray.fromBytes(rawPic));
+		}
 	}
 
 	inline public static function getPreloadPath(file:String = '')
 	{
-		return 'assets/$file';
+		if (FileSystem.exists('mods/mainMods/_append/$file'))
+		{
+			return File.getContent('mods/mainMods/_append/$file');
+		}
+		else
+		{
+			return 'assets/$file';
+		}
 	}
 
 	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
@@ -180,7 +298,16 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
+		#if !sys
 		return getPath('data/$key.json', TEXT, library);
+		#else
+		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
+		{
+			return 'mods/mainMods/_append/data/$key.json';
+		}
+		else
+			return getPath('data/$key.json', TEXT, library);
+		#end
 	}
 
 	inline static public function tjson(key:String, ?library:String)
@@ -246,7 +373,19 @@ class Paths
 
 	static public function sound(key:String, ?library:String):Sound
 	{
-		var sound:Sound = returnSound('sounds', key, library);
+		if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week1/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week2/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week3/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week4/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week5/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week6/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
+			return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
+		else
+			var sound:Sound = returnSound('sounds', key, library);
+		
 		return sound;
 	}
 
@@ -257,7 +396,19 @@ class Paths
 
 	inline static public function music(key:String, ?library:String):Sound
 	{
-		var file:Sound = returnSound('music', key, library);
+		if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week1/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week2/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week3/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week4/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week5/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/week6/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
+			return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
+		else
+			var file:Sound = returnSound('music', key, library);
+		
 		return file;
 	}
 
@@ -278,7 +429,19 @@ class Paths
 	inline static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
-		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week1/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week2/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week3/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week4/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week5/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/week6/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
+			return getPathImage('images/$key.png', IMAGE, library);
+		else
+			var returnAsset:FlxGraphic = returnGraphic(key, library);
+		
 		return returnAsset;
 	}
 

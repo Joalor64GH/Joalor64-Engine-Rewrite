@@ -39,7 +39,6 @@
 	<!-- JOALOR64 ENGINE CUSTOMIZATION -->
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
-	<!--<define name="MODDING_EXTENSION" if="MODS_ALLOWED" />-->
 	<define name="LUA_ALLOWED" if="desktop" />
 	<define name="HSCRIPT_ALLOWED" if="desktop"/>
 	<define name="SCRIPT_EXTENSION" if="desktop"/>
