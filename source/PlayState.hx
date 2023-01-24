@@ -2274,6 +2274,9 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			return;
 		}
 
+		#if WEBM_ALLOWED
+		openState(new VideoState(name));
+		#else
 		var video:VideoHandler = new VideoHandler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2281,6 +2284,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			startAndEnd();
 			return;
 		}
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
@@ -3523,6 +3527,92 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 
 		super.closeSubState();
+	}
+
+	override function openState(State:FlxState)
+	{
+		if (paused)
+		{
+			if (FlxG.sound.music != null)
+			{
+				FlxG.sound.music.pause();
+				vocals.pause();
+			}
+
+			if (startTimer != null && !startTimer.finished)
+				startTimer.active = false;
+			if (finishTimer != null && !finishTimer.finished)
+				finishTimer.active = false;
+			if (songSpeedTween != null)
+				songSpeedTween.active = false;
+
+			if(carTimer != null) carTimer.active = false;
+
+			var chars:Array<Character> = [boyfriend, gf, dad];
+			for (char in chars) {
+				if(char != null && char.colorTween != null) {
+					char.colorTween.active = false;
+				}
+			}
+
+			for (tween in modchartTweens) {
+				tween.active = false;
+			}
+			for (timer in modchartTimers) {
+				timer.active = false;
+			}
+		}
+
+		super.openState(State);
+	}
+
+	override function closeState()
+	{
+		if (paused)
+		{
+			if (FlxG.sound.music != null && !startingSong)
+			{
+				resyncVocals();
+			}
+
+			if (startTimer != null && !startTimer.finished)
+				startTimer.active = true;
+			if (finishTimer != null && !finishTimer.finished)
+				finishTimer.active = true;
+			if (songSpeedTween != null)
+				songSpeedTween.active = true;
+
+			if(carTimer != null) carTimer.active = true;
+
+			var chars:Array<Character> = [boyfriend, gf, dad];
+			for (char in chars) {
+				if(char != null && char.colorTween != null) {
+					char.colorTween.active = true;
+				}
+			}
+
+			for (tween in modchartTweens) {
+				tween.active = true;
+			}
+			for (timer in modchartTimers) {
+				timer.active = true;
+			}
+			paused = false;
+			callOnLuas('onResume', []);
+
+			#if desktop
+			if (startTimer != null && startTimer.finished)
+			{
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+			}
+			else
+			{
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			}
+			#end
+		}
+
+		super.closeState();
 	}
 
 	override public function onFocus():Void

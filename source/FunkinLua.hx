@@ -234,6 +234,31 @@ class FunkinLua {
 		set('buildTarget', 'unknown');
 		#end
 
+		// custom state
+		Lua_helper.add_callback(lua, "openCustomState", function(name:String, pauseGame:Bool = false) {
+			if(pauseGame)
+			{
+				PlayState.instance.persistentUpdate = false;
+				PlayState.instance.persistentDraw = true;
+				PlayState.instance.paused = true;
+				if(FlxG.sound.music != null) {
+					FlxG.sound.music.pause();
+					PlayState.instance.vocals.pause();
+				}
+			}
+			PlayState.instance.openState(new CustomState(name));
+		});
+
+		Lua_helper.add_callback(lua, "closeCustomState", function() {
+			if(CustomState.instance != null)
+			{
+				PlayState.instance.closeState();
+				CustomState.instance = null;
+				return true;
+			}
+			return false;
+		});
+
 		// custom substate
 		Lua_helper.add_callback(lua, "openCustomSubstate", function(name:String, pauseGame:Bool = false) {
 			if(pauseGame)
@@ -2198,7 +2223,7 @@ class FunkinLua {
 			return false;
 		});
 		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
-			#if VIDEOS_ALLOWED
+			#if (VIDEOS_ALLOWED && WEBM_ALLOWED)
 			if(FileSystem.exists(Paths.video(videoFile))) {
 				PlayState.instance.startVideo(videoFile);
 				return true;
@@ -2215,6 +2240,16 @@ class FunkinLua {
 			}
 			return true;
 			#end
+		});
+
+		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
+		{
+			PlayState.instance.backgroundVideo(video);
+		});
+
+		Lua_helper.add_callback(lua, "endBGVideo", function():Void
+		{
+			PlayState.instance.endBGVideo();
 		});
 
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
