@@ -1,3 +1,7 @@
+# `experimental`
+## THIS BRANCH CONTAINS UNFINISHED/EXPERIMENTAL FEATURES.
+## SOME PROBABLY WON'T MAKE IT INTO THE FINALIZED VERSION.
+
 # Joalor64 Engine Rewritten
 A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine).
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
