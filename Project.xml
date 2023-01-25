@@ -50,6 +50,7 @@
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="PSYCH"/>
+	<define name="MICD_UP"/>
 	<define name="EMBED_ASSETS"/>
 	<define name="MP3_ALLOWED"/>
 	<define name="WAV_ALLOWED"/>

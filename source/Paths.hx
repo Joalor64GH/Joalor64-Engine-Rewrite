@@ -46,7 +46,7 @@ class Paths
 		'data',
 		'songs',
 		'music',
-		#if sys
+		#if MICD_UP
 		'mainMods',
 		#end
 		'sounds',
@@ -154,7 +154,7 @@ class Paths
 		return getPreloadPath(file);
 	}
 
-	#if sys
+	#if MICD_UP
 	static function getPathImage(file:String, type:AssetType, library:Null<String>):FlxGraphicAsset
 	{
 		if (library != null)
@@ -199,7 +199,7 @@ class Paths
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
 
-	#if sys
+	#if MICD_UP
 	static public function getImageLibraryPath(file:String, library = "preload"):FlxGraphicAsset
 	{
 		return if (library == "preload" || library == "default") getImagePath(file); else getImagePathForce(file, library);
@@ -214,7 +214,7 @@ class Paths
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
 		var returnPath = '$library:assets/$library/$file';
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
 		{
 			return File.getContent('mods/mainMods/_append/$library/$file');
@@ -223,14 +223,14 @@ class Paths
 		{
 			return returnPath;
 		}
-		#else
-		return returnPath;
 		#end
+
+		return returnPath;
 	}
 
 	inline public static function getPreloadPath(file:String = '')
 	{
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/$file'))
 		{
 			return File.getContent('mods/mainMods/_append/$file');
@@ -239,14 +239,14 @@ class Paths
 		{
 			return 'assets/$file';
 		}
-		#else
-		return 'assets/$file';
 		#end
+
+		return 'assets/$file';
 	}
 
 	inline static function getSoundPathForce(file:String, library:String):FlxSoundAsset
 	{
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
 		{
 			return Sound.fromFile('mods/mainMods/_append/$library/$file');
@@ -255,14 +255,14 @@ class Paths
 		{
 			return Sound.fromFile('assets/$library/$file');
 		}
-		#else
-		return Sound.fromFile('assets/$library/$file');
 		#end
+
+		return Sound.fromFile('assets/$library/$file');
 	}
 
 	inline static function getSoundPath(file:String):FlxSoundAsset
 	{
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/$file'))
 		{
 			return Sound.fromFile('mods/mainMods/_append/$file');
@@ -271,12 +271,12 @@ class Paths
 		{
 			return Sound.fromFile('assets/$file');
 		}
-		#else
-		return Sound.fromFile('assets/$file');
 		#end
+
+		return Sound.fromFile('assets/$file');
 	}
 
-	#if sys
+	#if MICD_UP
 	inline static function getImagePathForce(file:String, library:String):FlxGraphicAsset
 	{
 		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
@@ -308,7 +308,7 @@ class Paths
 
 	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
 	{
-		#if !sys
+		#if MICD_UP
 		library = null;
 		#end
 
@@ -317,7 +317,7 @@ class Paths
 
 	inline static public function txt(key:String, ?library:String)
 	{
-		#if !sys
+		#if MICD_UP
 		library = null;
 		#end
 
@@ -331,7 +331,7 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
-		#if !sys
+		#if MICD_UP
 		return getPath('data/$key.json', TEXT, library);
 		#else
 		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
@@ -407,7 +407,7 @@ class Paths
 	static public function sound(key:String, ?library:String):Sound
 	{
 		var sound:Sound = returnSound('sounds', key, library);
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
 			|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
 			|| FileSystem.exists('mods/mainMods/_append/week1/sounds/$key.ogg')
@@ -420,14 +420,14 @@ class Paths
 			return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
 		else
 			return sound;
-		#else
-		return sound;
 		#end
+
+		return sound;
 	}
 
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
 	{
-		#if !sys
+		#if MICD_UP
 		library = null;
 		#end
 
@@ -437,7 +437,7 @@ class Paths
 	inline static public function music(key:String, ?library:String):Sound
 	{
 		var file:Sound = returnSound('music', key, library);
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
 			|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
 			|| FileSystem.exists('mods/mainMods/_append/week1/music/$key.ogg')
@@ -450,9 +450,9 @@ class Paths
 			return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
 		else
 			return file;
-		#else
-		return file;
 		#end
+
+		return file;
 	}
 
 	inline static public function voices(song:String):Any
@@ -473,7 +473,7 @@ class Paths
 	{
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
-		#if sys
+		#if MICD_UP
 		if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
 			|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
 			|| FileSystem.exists('mods/mainMods/_append/week1/images/$key.png')
@@ -486,9 +486,9 @@ class Paths
 			return getPathImage('images/$key.png', IMAGE, library);
 		else
 			return returnAsset;
-		#else
-		return returnAsset;
 		#end
+		
+		return returnAsset;
 	}
 
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
