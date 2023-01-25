@@ -326,13 +326,13 @@ class Paths
 
 	inline static public function xml(key:String, ?library:String)
 	{
-		return getPath('data/$key.xml', TEXT, null);
+		return getPath('data/$key.xml', TEXT, library);
 	}
 
 	inline static public function json(key:String, ?library:String)
 	{
 		#if !sys
-		return getPath('data/$key.json', TEXT, null);
+		return getPath('data/$key.json', TEXT, library);
 		#else
 		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
 		{
@@ -455,7 +455,7 @@ class Paths
 		#end
 	}
 
-	inline static public function voices(song:String):Any
+	inline static public function voices(song:String)
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
@@ -469,7 +469,7 @@ class Paths
 		#end
 	}
 
-	inline static public function inst(song:String):Any
+	inline static public function inst(song:String)
 	{
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
@@ -569,7 +569,7 @@ class Paths
 
 		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
 		#else
-		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', null));
+		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
 		#end
 	}
 
@@ -585,7 +585,7 @@ class Paths
 
 		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
 		#else
-		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', null));
+		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 		#end
 	}
 
