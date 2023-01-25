@@ -112,7 +112,7 @@
 	        <assets path="assets/videos"        library="videos" />
         </section>
 
-    <section if="LUA_ALLOWED">
+    	<section if="LUA_ALLOWED">
 		<assets path="assets/scripting/scripts"            rename="assets/scripts"/>
 		<assets path="assets/scripting/custom_events"      rename="assets/custom_events"/>
 		<assets path="assets/scripting/custom_notetypes"   rename="assets/custom_notetypes"/>
