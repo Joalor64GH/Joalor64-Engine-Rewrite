@@ -461,7 +461,7 @@ class Paths
 		var voices = returnSound('songs', songKey);
 		#if sys
 		if (FileSystem.exists('mods/mainMods/_append/songs/${song.toLowerCase()}/Voices.$SOUND_EXT'))
-			voices = Sound.fromFile('mods/mainMods/_append/songs/${song.toLowerCase()}/Voices.$SOUND_EXT');
+			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${song.toLowerCase()}/Voices.$SOUND_EXT');
 		else
 			return voices;
 		#else
@@ -475,7 +475,7 @@ class Paths
 		var inst = returnSound('songs', songKey);
 		#if sys
 		if (FileSystem.exists('mods/mainMods/_append/songs/${song.toLowerCase()}/Inst.$SOUND_EXT'))
-			inst = Sound.fromFile('mods/mainMods/_append/songs/${song.toLowerCase()}/Inst.$SOUND_EXT');
+			inst = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${song.toLowerCase()}/Inst.$SOUND_EXT');
 		else
 			return inst;
 		#else
