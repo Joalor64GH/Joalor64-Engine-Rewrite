@@ -1,6 +1,11 @@
 name: Debug Build
 
 on:
+  push:
+    branches: [ debug ]
+  pull_request:
+    branches: [ debug ]
+
   workflow_dispatch:
 
 jobs:

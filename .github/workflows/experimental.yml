@@ -1,6 +1,11 @@
 name: Experimental Build
 
 on:
+  push:
+    branches: [ experimental ]
+  pull_request:
+    branches: [ experimental ]
+  
   workflow_dispatch:
 
 jobs:
