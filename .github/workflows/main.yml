@@ -1,10 +1,10 @@
-name: Experimental Build
+name: Build
 
 on:
   push:
-    branches: [ experimantal ]
+    branches: [ main ]
   pull_request:
-    branches: [ experimental ]
+    branches: [ main ]
 
   workflow_dispatch:
 
