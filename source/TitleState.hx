@@ -74,6 +74,7 @@ class TitleState extends MusicBeatState
 	var titleTextAlphas:Array<Float> = [1, .64];
 
 	var curWacky:Array<String> = [];
+	var gameName:Array<String> = [];
 
 	var wackyImage:FlxSprite;
 
@@ -130,6 +131,7 @@ class TitleState extends MusicBeatState
 		PlayerSettings.init();
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
+		gameName = getName();
 
 		// DEBUG BULLSHIT
 
@@ -481,6 +483,14 @@ class TitleState extends MusicBeatState
 		return swagGoodArray;
 	}
 
+	function getName():Array<String>
+	{
+		var fullText:String = Assets.getText(Paths.txt('gameName'));
+
+		var firstArray:Array<String> = fullText.split('--');
+		return firstArray;
+	}
+
 	var transitioning:Bool = false;
 	private static var playJingle:Bool = false;
 	
@@ -705,7 +715,6 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					//FlxG.sound.music.stop();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
@@ -716,13 +725,12 @@ class TitleState extends MusicBeatState
 					#else
 					createCoolText(['ninjamuffin99', 'PhantomArcade', 'KawaiSprite', 'Evilsk8er']);
 					#end
-				// credTextShit.visible = true;
 				case 4:
 					#if JOALOR64_WATERMARKS
+					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
+					createCoolText(teamStuff);
 					credIcon1.visible = true;
 					credIcon2.visible = true;
-					addMoreText('Joalor64 YT', 15);
-					addMoreText('Bot 404', 15);
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
@@ -730,17 +738,11 @@ class TitleState extends MusicBeatState
 					#else
 					addMoreText('present');
 					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
 				case 5:
 				    	#if JOALOR64_WATERMARKS
 				    	credIcon1.destroy();
 					credIcon2.destroy();
 					#end
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
 				case 6:
 					#if JOALOR64_WATERMARKS
 					createCoolText(['Powered', 'with'], -40);
@@ -757,7 +759,6 @@ class TitleState extends MusicBeatState
 					addMoreText('Newgrounds', -40);
 					ngSpr.visible = true;
 					#end
-				// credTextShit.text += '\nNewgrounds';
 				case 9:
 					deleteCoolText();
 					#if JOALOR64_WATERMARKS
@@ -765,29 +766,18 @@ class TitleState extends MusicBeatState
 					#else
 					ngSpr.visible = false;
 					#end
-				// credTextShit.visible = false;
-
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
 				case 10:
 					createCoolText([curWacky[0]]);
-				// credTextShit.visible = true;
 				case 12:
 					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
 				case 13:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
 				case 14:
-					addMoreText('Friday Night Funkin');
-				        // credTextShit.visible = true;
+					addMoreText(gameName[0]);
 				case 15:
-					addMoreText('Joalor64 Engine');
-				        // credTextShit.text += '\nNight';
+					addMoreText(gameName[1]);
 				case 16:
-					addMoreText('Rewritten'); // credTextShit.text += '\nFunkin';
+					addMoreText(gameName[2]); 
 
 				case 17:
 					skipIntro();
