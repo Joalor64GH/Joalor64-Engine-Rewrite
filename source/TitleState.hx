@@ -743,6 +743,7 @@ class TitleState extends MusicBeatState
 				    	credIcon1.destroy();
 					credIcon2.destroy();
 					#end
+					deleteCoolText();
 				case 6:
 					#if JOALOR64_WATERMARKS
 					createCoolText(['Powered', 'with'], -40);
