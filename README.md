@@ -18,6 +18,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 # Planned Features
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Animate Atlas Support
+* [ ] HXS Module Support
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
@@ -29,7 +30,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Prepare Sprite + Customizable Main Menu via JSON + Credits Sounds
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
-* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Cocoa Code + Softcoded Achievements
+* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
 * [stevecodergh](https://github.com/stevecodergh) - Python Support
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
 
