@@ -338,9 +338,9 @@ class Paths
 		}
 		else
 			return getPath('data/$key.json', TEXT, library);
-		#end
-
+		#else
 		return getPath('data/$key.json', TEXT, library);
+		#end
 	}
 
 	inline static public function tjson(key:String, ?library:String)
