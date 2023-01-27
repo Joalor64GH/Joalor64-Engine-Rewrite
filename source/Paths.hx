@@ -331,7 +331,17 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
+		// i'll work on this later :skull:
+		/*#if sys
+		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
+			|| FileSystem.exists('mods/mainMods/_append/weeks/$key.json')
+			|| FileSystem.exists('mods/mainMods/_append/characters/$key.json')
+			return 'mods/mainMods/_append/data/$key.json';
+		else
+			return getPath('data/$key.json', TEXT, library);
+		#else*/
 		return getPath('data/$key.json', TEXT, library);
+		//#end
 	}
 
 	inline static public function tjson(key:String, ?library:String)
@@ -450,14 +460,28 @@ class Paths
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
+		/*#if sys
+		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT')
+			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT');
+		else
+			return voices;
+		#else*/
 		return voices;
+		//#end
 	}
 
 	inline static public function inst(song:String):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
+		/*#if sys
+		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT')
+			inst = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT');
+		else
+			return inst;
+		#else*/
 		return inst;
+		//#end
 	}
 
 	inline static public function image(key:String, ?library:String):FlxGraphic
