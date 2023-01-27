@@ -719,7 +719,8 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if JOALOR64_WATERMARKS
-					createCoolText(['Created By'], 15);
+					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
+					createCoolText(teamStuff);
 					#elseif PSYCH_WATERMARKS
  					createCoolText(['Psych Engine by'], 15);
 					#else
@@ -727,8 +728,7 @@ class TitleState extends MusicBeatState
 					#end
 				case 4:
 					#if JOALOR64_WATERMARKS
-					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
-					addMoreText(teamStuff);
+					addMoreText('present to you');
 					credIcon1.visible = true;
 					credIcon2.visible = true;
 					#elseif PSYCH_WATERMARKS
