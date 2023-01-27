@@ -17,15 +17,15 @@ class ScriptHandler extends SScript
     {
         super.preset();
 
-		interp.variables.set('FlxG', FlxG);
-		interp.variables.set('FlxBasic', FlxBasic);
-		interp.variables.set('FlxObject', FlxObject);
-		interp.variables.set('FlxCamera', FlxCamera);
-		interp.variables.set('FlxSprite', FlxSprite);
-		interp.variables.set('FlxTimer', FlxTimer);
-		interp.variables.set('FlxTween', FlxTween);
-		interp.variables.set('FlxEase', FlxEase);
-		interp.variables.set('FlxMath', FlxMath);
-		interp.variables.set('FlxSound', FlxSound);
+	interp.variables.set('FlxG', FlxG);
+	interp.variables.set('FlxBasic', FlxBasic);
+	interp.variables.set('FlxObject', FlxObject);
+	interp.variables.set('FlxCamera', FlxCamera);
+	interp.variables.set('FlxSprite', FlxSprite);
+	interp.variables.set('FlxTimer', FlxTimer);
+	interp.variables.set('FlxTween', FlxTween);
+	interp.variables.set('FlxEase', FlxEase);
+	interp.variables.set('FlxMath', FlxMath);
+	interp.variables.set('FlxSound', FlxSound);
     }
 }
