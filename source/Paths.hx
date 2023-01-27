@@ -331,16 +331,7 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
-		#if sys
-		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
-		{
-			return 'mods/mainMods/_append/data/$key.json';
-		}
-		else
-			return getPath('data/$key.json', TEXT, library);
-		#else
 		return getPath('data/$key.json', TEXT, library);
-		#end
 	}
 
 	inline static public function tjson(key:String, ?library:String)
