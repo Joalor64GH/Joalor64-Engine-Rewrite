@@ -1089,7 +1089,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 		#end
 
-
 		// STAGE SCRIPTS
 		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED)
 		var doPush:Bool = false;

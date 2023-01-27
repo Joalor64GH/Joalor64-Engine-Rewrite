@@ -350,7 +350,6 @@ class Paths
 		#end
 	}
 
-
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)

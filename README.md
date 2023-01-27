@@ -17,7 +17,6 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 # Planned Features
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Animate Atlas Support
-* [ ] HXS Module Support
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
