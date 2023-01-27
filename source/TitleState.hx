@@ -728,9 +728,9 @@ class TitleState extends MusicBeatState
 				case 4:
 					#if JOALOR64_WATERMARKS
 					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
+					addMoreText(teamStuff);
 					credIcon1.visible = true;
 					credIcon2.visible = true;
-					addMoreText(teamStuff);
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
