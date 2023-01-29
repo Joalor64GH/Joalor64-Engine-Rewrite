@@ -228,10 +228,10 @@ class Paths
 		#end
 	}
 
-	inline public static function getPreloadPath(file:String)
+	inline public static function getPreloadPath(file:String = '')
 	{
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/$file'))
+		if (FileSystem.exists('mods/mainMods/_append/$file') && !FileSystem.isDirectory('mods/mainMods/_append/$file'))
 		{
 			return File.getContent('mods/mainMods/_append/$file');
 		}
@@ -331,17 +331,16 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
-		// i'll work on this later :skull:
-		/*#if sys
+		#if sys
 		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
 			|| FileSystem.exists('mods/mainMods/_append/weeks/$key.json')
 			|| FileSystem.exists('mods/mainMods/_append/characters/$key.json')
 			return 'mods/mainMods/_append/data/$key.json';
 		else
 			return getPath('data/$key.json', TEXT, library);
-		#else*/
+		#else
 		return getPath('data/$key.json', TEXT, library);
-		//#end
+		#end
 	}
 
 	inline static public function tjson(key:String, ?library:String)
@@ -460,6 +459,7 @@ class Paths
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
+		// i'll work on this later :skull:
 		/*#if sys
 		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT')
 			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT');
