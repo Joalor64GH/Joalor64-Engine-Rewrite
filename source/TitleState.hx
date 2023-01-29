@@ -728,9 +728,9 @@ class TitleState extends MusicBeatState
 					#end
 				case 4:
 					#if JOALOR64_WATERMARKS
-					addMoreText('present to you');
 					credIcon1.visible = true;
 					credIcon2.visible = true;
+					addMoreText('present to you');
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
