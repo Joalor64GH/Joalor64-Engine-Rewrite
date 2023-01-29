@@ -333,8 +333,6 @@ class Paths
 	{
 		#if sys
 		if (FileSystem.exists(('mods/mainMods/_append/data/$key.json')))
-			|| FileSystem.exists('mods/mainMods/_append/weeks/$key.json')
-			|| FileSystem.exists('mods/mainMods/_append/characters/$key.json')
 			return 'mods/mainMods/_append/data/$key.json';
 		else
 			return getPath('data/$key.json', TEXT, library);
