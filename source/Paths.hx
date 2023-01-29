@@ -228,7 +228,7 @@ class Paths
 		#end
 	}
 
-	inline public static function getPreloadPath(file:String = '')
+	inline public static function getPreloadPath(file:String)
 	{
 		#if sys
 		if (FileSystem.exists('mods/mainMods/_append/$file'))
