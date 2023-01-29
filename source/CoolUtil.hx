@@ -74,6 +74,21 @@ class CoolUtil
 
 		return daList;
 	}
+
+	// this is actual source code from VS Null https://gamebanana.com/wips/70592
+	public static inline function coolerTextFile(path:String, daString:String = ''):String
+	{
+		#if MODS_ALLOWED
+		if (FileSystem.exists(path))
+			daString = File.getContent(path).trim();
+		#else
+		if (Assets.exists(path))
+			daString = Assets.getText(path).trim();
+		#end
+
+		return daString;
+	}
+	
 	public static function listFromString(string:String):Array<String>
 	{
 		var daList:Array<String> = [];
