@@ -61,6 +61,7 @@ import StageData;
 import FunkinLua;
 import FunkinHscript;
 import FunkinSScript;
+//import FunkinModule; // wip
 import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
@@ -789,10 +790,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 				GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
 				GameOverSubstate.characterName = 'bf-pixel-dead';
 
-				/*if(!ClientPrefs.lowQuality) { //Does this even do something?
-					var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
-					var waveEffectFG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 5, 2);
-				}*/
 				var posX = 400;
 				var posY = 200;
 				if(!ClientPrefs.lowQuality) {
@@ -4106,6 +4103,10 @@ class PlayState extends MusicBeatState /*implements IHook*/
 				for (timer in modchartTimers) {
 					timer.active = true;
 				}
+
+				if (SONG.song.toLowerCase() == 'tutorial')
+					trace('bro how tf did you die on tutorial :skull:');
+				
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
