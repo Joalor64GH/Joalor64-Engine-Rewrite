@@ -25,4 +25,4 @@ class Loader
 
 		return percent;
 	}
-}6
+}

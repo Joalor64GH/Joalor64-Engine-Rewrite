@@ -603,6 +603,17 @@ class Paths
 		#end
 	}
 
+	inline static public function getTextureAtlas(key:String, ?library:String)
+	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var file:String = modsTextureAtlas(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return getPath('images/$key.zip', BINARY, library);
+	}
+
 	inline static public function formatToSongPath(path:String) {
 		var invalidChars = ~/[~&\\;:<>#]/;
 		var hideChars = ~/[.,'"%?!]/;
@@ -639,7 +650,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no its returning null NOOOO');
+		trace('oh no ' + key + ' returning null NOOOO');
 		return null;
 	}
 
@@ -766,6 +777,10 @@ class Paths
 
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
+	}
+
+	inline static public function modsTextureAtlas(key:String) {
+		return modFolders('images/' + key + '.zip');
 	}
 
 	inline static public function modsFla(key:String) {

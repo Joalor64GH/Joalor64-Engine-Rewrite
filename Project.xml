@@ -7,7 +7,6 @@
         <app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
-	<!--<app file="J64EngineRE_APK" if="android" />-->
 
 	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
@@ -202,6 +201,7 @@
 	<haxedef name="POLYMOD_ROOT_PATH" value="assets/scripts/" />
 	<haxedef name="POLYMOD_MOD_METADATA_FILE" value="_polymod_meta.json" />
 	<haxedef name="POLYMOD_MOD_ICON_FILE" value="_polymod_icon.png" />
+	<haxedef name="POLYMOD_USE_HSCRIPTEX" value="true" />
 	<haxedef name="POLYMOD_DEBUG" if="debug" />
 	
 	<!--Used for Izzy Engine's crash handler-->
