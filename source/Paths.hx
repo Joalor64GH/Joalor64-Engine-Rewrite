@@ -366,18 +366,34 @@ class Paths
 	}
 	inline static public function lua(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.lua', TEXT, library);
 	}
 	inline static public function hscript(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.hscript', TEXT, library);
 	}
 	inline static public function hx(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.hx', TEXT, library);
 	}
 	inline static public function py(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+		
 		return getPath('$key.py', TEXT, library);
 	}
 	static public function video(key:String)

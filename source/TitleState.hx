@@ -721,6 +721,8 @@ class TitleState extends MusicBeatState
 					#if JOALOR64_WATERMARKS
 					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
 					createCoolText(teamStuff);
+					credIcon1.visible = true;
+					credIcon2.visible = true;
 					#elseif PSYCH_WATERMARKS
  					createCoolText(['Psych Engine by'], 15);
 					#else
@@ -728,8 +730,6 @@ class TitleState extends MusicBeatState
 					#end
 				case 4:
 					#if JOALOR64_WATERMARKS
-					credIcon1.visible = true;
-					credIcon2.visible = true;
 					addMoreText('present to you');
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
