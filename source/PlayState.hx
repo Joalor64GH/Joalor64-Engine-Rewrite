@@ -61,7 +61,6 @@ import StageData;
 import FunkinLua;
 import FunkinHscript;
 import FunkinSScript;
-//import FunkinModule; // wip
 import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
@@ -109,6 +108,7 @@ import horny.*;
 
 using StringTools;
 
+// I tried to do this but it didn't work. Oh well. :shrug:
 class PlayState extends MusicBeatState /*implements IHook*/
 {
 	public static var STRUM_X = 42;
