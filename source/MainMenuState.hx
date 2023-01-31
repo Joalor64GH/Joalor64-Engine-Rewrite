@@ -84,6 +84,12 @@ class MainMenuState extends MusicBeatState
 
 	var menuJSON:MenuData;
 
+	#if !mac
+	var name:String = Sys.environment()["USERNAME"];
+	#else
+	var name:String = Sys.environment()["USER"];
+	#end
+
 	override function create()
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -98,6 +104,12 @@ class MainMenuState extends MusicBeatState
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		modShortcutKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
+
+		#if desktop
+		trace(Sys.environment()["COMPUTERNAME"]); // sussy test for a next menu x1
+		#end
+
+		trace(name);
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();

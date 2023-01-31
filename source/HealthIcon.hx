@@ -73,6 +73,18 @@ class HealthIcon extends FlxSprite
 					animation.add(char, [0, 1, 2], 0, false, isPlayer);
 					animation.play(char);
 					this.char = char;
+				case 750:
+					loadGraphic(file, true, Math.floor(width / 5), Math.floor(height));
+					iconOffsets[0] = (width - 150) / 5;
+					iconOffsets[1] = (width - 150) / 5;
+					iconOffsets[2] = (width - 150) / 5;
+					iconOffsets[3] = (width - 150) / 5;
+					iconOffsets[4] = (width - 150) / 5;
+					updateHitbox();
+			
+					animation.add(char, [0, 1, 2, 3, 4], 0, false, isPlayer);
+					animation.play(char);
+					this.char = char;
 			}
 
 			antialiasing = ClientPrefs.globalAntialiasing;

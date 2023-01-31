@@ -54,6 +54,7 @@ class Paths
 		'characters',
 		'custom_events',
 		'custom_notetypes',
+		'custom_gamechangers',
 		'data',
 		'songs',
 		'music',
@@ -484,7 +485,6 @@ class Paths
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
-		// i'll work on this later :skull:
 		/*#if sys
 		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT')
 			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT');
