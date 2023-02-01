@@ -68,6 +68,11 @@ class TitleState extends MusicBeatState
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
+	#elseif PSYCH_WATERMARKS
+	var credIconShadow:FlxSprite;
+	var credIconRiver:FlxSprite;
+	var credIconShubs:FlxSprite;
+	var credIconBB:FlxSprite;
 	#end
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
@@ -440,6 +445,7 @@ class TitleState extends MusicBeatState
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
+		// credit icons
 		#if JOALOR64_WATERMARKS
 		credIcon1 = new FlxSprite(150,150).loadGraphic(Paths.image('credits/joalor'));
 		add(credIcon1);
@@ -451,6 +457,28 @@ class TitleState extends MusicBeatState
 		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
+		#elseif PSYCH_WATERMARKS
+		credIconShadow = new FlxSprite(150,150).loadGraphic(Paths.image('credits/shadowmario'));
+		add(credIconShadow);
+		credIconShadow.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconShadow.visible = false;
+
+		credIconRiver = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/river'));
+		add(credIconRiver);
+		credIconRiver.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconRiver.visible = false;
+		credIconRiver.flipX = true;
+
+		credIconShubs = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/shubs'));
+		add(credIconShubs);
+		credIconShubs.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconShubs.visible = false;
+
+		credIconBB = new FlxSprite(FlxG.width-300,FlxG.height-300).loadGraphic(Paths.image('credits/bb'));
+		add(credIconBB);
+		credIconBB.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconBB.visible = false;
+		credIconBB.flipX = true;
 		#end
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.2.0 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
@@ -735,6 +763,11 @@ class TitleState extends MusicBeatState
 					addMoreText('ShadowMario', 15);
 					addMoreText('RiverOaken', 15);
 					addMoreText('Yoshubs', 15);
+					addMoreText('BBPanzu', 15);
+					credIconShadow.visible = true;
+					credIconRiver.visible = true;
+					credIconShubs.visible = true;
+					credIconBB.visible = true;
 					#else
 					addMoreText('present');
 					#end
@@ -742,6 +775,11 @@ class TitleState extends MusicBeatState
 				    	#if JOALOR64_WATERMARKS
 				    	credIcon1.destroy();
 					credIcon2.destroy();
+					#elseif PSYCH_WATERMARKS
+					credIconShadow.destroy();
+					credIconRiver.destroy();
+					credIconShubs.destroy();
+					credIconBB.destroy();
 					#end
 					deleteCoolText();
 				case 6:
@@ -817,7 +855,12 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
-			            		#end
+			            #elseif PSYCH_WATERMARKS
+						credIconShadow.destroy();
+						credIconRiver.destroy();
+						credIconShubs.destroy();
+						credIconBB.destroy();
+						#end
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
@@ -838,7 +881,12 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
-			            		#end
+			            #elseif PSYCH_WATERMARKS
+						credIconShadow.destroy();
+						credIconRiver.destroy();
+						credIconShubs.destroy();
+						credIconBB.destroy();
+						#end
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
 					});
@@ -851,7 +899,12 @@ class TitleState extends MusicBeatState
 					#if JOALOR64_WATERMARKS
 			        		credIcon1.destroy();
 			        		credIcon2.destroy();
-			        		#end
+			        #elseif PSYCH_WATERMARKS
+					credIconShadow.destroy();
+					credIconRiver.destroy();
+					credIconShubs.destroy();
+					credIconBB.destroy();
+					#end
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
@@ -869,7 +922,12 @@ class TitleState extends MusicBeatState
 				#if JOALOR64_WATERMARKS
 			    	credIcon1.destroy();
 			    	credIcon2.destroy();
-			    	#end
+			    #elseif PSYCH_WATERMARKS
+				credIconShadow.destroy();
+				credIconRiver.destroy();
+				credIconShubs.destroy();
+				credIconBB.destroy();
+				#end
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
