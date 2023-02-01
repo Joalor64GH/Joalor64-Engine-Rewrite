@@ -337,8 +337,8 @@ class TitleState extends MusicBeatState
 		        	// trace(path, FileSystem.exists(path));
 		        	if (!FileSystem.exists(path))
 		        	{
-			        path = "mods/images/GF_assets.png";
-			        // trace(path, FileSystem.exists(path));
+			        	path = "mods/images/GF_assets.png";
+			        	// trace(path, FileSystem.exists(path));
 				}
 				if (!FileSystem.exists(path))
 				{
