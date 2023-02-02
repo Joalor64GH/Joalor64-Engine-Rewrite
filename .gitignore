@@ -49,6 +49,9 @@ art/mod.url
 polymod_mods/*
 example_mods/introMod/*
 example_mods/modList.txt
+source/Snd.hx
+source/SndTV.hx
+source/ChartParser.hx
 
 ### Add these regardless of them getting ignored.
 !appveyor-linux.yml

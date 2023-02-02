@@ -10,6 +10,7 @@
 .txt
 .xml
 .json
+.jsonc
 .ogg
 .mp3
 .wav
@@ -24,3 +25,5 @@
 .fla
 .flp
 .zip
+.csv
+.tsv

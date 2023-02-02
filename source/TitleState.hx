@@ -73,6 +73,11 @@ class TitleState extends MusicBeatState
 	var credIconRiver:FlxSprite;
 	var credIconShubs:FlxSprite;
 	var credIconBB:FlxSprite;
+	#else
+	var credIconMuff:FlxSprite;
+	var credIconPhantom:FlxSprite;
+	var credIconKawai:FlxSprite;
+	var credIconEvil:FlxSprite;
 	#end
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
@@ -479,6 +484,28 @@ class TitleState extends MusicBeatState
 		credIconBB.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconBB.visible = false;
 		credIconBB.flipX = true;
+		#else
+		credIconMuff = new FlxSprite(150,150).loadGraphic(Paths.image('credits/ninjamuffin99'));
+		add(credIconMuff);
+		credIconMuff.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconMuff.visible = false;
+
+		credIconPhantom = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/phantomarcade'));
+		add(credIconPhantom);
+		credIconPhantom.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconPhantom.visible = false;
+		credIconPhantom.flipX = true;
+
+		credIconKawai = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/kawaisprite'));
+		add(credIconKawai);
+		credIconKawai.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconKawai.visible = false;
+
+		credIconEvil = new FlxSprite(FlxG.width-300,FlxG.height-300).loadGraphic(Paths.image('credits/evilsk8r'));
+		add(credIconEvil);
+		credIconEvil.antialiasing = ClientPrefs.globalAntialiasing;
+		credIconEvil.visible = false;
+		credIconEvil.flipX = true;
 		#end
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.2.0 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
@@ -755,6 +782,10 @@ class TitleState extends MusicBeatState
  					createCoolText(['Psych Engine by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'PhantomArcade', 'KawaiSprite', 'Evilsk8er']);
+					credIconMuff.visible = true;
+					credIconPhantom.visible = true;
+					credIconKawai.visible = true;
+					credIconEvil.visible = true;
 					#end
 				case 4:
 					#if JOALOR64_WATERMARKS
@@ -780,6 +811,11 @@ class TitleState extends MusicBeatState
 					credIconRiver.destroy();
 					credIconShubs.destroy();
 					credIconBB.destroy();
+					#else
+					credIconMuff.destroy();
+					credIconPhantom.destroy();
+					credIconKawai.destroy();
+					credIconEvil.destroy();
 					#end
 					deleteCoolText();
 				case 6:
@@ -860,7 +896,12 @@ class TitleState extends MusicBeatState
 						credIconRiver.destroy();
 						credIconShubs.destroy();
 						credIconBB.destroy();
-						#end
+						#else
+						credIconMuff.destroy();
+						credIconPhantom.destroy();
+						credIconKawai.destroy();
+						credIconEvil.destroy();
+					    #end
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
@@ -886,6 +927,11 @@ class TitleState extends MusicBeatState
 						credIconRiver.destroy();
 						credIconShubs.destroy();
 						credIconBB.destroy();
+						#else
+						credIconMuff.destroy();
+						credIconPhantom.destroy();
+						credIconKawai.destroy();
+						credIconEvil.destroy();
 						#end
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
@@ -904,6 +950,11 @@ class TitleState extends MusicBeatState
 					credIconRiver.destroy();
 					credIconShubs.destroy();
 					credIconBB.destroy();
+					#else
+					credIconMuff.destroy();
+					credIconPhantom.destroy();
+					credIconKawai.destroy();
+					credIconEvil.destroy();
 					#end
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
@@ -927,6 +978,11 @@ class TitleState extends MusicBeatState
 				credIconRiver.destroy();
 				credIconShubs.destroy();
 				credIconBB.destroy();
+				#else
+				credIconMuff.destroy();
+				credIconPhantom.destroy();
+				credIconKawai.destroy();
+			    credIconEvil.destroy();
 				#end
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
