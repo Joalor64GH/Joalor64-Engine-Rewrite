@@ -982,7 +982,7 @@ class TitleState extends MusicBeatState
 				credIconMuff.destroy();
 				credIconPhantom.destroy();
 				credIconKawai.destroy();
-			    credIconEvil.destroy();
+			    	credIconEvil.destroy();
 				#end
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
