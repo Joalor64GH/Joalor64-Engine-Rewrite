@@ -43,6 +43,7 @@ typedef I8frame = {
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static var FLASH_EXT = "swf";
 	public static final VIDEO_EXT = ['mp4', 'webm'];
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -64,6 +65,7 @@ class Paths
 		'sounds',
 		'shaders',
 		'videos',
+		'swf',
 		'images',
 		'stages',
 		'weeks',
@@ -357,17 +359,14 @@ class Paths
 	{
 		return getPath('data/$key.jsonc', TEXT, library);
 	}
-
 	inline static public function fla(key:String, ?library:String)
 	{
 		return getPath('art/$key.fla', BINARY, library);
 	}
-
 	inline static public function flp(key:String, ?library:String)
 	{
 		return getPath('art/$key.flp', BINARY, library);
 	}
-
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
@@ -430,6 +429,17 @@ class Paths
 		return 'assets/videos/$key.mp4';
 	}
 
+	static public function flashMovie(key:String)
+	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var file:String = modsFlashMovie(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return 'assets/swf/$key.$FLASH_EXT';
+	}
+
 	static public function sound(key:String, ?library:String):Sound
 	{
 		var sound:Sound = returnSound('sounds', key, library);
@@ -485,28 +495,14 @@ class Paths
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
-		/*#if sys
-		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT')
-			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT');
-		else
-			return voices;
-		#else*/
 		return voices;
-		//#end
 	}
 
 	inline static public function inst(song:String):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
-		/*#if sys
-		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT')
-			inst = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT');
-		else
-			return inst;
-		#else*/
 		return inst;
-		//#end
 	}
 
 	inline static public function image(key:String, ?library:String):FlxGraphic
@@ -845,6 +841,10 @@ class Paths
 			}
 		}
 		return modFolders('videos/$key.mp4');
+	}
+
+	inline static public function modsFlashMovie(key:String) {
+		return modFolders('swf/' + key + '.' + FLASH_EXT);
 	}
 
 	inline static public function modsSounds(path:String, key:String) {

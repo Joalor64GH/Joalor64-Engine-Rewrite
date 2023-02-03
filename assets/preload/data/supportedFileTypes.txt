@@ -3,6 +3,7 @@
 .png
 .mp4
 .webm
+.swf
 .lua
 .py
 .hx

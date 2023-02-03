@@ -16,6 +16,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 
 # Planned Features
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
+* [ ] LUA Functions for Flash Movies
 * [ ] Animate Atlas Support
 
 # Downloads
