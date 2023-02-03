@@ -33,7 +33,8 @@ class ModCore
             'ttf' => FONT,
             'otf' => FONT, 
             'webm' => VIDEO,
-	    'mp4' => VIDEO
+	    'mp4' => VIDEO,
+			'swf' => VIDEO
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];

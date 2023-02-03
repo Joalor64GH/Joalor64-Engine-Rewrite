@@ -97,6 +97,11 @@ import BackgroundVideo;
 import VideoState;
 #end
 
+#if FLASH_MOVIE
+//import swf.SWF;
+import SwfVideo;
+#end
+
 #if PYTHON_SCRIPTING
 import pythonUtil.Python;
 #end
@@ -108,7 +113,6 @@ import horny.*;
 
 using StringTools;
 
-// I tried to do this but it didn't work. Oh well. :shrug:
 class PlayState extends MusicBeatState /*implements IHook*/
 {
 	public static var STRUM_X = 42;
@@ -2281,6 +2285,32 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		return;
 		#end
 	}
+
+	// i'll test this when i have the chance
+	/*public function startMovie(name:String)
+	{
+		#if FLASH_MOVIE
+		inCutscene = true;
+
+		var filepath:String = Paths.flashMovie(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			startAndEnd();
+			return;
+		}
+
+		var video:SwfVideo = new SwfVideo();
+		#else
+		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
+		return;
+		#end
+	}*/
 
 	function startAndEnd()
 	{

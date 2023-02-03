@@ -2227,6 +2227,26 @@ class FunkinLua {
 			#end
 		});
 
+		/*Lua_helper.add_callback(lua, "startMovie", function(flashFile:String) {
+			#if FLASH_MOVIE
+			if(FileSystem.exists(Paths.flashMovie(flashFile))) {
+				PlayState.instance.startMovie(flashFile);
+				return true;
+			} else {
+				luaTrace('flashVideo: Video file not found: ' + flashFile, false, false, FlxColor.RED);
+			}
+			return false;
+
+			#else
+			if(PlayState.instance.endingSong) {
+				PlayState.instance.endSong();
+			} else {
+				PlayState.instance.startCountdown();
+			}
+			return true;
+			#end
+		});*/
+
 		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
 		{
 			PlayState.instance.backgroundVideo(video);
