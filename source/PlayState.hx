@@ -98,7 +98,6 @@ import VideoState;
 #end
 
 #if FLASH_MOVIE
-//import swf.SWF;
 import SwfVideo;
 #end
 
@@ -1498,6 +1497,56 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			#end
 		}
 		#end
+		#if SCRIPT_EXTENSION
+		for (notetype in noteTypeMap.keys())
+		{
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			var hxToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hx');
+			if(FileSystem.exists(hxToLoad))
+			{
+				scriptArray.push(new FunkinSScript(hxToLoad));
+			}
+			else
+			{
+				hxToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
+				if(FileSystem.exists(hxToLoad))
+				{
+					scriptArray.push(new FunkinSScript(hxToLoad));
+				}
+			}
+			#elseif sys
+			var hxToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
+			if(OpenFlAssets.exists(hxToLoad))
+			{
+				scriptArray.push(new FunkinSScript(hxToLoad));
+			}
+			#end
+		}
+		for (event in eventPushedMap.keys())
+		{
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			var hxToLoad:String = Paths.modFolders('custom_events/' + event + '.hx');
+			if(FileSystem.exists(hxToLoad))
+			{
+				scriptArray.push(new FunkinSScript(hxToLoad));
+			}
+			else
+			{
+				hxToLoad = Paths.getPreloadPath('custom_events/' + event + '.hx');
+				if(FileSystem.exists(hxToLoad))
+				{
+					scriptArray.push(new FunkinSScript(hxToLoad));
+				}
+			}
+			#elseif sys
+			var hxToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.hx');
+			if(OpenFlAssets.exists(hxToLoad))
+			{
+				scriptArray.push(new FunkinSScript(hxToLoad));
+			}
+			#end
+		}
+		#end
 		noteTypeMap.clear();
 		noteTypeMap = null;
 		eventPushedMap.clear();
@@ -2234,6 +2283,36 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		if (doPush && !hscriptMap.exists(hscriptFile))
 		{
 			addHscript(hscriptFile);
+		}
+		#end
+
+		#if SCRIPT_EXTENSION
+		var doPush:Bool = false;
+		var scriptFile:String = 'characters/' + name + '.hx';
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
+			scriptFile = Paths.modFolders(scriptFile);
+			doPush = true;
+		} else {
+			scriptFile = Paths.getPreloadPath(scriptFile);
+			if(FileSystem.exists(scriptFile)) {
+				doPush = true;
+			}
+		}
+		#else
+		scriptFile = Paths.getPreloadPath(scriptFile);
+		if(Assets.exists(scriptFile)) {
+			doPush = true;
+		}
+		#end
+
+		if(doPush)
+		{
+			for (script in scriptArray)
+			{
+				if(script.scriptName == scriptFile) return;
+			}
+			scriptArray.push(new FunkinSScript(scriptFile));
 		}
 		#end
 	}
@@ -5395,6 +5474,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 
 		callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
+		callOnScripts('noteMiss', [note]);
 	}
 
 	function noteMissPress(direction:Int = 1):Void //You pressed a key when there was no notes to press for this key
@@ -5424,16 +5504,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			RecalculateRating(true);
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
-
-			/*boyfriend.stunned = true;
-
-			// get stunned for 1/60 of a second, makes you able to
-			new FlxTimer().start(1 / 60, function(tmr:FlxTimer)
-			{
-				boyfriend.stunned = false;
-			});*/
 
 			if(boyfriend.hasMissAnimations) {
 				boyfriend.playAnim(singAnimations[Std.int(Math.abs(direction))] + 'miss', true);
@@ -5486,6 +5556,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		note.hitByOpponent = true;
 
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
+		callOnScripts('opponentNoteHit', [daNote]);
 
 		if (!note.isSustainNote)
 		{
@@ -5593,6 +5664,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+			callOnScripts('goodNoteHit', [note]);
 
 			if (!note.isSustainNote)
 			{
@@ -6012,7 +6084,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		callOnLuas('onSectionHit', []);
 	}
 
-	public function callOnScripts(event:String, args:Array<Dynamic>)
+	public function callOnScripts(event:String, args:Array<Dynamic>):Void
 	{
 		#if !SCRIPT_EXTENSION
 		return;
@@ -6022,7 +6094,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			i.call(event, args);
 	}
 
-	public function setOnScripts(key:String, value:Dynamic)
+	public function setOnScripts(key:String, value:Dynamic):Void
 	{
 		#if !SCRIPT_EXTENSION
 		return;
@@ -6032,8 +6104,9 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			i.set(key, value);
 	}
 
-	public function callOnLuas(event:String, args:Array<Dynamic>, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
-		callOnScripts(event, args);
+	public function callOnLuas(event:String, args:Array<Dynamic>, ?callOnScript:Bool = true, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
+		if (callOnScript)
+			callOnScripts(event, args);
 
 		var returnVal:Dynamic = FunkinLua.Function_Continue;
 		#if LUA_ALLOWED
