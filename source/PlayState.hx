@@ -2310,7 +2310,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		{
 			for (script in scriptArray)
 			{
-				if(script.scriptName == scriptFile) return;
+				if(script.scriptFile == scriptFile) return;
 			}
 			scriptArray.push(new FunkinSScript(scriptFile));
 		}
@@ -5474,7 +5474,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 
 		callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
-		callOnScripts('noteMiss', [note]);
 	}
 
 	function noteMissPress(direction:Int = 1):Void //You pressed a key when there was no notes to press for this key
@@ -5556,7 +5555,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		note.hitByOpponent = true;
 
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		callOnScripts('opponentNoteHit', [daNote]);
 
 		if (!note.isSustainNote)
 		{
@@ -5664,7 +5662,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
-			callOnScripts('goodNoteHit', [note]);
 
 			if (!note.isSustainNote)
 			{
