@@ -15,7 +15,7 @@ class WebmSprite extends FlxSprite
 	#if WEBM_ALLOWED
 	public var webmHandler:WebmHandler;
 
-	private var blackDisplay = 'assets/videos/daWeirdVid/dontDelete.webm';
+	private var blackDisplay = 'assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm';
 
 	public function new(X:Float = 0, Y:Float = 0)
 	{

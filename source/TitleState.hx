@@ -901,7 +901,7 @@ class TitleState extends MusicBeatState
 						credIconPhantom.destroy();
 						credIconKawai.destroy();
 						credIconEvil.destroy();
-					    #end
+					    	#end
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
@@ -943,9 +943,9 @@ class TitleState extends MusicBeatState
 					remove(psychSpr);
 					remove(credGroup);
 					#if JOALOR64_WATERMARKS
-			        		credIcon1.destroy();
-			        		credIcon2.destroy();
-			        		#elseif PSYCH_WATERMARKS
+			        credIcon1.destroy();
+			        credIcon2.destroy();
+			        #elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
 					credIconShubs.destroy();
