@@ -43,7 +43,7 @@ typedef I8frame = {
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
-	public static final FLASH_EXT = ['swf', 'swc'];
+	inline public static var FLASH_EXT = "swf";
 	public static final VIDEO_EXT = ['mp4', 'webm'];
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -65,7 +65,7 @@ class Paths
 		'sounds',
 		'shaders',
 		'videos',
-		'flash',
+		'swf',
 		'images',
 		'stages',
 		'weeks',
@@ -359,7 +359,6 @@ class Paths
 	{
 		return getPath('data/$key.jsonc', TEXT, library);
 	}
-	
 	inline static public function fla(key:String, ?library:String)
 	{
 		return getPath('art/$key.fla', BINARY, library);
@@ -408,7 +407,6 @@ class Paths
 		
 		return getPath('$key.py', TEXT, library);
 	}
-
 	static public function video(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -439,18 +437,7 @@ class Paths
 			return file;
 		}
 		#end
-		for (i in FLASH_EXT) {
-			var path = 'assets/flash/$key.$i';
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			if (FileSystem.exists(path))
-			#else
-			if (OpenFlAssets.exists(path))
-			#end
-			{
-				return path;
-			}
-		}
-		return 'assets/flash/$key.swf';
+		return 'assets/flash/$key.$FLASH_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Sound
@@ -857,14 +844,7 @@ class Paths
 	}
 
 	inline static public function modsFlashMovie(key:String) {
-		for (i in FLASH_EXT) {
-			var path = modFolders('flash/$key.$i');
-			if (FileSystem.exists(path))
-			{
-				return path;
-			}
-		}
-		return modFolders('flash/$key.swf');
+		return modFolders('flash/' + key + '.' + FLASH_EXT);
 	}
 
 	inline static public function modsSounds(path:String, key:String) {
