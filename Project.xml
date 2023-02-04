@@ -79,7 +79,7 @@
 	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4"  unless="web"/>
 
 	<!-- SWF EXAMPLE-->
-	<!--<library path="assets/swf/movie.swf" preload="true" id="id"/>-->
+	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
 	
 	<!-- ALWAYS PRELOADED -->
 	<library name="videos"        preload="true" />
@@ -120,8 +120,8 @@
         </section>
 
 	<section if="FLASH_MOVIE">
-	        <assets path="assets/swf"        library="swf" />
-    </section>
+	        <assets path="assets/flash"        library="flash" />
+    	</section>
 
     	<section if="LUA_ALLOWED">
 		<assets path="assets/scripting/scripts"             rename="assets/scripts"/>
