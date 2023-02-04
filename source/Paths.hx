@@ -439,7 +439,7 @@ class Paths
 			return file;
 		}
 		#end
-		for (i in VIDEO_EXT) {
+		for (i in FLASH_EXT) {
 			var path = 'assets/flash/$key.$i';
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			if (FileSystem.exists(path))
@@ -857,7 +857,7 @@ class Paths
 	}
 
 	inline static public function modsFlashMovie(key:String) {
-		for (i in VIDEO_EXT) {
+		for (i in FLASH_EXT) {
 			var path = modFolders('flash/$key.$i');
 			if (FileSystem.exists(path))
 			{
