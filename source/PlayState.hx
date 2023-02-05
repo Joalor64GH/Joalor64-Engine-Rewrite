@@ -3858,15 +3858,63 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
-			iconP1.animation.curAnim.curFrame = 0;
+		switch (iconP1.widthThing) {
+			case 150:
+				iconP1.animation.curAnim.curFrame = 0;
+			case 300:
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1;
+				else
+					iconP1.animation.curAnim.curFrame = 0;
+			case 450:
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1; //Losing
+				else if (healthBar.percent > 20 && healthBar.percent < 80)
+					iconP1.animation.curAnim.curFrame = 0; //Neutral
+				else if (healthBar.percent > 80)
+					iconP1.animation.curAnim.curFrame = 2; //Winning
+			case 750:
+				if (healthBar.percent < 20 && healthBar.percent > 0)
+					iconP1.animation.curAnim.curFrame = 0; // Danger
+				else if (healthBar.percent < 40 && healthBar.percent > 20)
+					iconP1.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent > 40 && healthBar.percent < 60)
+					iconP1.animation.curAnim.curFrame = 2; // Neutral
+				else if (healthBar.percent > 60 && healthBar.percent < 80)
+					iconP1.animation.curAnim.curFrame = 3; // Winning
+				else if (healthBar.percent > 80)
+					iconP1.animation.curAnim.curFrame = 4; // Victorious
+		}
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-		else
-			iconP2.animation.curAnim.curFrame = 0;
+		// I actually don't know what I'm doing.
+		// I'm just trying to make it so that the icons don't look wonky in-game.
+		switch (iconP2.widthThing) {
+			case 150:
+				iconP2.animation.curAnim.curFrame = 0;
+			case 300:
+				if (healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 1;
+				else
+					iconP2.animation.curAnim.curFrame = 0;
+			case 450:
+				if (healthBar.percent < 80)
+					iconP2.animation.curAnim.curFrame = 2; //Winning
+				else if (healthBar.percent > 20 && healthBar.percent < 80)
+					iconP2.animation.curAnim.curFrame = 0; //Neutral
+				else if (healthBar.percent > 20)
+					iconP2.animation.curAnim.curFrame = 1; //Losing
+			case 750:
+				if (healthBar.percent < 80)
+					iconP2.animation.curAnim.curFrame = 4; // Victorious
+				else if (healthBar.percent < 60 && healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 3; // Winning
+				else if (healthBar.percent > 40 && healthBar.percent < 60)
+					iconP2.animation.curAnim.curFrame = 2; // Neutral
+				else if (healthBar.percent > 40 && healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent < 20 && healthBar.percent > 0)
+					iconP2.animation.curAnim.curFrame = 0; // Danger
+		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
