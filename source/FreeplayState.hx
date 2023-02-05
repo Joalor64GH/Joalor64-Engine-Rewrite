@@ -450,8 +450,6 @@ class FreeplayState extends MusicBeatState
 			});
 		}
 
-		// selector.y = (70 * curSelected) + 30;
-
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
@@ -459,6 +457,7 @@ class FreeplayState extends MusicBeatState
 
 		var bullShit:Int = 0;
 
+		// TO-DO: Not make 5 icons look weird in Freeplay
 		for (i in 0...iconArray.length)
 		{
 			iconArray[i].alpha = 0.6;

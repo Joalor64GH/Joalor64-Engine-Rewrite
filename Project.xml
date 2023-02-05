@@ -120,7 +120,7 @@
         </section>
 
 	<section if="FLASH_MOVIE">
-	        <assets path="assets/flash"        library="flash" />
+	        <assets path="assets/flash"         library="flash" />
     	</section>
 
     	<section if="LUA_ALLOWED">
