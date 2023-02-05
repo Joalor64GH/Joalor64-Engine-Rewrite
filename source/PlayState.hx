@@ -135,7 +135,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 
 	public var playfieldRenderer:PlayfieldRenderer;
 
-	#if (haxe >= "4.0.0")
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
 	public var dadMap:Map<String, Character> = new Map();
 	public var gfMap:Map<String, Character> = new Map();
@@ -146,18 +145,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
-	#else
-	public var boyfriendMap:Map<String, Boyfriend> = new Map<String, Boyfriend>();
-	public var dadMap:Map<String, Character> = new Map<String, Character>();
-	public var gfMap:Map<String, Character> = new Map<String, Character>();
-	public var variables:Map<String, Dynamic> = new Map<String, Dynamic>();
-	public var modchartTweens:Map<String, FlxTween> = new Map();
-	public var modchartSprites:Map<String, ModchartSprite> = new Map();
-	public var modchartTimers:Map<String, FlxTimer> = new Map();
-	public var modchartSounds:Map<String, FlxSound> = new Map();
-	public var modchartTexts:Map<String, ModchartText> = new Map();
-	public var modchartSaves:Map<String, FlxSave> = new Map();
-	#end
 
 	public var BF_X:Float = 770;
 	public var BF_Y:Float = 100;
@@ -1289,36 +1276,28 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
-		// startCountdown();
-
 		generateSong(SONG.song);
-
-		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
-		// add(strumLine);
 	
 		playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
-                playfieldRenderer.cameras = [camHUD];
-                add(playfieldRenderer);
+		playfieldRenderer.cameras = [camHUD];
+		add(playfieldRenderer);
 		add(grpNoteSplashes);
 
 		camFollow = new FlxPoint();
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 
 		snapCamFollowToPos(camPos.x, camPos.y);
-		if (prevCamFollow != null)
+		if (prevCamFollow != null && prevCamFollowPos != null)
 		{
 			camFollow = prevCamFollow;
 			prevCamFollow = null;
-		}
-		if (prevCamFollowPos != null)
-		{
+
 			camFollowPos = prevCamFollowPos;
-			prevCamFollowPos = null;
+			prevCamFollowPos = null;			
 		}
 		add(camFollowPos);
 
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow);
 
@@ -1390,11 +1369,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 		
 		#if LUA_ALLOWED
