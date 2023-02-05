@@ -34,6 +34,7 @@ appveyor-win32.yml
 ### Git-Specific
 .gitconfig
 .gitinclude
+.gitkeep
 
 ### Stage Editor-Related
 assets/images/stageborder.png
