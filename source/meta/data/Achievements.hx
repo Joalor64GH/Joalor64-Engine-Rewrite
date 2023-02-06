@@ -1,3 +1,5 @@
+package meta.data;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
@@ -6,6 +8,7 @@ import flixel.tweens.FlxTween;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
+import meta.data.ClientPrefs;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;

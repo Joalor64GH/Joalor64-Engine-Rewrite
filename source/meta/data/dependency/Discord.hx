@@ -1,4 +1,4 @@
-package;
+package meta.data.dependency;
 
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
@@ -82,7 +82,7 @@ class DiscordClient
 			details: details,
 			state: state,
 			largeImageKey: 'icon',
-			largeImageText: "Engine Version: " + MainMenuState.joalor64EngineVersion,
+			largeImageText: "Engine Version: " + meta.state.MainMenuState.joalor64EngineVersion,
 			smallImageKey : smallImageKey,
 			// Obtained times are in milliseconds so they are divided so Discord can use it
 			startTimestamp : Std.int(startTimestamp / 1000),

@@ -1,4 +1,4 @@
-package;
+package meta.data.scripts;
 
 import flixel.FlxG;
 import flixel.FlxBasic;
@@ -22,7 +22,12 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 import openfl.Lib;
-import InputFormatter;
+import meta.data.InputFormatter;
+import meta.substate.*;
+import meta.data.font.*;
+import meta.state.*;
+import meta.data.*;
+import gameObjects.*;
 
 final class FunkinSScript extends SScript
 {

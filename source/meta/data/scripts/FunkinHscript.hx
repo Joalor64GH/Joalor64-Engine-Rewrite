@@ -1,6 +1,8 @@
+package meta.data.scripts;
+
 import flixel.system.macros.FlxMacroUtil;
 import flixel.math.FlxAngle;
-import Achievements.AchievementObject;
+import meta.data.Achievements.AchievementObject;
 import flixel.addons.display.FlxBackdrop;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxDestroyUtil;
@@ -51,10 +53,10 @@ import flixel.system.FlxSound;
 import flixel.math.FlxRect;
 #if HSCRIPT_ALLOWED
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
-import options.*;
-import editors.*;
+import meta.data.options.*;
+import meta.state.editors.*;
 import animateatlas.*;
 import flixel.math.FlxMath;
 import flixel.input.keyboard.FlxKey;
@@ -71,7 +73,17 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import hscript.InterpEx;
-import Character;
+import gameObjects.userinterface.menu.*;
+import gameObjects.userinterface.note.*;
+import gameObjects.userinterface.*;
+import gameObjects.shaders.*;
+import gameObjects.*;
+import meta.*;
+import meta.data.scripts.*;
+import meta.state.*;
+import meta.substate.*;
+import meta.data.font.*;
+import meta.data.*;
 
 using StringTools;
 

@@ -1,6 +1,7 @@
-package;
+package meta.data;
 
-import Controls;
+import meta.data.*;
+import meta.Controls;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.util.FlxSignal;

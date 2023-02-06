@@ -1,4 +1,4 @@
-package;
+package meta.data.font;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -8,6 +8,7 @@ import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
 import flixel.system.FlxSound;
 import flash.media.Sound;
+import meta.data.font.Alphabet;
 
 using StringTools;
 

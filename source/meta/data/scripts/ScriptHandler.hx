@@ -1,4 +1,4 @@
-package;
+package meta.data.scripts;
 
 import flixel.*;
 import flixel.math.*;

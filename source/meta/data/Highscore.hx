@@ -1,6 +1,7 @@
-package;
+package meta.data;
 
 import flixel.FlxG;
+import meta.CoolUtil;
 
 using StringTools;
 

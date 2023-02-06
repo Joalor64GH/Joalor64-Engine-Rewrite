@@ -1,6 +1,8 @@
-package;
+package meta.data;
 
-import Conductor.BPMChangeEvent;
+import meta.*;
+import meta.CoolUtil;
+import meta.data.Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;

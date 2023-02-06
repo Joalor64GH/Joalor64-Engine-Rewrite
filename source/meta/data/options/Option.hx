@@ -1,4 +1,4 @@
-package options;
+package meta.data.options;
 
 import flash.text.TextField;
 import flixel.FlxG;
@@ -19,7 +19,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.Controls;
+import meta.data.font.Alphabet;
+import meta.data.ClientPrefs;
 
 using StringTools;
 

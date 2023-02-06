@@ -1,4 +1,4 @@
-package;
+package meta.data.scripts;
 
 import openfl.display.BitmapData;
 #if LUA_ALLOWED
@@ -54,8 +54,11 @@ import hscript.Expr;
 #end
 
 #if desktop
-import Discord;
+import meta.data.dependency.Discord;
 #end
+
+import meta.state.PlayState;
+import meta.data.*;
 
 using StringTools;
 
@@ -167,7 +170,7 @@ class FunkinLua {
 		set('rating', 0);
 		set('ratingName', '');
 		set('ratingFC', '');
-		set('version', MainMenuState.psychEngineVersion.trim());
+		set('version', meta.state.MainMenuState.psychEngineVersion.trim());
 
 		set('inGameOver', false);
 		set('mustHitSection', false);

@@ -1,4 +1,6 @@
-package;
+package meta.data.scripts;
+
+import meta.state.PlayState;
 
 using StringTools;
 

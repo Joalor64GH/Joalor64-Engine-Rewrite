@@ -1,7 +1,7 @@
-package options;
+package meta.data.options;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -23,7 +23,15 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.Controls;
+import meta.data.ClientPrefs;
+import gameObjects.Character;
+import meta.data.font.Alphabet;
+import meta.data.options.*;
+import meta.*;
+
+import gameObjects.userinterface.menu.CheckboxThingie;
+import gameObjects.AttachedText;
 
 using StringTools;
 

@@ -1,4 +1,4 @@
-package;
+package meta.data.font;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

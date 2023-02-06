@@ -1,5 +1,8 @@
-package;
+package meta.data;
+
 import flixel.*;
+import meta.*;
+import meta.Controls;
 import flixel.FlxSubState;
 import flixel.addons.ui.FlxUIButton;
 import flixel.addons.ui.FlxUIPopup;

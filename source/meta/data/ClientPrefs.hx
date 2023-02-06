@@ -1,10 +1,12 @@
-package;
+package meta.data;
 
 import flixel.FlxG;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.Controls;
+import meta.data.PlayerSettings;
+import meta.state.*;
 
 class ClientPrefs {
 	public static var downScroll:Bool = false;

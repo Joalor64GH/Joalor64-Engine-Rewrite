@@ -1,4 +1,4 @@
-package;
+package meta.data.scripts;
 
 #if LUA_ALLOWED
 import llua.*;

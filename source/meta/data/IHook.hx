@@ -1,4 +1,4 @@
-package;
+package meta.data;
 
 import polymod.hscript.HScriptable;
 import flixel.FlxSprite;

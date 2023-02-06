@@ -1,8 +1,9 @@
-package options;
+package meta.data.options;
 
 //this is what happens when you try to recreate a feature from scratch
 //i haven't tested it, but how did i do?
-import FlxVideo;
+import meta.*;
+import meta.video.FlxVideo;
 import flixel.FlxG;
 
 class TheSpecialState extends MusicBeatState

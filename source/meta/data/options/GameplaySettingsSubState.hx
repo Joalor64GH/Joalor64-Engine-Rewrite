@@ -23,7 +23,14 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.Controls;
+import meta.data.ClientPrefs;
+import meta.data.font.Alphabet;
+import meta.data.options.*;
+import meta.*;
+
+import gameObjects.userinterface.menu.CheckboxThingie;
+import gameObjects.AttachedText;
 
 using StringTools;
 
