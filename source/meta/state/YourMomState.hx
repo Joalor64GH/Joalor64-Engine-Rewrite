@@ -1,4 +1,6 @@
-package;
+package meta.state;
+
+import meta.state.*;
 
 class MyPenis {
     public var length=24;

@@ -2,11 +2,8 @@ package;
 
 import flixel.graphics.FlxGraphic;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
-import Section.SwagSection;
-import Song.SwagSong;
-import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -45,29 +42,46 @@ import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.media.Video;
-import editors.ChartingState;
-import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
-import Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxSave;
 import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
-import Achievements;
-import StageData;
-import FunkinLua;
-import FunkinHscript;
-import FunkinSScript;
-import DialogueBoxPsych;
-import Conductor.Rating;
-import Character;
-import LLua; // this doesn't even do anything
+import meta.state.editors.ChartingState;
+import meta.state.editors.CharacterEditorState;
+import meta.data.Section.SwagSection;
+import meta.data.Song.SwagSong;
+import meta.data.Achievements;
+import meta.data.StageData;
+import meta.data.scripts.FunkinLua;
+import meta.data.scripts.FunkinHscript;
+import meta.data.scripts.FunkinSScript;
+import meta.data.scripts.LLua; // this doesn't even do anything
+import meta.data.Conductor.Rating;
+import gameObjects.userinterface.DialogueBoxPsych;
+import gameObjects.userinterface.note.Note.EventNote;
+import gameObjects.shaders.WiggleEffect.WiggleEffectType;
+import gameObjects.Character;
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+
+import meta.*;
+import meta.data.*;
+import meta.data.font.*;
+import meta.data.options.*;
+import meta.substate.*;
+import meta.state.*;
+import meta.video.*;
+
+import gameObjects.*;
+import gameObjects.userinterface.*;
+import gameObjects.userinterface.note.*;
+import gameObjects.background.*;
+import gameObjects.shaders.*;
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -92,12 +106,12 @@ import vlc.MP4Handler;
 
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
-import BackgroundVideo;
-import VideoState;
+import meta.video.BackgroundVideo;
+import meta.video.VideoState;
 #end
 
 #if FLASH_MOVIE
-import SwfVideo;
+import meta.video.SwfVideo;
 #end
 
 #if PYTHON_SCRIPTING

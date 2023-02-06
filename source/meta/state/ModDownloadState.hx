@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import openfl.events.IOErrorEvent;
 import openfl.events.ErrorEvent;
@@ -34,6 +34,8 @@ import haxe.io.Bytes;
 import flixel.ui.FlxButton;
 import haxe.io.Input;
 import flixel.addons.ui.FlxUITabMenu;
+import meta.state.*;
+import meta.*;
 
 using StringTools;
 

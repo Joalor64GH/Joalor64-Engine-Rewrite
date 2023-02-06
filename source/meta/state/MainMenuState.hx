@@ -1,7 +1,7 @@
-package;
+import meta.state.*;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -18,12 +18,20 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import Achievements;
-import editors.MasterEditorMenu;
+import meta.data.Achievements;
+import meta.state.editors.MasterEditorMenu;
+import meta.data.WeekData;
 import flixel.input.keyboard.FlxKey;
 import openfl.Assets;
 import openfl.media.Video;
 import haxe.Json;
+import meta.video.*;
+import meta.Controls;
+import meta.CoolUtil;
+import meta.data.ClientPrefs;
+import meta.data.options.*;
+import meta.state.*;
+import meta.*;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -414,7 +422,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
+										LoadingState.loadAndSwitchState(new OptionsState());
 								}
 							});
 						}

@@ -1,7 +1,7 @@
 package;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
@@ -39,6 +39,12 @@ import openfl.Assets;
 #if FUTURE_POLYMOD
 import polymod.Polymod;
 #end
+
+import meta.CoolUtil;
+import meta.data.ClientPrefs;
+import meta.data.WeekData;
+import meta.state.*;
+import meta.*;
 
 using StringTools;
 

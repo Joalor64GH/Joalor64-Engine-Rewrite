@@ -1,9 +1,17 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
-import editors.ChartingState;
+import meta.*;
+import meta.CoolUtil;
+import meta.Controls;
+import meta.data.ClientPrefs;
+import meta.data.font.Alphabet;
+import meta.state.editors.ChartingState;
+import meta.state.PlayState;
+import meta.state.*;
+import meta.substate.*;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -17,7 +25,8 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WeekData;
+import gameObjects.userinterface.HealthIcon;
+import meta.data.WeekData;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end

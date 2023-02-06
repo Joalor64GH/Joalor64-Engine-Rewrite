@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import lime.app.Promise;
 import lime.app.Future;
@@ -13,6 +13,12 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
+
+import meta.*;
+import meta.state.*;
+import meta.Controls;
+import meta.data.ClientPrefs;
+import meta.state.PlayState;
 
 import haxe.io.Path;
 

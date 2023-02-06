@@ -1,5 +1,9 @@
-package;
+package meta.state;
 
+import meta.*;
+import meta.state.*;
+import meta.state.PlayState;
+import meta.Controls;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;

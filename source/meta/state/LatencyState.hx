@@ -1,5 +1,7 @@
-package;
+package meta.state;
 
+import meta.data.Conductor;
+import gameObjects.userinterface.note.Note;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;

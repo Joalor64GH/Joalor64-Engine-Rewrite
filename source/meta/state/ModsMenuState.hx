@@ -1,7 +1,7 @@
 package;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -27,10 +27,13 @@ import flixel.ui.FlxButton;
 import flixel.FlxBasic;
 import sys.io.File;
 import flixel.input.keyboard.FlxKey;
-/*import haxe.zip.Reader;
-import haxe.zip.Entry;
-import haxe.zip.Uncompress;
-import haxe.zip.Writer;*/
+import meta.*;
+import meta.state.*;
+import meta.data.*;
+import meta.Controls;
+import meta.CoolUtil;
+import meta.data.ClientPrefs;
+import gameObjects.AttachedSprite;
 
 using StringTools;
 

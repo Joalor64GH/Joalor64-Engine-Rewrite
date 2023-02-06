@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -13,7 +13,12 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.FlxSubState;
-import Achievements;
+import meta.data.font.Alphabet;
+import meta.data.Achievements;
+import meta.data.ClientPrefs;
+import meta.Controls;
+import meta.state.*;
+import meta.*;
 
 using StringTools;
 
