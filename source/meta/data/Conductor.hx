@@ -2,6 +2,7 @@ package meta.data;
 
 import meta.data.ClientPrefs;
 import meta.data.Song.SwagSong;
+import gameObjects.userinterface.note.Note;
 
 typedef BPMChangeEvent =
 {
