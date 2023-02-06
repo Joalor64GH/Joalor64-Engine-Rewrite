@@ -1,7 +1,7 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -20,7 +20,7 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.ui.FlxButton;
-import MenuCharacter;
+import gameObjects.userinterface.menu.MenuCharacter;
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
@@ -29,6 +29,11 @@ import haxe.Json;
 #if sys
 import sys.io.File;
 #end
+
+import meta.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.Controls;
 
 using StringTools;
 
@@ -286,7 +291,7 @@ class MenuCharacterEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 

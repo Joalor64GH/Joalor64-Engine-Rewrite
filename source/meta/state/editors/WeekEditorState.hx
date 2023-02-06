@@ -1,7 +1,7 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -31,7 +31,14 @@ import haxe.Json;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import WeekData;
+import meta.data.WeekData;
+import meta.data.ClientPrefs;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.*;
+
+import gameObjects.userinterface.menu.MenuCharacter;
+import gameObjects.userinterface.menu.MenuItem;
 
 using StringTools;
 
@@ -446,7 +453,7 @@ class WeekEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		}
@@ -809,7 +816,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 
