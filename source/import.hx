@@ -5,25 +5,25 @@ import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.FlxSprite;
 import flixel.FlxG;
-import Alphabet;
-import Discord;
-import Conductor;
-import Section;
-import Song;
+import meta.data.dependency.Discord;
+import meta.data.font.Alphabet;
+import meta.MusicBeatState;
+import meta.MusicBeatSubstate;
+import meta.data.PlayerSettings;
+import meta.state.PlayState;
+import meta.data.Highscore;
+import meta.data.Conductor;
+import meta.data.Section;
+import meta.data.Song;
+import meta.CoolUtil;
+import meta.Controls;
 import Paths;
-import CoolUtil;
-import Highscore;
-import PlayerSettings;
-import MusicBeatState;
-import MusicBeatSubstate;
-import PlayState;
-import Controls;
 #if (polymod && FUTURE_POLYMOD)
 import polymod.Polymod;
 #end
 
-using CoolUtil;
 using StringTools;
+using meta.CoolUtil;
 
 #if sys
 import sys.io.File;
