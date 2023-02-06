@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
@@ -19,7 +19,6 @@ import openfl.display.BitmapData;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import options.GraphicsSettingsSubState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
@@ -41,10 +40,13 @@ import polymod.Polymod;
 #end
 
 import meta.CoolUtil;
+import meta.data.options.*;
 import meta.data.ClientPrefs;
 import meta.data.WeekData;
 import meta.state.*;
 import meta.*;
+
+import gameObjects.shaders.*;
 
 using StringTools;
 
