@@ -62,6 +62,7 @@ import meta.data.Conductor;
 import meta.data.Song;
 import meta.CoolUtil;
 
+import gameObjects.AttachedSprite;
 import gameObjects.userinterface.HealthIcon;
 import gameObjects.userinterface.note.Note;
 
