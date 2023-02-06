@@ -1,4 +1,4 @@
-package;
+package meta.substate;
 
 #if desktop
 import Discord.DiscordClient;
@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import sys.io.File;
 import sys.FileSystem;
 #end
+import gameObjects.userinterface.menu.CheckboxThingie;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
@@ -27,7 +28,10 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.data.font.Alphabet;
+import meta.data.ClientPrefs;
+import meta.Controls;
+import meta.*;
 
 using StringTools;
 

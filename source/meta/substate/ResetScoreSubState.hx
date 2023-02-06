@@ -1,7 +1,14 @@
+package meta.substate;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.util.FlxColor;
+import gameObjects.userinterface.HealthIcon;
+import meta.data.font.Alphabet;
+import meta.data.Highscore;
+import meta.data.WeekData;
+import meta.*;
 
 using StringTools;
 
