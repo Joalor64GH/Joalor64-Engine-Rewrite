@@ -1,7 +1,8 @@
-package;
+package gameObjects.userinterface.menu;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import meta.data.ClientPrefs;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;

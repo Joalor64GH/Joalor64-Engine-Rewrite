@@ -1,4 +1,4 @@
-package;
+package gameObjects.userinterface;
 
 import flixel.FlxSprite;
 import openfl.utils.Assets as OpenFlAssets;

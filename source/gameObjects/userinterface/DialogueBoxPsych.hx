@@ -1,4 +1,4 @@
-package;
+package gameObjects.userinterface;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,7 +12,7 @@ import flixel.util.FlxTimer;
 import flixel.FlxSubState;
 import haxe.Json;
 import haxe.format.JsonParser;
-import Alphabet;
+import meta.data.font.Alphabet;
 #if sys
 import sys.FileSystem;
 import sys.io.File;

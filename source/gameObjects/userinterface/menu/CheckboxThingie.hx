@@ -1,6 +1,7 @@
-package;
+package gameObjects.userinterface.menu;
 
 import flixel.FlxSprite;
+import meta.data.ClientPrefs;
 import flixel.graphics.frames.FlxAtlasFrames;
 
 class CheckboxThingie extends FlxSprite

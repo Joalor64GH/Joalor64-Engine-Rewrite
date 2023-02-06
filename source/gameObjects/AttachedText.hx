@@ -1,6 +1,7 @@
-package;
+package gameObjects;
 
 import flixel.FlxSprite;
+import meta.data.font.Alphabet;
 import flixel.graphics.frames.FlxAtlasFrames;
 
 class AttachedText extends Alphabet

@@ -1,4 +1,4 @@
-package;
+package gameObjects;
 
 import flash.geom.Rectangle;
 import flixel.addons.ui.interfaces.IFlxUIClickable;

@@ -1,7 +1,8 @@
-package;
+package gameObjects.background;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import meta.data.ClientPrefs;
 import flixel.graphics.frames.FlxAtlasFrames;
 
 class TankmenBG extends FlxSprite

@@ -1,4 +1,4 @@
-package;
+package gameObjects;
 
 import flixel.FlxSprite;
 

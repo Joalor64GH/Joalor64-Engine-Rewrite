@@ -1,7 +1,8 @@
-package;
+package gameObjects.userinterface.menu;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import meta.data.ClientPrefs;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;

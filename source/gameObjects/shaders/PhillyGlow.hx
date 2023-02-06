@@ -1,6 +1,9 @@
+package gameObjects.shaders;
+
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+import meta.data.ClientPrefs;
 
 class PhillyGlowParticle extends FlxSprite
 {

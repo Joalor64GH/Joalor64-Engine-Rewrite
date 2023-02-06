@@ -1,4 +1,4 @@
-package;
+package gameObjects;
 
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
@@ -8,7 +8,8 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
-import Section.SwagSection;
+import meta.data.Section.SwagSection;
+import meta.data.ClientPrefs;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;

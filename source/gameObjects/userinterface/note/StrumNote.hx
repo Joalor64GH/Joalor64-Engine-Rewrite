@@ -1,9 +1,12 @@
-package;
+package gameObjects.userinterface.note;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.graphics.frames.FlxAtlasFrames;
+import meta.data.ClientPrefs;
+import meta.state.PlayState;
+import gameObjects.shaders.*;
 
 using StringTools;
 

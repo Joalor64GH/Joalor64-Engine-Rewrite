@@ -1,9 +1,12 @@
-package;
+package gameObjects.userinterface.note;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.graphics.frames.FlxAtlasFrames;
+import gameObjects.shaders.*;
+import meta.data.ClientPrefs;
+import meta.state.PlayState;
 
 class NoteSplash extends FlxSprite
 {
