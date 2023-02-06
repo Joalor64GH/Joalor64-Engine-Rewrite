@@ -26,6 +26,8 @@ import sys.io.Process;
 #end
 
 import meta.video.*;
+import meta.state.*;
+import meta.data.ClientPrefs.*;
 
 #if (hxCodec > "2.5.1")
 #error "hxCodec is the git version, please use the haxelib version instead"
