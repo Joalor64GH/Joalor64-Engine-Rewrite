@@ -1,7 +1,7 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -25,11 +25,16 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
 import haxe.Json;
-import DialogueBoxPsych;
+import gameObjects.userinterface.DialogueBoxPsych;
 import flixel.FlxCamera;
 import flixel.group.FlxSpriteGroup;
 import lime.system.Clipboard;
-import Alphabet;
+import meta.data.font.Alphabet;
+import meta.data.font.TypedAlphabet;
+import meta.data.ClientPrefs;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.*;
 #if sys
 import sys.io.File;
 #end

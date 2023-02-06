@@ -1,7 +1,7 @@
 package editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -15,6 +15,13 @@ import flixel.system.FlxSound;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end
+
+import meta.Controls;
+import meta.data.WeekData;
+import meta.data.font.Alphabet;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.*;
 
 using StringTools;
 

@@ -1,7 +1,7 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
@@ -30,7 +30,7 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import haxe.Json;
-import Character;
+import gameObjects.Character;
 import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import lime.system.Clipboard;
 import flixel.animation.FlxAnimation;
@@ -38,6 +38,12 @@ import flixel.animation.FlxAnimation;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.state.editors.*;
+import gameObjects.userinterface.HealthIcon;
 
 using StringTools;
 

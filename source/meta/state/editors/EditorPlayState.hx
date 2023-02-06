@@ -1,7 +1,9 @@
-package editors;
+package meta.state.editors;
 
-import Section.SwagSection;
-import Song.SwagSong;
+import meta.Controls;
+import meta.data.Conductor;
+import meta.data.Section.SwagSection;
+import meta.data.Song.SwagSong;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
@@ -18,7 +20,13 @@ import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
-import FunkinLua;
+import meta.data.scripts.FunkinLua;
+import meta.data.ClientPrefs;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.*;
+
+import gameObjects.userinterface.note.*;
 
 using StringTools;
 
@@ -116,7 +124,7 @@ class EditorPlayState extends MusicBeatState
 		for (notetype in noteTypeMap.keys()) {
 			var luaToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.lua');
 			if(sys.FileSystem.exists(luaToLoad)) {
-				var lua:editors.EditorLua = new editors.EditorLua(luaToLoad);
+				var lua:EditorLua = new EditorLua(luaToLoad);
 				new FlxTimer().start(0.1, function (tmr:FlxTimer) {
 					lua.stop();
 					lua = null;

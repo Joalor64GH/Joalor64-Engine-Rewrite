@@ -13,6 +13,7 @@ import flixel.FlxSubState;
 import haxe.Json;
 import haxe.format.JsonParser;
 import meta.data.font.Alphabet;
+import meta.data.ClientPrefs;
 #if sys
 import sys.FileSystem;
 import sys.io.File;

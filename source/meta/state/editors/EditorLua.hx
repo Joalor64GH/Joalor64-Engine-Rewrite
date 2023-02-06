@@ -1,4 +1,4 @@
-package editors;
+package meta.state.editors;
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -24,11 +24,14 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import Type.ValueType;
-import Controls;
-import DialogueBoxPsych;
+import meta.Controls;
+import gameObjects.userinterface.DialogueBoxPsych;
+
+import meta.state.*;
+import meta.data.*;
 
 #if desktop
-import Discord;
+import meta.data.dependency.Discord;
 #end
 
 using StringTools;

@@ -1,15 +1,15 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.geom.Rectangle;
 import haxe.Json;
 import haxe.format.JsonParser;
 import haxe.io.Bytes;
-import Conductor.BPMChangeEvent;
-import Section.SwagSection;
-import Song.SwagSong;
+import meta.data.Conductor.BPMChangeEvent;
+import meta.data.Section.SwagSection;
+import meta.data.Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -54,6 +54,16 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
+import meta.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.state.PlayState;
+import meta.data.Conductor;
+import meta.data.Song;
+import meta.CoolUtil;
+
+import gameObjects.userinterface.HealthIcon;
+import gameObjects.userinterface.note.Note;
 
 @:access(flixel.system.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
@@ -244,8 +254,6 @@ class ChartingState extends MusicBeatState
 		96,
 		192
 	];
-
-
 
 	var text:String = "";
 	public static var vortex:Bool = false;
