@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
+<project>
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
         <app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
-
+	<app preloader="flixel.system.FlxPreloader" />
+	
 	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
-
-	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
-		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
-	<!-- <app preloader="Preloader" resizable="true" /> -->
-	<app preloader="flixel.system.FlxPreloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
 	<set name="SWF_VERSION" value="11.8" />
@@ -179,7 +174,6 @@
 	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
-	<haxelib name="faxe" if='switch'/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="hxcpp-debug-server" if="desktop"/>
 
