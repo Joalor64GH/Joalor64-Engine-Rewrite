@@ -64,7 +64,7 @@ import meta.CoolUtil;
 
 import gameObjects.AttachedSprite;
 import gameObjects.userinterface.HealthIcon;
-import gameObjects.userinterface.note.Note;
+import gameObjects.userinterface.note.*;
 
 @:access(flixel.system.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
