@@ -87,8 +87,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
-import hxcodec.VideoHandler;
-import hxcodec.VideoSprite;
+import vlc.MP4Handler;
 #end
 
 #if WEBM_ALLOWED
@@ -2325,7 +2324,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler();
+		var video:MP4Handler = new MP4Handler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
 		{
@@ -2339,7 +2338,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		#end
 	}
 
-	// i'll test this when i have the chance
+	// i'll work on this some more when i have the chance
 	/*public function startMovie(name:String)
 	{
 		#if FLASH_MOVIE
@@ -5397,7 +5396,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		useVideo = true;
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
-		// WebmPlayer.SKIP_STEP_LIMIT = 90;
 		var str1:String = "WEBM SHIT";
 		webmHandler = new WebmHandler();
 		webmHandler.source(ourSource);
