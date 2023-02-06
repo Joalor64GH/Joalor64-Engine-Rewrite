@@ -11,8 +11,8 @@ import game.Note;
 import game.StrumNote;
 import game.Conductor;
 #else 
-import PlayState;
-import Note;
+import meta.state.PlayState;
+import gameObjects.userinterface.note.Note;
 #end
 
 enum ModifierType

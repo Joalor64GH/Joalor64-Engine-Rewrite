@@ -10,8 +10,8 @@ import states.PlayState;
 import game.Note;
 
 #else 
-import PlayState;
-import Note;
+import meta.state.PlayState;
+import gameObjects.userinterface.note.Note;
 #end
 
 using StringTools;

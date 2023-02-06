@@ -57,8 +57,11 @@ import hscript.Expr;
 import meta.data.dependency.Discord;
 #end
 
+import meta.Controls;
 import meta.state.PlayState;
 import meta.data.*;
+
+import gameObjects.userinterface.DialogueBoxPsych;
 
 using StringTools;
 

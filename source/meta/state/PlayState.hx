@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import flixel.graphics.FlxGraphic;
 #if desktop

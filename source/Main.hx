@@ -19,11 +19,13 @@ import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
 #end
+
+import meta.video.*;
 
 #if (hxCodec > "2.5.1")
 #error "hxCodec is the git version, please use the haxelib version instead"

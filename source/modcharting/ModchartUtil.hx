@@ -9,8 +9,9 @@ import flixel.FlxG;
 import states.PlayState;
 import game.Note;
 #else 
-import PlayState;
-import Note;
+import meta.state.PlayState;
+import gameObjects.userinterface.note.Note;
+import meta.data.ClientPrefs;
 #end
 
 class ModchartUtil
