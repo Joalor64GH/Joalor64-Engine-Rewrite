@@ -99,6 +99,14 @@ class CreditsState extends MusicBeatState
 				'noweyyy'
 			],
 			[
+				'MemeHovy',         
+				'meme',             
+				'Additional Programmer\n"Custom Quote"',                                  		
+				'https://github.com/MemeHovy',  
+				'FFEDD9',
+				'' // funni sound goes here if you want
+			],
+			[
 				'Bot 404',              
 				'bot',             
 				'Tiny little helper, Drew his own icon\n"expected more"',                                     	    

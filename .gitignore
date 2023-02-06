@@ -53,6 +53,7 @@ example_mods/modList.txt
 source/Snd.hx
 source/SndTV.hx
 source/ChartParser.hx
+polymod-fix/PolymodFileSystem.hx
 
 ### Add these regardless of them getting ignored.
 !appveyor-linux.yml

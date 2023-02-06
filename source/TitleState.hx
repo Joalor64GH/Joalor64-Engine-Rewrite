@@ -71,6 +71,7 @@ class TitleState extends MusicBeatState
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
+	var credIcon3:FlxSprite;
 	#elseif PSYCH_WATERMARKS
 	var credIconShadow:FlxSprite;
 	var credIconRiver:FlxSprite;
@@ -462,6 +463,12 @@ class TitleState extends MusicBeatState
 		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
+
+		credIcon3 = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/meme'));
+		add(credIcon3);
+		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
+		credIcon3.visible = false;
+		credIcon3.flipX = false;
 		#elseif PSYCH_WATERMARKS
 		credIconShadow = new FlxSprite(150,150).loadGraphic(Paths.image('credits/shadowmario'));
 		add(credIconShadow);
@@ -778,6 +785,7 @@ class TitleState extends MusicBeatState
 					createCoolText(teamStuff);
 					credIcon1.visible = true;
 					credIcon2.visible = true;
+					credIcon3.visible = true;
 					#elseif PSYCH_WATERMARKS
  					createCoolText(['Psych Engine by'], 15);
 					#else
@@ -806,6 +814,7 @@ class TitleState extends MusicBeatState
 				    	#if JOALOR64_WATERMARKS
 				    	credIcon1.destroy();
 					credIcon2.destroy();
+					credIcon3.destroy();
 					#elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
@@ -891,6 +900,7 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
+								credIcon3.destroy();
 			            		#elseif PSYCH_WATERMARKS
 						credIconShadow.destroy();
 						credIconRiver.destroy();
@@ -922,6 +932,7 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
+								credIcon3.destroy();
 			            		#elseif PSYCH_WATERMARKS
 						credIconShadow.destroy();
 						credIconRiver.destroy();
@@ -945,6 +956,7 @@ class TitleState extends MusicBeatState
 					#if JOALOR64_WATERMARKS
 			        credIcon1.destroy();
 			        credIcon2.destroy();
+					credIcon3.destroy();
 			        #elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
@@ -973,6 +985,7 @@ class TitleState extends MusicBeatState
 				#if JOALOR64_WATERMARKS
 			    	credIcon1.destroy();
 			    	credIcon2.destroy();
+					credIcon3.destroy();
 			    	#elseif PSYCH_WATERMARKS
 				credIconShadow.destroy();
 				credIconRiver.destroy();

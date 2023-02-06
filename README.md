@@ -25,6 +25,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 
 # Credits
 * [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer
+* [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Prepare Sprite + Customizable Main Menu via JSON + Credits Sounds
