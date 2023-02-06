@@ -1844,7 +1844,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	}
 	#end
 
-	function set_songSpeed(value:Float):Float
+	inline function set_songSpeed(value:Float):Float
 	{
 		if(generatedMusic)
 		{
@@ -1857,7 +1857,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		return value;
 	}
 
-	function set_playbackRate(value:Float):Float
+	inline function set_playbackRate(value:Float):Float
 	{
 		if(generatedMusic)
 		{
