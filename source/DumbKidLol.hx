@@ -17,7 +17,7 @@ class DumbKidLol extends RealDumbass
 		{
 			return 9999;
 		}
-		else if (stupidKid == 'MemeHoovy')
+		else if (stupidKid == 'MemeHovy')
 		{
 			return 0;
 		}
