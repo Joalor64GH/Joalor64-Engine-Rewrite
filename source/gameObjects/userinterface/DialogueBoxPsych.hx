@@ -14,6 +14,7 @@ import haxe.Json;
 import haxe.format.JsonParser;
 import meta.data.font.Alphabet;
 import meta.data.ClientPrefs;
+import meta.data.font.TypedAlphabet;
 #if sys
 import sys.FileSystem;
 import sys.io.File;
