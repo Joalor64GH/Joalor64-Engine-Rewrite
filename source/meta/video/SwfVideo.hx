@@ -1,4 +1,4 @@
-package;
+package meta.video;
 
 import openfl.utils.Assets;
 import flixel.system.FlxSound;

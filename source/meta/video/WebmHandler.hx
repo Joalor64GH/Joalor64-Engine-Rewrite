@@ -1,4 +1,4 @@
-package;
+package meta.video;
 
 import flixel.FlxG;
 import openfl.display.Sprite;

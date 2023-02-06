@@ -1,4 +1,4 @@
-package;
+package meta.video;
 
 import flixel.FlxState;
 import flixel.FlxG;
@@ -12,6 +12,7 @@ import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets;
 import openfl.utils.AssetType;
+import meta.*;
 
 import openfl.Lib;
 

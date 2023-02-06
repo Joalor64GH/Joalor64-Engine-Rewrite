@@ -1,6 +1,7 @@
-package;
+package meta.video;
 
 import openfl.Lib;
+import meta.video.*;
 
 class BackgroundVideo
 {

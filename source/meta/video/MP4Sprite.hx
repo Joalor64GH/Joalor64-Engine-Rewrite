@@ -1,5 +1,6 @@
-package;
+package meta.video;
 
+import meta.video.*;
 import flixel.FlxSprite;
 
 /**

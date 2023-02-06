@@ -1,5 +1,7 @@
-package;
+package meta.video;
 
+import meta.state.*;
+import meta.video.*;
 import flixel.FlxSprite;
 #if WEBM_ALLOWED
 import webm.*;
