@@ -418,7 +418,7 @@ class CharacterEditorState extends MusicBeatState
 			"scale": 1
 		}';
 
-	var charDropDown:FlxUIDropDownMenuCustom;
+	var charDropDown:gameObjects.FlxUIDropDownMenuCustom;
 	function addSettingsUI() {
 		var tab_group = new FlxUI(null, UI_box);
 		tab_group.name = "Settings";
@@ -434,7 +434,7 @@ class CharacterEditorState extends MusicBeatState
 			ghostChar.flipX = char.flipX;
 		};
 
-		charDropDown = new FlxUIDropDownMenuCustom(10, 30, FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(character:String)
+		charDropDown = new gameObjects.FlxUIDropDownMenuCustom(10, 30, gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(character:String)
 		{
 			daAnim = characterList[Std.parseInt(character)];
 			check_player.checked = daAnim.startsWith('bf');
@@ -610,8 +610,8 @@ class CharacterEditorState extends MusicBeatState
 		UI_characterbox.addGroup(tab_group);
 	}
 
-	var ghostDropDown:FlxUIDropDownMenuCustom;
-	var animationDropDown:FlxUIDropDownMenuCustom;
+	var ghostDropDown:gameObjects.FlxUIDropDownMenuCustom;
+	var animationDropDown:gameObjects.FlxUIDropDownMenuCustom;
 	var animationInputText:FlxUIInputText;
 	var animationNameInputText:FlxUIInputText;
 	var animationIndicesInputText:FlxUIInputText;
@@ -630,7 +630,7 @@ class CharacterEditorState extends MusicBeatState
 
 		// multipleI8 = new FlxUICheckBox(animationNameInputText.x + 180, animationNameInputText.y - 10, null, null, "Should it Loop?", 100);
 
-		animationDropDown = new FlxUIDropDownMenuCustom(15, animationInputText.y - 55, FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(pressed:String) {
+		animationDropDown = new gameObjects.FlxUIDropDownMenuCustom(15, animationInputText.y - 55, gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(pressed:String) {
 			var selectedAnimation:Int = Std.parseInt(pressed);
 			var anim:AnimArray = char.animationsArray[selectedAnimation];
 			animationInputText.text = anim.anim;
@@ -642,7 +642,7 @@ class CharacterEditorState extends MusicBeatState
 			animationIndicesInputText.text = indicesStr.substr(1, indicesStr.length - 2);
 		});
 
-		ghostDropDown = new FlxUIDropDownMenuCustom(animationDropDown.x + 150, animationDropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(pressed:String) {
+		ghostDropDown = new gameObjects.FlxUIDropDownMenuCustom(animationDropDown.x + 150, animationDropDown.y, gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(pressed:String) {
 			var selectedAnimation:Int = Std.parseInt(pressed);
 			ghostChar.visible = false;
 			char.alpha = 1;
@@ -1019,8 +1019,8 @@ class CharacterEditorState extends MusicBeatState
 		}
 		if(anims.length < 1) anims.push('NO ANIMATIONS'); //Prevents crash
 
-		animationDropDown.setData(FlxUIDropDownMenuCustom.makeStrIdLabelArray(anims, true));
-		ghostDropDown.setData(FlxUIDropDownMenuCustom.makeStrIdLabelArray(ghostAnims, true));
+		animationDropDown.setData(gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray(anims, true));
+		ghostDropDown.setData(gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray(ghostAnims, true));
 		reloadGhost();
 	}
 
@@ -1080,7 +1080,7 @@ class CharacterEditorState extends MusicBeatState
 		characterList = CoolUtil.coolTextFile(Paths.txt('characterList'));
 		#end
 
-		charDropDown.setData(FlxUIDropDownMenuCustom.makeStrIdLabelArray(characterList, true));
+		charDropDown.setData(gameObjects.FlxUIDropDownMenuCustom.makeStrIdLabelArray(characterList, true));
 		charDropDown.selectedLabel = daAnim;
 	}
 
