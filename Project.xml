@@ -31,7 +31,8 @@
 	<!--Mobile-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
 
-	<!-- JOALOR64 ENGINE DEFINES -->
+	<!-- _______________________________ Custom Defines ______________________________ -->
+
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="LUA_ALLOWED" if="desktop" />
@@ -71,7 +72,7 @@
                 <assets path="assets/fonts" embed='true'/>
 	</section>
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
-	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4"  unless="web"/>
+	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="web"/>
 
 	<!-- SWF EXAMPLE-->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
@@ -126,26 +127,31 @@
 	</section>
 
         <!-- PATH DEFINITIONS -->
-	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
-	<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/shared"        library="shared"        exclude="*.ogg" if="web"/>
-	<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/tutorial"      library="tutorial"      exclude="*.ogg" if="web"/>
-	<assets path="assets/tutorial"      library="tutorial"      exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week1"         library="week1"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week1"         library="week1"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week2"         library="week2"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week2"         library="week2"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week3"         library="week3"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week3"         library="week3"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week4"         library="week4"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week4"         library="week4"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week5"         library="week5"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week5"         library="week5"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week6"         library="week6"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week6"         library="week6"         exclude="*.mp3|*.mp4" unless="web"/>
-	<assets path="assets/week7"         library="week7"         exclude="*.ogg" if="web"/>
-	<assets path="assets/week7"         library="week7"         exclude="*.mp3|*.mp4" unless="web"/>
+	<section if="web">
+		<assets path="assets/songs"         library="songs"         exclude="*.ogg"/>
+		<assets path="assets/shared"        library="shared"        exclude="*.ogg"/>
+		<assets path="assets/tutorial"      library="tutorial"      exclude="*.ogg"/>
+		<assets path="assets/week1"         library="week1"         exclude="*.ogg"/>
+		<assets path="assets/week2"         library="week2"         exclude="*.ogg"/>
+		<assets path="assets/week3"         library="week3"         exclude="*.ogg"/>
+		<assets path="assets/week4"         library="week4"         exclude="*.ogg"/>
+		<assets path="assets/week5"         library="week5"         exclude="*.ogg"/>
+		<assets path="assets/week6"         library="week6"         exclude="*.ogg"/>
+		<assets path="assets/week7"         library="week7"         exclude="*.ogg"/>
+	</section>
+
+	<section unless="web">
+		<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.mp4"/>
+		<assets path="assets/tutorial"      library="tutorial"      exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week1"         library="week1"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week2"         library="week2"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week3"         library="week3"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week4"         library="week4"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week5"         library="week5"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week6"         library="week6"         exclude="*.mp3|*.mp4"/>
+		<assets path="assets/week7"         library="week7"         exclude="*.mp3|*.mp4"/>
+	</section>
 	
 	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
 		<assets path='example_mods' rename='mods' embed='false'/>
@@ -213,6 +219,8 @@
 	<!--Used for Izzy Engine's crash handler-->
 	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
+
+	<!-- _______________________________ Errors and Warnings ______________________________ -->
 
 	<error value="You're not using NebulaZoruas github fork of luajit, use it instead." if="${linc_luajit == 0.0.4}" />
 
