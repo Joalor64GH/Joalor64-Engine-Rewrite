@@ -9,21 +9,18 @@ class DumbKidLol extends RealDumbass
 	var STUPID:Bool = false;
 	var ratio(default, set):Int;
 	var hasBrain:Bool = true;
-	var stupidKid:String = 'NimuDevUwU'; // fuck you nimu, I reported your account & got it taken down, don't think I won't do it again
+	var stupidKid:String = 'NimuDevUwU'; // fuck you nimu, I reported your account & got it taken down/flagged, don't think I won't do it again
 
 	function set_ratio(r:Int):Int
 	{
-		if (stupidKid == 'NimuDevUwU')
-		{
-			return 9999;
-		}
-		else if (stupidKid == 'MemeHovy')
-		{
-			return 0;
-		}
-		else
-		{
-			return ratio = r;
+		switch(stupidKid){
+			case 'NimuDevUwU':
+				return 9999;
+			// why'd you make it my new github username .__.
+			case 'MemeHoovy':
+				return 0;
+			default:
+				return ratio = r;
 		}
 	}
 
