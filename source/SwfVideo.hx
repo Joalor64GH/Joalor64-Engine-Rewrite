@@ -67,7 +67,7 @@ class SwfVideo extends Sprite
     }
 
     public function screenCenter()
-	{
+    {
         var ratio:Float = FlxG.width / FlxG.height;
 		var realRatio:Float = FlxG.stage.stageWidth / FlxG.stage.stageHeight;
         var preX:Float = 0;
@@ -82,5 +82,5 @@ class SwfVideo extends Sprite
         barRight.graphics.beginFill();
         barLeft.graphics.drawRect(0, 0, clip.x, FlxG.stage.stageHeight);
         barRight.graphics.drawRect(FlxG.stage.stageWidth - clip.x, 0, clip.x, FlxG.stage.stageHeight);
-	}
+    }
 }
