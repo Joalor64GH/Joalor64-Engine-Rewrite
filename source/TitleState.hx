@@ -901,7 +901,7 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
-								credIcon3.destroy();
+						credIcon3.destroy();
 			            		#elseif PSYCH_WATERMARKS
 						credIconShadow.destroy();
 						credIconRiver.destroy();
@@ -955,10 +955,10 @@ class TitleState extends MusicBeatState
 					remove(psychSpr);
 					remove(credGroup);
 					#if JOALOR64_WATERMARKS
-			        credIcon1.destroy();
-			        credIcon2.destroy();
+			        	credIcon1.destroy();
+			        	credIcon2.destroy();
 					credIcon3.destroy();
-			        #elseif PSYCH_WATERMARKS
+			        	#elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
 					credIconShubs.destroy();
@@ -986,7 +986,7 @@ class TitleState extends MusicBeatState
 				#if JOALOR64_WATERMARKS
 			    	credIcon1.destroy();
 			    	credIcon2.destroy();
-					credIcon3.destroy();
+				credIcon3.destroy();
 			    	#elseif PSYCH_WATERMARKS
 				credIconShadow.destroy();
 				credIconRiver.destroy();
