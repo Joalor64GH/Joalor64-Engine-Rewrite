@@ -10,15 +10,21 @@ import openfl.display.MovieClip;
 
 class SwfVideo extends Sprite
 {
+    public var finishCallback:Void->Void = null;
+
     public var clip:MovieClip;
 
     private var barLeft:Sprite;
     private var barRight:Sprite;
 
-    public function new(movieClip:String, sound:String, onComplete:Void->Void)
+    public function new()
     {
         super();
+    }
 
+    // I'm not sure how to work with flash in Haxe, so I may have done something incorrectly.
+    public function playMovie(movieClip:String, sound:String, onComplete:Void->Void)
+    {
         barLeft = new Sprite();
         barRight = new Sprite();
 

@@ -18,11 +18,11 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Reorganized Source Code (Couldn't do it myself :skull:)
 * [ ] LUA Function for Flash Movies
-* [ ] Animate Atlas Support
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
 * [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
+* itch.io (Soon...)
 
 # Credits
 * [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer

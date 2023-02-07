@@ -97,6 +97,7 @@ import VideoState;
 #end
 
 #if FLASH_MOVIE
+//import swf.SWF;
 import SwfVideo;
 #end
 
@@ -2327,7 +2328,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		#end
 	}
 
-	// i'll work on this some more when i have the chance
+	// i just need to fix SwfVideo.hx i think
 	/*public function startMovie(name:String)
 	{
 		#if FLASH_MOVIE
@@ -2346,6 +2347,12 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 
 		var video:SwfVideo = new SwfVideo();
+		video.playMovie(filepath);
+		video.finishCallback = function()
+		{
+			startAndEnd();
+			return;
+		}
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();

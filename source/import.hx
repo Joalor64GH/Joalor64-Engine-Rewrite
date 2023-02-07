@@ -22,6 +22,8 @@ import Controls;
 import polymod.Polymod;
 #end
 
+import hscript.*;
+
 using CoolUtil;
 using StringTools;
 
