@@ -533,7 +533,23 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
+		var moddedFullText:String = '';
+
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var path = "mods/" + Paths.currentModDirectory + "/introText.txt";
+		if (!FileSystem.exists(path)){
+			path = "mods/introText.txt";
+		}
+		if (!FileSystem.exists(path)){
+			path = null;
+		}
+		if (path != null){
+			moddedFullText = File.getContent(path);
+		}			
+		#end
+
+		var fullText:String = Assets.getText(Paths.txt('introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		//trace(fullText);
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
