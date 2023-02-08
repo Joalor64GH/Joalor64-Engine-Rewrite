@@ -1110,6 +1110,23 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			addHscript(hscriptFile);
 		#end
 
+		#if (MODS_ALLOWED && FUTURE_POLYMOD && SCRIPT_EXTENSION)
+		var doPush:Bool = false;
+		var scriptFile:String = 'stages/' + curStage + '.hx';
+		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
+			scriptFile = Paths.modFolders(scriptFile);
+			doPush = true;
+		} else {
+			scriptFile = Paths.getPreloadPath(scriptFile);
+			if(FileSystem.exists(scriptFile)) {
+				doPush = true;
+			}
+		}
+
+		if(doPush)
+			scriptArray.push(new FunkinSScript(scriptFile));
+		#end
+
 		var gfVersion:String = SONG.gfVersion;
 		if(gfVersion == null || gfVersion.length < 1)
 		{
@@ -3867,18 +3884,18 @@ class PlayState extends MusicBeatState /*implements IHook*/
 					iconP1.animation.curAnim.curFrame = 2; //Winning
 			case 750:
 				if (healthBar.percent < 20 && healthBar.percent > 0)
-					iconP1.animation.curAnim.curFrame = 0; // Danger
+					iconP1.animation.curAnim.curFrame = 2; // Danger
 				else if (healthBar.percent < 40 && healthBar.percent > 20)
 					iconP1.animation.curAnim.curFrame = 1; // Losing
 				else if (healthBar.percent > 40 && healthBar.percent < 60)
-					iconP1.animation.curAnim.curFrame = 2; // Neutral
+					iconP1.animation.curAnim.curFrame = 0; // Neutral
 				else if (healthBar.percent > 60 && healthBar.percent < 80)
 					iconP1.animation.curAnim.curFrame = 3; // Winning
 				else if (healthBar.percent > 80)
 					iconP1.animation.curAnim.curFrame = 4; // Victorious
 		}
 
-		// I actually don't know what I'm doing.
+		// I'm not really sure what I'm doing.
 		// I'm just trying to make it so that the icons don't look wonky in-game.
 		switch (iconP2.widthThing) {
 			case 150:
@@ -3901,11 +3918,11 @@ class PlayState extends MusicBeatState /*implements IHook*/
 				else if (healthBar.percent < 60 && healthBar.percent > 80)
 					iconP2.animation.curAnim.curFrame = 3; // Winning
 				else if (healthBar.percent > 40 && healthBar.percent < 60)
-					iconP2.animation.curAnim.curFrame = 2; // Neutral
+					iconP2.animation.curAnim.curFrame = 0; // Neutral
 				else if (healthBar.percent > 40 && healthBar.percent < 20)
 					iconP2.animation.curAnim.curFrame = 1; // Losing
 				else if (healthBar.percent < 20 && healthBar.percent > 0)
-					iconP2.animation.curAnim.curFrame = 0; // Danger
+					iconP2.animation.curAnim.curFrame = 2; // Danger
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
@@ -4227,6 +4244,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 					timer.active = true;
 				}
 
+				// Minor spelling mistake. I win.
 				if (SONG.song.toLowerCase() == 'tutorial')
 					trace('bro how tf did you die on tutorial :skull:');
 				
