@@ -18,12 +18,14 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import Achievements;
-import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import Achievements;
 import openfl.Assets;
 import openfl.media.Video;
 import haxe.Json;
+
+import options.*;
+import editors.*;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -261,6 +263,14 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
+		// The system says hi :)
+		#if debug
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, "Hello" + CoolSystemStuff.getUsername(), "having a good day? im proud of you! :)", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		#end
+
                 // Joalor64 Engine
                 var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
 		versionShit.scrollFactor.set();
@@ -414,7 +424,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
+										LoadingState.loadAndSwitchState(new OptionsState());
 								}
 							});
 						}

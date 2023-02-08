@@ -1,9 +1,9 @@
 package;
 
-/*
-crazy system shit!!!!!
-lordryan wrote this :) (erizur added cross platform env vars)
-*/
+/**
+ * crazy system shit!!!!!
+ * @see https://github.com/Lokitot/FNF-SoulEngine
+ */
 
 import sys.io.File;
 import sys.io.Process;
