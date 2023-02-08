@@ -64,7 +64,6 @@ import FunkinSScript;
 import DialogueBoxPsych;
 import Conductor.Rating;
 import Character;
-import LLua; // this doesn't even do anything
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
@@ -97,7 +96,7 @@ import VideoState;
 #end
 
 #if FLASH_MOVIE
-//import swf.SWF;
+// import swf.SWF;
 import SwfVideo;
 #end
 
@@ -2930,7 +2929,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 						countdownPrepare.screenCenter();
 						countdownPrepare.antialiasing = antialias;
 						add(countdownPrepare);
-						FlxTween.tween(countdownPrepare, {/*y: countdownPrepare.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownPrepare, {alpha: 0}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -2951,7 +2950,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 						countdownReady.screenCenter();
 						countdownReady.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownReady);
-						FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownReady, {alpha: 0}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -2971,7 +2970,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 						countdownSet.screenCenter();
 						countdownSet.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownSet);
-						FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownSet, {alpha: 0}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -2993,7 +2992,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 						countdownGo.screenCenter();
 						countdownGo.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownGo);
-						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownGo, {alpha: 0}, Conductor.crochet / 1000, {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -3481,7 +3480,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 			{
 				//babyArrow.y -= 10;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				FlxTween.tween(babyArrow, {alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
 			else
 			{
@@ -4166,19 +4165,19 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		paused = true;
 
 		// 1 / 1000 chance for Gitaroo Man easter egg
-		/*if (FlxG.random.bool(0.1))
+		if (FlxG.random.bool(0.1))
 		{
 			// gitaroo man easter egg
 			cancelMusicFadeTween();
 			MusicBeatState.switchState(new GitarooPause());
 		}
-		else {*/
-		if(FlxG.sound.music != null) {
-			FlxG.sound.music.pause();
-			vocals.pause();
+		else {
+			if(FlxG.sound.music != null) {
+				FlxG.sound.music.pause();
+				vocals.pause();
+			}
+			openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		}
-		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-		//}
 
 		#if desktop
 		DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
@@ -4544,7 +4543,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
-
 
 			case 'Change Character':
 				var charType:Int = 0;
