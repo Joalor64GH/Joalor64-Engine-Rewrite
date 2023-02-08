@@ -17,13 +17,13 @@ class SwfVideo extends Sprite
     private var barLeft:Sprite;
     private var barRight:Sprite;
 
-    public function new()
+    public function new():Void
     {
         super();
     }
-
-    // I'm not sure how to work with flash in Haxe, so I may have done something incorrectly.
-    public function playMovie(movieClip:String, sound:String, onComplete:Void->Void)
+	
+    // I'm sure I'll figure it out.
+    public function playMovie(movieClip:String, sound:String, onComplete:Void->Void):Void
     {
         barLeft = new Sprite();
         barRight = new Sprite();
