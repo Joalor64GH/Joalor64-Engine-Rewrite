@@ -46,7 +46,7 @@ class CoolSystemStuff
 		#end
 	}
 
-	public static function executableFileName():Dynamic
+	public static function executableFileName():Dynamic // idk what type it was originally
 	{
 		#if windows
 		var programPath = Sys.programPath().split("\\");
