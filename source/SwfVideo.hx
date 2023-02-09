@@ -41,7 +41,9 @@ class SwfVideo extends Sprite
                 removeChild(clip);
                 (cast (Lib.current.getChildAt(0), Main)).removeChild(this);
             };
-            audio.play();
+
+            if (audio != null)
+                audio.play();
         });
 
         (cast (Lib.current.getChildAt(0), Main)).addChild(this);

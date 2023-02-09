@@ -241,7 +241,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = null;
 	var dialogueJson:DialogueFile = null;
 
 	var dadbattleBlack:BGSprite;
@@ -2345,7 +2345,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	}
 
 	// i just need to fix SwfVideo.hx i think
-	/*public function startMovie(name:String)
+	public function startMovie(name:String, sound:String)
 	{
 		#if FLASH_MOVIE
 		inCutscene = true;
@@ -2363,25 +2363,19 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		}
 
 		var video:SwfVideo = new SwfVideo();
-		video.playMovie(filepath);
-		video.finishCallback = function()
-		{
+		video.playMovie(filepath, sound, function(){
 			startAndEnd();
 			return;
-		}
+		});
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
 		return;
 		#end
-	}*/
+	}
 
-	function startAndEnd()
-	{
-		if(endingSong)
-			endSong();
-		else
-			startCountdown();
+	inline function startAndEnd(){
+		(endingSong) ? endSong() startCountdown();
 	}
 
 	var dialogueCount:Int = 0;
