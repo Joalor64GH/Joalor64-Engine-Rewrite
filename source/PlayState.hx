@@ -2375,7 +2375,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	}
 
 	inline function startAndEnd(){
-		(endingSong) ? endSong() startCountdown();
+		(endingSong) ? endSong() : startCountdown();
 	}
 
 	var dialogueCount:Int = 0;
