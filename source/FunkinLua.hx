@@ -2227,13 +2227,13 @@ class FunkinLua {
 			#end
 		});
 
-		Lua_helper.add_callback(lua, "startMovie", function(flashFile:String) {
+		Lua_helper.add_callback(lua, "startMovie", function(flashFile:String, sound:String) {
 			#if FLASH_MOVIE
-			if(FileSystem.exists(Paths.flashMovie(flashFile))) {
-				PlayState.instance.startMovie(flashFile);
+			if(FileSystem.exists(Paths.flashMovie(flashFile, sound))) {
+				PlayState.instance.startMovie(flashFile, sound);
 				return true;
 			} else {
-				luaTrace('startMovie: Flash movie not found: ' + flashFile, false, false, FlxColor.RED);
+				luaTrace('startMovie: Flash movie not found: ' + flashFile, sound, false, false, FlxColor.RED);
 			}
 			return false;
 
