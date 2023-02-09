@@ -2227,7 +2227,7 @@ class FunkinLua {
 			#end
 		});
 
-		/*Lua_helper.add_callback(lua, "startMovie", function(flashFile:String) {
+		Lua_helper.add_callback(lua, "startMovie", function(flashFile:String) {
 			#if FLASH_MOVIE
 			if(FileSystem.exists(Paths.flashMovie(flashFile))) {
 				PlayState.instance.startMovie(flashFile);
@@ -2245,7 +2245,7 @@ class FunkinLua {
 			}
 			return true;
 			#end
-		});*/
+		});
 
 		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
 		{
