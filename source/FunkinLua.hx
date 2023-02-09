@@ -2227,16 +2227,15 @@ class FunkinLua {
 			#end
 		});
 
-		/*Lua_helper.add_callback(lua, "startMovie", function(flashFile:String, sound:String) {
+		Lua_helper.add_callback(lua, "startMovie", function(flashFile:String, sound:String) {
 			#if FLASH_MOVIE
-			if(FileSystem.exists(Paths.flashMovie(flashFile, sound))) {
+			if(FileSystem.exists(Paths.flashMovie(flashFile))) {
 				PlayState.instance.startMovie(flashFile, sound);
 				return true;
 			} else {
-				luaTrace('startMovie: Flash movie not found: ' + flashFile, sound, false, false);
+				luaTrace('startMovie: Flash movie not found: ' + flashFile, false, false);
 			}
 			return false;
-
 			#else
 			if(PlayState.instance.endingSong) {
 				PlayState.instance.endSong();
@@ -2245,7 +2244,7 @@ class FunkinLua {
 			}
 			return true;
 			#end
-		});*/
+		});
 
 		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
 		{
