@@ -83,8 +83,8 @@ import Character;
 using StringTools;
 
 class FunkinHscript extends InterpEx {
-	public var scriptName:String = '';
-	public var closed:Bool = false;
+    public var scriptName:String = '';
+    public var closed:Bool = false;
 
     public function new(path:String) {
         super();
@@ -157,7 +157,6 @@ class FunkinHscript extends InterpEx {
         #if sys
         variables.set('File', File);
         variables.set('FileSystem', FileSystem);
-		variables.set('Sys', SysCustom);
         #end
 
         variables.set('AchievementObject', AchievementObject);
