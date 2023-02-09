@@ -15,9 +15,10 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
+* [X] LUA Function for Flash Movies **[yes]**
+* [ ] Simple Documentation **[Work in Progress]**
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Reorganized Source Code (Couldn't do it myself :skull:)
-* [ ] LUA Function for Flash Movies
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)

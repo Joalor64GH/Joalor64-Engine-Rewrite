@@ -22,7 +22,6 @@ class SwfVideo extends Sprite
         super();
     }
 	
-    // I'm sure I'll figure it out.
     public function playMovie(movieClip:String, sound:String, onComplete:Void->Void):Void
     {
         barLeft = new Sprite();
