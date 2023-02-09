@@ -2357,7 +2357,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		if(!OpenFlAssets.exists(filepath))
 		#end
 		{
-			FlxG.log.warn('Couldnt find video file: ' + name);
+			FlxG.log.warn('Couldnt find swf file: ' + name);
 			startAndEnd();
 			return;
 		}
