@@ -10,8 +10,6 @@ import openfl.display.MovieClip;
 
 class SwfVideo extends Sprite
 {
-    public var finishCallback:Void->Void = null;
-
     public var clip:MovieClip;
 
     private var barLeft:Sprite;
