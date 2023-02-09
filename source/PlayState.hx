@@ -2345,6 +2345,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 	}
 
 	// i just need to fix SwfVideo.hx i think
+	// I fixed it joalor
 	public function startMovie(name:String, sound:String)
 	{
 		#if FLASH_MOVIE

@@ -2,11 +2,15 @@ package;
 
 /**
  * crazy system shit!!!!!
+ * originally from VS Marcello
+ * used in VS Dave and Bambi
  * @see https://github.com/Lokitot/FNF-SoulEngine
  */
 
+#if sys
 import sys.io.File;
 import sys.io.Process;
+#end
 import haxe.io.Bytes;
 
 class CoolSystemStuff
@@ -42,29 +46,32 @@ class CoolSystemStuff
 		#end
 	}
 
-	public static function executableFileName()
+	public static function executableFileName():Dynamic
 	{
 		#if windows
 		var programPath = Sys.programPath().split("\\");
 		#else
 		var programPath = Sys.programPath().split("/");
+
+		return programPath != null ? [programPath.length - 1] : null;
 		#end
-		return programPath[programPath.length - 1];
+		return null;
 	}
-	public static function generateTextFile(fileContent:String, fileName:String)
+
+	public static function generateTextFile(fileContent:String, fileName:String):Void
 	{
 		#if desktop
-		var path = CoolSystemStuff.getTempPath() + "/" + fileName + ".txt";
+		final path = CoolSystemStuff.getTempPath() + "/" + fileName + ".txt";
 
 		File.saveContent(path, fileContent);
+		#end
+
 		#if windows
 		Sys.command("start " + path);
 		#elseif linux
 		Sys.command("xdg-open " + path);
 		#else
 		Sys.command("open " + path);
-		#end
-
 		#end
 	}
 }
