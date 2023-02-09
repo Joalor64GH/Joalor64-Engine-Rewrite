@@ -34,7 +34,7 @@ class SwfVideo extends Sprite
 
             addChild(barLeft);
             addChild(barRight);
-            
+
             audio.onComplete = function() {
                 onComplete();
                 removeChild(clip);
@@ -58,13 +58,10 @@ class SwfVideo extends Sprite
         var width:Int = FlxG.stage.stageWidth;
 		var height:Int = FlxG.stage.stageHeight;
 
-        width > height ? 
-            clip.scaleX = clip.scaleY = height / 720
-            : clip.scaleY = clip.scaleX = width / 1280;
+        if (clip != null)
+            width > height ? clip.scaleX = clip.scaleY = height / 720 : clip.scaleY = clip.scaleX = width / 1280;
 
         screenCenter();
-
-        // trace('RESIZED TO ${clip.scaleX}%');
     }
 
     public function screenCenter()
@@ -75,7 +72,8 @@ class SwfVideo extends Sprite
 
         preX = Math.floor(FlxG.stage.stageHeight * ratio);
 
-		clip.x = Math.ceil((FlxG.stage.stageWidth - preX) * 0.5);
+        if (clip != null)
+		    clip.x = Math.ceil((FlxG.stage.stageWidth - preX) * 0.5);
 
         barLeft.graphics.clear();
         barRight.graphics.clear();
