@@ -45,8 +45,6 @@ import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.media.Video;
-import editors.ChartingState;
-import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import Note.EventNote;
@@ -67,6 +65,8 @@ import Character;
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+
+import editors.*;
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -2344,7 +2344,6 @@ class PlayState extends MusicBeatState /*implements IHook*/
 		#end
 	}
 
-	// i just need to fix SwfVideo.hx i think
 	// I fixed it joalor
 	public function startMovie(name:String, sound:String)
 	{
@@ -3285,7 +3284,7 @@ class PlayState extends MusicBeatState /*implements IHook*/
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
-				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = editors.ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
+				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 
 				swagNote.scrollFactor.set();
 

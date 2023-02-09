@@ -13,9 +13,11 @@ import Song;
 import Paths;
 import CoolUtil;
 import Highscore;
+import AttachedSprite;
 import PlayerSettings;
 import MusicBeatState;
 import MusicBeatSubstate;
+import animateatlas.AtlasFrameMaker;
 import PlayState;
 import Controls;
 #if (polymod && FUTURE_POLYMOD)
