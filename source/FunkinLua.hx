@@ -2233,7 +2233,7 @@ class FunkinLua {
 				PlayState.instance.startMovie(flashFile, sound);
 				return true;
 			} else {
-				luaTrace('startMovie: Flash movie not found: ' + flashFile, sound, false, false, FlxColor.RED);
+				luaTrace('startMovie: Flash movie not found: ' + flashFile, sound, false, false);
 			}
 			return false;
 
