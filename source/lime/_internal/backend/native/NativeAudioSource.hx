@@ -141,38 +141,7 @@ class NativeAudioSource
 
 	public function play():Void
 	{
-		/*var pitch:Float = AL.getSourcef (handle, AL.PITCH);
-			trace(pitch);
-			AL.sourcef (handle, AL.PITCH, pitch*0.9);
-			pitch = AL.getSourcef (handle, AL.PITCH);
-			trace(pitch); */
-		/*var pos = getPosition();
-			trace(AL.DISTANCE_MODEL);
-			AL.distanceModel(AL.INVERSE_DISTANCE);
-			trace(AL.DISTANCE_MODEL);
-			AL.sourcef(handle, AL.ROLLOFF_FACTOR, 5);
-			setPosition(new Vector4(10, 10, -100));
-			pos = getPosition();
-			trace(pos); */
-		/*var filter = AL.createFilter();
-			trace(AL.getErrorString());
-
-			AL.filteri(filter, AL.FILTER_TYPE, AL.FILTER_LOWPASS);
-			trace(AL.getErrorString());
-
-			AL.filterf(filter, AL.LOWPASS_GAIN, 0.5);
-			trace(AL.getErrorString());
-
-			AL.filterf(filter, AL.LOWPASS_GAINHF, 0.5);
-			trace(AL.getErrorString());
-
-			AL.sourcei(handle, AL.DIRECT_FILTER, filter);
-			trace(AL.getErrorString()); */
-
-		if (playing || handle == null)
-		{
-			return;
-		}
+		if (playing || handle == null) return;
 
 		playing = true;
 
@@ -396,12 +365,6 @@ class NativeAudioSource
 
 	public function setCurrentTime(value:Int):Int
 	{
-		// `setCurrentTime()` has side effects and is never safe to skip.
-		/* if (value == getCurrentTime())
-		{
-			return value;
-		} */
-
 		if (handle != null)
 		{
 			if (stream)
@@ -418,7 +381,6 @@ class NativeAudioSource
 			{
 				AL.sourceRewind(handle);
 				if (playing) AL.sourcePlay(handle);
-				// AL.sourcef (handle, AL.SEC_OFFSET, (value + parent.offset) / 1000);
 
 				var secondOffset = (value + parent.offset) / 1000;
 				var totalSeconds = samples / parent.buffer.sampleRate;

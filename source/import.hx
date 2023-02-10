@@ -34,5 +34,5 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 import tjson.TJSON as Json;
-import openfl.utils.Assets as OpenFLAssets;
+import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets as LimeAssets;
