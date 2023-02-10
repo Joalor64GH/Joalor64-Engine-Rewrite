@@ -146,9 +146,8 @@ class SpriteSymbol extends Sprite {
 		for (i in 0...numElements) {
 			var elementData:SymbolInstanceData = elements[i].SYMBOL_Instance;
 
-			if (elementData == null) {
+			if (elementData == null)
 				continue;
-			}
 
 			// this is confusing but needed :(
 			var oldSymbol:SpriteSymbol = (layer.numChildren > i) ? try
@@ -183,22 +182,18 @@ class SpriteSymbol extends Sprite {
 			newSymbol.setColor(elementData.color);
 			newSymbol.setLoop(elementData.loop);
 			newSymbol.setType(elementData.symbolType);
-			
-		
 
 			if (newSymbol.type == SymbolType.GRAPHIC) {
 				var firstFrame:Int = elementData.firstFrame;
 				var frameAge:Int = Std.int(_currentFrame - frameData.index);
 
-				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME) {
+				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME)
 					newSymbol.currentFrame = firstFrame;
-				} else if (newSymbol.loopMode == LoopMode.LOOP) {
+				else if (newSymbol.loopMode == LoopMode.LOOP)
 					newSymbol.currentFrame = (firstFrame + frameAge) % newSymbol._numFrames;
-				} else {
+				else
 					newSymbol.currentFrame = firstFrame + frameAge;
-				}
 			}
-			
 		}
 
 		var numObsoleteSymbols:Int = (layer.numChildren - numElements);
