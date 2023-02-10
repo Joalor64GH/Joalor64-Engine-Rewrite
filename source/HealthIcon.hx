@@ -53,7 +53,6 @@ class HealthIcon extends FlxSprite
 		
 					animation.add(char, [0], 0, false, isPlayer);
 					animation.play(char);
-					this.char = char;
 				// 2 icons
 				case 300:
 					loadGraphic(file, true, Math.floor(width / 2), Math.floor(height));
@@ -63,7 +62,6 @@ class HealthIcon extends FlxSprite
 		
 					animation.add(char, [0, 1], 0, false, isPlayer);
 					animation.play(char);
-					this.char = char;
 				// 3 icons
 				case 450:
 					loadGraphic(file, true, Math.floor(width / 3), Math.floor(height));
@@ -74,7 +72,6 @@ class HealthIcon extends FlxSprite
 			
 					animation.add(char, [1, 0, 2], 0, false, isPlayer);
 					animation.play(char);
-					this.char = char;
 				// 5 icons
 				case 750:
 					loadGraphic(file, true, Math.floor(width / 5), Math.floor(height));
@@ -87,9 +84,9 @@ class HealthIcon extends FlxSprite
 			
 					animation.add(char, [2, 1, 0, 3, 4], 0, false, isPlayer);
 					animation.play(char);
-					this.char = char;
 			}
 
+			this.char = char;
 			antialiasing = ClientPrefs.globalAntialiasing;
 			if(char.endsWith('-pixel')) {
 				antialiasing = false;
