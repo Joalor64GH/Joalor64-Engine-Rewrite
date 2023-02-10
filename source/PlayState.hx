@@ -3054,7 +3054,6 @@ class PlayState extends MusicBeatState
 	}
 
 	var previousFrameTime:Int = 0;
-	var lastReportedPlayheadPosition:Int = 0;
 	var songTime:Float = 0;
 
 	public var songStarted = false;
@@ -3067,7 +3066,6 @@ class PlayState extends MusicBeatState
 		songStarted = true;
 
 		previousFrameTime = FlxG.game.ticks;
-		lastReportedPlayheadPosition = 0;
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		FlxG.sound.music.pitch = playbackRate;
@@ -3078,13 +3076,11 @@ class PlayState extends MusicBeatState
 			GlobalVideo.get().resume();
 
 		if(startOnTime > 0)
-		{
 			setSongTime(startOnTime - 500);
-		}
+
 		startOnTime = 0;
 
 		if(paused) {
-			//trace('Oopsie doopsie! Paused sound');
 			FlxG.sound.music.pause();
 			vocals.pause();
 		}
