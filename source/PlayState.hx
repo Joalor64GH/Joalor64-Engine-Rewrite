@@ -78,7 +78,6 @@ import VideoState;
 #end
 
 #if FLASH_MOVIE
-// import swf.SWF;
 import SwfVideo;
 #end
 
