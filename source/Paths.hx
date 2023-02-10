@@ -534,18 +534,15 @@ class Paths
 	{
 		var sound:Sound = returnSound('sounds', key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week1/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week2/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week3/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week4/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week5/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week6/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
-			return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
-		else
-			return sound;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
+				return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
+			else
+				return sound;
+		}
 		#else
 		return sound;
 		#end
@@ -560,22 +557,19 @@ class Paths
 		return sound(key + FlxG.random.int(min, max), library);
 	}
 
-	inline static public function music(key:String, ?library:String):Sound
+	static public function music(key:String, ?library:String):Sound
 	{
 		var file:Sound = returnSound('music', key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week1/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week2/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week3/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week4/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week5/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week6/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
-			return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
-		else
-			return file;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
+				return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
+			else
+				return file;
+		}
 		#else
 		return file;
 		#end
@@ -595,23 +589,20 @@ class Paths
 		return inst;
 	}
 
-	inline static public function image(key:String, ?library:String):FlxGraphic
+	static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week1/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week2/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week3/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week4/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week5/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week6/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
-			return getPathImage('images/$key.png', IMAGE, library);
-		else
-			return returnAsset;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
+				return getPathImage('images/$key.png', IMAGE, library);
+			else
+				return returnAsset;
+		}
 		#else
 		return returnAsset;
 		#end
