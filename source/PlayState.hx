@@ -1289,7 +1289,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
-		FlxG.fixedTimestep = false;
 		moveCameraSection();
 
 		healthBarBG = new AttachedSprite('healthBar');
@@ -1708,11 +1707,10 @@ class PlayState extends MusicBeatState
 		precacheList.set('missnote2', 'sound');
 		precacheList.set('missnote3', 'sound');
 
-		if (PauseSubState.songName != null) {
+		if (PauseSubState.songName != null)
 			precacheList.set(PauseSubState.songName, 'music');
-		} else if(ClientPrefs.pauseMusic != 'None') {
+		else if(ClientPrefs.pauseMusic != 'None')
 			precacheList.set(Paths.formatToSongPath(ClientPrefs.pauseMusic), 'music');
-		}
 
 		precacheList.set('alphabet', 'image');
 	
@@ -2132,41 +2130,6 @@ class PlayState extends MusicBeatState
 		setOnHscripts('camFollowPos', camFollowPos);
 		setOnHscripts('strumLine', strumLine);
 	}
-
-	/*
-	var modules:Array<String> = [];
-	function setupModules() {
-		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('scripts/classes/classList.txt'));
-		var filesPushed:Array<String> = [];
-		for (script in sexList) {
-			var file = Paths.getPreloadPath('scripts/classes/$script.hscript');
-			if (OpenFlAssets.exists(file) && !filesPushed.contains(file))
-			{
-				modules.push(Paths.getContent(file));
-				filesPushed.push(file);
-			}
-		}
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var foldersToCheck:Array<String> = [Paths.mods('scripts/classes/')];
-		if (Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods('${Paths.currentModDirectory}/scripts/classes/'));
-		for (folder in foldersToCheck)
-		{
-			if (FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if (file.endsWith('.hscript') && !filesPushed.contains(file))
-					{
-						modules.push(Paths.getContent(folder + file));
-						filesPushed.push(folder + file);
-					}
-				}
-			}
-		}
-		#end
-	}
-	*/
 	#end
 
 	function setOnHscripts(variable:String, arg:Dynamic) {
@@ -2376,11 +2339,10 @@ class PlayState extends MusicBeatState
 			add(psychDialogue);
 		} else {
 			FlxG.log.warn('Your dialogue file is badly formatted!');
-			if(endingSong) {
+			if(endingSong)
 				endSong();
-			} else {
+			else 
 				startCountdown();
-			}
 		}
 	}
 
@@ -2459,9 +2421,7 @@ class PlayState extends MusicBeatState
 						});
 					}
 					else
-					{
 						add(dialogueBox);
-					}
 				}
 				else
 					startCountdown();
@@ -2852,17 +2812,11 @@ class PlayState extends MusicBeatState
 			startTimer = new FlxTimer().start(Conductor.crochet / 1000 / playbackRate, function(tmr:FlxTimer)
 			{
 				if (gf != null && tmr.loopsLeft % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
-				{
 					gf.dance();
-				}
 				if (tmr.loopsLeft % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
-				{
 					boyfriend.dance();
-				}
 				if (tmr.loopsLeft % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
-				{
 					dad.dance();
-				}
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				introAssets.set('default', [
