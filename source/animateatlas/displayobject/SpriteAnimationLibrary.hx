@@ -56,7 +56,7 @@ class SpriteAnimationLibrary {
 		_symbolPool = new Map();
 	}
 
-	public function hasAnimation(name:String):Bool {
+	inline public function hasAnimation(name:String):Bool {
 		return hasSymbol(name);
 	}
 
@@ -82,22 +82,21 @@ class SpriteAnimationLibrary {
 		out.sort(function(a1, a2):Int {
 			a1 = a1.toLowerCase();
 			a2 = a2.toLowerCase();
-			if (a1 < a2) {
+			if (a1 < a2)
 				return -1;
-			} else if (a1 > a2) {
+		 	else if (a1 > a2)
 				return 1;
-			} else {
+			else 
 				return 0;
-			}
 		});
 		return out;
 	}
 
-	private function getSpriteData(name:String):SpriteData {
+	inline private function getSpriteData(name:String):SpriteData {
 		return _atlas.get(name);
 	}
 
-	private function hasSymbol(name:String):Bool {
+	inline private function hasSymbol(name:String):Bool {
 		return _symbolData.exists(name);
 	}
 
@@ -138,11 +137,10 @@ class SpriteAnimationLibrary {
 	private function parseAnimationData(data:AnimationData):Void {
 		var metaData = data.metadata;
 
-		if (metaData != null && metaData.framerate != null && metaData.framerate > 0) {
+		if (metaData != null && metaData.framerate != null && metaData.framerate > 0)
 			frameRate = (metaData.framerate);
-		} else {
+		else
 			frameRate = 24;
-		}
 
 		_symbolData = new Map();
 
@@ -221,7 +219,7 @@ class SpriteAnimationLibrary {
 		}
 	}
 
-	private function getSymbolData(name:String):SymbolData {
+	inline private function getSymbolData(name:String):SymbolData {
 		return _symbolData.get(name);
 	}
 
