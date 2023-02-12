@@ -199,25 +199,25 @@ class CreditsEditorState extends MusicBeatState
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		colorInput = new FlxUIInputText(60, linkInput.y + yDist, 70, '', 8);
 		colorSquare = new FlxSprite(colorInput.x + 80, colorInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		soundInput = new FlxUIInputText(60, descInput.y + yDist, 50, '', 8);
+		soundInput = new FlxUIInputText(60, descInput.y + yDist, 50, '', 8); // how do i fix the positioning???
 		var getIconColor:FlxButton = new FlxButton(colorSquare.x + 23, colorSquare.y - 2, "Get Icon Color", function()
-			{
-				var icon:String;
-				if(iconInput.text != null && iconInput.text.length > 0) icon = iconInput.text;
-				else icon = creditsStuff[curSelected][1];
+		{
+			var icon:String;
+			if(iconInput.text != null && iconInput.text.length > 0) icon = iconInput.text;
+			else icon = creditsStuff[curSelected][1];
 
-				var pathIcon:String;
-				if(Paths.fileExists('images/credits/' + icon + '.png', IMAGE)) pathIcon = 'credits/' + icon;
-				else pathIcon = 'credits/none';
+			var pathIcon:String;
+			if(Paths.fileExists('images/credits/' + icon + '.png', IMAGE)) pathIcon = 'credits/' + icon;
+			else pathIcon = 'credits/none';
 
-				var iconSprite:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image(pathIcon));				
-				var daColor:String = StringTools.hex(CoolUtil.dominantColor(iconSprite)).substring(2, this.length);
-				colorInput.text = daColor;
+			var iconSprite:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image(pathIcon));				
+			var daColor:String = StringTools.hex(CoolUtil.dominantColor(iconSprite)).substring(2, this.length);
+			colorInput.text = daColor;
 
-				iconSprite.kill();
-				iconSprite = null;
-				iconColorShow();
-			});
+			iconSprite.kill();
+			iconSprite = null;
+			iconColorShow();
+		});
 		var creditAdd:FlxButton = new FlxButton(20, colorInput.y + yDist + 10, "Add credit", function()
 		{
 			addCredit();
