@@ -26,6 +26,7 @@ class MasterEditorMenu extends MusicBeatState
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Character Editor',
+		'Credits Editor',
 		'Chart Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
@@ -124,6 +125,8 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 				case 'Dialogue Editor':
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
+				case 'Credits Editor':
+					MusicBeatState.switchState(new CreditsEditorState());
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
 			}
