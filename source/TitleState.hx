@@ -97,7 +97,11 @@ class TitleState extends MusicBeatState
 	var easterEggKeysBuffer:String = '';
 	#end
 
+	var mustUpdate:Bool = false;
+
 	var titleJSON:TitleData;
+
+	public static var updateVersion:String = '';
 
 	var candance:Bool = true;
 
