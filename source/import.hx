@@ -17,13 +17,13 @@ import AttachedSprite;
 import PlayerSettings;
 import MusicBeatState;
 import MusicBeatSubstate;
-import animateatlas.AtlasFrameMaker;
 import PlayState;
 import Controls;
 #if (polymod && FUTURE_POLYMOD)
 import polymod.Polymod;
 #end
 
+import animateatlas.AtlasFrameMaker;
 import hscript.*;
 
 using CoolUtil;

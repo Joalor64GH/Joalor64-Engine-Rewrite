@@ -18,7 +18,7 @@ class ModCore
 
 	#if FUTURE_POLYMOD
 	private static final extensions:Map<String, PolymodAssetType> = [ 
-		'ogg' => AUDIO_GENERIC,
+		'ogg' => SOUND,
 		'png' => IMAGE,
 		'xml' => TEXT, 
 		'json' => TEXT, 
@@ -34,7 +34,10 @@ class ModCore
 		'otf' => FONT, 
 		'webm' => VIDEO,
 		'mp4' => VIDEO,
-		'swf' => VIDEO
+		'swf' => BINARY,
+		'fla' => BINARY,
+		'flp' => BINARY,
+		'zip' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
