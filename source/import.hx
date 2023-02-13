@@ -13,6 +13,7 @@ import Song;
 import Paths;
 import CoolUtil;
 import Highscore;
+import AttachedSprite;
 import PlayerSettings;
 import MusicBeatState;
 import MusicBeatSubstate;
@@ -22,6 +23,9 @@ import Controls;
 import polymod.Polymod;
 #end
 
+import animateatlas.AtlasFrameMaker;
+import hscript.*;
+
 using CoolUtil;
 using StringTools;
 
@@ -30,5 +34,5 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 import tjson.TJSON as Json;
-import openfl.utils.Assets as OpenFLAssets;
+import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets as LimeAssets;

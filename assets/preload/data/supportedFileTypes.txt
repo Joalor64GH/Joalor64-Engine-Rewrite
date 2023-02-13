@@ -3,6 +3,7 @@
 .png
 .mp4
 .webm
+.swf
 .lua
 .py
 .hx
@@ -10,6 +11,7 @@
 .txt
 .xml
 .json
+.jsonc
 .ogg
 .mp3
 .wav
@@ -21,3 +23,8 @@
 .ico
 .exe
 .dat
+.fla
+.flp
+.zip
+.csv
+.tsv

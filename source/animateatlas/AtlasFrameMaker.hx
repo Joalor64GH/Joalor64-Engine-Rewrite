@@ -1,5 +1,5 @@
 package animateatlas;
-import flixel.util.FlxDestroyUtil;
+
 import openfl.geom.Rectangle;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
@@ -14,20 +14,9 @@ import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.graphics.frames.FlxFrame;
 import flixel.util.FlxColor;
-#if desktop
-import sys.FileSystem;
-import sys.io.File;
-#else
-import js.html.FileSystem;
-import js.html.File;
-#end
 
-using StringTools;
 class AtlasFrameMaker extends FlxFramesCollection
 {
-	//public static var widthoffset:Int = 0;
-	//public static var heightoffset:Int = 0;
-	//public static var excludeArray:Array<String>;
 	/**
 	
 	* Creates Frames from TextureAtlas(very early and broken ok) Originally made for FNF HD by Smokey and Rozebud
@@ -37,11 +26,11 @@ class AtlasFrameMaker extends FlxFramesCollection
 	*
 	*/
 
+	// for caching
+	static var framesLoaded:Map<String, FlxFramesCollection> = new Map();
+
 	public static function construct(key:String,?_excludeArray:Array<String> = null, ?noAntialiasing:Bool = false):FlxFramesCollection
 	{
-		// widthoffset = _widthoffset;
-		// heightoffset = _heightoffset;
-
 		var frameCollection:FlxFramesCollection;
 		var frameArray:Array<Array<FlxFrame>> = [];
 
@@ -52,6 +41,11 @@ class AtlasFrameMaker extends FlxFramesCollection
 			return null;
 		}
 
+		var daPath = Paths.getPath('images/$key/spritemap.png', IMAGE);
+
+		if (framesLoaded.exists(daPath))
+			return framesLoaded.get(daPath);
+
 		var animationData:AnimationData = Json.parse(Paths.getTextFromFile('images/$key/Animation.json'));
 		var atlasData:AtlasData = Json.parse(Paths.getTextFromFile('images/$key/spritemap.json').replace("\uFEFF", ""));
 
@@ -61,7 +55,6 @@ class AtlasFrameMaker extends FlxFramesCollection
 		if(_excludeArray == null)
 		{
 			_excludeArray = t.getFrameLabels();
-			//trace('creating all anims');
 		}
 		trace('Creating: ' + _excludeArray);
 
@@ -78,6 +71,7 @@ class AtlasFrameMaker extends FlxFramesCollection
 				frameCollection.pushFrame(y);
 			}
 		}
+		framesLoaded.set(daPath, frameCollection);
 		return frameCollection;
 	}
 
@@ -118,8 +112,11 @@ class AtlasFrameMaker extends FlxFramesCollection
 			theFrame.sourceSize.set(frameSize.x,frameSize.y);
 			theFrame.frame = new FlxRect(0, 0, bitMapArray[i].width, bitMapArray[i].height);
 			daFramez.push(theFrame);
-			//trace(daFramez);
 		}
 		return daFramez;
+	}
+
+	inline public static function clearCachedFrames(){
+		return framesLoaded.clear();
 	}
 }

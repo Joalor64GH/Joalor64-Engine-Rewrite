@@ -14,6 +14,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
+import lime.graphics.Image;
 import lime.utils.Assets;
 import flixel.FlxSprite;
 #if sys
@@ -22,16 +23,30 @@ import sys.FileSystem;
 #end
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
+import haxe.io.Bytes;
 import haxe.Json;
 
 import flash.media.Sound;
 import openfl.media.Sound;
+import GithubShit;
 
 using StringTools;
+
+// JSONI8 Format code by luckydog https://www.youtube.com/channel/UCeHXKGpDKo2eqYKVkqCUdaA
+// Modified and PsychEngine support by ZackDroid https://twitter.com/ZackDroidCoder
+typedef I8frame = {
+	var frame:{ x:Float, y:Float, w:Float, h:Float }
+	var rotated:Bool;
+	var trimmed:Bool;
+	var spriteSourceSize:{ x:Float, y:Float, w:Float, h:Float }
+	var sourceSize:{ w:Float, h:Float }
+	var duration:Float;
+}
 
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static var FLASH_EXT = "swf";
 	public static final VIDEO_EXT = ['mp4', 'webm'];
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -43,6 +58,7 @@ class Paths
 		'characters',
 		'custom_events',
 		'custom_notetypes',
+		'custom_gamechangers',
 		'data',
 		'songs',
 		'music',
@@ -52,6 +68,7 @@ class Paths
 		'sounds',
 		'shaders',
 		'videos',
+		'flash',
 		'images',
 		'stages',
 		'weeks',
@@ -193,6 +210,93 @@ class Paths
 		return getSoundPath(file);
 	}
 	#end
+
+	// this stuff is for github idk
+	public static function gitGetPath(path:String, branch:String = 'main')
+	{
+		trace('path: https://${GithubShit.personalAccessToken}@raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		var contents:String = '';
+		http.onData = function(data:String) {
+			//trace(data);
+			contents = data;
+		}
+		http.onError = function(error) {
+			trace('error: $error');
+		}
+		http.request();
+		return contents;
+	}
+	public static function gitImage(path:String, branch:String) {
+		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		var spr:FlxSprite = new FlxSprite();
+		http.onBytes = function(bytes:Bytes) {
+			var bmp:BitmapData = BitmapData.fromBytes(bytes);
+			spr.pixels = bmp;
+		}
+		http.onError = function(error) {
+			trace('error: $error');
+		}
+		http.request();
+
+		return spr;
+	}
+	public static function loadGraphicFromURL(url:String, sprite:FlxSprite):FlxSprite
+	{
+		var http = new haxe.Http(url);
+		var spr:FlxSprite = new FlxSprite();
+		http.onBytes = function(bytes:Bytes) {
+			var bmp:BitmapData = BitmapData.fromBytes(bytes);
+			spr.pixels = bmp;
+		}
+		http.onError = function(error) {
+			trace('error: $error');
+			return null;
+		}
+		http.request();
+
+		return spr;
+	}
+	public static function loadSparrowAtlasFromURL(xmlUrl:String, imageUrl:String)
+	{
+		var xml:String;
+		var xmlHttp = new haxe.Http(xmlUrl);
+		xmlHttp.onData = function (data:String) {
+			xml = data;
+		}
+		xmlHttp.onError = function (e) {
+			trace('error: $e');
+			return null;
+		}
+		xmlHttp.request();
+
+		var http = new haxe.Http(imageUrl);
+		var bmp:BitmapData;
+		http.onBytes = function (bytes:Bytes) {
+			bmp = BitmapData.fromBytes(bytes);
+			trace(bmp.height);
+		}
+		http.onError = function(error) {
+			trace('error: $error');
+			return null;
+		}
+		http.request();
+		return FlxAtlasFrames.fromSparrow(bmp, xml);
+	}
+	public static function loadFileFromURL(url:String):String
+	{
+		var shit:String;
+		var http = new haxe.Http(url);
+		http.onData = function (data:String)
+			shit = data;
+		http.onError = function (e)
+		{
+			trace('error: $e');
+			return null;
+		}
+		http.request();
+		return shit;
+	}
 
 	static public function getLibraryPath(file:String, library = "preload")
 	{
@@ -345,17 +449,14 @@ class Paths
 	{
 		return getPath('data/$key.jsonc', TEXT, library);
 	}
-
 	inline static public function fla(key:String, ?library:String)
 	{
 		return getPath('art/$key.fla', BINARY, library);
 	}
-
 	inline static public function flp(key:String, ?library:String)
 	{
 		return getPath('art/$key.flp', BINARY, library);
 	}
-
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
@@ -366,18 +467,34 @@ class Paths
 	}
 	inline static public function lua(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.lua', TEXT, library);
 	}
 	inline static public function hscript(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.hscript', TEXT, library);
 	}
 	inline static public function hx(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+
 		return getPath('$key.hx', TEXT, library);
 	}
 	inline static public function py(key:String, ?library:String)
 	{
+		#if !sys
+		library = null;
+		#end
+		
 		return getPath('$key.py', TEXT, library);
 	}
 	static public function video(key:String)
@@ -402,22 +519,30 @@ class Paths
 		return 'assets/videos/$key.mp4';
 	}
 
+	static public function flashMovie(key:String)
+	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var file:String = modsFlashMovie(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return 'assets/flash/$key.$FLASH_EXT';
+	}
+
 	static public function sound(key:String, ?library:String):Sound
 	{
 		var sound:Sound = returnSound('sounds', key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week1/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week2/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week3/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week4/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week5/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week6/sounds/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
-			return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
-		else
-			return sound;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/sounds/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
+				return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
+			else
+				return sound;
+		}
 		#else
 		return sound;
 		#end
@@ -432,22 +557,19 @@ class Paths
 		return sound(key + FlxG.random.int(min, max), library);
 	}
 
-	inline static public function music(key:String, ?library:String):Sound
+	static public function music(key:String, ?library:String):Sound
 	{
 		var file:Sound = returnSound('music', key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week1/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week2/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week3/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week4/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week5/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/week6/music/$key.ogg')
-			|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
-			return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
-		else
-			return file;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/music/$key.ogg')
+				|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
+				return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
+			else
+				return file;
+		}
 		#else
 		return file;
 		#end
@@ -457,51 +579,106 @@ class Paths
 	{
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		var voices = returnSound('songs', songKey);
-		// i'll work on this later :skull:
-		/*#if sys
-		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT')
-			voices = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT');
-		else
-			return voices;
-		#else*/
 		return voices;
-		//#end
 	}
 
 	inline static public function inst(song:String):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
-		/*#if sys
-		if (FileSystem.exists('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT')
-			inst = openfl.media.Sound.fromFile('mods/mainMods/_append/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT');
-		else
-			return inst;
-		#else*/
 		return inst;
-		//#end
 	}
 
-	inline static public function image(key:String, ?library:String):FlxGraphic
+	static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		#if sys
-		if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week1/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week2/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week3/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week4/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week5/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/week6/images/$key.png')
-			|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
-			return getPathImage('images/$key.png', IMAGE, library);
-		else
-			return returnAsset;
+		for (i in 1...6){
+			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/week$i/images/$key.png')
+				|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
+				return getPathImage('images/$key.png', IMAGE, library);
+			else
+				return returnAsset;
+		}
 		#else
 		return returnAsset;
 		#end
+	}
+
+	// Usage: Paths.fromI8("imageIwant", "shared");
+	public static function fromI8(key:String, ?library:String):Null<Dynamic> {
+		var Description:String = null;
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		if (FileSystem.exists(getPath('images/$key.json', TEXT, library)))
+			Description = getPath('images/$key.json', TEXT, library);
+		else if (FileSystem.exists(modFolders('images/$key.json')))
+			Description = modFolders('images/$key.json');
+		#else
+		if (Assets.exists(getPath('images/$key.json', TEXT, library)))
+			Description = getPath('images/$key.json', TEXT, library);
+		#end
+
+		var graphic:FlxGraphic = FlxG.bitmap.add(returnGraphic(key, library));
+		if (graphic == null) {
+			// please.
+			FlxG.stage.window.alert(key + "'s graphic is not found, or is in a bad format. Try to see if you put it in the correct specified directory", 'Error on I8 IMAGE');
+			return null;
+		}
+
+		// No need to parse data again
+		var frames:FlxAtlasFrames = FlxAtlasFrames.findFrame(graphic); // gets it from the cache right away -lucky
+		if (frames != null)
+			return frames;
+
+		if (Description == null) {
+			// please.
+			FlxG.stage.window.alert(key + "'s jsonI8 file is not found, or is in a bad format. Try to see if you put it in the correct specified directory", 'Error on I8JSON');
+			return null;
+		}
+
+		frames = new FlxAtlasFrames(graphic);
+
+		#if MODS_ALLOWED
+		if (FileSystem.exists(Description))
+			Description = File.getContent(Description);
+		#else
+		if (Assets.exists(Description))
+			Description = Assets.getText(Description);
+		#end
+
+		var json:{ frames:Dynamic, meta:Dynamic } = Json.parse(Description);
+		var framelist = Reflect.fields(json.frames);
+
+		for (framename in framelist)
+		{
+			var frame:I8frame = Reflect.field(json.frames, framename);
+			var rect = FlxRect.get(frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h);
+			// var duration:Int = frame.duration; // 100 = 10fps???
+
+			frames.addAtlasFrame(rect, FlxPoint.get(rect.width, rect.height), FlxPoint.get(), framename);
+		}
+
+		return frames;
+	}
+
+	// if you have multiple I8 Frames
+	// Usage: Paths.fromI8Array([ImageIwant, ImageIwant1, ImageIwant2], "shared");
+	public static function fromI8Array(array:Array<String>, ?library:String):FlxAtlasFrames {
+		var i8frames:Array<FlxAtlasFrames> = [];
+		for (i8 in 0...array.length)
+			i8frames.push(fromI8(array[i8], library));
+
+		var parent = i8frames[0];
+		i8frames.shift();
+
+		for (frames in i8frames)
+			for (frame in frames.frames)
+				parent.pushFrame(frame);
+
+		return parent;
 	}
 
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
@@ -572,7 +749,6 @@ class Paths
 		#end
 	}
 
-
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -586,6 +762,17 @@ class Paths
 		#else
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 		#end
+	}
+
+	inline static public function getTextureAtlas(key:String, ?library:String)
+	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var file:String = modsTextureAtlas(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return getPath('images/$key.zip', BINARY, library);
 	}
 
 	inline static public function formatToSongPath(path:String) {
@@ -614,7 +801,6 @@ class Paths
 		#end
 
 		var path = getPath('images/$key.png', IMAGE, library);
-		//trace(path);
 		if (OpenFlAssets.exists(path, IMAGE)) {
 			if(!currentTrackedAssets.exists(path)) {
 				var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, path);
@@ -624,7 +810,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no its returning null NOOOO');
+		trace('oh no ' + key + ' returning null NOOOO');
 		return null;
 	}
 
@@ -737,6 +923,10 @@ class Paths
 		return modFolders('videos/$key.mp4');
 	}
 
+	inline static public function modsFlashMovie(key:String) {
+		return modFolders('flash/' + key + '.' + FLASH_EXT);
+	}
+
 	inline static public function modsSounds(path:String, key:String) {
 		return modFolders(path + '/' + key + '.' + SOUND_EXT);
 	}
@@ -751,6 +941,10 @@ class Paths
 
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
+	}
+
+	inline static public function modsTextureAtlas(key:String) {
+		return modFolders('images/' + key + '.zip');
 	}
 
 	inline static public function modsFla(key:String) {

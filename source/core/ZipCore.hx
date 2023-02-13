@@ -9,10 +9,12 @@ import haxe.zip.Reader;
 import haxe.zip.Tools;
 import haxe.zip.Uncompress;
 import haxe.zip.Writer;
+#if sys
 import sys.FileStat;
 import sys.FileSystem;
 import sys.io.File;
 import sys.thread.Thread;
+#end
 
 using StringTools;
 
@@ -31,6 +33,7 @@ using StringTools;
 
 class ZipCore
 {
+	#if sys
 	public static var bannedNames:Array<String> = [".git"];
 
 	/**
@@ -93,10 +96,15 @@ class ZipCore
 		if (prog == null)
 			prog = new ZipProgress();
 
+		// threads are meant to fix lag btw
+		#if (target.threaded)
 		Thread.create(function()
 		{
 			uncompressZip(zip, destFolder, prefix, prog);
 		});
+		#else
+		uncompressZip(zip, destFolder, prefix, prog);
+		#end
 
 		return prog;
 	}
@@ -238,10 +246,14 @@ class ZipCore
 	public static function writeFolderToZipAsync(zip:ZipWriter, path:String, ?prefix:String):ZipProgress
 	{
 		var zipProg = new ZipProgress();
+		#if (target.threaded)
 		Thread.create(function()
 		{
 			writeFolderToZip(zip, path, prefix, zipProg);
 		});
+		#else
+		writeFolderToZip(zip, path, prefix, zipProg);
+		#end
 		return zipProg;
 	}
 
@@ -257,6 +269,7 @@ class ZipCore
 			list.push(e);
 		return list;
 	}
+	#end
 }
 
 class ZipProgress

@@ -25,11 +25,11 @@ class HornyScript extends FlxBasic {
 	
 	public var hscript:Interp;
 	public var parser:Parser;
-        var code:String = '';
+	var code:String = '';
 
 	public function new(path:String)
 	{
-                super();
+		super();
 		code = sys.io.File.getContent(path);
 		
 		hscript = new Interp();
@@ -80,39 +80,39 @@ class HornyScript extends FlxBasic {
 		setVariable('HSubstate', HornySubstate);
 		setVariable('HObject', HornyObject);
 		setVariable('HScript', HornyScript);
-                setVariable('Lua_helper', Lua_helper);
-                setVariable('Lua_Debug', {
-	                "event":Int,
-	                "name":String,             // (n)
-	                "namewhat":String,         // (n) `global', `local', `field', `method'
-	                "what":String,             // (S) `Lua', `C', `main', `tail'
-	                "source":String,           // (S)
-	                "currentline":Int,         // (l)
-	                "nups":Int,                // (u) number of upvalues
-	                "linedefined":Int,         // (S)
-	                "lastlinedefined":Int,     // (S)
-	                "short_src":Array, // (S)
-	                "i_ci":Int       // private
-                });
-                setVariable('LuaVM', LuaVM);
-                // vlc shit
-                setVariable('VLCBitmap', VLCBitmap);
-                setVariable('VideoHandler', VideoHandler);
+		setVariable('Lua_helper', Lua_helper);
+		setVariable('Lua_Debug', {
+			"event":Int,
+			"name":String,             // (n)
+			"namewhat":String,         // (n) `global', `local', `field', `method'
+			"what":String,             // (S) `Lua', `C', `main', `tail'
+			"source":String,           // (S)
+			"currentline":Int,         // (l)
+			"nups":Int,                // (u) number of upvalues
+			"linedefined":Int,         // (S)
+			"lastlinedefined":Int,     // (S)
+			"short_src":Array, // (S)
+			"i_ci":Int       // private
+		});
+		setVariable('LuaVM', LuaVM);
+		// vlc shit
+		setVariable('VLCBitmap', VLCBitmap);
+		setVariable('VideoHandler', VideoHandler);
 	}
 
         public function run()
         {
-                try
-		{
-			var ast:Any = parser.parseString(code);
+			try
+			{
+				var ast:Any = parser.parseString(code);
 
-			hscript.execute(ast);
+				hscript.execute(ast);
+			}
+			catch (e)
+			{
+				Lib.application.window.alert(e.message, "HSCRIPT ERROR!1111");
+			}
 		}
-		catch (e)
-		{
-			Lib.application.window.alert(e.message, "HSCRIPT ERROR!1111");
-		}
-        }
 
 	public function setVariable(name:String, val:Dynamic)
 	{

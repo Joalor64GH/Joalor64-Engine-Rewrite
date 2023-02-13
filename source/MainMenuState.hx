@@ -18,12 +18,14 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import Achievements;
-import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import Achievements;
 import openfl.Assets;
 import openfl.media.Video;
 import haxe.Json;
+
+import options.*;
+import editors.*;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -53,7 +55,7 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.1.0'; //This is also used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.2.0'; //This is also used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
 	public static var curSelected:Int = 0;
@@ -84,6 +86,12 @@ class MainMenuState extends MusicBeatState
 
 	var menuJSON:MenuData;
 
+	#if !mac
+	var name:String = Sys.environment()["USERNAME"];
+	#else
+	var name:String = Sys.environment()["USER"];
+	#end
+
 	override function create()
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -98,6 +106,12 @@ class MainMenuState extends MusicBeatState
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		modShortcutKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
+
+		#if desktop
+		trace(Sys.environment()["COMPUTERNAME"]); // sussy test for a next menu x1
+		#end
+
+		trace(name);
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -237,16 +251,25 @@ class MainMenuState extends MusicBeatState
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			if (firstStart)
-					FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-						{
-							finishedFunnyMove = true; 
-							changeItem();
-						}});
-				else
-					menuItem.y = 60 + (i * 160);
+				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
+					{
+						finishedFunnyMove = true; 
+						changeItem();
+					}
+				});
+			else
+				menuItem.y = 60 + (i * 160);
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
+
+		// The system says hi :)
+		#if debug
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, "Hello" + CoolSystemStuff.getUsername(), "having a good day? im proud of you! :)", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		#end
 
                 // Joalor64 Engine
                 var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
@@ -401,7 +424,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
+										LoadingState.loadAndSwitchState(new OptionsState());
 								}
 							});
 						}

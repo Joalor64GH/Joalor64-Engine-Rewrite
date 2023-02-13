@@ -1,7 +1,5 @@
 package;
 
-import openfl.Lib;
-
 class BackgroundVideo
 {
 	private static var video:VideoHandler;
@@ -12,40 +10,41 @@ class BackgroundVideo
 	public static var daAlpha1:Float = 0.2;
 	public static var daAlpha2:Float = 1;
 
-	public static function setVid(vid:VideoHandler):Void
+	inline public static function setVid(vid:VideoHandler):Void
 	{
-		video = vid;
+		if (vid != null)
+			video = vid;
 	}
 	
-	public static function getVid():VideoHandler
+	inline public static function getVid():VideoHandler
 	{
-		return video;
+		return (video != null) ? video : null;
 	}
 	
-	public static function setWebm(vid:WebmHandler):Void
+	inline public static function setWebm(vid:WebmHandler):Void
 	{
-		webm = vid;
+		if (vid != null)
+			webm = vid;
 		isWebm = true;
 	}
 	
-	public static function getWebm():WebmHandler
+	inline public static function getWebm():WebmHandler
 	{
-		return webm;
+		return (webm != null) ? webm : null;
 	}
 	
 	public static function get():Dynamic
 	{
-		if (isWebm) {
+		if (isWebm)
 			return getWebm();
-		}
 
 		return getVid();
 	}
 
 	public static function calc(ind:Int):Dynamic
 	{
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		var stageWidth:Int = openfl.Lib.current.stage.stageWidth;
+		var stageHeight:Int = openfl.Lib.current.stage.stageHeight;
 
 		var width:Float = 1280;
 		var height:Float = 720;

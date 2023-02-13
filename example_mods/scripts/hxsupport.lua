@@ -198,21 +198,22 @@ function onDestroy()
 end
 function fixRH()
   local rh = runHaxeCode
-  rh("setVar('luaVarHolder_HSCRIPTSUPPORT', null);")
+  rh("setVar('luaVarHolder', null);")
   runHaxeCode = function(code, vars)
     if not vars then
       return rh(code)
     else
-      local addedCode = ''
-      setProperty('luaVarHolder_HSCRIPTSUPPORT', vars)
+      setProperty('luaVarHolder', vars)
+      local stringVars = {}
       for k,v in pairs(vars) do
-        addedCode = addedCode.."var "..k.." = getVar('luaVarHolder_HSCRIPTSUPPORT')."..k..";\n"
+          table.insert(stringVars, "var "..k.." = getVar('luaVarHolder')."..k..";")
       end
-      rh(addedCode..'\n'..code)
-      setProperty('luaVarHolder_HSCRIPTSUPPORT', nil)
+      rh(table.concat(stringVars, '\n')..'\n'..code)
+      setProperty('luaVarHolder', nil)
     end
   end
 end
+
 --this appends every callback to also call on haxe, dont touch this basically lol
 callbacks = {
   'onCreatePost', 'onTweenCompleted', 'onTimerCompleted', 'onCustomSubstateCreate', 'onCustomSubstateCreatePost', 'onCustomSubstateUpdate', 'onCustomSubstateUpdatePost',

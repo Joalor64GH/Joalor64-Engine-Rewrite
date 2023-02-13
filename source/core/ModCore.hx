@@ -18,22 +18,31 @@ class ModCore
 
 	#if FUTURE_POLYMOD
 	private static final extensions:Map<String, PolymodAssetType> = [ 
-            'ogg' => AUDIO_GENERIC,
-            'png' => IMAGE,
-            'xml' => TEXT, 
-            'json' => TEXT, 
-            'jsonc' => TEXT, 
-            'txt' => TEXT, 
-            'hx' => TEXT, 
-            'hscript' => TEXT,
-	    'lua' => TEXT, 
-            'py' => TEXT,
-            'frag' => TEXT,
-            'vert' => TEXT,
-            'ttf' => FONT,
-            'otf' => FONT, 
-            'webm' => VIDEO,
-	    'mp4' => VIDEO
+		'ogg' => SOUND,
+		'mp3' => SOUND,
+		'png' => IMAGE,
+		'xml' => TEXT, 
+		'json' => TEXT, 
+		'jsonc' => TEXT, 
+		'csv' => TEXT, 
+		'tsv' => TEXT, 
+		'txt' => TEXT, 
+		'hx' => TEXT, 
+		'hscript' => TEXT,
+		'lua' => TEXT, 
+		'py' => TEXT,
+		'frag' => TEXT,
+		'vert' => TEXT,
+		'ttf' => FONT,
+		'otf' => FONT, 
+		'webm' => BINARY,
+		'mp4' => BINARY,
+		'swf' => BINARY,
+		'fla' => BINARY,
+		'flp' => BINARY,
+		'zip' => BINARY,
+		'dll' => BINARY,
+		'ndll' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
@@ -83,7 +92,7 @@ class ModCore
 
 		trace('Searching for Mods...');
 
-		for (i in Polymod.scan(SUtil.getPath() + MOD_DIR, '*.*.*', onError))
+		for (i in Polymod.scan(MOD_DIR, '*.*.*', onError))
 		{
 			trackedMods.push(i);
 			if (!FlxG.save.data.disabledMods.contains(i.id))

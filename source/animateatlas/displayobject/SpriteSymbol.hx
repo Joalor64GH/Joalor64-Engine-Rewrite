@@ -146,9 +146,8 @@ class SpriteSymbol extends Sprite {
 		for (i in 0...numElements) {
 			var elementData:SymbolInstanceData = elements[i].SYMBOL_Instance;
 
-			if (elementData == null) {
+			if (elementData == null)
 				continue;
-			}
 
 			// this is confusing but needed :(
 			var oldSymbol:SpriteSymbol = (layer.numChildren > i) ? try
@@ -183,22 +182,18 @@ class SpriteSymbol extends Sprite {
 			newSymbol.setColor(elementData.color);
 			newSymbol.setLoop(elementData.loop);
 			newSymbol.setType(elementData.symbolType);
-			
-		
 
 			if (newSymbol.type == SymbolType.GRAPHIC) {
 				var firstFrame:Int = elementData.firstFrame;
 				var frameAge:Int = Std.int(_currentFrame - frameData.index);
 
-				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME) {
+				if (newSymbol.loopMode == LoopMode.SINGLE_FRAME)
 					newSymbol.currentFrame = firstFrame;
-				} else if (newSymbol.loopMode == LoopMode.LOOP) {
+				else if (newSymbol.loopMode == LoopMode.LOOP)
 					newSymbol.currentFrame = (firstFrame + frameAge) % newSymbol._numFrames;
-				} else {
+				else
 					newSymbol.currentFrame = firstFrame + frameAge;
-				}
 			}
-			
 		}
 
 		var numObsoleteSymbols:Int = (layer.numChildren - numElements);
@@ -277,29 +272,8 @@ class SpriteSymbol extends Sprite {
 				blur.blurX = data.BlurFilter.blurX;
 				blur.blurY = data.BlurFilter.blurY;
 				blur.quality = data.BlurFilter.quality;
-				//_bitmap.bitmapData.applyFilter(_bitmap.bitmapData,new Rectangle(0,0,_bitmap.bitmapData.width,_bitmap.bitmapData.height),new Point(0,0),blur);
-				//filters.push(blur);
 			}
-			if (data.GlowFilter != null){
-				//trace('GLOW' + data.GlowFilter);
-				//glow = new GlowFilter();
-				//glow.blurX = data.GlowFilter.blurX;
-				//glow.blurY = data.GlowFilter.blurY;
-				//glow.color = data.GlowFilter.color;
-				//glow.alpha = data.GlowFilter.alpha;
-				//glow.quality = data.GlowFilter.quality;
-				//glow.strength = data.GlowFilter.strength;
-				//glow.knockout = data.GlowFilter.knockout;
-				//glow.inner = data.GlowFilter.inner;
-				//filters.push(glow);
-
-
-
-
-			}
-
 		}
-		
 	}
 
 	private function setTransformationMatrix(data:Matrix3DData):Void {

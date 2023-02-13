@@ -1,3 +1,11 @@
+#if HSCRIPT_ALLOWED
+#if LUA_ALLOWED
+import FunkinLua;
+#end
+import PhillyGlow;
+#if VIDEOS_ALLOWED
+import vlc.MP4Handler;
+#end
 import flixel.system.macros.FlxMacroUtil;
 import flixel.math.FlxAngle;
 import Achievements.AchievementObject;
@@ -49,7 +57,6 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.math.FlxRect;
-#if HSCRIPT_ALLOWED
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -76,10 +83,10 @@ import Character;
 using StringTools;
 
 class FunkinHscript extends InterpEx {
-	public var scriptName:String = '';
-	public var closed:Bool = false;
+    public var scriptName:String = '';
+    public var closed:Bool = false;
 
-     public function new(path:String) {
+    public function new(path:String) {
         super();
 		scriptName = path.split('/')[path.split('/').length - 1];
         super();
@@ -174,9 +181,6 @@ class FunkinHscript extends InterpEx {
         variables.set('CustomFadeTransition', CustomFadeTransition);
         variables.set('DialogueBox', DialogueBox);
         variables.set('DialogueBoxPsych', DialogueBoxPsych);
-        #if desktop
-        variables.set('DiscordClient', DiscordClient);
-        #end
         variables.set('FreeplayState', FreeplayState);
         variables.set('FunkinHscript', FunkinHscript);
         variables.set('FunkinLua', FunkinLua);
@@ -193,15 +197,29 @@ class FunkinHscript extends InterpEx {
         variables.set('OptionsState', OptionsState);
         variables.set('Paths', Paths);
         variables.set('PauseSubState', PauseSubState);
+		variables.set('PhillyGlowParticle', PhillyGlowParticle);
+		variables.set('PhillyGlowGradient', PhillyGlowGradient);
         variables.set('PlayState', PlayState);
         variables.set('Prompt', Prompt);
         variables.set('Song', Song);
         variables.set('StageData', StageData);
         variables.set('StoryMenuState', StoryMenuState);
         variables.set('StrumNote', StrumNote);
+		variables.set('TankmenBG', TankmenBG);
         variables.set('TitleState', TitleState);
         variables.set('WeekData', WeekData);
         variables.set('WiggleEffect', WiggleEffect);
+		#if desktop
+        variables.set('DiscordClient', DiscordClient);
+        #end
+		#if LUA_ALLOWED
+		variables.set('DebugLuaText', DebugLuaText);
+		variables.set('ModchartSprite', ModchartSprite);
+		variables.set('ModchartText', ModchartText);
+		#end
+        #if VIDEOS_ALLOWED
+        variables.set('MP4Handler', MP4Handler);
+        #end
 
         //VARIABLES
         variables.set('Function_Stop', FunkinLua.Function_Stop);

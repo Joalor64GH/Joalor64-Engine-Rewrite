@@ -16,16 +16,16 @@ FNFBot.exe
 ### GameJolt-Specific
 source/GJKeys.hx
 source/GameJolt.hx
-source/gamejolt/
+source/gamejolt/*
 
 ### Android-Specific
 source/SUtil.hx
-source/android/
-source/mobile/
-assets/android/
+source/android/*
+source/mobile/*
+assets/android/*
 assets/images/androidcontrols/
 art/dependencyFiles/android/
-mobile/
+mobile/*
 
 ### Appveyor-Specific
 appveyor.yml
@@ -33,6 +33,8 @@ appveyor-win32.yml
 
 ### Git-Specific
 .gitconfig
+.gitinclude
+.gitkeep
 
 ### Stage Editor-Related
 assets/images/stageborder.png
@@ -42,6 +44,16 @@ source/LayerFile.hx
 ### Stepmania Stuff
 assets/sm/
 source/smTools/
+
+### Misc
+art/mod.url
+polymod_mods/*
+example_mods/introMod/*
+example_mods/modList.txt
+source/Snd.hx
+source/SndTV.hx
+source/ChartParser.hx
+polymod-fix/PolymodFileSystem.hx
 
 ### Add these regardless of them getting ignored.
 !appveyor-linux.yml

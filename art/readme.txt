@@ -7,11 +7,15 @@ I started working on this because I sort of became bored one day.
 I also got inspiration from the following:
 
 Forever Engine - Yoshubs
-Cocoa - TheWorldMachinima
+Funkin Cocoa - TheWorldMachinima
 Kade Engine - KadeDev
 Chain Saw Engine - MAJigsaw77
 Denpa Engine - AT
 TopoConnection and Forever Engine Underscore - BeastlyGhost/Gabi
+Mic'd Up - Verwex
+Gamer Engine - Mealthy/Betopia
+Psych Forever Engine - ClassicBoost
+Mag Engine - stevecodergh
 Pull Requests - Psych Engine GitHub Contributors
 -------------------------------------------------------------
 So, yeah. That's pretty much it!

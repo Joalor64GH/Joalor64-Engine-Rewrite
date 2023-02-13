@@ -1,23 +1,12 @@
 package;
 
-import flixel.FlxG;
 import openfl.utils.Assets;
-import lime.utils.Assets as LimeAssets;
-import lime.utils.AssetLibrary;
-import lime.utils.AssetManifest;
-import flixel.system.FlxSound;
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#else
-import openfl.utils.Assets;
-#end
 
 using StringTools;
 
 class CoolUtil
 {
-	public static var defaultDifficulties:Array<String> = [
+	public static final defaultDifficulties:Array<String> = [
 		'Easy',
 		'Normal',
 		'Hard'
@@ -33,59 +22,32 @@ class CoolUtil
 		return (m / snap);
 	}
 	
-	public static function getDifficultyFilePath(num:Null<Int> = null)
+	inline public static function getDifficultyFilePath(num:Null<Int> = null)
 	{
-		if(num == null) num = PlayState.storyDifficulty;
-
-		var fileSuffix:String = difficulties[num];
-		if(fileSuffix != defaultDifficulty)
-		{
-			fileSuffix = '-' + fileSuffix;
-		}
-		else
-		{
-			fileSuffix = '';
-		}
-		return Paths.formatToSongPath(fileSuffix);
+		if (num == null) num = PlayState.storyDifficulty;
+		return Paths.formatToSongPath((difficulties[num] != defaultDifficulty) ? '-' + difficulties[num] : '');
 	}
 
-	public static function difficultyString():String
-	{
+	inline public static function difficultyString():String
 		return difficulties[PlayState.storyDifficulty].toUpperCase();
-	}
 
-	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
+	inline public static function boundTo(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
+
+	inline public static function coolTextFile(path:String):Array<String> {
+		return (Assets.exists(path)) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
 	}
 
-	public static function coolTextFile(path:String):Array<String>
-	{
-		var daList:Array<String> = [];
-		#if sys
-		if(FileSystem.exists(path)) daList = File.getContent(path).trim().split('\n');
-		#else
-		if(Assets.exists(path)) daList = Assets.getText(path).trim().split('\n');
-		#end
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
+	// this is actual source code from VS Null https://gamebanana.com/wips/70592
+	// now outdated 😅
+	public static inline function coolerTextFile(path:String, daString:String = ''):String{
+		return Assets.exists(path) ? daString = Assets.getText(path).trim() : '';
 	}
-	public static function listFromString(string:String):Array<String>
-	{
-		var daList:Array<String> = [];
-		daList = string.trim().split('\n');
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
+	
+	inline public static function listFromString(string:String):Array<String> {
+		return string.trim().split('\n').map(str -> str.trim());
 	}
+
 	public static function dominantColor(sprite:flixel.FlxSprite):Int{
 		var countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth){
@@ -112,26 +74,17 @@ class CoolUtil
 		return maxKey;
 	}
 
-	public static function numberArray(max:Int, ?min = 0):Array<Int>
-	{
-		var dumbArray:Array<Int> = [];
-		for (i in min...max)
-		{
-			dumbArray.push(i);
-		}
-		return dumbArray;
-	}
+	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
+		return [for (i in min...max) i];
 
 	//uhhhh does this even work at all? i'm starting to doubt
-	public static function precacheSound(sound:String, ?library:String = null):Void {
+	inline public static function precacheSound(sound:String, ?library:String = null):Void
 		Paths.sound(sound, library);
-	}
 
-	public static function precacheMusic(sound:String, ?library:String = null):Void {
+	inline public static function precacheMusic(sound:String, ?library:String = null):Void
 		Paths.music(sound, library);
-	}
 
-	public static function browserLoad(site:String) {
+	inline public static function browserLoad(site:String) {
 		#if linux
 		Sys.command('/usr/bin/xdg-open', [site]);
 		#else

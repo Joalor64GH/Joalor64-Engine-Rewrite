@@ -1,11 +1,7 @@
 package;
 
 import animateatlas.AtlasFrameMaker;
-import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.effects.FlxTrail;
-import flixel.animation.FlxBaseAnimation;
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
 import Section.SwagSection;
@@ -13,10 +9,8 @@ import Section.SwagSection;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import openfl.utils.AssetType;
 import openfl.utils.Assets;
 import haxe.Json;
-import haxe.format.JsonParser;
 
 using StringTools;
 
@@ -33,7 +27,12 @@ typedef CharacterFile = {
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
+
+	var multipleI8:Bool; // ONLY check this if you have multiple I8 jsons and images. and if youre using I8.
+	var I8Count:Int; // If you have multiple I8, please specify their count from 0 to whatever. Like: [Image0, Image1, etc.]
 }
+
+// Note from ZackDroid, okay so I DO NOT KNOW how to put the two new json arguments into CharacterEditorState, anyone else please do it instead :(
 
 typedef AnimArray = {
 	var anim:String;
@@ -78,16 +77,13 @@ class Character extends FlxSprite
 	public var originalFlipX:Bool = false;
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
-	public static var DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
+	public static inline final DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
+
 	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
 	{
 		super(x, y);
 
-		#if (haxe >= "4.0.0")
 		animOffsets = new Map();
-		#else
-		animOffsets = new Map<String, Array<Dynamic>>();
-		#end
 		curCharacter = character;
 		this.isPlayer = isPlayer;
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -97,22 +93,20 @@ class Character extends FlxSprite
 			//case 'your character name in case you want to hardcode them instead':
 
 			default:
+				// NOTE TO HARDCODER OF A MOD: this json should be in assets/characters. NOT images/characters. so dont get it confused :)
 				var characterPath:String = 'characters/' + curCharacter + '.json';
 
 				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				var path:String = Paths.modFolders(characterPath);
-				if (!FileSystem.exists(path)) {
+				if (!FileSystem.exists(path))
 					path = Paths.getPreloadPath(characterPath);
-				}
 
 				if (!FileSystem.exists(path))
 				#else
 				var path:String = Paths.getPreloadPath(characterPath);
 				if (!Assets.exists(path))
 				#end
-				{
 					path = Paths.getPreloadPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
-				}
 
 				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				var rawJson = File.getContent(path);
@@ -125,35 +119,36 @@ class Character extends FlxSprite
 				//sparrow
 				//packer
 				//texture
+				//I8
 				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				var modTxtToFind:String = Paths.modsTxt(json.image);
 				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
-				
-				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
-				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
 				
 				if (FileSystem.exists(modTxtToFind) || FileSystem.exists(txtToFind) || Assets.exists(txtToFind))
 				#else
 				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT)))
 				#end
-				{
 					spriteType = "packer";
-				}
 				
 				#if (MODS_ALLOWED && FUTURE_POLYMOD)
 				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '/Animation.json');
 				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
 				
-				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
-				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
-				
 				if (FileSystem.exists(modAnimToFind) || FileSystem.exists(animToFind) || Assets.exists(animToFind))
 				#else
 				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
 				#end
-				{
 					spriteType = "texture";
-				}
+
+				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				var modI8ToFind:String = Paths.modFolders('images/' + json.image + '.json');
+				var I8ToFind:String = Paths.getPath('images/' + json.image + '.json', TEXT);
+
+				if (FileSystem.exists(modI8ToFind) || FileSystem.exists(I8ToFind) || Assets.exists(I8ToFind))
+				#else
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.json', TEXT)))
+				#end
+					spriteType = "I8";
 
 				switch (spriteType){
 					
@@ -165,8 +160,21 @@ class Character extends FlxSprite
 					
 					case "texture":
 						frames = AtlasFrameMaker.construct(json.image);
+
+					case "I8":
+						if (json.multipleI8) {
+							var fuckk:Array<String> = [];
+
+							for (i in 0...json.I8Count) 
+								fuckk.push(json.image + i);
+
+							frames = Paths.fromI8Array(fuckk);
+						}
+						else
+							frames = Paths.fromI8(json.image);
 				}
-				imageFile = json.image;
+				if (json != null || frames != null || json.image != null)
+					imageFile = json.image;
 
 				if(json.scale != 1) {
 					jsonScale = json.scale;
@@ -209,41 +217,22 @@ class Character extends FlxSprite
 							addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
 						}
 					}
-				} else {
-					quickAnimAdd('idle', 'BF idle dance');
 				}
-				//trace('Loaded file to character ' + curCharacter);
+				else
+					quickAnimAdd('idle', 'BF idle dance');
 		}
 		originalFlipX = flipX;
 
-		if(animOffsets.exists('singLEFTmiss') || animOffsets.exists('singDOWNmiss') || animOffsets.exists('singUPmiss') || animOffsets.exists('singRIGHTmiss')) hasMissAnimations = true;
+		if(animOffsets.exists('singLEFTmiss') 
+		|| animOffsets.exists('singDOWNmiss') 
+		|| animOffsets.exists('singUPmiss') 
+		|| animOffsets.exists('singRIGHTmiss')) hasMissAnimations = true;
+
 		recalculateDanceIdle();
 		dance();
 
 		if (isPlayer)
-		{
 			flipX = !flipX;
-
-			/*// Doesn't flip for BF, since his are already in the right place???
-			if (!curCharacter.startsWith('bf'))
-			{
-				// var animArray
-				if(animation.getByName('singLEFT') != null && animation.getByName('singRIGHT') != null)
-				{
-					var oldRight = animation.getByName('singRIGHT').frames;
-					animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
-					animation.getByName('singLEFT').frames = oldRight;
-				}
-
-				// IF THEY HAVE MISS ANIMATIONS??
-				if (animation.getByName('singLEFTmiss') != null && animation.getByName('singRIGHTmiss') != null)
-				{
-					var oldMiss = animation.getByName('singRIGHTmiss').frames;
-					animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
-					animation.getByName('singLEFTmiss').frames = oldMiss;
-				}
-			}*/
-		}
 
 		switch(curCharacter)
 		{
@@ -294,9 +283,7 @@ class Character extends FlxSprite
 			if (!isPlayer)
 			{
 				if (animation.curAnim.name.startsWith('sing'))
-				{
 					holdTimer += elapsed;
-				}
 
 				if (holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
 				{
@@ -306,9 +293,7 @@ class Character extends FlxSprite
 			}
 
 			if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
-			{
 				playAnim(animation.curAnim.name + '-loop');
-			}
 		}
 		super.update(elapsed);
 	}
@@ -331,9 +316,8 @@ class Character extends FlxSprite
 				else
 					playAnim('danceLeft' + idleSuffix);
 			}
-			else if(animation.getByName('idle' + idleSuffix) != null) {
-					playAnim('idle' + idleSuffix);
-			}
+			else if(animation.getByName('idle' + idleSuffix) != null)
+				playAnim('idle' + idleSuffix);
 		}
 	}
 
@@ -344,27 +328,19 @@ class Character extends FlxSprite
 
 		var daOffset = animOffsets.get(AnimName);
 		if (animOffsets.exists(AnimName))
-		{
 			offset.set(daOffset[0], daOffset[1]);
-		}
 		else
 			offset.set(0, 0);
 
 		if (curCharacter.startsWith('gf'))
 		{
 			if (AnimName == 'singLEFT')
-			{
 				danced = true;
-			}
 			else if (AnimName == 'singRIGHT')
-			{
 				danced = false;
-			}
 
 			if (AnimName == 'singUP' || AnimName == 'singDOWN')
-			{
 				danced = !danced;
-			}
 		}
 	}
 	
@@ -372,18 +348,15 @@ class Character extends FlxSprite
 	{
 		var noteData:Array<SwagSection> = Song.loadFromJson('picospeaker', Paths.formatToSongPath(PlayState.SONG.song)).notes;
 		for (section in noteData) {
-			for (songNotes in section.sectionNotes) {
+			for (songNotes in section.sectionNotes)
 				animationNotes.push(songNotes);
-			}
 		}
 		TankmenBG.animationNotes = animationNotes;
 		animationNotes.sort(sortAnims);
 	}
 
-	function sortAnims(Obj1:Array<Dynamic>, Obj2:Array<Dynamic>):Int
-	{
+	inline function sortAnims(Obj1:Array<Dynamic>, Obj2:Array<Dynamic>):Int
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1[0], Obj2[0]);
-	}
 
 	public var danceEveryNumBeats:Int = 2;
 	private var settingCharacterUp:Bool = true;
@@ -392,9 +365,7 @@ class Character extends FlxSprite
 		danceIdle = (animation.getByName('danceLeft' + idleSuffix) != null && animation.getByName('danceRight' + idleSuffix) != null);
 
 		if(settingCharacterUp)
-		{
 			danceEveryNumBeats = (danceIdle ? 1 : 2);
-		}
 		else if(lastDanceIdle != danceIdle)
 		{
 			var calc:Float = danceEveryNumBeats;
@@ -409,14 +380,10 @@ class Character extends FlxSprite
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
-	{
 		animOffsets[name] = [x, y];
-	}
 
 	public function quickAnimAdd(name:String, anim:String)
-	{
 		animation.addByPrefix(name, anim, 24, false);
-	}
 }
 
 class Boyfriend extends Character
