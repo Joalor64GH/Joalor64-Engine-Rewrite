@@ -48,9 +48,6 @@
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="PSYCH"/>
 	<define name="EMBED_ASSETS"/>
-	<define name="MP3_ALLOWED"/>
-	<define name="WAV_ALLOWED"/>
-	<define name="MUSIC_FOLDER_ALLOWED"/>
 	<define name="CHECK_FOR_UPDATES" if="desktop"/>
 	<define name="PRELOAD_ALL" unless="web" /> <!-- UNCOMMENT THIS TO DISABLE LOADING SCREEN -->
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
@@ -159,6 +156,7 @@
 	</section>
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
+	<assets path='header.lua' />
 	
 	<!-- _______________________________ Libraries ______________________________ -->
 

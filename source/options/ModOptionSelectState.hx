@@ -1,5 +1,6 @@
 package options;
 
+import flixel.addons.transition.FlxTransitionableState;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -10,7 +11,6 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.FlxSubState;
@@ -30,60 +30,36 @@ import options.*;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class ModOptionSelectState extends MusicBeatState
 {
-	var options:Array<String> = [
-		#if MODS_ALLOWED 'Mod Options', #end
-		'Note Colors', 
-		'Controls', 
-		'Adjust Delay and Combo', 
-		'Graphics', 
-		'Visuals and UI', 
-		'Gameplay'/*, 
-		'The Special'*/
-	];
+	private var mods:Array<String>;
+
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Mod Options':
-				FlxG.switchState(new ModOptionSelectState()); // openSubState(new options.ModOptions());
-				FlxTransitionableState.skipNextTransOut = true;
-			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB') {
-					openSubState(new NotesRGBSubState());
-				} else {
-					openSubState(new NotesHSVSubState());
-				}
-			case 'Controls':
-				openSubState(new ControlsSubState());
-			case 'Graphics':
-				openSubState(new GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new VisualsUISubState());
-			case 'Gameplay':
-				openSubState(new GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new NoteOffsetState());
-			/*case 'The Special':
-				LoadingState.loadAndSwitchState(new TheSpecialState());*/
+			case 'Global':
+                openSubState(new ModOptions());
+            default:
+                openSubState(new ModOptions(label));
 		}
 	}
 
-	var selectorLeft:Alphabet;
-	var selectorRight:Alphabet;
-
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("Mod Menu", null);
 		#end
 
-		#if MODS_ALLOWED
-		if (!Paths.optionsExist()) 
-			options.remove('Mod Options');
-		#end
+        mods = Paths.getModDirectories();
+        mods.insert(0, 'Global');
+
+		for (mod in mods) {
+			if (!Paths.optionsExist(mod == 'Global' ? '' : mod)) {
+				mods.remove(mod);
+			}
+		}
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -96,21 +72,23 @@ class OptionsState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		for (i in 0...options.length)
+		for (i in 0...mods.length)
 		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			var optionText:Alphabet = new Alphabet(0, 0, mods[i], true);
 			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.y += (80 * i) + 50;
+
+			optionText.isMenuItem = true;
+			optionText.targetY = i;
+			optionText.alignment = CENTERED;
+			optionText.distancePerItem.x = 0;
+			optionText.startPosition.x = FlxG.width / 2;
+			optionText.startPosition.y = 100;
+
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft = new Alphabet(0, 0, '>', true);
-		add(selectorLeft);
-		selectorRight = new Alphabet(0, 0, '<', true);
-		add(selectorRight);
-
 		changeSelection();
-		ClientPrefs.saveSettings();
 
 		super.create();
 	}
@@ -132,19 +110,21 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
-		}
+            FlxTransitionableState.skipNextTransIn = true;
+            FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new OptionsState());		
+        }
 
 		if (controls.ACCEPT) {
-			openSelectedSubstate(options[curSelected]);
+			openSelectedSubstate(mods[curSelected]);
 		}
 	}
-	
+
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
+			curSelected = mods.length - 1;
+		if (curSelected >= mods.length)
 			curSelected = 0;
 
 		var bullShit:Int = 0;
@@ -156,10 +136,6 @@ class OptionsState extends MusicBeatState
 			item.alpha = 0.6;
 			if (item.targetY == 0) {
 				item.alpha = 1;
-				selectorLeft.x = item.x - 63;
-				selectorLeft.y = item.y;
-				selectorRight.x = item.x + item.width + 15;
-				selectorRight.y = item.y;
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));

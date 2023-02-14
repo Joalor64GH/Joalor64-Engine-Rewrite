@@ -1026,5 +1026,35 @@ class Paths
 		}
 		return list;
 	}
+
+	// custom options
+	static public function optionsExist(?key:String = null) // basically checks if a mod contains options
+	{
+		var modsFolder:Array<String> = getModDirectories();
+		modsFolder.insert(0, '');
+
+		if (key == null) {
+			for(mod in modsFolder){
+				var directory:String = mods(mod + '/options');
+				if (FileSystem.exists(directory)){
+					for(file in FileSystem.readDirectory(directory)){
+						var fileToCheck:String = mods(mod + '/options/' + file);
+						if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
+							return true;
+					}
+				}
+			}
+		}
+
+		var directory:String = mods(key + '/options');
+		if (FileSystem.exists(directory)){
+			for(file in FileSystem.readDirectory(directory)){
+				var fileToCheck:String = mods(key + '/options/' + file);
+				if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
+					return true;
+			}
+		}
+		return false;
+	}
 	#end
 }
