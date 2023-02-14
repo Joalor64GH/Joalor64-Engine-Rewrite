@@ -881,7 +881,7 @@ class TitleState extends MusicBeatState
 						#if JOALOR64_WATERMARKS
 			            		credIcon1.destroy();
 			            		credIcon2.destroy();
-								credIcon3.destroy();
+						credIcon3.destroy();
 			            		#elseif PSYCH_WATERMARKS
 						credIconShadow.destroy();
 						credIconRiver.destroy();

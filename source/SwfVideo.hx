@@ -54,7 +54,7 @@ class SwfVideo extends Sprite
     function onResize(_):Void
     {
         var width:Int = FlxG.stage.stageWidth;
-		var height:Int = FlxG.stage.stageHeight;
+	var height:Int = FlxG.stage.stageHeight;
 
         if (clip != null)
             width > height ? clip.scaleX = clip.scaleY = height / 720 : clip.scaleY = clip.scaleX = width / 1280;
@@ -65,13 +65,13 @@ class SwfVideo extends Sprite
     public function screenCenter()
     {
         var ratio:Float = FlxG.width / FlxG.height;
-		var realRatio:Float = FlxG.stage.stageWidth / FlxG.stage.stageHeight;
+	var realRatio:Float = FlxG.stage.stageWidth / FlxG.stage.stageHeight;
         var preX:Float = 0;
 
         preX = Math.floor(FlxG.stage.stageHeight * ratio);
 
         if (clip != null)
-		    clip.x = Math.ceil((FlxG.stage.stageWidth - preX) * 0.5);
+		clip.x = Math.ceil((FlxG.stage.stageWidth - preX) * 0.5);
 
         barLeft.graphics.clear();
         barRight.graphics.clear();

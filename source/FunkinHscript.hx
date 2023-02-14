@@ -197,26 +197,26 @@ class FunkinHscript extends InterpEx {
         variables.set('OptionsState', OptionsState);
         variables.set('Paths', Paths);
         variables.set('PauseSubState', PauseSubState);
-		variables.set('PhillyGlowParticle', PhillyGlowParticle);
-		variables.set('PhillyGlowGradient', PhillyGlowGradient);
+variables.set('PhillyGlowParticle', PhillyGlowParticle);
+variables.set('PhillyGlowGradient', PhillyGlowGradient);
         variables.set('PlayState', PlayState);
         variables.set('Prompt', Prompt);
         variables.set('Song', Song);
         variables.set('StageData', StageData);
         variables.set('StoryMenuState', StoryMenuState);
         variables.set('StrumNote', StrumNote);
-		variables.set('TankmenBG', TankmenBG);
+variables.set('TankmenBG', TankmenBG);
         variables.set('TitleState', TitleState);
         variables.set('WeekData', WeekData);
         variables.set('WiggleEffect', WiggleEffect);
-		#if desktop
+#if desktop
         variables.set('DiscordClient', DiscordClient);
         #end
-		#if LUA_ALLOWED
-		variables.set('DebugLuaText', DebugLuaText);
-		variables.set('ModchartSprite', ModchartSprite);
-		variables.set('ModchartText', ModchartText);
-		#end
+#if LUA_ALLOWED
+variables.set('DebugLuaText', DebugLuaText);
+variables.set('ModchartSprite', ModchartSprite);
+variables.set('ModchartText', ModchartText);
+#end
         #if VIDEOS_ALLOWED
         variables.set('MP4Handler', MP4Handler);
         #end
