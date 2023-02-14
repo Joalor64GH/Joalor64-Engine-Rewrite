@@ -143,6 +143,7 @@ class MainMenuState extends MusicBeatState
 				'credits',
 				#if !switch 'donate',
 				#end
+			// 	'manual', // i'm working on the documentation
 				'options'
 			];
 		}
@@ -383,7 +384,10 @@ class MainMenuState extends MusicBeatState
 				else if (optionShit[curSelected] == 'donate') {
 					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
 				}
-				else
+				else /*if (optionShit[curSelected] == 'manual') {
+					CoolUtil.browserLoad('https://linkgoeshere.com');
+				}
+				else*/
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
