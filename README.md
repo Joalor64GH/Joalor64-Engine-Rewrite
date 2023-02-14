@@ -16,6 +16,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
+* [ ] A LOT of Random Ahh Code **[Because this is quality :ok:]**
 * [ ] Simple Documentation **[Work in Progress]**
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Reorganized Source Code (Couldn't do it myself :skull:)

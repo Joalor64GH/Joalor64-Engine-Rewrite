@@ -388,6 +388,7 @@ class CreditsEditorState extends MusicBeatState
 		colorInput.text = '';
 		soundInput.text = '';
 		showIconExist(iconInput.text);
+		iconColorShow();
 	}
 
 	function setItemData(){
@@ -441,8 +442,9 @@ class CreditsEditorState extends MusicBeatState
 			curSelected -= 1;
 		} while(nullCheck(curSelected));
 
+		curSelected += 1;
 		updateCreditObjects();
-		changeSelection();
+		changeSelection(-1);
 	}
 
 	function templateArray(){
@@ -498,7 +500,6 @@ class CreditsEditorState extends MusicBeatState
 			if(creditsStuff.length > 1)
 			{
 				var shiftMult:Int = 1;
-				//if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
 
 				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP)
 				{
@@ -509,6 +510,11 @@ class CreditsEditorState extends MusicBeatState
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
+				}
+				if(FlxG.mouse.wheel != 0)
+				{
+					FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
+					changeSelection(-shiftMult * FlxG.mouse.wheel, false);
 				}
 
 				if((FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN) || (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP))
@@ -549,7 +555,7 @@ class CreditsEditorState extends MusicBeatState
 				addCredit();
 			}
 
-			if (FlxG.keys.justPressed.BACKSPACE)
+			if (FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE)
 			{
 				if(colorTween != null) {
 					colorTween.cancel();
@@ -558,6 +564,15 @@ class CreditsEditorState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				quitting = true;
+			}
+		}
+		if(blockInput){
+			if (FlxG.keys.justPressed.ENTER) {
+				for (i in 0...blockPressWhileTypingOn.length) {
+					if(blockPressWhileTypingOn[i].hasFocus) {
+						blockPressWhileTypingOn[i].hasFocus = false;
+					}
+				}
 			}
 		}
 
@@ -573,9 +588,9 @@ class CreditsEditorState extends MusicBeatState
 
 	var moveTween:FlxTween = null;
 	var curSelIsTitle:Bool = false;
-	function changeSelection(change:Int = 0)
+	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(change != 0) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		if(change != 0 && playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		do {
 			curSelected += change;
 			if (curSelected < 0)
@@ -769,7 +784,9 @@ class CreditsEditorState extends MusicBeatState
 					var arr:Array<String> = i.replace('\\n', '\n').split("::");
 					creditsStuff.push(arr);
 				}
+
 				updateCreditObjects();
+				changeSelection();
 				return;
 			}
 		}
