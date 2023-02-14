@@ -13,8 +13,9 @@ function fixRH()
       for k,v in pairs(vars) do
           table.insert(stringVars, "var "..k.." = getVar('luaVarHolder')."..k..";")
       end
-      rh(table.concat(stringVars, '\n')..'\n'..code)
+      local ret = rh(table.concat(stringVars, '\n')..'\n'..code)
       setProperty('luaVarHolder', nil)
+      return ret
     end
   end
 end
