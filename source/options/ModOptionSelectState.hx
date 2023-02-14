@@ -41,9 +41,9 @@ class ModOptionSelectState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Global':
-                openSubState(new ModOptions());
-            default:
-                openSubState(new ModOptions(label));
+                		openSubState(new ModOptions());
+            		default:
+                		openSubState(new ModOptions(label));
 		}
 	}
 
@@ -52,8 +52,8 @@ class ModOptionSelectState extends MusicBeatState
 		DiscordClient.changePresence("Mod Menu", null);
 		#end
 
-        mods = Paths.getModDirectories();
-        mods.insert(0, 'Global');
+        	mods = Paths.getModDirectories();
+        	mods.insert(0, 'Global');
 
 		for (mod in mods) {
 			if (!Paths.optionsExist(mod == 'Global' ? '' : mod)) {
@@ -110,10 +110,10 @@ class ModOptionSelectState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-            FlxTransitionableState.skipNextTransIn = true;
-            FlxTransitionableState.skipNextTransOut = true;
+            		FlxTransitionableState.skipNextTransIn = true;
+           		FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new OptionsState());		
-        }
+        	}
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(mods[curSelected]);
