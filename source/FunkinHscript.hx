@@ -88,7 +88,7 @@ class FunkinHscript extends InterpEx {
 
     public function new(path:String) {
         super();
-		scriptName = path.split('/')[path.split('/').length - 1];
+	scriptName = path.split('/')[path.split('/').length - 1];
         super();
         //CLASSES
         //THIS IS PROBABLY MORE THAN ANYONE EVER NEEDS AND YOU CAN IMPORT CLASSES MANUALLY ANYWAYS BUT WHATEVER
@@ -197,155 +197,155 @@ class FunkinHscript extends InterpEx {
         variables.set('OptionsState', OptionsState);
         variables.set('Paths', Paths);
         variables.set('PauseSubState', PauseSubState);
-variables.set('PhillyGlowParticle', PhillyGlowParticle);
-variables.set('PhillyGlowGradient', PhillyGlowGradient);
+	variables.set('PhillyGlowParticle', PhillyGlowParticle);
+	variables.set('PhillyGlowGradient', PhillyGlowGradient);
         variables.set('PlayState', PlayState);
         variables.set('Prompt', Prompt);
         variables.set('Song', Song);
         variables.set('StageData', StageData);
         variables.set('StoryMenuState', StoryMenuState);
         variables.set('StrumNote', StrumNote);
-variables.set('TankmenBG', TankmenBG);
+	variables.set('TankmenBG', TankmenBG);
         variables.set('TitleState', TitleState);
         variables.set('WeekData', WeekData);
         variables.set('WiggleEffect', WiggleEffect);
-#if desktop
+	#if desktop
         variables.set('DiscordClient', DiscordClient);
         #end
-#if LUA_ALLOWED
-variables.set('DebugLuaText', DebugLuaText);
-variables.set('ModchartSprite', ModchartSprite);
-variables.set('ModchartText', ModchartText);
-#end
+	#if LUA_ALLOWED
+	variables.set('DebugLuaText', DebugLuaText);
+	variables.set('ModchartSprite', ModchartSprite);
+	variables.set('ModchartText', ModchartText);
+	#end
         #if VIDEOS_ALLOWED
         variables.set('MP4Handler', MP4Handler);
         #end
 
         //VARIABLES
         variables.set('Function_Stop', FunkinLua.Function_Stop);
-		variables.set('Function_Continue', FunkinLua.Function_Continue);
-		variables.set('curBpm', Conductor.bpm);
-		variables.set('bpm', Conductor.bpm);
-		variables.set('crochet', Conductor.crochet);
-		variables.set('stepCrochet', Conductor.stepCrochet);
-		variables.set('scrollSpeed', PlayState.SONG.speed);
-		variables.set('songLength', 0);
-		variables.set('songName', PlayState.SONG.song);
-		variables.set('startedCountdown', false);
-		variables.set('isStoryMode', PlayState.isStoryMode);
-		variables.set('difficulty', PlayState.storyDifficulty);
-		variables.set('difficultyName', CoolUtil.difficulties[PlayState.storyDifficulty]);
-		variables.set('weekRaw', PlayState.storyWeek);
-		variables.set('week', WeekData.weeksLoaded.get(WeekData.weeksList[PlayState.storyWeek]).fileName);
-		variables.set('seenCutscene', PlayState.seenCutscene);
+	variables.set('Function_Continue', FunkinLua.Function_Continue);
+	variables.set('curBpm', Conductor.bpm);
+	variables.set('bpm', Conductor.bpm);
+	variables.set('crochet', Conductor.crochet);
+	variables.set('stepCrochet', Conductor.stepCrochet);
+	variables.set('scrollSpeed', PlayState.SONG.speed);
+	variables.set('songLength', 0);
+	variables.set('songName', PlayState.SONG.song);
+	variables.set('startedCountdown', false);
+	variables.set('isStoryMode', PlayState.isStoryMode);
+	variables.set('difficulty', PlayState.storyDifficulty);
+	variables.set('difficultyName', CoolUtil.difficulties[PlayState.storyDifficulty]);
+	variables.set('weekRaw', PlayState.storyWeek);
+	variables.set('week', WeekData.weeksLoaded.get(WeekData.weeksList[PlayState.storyWeek]).fileName);
+	variables.set('seenCutscene', PlayState.seenCutscene);
 
-		// Camera poo
-		variables.set('cameraX', 0);
-		variables.set('cameraY', 0);
+	// Camera poo
+	variables.set('cameraX', 0);
+	variables.set('cameraY', 0);
+	
+	// Screen stuff
+	variables.set('screenWidth', FlxG.width);
+	variables.set('screenHeight', FlxG.height);
+
+	// PlayState cringe ass nae nae bullcrap
+	variables.set('curBeat', 0);
+	variables.set('curStep', 0);
+
+	variables.set('score', 0);
+	variables.set('misses', 0);
+	variables.set('hits', 0);
+
+	variables.set('rating', 0);
+	variables.set('ratingName', '');
+	variables.set('ratingFC', '');
+	variables.set('versionJoalor', MainMenuState.joalor64EngineVersion.trim());
+	variables.set('versionPsych', MainMenuState.psychEngineVersion.trim());
 		
-		// Screen stuff
-		variables.set('screenWidth', FlxG.width);
-		variables.set('screenHeight', FlxG.height);
+	variables.set('inGameOver', false);
+	variables.set('curSection', 0);
+	variables.set('mustHitSection', false);
+	variables.set('altAnim', false);
+	variables.set('gfSection', false);
+	variables.set('lengthInSteps', 16);
+	variables.set('changeBPM', false);
 
-		// PlayState cringe ass nae nae bullcrap
-		variables.set('curBeat', 0);
-		variables.set('curStep', 0);
+	// Gameplay settings
+	variables.set('healthGainMult', PlayState.instance.healthGain);
+	variables.set('healthLossMult', PlayState.instance.healthLoss);
+	variables.set('instakillOnMiss', PlayState.instance.instakillOnMiss);
+	variables.set('botPlay', PlayState.instance.cpuControlled);
+	variables.set('practice', PlayState.instance.practiceMode);
 
-		variables.set('score', 0);
-		variables.set('misses', 0);
-		variables.set('hits', 0);
+	for (i in 0...4) {
+		variables.set('defaultPlayerStrumX', 0);
+		variables.set('defaultPlayerStrumY', 0);
+		variables.set('defaultOpponentStrumX', 0);
+		variables.set('defaultOpponentStrumY', 0);
+	}
 
-		variables.set('rating', 0);
-		variables.set('ratingName', '');
-		variables.set('ratingFC', '');
-		variables.set('versionJoalor', MainMenuState.joalor64EngineVersion.trim());
-		variables.set('versionPsych', MainMenuState.psychEngineVersion.trim());
-		
-		variables.set('inGameOver', false);
-		variables.set('curSection', 0);
-		variables.set('mustHitSection', false);
-		variables.set('altAnim', false);
-		variables.set('gfSection', false);
-		variables.set('lengthInSteps', 16);
-		variables.set('changeBPM', false);
+	// Default character positions woooo
+	variables.set('defaultBoyfriendX', PlayState.instance.BF_X);
+	variables.set('defaultBoyfriendY', PlayState.instance.BF_Y);
+	variables.set('defaultOpponentX', PlayState.instance.DAD_X);
+	variables.set('defaultOpponentY', PlayState.instance.DAD_Y);
+	variables.set('defaultGirlfriendX', PlayState.instance.GF_X);
+	variables.set('defaultGirlfriendY', PlayState.instance.GF_Y);
 
-		// Gameplay settings
-		variables.set('healthGainMult', PlayState.instance.healthGain);
-		variables.set('healthLossMult', PlayState.instance.healthLoss);
-		variables.set('instakillOnMiss', PlayState.instance.instakillOnMiss);
-		variables.set('botPlay', PlayState.instance.cpuControlled);
-		variables.set('practice', PlayState.instance.practiceMode);
+	// Character shit
+	variables.set('boyfriendName', PlayState.SONG.player1);
+	variables.set('dadName', PlayState.SONG.player2);
+	variables.set('gfName', PlayState.SONG.gfVersion);
 
-		for (i in 0...4) {
-			variables.set('defaultPlayerStrumX', 0);
-			variables.set('defaultPlayerStrumY', 0);
-			variables.set('defaultOpponentStrumX', 0);
-			variables.set('defaultOpponentStrumY', 0);
-		}
+        // Some settings, no jokes
+	variables.set('downscroll', ClientPrefs.downScroll);
+	variables.set('middlescroll', ClientPrefs.middleScroll);
+	variables.set('framerate', ClientPrefs.framerate);
+	variables.set('ghostTapping', ClientPrefs.ghostTapping);
+	variables.set('hideHud', ClientPrefs.hideHud);
+	variables.set('timeBarType', ClientPrefs.timeBarType);
+	variables.set('scoreZoom', ClientPrefs.scoreZoom);
+	variables.set('cameraZoomOnBeat', ClientPrefs.camZooms);
+	variables.set('flashingLights', ClientPrefs.flashing);
+	variables.set('noteOffset', ClientPrefs.noteOffset);
+	variables.set('noResetButton', ClientPrefs.noReset);
+	variables.set('lowQuality', ClientPrefs.lowQuality);
 
-		// Default character positions woooo
-		variables.set('defaultBoyfriendX', PlayState.instance.BF_X);
-		variables.set('defaultBoyfriendY', PlayState.instance.BF_Y);
-		variables.set('defaultOpponentX', PlayState.instance.DAD_X);
-		variables.set('defaultOpponentY', PlayState.instance.DAD_Y);
-		variables.set('defaultGirlfriendX', PlayState.instance.GF_X);
-		variables.set('defaultGirlfriendY', PlayState.instance.GF_Y);
+	variables.set("scriptName", scriptName);
 
-		// Character shit
-		variables.set('boyfriendName', PlayState.SONG.player1);
-		variables.set('dadName', PlayState.SONG.player2);
-		variables.set('gfName', PlayState.SONG.gfVersion);
-
-		// Some settings, no jokes
-		variables.set('downscroll', ClientPrefs.downScroll);
-		variables.set('middlescroll', ClientPrefs.middleScroll);
-		variables.set('framerate', ClientPrefs.framerate);
-		variables.set('ghostTapping', ClientPrefs.ghostTapping);
-		variables.set('hideHud', ClientPrefs.hideHud);
-		variables.set('timeBarType', ClientPrefs.timeBarType);
-		variables.set('scoreZoom', ClientPrefs.scoreZoom);
-		variables.set('cameraZoomOnBeat', ClientPrefs.camZooms);
-		variables.set('flashingLights', ClientPrefs.flashing);
-		variables.set('noteOffset', ClientPrefs.noteOffset);
-		variables.set('noResetButton', ClientPrefs.noReset);
-		variables.set('lowQuality', ClientPrefs.lowQuality);
-
-		variables.set("scriptName", scriptName);
-
-		#if windows
-		variables.set('buildTarget', 'windows');
-		#elseif linux
-		variables.set('buildTarget', 'linux');
-		#elseif mac
-		variables.set('buildTarget', 'mac');
-		#elseif html5
-		variables.set('buildTarget', 'browser');
-		#elseif android
-		variables.set('buildTarget', 'android');
-		#else
-		variables.set('buildTarget', 'unknown');
-		#end
+	#if windows
+	variables.set('buildTarget', 'windows');
+	#elseif linux
+	variables.set('buildTarget', 'linux');
+	#elseif mac
+	variables.set('buildTarget', 'mac');
+	#elseif html5
+	variables.set('buildTarget', 'browser');
+	#elseif android
+	variables.set('buildTarget', 'android');
+	#else
+	variables.set('buildTarget', 'unknown');
+	#end
 
         variables.set('controls', PlayerSettings.player1.controls);
         variables.set('instance', PlayState.instance);
         variables.set('window', Application.current.window);
 
         //EVENTS
-		var funcs = [
-			'onCreate',
-			'onCreatePost',
-			'onDestroy'
-		];
-		for (i in funcs)
-			variables.set(i, function() {});
-		variables.set('onUpdate', function(elapsed) {});
-		variables.set('onUpdatePost', function(elapsed) {});
+	var funcs = [
+	    'onCreate',
+	    'onCreatePost',
+	    'onDestroy'
+	];
+	for (i in funcs)
+	    variables.set(i, function() {});
+            variables.set('onUpdate', function(elapsed) {});
+	    variables.set('onUpdatePost', function(elapsed) {});
     }
 
     inline function getInstance()
-	{
-		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
-	}
+    {
+        return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+    }
 }
 
 //cant use an abstract as a value so made one with just the static functions
