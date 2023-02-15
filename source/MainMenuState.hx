@@ -385,7 +385,7 @@ class MainMenuState extends MusicBeatState
 					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
 				}
 				else /*if (optionShit[curSelected] == 'manual') {
-					CoolUtil.browserLoad('https://linkgoeshere.com');
+					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
 				}
 				else*/
 				{

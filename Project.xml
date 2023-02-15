@@ -6,17 +6,15 @@
         <app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
-	<app preloader="flixel.system.FlxPreloader" />
-	
-	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
-	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
 
-	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
+	<app preloader="flixel.system.FlxPreloader" />
 	<set name="SWF_VERSION" value="11.8" />
+
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- this is important -->
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
-	<!--These window settings apply to all targets-->
+	<!--All targets-->
 	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-->
