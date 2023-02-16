@@ -142,6 +142,8 @@ class Conductor
 
 	public static function changeBPM(newBpm:Float)
 	{
+		if (newBpm <= 0 || newBpm == bpm) return;
+
 		bpm = newBpm;
 
 		crochet = calculateCrochet(bpm);
@@ -166,13 +168,14 @@ class Rating
 		this.counter = name + 's';
 		this.hitWindow = Reflect.field(ClientPrefs, name + 'Window');
 		if(hitWindow == null)
-		{
 			hitWindow = 0;
-		}
 	}
 
 	public function increase(blah:Int = 1)
 	{
-		Reflect.setField(PlayState.instance, counter, Reflect.field(PlayState.instance, counter) + blah);
+		if (Reflect.hasField(PlayState.instance, counter))
+			Reflect.setField(PlayState.instance, counter, Reflect.field(PlayState.instance, counter) + blah);
+		else
+			return;
 	}
 }
