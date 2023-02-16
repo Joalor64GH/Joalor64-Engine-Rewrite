@@ -24,7 +24,9 @@ import polymod.Polymod;
 #end
 
 import animateatlas.AtlasFrameMaker;
+
 import hscript.*;
+import options.*;
 
 using CoolUtil;
 using StringTools;

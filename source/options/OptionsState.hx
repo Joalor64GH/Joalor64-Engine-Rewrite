@@ -33,7 +33,7 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
-		#if MODS_ALLOWED 'Mod Options', #end
+		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
 		'Adjust Delay and Combo', 
@@ -48,15 +48,19 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
+			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mod Options':
-				FlxG.switchState(new ModOptionSelectState()); // openSubState(new options.ModOptions());
-				FlxTransitionableState.skipNextTransOut = true;
+			    if (Paths.optionsExist())
+					FlxG.switchState(new ModOptionSelectState());
+					FlxTransitionableState.skipNextTransOut = true;
+				else
+					Main.toast.create('No Custom Options!', 0xFFFFFF00, 'Please add custom options to be able to access the menu!');
+			#end
 			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB') {
+				if(ClientPrefs.arrowMode == 'RGB')
 					openSubState(new NotesRGBSubState());
-				} else {
+				else
 					openSubState(new NotesHSVSubState());
-				}
 			case 'Controls':
 				openSubState(new ControlsSubState());
 			case 'Graphics':
@@ -78,11 +82,6 @@ class OptionsState extends MusicBeatState
 	override function create() {
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
-		#end
-
-		#if MODS_ALLOWED
-		if (!Paths.optionsExist()) 
-			options.remove('Mod Options');
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

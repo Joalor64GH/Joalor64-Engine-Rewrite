@@ -30,6 +30,7 @@ import editors.*;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 import sys.io.File;
+import core.ModCore;
 #end
 
 using StringTools;
@@ -419,7 +420,7 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									#if (MODS_ALLOWED && FUTURE_POLYMOD)
+									#if (MODS_ALLOWED && FUTURE_POLYMOD && ModCore.trackedMods != [])
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
