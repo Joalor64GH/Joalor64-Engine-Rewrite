@@ -143,7 +143,6 @@ class MainMenuState extends MusicBeatState
 				'credits',
 				#if !switch 'donate',
 				#end
-				'manual',
 				'options'
 			];
 		}
@@ -383,9 +382,6 @@ class MainMenuState extends MusicBeatState
 				}
 				else if (optionShit[curSelected] == 'donate') {
 					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
-				}
-				else if (optionShit[curSelected] == 'manual') {
-					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
 				}
 				else
 				{

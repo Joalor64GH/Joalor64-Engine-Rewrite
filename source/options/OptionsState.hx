@@ -24,6 +24,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import core.ToastCore;
 import Controls;
 
 import options.*;
@@ -81,7 +82,8 @@ class OptionsState extends MusicBeatState
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
-	override function create() {
+	override function create() 
+	{
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
