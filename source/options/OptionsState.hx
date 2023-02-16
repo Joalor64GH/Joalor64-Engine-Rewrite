@@ -50,17 +50,19 @@ class OptionsState extends MusicBeatState
 		switch(label) {
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mod Options':
-			    if (Paths.optionsExist())
+			    if (Paths.optionsExist()) {
 					FlxG.switchState(new ModOptionSelectState());
 					FlxTransitionableState.skipNextTransOut = true;
-				else
+				} else {
 					Main.toast.create('No Custom Options!', 0xFFFFFF00, 'Please add custom options to be able to access the menu!');
+				}
 			#end
 			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB')
+				if(ClientPrefs.arrowMode == 'RGB') {
 					openSubState(new NotesRGBSubState());
-				else
+				} else {
 					openSubState(new NotesHSVSubState());
+				}
 			case 'Controls':
 				openSubState(new ControlsSubState());
 			case 'Graphics':
