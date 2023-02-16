@@ -2254,6 +2254,10 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
+		#if WEBM_ALLOWED
+		MusicBeatState.switchState(new VideoState((name)));
+		return;
+		#else
 		var video:MP4Handler = new MP4Handler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2261,6 +2265,7 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
@@ -2432,7 +2437,6 @@ class PlayState extends MusicBeatState
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		dadGroup.alpha = 0.00001;
 		camHUD.visible = false;
-		//inCutscene = true; //this would stop the camera movement, oops
 
 		var tankman:FlxSprite = new FlxSprite(-20, 320);
 		tankman.frames = Paths.getSparrowAtlas('cutscenes/' + songName);

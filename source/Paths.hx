@@ -76,6 +76,7 @@ class Paths
 		'scripts',
 		'libs',
 		'achievements',
+		'options',
 		'art'
 	];
 	#end
@@ -1027,7 +1028,6 @@ class Paths
 		return list;
 	}
 
-	// custom options
 	static public function optionsExist(?key:String = null) // basically checks if a mod contains options
 	{
 		var modsFolder:Array<String> = getModDirectories();
