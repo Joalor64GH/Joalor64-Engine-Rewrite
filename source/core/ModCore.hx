@@ -37,7 +37,12 @@ class ModCore
 		'otf' => FONT, 
 		'webm' => VIDEO,
 		'mp4' => VIDEO,
-		'swf' => VIDEO
+		'swf' => VIDEO,
+		'fla' => BINARY,
+		'flp' => BINARY,
+		'zip' => BINARY,
+		'dll' => BINARY,
+		'ndll' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
