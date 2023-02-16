@@ -2254,10 +2254,10 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		#if WEBM_ALLOWED
+		/*#if WEBM_ALLOWED
 		MusicBeatState.switchState(new VideoState((name)));
 		return;
-		#else
+		#else*/
 		var video:MP4Handler = new MP4Handler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2265,7 +2265,7 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
-		#end
+		//#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
