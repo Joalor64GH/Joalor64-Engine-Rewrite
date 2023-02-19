@@ -3002,7 +3002,7 @@ class PlayState extends MusicBeatState
 	{
 		scoreTxt.text = 'Score: ' + songScore
 		+ ' // Combo Breaks: ' + songMisses
-		+ ' // Rating: ' + ratingName
+		+ ' // Accuracy: ' + ratingName
 		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -4800,6 +4800,52 @@ class PlayState extends MusicBeatState
 		var pixelShitPart1:String = '';
 		var pixelShitPart2:String = '';
 		if (isPixelStage)
+		{
+			pixelShitPart1 = 'pixelUI/';
+			pixelShitPart2 = '-pixel';
+		}
+
+		// UI Skins
+		if(ClientPrefs.uiSkin == 'Default' && PlayState.isPixelStage)
+		{
+			pixelShitPart1 = 'pixelUI/';
+			pixelShitPart2 = '-pixel';
+		}
+
+		//Forever Engine Skin
+		if(ClientPrefs.uiSkin == 'Forever')
+		{
+			pixelShitPart1 = 'skins/foreverUI/';
+			pixelShitPart2 = '';
+		}
+		//Forever Engine Pixel Skin
+		if(ClientPrefs.uiSkin == 'Forever' && PlayState.isPixelStage)
+		{
+			pixelShitPart1 = 'skins/foreverUI/';
+			pixelShitPart2 = '-pixel';
+		}
+
+		//Kade Engine Skin
+		if(ClientPrefs.uiSkin == 'Kade')
+		{
+			pixelShitPart1 = 'skins/kadeUI/';
+			pixelShitPart2 = '';
+		}
+		//Kade Engine Pixel Skin
+		if(ClientPrefs.uiSkin == 'Kade' && PlayState.isPixelStage)
+		{
+			pixelShitPart1 = 'skins/kadeUI/';
+			pixelShitPart2 = '-pixel';
+		}
+
+		//Simplylove Skin
+		if(ClientPrefs.uiSkin == 'Simplylove')
+		{
+			pixelShitPart1 = 'skins/simplylove/';
+			pixelShitPart2 = '';
+		}
+		//Simplylove doesn't have a Pixel skin, so it will just use the default skin instead
+		if(ClientPrefs.uiSkin == 'Simplylove' && PlayState.isPixelStage)
 		{
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
