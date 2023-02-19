@@ -8,7 +8,8 @@ package cpp;
 #include <iostream>
 #include <cstdlib>
 ')
-
+// Original Author: LunarCleint
+// Author: MemeHoovy
 class CPPWindows
 {
     @:functionCode('
@@ -35,6 +36,34 @@ class CPPWindows
     public static function randomNumber():UInt64 {
         return 1;
     }
+
+	#if windows
+	@:functionCode('
+        int darkMode = mode;
+        HWND window = GetActiveWindow();
+        if (S_OK != DwmSetWindowAttribute(window, 19, &darkMode, sizeof(darkMode))) {
+            DwmSetWindowAttribute(window, 20, &darkMode, sizeof(darkMode));
+        }
+        UpdateWindow(window);
+    ')
+	@:noCompletion
+	public static function _setWindowColorMode(mode:Int)
+	{
+	}
+
+	public static function setWindowColorMode(mode:WindowColorMode)
+	{
+		var darkMode:Int = cast(mode, Int);
+
+		if (darkMode > 1 || darkMode < 0)
+		{
+			trace("WindowColorMode Not Found...");
+
+			return;
+		}
+
+		_setWindowColorMode(darkMode);
+	}
 }
 #end
 #end
