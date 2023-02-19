@@ -73,7 +73,7 @@ class OptionsState extends MusicBeatState
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
 			/*case 'The Special':
-				LoadingState.loadAndSwitchState(new TheSpecialState());*/
+				FlxG.switchState(new TheSpecialState());*/
 		}
 	}
 
