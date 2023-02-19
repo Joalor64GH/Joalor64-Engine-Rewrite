@@ -6,6 +6,9 @@ import PhillyGlow;
 #if VIDEOS_ALLOWED
 import vlc.MP4Handler;
 #end
+#if FLASH_MOVIE
+import SwfVideo;
+#end
 import flixel.system.macros.FlxMacroUtil;
 import flixel.math.FlxAngle;
 import Achievements.AchievementObject;
@@ -219,6 +222,9 @@ class FunkinHscript extends InterpEx {
 	#end
         #if VIDEOS_ALLOWED
         variables.set('MP4Handler', MP4Handler);
+        #end
+	#if FLASH_MOVIE
+        variables.set('SwfVideo', SwfVideo);
         #end
 
         //VARIABLES

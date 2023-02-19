@@ -1,6 +1,7 @@
 # Joalor64 Engine Rewritten
 A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine). Not everything is perfect, so contributions and/or [pull requests](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pulls) would be nice! Be sure to report bugs in [issues](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues) also!
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
+* [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 # Features
 * SWF Support (broken at the moment)
@@ -16,7 +17,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Softcoded Achievements
 
 # Planned Features
-* [ ] A LOT of Random Ahh Code **[Because this is quality :ok:]**
+* [ ] Fix Some Bugs
 * [ ] Simple Documentation **[Work in Progress]**
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Reorganized Source Code (Couldn't do it myself :skull:)
@@ -36,6 +37,9 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
 * [stevecodergh](https://github.com/stevecodergh) - Python Support
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
+* [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
+* [KookerFoxYT](https://github.com/KookerFoxYT) - Custom Options
+* [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.

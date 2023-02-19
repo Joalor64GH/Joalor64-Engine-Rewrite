@@ -53,6 +53,8 @@ example_mods/modList.txt
 source/Snd.hx
 source/SndTV.hx
 source/ChartParser.hx
+source/editors/EditorLua.hx
+source/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
 
 ### Add these regardless of them getting ignored.
