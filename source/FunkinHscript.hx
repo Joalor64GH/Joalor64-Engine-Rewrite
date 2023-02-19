@@ -223,7 +223,7 @@ class FunkinHscript extends InterpEx {
         #if VIDEOS_ALLOWED
         variables.set('MP4Handler', MP4Handler);
         #end
-		#if FLASH_MOVIE
+	#if FLASH_MOVIE
         variables.set('SwfVideo', SwfVideo);
         #end
 
