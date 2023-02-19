@@ -1732,7 +1732,6 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 		for (key => type in precacheList)
 		{
-			//trace('Key $key is type $type');
 			switch(type)
 			{
 				case 'image':
@@ -3000,10 +2999,17 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: ' + songScore
-		+ ' // Combo Breaks: ' + songMisses
-		+ ' // Accuracy: ' + ratingName
-		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+		if(ratingName == '?') {
+			scoreTxt.text = 'Score: ' + songScore 
+			+ ' // Combo Breaks: ' + songMisses 
+			+ ' // Accuracy: ?' 
+			+ ' // Rank: ?';
+		} else {
+			scoreTxt.text = 'Score: ' + songScore 
+			+ ' // Combo Breaks: ' + songMisses
+			+ ' // Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' 
+			+ ' // Rank: ' + ratingFC;
+		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
