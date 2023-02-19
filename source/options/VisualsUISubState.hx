@@ -125,19 +125,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
-		var option:Option = new Option('UI Skin:',
-			"What should your Judgements look like?",
-			'uiSkin',
-			'string',
-			'Default',
-			[
-				'Default', 
-				'Forever', 
-				'Kade', 
-				'Simplylove'
-			]);
-		addOption(option);
-
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
