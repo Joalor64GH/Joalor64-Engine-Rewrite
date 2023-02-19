@@ -15,7 +15,18 @@ class CPPWindows
     @:functionCode('
     HWND window = getActiveWindow();
     ')
+    @:noCompletion
     public static function getHWNDWindow(){
+        return null;
+    }
+    
+    @:functionCode('
+    HWND daWindow;
+
+    HWND window = setActiveWindow(prevWindow);
+    ')
+    @:noCompletion
+    public static function setHWNDWindow(window:HWND){
         return null;
     }
 
