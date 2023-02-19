@@ -27,6 +27,7 @@ import flixel.graphics.FlxGraphic;
 import core.ToastCore;
 import Controls;
 
+// Keep It Simple ShadowMaio
 import options.*;
 
 using StringTools;
@@ -54,6 +55,7 @@ class OptionsState extends MusicBeatState
 			    if (Paths.optionsExist())
 					FlxG.switchState(new ModOptionSelectState());
 				else
+					// Idk why but the message won't appear
 					Main.toast.create('No Custom Options!', 0xFFFFFF00, 'Please add custom options to be able to access the menu!');
 			#end
 			case 'Note Colors':

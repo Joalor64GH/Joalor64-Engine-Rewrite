@@ -6004,12 +6004,20 @@ class PlayState extends MusicBeatState
 			}
 
 			// Rating FC
+			// we should probably get these fixed
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "PFC";
-			if (goods > 0) ratingFC = "NFC";
-			if (bads > 0 || shits > 0) ratingFC = "OFC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDM";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			if (sicks > 0) 
+				ratingFC = "PFC";
+			if (goods > 0) 
+				ratingFC = "NFC";
+			if (bads > 0 || shits > 0) 
+				ratingFC = "OFC";
+			if (songMisses > 0 && songMisses < 10) 
+				ratingFC = "SDM";
+			else if (songMisses >= 10) 
+				ratingFC = "Clear";
+			else if (cpuControlled) 
+				ratingFC = "Cheater!";
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
 		setOnLuas('rating', ratingPercent);
