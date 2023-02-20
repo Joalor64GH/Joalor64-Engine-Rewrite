@@ -2782,7 +2782,6 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				setOnHscripts('opponentStrums', opponentStrums);
-				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 				setOnHscripts('opponentStrums', opponentStrums);
 			}
 
@@ -3002,7 +3001,7 @@ class PlayState extends MusicBeatState
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses 
-			+ ' // Accuracy: ?' 
+			+ ' // Accuracy: ' + ratingName 
 			+ ' // Rank: ?';
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
@@ -3378,7 +3377,6 @@ class PlayState extends MusicBeatState
 	{
 		for (i in 0...4)
 		{
-			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
@@ -4093,8 +4091,6 @@ class PlayState extends MusicBeatState
 				
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
-				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
@@ -4323,7 +4319,6 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Play Animation':
-				//trace('Anim to play: ' + value1);
 				var char:Character = dad;
 				switch(value2.toLowerCase().trim()) {
 					case 'bf' | 'boyfriend':
@@ -5938,7 +5933,6 @@ class PlayState extends MusicBeatState
 			for (i in achievementsArray)
 			i.call(event, args);
 			#end
-		//trace(event, returnVal);
 		return returnVal;
 	}
 
@@ -5989,7 +5983,6 @@ class PlayState extends MusicBeatState
 			{
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
-				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
 
 				// Rating Name
 				if(ratingPercent >= 1)
@@ -6010,14 +6003,15 @@ class PlayState extends MusicBeatState
 			}
 
 			// Rating FC
-			// we should probably get these fixed
 			ratingFC = "";
-			if (sicks > 0) 
+			if (sicks > 0 && songMisses < 1) 
 				ratingFC = "PFC";
-			if (goods > 0) 
-				ratingFC = "NFC";
-			if (bads > 0 || shits > 0) 
-				ratingFC = "OFC";
+			if (goods > 0 && songMisses < 1) 
+				ratingFC = "MFC";
+			if (bads > 0 && songMisses < 1) 
+				ratingFC = "GFC";
+			if (shits > 0 && songMisses < 1) 
+				ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) 
 				ratingFC = "SDM";
 			else if (songMisses >= 10) 
