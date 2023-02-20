@@ -27,6 +27,9 @@ import haxe.Json;
 import options.*;
 import editors.*;
 
+import core.ModCore;
+import core.ToastCore;
+
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 import sys.io.File;
@@ -415,7 +418,7 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									#if (MODS_ALLOWED && FUTURE_POLYMOD)
+									#if (MODS_ALLOWED && FUTURE_POLYMOD && ModCore.trackedMods)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
@@ -425,6 +428,8 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										LoadingState.loadAndSwitchState(new OptionsState());
+									default:
+										Main.toast.create('Oops!', 0xFFFFFF00, 'State not found!');
 								}
 							});
 						}

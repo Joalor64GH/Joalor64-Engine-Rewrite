@@ -170,7 +170,7 @@
 	<haxelib name="hxjsonast" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="flixel-tools" />
-	<haxelib name="polymod" if="FUTURE_POLYMOD"/>
+	<haxelib name="polymod-joalor64" rename="polymod" if="FUTURE_POLYMOD"/>
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
