@@ -43,7 +43,7 @@ function getColorByRating(fRating)
 end
 
 function onCreatePost()
-    isOnRight = false
+    isOnRight = true
 
     local squY = 175
     local BOX_SCALE = 0.8
