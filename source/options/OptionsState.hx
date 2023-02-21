@@ -24,7 +24,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import core.ToastCore;
 import Controls;
 
 // Keep It Simple ShadowMaio
@@ -55,8 +54,7 @@ class OptionsState extends MusicBeatState
 			    if (Paths.optionsExist())
 					FlxG.switchState(new ModOptionSelectState());
 				else
-					// Idk why but the message won't appear
-					Main.toast.create('No Custom Options!', 0xFFFFFF00, 'Please add custom options to be able to access the menu!');
+					FlxG.switchState(new error.OopsState());
 			#end
 			case 'Note Colors':
 				if(ClientPrefs.arrowMode == 'RGB') {
