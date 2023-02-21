@@ -4806,50 +4806,29 @@ class PlayState extends MusicBeatState
 			pixelShitPart2 = '-pixel';
 		}
 
-		// UI Skins
-		if(ClientPrefs.uiSkin == 'Default' && PlayState.isPixelStage)
-		{
-			pixelShitPart1 = 'pixelUI/';
-			pixelShitPart2 = '-pixel';
-		}
+		switch (ClientPrefs.uiSkin){
+			case 'Default' if (PlayState.isPixelStage):
+				pixelShitPart1 = 'pixelUI/';
+				pixelShitPart2 = '-pixel';
+			case 'Forever':
+				pixelShitPart1 = 'skins/foreverUI/';
+				if (PlayState.isPixelStage)
+					pixelShitPart2 = '-pixel';
+				else
+					pixelShitPart2 = '';
+			case 'Kade':
+				pixelShitPart1 = 'skins/kadeUI/';
+				if (!PlayState.isPixelStage)
+					pixelShitPart2 = '';
+				else
+					pixelShitPart2 = '-pixel';
+			case 'Simplylove':
+				pixelShitPart1 = 'skins/simplylove/';
+				if (PlayState.isPixelStage)
+					pixelShitPart2 = '-pixel';
+				else
+					pixelShitPart2 = '';
 
-		//Forever Engine Skin
-		if(ClientPrefs.uiSkin == 'Forever')
-		{
-			pixelShitPart1 = 'skins/foreverUI/';
-			pixelShitPart2 = '';
-		}
-		//Forever Engine Pixel Skin
-		if(ClientPrefs.uiSkin == 'Forever' && PlayState.isPixelStage)
-		{
-			pixelShitPart1 = 'skins/foreverUI/';
-			pixelShitPart2 = '-pixel';
-		}
-
-		//Kade Engine Skin
-		if(ClientPrefs.uiSkin == 'Kade')
-		{
-			pixelShitPart1 = 'skins/kadeUI/';
-			pixelShitPart2 = '';
-		}
-		//Kade Engine Pixel Skin
-		if(ClientPrefs.uiSkin == 'Kade' && PlayState.isPixelStage)
-		{
-			pixelShitPart1 = 'skins/kadeUI/';
-			pixelShitPart2 = '-pixel';
-		}
-
-		//Simplylove Skin
-		if(ClientPrefs.uiSkin == 'Simplylove')
-		{
-			pixelShitPart1 = 'skins/simplylove/';
-			pixelShitPart2 = '';
-		}
-		//Simplylove doesn't have a Pixel skin, so it will just use the default skin instead
-		if(ClientPrefs.uiSkin == 'Simplylove' && PlayState.isPixelStage)
-		{
-			pixelShitPart1 = 'pixelUI/';
-			pixelShitPart2 = '-pixel';
 		}
 
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
