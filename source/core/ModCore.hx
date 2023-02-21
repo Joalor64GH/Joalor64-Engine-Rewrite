@@ -22,9 +22,10 @@ class ModCore
 		'ogg' => AUDIO_GENERIC,
 		'mp3' => AUDIO_GENERIC,
 		'png' => IMAGE,
-		'xml' => SPARROW,
+		'xml' => TEXT,
 		'txt' => TEXT,
 		'json' => TEXT,
+		'jsonc' => TEXT,
 		'csv' => TEXT,
 		'tsv' => TEXT,
 		'hx' => TEXT,
@@ -76,6 +77,7 @@ class ModCore
 		for (mod in loadedModlist)
 			trace('Name: ${mod.title}, [${mod.id}]');
 
+		// debug stuff
 		#if debug
 		var fileList = Polymod.listModFiles('IMAGE');
 		trace('Installed mods added / replaced ${fileList.length} images');
