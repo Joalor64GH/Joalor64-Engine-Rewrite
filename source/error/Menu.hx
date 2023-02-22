@@ -40,7 +40,7 @@ class Menu extends FlxSubState
 
 	public override function create()
 	{
-                openfl.system.System.gc();
+		openfl.system.System.gc();
 
 		cb = callback.bind(_);
 
@@ -51,13 +51,11 @@ class Menu extends FlxSubState
 		optionsT.alignment = FlxTextAlign.CENTER;
 		var tempString = "";
 		for (option in options)
-		{
 			tempString = tempString + option + "\n";
-		}
-		if (includeExitBtn == true)
-		{
+
+		if (includeExitBtn)
 			tempString = tempString + "Exit Menu";
-		}
+
 		optionsT.text = tempString;
 		optionsT.screenCenter();
 		add(optionsT);
@@ -133,19 +131,14 @@ class Menu extends FlxSubState
 
 	inline function flashArrow()
 	{
-		new FlxTimer().start(0.1, (timer:FlxTimer) ->
-		{
-			cursor.visible = !cursor.visible;
-		}, 0);
+		new FlxTimer().start(0.1, (timer:FlxTimer) -> {cursor.visible = !cursor.visible;}, 0);
 	}
 
 	inline function doAction(?timer:FlxTimer)
 	{
 		trace("eugh");
 		if (includeExitBtn && currentOption == maxOptions)
-		{
 			close();
-		}
 		else
 		{
 			cb({id: currentOption, text: splitText(currentOption)});
@@ -155,8 +148,7 @@ class Menu extends FlxSubState
 
 	inline function splitText(returnOption:Int)
 	{
-		var tempArray = optionsT.text.trim().split('\n');
-
+		final tempArray = optionsT.text.trim().split('\n');
 		return tempArray[returnOption].trim();
 	}
 }

@@ -16,6 +16,9 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Epic Modcharting Tools
 * Softcoded Achievements
 
+### If you get an issue with polymod like this `Error: Could not find haxelib "polymod-joalor64", does it need to be installed?` do the following
+`haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
+
 # Planned Features
 * [X] Simple Documentation **[Complete, but will get Updates]**
 * [ ] Fix Some Bugs

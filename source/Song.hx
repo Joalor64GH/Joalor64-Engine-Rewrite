@@ -106,10 +106,10 @@ class Song
 			#end
 		}
 
-		while (!rawJson.endsWith("}"))
-		{
-			rawJson = rawJson.substr(0, rawJson.length - 1);
-		}
+		if (rawJson == null)
+			throw "JSON not found in: " + formattedFolder;
+
+		while (!rawJson.endsWith("}")) rawJson = rawJson.substr(0, rawJson.length - 1);
 
 		var songJson:Dynamic = parseJSONshit(rawJson);
 		if(jsonInput != 'events') StageData.loadDirectory(songJson);
