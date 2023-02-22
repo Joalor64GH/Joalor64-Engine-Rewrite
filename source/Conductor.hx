@@ -7,7 +7,7 @@ typedef BPMChangeEvent =
 	var stepTime:Int;
 	var songTime:Float;
 	var bpm:Float;
-	@:optional var stepCrochet:Float;
+	var ?stepCrochet:Float;
 }
 
 class Conductor
@@ -167,8 +167,7 @@ class Rating
 		this.image = name;
 		this.counter = name + 's';
 		this.hitWindow = Reflect.field(ClientPrefs, name + 'Window');
-		if(hitWindow == null)
-			hitWindow = 0;
+		if(hitWindow == null) hitWindow = 0;
 	}
 
 	public function increase(blah:Int = 1)
