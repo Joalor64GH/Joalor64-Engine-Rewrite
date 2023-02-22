@@ -61,10 +61,9 @@
 	<source path="source" />
 
         <section if="EMBED_ASSETS">
-                <assets path="presets" embed='true'/>
 	        <assets path="assets/art" embed='false'/>
 	        <assets path="assets/core" embed='true'/>
-                <assets path="assets/fonts" embed='true'/>
+			<assets path="assets/fonts" embed='true'/>
 	</section>
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="web"/>
@@ -181,7 +180,7 @@
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
-        <!--No deprecation warnings-->
+	<!--No deprecation warnings-->
 	<haxedef name="no-deprecation-warnings" />
 
 	<!-- Script logging -->
