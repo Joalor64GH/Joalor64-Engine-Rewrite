@@ -111,6 +111,9 @@ class Paths
 			}
 		}
 		// run the garbage collector for good measure lmfao
+		#if cpp
+		cpp.vm.Gc.enable(true);
+		#end
 		System.gc();
 	}
 
@@ -449,14 +452,6 @@ class Paths
 	inline static public function tjson(key:String, ?library:String)
 	{
 		return getPath('data/$key.jsonc', TEXT, library);
-	}
-	inline static public function fla(key:String, ?library:String)
-	{
-		return getPath('art/$key.fla', BINARY, library);
-	}
-	inline static public function flp(key:String, ?library:String)
-	{
-		return getPath('art/$key.flp', BINARY, library);
 	}
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
@@ -862,7 +857,7 @@ class Paths
 		return modFolders('data/' + key + '.jsonc');
 	}
 
-    	#if FUTURE_POLYMOD
+	#if FUTURE_POLYMOD
 	inline static public function appendTxt(key:String) {
 		return modFolders('_append/data/' + key + '.txt');
 	}
@@ -937,14 +932,6 @@ class Paths
 
 	inline static public function modsTextureAtlas(key:String) {
 		return modFolders('images/' + key + '.zip');
-	}
-
-	inline static public function modsFla(key:String) {
-		return modFolders('art/' + key + '.fla');
-	}
-
-	inline static public function modsFlp(key:String) {
-		return modFolders('art/' + key + '.flp');
 	}
 
 	inline static public function modsAchievements(key:String) {
