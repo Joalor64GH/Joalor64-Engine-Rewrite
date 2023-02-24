@@ -28,7 +28,6 @@ class Note extends FlxSprite
 	public var strumTime:Float = 0;
 	public var mustPress:Bool = false;
 	public var noteData:Int = 0;
-	public var canBeHit:Bool = false;
 	public var tooLate:Bool = false;
 	public var wasGoodHit:Bool = false;
 	public var ignoreNote:Bool = false;
@@ -100,6 +99,19 @@ class Note extends FlxSprite
 	public var distance:Float = 2000; //plan on doing scroll directions soon -bb
 
 	public var hitsoundDisabled:Bool = false;
+
+	@:isVar
+	public var canBeHit(get, set):Bool = false;
+
+	inline public function get_canBeHit(){
+		return (mustPress) ? strumTime > Conductor.songPosition - Conductor.safeZoneOffset * lateHitMult
+			&& strumTime < Conductor.songPosition + Conductor.safeZoneOffset * earlyHitMult : false;
+	}
+
+	inline function set_canBeHit(b:Bool) {return canBeHit = b;};
+
+	// a thing for modders
+	public var killNote:Bool = false;
 
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
@@ -245,7 +257,6 @@ class Note extends FlxSprite
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
 				}
 				prevNote.updateHitbox();
-				// prevNote.setGraphicSize();
 			}
 
 			if(PlayState.isPixelStage) {
@@ -263,9 +274,7 @@ class Note extends FlxSprite
 	public var originalHeightForCalcs:Float = 6;
 	function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '') {
 		if(ClientPrefs.arrowMode == 'RGB') shader = null;
-		if(prefix == null) prefix = '';
-		if(texture == null) texture = '';
-		if(suffix == null) suffix = '';
+		for (e in [prefix, texture, suffix]) if (e == null) e = '';
 
 		var skin:String = texture;
 		if(texture.length < 1) {
@@ -365,22 +374,16 @@ class Note extends FlxSprite
 	{
 		super.update(elapsed);
 
+		if (killNote) this.kill();
+
 		if (mustPress)
 		{
 			// ok river
-			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-				canBeHit = true;
-			else
-				canBeHit = false;
-
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
 				tooLate = true;
 		}
 		else
 		{
-			canBeHit = false;
-
 			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
 			{
 				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)

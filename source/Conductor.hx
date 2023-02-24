@@ -170,11 +170,8 @@ class Rating
 		if(hitWindow == null) hitWindow = 0;
 	}
 
-	public function increase(blah:Int = 1)
+	inline public function increase(blah:Int = 1)
 	{
-		if (Reflect.hasField(PlayState.instance, counter))
-			Reflect.setField(PlayState.instance, counter, Reflect.field(PlayState.instance, counter) + blah);
-		else
-			return;
+		Reflect.setField(PlayState.instance, counter, Reflect.field(PlayState.instance, counter) + blah);
 	}
 }

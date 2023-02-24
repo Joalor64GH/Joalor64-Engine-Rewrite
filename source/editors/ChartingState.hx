@@ -192,7 +192,7 @@ class ChartingState extends MusicBeatState
 	**/
 	var curSelectedNote:Array<Dynamic> = null;
 
-	var playbackSpeed:Float = 1;
+	var playbackSpeed(default, set):Float = 1;
 
 	var vocals:FlxSound = null;
 
@@ -1991,19 +1991,11 @@ class ChartingState extends MusicBeatState
 		var pressedRB = FlxG.keys.justPressed.RBRACKET;
 
 		if (!holdingShift && pressedLB || holdingShift && holdingLB)
-			playbackSpeed -= 0.01;
+			set_playbackSpeed(playbackSpeed -= 0.01);
 		if (!holdingShift && pressedRB || holdingShift && holdingRB)
-			playbackSpeed += 0.01;
+			set_playbackSpeed(playbackSpeed += 0.01);
 		if (FlxG.keys.pressed.ALT && (pressedLB || pressedRB || holdingLB || holdingRB))
-			playbackSpeed = 1;
-
-		if (playbackSpeed <= 0.5)
-			playbackSpeed = 0.5;
-		if (playbackSpeed >= 3)
-			playbackSpeed = 3;
-
-		FlxG.sound.music.pitch = playbackSpeed;
-		vocals.pitch = playbackSpeed;
+			set_playbackSpeed(1);
 
 		bpmTxt.text =
 		Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +
@@ -2066,6 +2058,21 @@ class ChartingState extends MusicBeatState
 		}
 		lastConductorPos = Conductor.songPosition;
 		super.update(elapsed);
+	}
+
+	inline function set_playbackSpeed(rate:Float){
+		playbackSpeed = rate;
+
+		if (playbackSpeed <= 0.5)
+			playbackSpeed = 0.5;
+		if (playbackSpeed >= 3)
+			playbackSpeed = 3;
+
+		FlxG.sound.music.pitch = playbackSpeed;
+		if (vocals != null)
+			vocals.pitch = playbackSpeed;
+
+		return playbackSpeed;
 	}
 
 	function updateZoom() {

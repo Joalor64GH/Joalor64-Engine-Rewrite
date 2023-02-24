@@ -138,10 +138,15 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
         super(0,0);
     }
 
-
     public function addNewplayfield(?X:Float = 0, ?Y:Float = 0, ?Z:Float = 0)
     {
         playfields.push({x:X,y:Y,z:Z});
+    }
+
+    public function removePlayfield(play:Playfield){
+        if (playfields != null && play != null){
+            playfields.remove(play);
+        }
     }
 
     public function addModifier(mod:Modifier)
@@ -159,23 +164,11 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
 
     override function update(elapsed:Float) 
     {
-        if (events.length > 1)
-        {
-            events.sort(function(a, b){
-                if (a.time < b.time)
-                    return -1;
-                else if (a.time > b.time)
-                    return 1;
-                else
-                    return 0;
-            });
-        }
+        if (events.length > 1) events.sort((a,b) -> return (a.time < b.time) ? -1 : (a.time > b.time) ? 1 : 0);
+
 		while(events.length > 0) {
 			var event:ModchartEvent = events[0];
-			if(Conductor.songPosition < event.time) {
-				break;
-			}
-            //Reflect.callMethod(this, event.func, event.args);
+			if(Conductor.songPosition < event.time) break;
             event.func(event.args);
 			events.shift();
 		}
@@ -184,26 +177,14 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
         super.update(elapsed);
     }
 
-
     override public function draw()
     {
-        if (alpha == 0 || !visible)
-            return;
+        if (alpha == 0 || !visible) return;
 
         strumGroup.cameras = this.cameras;
         notes.cameras = this.cameras;
-
-        
-        //drawStrums();
-        //drawSustains();
-        //drawNotes();
         
         drawStuff(getNotePositions());
-
-
-        //draw notes to screen
-
-        
     }
 
 
@@ -254,8 +235,6 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
 
         return strumData;
     }
-
-   
 
     private function addDataToNote(noteData:NotePositionData, daNote:Note)
     {
@@ -343,11 +322,6 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
             //noteDist = mod.getNoteDist(noteData, lane, curPos, p);
         return noteDist;
     }
-
-
-
-
-
 
     private function getNotePositions()
     {
@@ -691,9 +665,6 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
 
         return noteData;
     }
-
-
-
 
     public function tweenModifier(modifier:String, val:Float, time:Float, ease:String)
     {

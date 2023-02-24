@@ -6031,19 +6031,19 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) 
+			if (sicks > 0)
 				ratingFC = "PFC";
-			if (goods > 0) 
+			else if (goods > 0)
 				ratingFC = "MFC";
-			if (bads > 0) 
+			else if (bads > 0)
 				ratingFC = "GFC";
-			if (shits > 0) 
+			else if (shits > 0)
 				ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) 
+			else if (songMisses > 0 && songMisses < 10)
 				ratingFC = "SDM";
-			else if (songMisses >= 10) 
+			else if (songMisses >= 10)
 				ratingFC = "Clear";
-			else if (cpuControlled) 
+			else if (cpuControlled)
 				ratingFC = "Cheater!";
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
