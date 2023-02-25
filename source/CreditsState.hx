@@ -160,10 +160,34 @@ class CreditsState extends MusicBeatState
 			[
 				'TheZoroForce240',
 				'zoro',
-				'Special Modcharting System\n"Not alot to say about this guy"',
+				'Modcharting Tools Haxelib\n"Not alot to say about this guy"',
 				'https://github.com/TheZoroForce240',
 				'FFD900',
 				'goofyahhphone'
+			],
+			[
+				'MAJigsaw77',
+				'',
+				'ToastCore\n"Just a guy"',
+				'https://github.com/MAJigsaw77',
+				'444444',
+				''
+			],
+			[
+				'KookerFoxYT',
+				'',
+				'Custom Options\n"fox"',
+				'https://github.com/KookerFoxYT',
+				'0000FF',
+				''
+			],
+			[
+				'Endergreen12',
+				'',
+				'Custom Gameplay Changers\n"He did a thing"',
+				'https://github.com/Endergreen12',
+				'FFD900',
+				''
 			],
 			[
 				'You',

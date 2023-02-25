@@ -437,8 +437,8 @@ class PlayState extends MusicBeatState
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
+		// Stages and stuff
 		curStage = SONG.stage;
-		//trace('stage is: ' + curStage);
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{
@@ -1811,7 +1811,6 @@ class PlayState extends MusicBeatState
 				if(found)
 				{
 					runtimeShaders.set(name, [frag, vert]);
-					//trace('Found shader $name!');
 					return true;
 				}
 			}
@@ -2254,11 +2253,6 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
-
-		/*#if WEBM_ALLOWED
-		MusicBeatState.switchState(new VideoState((name)));
-		return;
-		#else*/
 		var video:MP4Handler = new MP4Handler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2266,7 +2260,6 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
-		//#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();

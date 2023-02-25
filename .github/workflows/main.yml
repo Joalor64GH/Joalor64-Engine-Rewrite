@@ -41,6 +41,7 @@ jobs:
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
+          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib git SScript https://github.com/TheWorldMachinima/SScript
@@ -87,6 +88,7 @@ jobs:
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
+          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib git SScript https://github.com/TheWorldMachinima/SScript
@@ -134,6 +136,7 @@ jobs:
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
+          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib git SScript https://github.com/TheWorldMachinima/SScript
