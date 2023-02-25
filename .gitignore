@@ -22,6 +22,7 @@ source/gamejolt/*
 source/SUtil.hx
 source/android/*
 source/mobile/*
+source/mobile/flixel/*
 assets/android/*
 assets/images/androidcontrols/
 art/dependencyFiles/android/
@@ -48,7 +49,6 @@ source/smTools/
 ### Misc
 art/mod.url
 polymod_mods/*
-example_mods/introMod/*
 example_mods/modList.txt
 source/Snd.hx
 source/SndTV.hx
@@ -56,8 +56,9 @@ source/ChartParser.hx
 source/editors/EditorLua.hx
 source/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
+* - Copy.*
 
-### Add these regardless of them getting ignored.
+### Add any of these regardless of them getting ignored.
 !appveyor-linux.yml
 !appveyor-macos.yml
 !appveyor-windows.yml
@@ -70,6 +71,9 @@ polymod-fix/PolymodFileSystem.hx
 !*.hxp
 !*.jsonc
 !source/spine/
+
+# Why wouldn't we allow introMod?
+!example_mods/introMod/* 
 
 ### VS Code
 export/*
