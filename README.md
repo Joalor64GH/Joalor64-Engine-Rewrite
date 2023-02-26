@@ -23,6 +23,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 # Planned Features
 * [X] Simple Documentation **[Complete, will get Occasional Updates]**
 * [X] Fix Some Bugs **[We good]**
+* [ ] WAV Support
 * [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
 * [ ] Reorganized Source Code (Couldn't do it myself :skull:)
 

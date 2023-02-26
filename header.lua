@@ -1008,7 +1008,7 @@ function luaSoundExists(tag) end
 ---@param x number
 ---@param y number
 function makeLuaSprite(tag, path, x, y) end
----@alias spriteType string | "tex" | "texture" | "textureatlas" | "texture_noaa" | "textureatlass_noaa" | "tex_noaa" | "packer" | "packeratlas" | "pac"
+---@alias spriteType string | "tex" | "texture" | "textureatlas" | "texture_noaa" | "textureatlass_noaa" | "tex_noaa" | "packer" | "packeratlas" | "pac" | "i8" | "jsoni8" | "json"
 ---Makes an animated `ModchartSprite` with the tag `tag`, at x and y `x` and `y`
 ---@param tag string Sprite tag name. Used in other Lua Sprite functions, like `scaleObject`
 ---@param path string Path to the `spriteType` animation handler
