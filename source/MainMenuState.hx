@@ -28,6 +28,7 @@ import options.*;
 import editors.*;
 
 import core.ToastCore;
+import core.ModCore;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -417,7 +418,7 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									#if (MODS_ALLOWED && FUTURE_POLYMOD)
+									#if (MODS_ALLOWED && FUTURE_POLYMOD && ModCore.trackedMods != [])
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end

@@ -1,6 +1,7 @@
 package core;
 
 import flixel.FlxG;
+import openfl.Lib;
 #if FUTURE_POLYMOD
 import polymod.Polymod;
 import polymod.Polymod.ModMetadata;
@@ -10,15 +11,16 @@ import polymod.format.ParseRules;
 #end
 
 /**
- * Class based from Kade Engine.
- * Credits: KadeDev.
+ * Class based originally from ChainSaw Engine.
+ * Credits: MAJigsaw77.
  */
 class ModCore
 {
 	private static final API_VER:String = '1.0.0';
 	private static final MOD_DIR:String = 'mods';
 
-	private static final modExtensions:Map<String, PolymodAssetType> = [
+	#if FUTURE_POLYMOD
+	private static final extensions:Map<String, PolymodAssetType> = [
 		'ogg' => AUDIO_GENERIC,
 		'mp3' => AUDIO_GENERIC,
 		'png' => IMAGE,
@@ -47,6 +49,7 @@ class ModCore
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
+	#end
 
 	public static function reload():Void
 	{
@@ -68,7 +71,7 @@ class ModCore
 			apiVersion: API_VER,
 			errorCallback: onError,
 			parseRules: getParseRules(),
-			extensionMap: modExtensions,
+			extensionMap: extensions,
 			ignoredFiles: Polymod.getDefaultIgnoreList()
 		});
 
@@ -76,39 +79,19 @@ class ModCore
 
 		for (mod in loadedModlist)
 			trace('Name: ${mod.title}, [${mod.id}]');
-
-		// debug stuff
-		#if debug
-		var fileList = Polymod.listModFiles('IMAGE');
-		trace('Installed mods added / replaced ${fileList.length} images');
-		for (item in fileList)
-			trace('* [$item]');
-
-		var fileList = Polymod.listModFiles('TEXT');
-		trace('Installed mods added / replaced ${fileList.length} text files');
-		for (item in fileList)
-			trace('* [$item]');
-
-		var fileList = Polymod.listModFiles('MUSIC');
-		trace('Installed mods added / replaced ${fileList.length} songs');
-		for (item in fileList)
-			trace('* [$item]');
-
-		var fileList = Polymod.listModFiles('SOUNDS');
-		trace('Installed mods added / replaced ${fileList.length} sounds');
-		for (item in fileList)
-			trace('* [$item]');
-		#end
 	}
 
 	public static function getMods():Array<String>
 	{
 		trackedMods = [];
 
-		var daList:Array<String> = [];
-
 		if (FlxG.save.data.disabledMods == null)
+		{
 			FlxG.save.data.disabledMods = [];
+			FlxG.save.flush();
+		}
+
+		var daList:Array<String> = [];
 
 		trace('Searching for Mods...');
 
