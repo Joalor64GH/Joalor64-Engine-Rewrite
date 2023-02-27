@@ -530,7 +530,7 @@ class Paths
 	{
 		var sound:Sound = returnSound('sounds', key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/sounds/$key.ogg')
@@ -557,7 +557,7 @@ class Paths
 	{
 		var file:Sound = returnSound('music', key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/music/$key.ogg')
@@ -590,7 +590,7 @@ class Paths
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/images/$key.png')

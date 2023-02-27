@@ -77,7 +77,7 @@ import sys.io.File;
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
 import BackgroundVideo;
-import VideoState;
+import VideoSubState;
 #end
 
 #if FLASH_MOVIE
@@ -2251,6 +2251,10 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
+		#if WEBM_ALLOWED
+		openSubState(new VideoSubState(name, startAndEnd));
+		return;
+		#else
 		var video:MP4Handler = new MP4Handler();
 		video.playVideo(filepath);
 		video.finishCallback = function()
@@ -2258,6 +2262,7 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
+		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
