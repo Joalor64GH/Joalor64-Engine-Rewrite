@@ -2252,7 +2252,7 @@ class PlayState extends MusicBeatState
 			return;
 		}
 		#if WEBM_ALLOWED
-		openSubState(new VideoSubState(name, startAndEnd));
+		openSubState(new VideoSubState(name, null, () -> startAndEnd()));
 		return;
 		#else
 		var video:MP4Handler = new MP4Handler();

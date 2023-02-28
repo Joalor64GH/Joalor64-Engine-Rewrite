@@ -116,6 +116,19 @@ class FunkinLua {
 
 		trace('lua file loaded succesfully:' + script);
 
+		if (lua != null){
+			LuaL.dostring(lua, "
+				os.execute, os.getenv, os.rename, os.remove, os.tmpname = nil, nil, nil, nil, nil
+				io, load, loadfile, loadstring, dofile = nil, nil, nil, nil, nil
+				require, module, package = nil, nil, nil
+				setfenv, getfenv = nil, nil
+				newproxy = nil
+				gcinfo = nil
+				debug = nil
+				jit = nil
+			");
+		}
+
 		// Lua shit
 		set('Function_StopLua', Function_StopLua);
 		set('Function_Stop', Function_Stop);

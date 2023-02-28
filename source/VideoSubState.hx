@@ -33,12 +33,17 @@ class VideoSubState extends MusicBeatSubstate
 	public var doShit:Bool = false;
 	public var pauseText:String = "Press P To Pause/Unpause";
 
-	public function new(source:String, toTrans:FlxState)
+	public var videoCallback:Void->Void;
+
+	public function new(source:String, toTrans:FlxState, ?onComplete:Void->Void)
 	{
 		super();
 		
 		leSource = source;
 		transClass = toTrans;
+
+		if (onComplete != null)
+			videoCallback = onComplete;
 	}
 	
 	override function create()
@@ -91,23 +96,8 @@ class VideoSubState extends MusicBeatSubstate
 			GlobalVideo.get().play();
 		}
 		
-		/*if (useSound)
-		{*/
-			//vidSound = FlxG.sound.play(leSource.replace(".webm", ".ogg"));
-		
-			/*new FlxTimer().start(0.1, function(tmr:FlxTimer)
-			{*/
-				vidSound.time = vidSound.length * soundMultiplier;
-				/*new FlxTimer().start(1.2, function(tmr:FlxTimer)
-				{
-					if (useSound)
-					{
-						vidSound.time = vidSound.length * soundMultiplier;
-					}
-				}, 0);*/
-				doShit = true;
-			//}, 1);
-		//}
+		vidSound.time = vidSound.length * soundMultiplier;
+		doShit = true;
 	}
 	
 	override function update(elapsed:Float)
@@ -192,6 +182,9 @@ class VideoSubState extends MusicBeatSubstate
 			txt.text = pauseText;
 			FlxG.autoPause = true;
 			FlxG.switchState(transClass);
+
+			if (videoCallback != null)
+				videoCallback();
 		}
 		
 		if (GlobalVideo.get().played || GlobalVideo.get().restarted)
