@@ -68,6 +68,10 @@ class DiscordClient
 		});
 		trace("Discord Client initialized");
 		isInitialized = true;
+		#else
+		new DiscordClient();
+		trace("Discord Client initialized");
+		isInitialized = true;
 		#end
 	}
 
