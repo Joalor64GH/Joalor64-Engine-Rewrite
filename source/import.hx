@@ -8,6 +8,7 @@ import flixel.FlxG;
 import Alphabet;
 import Discord;
 import Conductor;
+import Conductor.BPMChangeEvent;
 import Section;
 import Song;
 import Paths;
@@ -35,6 +36,7 @@ using StringTools;
 import sys.io.File;
 import sys.FileSystem;
 #end
+
 import tjson.TJSON as Json;
 import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets as LimeAssets;

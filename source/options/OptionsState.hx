@@ -26,7 +26,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 
-// Keep It Simple ShadowMaio
+// Keep It Simple ShadowMario
 import options.*;
 
 using StringTools;

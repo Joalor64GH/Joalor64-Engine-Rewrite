@@ -167,7 +167,7 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'MAJigsaw77',
-				'',
+				'jigsaw',
 				'ToastCore\n"Just a guy"',
 				'https://github.com/MAJigsaw77',
 				'444444',
@@ -175,7 +175,7 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'KookerFoxYT',
-				'',
+				'fox',
 				'Custom Options\n"fox"',
 				'https://github.com/KookerFoxYT',
 				'0000FF',
