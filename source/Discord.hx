@@ -1,5 +1,6 @@
 package;
 
+#if desktop
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
 
@@ -28,7 +29,6 @@ class DiscordClient
 		{
 			DiscordRpc.process();
 			sleep(2);
-			//trace("Discord Client Update");
 		}
 
 		DiscordRpc.shutdown();
@@ -61,22 +61,22 @@ class DiscordClient
 
 	public static function initialize()
 	{
+		#if target.threaded
 		var DiscordDaemon = sys.thread.Thread.create(() ->
 		{
 			new DiscordClient();
 		});
 		trace("Discord Client initialized");
 		isInitialized = true;
+		#end
 	}
 
 	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
 	{
-		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
+		var startTimestamp:Float = (hasStartTimestamp) ? Date.now().getTime() : 0;
 
 		if (endTimestamp > 0)
-		{
 			endTimestamp = startTimestamp + endTimestamp;
-		}
 
 		DiscordRpc.presence({
 			details: details,
@@ -88,8 +88,6 @@ class DiscordClient
 			startTimestamp : Std.int(startTimestamp / 1000),
             endTimestamp : Std.int(endTimestamp / 1000)
 		});
-
-		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
 	}
 
 	#if LUA_ALLOWED
@@ -100,3 +98,4 @@ class DiscordClient
 	}
 	#end
 }
+#end
