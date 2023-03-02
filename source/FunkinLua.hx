@@ -2221,7 +2221,7 @@ class FunkinLua {
 			return false;
 		});
 		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
-			#if VIDEOS_ALLOWED
+			#if (VIDEOS_ALLOWED && WEBM_ALLOWED)
 			if(FileSystem.exists(Paths.video(videoFile))) {
 				PlayState.instance.startVideo(videoFile);
 				return true;

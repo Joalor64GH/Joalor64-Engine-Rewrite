@@ -285,10 +285,10 @@ class FunkinHscript extends InterpEx {
 	variables.set('practice', PlayState.instance.practiceMode);
 
 	for (i in 0...4) {
-		variables.set('defaultPlayerStrumX', 0);
-		variables.set('defaultPlayerStrumY', 0);
-		variables.set('defaultOpponentStrumX', 0);
-		variables.set('defaultOpponentStrumY', 0);
+		variables.set('defaultPlayerStrumX' + i, 0);
+		variables.set('defaultPlayerStrumY' + i, 0);
+		variables.set('defaultOpponentStrumX' + i, 0);
+		variables.set('defaultOpponentStrumY' + i, 0);
 	}
 
 	// Default character positions woooo

@@ -36,7 +36,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 #if FUTURE_POLYMOD
-import polymod.Polymod;
+import core.ModCore;
 #end
 
 using StringTools;
@@ -97,6 +97,8 @@ class TitleState extends MusicBeatState
 
 	var candance:Bool = true;
 
+	var leDate = Date.now();
+
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -109,18 +111,7 @@ class TitleState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		#if FUTURE_POLYMOD
-		if (sys.FileSystem.exists('mods/')) {
-			var folders:Array<String> = [];
-			for (file in sys.FileSystem.readDirectory('mods/')) {
-				var path = haxe.io.Path.join(['mods/', file]);
-				if (sys.FileSystem.isDirectory(path)) {
-					folders.push(file);
-				}
-			}
-			if(folders.length > 0) {
-				polymod.Polymod.init({modRoot: "mods", dirs: folders});
-			}
-		}
+		ModCore.reload();
 		#end
 
 		FlxG.game.focusLostFramerate = 60;
@@ -444,7 +435,12 @@ class TitleState extends MusicBeatState
 		}			
 		#end
 
-		var fullText:String = Assets.getText(Paths.txt('introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		// i did this lol
+		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
+			var fullText:String = Assets.getText(Paths.txt('fridayText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		} else {
+			var fullText:String = Assets.getText(Paths.txt('introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		}
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];

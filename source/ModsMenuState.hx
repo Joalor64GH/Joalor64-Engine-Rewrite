@@ -105,7 +105,6 @@ class ModsMenuState extends MusicBeatState
 					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()))
 					{
 						addToModsList([modSplit[0], (modSplit[1] == '1')]);
-						//trace(modSplit[1]);
 					}
 				}
 			}
@@ -509,7 +508,7 @@ class ModsMenuState extends MusicBeatState
 				}
 
 				// correct layering
-				var stuffArray:Array<FlxSprite> = [/*removeButton, installButton,*/ selector, descriptionTxt, mod.alphabet, mod.icon];
+				var stuffArray:Array<FlxSprite> = [selector, descriptionTxt, mod.alphabet, mod.icon];
 				for (obj in stuffArray)
 				{
 					remove(obj);

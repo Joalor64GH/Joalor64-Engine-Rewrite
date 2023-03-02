@@ -43,9 +43,7 @@ class ModCore
 		'swf' => VIDEO,
 		'fla' => BINARY,
 		'flp' => BINARY,
-		'zip' => BINARY,
-		'dll' => BINARY,
-		'ndll' => BINARY
+		'zip' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
