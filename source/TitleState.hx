@@ -436,11 +436,7 @@ class TitleState extends MusicBeatState
 		#end
 
 		// i did this lol
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
-			var fullText:String = Assets.getText(Paths.txt('fridayText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
-		} else {
-			var fullText:String = Assets.getText(Paths.txt('introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
-		}
+		var fullText:String = Assets.getText(Paths.txt(if (leDate.getDay() == 5 && leDate.getHours() >= 18) 'fridayText' else 'introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
