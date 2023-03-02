@@ -199,7 +199,7 @@ class CreditsEditorState extends MusicBeatState
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		colorInput = new FlxUIInputText(60, linkInput.y + yDist, 70, '', 8);
 		colorSquare = new FlxSprite(colorInput.x + 80, colorInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		soundInput = new FlxUIInputText(60, soundInput.y + yDist, 50, '', 8); // how do i fix the positioning???
+		soundInput = new FlxUIInputText(60, soundInput.y + yDist, 50, '', 8); // we'll probably get this fixed
 		var getIconColor:FlxButton = new FlxButton(colorSquare.x + 23, colorSquare.y - 2, "Get Icon Color", function()
 		{
 			var icon:String;
