@@ -47,8 +47,6 @@ class ModCore
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
-
-	private static var failedToReload:Bool = false;
 	#end
 
 	public static function reload():Void
@@ -56,10 +54,6 @@ class ModCore
 		#if FUTURE_POLYMOD
 		trace('Reloading Polymod...');
 		loadMods(getMods());
-		if (failedToReload){
-			trace('Failed to reload...');
-			// return;
-		}
 		#else
 		trace("Polymod reloading is not supported on your Platform!");
 		#end
@@ -79,13 +73,9 @@ class ModCore
 			ignoredFiles: Polymod.getDefaultIgnoreList()
 		});
 
-		if (loadedModlist != null && loadedModlist.length > 0 && folders != null && folders.length > 0)
-			trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
-		else {
-			trace('Loading failed with mods');
-			failedToReload = true;
-			// return;
-		}
+		if (loadedModlist == null) return;
+
+		trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
 
 		for (mod in loadedModlist)
 			trace('Name: ${mod.title}, [${mod.id}]');
@@ -101,13 +91,16 @@ class ModCore
 
 		for (i in Polymod.scan(MOD_DIR, '*.*.*', onError))
 		{
-			trackedMods.push(i);
-			daList.push(i.id);
+			if (i != null){
+				trackedMods.push(i);
+				daList.push(i.id);
+			}
 		}
 
-		trace('Found ${daList.length} new mods.');
+		if (daList != null && daList.length > 0)
+			trace('Found ${daList.length} new mods.');
 
-		return daList;
+		return daList != null && daList.length > 0 ? daList : [];
 	}
 
 	public static function getParseRules():ParseRules
@@ -115,7 +108,7 @@ class ModCore
 		var output:ParseRules = ParseRules.getDefault();
 		output.addType("txt", TextFileFormat.LINES);
 		output.addType("hx", TextFileFormat.PLAINTEXT);
-		return output;
+		return output != null ? output : null;
 	}
 
 	static function onError(error:PolymodError):Void
