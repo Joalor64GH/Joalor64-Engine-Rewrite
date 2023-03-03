@@ -263,14 +263,14 @@ class MainMenuState extends MusicBeatState
 
 		// The system says hi :)
 		#if debug
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, "Hello" + CoolSystemStuff.getUsername(), "having a good day? im proud of you! :)", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, 'Hello ${CoolSystemStuff.getUsername()} having a good day? im proud of you! :)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		#end
 
-                // Joalor64 Engine
-                var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
+		// Joalor64 Engine
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + joalor64EngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

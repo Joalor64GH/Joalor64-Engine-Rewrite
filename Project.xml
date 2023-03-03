@@ -3,9 +3,14 @@
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
-        <app file="J64EngineRE_WIN" if="windows" />
+	<app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
+
+	<!-- just for clarfication -->
+	<app file="J64EngineRE_WIN DEBUG" if="windows debug" />
+	<app file="J64EngineRE_APP DEBUG" if="linux debug" />
+	<app file="J64EngineRE_MAC DEBUG" if="mac debug" />
 
 	<!--Preloader-->
 	<app preloader="flixel.system.FlxPreloader" />
@@ -179,7 +184,7 @@
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 	<haxelib name="discord_rpc" if="desktop"/>
-	<haxelib name="hxcpp-debug-server" if="desktop"/>
+	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

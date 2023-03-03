@@ -405,7 +405,8 @@ class TitleState extends MusicBeatState
 		#end
 
 		// Version Text
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.2.5 (PE 0.6.3)" #if debug + " DEBUG BUILD" #end, 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.2.5 (PE 0.6.3)", 12);
+		#if debug versionShit.text += "DEBUG BUILD"; #end
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -436,7 +437,17 @@ class TitleState extends MusicBeatState
 		#end
 
 		// i did this lol
-		var fullText:String = Assets.getText(Paths.txt(if (leDate.getDay() == 5 && leDate.getHours() >= 18) 'fridayText' else 'introText') #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		// me too joalor lol
+		var fullText:String = '';
+
+		final dateShit = Paths.txt((leDate.getDay() == 5 && leDate.getHours() >= 18) ? 'fridayText' : 'introText');
+
+		if (Assets.exists(dateShit))
+			fullText = Assets.getText(dateShit #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+		else {
+			trace('IntroText could not be found');
+			fullText = Assets.exists(Paths.txt('introText')) ? Assets.getText(Paths.txt('introText')) : '';
+		}
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
@@ -550,7 +561,7 @@ class TitleState extends MusicBeatState
 	{
 		for (i in 0...textArray.length)
 		{
-			var money:Alphabet = new Alphabet(0, 0, textArray[i], true);
+			var money:Alphabet = new Alphabet(0, 0, textArray.length > 0 ? textArray[i] : 'Placeholder', true);
 			money.screenCenter(X);
 			money.y += (i * 60) + 200 + offset;
 			if(credGroup != null && textGroup != null) {
@@ -563,7 +574,7 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String, ?offset:Float = 0)
 	{
 		if(textGroup != null && credGroup != null) {
-			var coolText:Alphabet = new Alphabet(0, 0, text, true);
+			var coolText:Alphabet = new Alphabet(0, 0, text != '' ? text : 'bruh', true);
 			coolText.screenCenter(X);
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
