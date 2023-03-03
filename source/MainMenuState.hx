@@ -26,9 +26,7 @@ import haxe.Json;
 
 import options.*;
 import editors.*;
-
-import core.ToastCore;
-import core.ModCore;
+import core.*;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -209,8 +207,6 @@ class MainMenuState extends MusicBeatState
 			magenta.color = 0xFFfd719b;
 
 		add(magenta);
-		
-		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
