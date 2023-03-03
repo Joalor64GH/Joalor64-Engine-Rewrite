@@ -73,7 +73,12 @@ class ModCore
 			ignoredFiles: Polymod.getDefaultIgnoreList()
 		});
 
-		trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
+		if (loadedModlist != null && loadedModlist.length > 0 && folders != null && folders.length > 0)
+			trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
+		else {
+			trace('Loading failed with mods');
+			return;
+		}
 
 		for (mod in loadedModlist)
 			trace('Name: ${mod.title}, [${mod.id}]');
