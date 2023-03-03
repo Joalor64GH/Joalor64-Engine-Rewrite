@@ -47,6 +47,8 @@ class ModCore
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
+
+	private static var failedToReload:Bool = false;
 	#end
 
 	public static function reload():Void
@@ -54,8 +56,12 @@ class ModCore
 		#if FUTURE_POLYMOD
 		trace('Reloading Polymod...');
 		loadMods(getMods());
+		if (failedToReload){
+			trace('Failed to reload...');
+			// return;
+		}
 		#else
-		trace("Polymod reloading is not supported on your Platform!")
+		trace("Polymod reloading is not supported on your Platform!");
 		#end
 	}
 
@@ -77,7 +83,8 @@ class ModCore
 			trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
 		else {
 			trace('Loading failed with mods');
-			return;
+			failedToReload = true;
+			// return;
 		}
 
 		for (mod in loadedModlist)
