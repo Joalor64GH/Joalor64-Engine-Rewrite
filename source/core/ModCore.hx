@@ -90,8 +90,7 @@ class ModCore
 		for (i in Polymod.scan(MOD_DIR, '*.*.*', onError))
 		{
 			trackedMods.push(i);
-			if (!FlxG.save.data.disabledMods.contains(i.id))
-				daList.push(i.id);
+			daList.push(i.id);
 		}
 
 		trace('Found ${daList.length} new mods.');
