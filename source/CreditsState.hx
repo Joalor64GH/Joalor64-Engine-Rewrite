@@ -190,6 +190,14 @@ class CreditsState extends MusicBeatState
 				''
 			],
 			[
+				'Verwex',
+				'',
+				'Micd Up Paths System\n"hell"',
+				'https://github.com/Verwex',
+				'FFD900',
+				''
+			],
+			[
 				'You',
 				'face',
 				'For playing :)\n"No problem! -You"',

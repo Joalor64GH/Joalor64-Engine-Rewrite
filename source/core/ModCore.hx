@@ -83,12 +83,6 @@ class ModCore
 	{
 		trackedMods = [];
 
-		if (FlxG.save.data.disabledMods == null)
-		{
-			FlxG.save.data.disabledMods = [];
-			FlxG.save.flush();
-		}
-
 		var daList:Array<String> = [];
 
 		trace('Searching for Mods...');
