@@ -36,7 +36,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 #if FUTURE_POLYMOD
-import core.ModCore;
+import polymod.PolymodAssets;
 #end
 
 using StringTools;
@@ -111,7 +111,18 @@ class TitleState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		#if FUTURE_POLYMOD
-		ModCore.reload();
+		if (sys.FileSystem.exists('mods/')) {
+			var folders:Array<String> = [];
+			for (file in sys.FileSystem.readDirectory('mods/')) {
+				var path = haxe.io.Path.join(['mods/', file]);
+				if (sys.FileSystem.isDirectory(path)) {
+					folders.push(file);
+				}
+			}
+			if(folders.length > 0) {
+				polymod.Polymod.init({modRoot: "mods", dirs: folders});
+			}
+		}
 		#end
 
 		FlxG.game.focusLostFramerate = 60;
