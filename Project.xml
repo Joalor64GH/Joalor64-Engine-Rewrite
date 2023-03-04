@@ -48,7 +48,6 @@
 	<define name="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release" />
-	<define name="MP3_ALLOWED" if="web || flash || cpp"/>
 	<define name="PSYCH"/>
 	<define name="EMBED_ASSETS"/>
 	<define name="CHECK_FOR_UPDATES" if="desktop"/>
@@ -70,8 +69,8 @@
 	        <assets path="assets/core" embed='true'/>
 			<assets path="assets/fonts" embed='true'/>
 	</section>
-	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="MP3_ALLOWED"/>
-	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="MP3_ALLOWED"/>
+	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
+	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="web"/>
 
 	<!-- SWF EXAMPLE-->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
@@ -126,7 +125,7 @@
 	</section>
 
         <!-- PATH DEFINITIONS -->
-	<section if="MP3_ALLOWED">
+	<section if="web">
 		<assets path="assets/songs"         library="songs"         exclude="*.ogg"/>
 		<assets path="assets/shared"        library="shared"        exclude="*.ogg"/>
 		<assets path="assets/tutorial"      library="tutorial"      exclude="*.ogg"/>
@@ -139,7 +138,7 @@
 		<assets path="assets/week7"         library="week7"         exclude="*.ogg"/>
 	</section>
 
-	<section unless="MP3_ALLOWED">
+	<section unless="web">
 		<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4"/>
 		<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.mp4"/>
 		<assets path="assets/tutorial"      library="tutorial"      exclude="*.mp3|*.mp4"/>
