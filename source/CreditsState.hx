@@ -171,30 +171,30 @@ class CreditsState extends MusicBeatState
 				'ToastCore\n"Just a guy"',
 				'https://github.com/MAJigsaw77',
 				'444444',
-				''
+				'jigsaw'
 			],
 			[
 				'KookerFoxYT',
 				'fox',
 				'Custom Options\n"fox"',
 				'https://github.com/KookerFoxYT',
-				'0000FF',
-				''
+				'00B0B4', // it spelled bob lmao
+				'fox'
 			],
 			[
 				'Endergreen12',
-				'',
+				'none',
 				'Custom Gameplay Changers\n"He did a thing"',
 				'https://github.com/Endergreen12',
-				'FFD900',
-				''
+				'00C834',
+				'none'
 			],
 			[
 				'Verwex',
-				'',
+				'verwex',
 				'Micd Up Paths System\n"hell"',
 				'https://github.com/Verwex',
-				'FFD900',
+				'8FFFFF',
 				''
 			],
 			[
