@@ -112,7 +112,7 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRight.scrollFactor.set();
 		add(portraitRight);
 		portraitRight.visible = false;
-		
+
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
 		box.updateHitbox();
@@ -126,12 +126,6 @@ class DialogueBox extends FlxSpriteGroup
 		handSelect.updateHitbox();
 		handSelect.visible = false;
 		add(handSelect);
-
-
-		if (!talkingRight)
-		{
-			// box.flipX = true;
-		}
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
@@ -236,11 +230,7 @@ class DialogueBox extends FlxSpriteGroup
 	function startDialogue():Void
 	{
 		cleanDialog();
-		// var theDialog:Alphabet = new Alphabet(0, 70, dialogueList[0], false, true);
-		// dialogue = theDialog;
-		// add(theDialog);
 
-		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
 		swagDialogue.completeCallback = function() {
