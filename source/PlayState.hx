@@ -6029,13 +6029,13 @@ class PlayState extends MusicBeatState
 			ratingFC = "";
 			if (sicks > 0)
 				ratingFC = "PFC";
-			else if (goods > 0)
+			if (goods > 0)
 				ratingFC = "MFC";
-			else if (bads > 0)
+			if (bads > 0)
 				ratingFC = "GFC";
-			else if (shits > 0)
+			if (shits > 0)
 				ratingFC = "FC";
-			else if (songMisses > 0 && songMisses < 10)
+			if (songMisses > 0 && songMisses < 10)
 				ratingFC = "SDM";
 			else if (songMisses >= 10)
 				ratingFC = "Clear";
