@@ -12,6 +12,10 @@ class BackgroundGirls extends FlxSprite
 
 		// BG fangirls dissuaded
 		frames = Paths.getSparrowAtlas('weeb/bgFreaks');
+		if (frames == null){
+			trace("Failed to load images for background girls");
+			return;
+		}	
 
 		swapDanceType();
 
