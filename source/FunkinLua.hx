@@ -158,6 +158,7 @@ class FunkinLua {
 		set('weekRaw', PlayState.storyWeek);
 		set('week', WeekData.weeksList[PlayState.storyWeek]);
 		set('seenCutscene', PlayState.seenCutscene);
+		set('inCutscene', PlayState.instance.inCutscene);
 
 		// Camera poo
 		set('cameraX', 0);

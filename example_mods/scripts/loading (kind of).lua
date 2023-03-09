@@ -1,3 +1,8 @@
+--[[
+This doesn't work on Week 6, I've been trying to fix it for a while and I'm starting to get ticked off.
+I'm coming close to deleting it altogether.
+]]
+
 local bg = 'loadingBG' -- don't touch this
 
 local allowCountdown = false
@@ -13,11 +18,13 @@ function onStartCountdown() -- No countdown yet
 end
 
 function onCreatePost() -- sprite loading
-	makeLuaSprite('loadingBG', 'loadingscreen/'..bg, 0, 0)
-	runTimer('fadeTimer', 3.0, 1)
+	if weekRaw ~= 6 or weekRaw ~= 7 then
+		makeLuaSprite('loadingBG', 'loadingscreen/'..bg, 0, 0)
+		runTimer('fadeTimer', 3.0, 1)
 
-	addLuaSprite('loadingBG', true)
-	setObjectCamera('loadingBG', 'camOther')
+		addLuaSprite('loadingBG', true)
+		setObjectCamera('loadingBG', 'camOther')
+	end
 end
 
 function onTimerCompleted(tag) -- bye bye loading screen
@@ -25,13 +32,11 @@ function onTimerCompleted(tag) -- bye bye loading screen
 	    doTweenAlpha('delete', 'loadingBG', 0, 0.5, 'backIn')
 		allowCountdown = true
 		startCountdown()
-		
 	end
 end
 
 function onTweenCompleted(tag) -- everything goes bye bye
     if tag == 'delete' then
 	    removeLuaSprite('loadingBG', true)
-		
 	end
 end
