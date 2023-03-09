@@ -1,5 +1,5 @@
 --[[
-This doesn't work on Week 6, I've been trying to fix it for a while and I'm starting to get ticked off.
+This doesn't work on Week 6 (and cutscenes in general), I've been trying to fix it for a while and I'm starting to get ticked off.
 I'm coming close to deleting it altogether.
 ]]
 
