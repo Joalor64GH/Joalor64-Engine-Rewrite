@@ -150,10 +150,10 @@ class CreditsState extends MusicBeatState
 				'nyaw'
 			],
 			[
-				'stevecodergh',
-				'steve',
-				'Python Support\n"Mag Engine is discontinued FRICK"',
-				'https://github.com/stevecodergh',
+				'magnumsrt',
+				'mag',
+				'Python Support\n"why bro keep changing his user"',
+				'https://github.com/magnumsrt',
 				'0000FF',
 				'squeak'
 			],
@@ -171,7 +171,7 @@ class CreditsState extends MusicBeatState
 				'ToastCore\n"Just a guy"',
 				'https://github.com/MAJigsaw77',
 				'444444',
-				'jigsaw'
+				''
 			],
 			[
 				'KookerFoxYT',
@@ -179,7 +179,7 @@ class CreditsState extends MusicBeatState
 				'Custom Options\n"fox"',
 				'https://github.com/KookerFoxYT',
 				'00B0B4', // it spelled bob lmao
-				'fox'
+				''
 			],
 			[
 				'Endergreen12',
@@ -187,7 +187,7 @@ class CreditsState extends MusicBeatState
 				'Custom Gameplay Changers\n"He did a thing"',
 				'https://github.com/Endergreen12',
 				'00C834',
-				'none'
+				''
 			],
 			[
 				'Verwex',

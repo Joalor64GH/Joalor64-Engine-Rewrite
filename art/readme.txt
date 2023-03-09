@@ -15,7 +15,7 @@ TopoConnection and Forever Engine Underscore - BeastlyGhost/Gabi
 Mic'd Up - Verwex
 Gamer Engine - Mealthy/Betopia
 Psych Forever Engine - ClassicBoost
-Mag Engine - stevecodergh
+Mag Engine - magnumsrt
 Pull Requests - Psych Engine GitHub Contributors
 -------------------------------------------------------------
 So, yeah. That's pretty much it!
