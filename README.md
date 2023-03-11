@@ -24,7 +24,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 
 # Planned Features
 * [ ] WAV Support
-* [ ] Make a Tempplate for HX Scripts
+* [ ] Make a Template for HX Scripts
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 * [ ] Reorganized Source Code
 
