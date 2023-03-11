@@ -190,7 +190,7 @@ function onUpdate()
 		setPropertyFromClass('flixel.FlxG', 'sound.music.volume',0)
 		setProperty('vocals.volume',0)
 	end
-	if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.SPACE') and FreezeTime==true then
+	if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.ENTER') and FreezeTime==true then
 		FreezeTime=false
 		SeenRatingScreen=true
 		playSound('dialogueClose',0.35)

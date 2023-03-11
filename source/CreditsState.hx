@@ -94,7 +94,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Joalor64 YT',
 				'joalor',
-				'Project leader\nMain Programmer\n"I do things"',
+				'Project Leader\nMain Programmer\n"I do things"',
 				'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',
 				'00FFF6',
 				'noweyyy'
