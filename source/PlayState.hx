@@ -67,7 +67,6 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-// epic fix
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
@@ -1037,7 +1036,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.py') && !filesPushed.contains(file))
 					{
-	                    Python.doFile(folder + file);
+	                    			Python.doFile(folder + file);
 						filesPushed.push(file);
 					}
 				}
@@ -1615,7 +1614,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file == '.py' && !filesPushed.contains(file))
 					{
-	                    Python.doFile(folder + file);
+	                    			Python.doFile(folder + file);
 						filesPushed.push(file);
 					}
 				}
@@ -2733,8 +2732,8 @@ class PlayState extends MusicBeatState
 		introAssets.set('default', [
 			'three',
 			'two', 
-		    'one', 
-		    'go'
+		    	'one', 
+		    	'go'
 		]);
 		introAssets.set('pixel', [
 			'pixelUI/three-pixel',
@@ -5940,21 +5939,22 @@ class PlayState extends MusicBeatState
 		#end
 
 		#if HSCRIPT_ALLOWED
-			for (script in hscriptMap.keys()) {
-				var hscript = hscriptMap.get(script);
-				if(hscript.closed || exclusions.contains(hscript.scriptName))
-					continue;
+		for (script in hscriptMap.keys()) {
+			var hscript = hscriptMap.get(script);
+			if(hscript.closed || exclusions.contains(hscript.scriptName))
+				continue;
 
-				var ret:Dynamic = callHscript(script, event, args);
-				if(ret == FunkinLua.Function_StopLua && !ignoreStops)
-					break;
+			var ret:Dynamic = callHscript(script, event, args);
+			if(ret == FunkinLua.Function_StopLua && !ignoreStops)
+				break;
 
-				if (ret != FunkinLua.Function_Continue)
-					returnVal = ret;
-			}
-			for (i in achievementsArray)
-			i.call(event, args);
-			#end
+			if (ret != FunkinLua.Function_Continue)
+				returnVal = ret;
+		}
+		for (i in achievementsArray)
+		i.call(event, args);
+		#end
+			
 		return returnVal;
 	}
 
