@@ -1,6 +1,10 @@
-package;
+package meta.substate;
 
-import Controls.Control;
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.substate.*;
+import meta.data.alphabet.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;

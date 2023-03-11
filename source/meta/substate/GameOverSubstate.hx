@@ -1,4 +1,4 @@
-package;
+package meta.substate;
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -9,7 +9,11 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import Character;
+import objects.Character;
+import meta.substate.*;
+import meta.state.*;
+import meta.data.*;
+import meta.*;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
