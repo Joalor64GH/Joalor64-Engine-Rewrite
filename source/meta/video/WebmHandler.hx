@@ -1,5 +1,6 @@
-package;
+package meta.video;
 
+import meta.video.*;
 import flixel.FlxG;
 import openfl.display.Sprite;
 #if WEBM_ALLOWED

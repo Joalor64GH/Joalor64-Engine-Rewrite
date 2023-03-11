@@ -1,3 +1,5 @@
+package meta.video;
+
 #if web
 import openfl.net.NetConnection;
 import openfl.net.NetStream;

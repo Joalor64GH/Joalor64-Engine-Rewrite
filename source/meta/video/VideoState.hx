@@ -1,8 +1,9 @@
-package;
+package meta.video;
 
+import meta.*;
+import meta.video.*;
 import flixel.FlxState;
 import flixel.FlxG;
-
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;

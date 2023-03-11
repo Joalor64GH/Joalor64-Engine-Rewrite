@@ -1,4 +1,6 @@
-package;
+package meta.video;
+
+import meta.video.*;
 
 import flixel.FlxCamera;
 import flixel.FlxG;

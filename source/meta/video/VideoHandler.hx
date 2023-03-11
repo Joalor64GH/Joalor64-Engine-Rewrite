@@ -1,6 +1,7 @@
 // This was made by GWebDev lol btw this uses actuate
-package;
+package meta.video;
 
+import meta.video.*;
 import motion.Actuate;
 import openfl.display.Sprite;
 import openfl.events.AsyncErrorEvent;
