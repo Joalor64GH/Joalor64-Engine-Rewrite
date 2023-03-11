@@ -1,11 +1,12 @@
-package error;
+package meta.state.error;
 
 import haxe.Log;
-import error.Menu;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import meta.state.error.Menu;
+import meta.state.TitleState;
 
 class OopsState extends FlxState
 {

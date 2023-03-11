@@ -1,3 +1,5 @@
+package meta.data.scripts;
+
 #if HSCRIPT_ALLOWED
 #if LUA_ALLOWED
 import FunkinLua;

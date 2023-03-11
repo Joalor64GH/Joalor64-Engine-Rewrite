@@ -1,4 +1,4 @@
-package error;
+package meta.state.error;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

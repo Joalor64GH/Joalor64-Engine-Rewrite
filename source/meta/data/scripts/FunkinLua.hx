@@ -1,4 +1,4 @@
-package;
+package meta.data.scripts;
 
 import openfl.display.BitmapData;
 #if LUA_ALLOWED

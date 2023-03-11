@@ -1,4 +1,4 @@
-package windows;
+package meta.data.windows;
 
 #if windows
 @:buildXml('

@@ -1,42 +1,44 @@
 // This just contains global imports.
+// FLIXEL
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.FlxSprite;
 import flixel.FlxG;
-import Alphabet;
-import Discord;
-import Conductor;
-import Conductor.BPMChangeEvent;
-import Section;
-import Song;
+
+// FNF
+import animateatlas.AtlasFrameMaker;
+import meta.data.font.Alphabet;
+import meta.data.dependency.Discord;
+import meta.data.Conductor;
+import meta.data.Conductor.BPMChangeEvent;
+import meta.data.Section;
+import meta.data.Song;
+import meta.CoolUtil;
+import meta.data.Highscore;
+import meta.data.PlayerSettings;
+import meta.MusicBeatState;
+import meta.MusicBeatSubstate;
+import meta.state.PlayState;
+import meta.Controls;
 import Paths;
-import CoolUtil;
-import Highscore;
-import AttachedSprite;
-import PlayerSettings;
-import MusicBeatState;
-import MusicBeatSubstate;
-import PlayState;
-import Controls;
+
+import objects.AttachedSprite;
+import meta.data.options.*;
+import hscript.*;
+
+// MISCELLANEOUS
 #if (polymod && FUTURE_POLYMOD)
 import polymod.Polymod;
 #end
-
-import animateatlas.AtlasFrameMaker;
-
-import hscript.*;
-import options.*;
-
-using CoolUtil;
-using StringTools;
-
 #if sys
 import sys.io.File;
 import sys.FileSystem;
 #end
-
 import tjson.TJSON as Json;
 import openfl.utils.Assets as OpenFlAssets;
 import lime.utils.Assets as LimeAssets;
+
+using StringTools;
+using meta.CoolUtil;
