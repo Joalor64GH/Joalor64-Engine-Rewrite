@@ -11,7 +11,9 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import meta.data.ClientPrefs;
 import core.ToastCore;
+import meta.video.*;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -106,21 +108,21 @@ class Main extends Sprite
 
 		#if web
 		var str1:String = "HTML CRAP";
-		var vHandler = new meta.video.VideoHandler();
+		var vHandler = new VideoHandler();
 		vHandler.init1();
 		vHandler.video.name = str1;
 		addChild(vHandler.video);
 		vHandler.init2();
-		meta.video.GlobalVideo.setVid(vHandler);
+		GlobalVideo.setVid(vHandler);
 		vHandler.source(ourSource);
 		#elseif WEBM_ALLOWED
 		var str1:String = "WEBM SHIT";
-		var webmHandle = new meta.video.WebmHandler();
+		var webmHandle = new WebmHandler();
 		webmHandle.source(ourSource);
 		webmHandle.makePlayer();
 		webmHandle.webm.name = str1;
 		addChild(webmHandle.webm);
-		meta.video.GlobalVideo.setWebm(webmHandle);
+		GlobalVideo.setWebm(webmHandle);
 		#end
 
 		#if html5
@@ -165,7 +167,7 @@ class Main extends Sprite
 			Sys.println("Crash dump saved in " + Path.normalize(path));
 	
 			Application.current.window.alert(errMsg, "Error!");
-			meta.data.dependency.DiscordClient.shutdown();
+			DiscordClient.shutdown();
 			Sys.exit(1);
 		});
 		#end

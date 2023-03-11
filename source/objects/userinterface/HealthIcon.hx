@@ -1,7 +1,8 @@
-package;
+package objects.userinterface;
 
 import flixel.FlxSprite;
 import openfl.utils.Assets as OpenFlAssets;
+import meta.data.ClientPrefs;
 
 using StringTools;
 

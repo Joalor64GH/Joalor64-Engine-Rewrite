@@ -1,7 +1,8 @@
-package;
+package objects.background;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import meta.data.ClientPrefs;
 
 class BackgroundDancer extends FlxSprite
 {

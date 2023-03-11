@@ -1,4 +1,4 @@
-package;
+package objects.userinterface.menu;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -9,6 +9,7 @@ import sys.FileSystem;
 import openfl.utils.Assets;
 import haxe.Json;
 import haxe.format.JsonParser;
+import meta.data.ClientPrefs;
 
 typedef MenuCharacterFile = {
 	var image:String;

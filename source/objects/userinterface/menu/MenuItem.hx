@@ -1,10 +1,11 @@
-package;
+package objects.userinterface.menu;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import meta.data.ClientPrefs;
 
 class MenuItem extends FlxSprite
 {

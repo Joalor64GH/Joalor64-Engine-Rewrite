@@ -1,10 +1,10 @@
-package;
+package objects;
 
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
-import Section.SwagSection;
+import meta.data.*;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;

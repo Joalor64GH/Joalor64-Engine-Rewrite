@@ -1,4 +1,4 @@
-package;
+package objects.userinterface;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

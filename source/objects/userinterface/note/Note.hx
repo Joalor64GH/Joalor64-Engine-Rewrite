@@ -1,4 +1,4 @@
-package;
+package objects.userinterface.note;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -6,7 +6,11 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flash.display.BitmapData;
-import editors.ChartingState;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.data.*;
+
+import objects.shaders.*;
 
 using StringTools;
 

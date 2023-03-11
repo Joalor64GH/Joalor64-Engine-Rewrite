@@ -1,4 +1,4 @@
-package;
+package objects.shaders;
 
 import flixel.util.FlxColor;
 import openfl.display.ShaderParameter;
