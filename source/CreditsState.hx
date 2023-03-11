@@ -128,7 +128,7 @@ class CreditsState extends MusicBeatState
 			[
 				'BeastlyGhost',
 				'beastly',
-				'Customizable Main Menu with .JSON\nPrepare Sprite\nCredits Sounds\n"just happy to be here!"',
+				'Customizable Main Menu with .JSON\nCredits Sounds\n"just happy to be here!"',
 				'https://github.com/BeastlyGhost',
 				'8CC4FF',
 				'Ghost'

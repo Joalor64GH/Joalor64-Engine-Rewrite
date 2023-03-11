@@ -39,7 +39,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
-* [BeastlyGhost](https://github.com/BeastlyGhost) - Prepare Sprite + Customizable Main Menu via JSON + Credits Sounds
+* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
 * [magnumsrt](https://github.com/magnumsrt) - Python Support
