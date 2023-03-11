@@ -1,3 +1,5 @@
+package windows;
+
 #if windows
 @:buildXml('
 <compilerflag value="/DelayLoad:ComCtl32.dll"/>
