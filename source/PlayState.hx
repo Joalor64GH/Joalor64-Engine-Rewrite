@@ -83,10 +83,6 @@ import VideoSubState;
 import SwfVideo;
 #end
 
-#if PYTHON_SCRIPTING
-import pythonUtil.Python;
-#end
-
 #if HSCRIPT_ALLOWED
 import hscript.*;
 import horny.*;
@@ -1015,35 +1011,6 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		#if PYTHON_SCRIPTING
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if(file.endsWith('.py') && !filesPushed.contains(file))
-					{
-	                    			Python.doFile(folder + file);
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end
-
 		// STAGE SCRIPTS
 		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED)
 		var doPush:Bool = false;
@@ -1586,35 +1553,6 @@ class PlayState extends MusicBeatState
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
 						scriptArray.push(new FunkinSScript(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end
-
-		#if PYTHON_SCRIPTING
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if(file == '.py' && !filesPushed.contains(file))
-					{
-	                    			Python.doFile(folder + file);
 						filesPushed.push(file);
 					}
 				}

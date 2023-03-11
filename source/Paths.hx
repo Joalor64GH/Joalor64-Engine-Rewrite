@@ -485,14 +485,6 @@ class Paths
 
 		return getPath('$key.hx', TEXT, library);
 	}
-	inline static public function py(key:String, ?library:String)
-	{
-		#if !sys
-		library = null;
-		#end
-		
-		return getPath('$key.py', TEXT, library);
-	}
 	static public function video(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)

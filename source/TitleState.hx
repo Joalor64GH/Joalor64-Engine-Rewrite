@@ -348,13 +348,13 @@ class TitleState extends MusicBeatState
 		credIcon1.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon1.visible = false;
 
-		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/bot'));
+		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/meme'));
 		add(credIcon2);
 		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
 
-		credIcon3 = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/meme'));
+		credIcon3 = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/bot'));
 		add(credIcon3);
 		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;

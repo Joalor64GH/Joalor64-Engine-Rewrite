@@ -152,7 +152,7 @@ class CreditsState extends MusicBeatState
 			[
 				'magnumsrt',
 				'mag',
-				'Python Support\n"why bro keep changing his user"',
+				'In-Game Mod Downloader\n"why bro keep changing his user"',
 				'https://github.com/magnumsrt',
 				'0000FF',
 				'squeak'

@@ -35,6 +35,7 @@
 
 	<!-- _______________________________ Custom Defines ______________________________ -->
 
+	<!-- UNCOMMENT THESE TO DISABLE THEM -->
 	<section if="desktop">
 		<define name="MODS_ALLOWED" />
 		<define name="LUA_ALLOWED" />
@@ -45,15 +46,14 @@
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
-	<define name="PYTHON_SCRIPTING" if="windows" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
-	<define name="JOALOR64_WATERMARKS"/> <!-- UNCOMMENT THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
-	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- UNCOMMENT THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+	<define name="JOALOR64_WATERMARKS"/>
+	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="PSYCH"/>
 	<define name="EMBED_ASSETS"/>
-	<define name="PRELOAD_ALL" unless="web" /> <!-- UNCOMMENT THIS TO DISABLE LOADING SCREEN -->
+	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
 	<!-- _____________________________ Export Folder ____________________________ -->
@@ -107,10 +107,6 @@
 		<library name="week7"         preload="false" />
 	</section>
 
-	<section if="PYTHON_SCRIPTING">
-	        <assets path="dlls/"                rename='' />
-	</section>
-
 	<section if="VIDEOS_ALLOWED || WEBM_ALLOWED">
 	        <assets path="assets/videos"        library="videos" />
         </section>
@@ -161,7 +157,7 @@
 	<assets path='LICENSE' rename='LICENSE.txt' />
 
 	<!--FOR LUA DOCUMENTATION-->
-	<assets path='header.lua' embed='true'/>
+	<assets path='art/header.lua' embed='true'/>
 	
 	<!-- _______________________________ Libraries ______________________________ -->
 

@@ -6,7 +6,11 @@ import flixel.FlxState;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.events.Event;
+#if (hxCodec >= "2.6.1")
+import hxcodec.vlc.VlcBitmap as vlc.VlcBitmap;
+#else
 import vlc.VlcBitmap;
+#end
 
 // THIS IS FOR TESTING
 // DONT STEAL MY CODE >:(

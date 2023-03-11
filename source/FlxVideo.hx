@@ -5,7 +5,11 @@ import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 #else
 import openfl.events.Event;
-import hxcodec.vlc.VlcBitmap;
+#if (hxCodec >= "2.6.1")
+import hxcodec.vlc.VlcBitmap as vlc.VlcBitmap;
+#else
+import vlc.VlcBitmap;
+#end
 #end
 import flixel.FlxBasic;
 import flixel.FlxG;
