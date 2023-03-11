@@ -7,7 +7,7 @@
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
 
-	<!-- just for clarfication -->
+	<!-- Just for clarfication -->
 	<app file="J64EngineRE_WIN DEBUG" if="windows debug" />
 	<app file="J64EngineRE_APP DEBUG" if="linux debug" />
 	<app file="J64EngineRE_MAC DEBUG" if="mac debug" />
@@ -35,22 +35,24 @@
 
 	<!-- _______________________________ Custom Defines ______________________________ -->
 
-	<define name="MODS_ALLOWED" if="desktop" />
+	<section if="desktop">
+		<define name="MODS_ALLOWED" />
+		<define name="LUA_ALLOWED" />
+		<define name="HSCRIPT_ALLOWED" />
+		<define name="SCRIPT_EXTENSION" />
+		<define name="WEBM_ALLOWED" />
+		<define name="FLASH_MOVIE" />
+		<define name="CHECK_FOR_UPDATES" />
+	</section>
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
-	<define name="LUA_ALLOWED" if="desktop" />
-	<define name="HSCRIPT_ALLOWED" if="desktop"/>
-	<define name="SCRIPT_EXTENSION" if="desktop"/>
 	<define name="PYTHON_SCRIPTING" if="windows" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
-	<define name="WEBM_ALLOWED" if="desktop" />
-	<define name="FLASH_MOVIE" if="desktop" />
-	<define name="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
-	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+	<define name="JOALOR64_WATERMARKS"/> <!-- UNCOMMENT THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- UNCOMMENT THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="PSYCH"/>
 	<define name="EMBED_ASSETS"/>
-	<define name="CHECK_FOR_UPDATES" if="desktop"/>
 	<define name="PRELOAD_ALL" unless="web" /> <!-- UNCOMMENT THIS TO DISABLE LOADING SCREEN -->
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
