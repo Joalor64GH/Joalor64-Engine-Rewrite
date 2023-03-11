@@ -1,4 +1,4 @@
-package;
+package meta.data.alphabet;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

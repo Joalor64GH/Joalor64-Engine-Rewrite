@@ -1,4 +1,4 @@
-package;
+package meta.data.alphabet;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -11,7 +11,7 @@ import flash.media.Sound;
 
 using StringTools;
 
-class TypedAlphabet extends Alphabet
+class TypedAlphabet extends meta.data.alphabet.Alphabet
 {
 	public var onFinish:Void->Void = null;
 	public var finishedText:Bool = false;

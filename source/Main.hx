@@ -19,7 +19,7 @@ import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
@@ -99,28 +99,28 @@ class Main extends Sprite
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null) {
-			fpsVar.visible = ClientPrefs.showFPS;
+			fpsVar.visible = meta.data.ClientPrefs.showFPS;
 		}
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
 
 		#if web
 		var str1:String = "HTML CRAP";
-		var vHandler = new VideoHandler();
+		var vHandler = new meta.video.VideoHandler();
 		vHandler.init1();
 		vHandler.video.name = str1;
 		addChild(vHandler.video);
 		vHandler.init2();
-		GlobalVideo.setVid(vHandler);
+		meta.video.GlobalVideo.setVid(vHandler);
 		vHandler.source(ourSource);
 		#elseif WEBM_ALLOWED
 		var str1:String = "WEBM SHIT";
-		var webmHandle = new WebmHandler();
+		var webmHandle = new meta.video.WebmHandler();
 		webmHandle.source(ourSource);
 		webmHandle.makePlayer();
 		webmHandle.webm.name = str1;
 		addChild(webmHandle.webm);
-		GlobalVideo.setWebm(webmHandle);
+		meta.video.GlobalVideo.setWebm(webmHandle);
 		#end
 
 		#if html5
@@ -165,7 +165,7 @@ class Main extends Sprite
 			Sys.println("Crash dump saved in " + Path.normalize(path));
 	
 			Application.current.window.alert(errMsg, "Error!");
-			DiscordClient.shutdown();
+			meta.data.dependency.DiscordClient.shutdown();
 			Sys.exit(1);
 		});
 		#end

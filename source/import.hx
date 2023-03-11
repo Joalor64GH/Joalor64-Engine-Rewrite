@@ -9,7 +9,7 @@ import flixel.FlxG;
 
 // FNF
 import animateatlas.AtlasFrameMaker;
-import meta.data.font.Alphabet;
+import meta.data.alphabet.Alphabet;
 import meta.data.dependency.Discord;
 import meta.data.Conductor;
 import meta.data.Conductor.BPMChangeEvent;

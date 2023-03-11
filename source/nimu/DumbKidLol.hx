@@ -1,4 +1,4 @@
-package;
+package nimu;
 
 class DumbKidLol extends RealDumbass
 {

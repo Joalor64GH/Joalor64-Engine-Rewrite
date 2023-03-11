@@ -1,6 +1,4 @@
-// yeah um idk
-// this was supposed to be used if PRELOAD_ALL is disabled
-package other;
+package unused;
 
 class Loader
 {
