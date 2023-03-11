@@ -28,7 +28,7 @@ import haxe.Json;
 
 import flash.media.Sound;
 import openfl.media.Sound;
-import GithubShit;
+import github.APIShit;
 
 using StringTools;
 
@@ -218,8 +218,8 @@ class Paths
 	// this stuff is for github idk
 	public static function gitGetPath(path:String, branch:String = 'main')
 	{
-		trace('path: https://${GithubShit.personalAccessToken}@raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
-		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		trace('path: https://${APIShit.personalAccessToken}@raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
+		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
 		var contents:String = '';
 		http.onData = function(data:String) {
 			//trace(data);
@@ -232,7 +232,7 @@ class Paths
 		return contents;
 	}
 	public static function gitImage(path:String, branch:String) {
-		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
 		var spr:FlxSprite = new FlxSprite();
 		http.onBytes = function(bytes:Bytes) {
 			var bmp:BitmapData = BitmapData.fromBytes(bytes);

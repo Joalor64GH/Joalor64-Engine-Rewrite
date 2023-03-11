@@ -1,6 +1,6 @@
-package;
+package github;
 
-class GithubShit
+class APIShit
 {
     public static var repoHolder:String = 'Joalor64GH';
     public static var repoName:String = 'Joalor64-Engine-Rewrite';
