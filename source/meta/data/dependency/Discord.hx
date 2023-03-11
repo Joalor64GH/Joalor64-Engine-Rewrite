@@ -1,4 +1,4 @@
-package;
+package meta.data.dependency;
 
 #if desktop
 import Sys.sleep;
@@ -8,6 +8,8 @@ import discord_rpc.DiscordRpc;
 import llua.Lua;
 import llua.State;
 #end
+
+import meta.state.MainMenuState;
 
 using StringTools;
 
