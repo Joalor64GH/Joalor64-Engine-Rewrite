@@ -1,4 +1,7 @@
-package;
+package meta.state;
+
+import meta.data.*;
+import objects.userinterface.note.*;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

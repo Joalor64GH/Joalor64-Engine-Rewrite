@@ -1,9 +1,8 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
-import editors.ChartingState;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -17,7 +16,13 @@ import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
-import WeekData;
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.data.alphabet.*;
+import objects.userinterface.*;
 
 using StringTools;
 

@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -19,13 +19,19 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
-import Achievements;
 import openfl.Assets;
 import openfl.media.Video;
 import haxe.Json;
 
-import options.*;
-import editors.*;
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.video.*;
+import meta.data.alphabet.*;
+import meta.data.options.*;
+import meta.state.editors.*;
+import system.*;
+
 import core.ToastCore;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)

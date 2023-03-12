@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
@@ -19,7 +19,6 @@ import openfl.display.BitmapData;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import options.GraphicsSettingsSubState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
@@ -38,6 +37,13 @@ import openfl.Assets;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
+
+import meta.*;
+import meta.data.*;
+import meta.data.options.*;
+import meta.state.*;
+import meta.data.alphabet.*;
+import objects.shaders.*;
 
 using StringTools;
 
@@ -404,7 +410,6 @@ class TitleState extends MusicBeatState
 		credIconEvil.flipX = true;
 		#end
 
-		// Version Text
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.2.5 (PE 0.6.3)", 12);
 		#if debug versionShit.text += "DEBUG BUILD"; #end
 		versionShit.scrollFactor.set();

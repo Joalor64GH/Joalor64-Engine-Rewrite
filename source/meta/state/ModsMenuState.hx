@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -27,6 +27,12 @@ import flixel.ui.FlxButton;
 import flixel.FlxBasic;
 import sys.io.File;
 import flixel.input.keyboard.FlxKey;
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.data.alphabet.*;
+import objects.*;
 
 using StringTools;
 

@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -17,7 +17,12 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
 import flixel.graphics.FlxGraphic;
-import WeekData;
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.data.substate.*;
+import objects.userinterface.menu.*;
 
 using StringTools;
 

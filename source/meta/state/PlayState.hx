@@ -3,8 +3,6 @@ package;
 #if desktop
 import Discord.DiscordClient;
 #end
-import Section.SwagSection;
-import Song.SwagSong;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxObject;
@@ -31,24 +29,13 @@ import lime.utils.Assets;
 import openfl.Lib;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
-import Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.util.FlxSave;
 import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
-import Achievements;
-import StageData;
-import FunkinLua;
-import FunkinHscript;
-import FunkinSScript;
-import DialogueBoxPsych;
-import Conductor.Rating;
-import Character;
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
-
-import editors.*;
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -75,18 +62,31 @@ import sys.io.File;
 
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
-import BackgroundVideo;
-import VideoSubState;
+import meta.video.BackgroundVideo;
+import meta.video.VideoSubState;
 #end
 
 #if FLASH_MOVIE
-import SwfVideo;
+import meta.video.SwfVideo;
 #end
 
 #if HSCRIPT_ALLOWED
 import hscript.*;
 import horny.*;
 #end
+
+import meta.*;
+import meta.data.*;
+import meta.state.editors.*;
+import meta.state.*;
+import meta.substate.*;
+import meta.data.scripts.*;
+import meta.data.options.*;
+import objects.*;
+import objects.shaders.*;
+import objects.background.*;
+import objects.userinterface.*;
+import objects.userinterface.note.*;
 
 using StringTools;
 

@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -18,6 +18,12 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import lime.utils.Assets;
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.data.alphabet.*;
+import objects.*;
 
 using StringTools;
 

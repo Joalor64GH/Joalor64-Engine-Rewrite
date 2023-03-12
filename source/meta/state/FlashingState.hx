@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -10,6 +10,10 @@ import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
 
 class FlashingState extends MusicBeatState
 {
