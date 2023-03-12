@@ -11,7 +11,10 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import meta.data.ClientPrefs;
+import meta.state.TitleState;
 import core.ToastCore;
+import meta.video.*;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -19,15 +22,10 @@ import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-#end
-
-//update hxCodec dammit
-#if (hxCodec > "2.5.1")
-#error "hxCodec is the git version or greater then 2.5.1, please use the haxelib version instead"
 #end
 
 using StringTools;
@@ -36,7 +34,6 @@ class Main extends Sprite
 {
 	var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions. (Removed from Flixel 5.0.0)
 	var framerate:Int = 60; // How many frames per second the game should run at.
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
@@ -93,7 +90,7 @@ class Main extends Sprite
 		}
 	
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, TitleState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);

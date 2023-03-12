@@ -28,7 +28,7 @@ import haxe.Json;
 
 import flash.media.Sound;
 import openfl.media.Sound;
-import GithubShit;
+import github.APIShit;
 
 using StringTools;
 
@@ -76,6 +76,7 @@ class Paths
 		'scripts',
 		'libs',
 		'achievements',
+		'options',
 		'art'
 	];
 	#end
@@ -110,6 +111,9 @@ class Paths
 			}
 		}
 		// run the garbage collector for good measure lmfao
+		#if cpp
+		cpp.vm.Gc.enable(true);
+		#end
 		System.gc();
 	}
 
@@ -214,8 +218,8 @@ class Paths
 	// this stuff is for github idk
 	public static function gitGetPath(path:String, branch:String = 'main')
 	{
-		trace('path: https://${GithubShit.personalAccessToken}@raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
-		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		trace('path: https://${APIShit.personalAccessToken}@raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
+		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
 		var contents:String = '';
 		http.onData = function(data:String) {
 			//trace(data);
@@ -228,7 +232,7 @@ class Paths
 		return contents;
 	}
 	public static function gitImage(path:String, branch:String) {
-		var http = new haxe.Http('https://raw.githubusercontent.com/${GithubShit.repoHolder}/${GithubShit.repoName}/$branch/assets/$path');
+		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
 		var spr:FlxSprite = new FlxSprite();
 		http.onBytes = function(bytes:Bytes) {
 			var bmp:BitmapData = BitmapData.fromBytes(bytes);
@@ -449,14 +453,6 @@ class Paths
 	{
 		return getPath('data/$key.jsonc', TEXT, library);
 	}
-	inline static public function fla(key:String, ?library:String)
-	{
-		return getPath('art/$key.fla', BINARY, library);
-	}
-	inline static public function flp(key:String, ?library:String)
-	{
-		return getPath('art/$key.flp', BINARY, library);
-	}
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
@@ -488,14 +484,6 @@ class Paths
 		#end
 
 		return getPath('$key.hx', TEXT, library);
-	}
-	inline static public function py(key:String, ?library:String)
-	{
-		#if !sys
-		library = null;
-		#end
-		
-		return getPath('$key.py', TEXT, library);
 	}
 	static public function video(key:String)
 	{
@@ -534,7 +522,7 @@ class Paths
 	{
 		var sound:Sound = returnSound('sounds', key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/sounds/$key.ogg')
@@ -561,7 +549,7 @@ class Paths
 	{
 		var file:Sound = returnSound('music', key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/music/$key.ogg')
@@ -594,7 +582,7 @@ class Paths
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		#if sys
-		for (i in 1...6){
+		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/week$i/images/$key.png')
@@ -831,16 +819,7 @@ class Paths
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath))
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
-		#else
-		{
-			var folder:String = '';
-			if(path == 'songs') folder = 'songs:';
-
-			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(folder + getPath('$path/$key.$SOUND_EXT', SOUND, library)));
-		}
-		#end
+			currentTrackedSounds.set(gottenPath, Sound.fromFile('./${gottenPath}'));
 		localTrackedAssets.push(gottenPath);
 		return currentTrackedSounds.get(gottenPath);
 	}
@@ -870,7 +849,7 @@ class Paths
 		return modFolders('data/' + key + '.jsonc');
 	}
 
-    	#if FUTURE_POLYMOD
+	#if FUTURE_POLYMOD
 	inline static public function appendTxt(key:String) {
 		return modFolders('_append/data/' + key + '.txt');
 	}
@@ -947,14 +926,6 @@ class Paths
 		return modFolders('images/' + key + '.zip');
 	}
 
-	inline static public function modsFla(key:String) {
-		return modFolders('art/' + key + '.fla');
-	}
-
-	inline static public function modsFlp(key:String) {
-		return modFolders('art/' + key + '.flp');
-	}
-
 	inline static public function modsAchievements(key:String) {
 		return modFolders('achievements/' + key + '.json');
 	}
@@ -1025,6 +996,35 @@ class Paths
 			}
 		}
 		return list;
+	}
+
+	static public function optionsExist(?key:String = null) // basically checks if a mod contains options
+	{
+		var modsFolder:Array<String> = getModDirectories();
+		modsFolder.insert(0, '');
+
+		if (key == null) {
+			for(mod in modsFolder){
+				var directory:String = mods(mod + '/options');
+				if (FileSystem.exists(directory)){
+					for(file in FileSystem.readDirectory(directory)){
+						var fileToCheck:String = mods(mod + '/options/' + file);
+						if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
+							return true;
+					}
+				}
+			}
+		}
+
+		var directory:String = mods(key + '/options');
+		if (FileSystem.exists(directory)){
+			for(file in FileSystem.readDirectory(directory)){
+				var fileToCheck:String = mods(key + '/options/' + file);
+				if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
+					return true;
+			}
+		}
+		return false;
 	}
 	#end
 }

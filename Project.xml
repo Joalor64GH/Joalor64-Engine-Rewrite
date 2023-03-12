@@ -3,20 +3,22 @@
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
-        <app file="J64EngineRE_WIN" if="windows" />
+	<app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
-	<app preloader="flixel.system.FlxPreloader" />
-	
-	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
-	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
 
-	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
+	<!-- Just for clarfication -->
+	<app file="J64EngineRE_WIN DEBUG" if="windows debug" />
+	<app file="J64EngineRE_APP DEBUG" if="linux debug" />
+	<app file="J64EngineRE_MAC DEBUG" if="mac debug" />
+
+	<!--Preloader-->
+	<app preloader="flixel.system.FlxPreloader" />
 	<set name="SWF_VERSION" value="11.8" />
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
-	<!--These window settings apply to all targets-->
+	<!--All targets-->
 	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-->
@@ -33,26 +35,25 @@
 
 	<!-- _______________________________ Custom Defines ______________________________ -->
 
-	<define name="MODS_ALLOWED" if="desktop" />
+	<!-- UNCOMMENT THESE TO DISABLE THEM -->
+	<section if="desktop">
+		<define name="MODS_ALLOWED" />
+		<define name="LUA_ALLOWED" />
+		<define name="HSCRIPT_ALLOWED" />
+		<define name="SCRIPT_EXTENSION" />
+		<define name="WEBM_ALLOWED" />
+		<define name="FLASH_MOVIE" />
+		<define name="CHECK_FOR_UPDATES" />
+	</section>
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
-	<define name="LUA_ALLOWED" if="desktop" />
-	<define name="HSCRIPT_ALLOWED" if="desktop"/>
-	<define name="SCRIPT_EXTENSION" if="desktop"/>
-	<define name="PYTHON_SCRIPTING" if="windows" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
-	<define name="WEBM_ALLOWED" if="desktop" />
-	<define name="FLASH_MOVIE" if="desktop" />
-	<define name="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
-	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+	<define name="JOALOR64_WATERMARKS"/>
+	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="PSYCH"/>
 	<define name="EMBED_ASSETS"/>
-	<define name="MP3_ALLOWED"/>
-	<define name="WAV_ALLOWED"/>
-	<define name="MUSIC_FOLDER_ALLOWED"/>
-	<define name="CHECK_FOR_UPDATES" if="desktop"/>
-	<define name="PRELOAD_ALL" unless="web" /> <!-- UNCOMMENT THIS TO DISABLE LOADING SCREEN -->
+	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
 	<!-- _____________________________ Export Folder ____________________________ -->
@@ -66,10 +67,9 @@
 	<source path="source" />
 
         <section if="EMBED_ASSETS">
-                <assets path="presets" embed='true'/>
 	        <assets path="assets/art" embed='false'/>
 	        <assets path="assets/core" embed='true'/>
-                <assets path="assets/fonts" embed='true'/>
+			<assets path="assets/fonts" embed='true'/>
 	</section>
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="web"/>
@@ -105,10 +105,6 @@
 		<library name="week5"         preload="false" />
 		<library name="week6"         preload="false" />
 		<library name="week7"         preload="false" />
-	</section>
-
-	<section if="PYTHON_SCRIPTING">
-	        <assets path="dlls/"                rename='' />
 	</section>
 
 	<section if="VIDEOS_ALLOWED || WEBM_ALLOWED">
@@ -159,6 +155,9 @@
 	</section>
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
+
+	<!--FOR LUA DOCUMENTATION-->
+	<assets path='art/header.lua' embed='true'/>
 	
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -174,19 +173,20 @@
 	<haxelib name="hxjsonast" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="flixel-tools" />
-	<haxelib name="polymod" if="FUTURE_POLYMOD"/>
+	<haxelib name="polymod-joalor64" if="FUTURE_POLYMOD"/>
+	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 	<haxelib name="discord_rpc" if="desktop"/>
-	<haxelib name="hxcpp-debug-server" if="desktop"/>
+	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
-        <!--No deprecation warnings-->
-	<haxedef name="no-deprecation-warnings" />
+	<!-- This is for LUA -->
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
 
 	<!-- Script logging -->
 	<haxedef name="hscriptPos" value="true" />

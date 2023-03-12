@@ -4,45 +4,46 @@ import flixel.FlxG;
 import openfl.Lib;
 #if FUTURE_POLYMOD
 import polymod.Polymod;
+import polymod.Polymod.ModMetadata;
+import polymod.Polymod.PolymodError;
 import polymod.backends.PolymodAssets.PolymodAssetType;
 import polymod.format.ParseRules;
 #end
 
 /**
- * Class based originally from Kade Engine.
- * Credits: KadeDev & MasterEric.
+ * Class based originally from ChainSaw Engine.
+ * Credits: MAJigsaw77.
  */
 class ModCore
 {
+	private static final API_VER:String = '1.0.0';
 	private static final MOD_DIR:String = 'mods';
 
 	#if FUTURE_POLYMOD
-	private static final extensions:Map<String, PolymodAssetType> = [ 
-		'ogg' => SOUND,
-		'mp3' => SOUND,
+	private static final extensions:Map<String, PolymodAssetType> = [
+		'ogg' => AUDIO_GENERIC,
+		'mp3' => AUDIO_GENERIC,
 		'png' => IMAGE,
-		'xml' => TEXT, 
-		'json' => TEXT, 
-		'jsonc' => TEXT, 
-		'csv' => TEXT, 
-		'tsv' => TEXT, 
-		'txt' => TEXT, 
-		'hx' => TEXT, 
+		'xml' => TEXT,
+		'txt' => TEXT,
+		'json' => TEXT,
+		'jsonc' => TEXT,
+		'csv' => TEXT,
+		'tsv' => TEXT,
+		'hx' => TEXT,
 		'hscript' => TEXT,
-		'lua' => TEXT, 
+		'lua' => TEXT,
 		'py' => TEXT,
 		'frag' => TEXT,
 		'vert' => TEXT,
 		'ttf' => FONT,
-		'otf' => FONT, 
-		'webm' => BINARY,
-		'mp4' => BINARY,
-		'swf' => BINARY,
+		'otf' => FONT,
+		'webm' => VIDEO,
+		'mp4' => VIDEO,
+		'swf' => VIDEO,
 		'fla' => BINARY,
 		'flp' => BINARY,
-		'zip' => BINARY,
-		'dll' => BINARY,
-		'ndll' => BINARY
+		'zip' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
@@ -65,12 +66,14 @@ class ModCore
 			modRoot: MOD_DIR,
 			dirs: folders,
 			framework: OPENFL,
-			apiVersion: Lib.application.meta.get('version'),
+			apiVersion: API_VER,
 			errorCallback: onError,
 			parseRules: getParseRules(),
 			extensionMap: extensions,
 			ignoredFiles: Polymod.getDefaultIgnoreList()
 		});
+
+		if (loadedModlist == null) return;
 
 		trace('Loading Successful, ${loadedModlist.length} / ${folders.length} new mods.');
 
@@ -82,26 +85,22 @@ class ModCore
 	{
 		trackedMods = [];
 
-		if (FlxG.save.data.disabledMods == null)
-		{
-			FlxG.save.data.disabledMods = [];
-			FlxG.save.flush();
-		}
-
 		var daList:Array<String> = [];
 
 		trace('Searching for Mods...');
 
 		for (i in Polymod.scan(MOD_DIR, '*.*.*', onError))
 		{
-			trackedMods.push(i);
-			if (!FlxG.save.data.disabledMods.contains(i.id))
+			if (i != null){
+				trackedMods.push(i);
 				daList.push(i.id);
+			}
 		}
 
-		trace('Found ${daList.length} new mods.');
+		if (daList != null && daList.length > 0)
+			trace('Found ${daList.length} new mods.');
 
-		return daList;
+		return daList != null && daList.length > 0 ? daList : [];
 	}
 
 	public static function getParseRules():ParseRules
@@ -109,7 +108,7 @@ class ModCore
 		var output:ParseRules = ParseRules.getDefault();
 		output.addType("txt", TextFileFormat.LINES);
 		output.addType("hx", TextFileFormat.PLAINTEXT);
-		return output;
+		return output != null ? output : null;
 	}
 
 	static function onError(error:PolymodError):Void

@@ -161,23 +161,23 @@ function addScript(path)
   ]], {code = table.concat(lines, '\n'), path = path, imports = imports})
 end
 function callOnHaxe(func, args)
-  local ret = runHaxeCode([[
-  var ret = null;
-  for(hscript in hscripts)
-  {
-    if(hscript.interp.variables.exists(func))
+    local ret = runHaxeCode([[
+    var ret = null;
+    for(hscript in hscripts)
     {
-      var coolRet = Reflect.callMethod(null, hscript.interp.variables.get(func), args);
-      if(coolRet != null)
-        ret = coolRet;
+      if(hscript.interp.variables.exists(func))
+      {
+        var coolRet = Reflect.callMethod(null, hscript.interp.variables.get(func), args);
+        if(coolRet != null)
+          ret = coolRet;
+      }
     }
-  }
-  setVar('STUPID_IDIOT_RET', ret); //GOSH!!!!!!!!!!!!!!!!
-  ]], {
-    func = func,
-    args = args
-  })
-  return getProperty('STUPID_IDIOT_RET')
+    return ret;
+    ]], {
+      func = func,
+      args = args
+    })
+    return ret
 end
 function onUpdate()
   updateLuaVars()
@@ -208,8 +208,9 @@ function fixRH()
       for k,v in pairs(vars) do
           table.insert(stringVars, "var "..k.." = getVar('luaVarHolder')."..k..";")
       end
-      rh(table.concat(stringVars, '\n')..'\n'..code)
+      local ret = rh(table.concat(stringVars, '\n')..'\n'..code)
       setProperty('luaVarHolder', nil)
+      return ret
     end
   end
 end

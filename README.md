@@ -1,12 +1,17 @@
+![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logo.png?raw=true)
+
 # Joalor64 Engine Rewritten
 A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine). Not everything is perfect, so contributions and/or [pull requests](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pulls) would be nice! Be sure to report bugs in [issues](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues) also!
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
+* [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 # Features
+* GitHub API Stuff
+* In-Game Mod Downloader
+* Custom Options
 * SWF Support (broken at the moment)
 * Polymod Support
 * HX and Hscript Support
-* Python Support
 * 3D Notes
 * Noteskins
 * Random LUA Scripts
@@ -15,10 +20,15 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * Epic Modcharting Tools
 * Softcoded Achievements
 
+### If you get an issue with polymod like this `Error: Could not find haxelib "polymod-joalor64", does it need to be installed?` do the following
+`haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
+
 # Planned Features
-* [ ] Simple Documentation **[Work in Progress]**
-* [ ] Extra Notes (Deciding on Hardcoded or Softcoded)
-* [ ] Reorganized Source Code (Couldn't do it myself :skull:)
+* [X] Reorganized Source Code **[I AM A FUQIN MADLAD]**
+* [ ] WAV Support
+* [ ] Make a Template for HX Scripts
+* [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
+* [ ] Reorganized Assets **[Definitely doing this when I feel like it]**
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
@@ -30,11 +40,16 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
-* [BeastlyGhost](https://github.com/BeastlyGhost) - Prepare Sprite + Customizable Main Menu via JSON + Credits Sounds
+* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
-* [stevecodergh](https://github.com/stevecodergh) - Python Support
-* [TheZoroForce240](https://github.com/TheZoroForce240) - Special Modcharting System
+* [magnumsrt](https://github.com/magnumsrt) - In-Game Mod Downloader
+* [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
+* [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
+* [KookerFoxYT](https://github.com/KookerFoxYT) - Custom Options
+* [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
+* [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
+* [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
 
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.

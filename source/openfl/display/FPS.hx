@@ -17,6 +17,8 @@ import openfl.Lib;
 import openfl.system.System;
 #end
 
+import meta.data.ClientPrefs;
+
 /**
 	The FPS class provides an easy-to-use monitor to display
 	the current frame rate of an OpenFL project
