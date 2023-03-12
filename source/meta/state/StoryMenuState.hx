@@ -21,7 +21,7 @@ import flixel.graphics.FlxGraphic;
 import meta.*;
 import meta.data.*;
 import meta.state.*;
-import meta.data.substate.*;
+import meta.substate.*;
 import objects.userinterface.menu.*;
 
 using StringTools;

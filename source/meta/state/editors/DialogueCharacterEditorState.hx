@@ -39,6 +39,7 @@ import meta.data.*;
 import meta.data.alphabet.*;
 import objects.*;
 import objects.userinterface.*;
+import objects.userinterface.DialogueBoxPsych;
 
 using StringTools;
 

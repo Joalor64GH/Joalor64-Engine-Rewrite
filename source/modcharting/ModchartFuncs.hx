@@ -16,7 +16,7 @@ import game.Conductor;
 #else
 import meta.state.*;
 import meta.data.*;
-import meta.data.script.*;
+import meta.data.script.FunkinLua;
 #end
 
 import modcharting.Modifier;
