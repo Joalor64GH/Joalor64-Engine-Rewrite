@@ -47,6 +47,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [KookerFoxYT](https://github.com/KookerFoxYT) - Custom Options
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
+* [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
 
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
