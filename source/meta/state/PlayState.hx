@@ -76,17 +76,18 @@ import horny.*;
 #end
 
 import meta.*;
+import objects.*;
 import meta.data.*;
 import meta.state.editors.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.data.scripts.*;
 import meta.data.options.*;
-import objects.*;
 import objects.shaders.*;
 import objects.background.*;
 import objects.userinterface.*;
 import objects.userinterface.note.*;
+import meta.data.scripts.FunkinLua;
 import objects.Character;
 
 using StringTools;
