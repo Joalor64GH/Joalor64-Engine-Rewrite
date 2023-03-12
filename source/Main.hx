@@ -25,7 +25,6 @@ import haxe.io.Path;
 import meta.data.dependency.Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
-import sys.io.Process;
 #end
 
 using StringTools;
