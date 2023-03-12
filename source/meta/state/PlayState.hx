@@ -1,7 +1,7 @@
-package;
+package meta.state;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxBasic;
 import flixel.FlxCamera;

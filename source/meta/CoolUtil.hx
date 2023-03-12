@@ -1,6 +1,6 @@
 package meta;
 
-import meta.states.PlayState;
+import meta.state.PlayState;
 import openfl.utils.Assets;
 
 using StringTools;

@@ -1,6 +1,6 @@
 package meta;
 
-import Conductor.BPMChangeEvent;
+import meta.data.Conductor.BPMChangeEvent;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import flixel.FlxBasic;
