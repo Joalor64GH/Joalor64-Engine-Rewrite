@@ -101,7 +101,7 @@ class Main extends Sprite
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null) {
-			fpsVar.visible = meta.data.ClientPrefs.showFPS;
+			fpsVar.visible = ClientPrefs.showFPS;
 		}
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
