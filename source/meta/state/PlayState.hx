@@ -87,6 +87,7 @@ import objects.shaders.*;
 import objects.background.*;
 import objects.userinterface.*;
 import objects.userinterface.note.*;
+import objects.Character;
 
 using StringTools;
 
