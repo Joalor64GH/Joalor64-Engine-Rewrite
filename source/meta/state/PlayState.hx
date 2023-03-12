@@ -88,10 +88,14 @@ import objects.background.*;
 import objects.userinterface.*;
 import objects.userinterface.note.*;
 import objects.userinterface.note.Note;
+import objects.userinterface.DialogueBoxPsych;
 import meta.data.scripts.FunkinLua;
+import meta.data.Achievements;
 import meta.data.Conductor;
 import meta.data.Song;
 import meta.data.Section;
+import meta.data.StageData;
+import meta.data.WeekData;
 import objects.Character;
 
 using StringTools;
