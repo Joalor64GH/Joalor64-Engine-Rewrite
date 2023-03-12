@@ -6,6 +6,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 # Features
+* GitHub API Stuff
 * In-Game Mod Downloader
 * Custom Options
 * SWF Support (broken at the moment)
@@ -23,10 +24,11 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 `haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
 
 # Planned Features
+* [X] Reorganized Source Code **[I AM A FUQIN MADLAD]**
 * [ ] WAV Support
 * [ ] Make a Template for HX Scripts
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
-* [ ] Reorganized Source Code
+* [ ] Reorganized Assets **[Definitely doing this when I feel like it]**
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
