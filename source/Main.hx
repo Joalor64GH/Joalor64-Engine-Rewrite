@@ -11,7 +11,10 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import meta.data.ClientPrefs;
+import meta.state.TitleState;
 import core.ToastCore;
+import meta.video.*;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -19,7 +22,7 @@ import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
