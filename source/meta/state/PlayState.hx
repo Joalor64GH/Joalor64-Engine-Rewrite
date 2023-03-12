@@ -87,7 +87,11 @@ import objects.shaders.*;
 import objects.background.*;
 import objects.userinterface.*;
 import objects.userinterface.note.*;
+import objects.userinterface.note.Note;
 import meta.data.scripts.FunkinLua;
+import meta.data.Conductor;
+import meta.data.Song;
+import meta.data.Section;
 import objects.Character;
 
 using StringTools;
