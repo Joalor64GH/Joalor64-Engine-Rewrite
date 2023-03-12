@@ -78,11 +78,11 @@ import horny.*;
 import meta.*;
 import objects.*;
 import meta.data.*;
-import meta.state.editors.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.data.scripts.*;
 import meta.data.options.*;
+import meta.state.editors.*;
 import objects.shaders.*;
 import objects.background.*;
 import objects.userinterface.*;
@@ -97,6 +97,7 @@ import meta.data.Section;
 import meta.data.StageData;
 import meta.data.WeekData;
 import objects.Character;
+import meta.video.*;
 
 using StringTools;
 
