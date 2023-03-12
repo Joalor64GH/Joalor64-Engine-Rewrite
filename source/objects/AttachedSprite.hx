@@ -1,6 +1,7 @@
 package objects;
 
 import flixel.FlxSprite;
+import meta.data.*;
 
 using StringTools;
 

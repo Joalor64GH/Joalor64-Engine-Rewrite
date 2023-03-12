@@ -2,6 +2,7 @@ package objects;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import meta.data.alphabet.*;
 
 class AttachedText extends Alphabet
 {
