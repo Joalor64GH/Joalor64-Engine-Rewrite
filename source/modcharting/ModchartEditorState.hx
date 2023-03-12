@@ -60,6 +60,7 @@ import states.LoadingState;
 import states.MusicBeatState;
 import substates.MusicBeatSubstate;
 #else
+import objects.FlxUIDropDownMenuCustom;
 import objects.userinterface.note.*;
 import meta.state.PlayState;
 import meta.data.*;
