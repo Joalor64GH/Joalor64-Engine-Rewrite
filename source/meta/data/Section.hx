@@ -1,4 +1,4 @@
-package;
+package meta.data;
 
 typedef SwagSection =
 {

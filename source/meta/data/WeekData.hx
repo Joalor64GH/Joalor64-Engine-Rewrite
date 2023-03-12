@@ -1,4 +1,4 @@
-package;
+package meta.data;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
@@ -8,6 +8,9 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
 import haxe.format.JsonParser;
+
+import meta.*;
+import meta.state.PlayState;
 
 using StringTools;
 

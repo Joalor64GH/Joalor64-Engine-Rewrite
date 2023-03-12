@@ -1,3 +1,5 @@
+package meta.data.*;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
@@ -11,6 +13,8 @@ import flixel.text.FlxText;
 import sys.io.File;
 import sys.FileSystem;
 #end
+
+import meta.data.*;
 
 using StringTools;
 

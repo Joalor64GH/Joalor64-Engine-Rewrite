@@ -1,4 +1,4 @@
-package;
+package meta.data;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
@@ -8,7 +8,7 @@ import openfl.utils.Assets;
 #end
 import haxe.Json;
 import haxe.format.JsonParser;
-import Song;
+import meta.data.Song;
 
 using StringTools;
 
