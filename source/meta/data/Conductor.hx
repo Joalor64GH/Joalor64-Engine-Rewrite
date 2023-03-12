@@ -1,6 +1,8 @@
 package meta.data;
 
 import meta.data.*;
+import meta.state.*;
+import objects.userinterface.note.Note;
 
 typedef BPMChangeEvent =
 {
