@@ -22,7 +22,13 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 import openfl.Lib;
-import InputFormatter;
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.substate.*;
+import meta.data.alphabet.*;
+import objects.userinterface.note.*;
+import objects.*;
 
 final class FunkinSScript extends SScript
 {

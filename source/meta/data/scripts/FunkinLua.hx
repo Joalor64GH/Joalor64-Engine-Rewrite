@@ -44,8 +44,14 @@ import sys.io.File;
 #end
 
 import Type.ValueType;
-import Controls;
-import DialogueBoxPsych;
+import meta.*;
+import meta.state.*;
+import meta.substate.*;
+import meta.data.*;
+import meta.video.*;
+import objects.userinterface.*;
+import objects.userinterface.note.*;
+import objects.*;
 
 #if hscript
 import hscript.Parser;
@@ -54,7 +60,7 @@ import hscript.Expr;
 #end
 
 #if desktop
-import Discord;
+import meta.data.dependency.Discord;
 #end
 
 using StringTools;

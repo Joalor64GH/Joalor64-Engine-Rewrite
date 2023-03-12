@@ -2,20 +2,18 @@ package meta.data.scripts;
 
 #if HSCRIPT_ALLOWED
 #if LUA_ALLOWED
-import FunkinLua;
+import meta.data.scripts.FunkinLua;
 #end
-import PhillyGlow;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
 #else import vlc.MP4Handler; #end
 #end
 #if FLASH_MOVIE
-import SwfVideo;
+import meta.video.SwfVideo;
 #end
 import flixel.system.macros.FlxMacroUtil;
 import flixel.math.FlxAngle;
-import Achievements.AchievementObject;
 import flixel.addons.display.FlxBackdrop;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxDestroyUtil;
@@ -65,10 +63,8 @@ import flixel.tweens.FlxEase;
 import flixel.system.FlxSound;
 import flixel.math.FlxRect;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
-import options.*;
-import editors.*;
 import animateatlas.*;
 import flixel.math.FlxMath;
 import flixel.input.keyboard.FlxKey;
@@ -85,7 +81,22 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.text.FlxText;
 import hscript.InterpEx;
-import Character;
+import objects.Character;
+
+import meta.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.data.options.*;
+import meta.substate.*;
+import meta.data.*;
+import meta.video.*;
+import meta.data.alphabet.*;
+import objects.userinterface.*;
+import objects.userinterface.note.*;
+import objects.userinterface.menu.*;
+import objects.background.*;
+import objects.shaders.*;
+import objects.*;
 
 using StringTools;
 
