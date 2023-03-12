@@ -1,4 +1,4 @@
-package options;
+package meta.data.options;
 
 class SoftcodeOption extends Option
 {

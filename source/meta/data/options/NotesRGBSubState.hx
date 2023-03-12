@@ -1,7 +1,7 @@
-package options;
+package meta.data.options;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -23,7 +23,13 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.*;
+import objects.*;
+import objects.userinterface.menu.*;
+import objects.shaders.*;
+import meta.data.*;
+import meta.data.alphabet.*;
+import meta.data.options.*;
 
 using StringTools;
 

@@ -1,7 +1,7 @@
-package options;
+package meta.data.options;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -24,10 +24,12 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
-
-// Keep It Simple ShadowMario
-import options.*;
+import meta.*;
+import meta.data.*;
+import meta.data.alphabet.*;
+import meta.data.options.*;
+import meta.state.*;
+import meta.state.error.*;
 
 using StringTools;
 
@@ -54,7 +56,7 @@ class OptionsState extends MusicBeatState
 			    if (Paths.optionsExist())
 					FlxG.switchState(new ModOptionSelectState());
 				else
-					FlxG.switchState(new error.OopsState());
+					FlxG.switchState(new OopsState());
 			#end
 			case 'Note Colors':
 				if(ClientPrefs.arrowMode == 'RGB') {

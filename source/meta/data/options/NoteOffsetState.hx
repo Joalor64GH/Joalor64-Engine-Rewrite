@@ -1,4 +1,4 @@
-package options;
+package meta.data.options;
 
 import flixel.util.FlxStringUtil;
 import flixel.tweens.FlxEase;
@@ -13,6 +13,14 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.ui.FlxBar;
 import flixel.math.FlxPoint;
+
+import meta.*;
+import objects.*;
+import objects.userinterface.menu.*;
+import objects.background.*;
+import meta.data.*;
+import meta.data.alphabet.*;
+import meta.data.options.*;
 
 using StringTools;
 

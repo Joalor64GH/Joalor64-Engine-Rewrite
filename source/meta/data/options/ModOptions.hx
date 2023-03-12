@@ -1,10 +1,13 @@
-package options;
+package meta.data.options;
 
 import flixel.FlxG;
 import flixel.util.FlxSave;
 import sys.io.File;
 import sys.FileSystem;
 import haxe.Json;
+import meta.*;
+import meta.data.*;
+import meta.data.options.*;
 
 using StringTools;
 
