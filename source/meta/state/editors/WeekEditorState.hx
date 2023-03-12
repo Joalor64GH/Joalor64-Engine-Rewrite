@@ -1,4 +1,4 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
 import Discord.DiscordClient;
@@ -31,7 +31,15 @@ import haxe.Json;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import WeekData;
+
+import meta.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.data.*;
+import meta.data.alphabet.*;
+import objects.*;
+import objects.userinterface.*;
+import objects.userinterface.menu.*;
 
 using StringTools;
 

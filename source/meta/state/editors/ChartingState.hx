@@ -1,15 +1,12 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.geom.Rectangle;
 import haxe.Json;
 import haxe.format.JsonParser;
 import haxe.io.Bytes;
-import Conductor.BPMChangeEvent;
-import Section.SwagSection;
-import Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -53,6 +50,14 @@ import flash.media.Sound;
 import sys.FileSystem;
 import sys.io.File;
 #end
+
+import meta.*;
+import meta.data.*;
+import meta.state.*;
+import meta.state.editors.*;
+import objects.userinterface.note.*;
+import objects.userinterface.*;
+import objects.*;
 
 
 @:access(flixel.system.FlxSound._sound)

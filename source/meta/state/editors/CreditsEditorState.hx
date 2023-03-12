@@ -1,7 +1,7 @@
-package editors;
+package meta.state.editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -36,6 +36,13 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
+
+import meta.*;
+import meta.state.*;
+import meta.state.editors.*;
+import meta.data.alphabet.*;
+import meta.data.*;
+import objects.*;
 
 using StringTools;
 
