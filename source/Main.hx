@@ -27,11 +27,6 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
-//use 2.5.1 dammit
-#if (hxCodec > "2.5.1")
-#error "hxCodec is the git version or greater then 2.5.1, please use the haxelib version instead"
-#end
-
 using StringTools;
 
 class Main extends Sprite
