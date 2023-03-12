@@ -36,6 +36,7 @@ import meta.data.*;
 import objects.*;
 import objects.userinterface.*;
 import objects.userinterface.menu.*;
+import objects.userinterface.menu.MenuCharacter;
 
 using StringTools;
 
@@ -293,7 +294,7 @@ class MenuCharacterEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 

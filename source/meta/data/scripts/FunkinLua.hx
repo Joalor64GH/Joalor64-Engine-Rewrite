@@ -53,6 +53,8 @@ import objects.userinterface.*;
 import objects.userinterface.note.*;
 import objects.*;
 
+import objects.userinterface.DialogueBoxPsych;
+
 #if hscript
 import hscript.Parser;
 import hscript.Interp;

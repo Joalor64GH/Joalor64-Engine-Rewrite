@@ -7,6 +7,7 @@ import flixel.util.FlxSort;
 import meta.*;
 import meta.data.*;
 import meta.state.*;
+import objects.background.*;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;

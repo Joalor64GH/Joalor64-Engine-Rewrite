@@ -1,6 +1,8 @@
 package meta;
 
 import meta.data.Conductor.BPMChangeEvent;
+import meta.data.CustomFadeTransition;
+import meta.data.ClientPrefs;
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;

@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.system.FlxSound;
+import objects.Character;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
 #end

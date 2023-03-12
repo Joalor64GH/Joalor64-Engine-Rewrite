@@ -20,6 +20,7 @@ import openfl.utils.Assets as OpenFlAssets;
 import meta.*;
 import meta.data.*;
 import meta.state.*;
+import meta.substate.*;
 import meta.state.editors.*;
 import meta.data.alphabet.*;
 import objects.userinterface.*;

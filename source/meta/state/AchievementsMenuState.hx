@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
@@ -18,6 +18,7 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 import meta.data.alphabet.*;
+import meta.data.Achievements;
 
 using StringTools;
 

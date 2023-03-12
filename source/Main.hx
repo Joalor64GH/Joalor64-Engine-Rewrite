@@ -12,6 +12,7 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import meta.data.ClientPrefs;
+import meta.state.TitleState;
 import core.ToastCore;
 import meta.video.*;
 

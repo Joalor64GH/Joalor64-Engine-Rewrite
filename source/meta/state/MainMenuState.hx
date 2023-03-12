@@ -20,6 +20,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
 import openfl.Assets;
+import meta.data.Achievements;
 import openfl.media.Video;
 import haxe.Json;
 

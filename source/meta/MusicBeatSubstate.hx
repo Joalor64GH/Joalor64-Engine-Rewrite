@@ -1,6 +1,7 @@
 package meta;
 
 import meta.data.Conductor.BPMChangeEvent;
+import meta.data.CustomFadeTransition;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import flixel.FlxBasic;

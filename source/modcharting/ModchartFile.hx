@@ -12,6 +12,7 @@ import game.Conductor;
 import meta.state.*;
 import meta.data.*;
 import objects.userinterface.note.*;
+import objects.shaders.*;
 #end
 #if sys
 import sys.io.File;
