@@ -117,6 +117,9 @@ class Note extends FlxSprite
 	// a thing for modders
 	public var killNote:Bool = false;
 
+	var defaultWidth:Float = 0;
+	var defaultHeight:Float = 0;	
+
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
 		multSpeed = value;
@@ -268,7 +271,7 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 		} else if(!isSustainNote) {
-			earlyHitMult = 1;
+			earlyHitMult = 1.2;
 		}
 		x += offsetX;
 	}
@@ -303,6 +306,9 @@ class Note extends FlxSprite
 
 		var lastScaleY:Float = scale.y;
 		var blahblah:String = arraySkin.join('/');
+
+		defaultWidth = 157;
+		defaultHeight = 154;
 		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
@@ -316,6 +322,7 @@ class Note extends FlxSprite
 				height = height / 5;
 				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
+			defaultWidth = width;
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			loadPixelNoteAnims();
 			antialiasing = false;
@@ -324,13 +331,6 @@ class Note extends FlxSprite
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
 				lastNoteOffsetXForPixelAutoAdjusting = (width - 7) * (PlayState.daPixelZoom / 2);
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
-
-				/*if(animName != null && !animName.endsWith('end'))
-				{
-					lastScaleY /= lastNoteScaleToo;
-					lastNoteScaleToo = (6 / height);
-					lastScaleY *= lastNoteScaleToo;
-				}*/
 			}
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
@@ -360,8 +360,7 @@ class Note extends FlxSprite
 			animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end');
 			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece');
 		}
-
-		setGraphicSize(Std.int(width * 0.7));
+		setGraphicSize(Std.int(defaultWidth * 0.7), (isSustainNote ? Std.int(defaultHeight * 0.7) : 0));
 		updateHitbox();
 	}
 
@@ -380,20 +379,11 @@ class Note extends FlxSprite
 
 		if (killNote) this.kill();
 
-		if (mustPress)
-		{
-			// ok river
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
-				tooLate = true;
-		}
-		else
-		{
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-			{
-				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
-					wasGoodHit = true;
-			}
-		}
+		// ok river
+		if (mustPress && strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit && canBeHit) tooLate = true;
+
+		if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+			if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition) wasGoodHit = true;
 
 		if (tooLate && !inEditor)
 		{
