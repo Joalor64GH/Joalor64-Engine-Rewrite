@@ -41,6 +41,7 @@
 		<define name="LUA_ALLOWED" />
 		<define name="HSCRIPT_ALLOWED" />
 		<define name="SCRIPT_EXTENSION" />
+		<define name="SCRIPTCORE" />
 		<define name="WEBM_ALLOWED" />
 		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
