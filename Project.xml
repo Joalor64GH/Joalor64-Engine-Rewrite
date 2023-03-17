@@ -168,7 +168,7 @@
 	<haxelib name="hscript" />
 	<haxelib name="hscript-ex" />
 	<haxelib name="actuate"/>
-	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
+	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
 	<haxelib name="tjson" />
 	<haxelib name="hxjsonast" />
 	<haxelib name="flixel-ui" />
