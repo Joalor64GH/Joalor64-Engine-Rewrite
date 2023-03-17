@@ -116,10 +116,7 @@
     	</section>
 
     	<section if="LUA_ALLOWED">
-		<assets path="assets/scripting/scripts"             rename="assets/scripts"/>
-		<assets path="assets/scripting/custom_events"       rename="assets/custom_events"/>
-		<assets path="assets/scripting/custom_notetypes"    rename="assets/custom_notetypes"/>
-		<assets path="assets/scripting/custom_gamechangers" rename="assets/custom_gamechangers"/>
+		<assets path="assets/scripting"             rename="assets/scripts"/>
 	</section>
 
         <!-- PATH DEFINITIONS -->
@@ -153,11 +150,10 @@
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt' rename='' />
 	</section>
+
+	<assets path='art/header.lua' embed='true'/>
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
-
-	<!--FOR LUA DOCUMENTATION-->
-	<assets path='art/header.lua' embed='true'/>
 	
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -165,7 +161,7 @@
 
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
-	<haxelib name="hscript" />
+	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="hscript-ex" />
 	<haxelib name="actuate"/>
 	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
@@ -200,12 +196,6 @@
 	<!-- Show debug traces for hxCodec -->
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
 	
-	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
-	<haxedef name="FLX_NO_DEBUG" unless="debug" />
-
-	<!--Enable this for Nape release builds for a serious peformance improvement-->
-	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	
 	<!-- Use defines to configure the behavior of Polymod. -->
 	<haxedef name="POLYMOD_SCRIPT_EXT" value=".lua" />
 	<haxedef name="POLYMOD_SCRIPT_CLASS_EXT" value=".lua" />
@@ -215,10 +205,20 @@
 	<haxedef name="POLYMOD_MOD_METADATA_FILE" value="_polymod_meta.json" />
 	<haxedef name="POLYMOD_MOD_ICON_FILE" value="_polymod_icon.png" />
 	<haxedef name="POLYMOD_DEBUG" if="debug" />
+
+	<section unless="debug">
+		<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
+		<haxedef name="FLX_NO_DEBUG" />
+
+		<!--Enable this for Nape release builds for a serious peformance improvement-->
+		<haxedef name="NAPE_RELEASE_BUILD" />
+	</section>
 	
 	<!--Used for Izzy Engine's crash handler-->
-	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
-	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
+	<section if="CRASH_HANDLER">
+		<haxedef name="HXCPP_CHECK_POINTER" />
+		<haxedef name="HXCPP_STACK_LINE" />
+	</section>
 
 	<!-- _______________________________ Errors and Warnings ______________________________ -->
 
@@ -228,9 +228,7 @@
 
 	<warn value="HTML5 builds haven't been tested and might not work, so beware of that." if="html5" />
 
-	<!-- _________________________________ Custom _______________________________ -->
-
-	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+	<!-- _________________________________ Miscellaneous _______________________________ -->
 	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
