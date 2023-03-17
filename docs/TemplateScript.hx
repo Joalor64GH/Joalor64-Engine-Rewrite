@@ -1,4 +1,4 @@
-function onCreate()
+function create()
 {
     // nothing yet lol.
 }
