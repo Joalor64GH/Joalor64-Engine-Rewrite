@@ -80,7 +80,7 @@ function eventEarlyTrigger(name)
 {
 }
 
-//le camera
+// le camera
 function onMoveCamera(focus)
 {
 }
