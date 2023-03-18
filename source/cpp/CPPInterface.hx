@@ -44,4 +44,16 @@ class CPPInterface
 		return CPPLinux.obtainRAM();
 	}
 	#end
+		
+	#if windows
+	public static function getWindow()
+	{
+		return CPPWindows.getHWNDWindow();
+	}
+
+	public static function setWindow(window)
+	{
+		return CPPWindows.setHWNDWindow(window);
+	}
+	#end
 }

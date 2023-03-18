@@ -54,7 +54,11 @@ class WeekData {
 
 	public static function createWeekFile():WeekFile {
 		var weekFile:WeekFile = {
-			songs: [["Song 1", "face", [135, 131, 158]], ["Song 2", "face", [135, 131, 158]], ["Song 3", "face", [135, 131, 158]]],
+			songs: [
+				["Song 1", "face", [135, 131, 158]], 
+				["Song 2", "face", [135, 131, 158]], 
+				["Song 3", "face", [135, 131, 158]]
+			],
 			weekCharacters: ['dad', 'bf', 'gf'],
 			weekBackground: 'stage',
 			weekBefore: 'tutorial',
