@@ -156,10 +156,10 @@ class CreditsState extends MusicBeatState
 				'nyaw'
 			],
 			[
-				'magnumsrt',
+				'Magnumsrt',
 				'mag',
 				'In-Game Mod Downloader\n"why bro keep changing his user"',
-				'https://github.com/magnumsrt',
+				'https://github.com/Magnumsrt',
 				'0000FF',
 				'squeak'
 			],

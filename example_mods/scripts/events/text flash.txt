@@ -1,0 +1,5 @@
+credit by raiden alfares
+
+
+value 1: Name of text
+value 2:The timer

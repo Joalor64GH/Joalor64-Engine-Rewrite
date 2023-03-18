@@ -8,6 +8,6 @@ class Globals {
 
 	public static inline function getInstance()
 	{
-		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+		return meta.state.PlayState.instance.isDead ? meta.substate.GameOverSubstate.instance : meta.state.PlayState.instance;
 	}
 }

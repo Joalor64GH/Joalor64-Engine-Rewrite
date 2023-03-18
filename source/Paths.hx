@@ -29,6 +29,7 @@ import haxe.Json;
 import flash.media.Sound;
 import openfl.media.Sound;
 import github.APIShit;
+import meta.CoolUtil;
 
 using StringTools;
 
@@ -56,9 +57,6 @@ class Paths
 		'_merge', 
 		#end
 		'characters',
-		'custom_events',
-		'custom_notetypes',
-		'custom_gamechangers',
 		'data',
 		'songs',
 		'music',
@@ -149,9 +147,7 @@ class Paths
 	static public var currentModDirectory:String = '';
 	static public var currentLevel:String;
 	static public function setCurrentLevel(name:String)
-	{
 		currentLevel = name.toLowerCase();
-	}
 
 	public static function getPath(file:String, type:AssetType, ?library:Null<String> = null)
 	{
@@ -215,7 +211,6 @@ class Paths
 	}
 	#end
 
-	// this stuff is for github idk
 	public static function gitGetPath(path:String, branch:String = 'main')
 	{
 		trace('path: https://${APIShit.personalAccessToken}@raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
@@ -752,17 +747,6 @@ class Paths
 		#end
 	}
 
-	inline static public function getTextureAtlas(key:String, ?library:String)
-	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var file:String = modsTextureAtlas(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
-		#end
-		return getPath('images/$key.zip', BINARY, library);
-	}
-
 	inline static public function formatToSongPath(path:String) {
 		var invalidChars = ~/[~&\\;:<>#]/;
 		var hideChars = ~/[.,'"%?!]/;
@@ -920,10 +904,6 @@ class Paths
 
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
-	}
-
-	inline static public function modsTextureAtlas(key:String) {
-		return modFolders('images/' + key + '.zip');
 	}
 
 	inline static public function modsAchievements(key:String) {

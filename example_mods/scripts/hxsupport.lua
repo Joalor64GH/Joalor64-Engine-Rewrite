@@ -33,14 +33,14 @@ function onCreate(path)
     end
   end
   --stage script
-  if checkFileExists('stages/'..curStage..'.hx') then
+  if checkFileExists('scripts/stages/'..curStage..'.hx') then
     addScript('stages/'..curStage..'.hx')
   end
   --character scripts
   local chars = {boyfriendName, dadName, gfName}
   for i,char in pairs(chars) do
-    if checkFileExists('characters/'..char..'.hx') then
-      addScript('characters/'..char..'.hx')
+    if checkFileExists('scripts/characters/'..char..'.hx') then
+      addScript('scripts/characters/'..char..'.hx')
     end
   end
   if #hscripts == 0 then --wacky stuff happens when thers no hscripts for some reason
@@ -65,8 +65,8 @@ function onCreatePost()
     end
   end
   for k,v in pairs(noteTypes) do
-    if checkFileExists('custom_notetypes/'..v..'.hx') then
-      addScript('custom_notetypes/'..v..'.hx')
+    if checkFileExists('scripts/notetypes/'..v..'.hx') then
+      addScript('scripts/notetypes/'..v..'.hx')
     end
   end
   for i=0,getProperty('eventNotes.length')-1 do
@@ -82,8 +82,8 @@ function onCreatePost()
     end
   end
   for k,v in pairs(events) do
-    if checkFileExists('custom_events/'..v..'.hx') then
-      addScript('custom_events/'..v..'.hx')
+    if checkFileExists('scripts/events/'..v..'.hx') then
+      addScript('scripts/events/'..v..'.hx')
     end
   end
 end
