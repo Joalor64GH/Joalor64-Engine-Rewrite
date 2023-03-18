@@ -360,7 +360,7 @@ class TitleState extends MusicBeatState
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
 
-		credIcon3 = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/bot'));
+		credIcon3 = new FlxSprite(credIcon1.x,credIcon1.x - 300).loadGraphic(Paths.image('credits/bot'));
 		add(credIcon3);
 		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;
@@ -659,8 +659,8 @@ class TitleState extends MusicBeatState
 					addMoreText('present');
 					#end
 				case 5:
-				    	#if JOALOR64_WATERMARKS
-				    	credIcon1.destroy();
+					#if JOALOR64_WATERMARKS
+					credIcon1.destroy();
 					credIcon2.destroy();
 					credIcon3.destroy();
 					#elseif PSYCH_WATERMARKS
