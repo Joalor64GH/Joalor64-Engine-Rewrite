@@ -1,6 +1,6 @@
-Add custom game play changers
+Your custom gameplay changers go here!
 
-The file name becomes the name of the configuration
+The file name of the text file becomes the name of the gamechanger.
 Supported types: "int, float, percent, string"
 
 Please write it in a text file:

@@ -33,7 +33,6 @@ class ModCore
 		'hx' => TEXT,
 		'hscript' => TEXT,
 		'lua' => TEXT,
-		'py' => TEXT,
 		'frag' => TEXT,
 		'vert' => TEXT,
 		'ttf' => FONT,
