@@ -41,8 +41,7 @@ class ModCore
 		'mp4' => VIDEO,
 		'swf' => VIDEO,
 		'fla' => BINARY,
-		'flp' => BINARY,
-		'zip' => BINARY
+		'flp' => BINARY
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];

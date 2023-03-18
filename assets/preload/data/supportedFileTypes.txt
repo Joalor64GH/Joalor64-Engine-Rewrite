@@ -5,7 +5,6 @@
 .webm
 .swf
 .lua
-.py
 .hx
 .hscript
 .txt
@@ -14,7 +13,6 @@
 .jsonc
 .ogg
 .mp3
-.wav
 .frag
 .vert
 .ttf
