@@ -1,10 +1,14 @@
 package meta.data.options;
 
+#if desktop
+import meta.data.dependency.Discord.DiscordClient;
+#end
 import flixel.FlxG;
 import flixel.util.FlxSave;
 import sys.io.File;
 import sys.FileSystem;
 import haxe.Json;
+
 import meta.*;
 import meta.data.*;
 import meta.data.options.*;
@@ -49,31 +53,6 @@ class ModOptions extends BaseOptionsMenu {
 				save.bind('options', modName == '' ? 'psychenginemods' : 'psychenginemods/$modName/');
 
 				if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
-					/*if (file.endsWith('.txt')) {
-						var optionText:Array<Dynamic> = CoolUtil.coolTextFile(path);
-						var optionType:String = optionText[3];
-						var defVal:Dynamic = Reflect.field(save.data, optionText[2]);
-						var optList:Array<String> = (optionType == 'string') ? optionText[5].split(',') : null;
-						if (defVal == null) {
-							defVal = optionText[4];
-						};
-						var option:SoftcodeOption = new SoftcodeOption( // overriding options
-							optionText[0], // name
-							optionText[1], // description
-							optionText[2], // save (a key in which optionText info is stored)
-							optionType, // optionText type
-							defVal, // default value (might be overwritten depending on what did you set)
-							optList // other values (if it's a string option type)
-						);
-						if (optionType == 'int' || optionType == 'float' || optionType == 'percent') {
-							option.displayFormat = '%v';
-							option.minValue = optionText[5];
-							option.maxValue = optionText[6];
-							option.changeValue = optionText[7];
-							option.scrollSpeed = optionText[8];
-						};
-						addOption(option); */
-
 					var jsonFile:OptionData = cast Json.parse(File.getContent(path));
 					var defVal:Dynamic = Reflect.field(save.data, jsonFile.saveKey);
 					defVal = defVal == null ? defVal = jsonFile.defaultValue : defVal;
