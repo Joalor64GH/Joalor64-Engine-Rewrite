@@ -25,6 +25,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 
 # Planned Features
 * [X] Reorganized Source Code **[I AM A FUQIN MADLAD]**
+* [ ] Incredibly Basic Multi-Language Support
 * [ ] WAV Support
 * [ ] Make a Template for HX Scripts
 * [ ] ScriptCore (For better Haxescript)
