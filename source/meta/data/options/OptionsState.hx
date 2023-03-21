@@ -39,7 +39,7 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
-		'Preferences' 
+		'Preferences',
 		'Adjust Delay and Combo'/*, 
 		'The Special'*/
 	];
