@@ -19,7 +19,6 @@ class LanguageSupport {
         var directories:Array<String> = Paths.getModDirectories();
         for (dir in directories) {
             var target:String = haxe.io.Path.join([Paths.mods(), dir]) + '/data/langs.txt';
-            //trace('Looking for '+ target);
             if (FileSystem.exists(target)) {
                 var content:String = File.getContent(target);
                 var lines:Array<String> = content.split('\n');
@@ -27,8 +26,18 @@ class LanguageSupport {
                     var split:Array<String> = line.split("|"); //<langcode>|<Language name>
                     if (split.length < 2) continue;
                     langs.push([split[0].trim(), split[1].trim()]);
-                    //trace('Loaded language: '+ split[0] + ' - ' + split[1]);
                 }
+            }
+        }
+        #else
+        var target:String = haxe.io.Path.join([Paths.getPreloadPath()]) + '/data/langs.txt';
+        if (FileSystem.exists(target)) {
+            var content:String = File.getContent(target);
+            var lines:Array<String> = content.split('\n');
+            for (line in lines) {
+                var split:Array<String> = line.split("|"); //<langcode>|<Language name>
+                if (split.length < 2) continue;
+                langs.push([split[0].trim(), split[1].trim()]);
             }
         }
         #end
