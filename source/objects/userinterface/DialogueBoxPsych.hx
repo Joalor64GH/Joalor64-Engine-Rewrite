@@ -20,6 +20,8 @@ import sys.io.File;
 #end
 import openfl.utils.Assets;
 
+import flash.media.Sound;
+
 using StringTools;
 
 typedef DialogueCharacterFile = {
@@ -513,6 +515,43 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		if(nextDialogueThing != null) {
 			nextDialogueThing();
 		}
+	}
+
+	function fetchSound(name:String):Dynamic {
+		var sound:Dynamic = null; //String|flash.media.Sound
+		//The Flash Sound bit took me a while to figure out
+		#if (desktop && MODS_ALLOWED)
+		var paths:Array<String> = [
+			'mods/' + Paths.currentModDirectory + '/sounds/dialogue/$name.ogg',
+			'mods/sounds/dialogue/$name.ogg',
+			Paths.sound('dialogue/$name'),
+			'mods/' + Paths.currentModDirectory + '/sounds/dialogue.ogg',
+			'mods/sounds/dialogue.ogg',
+			Paths.sound('dialogue')
+		];
+		for (path in paths) {
+			//trace(path);
+			if (FileSystem.exists(path)) {
+				sound = Sound.fromFile(path);
+				break;
+			} else if (!'$path'.startsWith('mods/') && Assets.exists(path)) {
+				sound = path;
+				break;
+			}
+		}
+		#else
+		var paths:Array<String> = [
+			Paths.sound('dialogue/$name'),
+			Paths.sound('dialogue')
+		];
+		for (path in paths) {
+			if (Assets.exists(path)) {
+				sound = path;
+				break;
+			}
+		}
+		#end
+		return sound;
 	}
 
 	public static function parseDialogue(path:String):DialogueFile {

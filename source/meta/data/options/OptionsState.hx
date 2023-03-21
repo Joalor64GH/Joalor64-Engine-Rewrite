@@ -131,7 +131,7 @@ class OptionsState extends MusicBeatState
 			if (options[i] == 'Dialogue Language') {
 				text =  'Lang > ${LanguageSupport.currentLangName()}';
 			}
-			var optionText:Alphabet = new Alphabet(0, 0, text, true, false);
+			var optionText:Alphabet = new Alphabet(0, 0, text, true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
