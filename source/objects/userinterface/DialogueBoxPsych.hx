@@ -516,13 +516,19 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	}
 
 	public static function parseDialogue(path:String):DialogueFile {
+		var content:String = null;
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		if(FileSystem.exists(path))
-		{
-			return cast Json.parse(File.getContent(path));
+		if (FileSystem.exists(path)) {
+			content = File.getContent(path);
 		}
+		#else
+		content = Assets.getText(path);
 		#end
-		return cast Json.parse(Assets.getText(path));
+		if (path.toLowerCase().endsWith('.txt')) {
+			return parseTxtDialog(content);
+		} else { //Load the usual Psych dialogue
+			return cast Json.parse(content);
+		}
 	}
 
 	public static function updateBoxOffsets(box:FlxSprite) { //Had to make it static because of the editors

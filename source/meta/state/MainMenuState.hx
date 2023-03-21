@@ -417,8 +417,10 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
+										LanguageSupport.refreshLangs();
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
+										LanguageSupport.refreshLangs();
 										MusicBeatState.switchState(new FreeplayState());
 									#if (MODS_ALLOWED && FUTURE_POLYMOD)
 									case 'mods':
@@ -429,6 +431,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
+										LanguageSupport.refreshLangs();
 										LoadingState.loadAndSwitchState(new OptionsState());
 									default:
 										Main.toast.create('Oops!', 0xFFFFFF00, 'State not found!');

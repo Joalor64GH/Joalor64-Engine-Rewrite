@@ -36,6 +36,7 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
+		'Dialogue Language',
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
@@ -51,6 +52,10 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
+			case 'Dialogue Language':
+				LanguageSupport.languageSwitch();
+				initOptions();
+				changeSelection();
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mod Options':
 			    if (Paths.optionsExist())
@@ -116,6 +121,27 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 
 		super.create();
+	}
+
+	function initOptions() {
+		if (grpOptions != null) {
+			remove(grpOptions);
+		}
+
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
+		for (i in 0...options.length)
+		{
+			var text = options[i];
+			if (options[i] == 'Dialogue Language') {
+				text =  'Lang > ${LanguageSupport.currentLangName()}';
+			}
+			var optionText:Alphabet = new Alphabet(0, 0, text, true, false);
+			optionText.screenCenter();
+			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			grpOptions.add(optionText);
+		}
 	}
 
 	override function closeSubState() {

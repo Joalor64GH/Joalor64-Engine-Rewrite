@@ -1769,6 +1769,51 @@ class PlayState extends MusicBeatState
 	}
 	#end
 
+	// Also comes with TXT Dialogue Support
+	public function searchPsychDialogue(songName:String, key:String, file:String = 'Dialogue'):String {
+		var resp:String = null;
+		
+		#if (desktop && MODS_ALLOWED)
+		var paths:Array<String> = [
+			'mods/' + Paths.currentModDirectory + '/data/$songName/$songName$file${LanguageSupport.currentLangExt()}.txt',
+			'mods/' + Paths.currentModDirectory + '/data/$songName/$key${LanguageSupport.currentLangExt()}.json',
+			'mods/data/$songName/$songName$file${LanguageSupport.currentLangExt()}.txt',
+			'mods/data/$songName/$key${LanguageSupport.currentLangExt()}.json',
+			Paths.json(songName + '/$songName$file${LanguageSupport.currentLangExt()}'),
+			'mods/' + Paths.currentModDirectory + '/data/$songName/$songName$file.txt',
+			'mods/' + Paths.currentModDirectory + '/data/$songName/$key.json',
+			'mods/data/$songName/$songName$file.txt',
+			'mods/data/$songName/$key.json',
+			Paths.json(songName + '/$songName$file')
+		];
+		for (path in paths) {
+			if (FileSystem.exists(path)) {
+				resp = path;
+				break;
+			}
+		}
+		#else
+		var paths:Array<String> = [
+			Paths.json(songName + '/${SONG.song.toLowerCase()}$file${LanguageSupport.currentLangExt()}'),
+			Paths.json(songName + '/${SONG.song.toLowerCase()}$file')
+		];
+		for (path in paths) {
+			if (OpenFlAssets.exists(path)) {
+				resp = path;
+				break;
+			}
+		}
+		#end
+		return resp;
+	}
+
+	function loadPsychDialogue(songName:String, suffix:String = ''):DialogueFile {
+		var path:String = searchPsychDialogue(songName, 'dialogue' + suffix);
+		var diag:DialogueFile = null;
+		if (path != null) diag = DialogueBoxPsych.parseDialogue(path);
+		return diag;
+	}
+
 	inline function set_songSpeed(value:Float):Float
 	{
 		if(generatedMusic)

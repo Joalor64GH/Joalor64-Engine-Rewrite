@@ -1,0 +1,3 @@
+es|Spanish
+pt|Portuguese
+fr|French
