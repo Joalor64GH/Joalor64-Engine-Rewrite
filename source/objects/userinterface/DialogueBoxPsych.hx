@@ -531,6 +531,28 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		}
 	}
 
+	// TXT Dialogue Compatibility
+	public static function parseTxtDialog(content:String):DialogueFile {
+		var diag:DialogueFile = { dialogue: new Array<DialogueLine>() };
+		var lines:Array<String> = content.split('\n');
+		for (line in lines) {
+			var splitName:Array<String> = line.split("|"); //<L,R>|<char:state>|<msg>
+			if (splitName.length < 2) continue;
+			var dline:DialogueLine = { 
+				speed: 0.05, boxState: 'normal', portrait: '',
+				expression: 'default', text: ''
+			};
+			//curAlignment = splitName[0];
+			var split:Array<String> = splitName[1].split(':');
+			dline.portrait = split[0];
+			if (split.length > 1)
+				dline.expression = split[1];
+			dline.text = splitName[2].trim();
+			diag.dialogue.push(dline);
+		}
+		return diag;
+	}
+
 	public static function updateBoxOffsets(box:FlxSprite) { //Had to make it static because of the editors
 		box.centerOffsets();
 		box.updateHitbox();
