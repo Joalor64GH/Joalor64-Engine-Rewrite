@@ -40,10 +40,8 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
-		'Adjust Delay and Combo', 
-		'Graphics', 
-		'Visuals and UI', 
-		'Gameplay'/*, 
+		'Preferences',
+		'Adjust Delay and Combo'/*, 
 		'The Special'*/
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -71,12 +69,8 @@ class OptionsState extends MusicBeatState
 				}
 			case 'Controls':
 				openSubState(new ControlsSubState());
-			case 'Graphics':
-				openSubState(new GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new VisualsUISubState());
-			case 'Gameplay':
-				openSubState(new GameplaySettingsSubState());
+			case 'Preferences':
+				openSubState(new PreferencesSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
 			/*case 'The Special':
