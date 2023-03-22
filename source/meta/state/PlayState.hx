@@ -3139,21 +3139,20 @@ class PlayState extends MusicBeatState
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				swagNote.mustPress = gottaHitNote;
-				swagNote.sustainLength = songNotes[2];
+				// sustain length fix courtesey of Stilic
+				// modified by memehoovy
+				swagNote.sustainLength = Math.round(songNotes[2] / Conductor.stepCrochet) * Conductor.stepCrochet;
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 
 				swagNote.scrollFactor.set();
 
-				var susLength:Float = swagNote.sustainLength;
-
-				susLength = susLength / Conductor.stepCrochet;
 				unspawnNotes.push(swagNote);
 
-				var floorSus:Int = Math.floor(susLength);
-				if(floorSus > 0) {
-					for (susNote in 0...floorSus+1)
+				var roundSus:Int = Math.round(swagNote.sustainLength / Conductor.stepCrochet);
+				if(roundSus > 0) {
+					for (susNote in 0...Math.floor(Math.max(roundSus, 2)))
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
@@ -5034,11 +5033,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				// I dunno what you need this for but here you go
-				//									- Shubs
-
-				// Shubs, this is for the "Just the Two of Us" achievement lol
-				//									- Shadow Mario
+				// for the "Just the Two of Us" achievement
 				keysPressed[key] = true;
 
 				//more accurate hit time for the ratings? part 2 (Now that the calculations are done, go back to the time it was before for not causing a note stutter)
@@ -5853,9 +5848,7 @@ class PlayState extends MusicBeatState
 		#if !SCRIPT_EXTENSION
 		return;
 		#end
-
-		return for (i in scriptArray)
-			i.call(event, args);
+		return for (i in scriptArray) i.call(event, args);
 	}
 
 	public function setOnScripts(key:String, value:Dynamic):Void
@@ -5863,9 +5856,7 @@ class PlayState extends MusicBeatState
 		#if !SCRIPT_EXTENSION
 		return;
 		#end
-		
-		return for (i in scriptArray)
-			i.set(key, value);
+		return for (i in scriptArray) i.set(key, value);
 	}
 
 	public function callOnLuas(event:String, args:Array<Dynamic>, ?callOnScript:Bool = true, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
