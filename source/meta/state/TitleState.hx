@@ -360,7 +360,7 @@ class TitleState extends MusicBeatState
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
 
-		credIcon3 = new FlxSprite(credIcon1.x,credIcon1.x - 300).loadGraphic(Paths.image('credits/bot'));
+		credIcon3 = new FlxSprite(150, -250).loadGraphic(Paths.image('credits/bot'));
 		add(credIcon3);
 		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;
