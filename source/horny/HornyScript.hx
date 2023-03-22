@@ -1,10 +1,13 @@
 package horny;
 
+#if HSCRIPT_ALLOWED
 import hscript.Interp;
 import hscript.Parser;
+#end
 import openfl.Lib;
 import flixel.FlxBasic;
 import flixel.util.FlxColor;
+#if LUA_ALLOWED
 import llua.Buffer;
 import llua.Convert;
 import llua.Lua;
@@ -13,8 +16,11 @@ import llua.LuaL;
 import llua.LuaOpen;
 import llua.State;
 import vm.lua.LuaVM;
+#end
+#if VIDEOS_ALLOWED
 import vlc.VLCBitmap;
 import vlc.LibVLC;
+#end
 import horny.*;
 using StringTools;
 
@@ -35,9 +41,7 @@ class HornyScript extends FlxBasic {
 		hscript = new Interp();
 		
 		parser = new Parser();
-		parser.allowJSON = true;
-		parser.allowTypes = true;
-		parser.allowMetadata = true;
+		parser.allowJSON = parser.allowTypes = parser.allowMetadata = true;
 		
 		setVariable('script', this);
 		setVariable('import', function(daClass:String)
@@ -80,6 +84,7 @@ class HornyScript extends FlxBasic {
 		setVariable('HSubstate', HornySubstate);
 		setVariable('HObject', HornyObject);
 		setVariable('HScript', HornyScript);
+		#if LUA_ALLOWED
 		setVariable('Lua_helper', Lua_helper);
 		setVariable('Lua_Debug', {
 			"event":Int,
@@ -95,9 +100,14 @@ class HornyScript extends FlxBasic {
 			"i_ci":Int       // private
 		});
 		setVariable('LuaVM', LuaVM);
+		#end
 		// vlc shit
+		#if VIDEOS_ALLOWED
 		setVariable('VLCBitmap', VLCBitmap);
+		#end
+		#if actuate
 		setVariable('VideoHandler', VideoHandler);
+		#end
 	}
 
         public function run()
