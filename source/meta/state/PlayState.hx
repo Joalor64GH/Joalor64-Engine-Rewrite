@@ -3139,7 +3139,9 @@ class PlayState extends MusicBeatState
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				swagNote.mustPress = gottaHitNote;
-				swagNote.sustainLength = Math.round(songNotes[2] / Conductor.stepCrochet) * Conductor.stepCrochet; // sustain length fix courtesey of Stilic
+				// sustain length fix courtesey of Stilic
+				// modified by memehoovy
+				swagNote.sustainLength = Math.round(songNotes[2] / Conductor.stepCrochet) * Conductor.stepCrochet;
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
@@ -3150,7 +3152,8 @@ class PlayState extends MusicBeatState
 
 				var roundSus:Int = Math.round(swagNote.sustainLength / Conductor.stepCrochet);
 				if(roundSus > 0) {
-					for (susNote in 0...Math.floor(Math.max(roundSus, 1)))
+					if(roundSus == 1) roundSus++;
+					for (susNote in 0...roundSus)
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
