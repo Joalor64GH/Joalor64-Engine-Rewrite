@@ -2917,8 +2917,7 @@ class PlayState extends MusicBeatState
 			var daNote:Note = unspawnNotes[i];
 			if(daNote.strumTime - 350 < time)
 			{
-				daNote.active = false;
-				daNote.visible = false;
+				daNote.active = daNote.visible = false;
 				daNote.ignoreNote = true;
 
 				daNote.kill();
@@ -3012,8 +3011,6 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		var ourVideo:Dynamic = BackgroundVideo.get();
-
 		startingSong = false;
 		songStarted = true;
 
@@ -3327,10 +3324,7 @@ class PlayState extends MusicBeatState
 		{
 			var targetAlpha:Float = 1;
 			if (player < 1)
-			{
-				if(!ClientPrefs.opponentStrums) targetAlpha = 0;
-				else if(ClientPrefs.middleScroll) targetAlpha = 0.35;
-			}
+				targetAlpha = (!ClientPrefs.opponentStrums) ? 0 : (ClientPrefs.middleScroll) ? 0.35 : 1;
 
 			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 			babyArrow.downScroll = ClientPrefs.downScroll;
@@ -3492,8 +3486,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		var ourVideo:Dynamic = BackgroundVideo.get();
-
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
@@ -4026,12 +4018,10 @@ class PlayState extends MusicBeatState
 
 				persistentUpdate = false;
 				persistentDraw = false;
-				for (tween in modchartTweens) {
+				for (tween in modchartTweens)
 					tween.active = true;
-				}
-				for (timer in modchartTimers) {
+				for (timer in modchartTimers)
 					timer.active = true;
-				}
 
 				// Minor spelling mistake. I win.
 				if (SONG.song.toLowerCase() == 'tutorial')
