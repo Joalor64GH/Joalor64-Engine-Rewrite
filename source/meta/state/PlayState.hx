@@ -3152,8 +3152,7 @@ class PlayState extends MusicBeatState
 
 				var roundSus:Int = Math.round(swagNote.sustainLength / Conductor.stepCrochet);
 				if(roundSus > 0) {
-					if(roundSus == 1) roundSus++;
-					for (susNote in 0...Math.floor(Math.max(roundSus, 1)))
+					for (susNote in 0...Math.floor(Math.max(roundSus, 2)))
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
