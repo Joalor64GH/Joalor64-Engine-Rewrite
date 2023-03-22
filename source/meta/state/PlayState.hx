@@ -36,6 +36,7 @@ import animateatlas.AtlasFrameMaker;
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+import core.ScriptCore;
 
 #if LUA_ALLOWED
 import llua.Lua;
