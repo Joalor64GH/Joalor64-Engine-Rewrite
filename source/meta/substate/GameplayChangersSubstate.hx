@@ -108,10 +108,10 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		var directories:Array<String> = [];
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		directories.push(Paths.mods('scripts/gamechangers/'));
-		directories.push(Paths.mods(Paths.currentModDirectory + '/scripts/gamechangers/'));
+		directories.push(Paths.mods('custom_gamechangers/'));
+		directories.push(Paths.mods(Paths.currentModDirectory + '/custom_gamechangers/'));
 		for(mod in Paths.getGlobalMods())
-			directories.push(Paths.mods(mod + '/scripts/gamechangers/'));
+			directories.push(Paths.mods(mod + '/custom_gamechangers/'));
 		#end
 
 		for (i in 0...directories.length) {

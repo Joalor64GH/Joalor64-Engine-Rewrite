@@ -57,6 +57,9 @@ class Paths
 		'_merge', 
 		#end
 		'characters',
+		'custom_events',
+		'custom_notetypes',
+		'custom_gamechangers',
 		'data',
 		'songs',
 		'music',
@@ -444,10 +447,6 @@ class Paths
 		#end
 	}
 
-	inline static public function tjson(key:String, ?library:String)
-	{
-		return getPath('data/$key.jsonc', TEXT, library);
-	}
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
@@ -456,6 +455,7 @@ class Paths
 	{
 		return getPath('shaders/$key.vert', TEXT, library);
 	}
+	
 	inline static public function lua(key:String, ?library:String)
 	{
 		#if !sys
