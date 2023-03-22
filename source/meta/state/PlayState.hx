@@ -2048,6 +2048,29 @@ class PlayState extends MusicBeatState
 		return FunkinLua.Function_Continue;
 	}
 
+	#if HSCRIPT_ALLOWED
+	// scriptcore crap
+	inline function executeScript(name:String, ?execCreate:Bool = false){
+		ScriptCore.execute(name, execCreate);
+	}
+
+	inline function setVar(name:String, val:Dynamic){
+		ScriptCore.setVariable(name, val);
+	}
+
+	inline function getVar(name:String, val:Dynamic){
+		return (ScriptCore.existsVariable(val)) ? ScriptCore.getVariable(name, val) : null;
+	}
+
+	inline function existsVar(name:String){
+		return ScriptCore.existsVariable(name);
+	}
+
+	inline function executeFunc(name:String){
+		return ScriptCore.executeFunc(name);
+	}
+	#end
+
 	function postSetHscript() {
 		setOnHscripts('boyfriend', boyfriend);
 		setOnHscripts('dad', dad);
