@@ -8,9 +8,11 @@
 	<app file="J64EngineRE_MAC" if="mac" />
 
 	<!-- Just for clarfication -->
-	<app file="J64EngineRE_WIN DEBUG" if="windows debug" />
-	<app file="J64EngineRE_APP DEBUG" if="linux debug" />
-	<app file="J64EngineRE_MAC DEBUG" if="mac debug" />
+	<section if="debug">
+		<app file="J64EngineRE_WIN DEBUG" if="windows" />
+		<app file="J64EngineRE_APP DEBUG" if="linux" />
+		<app file="J64EngineRE_MAC DEBUG" if="mac" />
+	</section>
 
 	<!--Preloader-->
 	<app preloader="flixel.system.FlxPreloader" />
@@ -65,17 +67,17 @@
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
+	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
 
         <section if="EMBED_ASSETS">
 	        <assets path="assets/art" embed='false'/>
 	        <assets path="assets/core" embed='true'/>
-			<assets path="assets/fonts" embed='true'/>
+		<assets path="assets/fonts" embed='true'/>
+		<assets path='art/header.lua' embed='true'/>
 	</section>
-	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
-	<assets path="assets/preload" rename="assets" exclude="*.mp3|*.mp4" unless="web"/>
 
-	<!-- SWF EXAMPLE-->
+	<!-- SWF EXAMPLE -->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
 	
 	<!-- ALWAYS PRELOADED -->
@@ -125,6 +127,7 @@
 
         <!-- PATH DEFINITIONS -->
 	<section if="web">
+		<assets path="assets/preload" 	    rename="assets" 	    exclude="*.ogg"/>
 		<assets path="assets/songs"         library="songs"         exclude="*.ogg"/>
 		<assets path="assets/shared"        library="shared"        exclude="*.ogg"/>
 		<assets path="assets/tutorial"      library="tutorial"      exclude="*.ogg"/>
@@ -138,6 +141,7 @@
 	</section>
 
 	<section unless="web">
+		<assets path="assets/preload" 	    rename="assets" 	    exclude="*.mp3|*.mp4"/>
 		<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4"/>
 		<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.mp4"/>
 		<assets path="assets/tutorial"      library="tutorial"      exclude="*.mp3|*.mp4"/>
@@ -152,10 +156,9 @@
 	
 	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
 		<assets path='example_mods' rename='mods' embed='false'/>
-		<assets path='modsList.txt' rename='' />
+		<assets path='modsList.txt'/>
 	</section>
 
-	<assets path='art/header.lua' embed='true'/>
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	
