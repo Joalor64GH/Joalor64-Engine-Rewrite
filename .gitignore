@@ -70,9 +70,9 @@ polymod-fix/PolymodFileSystem.hx
 !*.hxproj
 !*.hxp
 !*.jsonc
-!source/spine/
 
 # Why wouldn't we allow introMod?
+# It's a hit classic.
 !example_mods/introMod/* 
 
 ### VS Code

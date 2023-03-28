@@ -1,21 +1,26 @@
+local difficulties = {
+    "Easy",
+    "Normal",
+    "Hard",
+    "Harder",
+    "Ow my hands",
+}
+
+local oldTitle = "Friday Night Funkin: Joalor64 Engine Rewritten"
+
 function onCreate()
-	setPropertyFromClass("openfl.Lib", "application.window.title", "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " .. (songName))
+    oldTitle = (getPropertyFromClass("openfl.Lib", "application.window.title") or "Friday Night Funkin': Joalor64 Engine Rewritten")
+    setPropertyFromClass("openfl.Lib", "application.window.title", oldTitle .. " - NOW PLAYING: " .. (songName))
 end
+
 function onDestroy()
-	setPropertyFromClass("openfl.Lib", "application.window.title", "Friday Night Funkin': Joalor64 Engine Rewritten")
+    setPropertyFromClass("openfl.Lib", "application.window.title", oldTitle)
 end
+
 function onCreatePost()
-	if songName == 'Too Slow Encore' then
-		if difficulty == 0 then
-			setPropertyFromClass("openfl.Lib", "application.window.title", "Now Playing Too Slow Encore - Baby")
-		elseif difficulty == 1 then
-			setPropertyFromClass("openfl.Lib", "application.window.title", "Now Playing Too Slow Encore - Hardnt")
-		elseif difficulty == 2 then
-			setPropertyFromClass("openfl.Lib", "application.window.title", "Now Playing Too Slow Encore - Encore")
-		elseif difficulty == 3 then
-			setPropertyFromClass("openfl.Lib", "application.window.title", "Now Playing Too Slow Encore - Flipped")
-		elseif difficulty == 4 then
-			setPropertyFromClass("openfl.Lib", "application.window.title", "Now Playing Too Slow Encore - New")
-		end
-	end
+    setPropertyFromClass("openfl.Lib", "application.window.title", oldTitle .. " - NOW PLAYING: " .. (songName) .. " on " .. difficulties[difficulty])
 end
+
+-- Credits
+-- Original by P00P36#7620
+-- Improved by Superpowers04#3887
