@@ -2,6 +2,7 @@ package meta;
 
 import meta.state.PlayState;
 import openfl.utils.Assets;
+import flixel.FlxG;
 
 using StringTools;
 
