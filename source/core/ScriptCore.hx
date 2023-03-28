@@ -22,6 +22,8 @@ class ScriptCore extends FlxBasic
 	private var parser:Parser;
 	private var interp:Interp;
 
+	public static var instance:ScriptCore = null;
+
 	public function new(file:String, ?execute:Bool = true)
 	{
 		super();
@@ -30,6 +32,8 @@ class ScriptCore extends FlxBasic
 		parser.allowJSON = parser.allowTypes = parser.allowMetadata = true;
 
 		interp = new Interp();
+
+		instance = this;
 
 		setVariable('this', this);
 		setVariable('import', function(daClass:String, ?asDa:String)
@@ -181,5 +185,6 @@ class ScriptCore extends FlxBasic
 		super.destroy();
 		parser = null;
 		interp = null;
+		instance = null;
 	}
 }
