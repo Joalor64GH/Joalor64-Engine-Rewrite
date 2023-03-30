@@ -75,6 +75,7 @@ class Paths
 		'weeks',
 		'fonts',
 		'scripts',
+		'classes',
 		'libs',
 		'achievements',
 		'options',
@@ -703,6 +704,17 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
+	inline static public function haxescript(key:String)
+	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		var file:String = modsHaxe(key);
+		if(FileSystem.exists(file)) {
+			return file;
+		}
+		#end
+		return 'assets/classes/$key';
+	}
+
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -819,6 +831,10 @@ class Paths
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
 	inline static public function mods(key:String = '') {
 		return 'mods/' + key;
+	}
+
+	inline static public function modsHaxe(key:String) {
+		return modFolders('classes/' + key);
 	}
 
 	inline static public function modsFont(key:String) {

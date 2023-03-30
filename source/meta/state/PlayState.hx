@@ -36,6 +36,7 @@ import animateatlas.AtlasFrameMaker;
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+import core.ScriptCore;
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -2047,6 +2048,29 @@ class PlayState extends MusicBeatState
 		}
 		return FunkinLua.Function_Continue;
 	}
+
+	#if HSCRIPT_ALLOWED
+	// scriptcore crap
+	inline function executeScript(name:String, ?execCreate:Bool = false){
+		ScriptCore.instance.execute(name, execCreate);
+	}
+
+	inline function setVar(name:String, val:Dynamic){
+		ScriptCore.instance.setVariable(name, val);
+	}
+
+	inline function getVar(name:String){
+		return (ScriptCore.instance.existsVariable(name)) ? ScriptCore.instance.getVariable(name) : null;
+	}
+
+	inline function existsVar(name:String){
+		return ScriptCore.instance.existsVariable(name);
+	}
+
+	inline function executeFunc(name:String){
+		return ScriptCore.instance.executeFunc(name);
+	}
+	#end
 
 	function postSetHscript() {
 		setOnHscripts('boyfriend', boyfriend);
