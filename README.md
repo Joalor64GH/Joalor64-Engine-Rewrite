@@ -23,10 +23,10 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 `haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
 
 # Planned Features
+* [X] ScriptCore (For better Haxescript) **[yes]**
 * [X] Reorganized Source Code **[I AM A FUQIN MADLAD]**
 * [ ] WAV Support
 * [ ] Make a Template for HX Scripts
-* [ ] ScriptCore (For better Haxescript)
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 * [ ] Reorganized Assets **[Definitely doing this when I feel like it]**
 
