@@ -32,24 +32,24 @@ class PasswordPrompt extends meta.MusicBeatSubstate
 		input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
 		input.screenCenter();
 		input.y += 50;
-        input.scrollFactor.set();
+        	input.scrollFactor.set();
 		add(black);
 		add(txt);
 		add(input);
-        input.backgroundColor = 0xFF000000;
-        input.maxLength = 15;
-        input.lines = 1;
-        input.caretColor = 0xFFFFFFFF;
+        	input.backgroundColor = 0xFF000000;
+        	input.maxLength = 15;
+        	input.lines = 1;
+        	input.caretColor = 0xFFFFFFFF;
 		FlxG.mouse.visible = true;
 	}
 
 	override function update(elapsed:Float) 
 	{
 		super.update(elapsed);
-        input.hasFocus = true;
+        	input.hasFocus = true;
 
 		if (controls.ACCEPT){
-            // add custom functions here
+            		// add custom functions here
 			FlxG.state.closeSubState();
 		}
 		if (controls.BACK){
