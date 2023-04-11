@@ -166,5 +166,9 @@ class Main extends Sprite
 			Sys.exit(1);
 		});
 		#end
+
+		#if windows
+		meta.data.windows.NativeUtil.enableDarkMode();
+		#end
 	}
 }
