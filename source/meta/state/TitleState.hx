@@ -107,6 +107,10 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		#if windows
+		meta.data.windows.NativeUtil.enableDarkMode();
+		#end
+		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
