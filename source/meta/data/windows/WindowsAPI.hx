@@ -1,12 +1,15 @@
 package meta.data.windows;
 
+import meta.data.native.WinAPI;
+
 /**
  * THIS WAS MADE BY YOSHICRAFTER29!!! LMAO!!
  */
+ 
 class WindowsAPI {
     @:dox(hide) public static function registerAudio() {
         #if windows
-        native.WinAPI.registerAudio();
+        WinAPI.registerAudio();
         #end
     }
 
@@ -15,7 +18,7 @@ class WindowsAPI {
      */
     public static function setDarkMode(enable:Bool) {
         #if windows
-        native.WinAPI.setDarkMode(enable);
+        WinAPI.setDarkMode(enable);
         #end
     }
 }
