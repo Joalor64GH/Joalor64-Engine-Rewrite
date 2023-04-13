@@ -7,7 +7,7 @@ import flixel.math.FlxMath;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
-// FNF
+// JOALOR64
 import animateatlas.AtlasFrameMaker;
 import meta.data.alphabet.Alphabet;
 import meta.data.dependency.Discord;
