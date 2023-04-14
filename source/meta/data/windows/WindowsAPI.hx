@@ -1,4 +1,4 @@
-package meta.data.native;
+package meta.data.windows;
 
 import meta.data.native.WinAPI;
 
