@@ -12,7 +12,7 @@ class WindowsAPI {
      */
     public static function setDarkMode(enable:Bool) {
         #if windows
-        native.WinAPI.setDarkMode(enable);
+        WinAPI.setDarkMode(enable);
         #end
     }
 
