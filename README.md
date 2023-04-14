@@ -6,6 +6,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 # Features
+* Dark Mode Application Bar (Windows 10 Only)
 * In-Game Mod Downloader
 * Custom Options
 * SWF Support (broken at the moment)
@@ -23,9 +24,6 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 `haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
 
 # Planned Features
-* [X] ScriptCore (For better Haxescript) **[yes]**
-* [X] Reorganized Source Code **[I AM A FUQIN MADLAD]**
-* [ ] WAV Support
 * [ ] Make a Template for HX Scripts
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 * [ ] Reorganized Assets **[Definitely doing this when I feel like it]**
