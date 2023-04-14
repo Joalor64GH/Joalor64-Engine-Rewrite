@@ -1,5 +1,6 @@
-package meta.data.native;
+package native;
 
+import funkin.windows.WindowsAPI.MessageBoxIcon;
 #if windows
 @:buildXml('
 <target id="haxe">
@@ -104,8 +105,7 @@ class AudioFixClient : public IMMNotificationClient {
         EDataFlow flow, ERole role,
         LPCWSTR pwstrDeviceId)
     {
-        std::cout << "fuck";
-        ::Main_obj::audioDisconnected = true;
+        ::funkin::_hx_system::Main_obj::audioDisconnected = true;
         return S_OK;
     };
 };
@@ -114,11 +114,6 @@ AudioFixClient *curAudioFix;
 ')
 @:dox(hide)
 class WinAPI {
-
-    public static var __audioChangeCallback:Void->Void = function() {
-        trace("test");
-    };
-
     @:functionCode('
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
@@ -127,5 +122,14 @@ class WinAPI {
         }
     ')
     public static function setDarkMode(enable:Bool) {}
+
+    #if windows
+    @:functionCode('
+        MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
+    ')
+    #end
+    public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {
+        
+    }
 }
 #end
