@@ -41,8 +41,6 @@ class Main extends Sprite
 	
 	public static var toast:ToastCore; // credits go to MAJigsaw77
 
-	// You can pretty much ignore everything from here on - your code should go in your states.
-
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
@@ -73,6 +71,8 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		meta.data.windows.WindowsAPI.setDarkMode(true);
+		
 		gameWidth = GameDimensions.width;
 		gameHeight = GameDimensions.height;
 		
