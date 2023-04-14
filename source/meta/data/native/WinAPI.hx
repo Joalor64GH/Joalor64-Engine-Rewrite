@@ -120,13 +120,6 @@ class WinAPI {
     };
 
     @:functionCode('
-    if (!curAudioFix) curAudioFix = new AudioFixClient();
-    ')
-    public static function registerAudio() {
-        Main.audioDisconnected = false;
-    }
-
-    @:functionCode('
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
         if (S_OK != DwmSetWindowAttribute(window, 19, &darkMode, sizeof(darkMode))) {
