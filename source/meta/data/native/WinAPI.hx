@@ -31,18 +31,33 @@ import meta.data.windows.WindowsAPI.MessageBoxIcon;
               if ((punk) != NULL)  \\
                 { (punk)->Release(); (punk) = NULL; }
 
+#ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
+#define DWMWA_USE_IMMERSIVE_DARK_MODE 20 // supported in Windows 11 (Build 22000 and higher)
+#endif
+
 static long lastDefId = 0;
 ')
 @:dox(hide)
 class WinAPI {
     @:functionCode('
+        // This only works for 32 bit systems/platforms
+        #if defined(__WIN32__)
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
-        if (S_OK != DwmSetWindowAttribute(window, 19, &darkMode, sizeof(darkMode))) {
-            DwmSetWindowAttribute(window, 20, &darkMode, sizeof(darkMode));
+        if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, 20, sizeof(darkMode))) {
+            DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, 20, sizeof(darkMode));
         }
+        #else
+        return false;
+        #endif
     ')
-    public static function setDarkMode(enable:Bool) {}
+    public static function setDarkMode(enable:Bool) {
+        #if HXCPP_M32
+        return true;
+        #else
+        return false;
+        #end
+    }
 
     #if windows
     @:functionCode('
