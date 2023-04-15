@@ -13,6 +13,7 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import meta.data.ClientPrefs;
 import meta.state.TitleState;
+import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
 
@@ -72,6 +73,9 @@ class Main extends Sprite
 	private function setupGame():Void
 	{
 		meta.data.windows.WindowsAPI.setDarkMode(true);
+
+		ButtplugUtils.set_intensity(100);
+		ButtplugUtils.initialise();
 		
 		gameWidth = GameDimensions.width;
 		gameHeight = GameDimensions.height;

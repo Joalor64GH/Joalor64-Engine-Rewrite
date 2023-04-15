@@ -47,7 +47,8 @@ import objects.shaders.*;
 
 using StringTools;
 
-typedef TitleData = {
+typedef TitleData = 
+{
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -106,9 +107,6 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		ButtplugUtils.set_intensity(100);
-		ButtplugUtils.initialise();
-
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
@@ -743,7 +741,9 @@ class TitleState extends MusicBeatState
 			credIconKawai.destroy();
 			credIconEvil.destroy();
 			#end
+
 			FlxG.camera.flash(FlxColor.WHITE, 4);
+			
 			skippedIntro = true;
 		}
 	}
