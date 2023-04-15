@@ -344,6 +344,9 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	//the payload for beat-based buttplug support
+	public var bpPayload:String = "";
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -3106,6 +3109,9 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(vocals);
 		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
 
+		//generate the payload for the frontend
+		bpPayload = ButtplugUtils.createPayload(Conductor.crochet);
+
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
 
@@ -4047,7 +4053,6 @@ class PlayState extends MusicBeatState
 				for (timer in modchartTimers)
 					timer.active = true;
 
-				// Minor spelling mistake. I win.
 				if (SONG.song.toLowerCase() == 'tutorial')
 					trace('bro how tf did you die on tutorial :skull:');
 				
@@ -4558,6 +4563,8 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
+		ButtplugUtils.stop();
+
 		if (useVideo)
 		{
 			GlobalVideo.get().stop();
@@ -5821,6 +5828,9 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 		lastBeatHit = curBeat;
+
+		//buttplug fuckery
+		ButtplugUtils.sendPayload(bpPayload);
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);

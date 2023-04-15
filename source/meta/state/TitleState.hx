@@ -47,8 +47,7 @@ import objects.shaders.*;
 
 using StringTools;
 
-typedef TitleData =
-{
+typedef TitleData = {
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -107,6 +106,9 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		ButtplugUtils.set_intensity(100);
+		ButtplugUtils.initialise();
+
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
@@ -411,7 +413,7 @@ class TitleState extends MusicBeatState
 		#end
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.3.0 (PE 0.6.3)", 12);
-		#if debug versionShit.text += "DEBUG BUILD"; #end
+		#if debug versionShit.text += " DEBUG BUILD"; #end
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -741,9 +743,7 @@ class TitleState extends MusicBeatState
 			credIconKawai.destroy();
 			credIconEvil.destroy();
 			#end
-
 			FlxG.camera.flash(FlxColor.WHITE, 4);
-
 			skippedIntro = true;
 		}
 	}
