@@ -886,6 +886,10 @@ class Paths
 		return modFolders('_merge/data/' + key + '.xml');
 	}
 
+	inline static public function csv(key:String) {
+		return modFolders(key + '.csv');
+	}
+
 	inline static public function tsv(key:String) {
 		return modFolders(key + '.tsv');
 	}
