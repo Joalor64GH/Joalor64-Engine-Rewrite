@@ -221,7 +221,6 @@ class Paths
 		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
 		var contents:String = '';
 		http.onData = function(data:String) {
-			//trace(data);
 			contents = data;
 		}
 		http.onError = function(error) {
@@ -302,25 +301,18 @@ class Paths
 	}
 
 	static public function getLibraryPath(file:String, library = "preload")
-	{
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
-	}
 
 	#if sys
 	static public function getImageLibraryPath(file:String, library = "preload"):FlxGraphicAsset
-	{
 		return if (library == "preload" || library == "default") getImagePath(file); else getImagePathForce(file, library);
-	}
 
 	static public function getSoundLibraryPath(file:String, library = "preload"):FlxSoundAsset
-	{
 		return if (library == "preload" || library == "default") getSoundPath(file); else getSoundPathForce(file, library);
-	}
 	#end
 
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
-		var returnPath = '$library:assets/$library/$file';
 		#if sys
 		if (FileSystem.exists('mods/mainMods/_append/$library/$file'))
 		{
@@ -328,10 +320,10 @@ class Paths
 		}
 		else
 		{
-			return returnPath;
+			return '$library:assets/$library/$file';
 		}
 		#else
-		return returnPath;
+		return '$library:assets/$library/$file';
 		#end
 	}
 
@@ -432,9 +424,7 @@ class Paths
 	}
 
 	inline static public function xml(key:String, ?library:String)
-	{
 		return getPath('data/$key.xml', TEXT, library);
-	}
 
 	inline static public function json(key:String, ?library:String)
 	{
@@ -449,13 +439,10 @@ class Paths
 	}
 
 	inline static public function shaderFragment(key:String, ?library:String)
-	{
 		return getPath('shaders/$key.frag', TEXT, library);
-	}
+	
 	inline static public function shaderVertex(key:String, ?library:String)
-	{
 		return getPath('shaders/$key.vert', TEXT, library);
-	}
 	
 	inline static public function lua(key:String, ?library:String)
 	{
@@ -481,6 +468,7 @@ class Paths
 
 		return getPath('$key.hx', TEXT, library);
 	}
+	
 	static public function video(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -516,19 +504,17 @@ class Paths
 
 	static public function sound(key:String, ?library:String):Sound
 	{
-		var sound:Sound = returnSound('sounds', key, library);
 		#if sys
 		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/week$i/sounds/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
 				return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
 			else
-				return sound;
+				return returnSound('sounds', key, library);
 		}
 		#else
-		return sound;
+		return returnSound('sounds', key, library);
 		#end
 	}
 
@@ -543,52 +529,39 @@ class Paths
 
 	static public function music(key:String, ?library:String):Sound
 	{
-		var file:Sound = returnSound('music', key, library);
 		#if sys
 		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/week$i/music/$key.ogg')
 				|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
 				return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
 			else
-				return file;
+				return returnSound('music', key, library);
 		}
 		#else
-		return file;
+		return returnSound('music', key, library);
 		#end
 	}
 
 	inline static public function voices(song:String):Any
-	{
-		var songKey:String = '${formatToSongPath(song)}/Voices';
-		var voices = returnSound('songs', songKey);
-		return voices;
-	}
+		return returnSound('songs', '${formatToSongPath(song)}/Voices');
 
 	inline static public function inst(song:String):Any
-	{
-		var songKey:String = '${formatToSongPath(song)}/Inst';
-		var inst = returnSound('songs', songKey);
-		return inst;
-	}
+		return returnSound('songs', '${formatToSongPath(song)}/Inst');
 
 	static public function image(key:String, ?library:String):FlxGraphic
 	{
-		// streamlined the assets process more
-		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		#if sys
 		for (i in 1...7){
 			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
-				|| FileSystem.exists('mods/mainMods/_append/week$i/images/$key.png')
 				|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
 				return getPathImage('images/$key.png', IMAGE, library);
 			else
-				return returnAsset;
+				return returnGraphic(key, library);
 		}
 		#else
-		return returnAsset;
+		return returnGraphic(key, library);
 		#end
 	}
 
@@ -813,7 +786,6 @@ class Paths
 		// I hate this so god damn much
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
-		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath))
 			currentTrackedSounds.set(gottenPath, Sound.fromFile('./${gottenPath}'));
 		localTrackedAssets.push(gottenPath);
@@ -829,70 +801,54 @@ class Paths
 	}
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
-	inline static public function mods(key:String = '') {
+	inline static public function mods(key:String = '')
 		return 'mods/' + key;
-	}
 
-	inline static public function modsHaxe(key:String) {
+	inline static public function modsHaxe(key:String)
 		return modFolders('classes/' + key);
-	}
 
-	inline static public function modsFont(key:String) {
+	inline static public function modsFont(key:String)
 		return modFolders('fonts/' + key);
-	}
 
-	inline static public function modsJson(key:String) {
+	inline static public function modsJson(key:String)
 		return modFolders('data/' + key + '.json');
-	}
 
-	inline static public function modsTjson(key:String) {
+	inline static public function modsTjson(key:String)
 		return modFolders('data/' + key + '.jsonc');
-	}
 
 	#if FUTURE_POLYMOD
-	inline static public function appendTxt(key:String) {
+	inline static public function appendTxt(key:String)
 		return modFolders('_append/data/' + key + '.txt');
-	}
 
-	inline static public function appendJson(key:String) {
+	inline static public function appendJson(key:String)
 		return modFolders('_append/data/' + key + '.json');
-	}
 
-	inline static public function appendCsv(key:String) {
+	inline static public function appendCsv(key:String)
 		return modFolders('_append/data/' + key + '.csv');
-	}
 
-	inline static public function appendXml(key:String) {
+	inline static public function appendXml(key:String)
 		return modFolders('_append/data/' + key + '.xml');
-	}
 
-	inline static public function mergeTxt(key:String) {
+	inline static public function mergeTxt(key:String)
 		return modFolders('_merge/data/' + key + '.txt');
-	}
 
-	inline static public function mergeJson(key:String) {
+	inline static public function mergeJson(key:String)
 		return modFolders('_merge/data/' + key + '.json');
-	}
 
-	inline static public function mergeCsv(key:String) {
+	inline static public function mergeCsv(key:String)
 		return modFolders('_merge/data/' + key + '.csv');
-	}
 
-	inline static public function mergeTsv(key:String) {
+	inline static public function mergeTsv(key:String)
 		return modFolders('_merge/data/' + key + '.tsv');
-	}
 
-	inline static public function mergeXml(key:String) {
+	inline static public function mergeXml(key:String)
 		return modFolders('_merge/data/' + key + '.xml');
-	}
 
-	inline static public function csv(key:String) {
+	inline static public function csv(key:String)
 		return modFolders(key + '.csv');
-	}
 
-	inline static public function tsv(key:String) {
+	inline static public function tsv(key:String)
 		return modFolders(key + '.tsv');
-	}
 	#end
 
 	static public function modsVideo(key:String) {
@@ -906,29 +862,23 @@ class Paths
 		return modFolders('videos/$key.mp4');
 	}
 
-	inline static public function modsFlashMovie(key:String) {
+	inline static public function modsFlashMovie(key:String)
 		return modFolders('flash/' + key + '.' + FLASH_EXT);
-	}
 
-	inline static public function modsSounds(path:String, key:String) {
+	inline static public function modsSounds(path:String, key:String)
 		return modFolders(path + '/' + key + '.' + SOUND_EXT);
-	}
 
-	inline static public function modsImages(key:String) {
+	inline static public function modsImages(key:String)
 		return modFolders('images/' + key + '.png');
-	}
 
-	inline static public function modsXml(key:String) {
+	inline static public function modsXml(key:String)
 		return modFolders('images/' + key + '.xml');
-	}
 
-	inline static public function modsTxt(key:String) {
+	inline static public function modsTxt(key:String)
 		return modFolders('images/' + key + '.txt');
-	}
 
-	inline static public function modsAchievements(key:String) {
+	inline static public function modsAchievements(key:String)
 		return modFolders('achievements/' + key + '.json');
-	}
 
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {
