@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "label": "Build Windows",
+      "command": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build Mac",
+      "command": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build Linux",
+      "command": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+	]
+}
