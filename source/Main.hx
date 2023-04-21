@@ -51,27 +51,6 @@ class Main extends Sprite
 	{
 		super();
 
-		if (stage != null)
-			init();
-		else
-			addEventListener(Event.ADDED_TO_STAGE, init);
-
-		toast = new ToastCore();
-		addChild(toast);
-	}
-
-	public static var webmHandler:WebmHandler;
-
-	private function init(?E:Event):Void
-	{
-		if (hasEventListener(Event.ADDED_TO_STAGE))
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-
-		setupGame();
-	}
-
-	private function setupGame():Void
-	{
 		meta.data.windows.WindowsAPI.setDarkMode(true);
 
 		ButtplugUtils.set_intensity(100);
@@ -125,15 +104,13 @@ class Main extends Sprite
 		#end
 
 		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+		FlxG.autoPause = FlxG.mouse.visible = false;
 		#end
 		
-		#if CRASH_HANDLER
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,
 		// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 		// very cool person for real they don't get enough credit for their work
-		function(e){
+		#if CRASH_HANDLER
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, (e) -> {
 			var errMsg:String = "";
 			var path:String;
 			var callStack:Array<StackItem> = CallStack.exceptionStack(true);
@@ -170,5 +147,10 @@ class Main extends Sprite
 			Sys.exit(1);
 		});
 		#end
+
+		toast = new ToastCore();
+		addChild(toast);
 	}
+
+	public static var webmHandler:WebmHandler;
 }
