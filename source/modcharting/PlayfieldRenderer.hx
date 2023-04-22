@@ -101,7 +101,11 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
     public var modchart:ModchartFile;
     public var inEditor:Bool = false;
     public var editorPaused:Bool = false;
-    public function new(strumGroup:FlxTypedGroup<StrumNoteType>, notes:FlxTypedGroup<Note>,instance:ModchartMusicBeatState) 
+
+    // in case you wanna toggle it
+    public static var drawRenderer:Bool = true;
+
+    public function new(strumGroup:FlxTypedGroup<StrumNoteType>, notes:FlxTypedGroup<Note>, instance:ModchartMusicBeatState, ?drawRenderer:Bool = true) 
     {
         super(0,0);
         this.strumGroup = strumGroup;
@@ -110,15 +114,21 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
         if (Std.isOfType(instance, PlayState))
             playStateInstance = cast instance; //so it just casts once
 
-        strumGroup.visible = false; //drawing with renderer instead
-        notes.visible = false;
+        if (drawRenderer && alpha > 0 && visible){
+            strumGroup.visible = false; //drawing with renderer instead
+            notes.visible = false;
+        }
+        else {
+            strumGroup.visible = true;
+            notes.visible = true;
+            return;
+        }
 
         //fix stupid crash because the renderer in playstate is still technically null at this point and its needed for json loading
         instance.playfieldRenderer = this; 
 
         addNewplayfield(0,0,0);
         loadDefaultModifiers();
-
 
         modchart = new ModchartFile(this);
     }
@@ -193,23 +203,13 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
 
     override public function draw()
     {
-        if (alpha == 0 || !visible)
+        if (alpha == 0 || !visible || !drawRenderer)
             return;
 
         strumGroup.cameras = this.cameras;
         notes.cameras = this.cameras;
 
-        
-        //drawStrums();
-        //drawSustains();
-        //drawNotes();
-        
         drawStuff(getNotePositions());
-
-
-        //draw notes to screen
-
-        
     }
 
 
