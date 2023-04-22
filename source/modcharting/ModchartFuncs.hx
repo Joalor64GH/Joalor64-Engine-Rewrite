@@ -75,9 +75,7 @@ class ModchartFuncs
                 set(beat, argsAsString);
             });
             Lua_helper.add_callback(funkin.lua, 'ease', function(beat:Float, time:Float, easeStr:String, argsAsString:String){
-
                 ease(beat, time, easeStr, argsAsString);
-                
             });
         }
         #end
@@ -93,10 +91,6 @@ class ModchartFuncs
             FunkinLua.hscript.variables.set('ModchartFile', ModchartFile);
         }
         #end
-
-
-        #elseif LEATHER
-
         #end
     }
 
