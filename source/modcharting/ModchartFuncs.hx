@@ -262,10 +262,10 @@ class ModchartFuncs
                         var modName = subModCheck[0];
                         var subModName = subModCheck[1];
                         if (instance.playfieldRenderer.modifiers.exists(modName))
-                            if (instance.playfieldRenderer.modifiers.get(name).subValues.exists(subValName))
+                            if (instance.playfieldRenderer.modifiers.get(name).subValues.exists(subModName))
                                 instance.playfieldRenderer.modifiers.get(modName).subValues.get(subModName).value = value;
                             else
-                                instance.playfieldRenderer.modifiers.get(name).subValues.set(subValName, new Modifier.ModifierSubValue(value));
+                                instance.playfieldRenderer.modifiers.get(name).subValues.set(subModName, new Modifier.ModifierSubValue(value));
                     }
                 }
                     
