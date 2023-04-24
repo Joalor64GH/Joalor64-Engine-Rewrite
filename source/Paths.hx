@@ -1,5 +1,12 @@
 package;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
+
+import flash.media.Sound;
+import openfl.media.Sound;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import animateatlas.AtlasFrameMaker;
@@ -17,17 +24,11 @@ import openfl.utils.ByteArray;
 import lime.graphics.Image;
 import lime.utils.Assets;
 import flixel.FlxSprite;
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import haxe.io.Bytes;
 import haxe.Json;
 
-import flash.media.Sound;
-import openfl.media.Sound;
 import github.APIShit;
 import meta.CoolUtil;
 
@@ -88,12 +89,12 @@ class Paths
 			dumpExclusions.push(key);
 	}
 
-	public static var dumpExclusions:Array<String> =
-	[
+	public static var dumpExclusions:Array<String> = [
 		'assets/music/freakyMenu.$SOUND_EXT',
 		'assets/shared/music/breakfast.$SOUND_EXT',
-		'assets/shared/music/tea-time.$SOUND_EXT',
+		'assets/shared/music/tea-time.$SOUND_EXT', // what's with the trailing comma??
 	];
+
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory() {
 		// clear non local assets in the tracked assets list
@@ -138,7 +139,6 @@ class Paths
 		for (key in currentTrackedSounds.keys()) {
 			if (!localTrackedAssets.contains(key)
 			&& !dumpExclusions.contains(key) && key != null) {
-				//trace('test: ' + dumpExclusions, key);
 				Assets.cache.clear(key);
 				currentTrackedSounds.remove(key);
 			}
@@ -505,14 +505,12 @@ class Paths
 	static public function sound(key:String, ?library:String):Sound
 	{
 		#if sys
-		for (i in 1...7){
-			if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
-				return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
-			else
-				return returnSound('sounds', key, library);
-		}
+		if (FileSystem.exists('mods/mainMods/_append/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/shared/sounds/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/$library/sounds/$key.ogg'))
+			return getPathSound('sounds/$key.$SOUND_EXT', SOUND, library);
+		else
+			return returnSound('sounds', key, library);
 		#else
 		return returnSound('sounds', key, library);
 		#end
@@ -530,14 +528,12 @@ class Paths
 	static public function music(key:String, ?library:String):Sound
 	{
 		#if sys
-		for (i in 1...7){
-			if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
-				|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
-				return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
-			else
-				return returnSound('music', key, library);
-		}
+		if (FileSystem.exists('mods/mainMods/_append/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/shared/music/$key.ogg')
+			|| FileSystem.exists('mods/mainMods/_append/$library/music/$key.ogg'))
+			return getPathSound('music/$key.$SOUND_EXT', MUSIC, library);
+		else
+			return returnSound('music', key, library);
 		#else
 		return returnSound('music', key, library);
 		#end
@@ -552,14 +548,12 @@ class Paths
 	static public function image(key:String, ?library:String):FlxGraphic
 	{
 		#if sys
-		for (i in 1...7){
-			if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
-				|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
-				|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
-				return getPathImage('images/$key.png', IMAGE, library);
-			else
-				return returnGraphic(key, library);
-		}
+		if (FileSystem.exists('mods/mainMods/_append/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/shared/images/$key.png')
+			|| FileSystem.exists('mods/mainMods/_append/$library/images/$key.png')) // lol
+			return getPathImage('images/$key.png', IMAGE, library);
+		else
+			return returnGraphic(key, library);
 		#else
 		return returnGraphic(key, library);
 		#end
@@ -613,7 +607,6 @@ class Paths
 		{
 			var frame:I8frame = Reflect.field(json.frames, framename);
 			var rect = FlxRect.get(frame.frame.x, frame.frame.y, frame.frame.w, frame.frame.h);
-			// var duration:Int = frame.duration; // 100 = 10fps???
 
 			frames.addAtlasFrame(rect, FlxPoint.get(rect.width, rect.height), FlxPoint.get(), framename);
 		}
@@ -813,9 +806,6 @@ class Paths
 	inline static public function modsJson(key:String)
 		return modFolders('data/' + key + '.json');
 
-	inline static public function modsTjson(key:String)
-		return modFolders('data/' + key + '.jsonc');
-
 	#if FUTURE_POLYMOD
 	inline static public function appendTxt(key:String)
 		return modFolders('_append/data/' + key + '.txt');
@@ -956,8 +946,8 @@ class Paths
 		if (key == null) {
 			for(mod in modsFolder){
 				var directory:String = mods(mod + '/options');
-				if (FileSystem.exists(directory)){
-					for(file in FileSystem.readDirectory(directory)){
+				if (FileSystem.exists(directory)) {
+					for(file in FileSystem.readDirectory(directory)) {
 						var fileToCheck:String = mods(mod + '/options/' + file);
 						if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
 							return true;
@@ -967,8 +957,8 @@ class Paths
 		}
 
 		var directory:String = mods(key + '/options');
-		if (FileSystem.exists(directory)){
-			for(file in FileSystem.readDirectory(directory)){
+		if (FileSystem.exists(directory)) {
+			for(file in FileSystem.readDirectory(directory)) {
 				var fileToCheck:String = mods(key + '/options/' + file);
 				if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
 					return true;
