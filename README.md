@@ -6,7 +6,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 # Features
-* Dark Mode Application Bar (Windows 10 Only)
+* Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
 * SWF Support (broken at the moment)

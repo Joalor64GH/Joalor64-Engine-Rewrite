@@ -319,7 +319,7 @@ class PlayState extends MusicBeatState
 	var achievementWeeks:Array<String> = [];
 
 	// Scripting shit
-	public static var instance:PlayState;
+	public static var instance:PlayState = null;
 
 	public var scriptArray:Array<FunkinSScript> = [];
 	public var luaArray:Array<FunkinLua> = [];

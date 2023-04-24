@@ -1,6 +1,8 @@
 package meta;
 
+#if sys
 import sys.io.Process;
+#end
 import flixel.util.FlxTimer;
 
 using StringTools;
@@ -355,13 +357,27 @@ class ButtplugUtils
         var toywebbridgeRunning = false;
         var intifaceRunning = false;
 
-        var twbtask = new Process('tasklist /fi "imagename eq toywebbridge.exe" /fo csv /nh');
-        toywebbridgeRunning = StringTools.contains(twbtask.stdout.readAll().toString(), "ToyWebBridge.exe");
-        twbtask.close();
+        try {
+            #if sys
+            var twbtask = new Process('tasklist /fi "imagename eq toywebbridge.exe" /fo csv /nh');
+            toywebbridgeRunning = StringTools.contains(twbtask.stdout.readAll().toString(), "ToyWebBridge.exe");
+            twbtask.close();
+            #end
+        }
+        catch (e)
+        {
+        }
 
-        var intifaceTask = new Process('tasklist /fi "imagename eq intiface_central.exe" /fo csv /nh');
-        intifaceRunning = StringTools.contains(intifaceTask.stdout.readAll().toString(), "intiface_central.exe");
-        intifaceTask.close();
+        try {
+            #if sys
+            var intifaceTask = new Process('tasklist /fi "imagename eq intiface_central.exe" /fo csv /nh');
+            intifaceRunning = StringTools.contains(intifaceTask.stdout.readAll().toString(), "intiface_central.exe");
+            intifaceTask.close();
+            #end
+        }
+        catch (e)
+        {
+        }
 
         if (toywebbridgeRunning == false || intifaceRunning == false)
         {

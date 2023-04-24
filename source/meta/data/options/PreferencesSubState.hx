@@ -179,6 +179,20 @@ class PreferencesSubState extends BaseOptionsMenu
 				'Simplylove'
 			]);
 		addOption(option);
+	
+		var option:Option = new Option('Colorblind filter:',
+			"For Colorblind people",
+			'colorBlindFilter',
+			'string',
+			'None',
+			[
+				'None', 
+				'Deuteranopia', 
+				'Protanopia', 
+				'Tritanopia'
+			]);
+		addOption(option);
+		option.onChange = () -> meta.Colorblind.updateFilter();
 
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
