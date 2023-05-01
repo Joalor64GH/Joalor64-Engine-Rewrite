@@ -30,7 +30,7 @@ import meta.data.alphabet.*;
 import objects.userinterface.note.*;
 import objects.*;
 
-final class FunkinSScript extends SScript
+final class FunkinTeaScript extends tea.TeaScript
 {
 	override public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
 	{

@@ -37,6 +37,7 @@ class ClientPrefs {
 	public static var uiSkin:String = 'Default';
 	public static var comboStacking = true;
 	public static var colorBlindFilter:String = 'None';
+	public static var simpleMain:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -134,6 +135,7 @@ class ClientPrefs {
 		FlxG.save.data.uiSkin = uiSkin;
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.colorBlindFilter = colorBlindFilter;
+		FlxG.save.data.simpleMain = simpleMain;
 	
 		FlxG.save.flush();
 
@@ -272,6 +274,8 @@ class ClientPrefs {
 			comboStacking = FlxG.save.data.comboStacking;
 		if (FlxG.save.data.colorBlindFilter != null)
 			colorBlindFilter = FlxG.save.data.colorBlindFilter;
+		if(FlxG.save.data.simpleMain != null)
+			simpleMain = FlxG.save.data.simpleMain;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

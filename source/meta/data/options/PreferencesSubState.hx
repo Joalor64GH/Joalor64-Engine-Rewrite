@@ -194,6 +194,13 @@ class PreferencesSubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = () -> meta.Colorblind.updateFilter();
 
+		var option:Option = new Option('Simple Main Menu',
+			'Just a simple version of the Main Menu for low-end users.',
+			'simpleMain',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
