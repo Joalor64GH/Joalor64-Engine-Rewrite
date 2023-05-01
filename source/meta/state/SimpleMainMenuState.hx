@@ -148,7 +148,7 @@ class SimpleMainMenuState extends MusicBeatState
 		super.closeSubState();
 	}
 
-    function initOptions {
+    function initOptions() {
         grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
