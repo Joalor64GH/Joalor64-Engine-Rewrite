@@ -36,7 +36,7 @@ using StringTools;
 class SimpleMainMenuState extends MusicBeatState
 {
 	var options:Array<String> = [
-		'Story Mode'
+		'Story Mode',
 		'Freeplay',
         #if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', 
         #end
