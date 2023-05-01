@@ -1,7 +1,7 @@
 package meta.video;
 
 import openfl.utils.Assets;
-import flixel.system.FlxSound;
+import flixel.sound.FlxSound;
 import openfl.display.Sprite;
 import openfl.Lib;
 import openfl.events.Event;

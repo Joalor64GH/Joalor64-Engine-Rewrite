@@ -22,6 +22,7 @@ import haxe.Json;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
+import flixel.FlxCamera;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
