@@ -189,6 +189,7 @@
 
 	<!-- Script logging -->
 	<haxedef name="hscriptPos" value="true" />
+	<haxedef name="openflPos"/> <!-- This is for TeaScript btw -->
 	
 	<!--Enable the Flixel core recording system-->
 	<haxedef name="FLX_RECORD" />
