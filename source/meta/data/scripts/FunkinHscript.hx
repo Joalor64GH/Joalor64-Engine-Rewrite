@@ -60,7 +60,7 @@ import flixel.util.FlxColor;
 import flixel.ui.FlxBar;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import flixel.sound.FlxSound;
+import flixel.system.FlxSound;
 import flixel.math.FlxRect;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;

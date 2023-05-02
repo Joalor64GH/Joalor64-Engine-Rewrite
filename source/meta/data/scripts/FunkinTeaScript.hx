@@ -11,7 +11,7 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
-import flixel.sound.FlxSound;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -32,9 +32,9 @@ import objects.*;
 
 final class FunkinTeaScript extends tea.TeaScript
 {
-	public function new(?scriptFile:String = "", ?preset:Bool, ?startExecute:Bool)
+	public function new(?scriptPath:String = "", ?preset:Bool = true)
 	{
-		super(scriptFile, true, false);
+		super(scriptPath, preset);
 
 		traces = false;
 		

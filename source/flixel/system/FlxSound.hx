@@ -1,4 +1,4 @@
-package flixel.sound;
+package flixel.system;
 
 import flash.events.IEventDispatcher;
 import flash.events.Event;
@@ -64,7 +64,7 @@ class FlxSound extends FlxBasic
 	public var amplitudeLeft(default, null):Float;
 
 	/**
-	 * Just the amplitude of the right stereo channel
+	 * Just the amplitude of the left stereo channel
 	 */
 	public var amplitudeRight(default, null):Float;
 
@@ -585,7 +585,7 @@ class FlxSound extends FlxBasic
 	/**
 	 * Call after adjusting the volume to update the sound channel's settings.
 	 */
-	@:allow(flixel.sound.FlxSoundGroup)
+	@:allow(flixel.system.FlxSoundGroup)
 	function updateTransform():Void
 	{
 		_transform.volume = #if FLX_SOUND_SYSTEM (FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * #end

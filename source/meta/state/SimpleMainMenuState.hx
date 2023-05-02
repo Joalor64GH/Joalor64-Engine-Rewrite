@@ -26,11 +26,15 @@ import flixel.FlxCamera;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import lime.app.Application;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 import meta.data.options.*;
+import meta.state.editors.*;
 import meta.state.*;
+
+import meta.data.Achievements;
 
 using StringTools;
 
@@ -70,7 +74,7 @@ class SimpleMainMenuState extends MusicBeatState
 			case 'Credits':
 				MusicBeatState.switchState(new CreditsState());
 			case 'Options':
-				MusicBeatState.switchState(new options.OptionsState());
+				MusicBeatState.switchState(new OptionsState());
 		}
 	}
 
@@ -90,8 +94,7 @@ class SimpleMainMenuState extends MusicBeatState
 
         debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.setGraphicSize(Std.int(bg.width * 1.1 * scaleRatio));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
