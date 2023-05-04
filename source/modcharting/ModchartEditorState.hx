@@ -44,7 +44,7 @@ import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
-
+import flixel.input.keyboard.FlxKey;
 
 #if LEATHER
 import states.PlayState;
@@ -546,9 +546,12 @@ class ModchartEditorState extends MusicBeatState
         if (!blockInput)
         {
             #if PSYCH
-            FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+            // FlxG.sound.muteKeys = TitleState.muteKeys;
+			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			FlxG.sound.muteKeys = [FlxKey.ZERO];
+			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
             #end
             if (FlxG.keys.justPressed.SPACE)
             {

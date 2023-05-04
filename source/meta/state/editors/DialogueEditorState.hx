@@ -27,6 +27,7 @@ import flash.net.FileFilter;
 import haxe.Json;
 import lime.system.Clipboard;
 import objects.userinterface.DialogueBoxPsych;
+import flixel.input.keyboard.FlxKey;
 #if sys
 import sys.io.File;
 #end
@@ -356,9 +357,12 @@ class DialogueEditorState extends MusicBeatState
 		}
 
 		if(!blockInput) {
-			FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			// FlxG.sound.muteKeys = TitleState.muteKeys;
+			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			FlxG.sound.muteKeys = [FlxKey.ZERO];
+			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 			if(FlxG.keys.justPressed.SPACE) {
 				reloadText(false);
 			}
