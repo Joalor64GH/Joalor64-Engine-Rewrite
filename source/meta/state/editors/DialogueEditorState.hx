@@ -27,6 +27,7 @@ import flash.net.FileFilter;
 import haxe.Json;
 import lime.system.Clipboard;
 import objects.userinterface.DialogueBoxPsych;
+import flixel.input.keyboard.FlxKey;
 #if sys
 import sys.io.File;
 #end
