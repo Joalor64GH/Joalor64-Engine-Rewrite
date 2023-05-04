@@ -5997,7 +5997,7 @@ class PlayState extends MusicBeatState
 			if (sicks > 0)
 				ratingFC = "PFC";
 			if (goods > 0)
-				ratingFC = "MFC";
+				ratingFC = "SFC";
 			if (bads > 0)
 				ratingFC = "GFC";
 			if (shits > 0)

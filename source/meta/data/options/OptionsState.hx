@@ -30,6 +30,7 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 import meta.state.*;
 import meta.state.error.*;
+import meta.substate.*;
 
 using StringTools;
 
@@ -129,10 +130,15 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
-			else
-				MusicBeatState.switchState(new MainMenuState());
+			if (PauseSubState.fromPlayState) {
+				StageData.loadDirectory(PlayState.SONG);
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				if (ClientPrefs.simpleMain)
+					MusicBeatState.switchState(new SimpleMainMenuState());
+				else
+					MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		if (controls.ACCEPT) {

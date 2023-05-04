@@ -43,10 +43,8 @@ class SimpleMainMenuState extends MusicBeatState
 	var options:Array<String> = [
 		'Story Mode',
 		'Freeplay',
-        #if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', 
-        #end
-        #if ACHIEVEMENTS_ALLOWED 'Awards',
-        #end
+        #if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
+        #if ACHIEVEMENTS_ALLOWED 'Awards', #end
 		'Credits',
 		'Options'
 	];
