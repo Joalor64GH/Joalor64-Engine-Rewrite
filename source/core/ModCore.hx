@@ -21,8 +21,7 @@ class ModCore
 
 	#if FUTURE_POLYMOD
 	private static final extensions:Map<String, PolymodAssetType> = [
-		'ogg' => AUDIO_GENERIC,
-		'mp3' => AUDIO_GENERIC,
+		#if web 'mp3' #else 'ogg' #end => AUDIO_GENERIC,
 		'png' => IMAGE,
 		'xml' => TEXT,
 		'txt' => TEXT,

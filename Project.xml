@@ -50,7 +50,7 @@
 	</section>
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
+	<define name="VIDEOS_ALLOWED" if="windows || android"/>
 	<define name="JOALOR64_WATERMARKS"/>
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
@@ -144,7 +144,7 @@
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
-	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
+	<haxelib name="TeaScript" if="SCRIPT_EXTENSION"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 	<haxelib name="discord_rpc" if="desktop"/>
@@ -157,6 +157,7 @@
 
 	<!-- Script logging -->
 	<haxedef name="hscriptPos" value="true" />
+	<haxedef name="openflPos"/> <!-- This is for TeaScript btw -->
 	
 	<!--Enable the Flixel core recording system-->
 	<haxedef name="FLX_RECORD" />

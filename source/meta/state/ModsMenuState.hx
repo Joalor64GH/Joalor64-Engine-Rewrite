@@ -444,7 +444,10 @@ class ModsMenuState extends MusicBeatState
 			}
 			else
 			{
-				MusicBeatState.switchState(new MainMenuState());
+				if (ClientPrefs.simpleMain)
+					MusicBeatState.switchState(new SimpleMainMenuState());
+				else
+					MusicBeatState.switchState(new MainMenuState());
 			}
 		}
 

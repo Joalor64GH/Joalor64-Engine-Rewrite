@@ -37,6 +37,7 @@ class ClientPrefs {
 	public static var uiSkin:String = 'Default';
 	public static var comboStacking = true;
 	public static var colorBlindFilter:String = 'None';
+	public static var simpleMain:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -134,6 +135,7 @@ class ClientPrefs {
 		FlxG.save.data.uiSkin = uiSkin;
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.colorBlindFilter = colorBlindFilter;
+		FlxG.save.data.simpleMain = simpleMain;
 	
 		FlxG.save.flush();
 
@@ -272,6 +274,8 @@ class ClientPrefs {
 			comboStacking = FlxG.save.data.comboStacking;
 		if (FlxG.save.data.colorBlindFilter != null)
 			colorBlindFilter = FlxG.save.data.colorBlindFilter;
+		if(FlxG.save.data.simpleMain != null)
+			simpleMain = FlxG.save.data.simpleMain;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');
@@ -291,12 +295,16 @@ class ClientPrefs {
 	public static function reloadControls() {
 		PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
 
+		/*
 		TitleState.muteKeys = copyKey(keyBinds.get('volume_mute'));
 		TitleState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));
 		TitleState.volumeUpKeys = copyKey(keyBinds.get('volume_up'));
 		FlxG.sound.muteKeys = TitleState.muteKeys;
 		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;*/
+		FlxG.sound.muteKeys = [FlxKey.ZERO];
+		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 	}
 	public static function copyKey(arrayToCopy:Array<FlxKey>):Array<FlxKey> {
 		var copiedArray:Array<FlxKey> = arrayToCopy.copy();

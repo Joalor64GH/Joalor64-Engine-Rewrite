@@ -41,7 +41,7 @@ class CoolUtil
 
 	// this is actual source code from VS Null https://gamebanana.com/wips/70592
 	// now outdated 😅
-	public static inline function coolerTextFile(path:String, daString:String = ''):String{
+	public static inline function coolerTextFile(path:String, daString:String = ''):String {
 		return Assets.exists(path) ? daString = Assets.getText(path).trim() : '';
 	}
 	
@@ -49,7 +49,7 @@ class CoolUtil
 		return string.trim().split('\n').map(str -> str.trim());
 	}
 
-	public static function dominantColor(sprite:flixel.FlxSprite):Int{
+	public static function dominantColor(sprite:flixel.FlxSprite):Int {
 		var countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth){
 			for(row in 0...sprite.frameHeight){

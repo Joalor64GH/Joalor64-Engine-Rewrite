@@ -5,6 +5,7 @@ import meta.data.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.data.alphabet.*;
+import meta.data.options.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -27,7 +28,8 @@ class PauseSubState extends MusicBeatSubstate
 	var menuItemsOG:Array<String> = [
 		'Resume', 
 		'Restart Song', 
-		'Change Difficulty', 
+		'Change Difficulty',
+		'Go to Options', 
 		'Exit to freeplay',
 		'Exit to menu',
 		'Close Game'
@@ -43,6 +45,8 @@ class PauseSubState extends MusicBeatSubstate
 	//var botplayText:FlxText;
 
 	public static var songName:String = '';
+
+	public static var fromPlayState:Bool = false;
 
 	public function new(x:Float, y:Float)
 	{
@@ -268,6 +272,17 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
+				case "Go to Options":
+					PlayState.deathCounter = 0;
+					PlayState.seenCutscene = false;
+
+					WeekData.loadTheFirstEnabledMod();
+					MusicBeatState.switchState(new OptionsState());
+					PlayState.cancelMusicFadeTween();
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					PlayState.changedDifficulty = false;
+					PlayState.chartingMode = false;
+					fromPlayState = true;
 				case "Exit to freeplay":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
@@ -286,7 +301,10 @@ class PauseSubState extends MusicBeatSubstate
 					if(PlayState.isStoryMode) {
 						MusicBeatState.switchState(new StoryMenuState());
 					} else {
-						MusicBeatState.switchState(new MainMenuState());
+						if (ClientPrefs.simpleMain)
+							MusicBeatState.switchState(new SimpleMainMenuState());
+						else
+							MusicBeatState.switchState(new MainMenuState());
 					}
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));

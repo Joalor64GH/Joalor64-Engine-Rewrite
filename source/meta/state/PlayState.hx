@@ -321,7 +321,7 @@ class PlayState extends MusicBeatState
 	// Scripting shit
 	public static var instance:PlayState = null;
 
-	public var scriptArray:Array<FunkinSScript> = [];
+	public var scriptArray:Array<FunkinTeaScript> = [];
 	public var luaArray:Array<FunkinLua> = [];
 
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
@@ -1022,7 +1022,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
-						scriptArray.push(new FunkinSScript(folder + file));
+						scriptArray.push(new FunkinTeaScript(folder + file));
 						filesPushed.push(file);
 					}
 				}
@@ -1079,7 +1079,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(doPush)
-			scriptArray.push(new FunkinSScript(scriptFile));
+			scriptArray.push(new FunkinTeaScript(scriptFile));
 		#end
 
 		var gfVersion:String = SONG.gfVersion;
@@ -1443,21 +1443,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
+				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinSScript(hxToLoad));
+					scriptArray.push(new FunkinTeaScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
+				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			#end
 		}
@@ -1467,21 +1467,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('custom_events/' + event + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
+				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('custom_events/' + event + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinSScript(hxToLoad));
+					scriptArray.push(new FunkinTeaScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
+				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			#end
 		}
@@ -1571,7 +1571,7 @@ class PlayState extends MusicBeatState
 				{
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
-						scriptArray.push(new FunkinSScript(folder + file));
+						scriptArray.push(new FunkinTeaScript(folder + file));
 						filesPushed.push(file);
 					}
 				}
@@ -2191,7 +2191,7 @@ class PlayState extends MusicBeatState
 			{
 				if(script.scriptFile == scriptFile) return;
 			}
-			scriptArray.push(new FunkinSScript(scriptFile));
+			scriptArray.push(new FunkinTeaScript(scriptFile));
 		}
 		#end
 	}
@@ -5997,7 +5997,7 @@ class PlayState extends MusicBeatState
 			if (sicks > 0)
 				ratingFC = "PFC";
 			if (goods > 0)
-				ratingFC = "MFC";
+				ratingFC = "SFC";
 			if (bads > 0)
 				ratingFC = "GFC";
 			if (shits > 0)
