@@ -2989,7 +2989,7 @@ class PlayState extends MusicBeatState
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses
-			+ ' // Accuracy: ' + (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' 
+			+ ' // Accuracy: ' + (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%) 
 			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 		}
 
