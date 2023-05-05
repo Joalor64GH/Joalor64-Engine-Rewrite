@@ -5830,7 +5830,8 @@ class PlayState extends MusicBeatState
 		lastBeatHit = curBeat;
 
 		//buttplug fuckery
-		ButtplugUtils.sendPayload(bpPayload);
+		if (ButtplugUtils.depsRunning) // so to not spam the console
+			ButtplugUtils.sendPayload(bpPayload);
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);
