@@ -107,7 +107,7 @@ function onCreate()
 end
 
 function onStepHit()
-	if getPropertyFromClass('flixel.FlxG', 'sound.music.time') >= songLength-1000  then --checks if theres 1 second left in the song
+	if getPropertyFromClass('flixel.FlxG', 'sound.music.time') >= songLength-1000 and not SeenRatingScreen then --checks if theres 1 second left in the song
 		triggerEvent('Play Animation', 'RatingScreen','')
 		SeenRatingScreen=true
 	end
@@ -167,10 +167,6 @@ function onTimerCompleted(tag, loops, loopsLeft)
 			cancelTimer('Count'..FunniArrayOne[Type])
 			Type=Type+1
 			runTimer('Count'..FunniArrayOne[Type], 0.1, 10)
-			
-			if tag == 'CountMiss' then
-				
-			end
 		end
 	end
 end
