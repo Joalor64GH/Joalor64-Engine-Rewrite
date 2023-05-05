@@ -3,6 +3,16 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
+
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
+
+#if !flash 
+import flixel.addons.display.FlxRuntimeShader;
+import openfl.filters.ShaderFilter;
+#end
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxObject;
@@ -43,16 +53,6 @@ import llua.Lua;
 import llua.LuaL;
 import llua.State;
 import llua.Convert;
-#end
-
-#if !flash 
-import flixel.addons.display.FlxRuntimeShader;
-import openfl.filters.ShaderFilter;
-#end
-
-#if sys
-import sys.FileSystem;
-import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED
@@ -112,16 +112,24 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['boowomp', 0.2], //From 0% to 19%
-		['WATAFAC', 0.4], //From 20% to 39%
-		['Dammit', 0.5], //From 40% to 49%
-		['spunchbob', 0.6], //From 50% to 59%
-		['wha', 0.69], //From 60% to 68%
-		['Me and who?', 0.7], //69%
-		['Aight homie', 0.8], //From 70% to 79%
-		['Yey', 0.9], //From 80% to 89%
-		['Not Bad!', 1], //From 90% to 99%
-		['Kanpeki!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['F-', 0.2],
+		['F', 0.5],
+		['D', 0.6],
+		['C', 0.7],
+		['B', 0.8],
+		['A-', 0.89],
+		['A', 0.90],
+		['A+', 0.93],
+		['S-', 0.96],
+		['S', 0.99],
+		['S+', 0.997],
+		['SS-', 0.998],
+		['SS', 0.999],
+		['SS+', 0.9995],
+		['X-', 0.9997],
+		['X', 0.9998],
+		['X+', 0.999935],
+		['P', 1.0]
 	];
 
 	//event variables
@@ -2977,12 +2985,12 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses 
 			+ ' // Accuracy: ' + ratingName 
-			+ ' // Rank: ?';
+			+ ' // Rank: N/A';
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses
-			+ ' // Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' 
-			+ ' // Rank: ' + ratingFC;
+			+ ' // Accuracy: ' + '(' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)'
+			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -3736,6 +3744,8 @@ class PlayState extends MusicBeatState
 
 		// I'm not really sure what I'm doing.
 		// I'm just trying to make it so that the icons don't look wonky in-game.
+		// Does this even work as intended??
+		// Because I'm not even sure myself.
 		switch (iconP2.widthThing) {
 			case 150:
 				iconP2.animation.curAnim.curFrame = 0;
@@ -5996,17 +6006,17 @@ class PlayState extends MusicBeatState
 			// Rating FC
 			ratingFC = "";
 			if (sicks > 0)
-				ratingFC = "PFC";
-			if (goods > 0)
 				ratingFC = "SFC";
+			if (goods > 0)
+				ratingFC = "MFC";
 			if (bads > 0)
 				ratingFC = "GFC";
 			if (shits > 0)
 				ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "SDM";
+				ratingFC = "SDCB";
 			else if (songMisses >= 10)
-				ratingFC = "Clear";
+				ratingFC = "CB";
 			else if (cpuControlled)
 				ratingFC = "Cheater!";
 		}

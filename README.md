@@ -14,7 +14,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * HX and Hscript Support
 * 3D Notes
 * Noteskins
-* Random LUA Scripts
+* Random LUA Scripts (Most will be hardcoded soon)
 * MP4/WebM Video Support
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
@@ -24,9 +24,10 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 `haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
 
 # Planned Features
+* [ ] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21)
 * [ ] Make a Template for HX Scripts
+* [ ] Hardcode the Lua Scripts to PlayState (Because yeah)
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
-* [ ] Reorganized Assets **[Definitely doing this when I feel like it]**
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
@@ -40,7 +41,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
-* [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
+* [TheWorldMachinima](https://github.com/TheWorldMachinima) - TeaScript and Funkin Cocoa Code + Softcoded Achievements
 * [Magnumsrt](https://github.com/Magnumsrt) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
