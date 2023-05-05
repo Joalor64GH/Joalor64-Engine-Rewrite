@@ -6,7 +6,7 @@ import hscript.Parser;
 #end
 import openfl.Lib;
 import flixel.FlxBasic;
-import flixel.util.FlxColor;
+import flixel.util.FlxColorHScript;
 #if LUA_ALLOWED
 import llua.Buffer;
 import llua.Convert;
@@ -21,7 +21,6 @@ import vm.lua.LuaVM;
 import vlc.VLCBitmap;
 import vlc.LibVLC;
 #end
-import horny.*;
 using StringTools;
 
 /*
@@ -78,7 +77,7 @@ class HornyScript extends FlxBasic {
 		setVariable('Type', Type);
 		setVariable('Xml', Xml);
 		setVariable('Globals', Globals);
-		setVariable('FlxColor', FlxColor);
+		setVariable('FlxColor', FlxColorHScript);
 		setVariable('HClass', HornyClass);
 		setVariable('HState', HornyState);
 		setVariable('HSubstate', HornySubstate);

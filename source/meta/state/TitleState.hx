@@ -406,7 +406,7 @@ class TitleState extends MusicBeatState
 		credIconEvil.flipX = true;
 		#end
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.3.0 (PE 0.6.3)", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.3.5b (PE 0.6.3)", 12);
 		#if debug versionShit.text += " DEBUG BUILD"; #end
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
