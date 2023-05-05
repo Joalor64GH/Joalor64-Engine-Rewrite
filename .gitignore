@@ -56,7 +56,7 @@ source/ChartParser.hx
 source/editors/EditorLua.hx
 source/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
-* - Copy.*
+* - Copy*
 
 ### Add any of these regardless of them getting ignored.
 !appveyor-linux.yml
@@ -70,10 +70,6 @@ polymod-fix/PolymodFileSystem.hx
 !*.hxproj
 !*.hxp
 !*.jsonc
-
-# Why wouldn't we allow introMod?
-# It's a hit classic.
-!example_mods/introMod/* 
 
 ### VS Code
 export/*

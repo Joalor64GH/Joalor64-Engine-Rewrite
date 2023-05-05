@@ -5,7 +5,6 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxCamera;
 import flixel.math.FlxRect;
 import flixel.math.FlxPoint;
-import horny.*;
 
 class HornyObject extends FlxSprite {
 	public var offsets:Map<String, Array<Float>> = [];
