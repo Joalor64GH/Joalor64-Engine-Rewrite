@@ -148,9 +148,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	}
 
 	public static function getState():MusicBeatState {
-		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
-		return leState;
+		return cast(FlxG.state, MusicBeatState);
 	}
 
 	public function stepHit():Void

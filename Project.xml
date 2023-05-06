@@ -112,13 +112,6 @@
 		<assets path='modsList.txt'/>
 	</section>
 
-	<section if="LUA_ALLOWED">
-		<assets path="assets/scripting/scripts"             rename="assets/scripts"/>
-		<assets path="assets/scripting/custom_events"       rename="assets/custom_events"/>
-		<assets path="assets/scripting/custom_notetypes"    rename="assets/custom_notetypes"/>
-		<assets path="assets/scripting/custom_gamechangers" rename="assets/custom_gamechangers"/>
-	</section>
-
 	<assets path="assets/videos"        library="videos" 		if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
 	<assets path="assets/classes"       library="classes" 		if="HSCRIPT_ALLOWED"/>
 	<assets path="assets/flash"         library="flash"   		if="FLASH_MOVIE"/>

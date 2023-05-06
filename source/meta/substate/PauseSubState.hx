@@ -311,7 +311,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 				case "Close Game":
-					Sys.exit(0);
+					persistentUpdate = false;
+					FlxG.mouse.visible = true;
+					// WIP
+					openSubState(new Prompt('Are you sure you want to close the game?', 0, () -> lime.system.System.exit(0), () -> {
+						persistentUpdate = true;
+						FlxG.mouse.visible = false;
+					},
+					false));
 			}
 		}
 	}

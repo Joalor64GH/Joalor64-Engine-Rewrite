@@ -355,6 +355,8 @@ class PlayState extends MusicBeatState
 	//the payload for beat-based buttplug support
 	public var bpPayload:String = "";
 
+	public var comboFunction:Void->Void = null;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -382,6 +384,27 @@ class PlayState extends MusicBeatState
 			'NOTE_UP',
 			'NOTE_RIGHT'
 		];
+
+		comboFunction = () -> {
+			// Rating FC
+			ratingFC = "CB";
+			if (songMisses < 1){
+				if (shits > 0)
+					ratingFC = "FC";
+				else if (bads > 0)
+					ratingFC = "GFC";
+				else if (goods > 0)
+					ratingFC = "MFC";
+				else if (sicks > 0)
+					ratingFC = "SFC";
+			}
+			else if (songMisses < 10){
+				ratingFC = "SDCB";
+			}
+			else if (cpuControlled){
+				ratingFC = "Cheater!";
+			}
+		}
 
 		//Ratings
 		ratingsData.push(new Rating('sick')); //default rating
@@ -3271,6 +3294,8 @@ class PlayState extends MusicBeatState
 				addCharacterToList(newCharacter, charType);
 
 			case 'Dadbattle Spotlight':
+				if (curStage != 'stage')
+					return;
 				dadbattleBlack = new BGSprite(null, -800, -400, 0, 0);
 				dadbattleBlack.makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 				dadbattleBlack.alpha = 0.25;
@@ -3305,6 +3330,8 @@ class PlayState extends MusicBeatState
 
 
 			case 'Philly Glow':
+				if (curStage != 'philly')
+					return;
 				blammedLightsBlack = new FlxSprite(FlxG.width * -0.5, FlxG.height * -0.5).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 				blammedLightsBlack.visible = false;
 				insert(members.indexOf(phillyStreet), blammedLightsBlack);
@@ -4008,8 +4035,7 @@ class PlayState extends MusicBeatState
 	function openPauseMenu()
 	{
 		persistentUpdate = false;
-		persistentDraw = true;
-		paused = true;
+		persistentDraw = paused = true;
 
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
@@ -4032,10 +4058,9 @@ class PlayState extends MusicBeatState
 		}
 
 		persistentUpdate = false;
-		paused = true;
 		cancelMusicFadeTween();
 		MusicBeatState.switchState(new ChartingState());
-		chartingMode = true;
+		chartingMode = paused = true;
 
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -4056,8 +4081,7 @@ class PlayState extends MusicBeatState
 				vocals.stop();
 				FlxG.sound.music.stop();
 
-				persistentUpdate = false;
-				persistentDraw = false;
+				persistentUpdate = persistentDraw = false;
 				for (tween in modchartTweens)
 					tween.active = true;
 				for (timer in modchartTimers)
@@ -4104,6 +4128,9 @@ class PlayState extends MusicBeatState
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Dadbattle Spotlight':
+				if (curStage != 'stage')
+					return;
+
 				var val:Null<Int> = Std.parseInt(value1);
 				if(val == null) val = 0;
 
@@ -4177,6 +4204,9 @@ class PlayState extends MusicBeatState
 				gfSpeed = value;
 
 			case 'Philly Glow':
+				if (curStage != 'philly')
+					return;
+
 				var lightId:Int = Std.parseInt(value1);
 				if(Math.isNaN(lightId)) lightId = 0;
 
@@ -6002,23 +6032,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-
-			// Rating FC
-			ratingFC = "";
-			if (sicks > 0)
-				ratingFC = "SFC";
-			if (goods > 0)
-				ratingFC = "MFC";
-			if (bads > 0)
-				ratingFC = "GFC";
-			if (shits > 0)
-				ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "SDCB";
-			else if (songMisses >= 10)
-				ratingFC = "CB";
-			else if (cpuControlled)
-				ratingFC = "Cheater!";
+			comboFunction();
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
 		setOnLuas('rating', ratingPercent);
