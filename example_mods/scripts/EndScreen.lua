@@ -109,7 +109,7 @@ end
 function onStepHit()
 	if getPropertyFromClass('flixel.FlxG', 'sound.music.time') >= songLength-1000 and not SeenRatingScreen then --checks if theres 1 second left in the song
 		triggerEvent('Play Animation', 'RatingScreen','')
-		SeenRatingScreen=true
+		SeenRatingScreen=true --do this once so it doesn't cause this to glitch
 	end
 end
 

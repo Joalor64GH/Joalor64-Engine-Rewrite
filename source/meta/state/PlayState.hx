@@ -355,6 +355,8 @@ class PlayState extends MusicBeatState
 	//the payload for beat-based buttplug support
 	public var bpPayload:String = "";
 
+	public var comboFunction:Void->Void = null;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -382,6 +384,27 @@ class PlayState extends MusicBeatState
 			'NOTE_UP',
 			'NOTE_RIGHT'
 		];
+
+		comboFunction = () -> {
+			// Rating FC
+			ratingFC = "CB";
+			if (songMisses < 1){
+				if (shits > 0)
+					ratingFC = "FC";
+				else if (bads > 0)
+					ratingFC = "GFC";
+				else if (goods > 0)
+					ratingFC = "MFC";
+				else if (sicks > 0)
+					ratingFC = "SFC";
+			}
+			else if (songMisses < 10){
+				ratingFC = "SDCB";
+			}
+			else if (cpuControlled){
+				ratingFC = "Cheater!";
+			}
+		}
 
 		//Ratings
 		ratingsData.push(new Rating('sick')); //default rating
@@ -6002,23 +6025,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-
-			// Rating FC
-			ratingFC = "";
-			if (sicks > 0)
-				ratingFC = "SFC";
-			if (goods > 0)
-				ratingFC = "MFC";
-			if (bads > 0)
-				ratingFC = "GFC";
-			if (shits > 0)
-				ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "SDCB";
-			else if (songMisses >= 10)
-				ratingFC = "CB";
-			else if (cpuControlled)
-				ratingFC = "Cheater!";
+			comboFunction();
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
 		setOnLuas('rating', ratingPercent);
