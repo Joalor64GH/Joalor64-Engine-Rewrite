@@ -4031,8 +4031,7 @@ class PlayState extends MusicBeatState
 	function openPauseMenu()
 	{
 		persistentUpdate = false;
-		persistentDraw = true;
-		paused = true;
+		persistentDraw = paused = true;
 
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
@@ -4055,10 +4054,9 @@ class PlayState extends MusicBeatState
 		}
 
 		persistentUpdate = false;
-		paused = true;
 		cancelMusicFadeTween();
 		MusicBeatState.switchState(new ChartingState());
-		chartingMode = true;
+		chartingMode = paused = true;
 
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
