@@ -43,13 +43,13 @@ class SimpleMainMenuState extends MusicBeatState
 	var options:Array<String> = [
 		'Story Mode',
 		'Freeplay',
-        #if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
-        #if ACHIEVEMENTS_ALLOWED 'Awards', #end
+        	#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
+        	#if ACHIEVEMENTS_ALLOWED 'Awards', #end
 		'Credits',
 		'Options'
 	];
 
-    var debugKeys:Array<FlxKey>;
+    	var debugKeys:Array<FlxKey>;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
@@ -63,10 +63,10 @@ class SimpleMainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new StoryMenuState());
 			case 'Freeplay':
 				MusicBeatState.switchState(new FreeplayState());
-            #if (MODS_ALLOWED && FUTURE_POLYMOD)
+            		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mods':
 				MusicBeatState.switchState(new ModsMenuState());
-            #end
+            		#end
 			case 'Awards':
 				MusicBeatState.switchState(new AchievementsMenuState());
 			case 'Credits':
@@ -85,12 +85,12 @@ class SimpleMainMenuState extends MusicBeatState
 		DiscordClient.changePresence("Simple Main Menu Menu", null);
 		#end
 
-        camAchievement = new FlxCamera();
+        	camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
-        FlxG.cameras.add(camAchievement, false);
+        	FlxG.cameras.add(camAchievement, false);
 
-        debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
+        	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.updateHitbox();
@@ -98,13 +98,13 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-        initOptions();
+        	initOptions();
 
-        var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion, 12);
+        	var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + MainMenuState.psychEngineVersion + "[" + MainMenuState.psychGitBuild + "]", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + MainMenuState.psychEngineVersion + " [" + MainMenuState.psychGitBuild + "]", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -120,7 +120,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 		changeSelection();
 
-        #if ACHIEVEMENTS_ALLOWED
+        	#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
 		var leDate = Date.now();
 		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
@@ -136,7 +136,7 @@ class SimpleMainMenuState extends MusicBeatState
 		super.create();
 	}
 
-    #if ACHIEVEMENTS_ALLOWED
+    	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
 		add(new AchievementObject('friday_night_play', camAchievement));
@@ -145,13 +145,13 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 	#end
 
-    override function closeSubState()
+    	override function closeSubState()
 	{
 		super.closeSubState();
 	}
 
-    function initOptions() {
-        grpOptions = new FlxTypedGroup<Alphabet>();
+    	function initOptions() {
+        	grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
 		for (i in 0...options.length)
@@ -161,7 +161,7 @@ class SimpleMainMenuState extends MusicBeatState
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
-    }
+    	}
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
@@ -199,7 +199,7 @@ class SimpleMainMenuState extends MusicBeatState
 			});
 		}
 
-        #if desktop
+        	#if desktop
 		else if (FlxG.keys.anyJustPressed(debugKeys))
 		{
 			MusicBeatState.switchState(new MasterEditorMenu());
