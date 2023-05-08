@@ -37,6 +37,7 @@ import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
 import openfl.Lib;
+import lime.app.Application;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
@@ -359,6 +360,13 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		/*if (songName == 'thorns') {
+			// supposed to generate random numbers and symbols using the random(); function
+			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+		} else {*/
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+		// }
+
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -479,7 +487,6 @@ class PlayState extends MusicBeatState
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
-		// Stages and stuff
 		curStage = SONG.stage;
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
@@ -1351,6 +1358,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll)
 			botplayTxt.y = timeBarBG.y - 78;
 
+		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.projectFnfVersion}', 12);
+		versionTxt.scrollFactor.set();
+		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionTxt);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1364,6 +1376,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		versionTxt.cameras = [camHUD];
 
 		startingSong = true;
 
@@ -3012,7 +3025,7 @@ class PlayState extends MusicBeatState
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses
-			+ ' // Accuracy: ' + '(' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)'
+			+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
 			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 		}
 
@@ -4603,6 +4616,8 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+		
 		ButtplugUtils.stop();
 
 		if (useVideo)
@@ -6112,4 +6127,14 @@ class PlayState extends MusicBeatState
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
+
+	var upperCase:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var lowerCase:String = "abcdefghijklmnopqrstuvwxyz";
+	var numbers:String = "0123456789";
+	var symbols:String = "!@#$%&()*+-,./:;<=>?^[]{}";
+
+	function random() 
+	{
+		// nothing yet, but i think you get the idea
+	}
 }
