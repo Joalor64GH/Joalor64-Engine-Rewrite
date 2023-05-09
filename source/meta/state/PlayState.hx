@@ -163,6 +163,7 @@ class PlayState extends MusicBeatState
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
+
 	public static var curStage:String = '';
 	public static var isPixelStage:Bool = false;
 	public static var SONG:SwagSong = null;
@@ -351,8 +352,10 @@ class PlayState extends MusicBeatState
 	
 	// stores the last judgement object
 	public static var lastRating:FlxSprite;
+
 	// stores the last combo sprite object
 	public static var lastCombo:FlxSprite;
+	
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
@@ -383,7 +386,6 @@ class PlayState extends MusicBeatState
 			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
 			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 		];
-
 		controlArray = [
 			'NOTE_LEFT',
 			'NOTE_DOWN',
@@ -532,6 +534,7 @@ class PlayState extends MusicBeatState
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
+		
 		BF_X = stageData.boyfriend[0];
 		BF_Y = stageData.boyfriend[1];
 		GF_X = stageData.girlfriend[0];
@@ -976,7 +979,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
-
 
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
@@ -2513,6 +2515,7 @@ class PlayState extends MusicBeatState
 
 				// Well well well, what do we got here?
 				// EDUARDO???
+				// WELL WELL WELL
 				cutsceneHandler.timer(0.1, function()
 				{
 					wellWellWell.play(true);
@@ -3586,6 +3589,43 @@ class PlayState extends MusicBeatState
 				boyfriend.specialAnim = true;
 				boyfriend.heyTimer = 0.6;
 			}
+		}
+
+		// SECRET KEYS!! SHHHHHHHH
+		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
+			endSong();
+		} else if (FlxG.keys.justPressed.F2 && !startingSong) { // 10 Seconds Forward
+			Conductor.songPosition += 10000;
+			FlxG.sound.music.time = Conductor.songPosition;
+			vocals.time = Conductor.songPosition;
+		} else if (FlxG.keys.justPressed.F3 && !startingSong) { // 10 Seconds Back
+			Conductor.songPosition -= 10000;
+			FlxG.sound.music.time = Conductor.songPosition;
+			vocals.time = Conductor.songPosition;
+		} else if (FlxG.keys.justPressed.F4) { // Enable/Disable Botplay
+			if (!cpuControlled) {
+				cpuControlled = true;
+				botplayTxt.visible = true;
+			} else {
+				cpuControlled = false;
+				botplayTxt.visible = false;
+			}
+		} else if (FlxG.keys.justPressed.F5) { // Camera Speeds Up
+			cameraSpeed += 0.5;
+		} else if (FlxG.keys.justPressed.F6) { // Camera Slows Down
+			cameraSpeed -= 0.5;
+		} else if (FlxG.keys.justPressed.F7) { // Song Speeds Up
+			songSpeed += 0.1;
+			scrollSpeed = songSpeed;
+		} else if (FlxG.keys.justPressed.F8) { // Song Slows Down
+			songSpeed -= 0.1;
+			scrollSpeed = songSpeed;
+		} else if (FlxG.keys.justPressed.F9) { // Camera Zooms In
+			defaultCamZoom += 0.1;
+			camGame = defaultCamZoom;
+		} else if (FlxG.keys.justPressed.F10) { // Camera Zooms Out
+			defaultCamZoom -= 0.1;
+			camGame = defaultCamZoom;
 		}
 
 		if (useVideo && GlobalVideo.get() != null)

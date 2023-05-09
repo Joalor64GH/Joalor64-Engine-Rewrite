@@ -30,6 +30,10 @@ NOTE: **I AM NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5, NOR AM I RESPONSIBLE FO
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [ ] Make a Template for HX Scripts
 * [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
+    * [ ] Health Icon Bopping
+    * [ ] Health Counter
+    * [ ] Rating Squares
+    * [ ] End Screen (Low Priority)
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 
 # Downloads
