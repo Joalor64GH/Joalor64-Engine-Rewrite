@@ -3703,6 +3703,8 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
+			case 'schoolEvil':
+				randomString(FlxG.random.int(0, 16));
 		}
 
 		if(!inCutscene) {
@@ -6128,13 +6130,18 @@ class PlayState extends MusicBeatState
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
 
-	var upperCase:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	var lowerCase:String = "abcdefghijklmnopqrstuvwxyz";
-	var numbers:String = "0123456789";
-	var symbols:String = "!@#$%&()*+-,./:;<=>?^[]{}";
+	static inline var upperCase:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	static inline var lowerCase:String = "abcdefghijklmnopqrstuvwxyz";
+	static inline var numbers:String = "0123456789";
+	static inline var symbols:String = "!@#$%&()*+-,./:;<=>?^[]{}";
 
-	function random() 
+	inline public static function randomString(len:Int) 
 	{
-		// nothing yet, but i think you get the idea
+		var str = "";
+		for (i in 0...len){
+			for (e in [upperCase, lowerCase, numbers, symbols])
+				str += e.charAt(FlxG.random.int(0, e.length - 1));
+		}
+		return str;
 	}
 }
