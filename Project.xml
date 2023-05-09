@@ -48,14 +48,13 @@
 		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
+	<define name="PSYCH"/>
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="windows || android"/>
 	<define name="JOALOR64_WATERMARKS"/>
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
-	<define name="CRASH_HANDLER" if="desktop release" />
-	<define name="PSYCH"/>
-	<define name="EMBED_ASSETS"/>
+	<define name="CRASH_HANDLER" if="desktop release" />=
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
@@ -70,12 +69,9 @@
 	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
 
-        <section if="EMBED_ASSETS">
-	        <assets path="assets/art" embed='false'/>
-	        <assets path="assets/core" embed='true'/>
-		<assets path="assets/fonts" embed='true'/>
-		<assets path='art/header.lua' embed='true'/>
-	</section>
+	<assets path="assets/core" embed='true'/>
+	<assets path="assets/fonts" embed='true'/>
+	<assets path='art/header.lua' embed='true'/>
 
 	<!-- SWF EXAMPLE -->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
@@ -217,13 +213,10 @@
 		<haxedef name="HXCPP_STACK_LINE" />
 	</section>
 
-	<!-- _______________________________ Errors and Warnings ______________________________ -->
+	<!-- _______________________________ Errors ______________________________ -->
 
-	<error value="You're not using NebulaZoruas github fork of luajit, use it instead." if="${linc_luajit == 0.0.4}" />
-
-	<error value="You're using Haxe 4.1.5, update to 4.2.5." if="${haxe == 4.1.5}" unless="linux" />
-
-	<warn value="HTML5 builds haven't been tested and might not work, so beware of that." if="html5" />
+	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
+	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
 
 	<!-- _________________________________ Miscellaneous _______________________________ -->
 	

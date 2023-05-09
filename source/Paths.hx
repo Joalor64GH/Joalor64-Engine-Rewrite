@@ -78,8 +78,7 @@ class Paths
 		'classes',
 		'libs',
 		'achievements',
-		'options',
-		'art'
+		'options'
 	];
 	#end
 
@@ -481,6 +480,7 @@ class Paths
 
 		return getPath('$key.hx', TEXT, library);
 	}
+	
 	static public function video(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
