@@ -238,7 +238,6 @@ class PlayState extends MusicBeatState
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
-
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
@@ -333,12 +332,10 @@ class PlayState extends MusicBeatState
 
 	// Scripting shit
 	public static var instance:PlayState = null;
-
-	public var scriptArray:Array<FunkinTeaScript> = [];
 	public var luaArray:Array<FunkinLua> = [];
-
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
+	public var scriptArray:Array<FunkinTeaScript> = [];
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -352,10 +349,8 @@ class PlayState extends MusicBeatState
 	
 	// stores the last judgement object
 	public static var lastRating:FlxSprite;
-
 	// stores the last combo sprite object
 	public static var lastCombo:FlxSprite;
-	
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
@@ -3616,16 +3611,12 @@ class PlayState extends MusicBeatState
 			cameraSpeed -= 0.5;
 		} else if (FlxG.keys.justPressed.F7) { // Song Speeds Up
 			songSpeed += 0.1;
-			scrollSpeed = songSpeed;
 		} else if (FlxG.keys.justPressed.F8) { // Song Slows Down
 			songSpeed -= 0.1;
-			scrollSpeed = songSpeed;
 		} else if (FlxG.keys.justPressed.F9) { // Camera Zooms In
 			defaultCamZoom += 0.1;
-			camGame = defaultCamZoom;
 		} else if (FlxG.keys.justPressed.F10) { // Camera Zooms Out
 			defaultCamZoom -= 0.1;
-			camGame = defaultCamZoom;
 		}
 
 		if (useVideo && GlobalVideo.get() != null)
@@ -4716,7 +4707,6 @@ class PlayState extends MusicBeatState
 		camZooming = false;
 		inCutscene = false;
 		updateTime = false;
-
 		deathCounter = 0;
 		seenCutscene = false;
 
