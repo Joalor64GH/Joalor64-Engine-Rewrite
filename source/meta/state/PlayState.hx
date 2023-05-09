@@ -360,12 +360,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		/*if (songName == 'thorns') {
-			// supposed to generate random numbers and symbols using the random(); function
-			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
-		} else {*/
 		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
-		// }
 
 		Paths.clearStoredMemory();
 
@@ -2514,6 +2509,7 @@ class PlayState extends MusicBeatState
 				FlxG.camera.zoom *= 1.2;
 
 				// Well well well, what do we got here?
+				// EDUARDO???
 				cutsceneHandler.timer(0.1, function()
 				{
 					wellWellWell.play(true);
@@ -2927,6 +2923,10 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+						if (!PlayState.isPixelStage && curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo') {
+							boyfriend.playAnim('pre-attack', true);
+							boyfriend.specialAnim = true;
+						}
 					case 3:
 						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[3]));
 						countdownGo.cameras = [camHUD];
@@ -2949,6 +2949,19 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						if (!PlayState.isPixelStage && curStage != 'limo') {
+							if(boyfriend.animOffsets.exists('hey')) {
+								boyfriend.playAnim('hey', true);
+								boyfriend.specialAnim = true;
+								boyfriend.heyTimer = 0.6;
+							}
+
+							if(gf != null && gf.animOffsets.exists('cheer')) {
+								gf.playAnim('cheer', true);
+								gf.specialAnim = true;
+								gf.heyTimer = 0.6;
+							}
+						}
 				}
 
 				notes.forEachAlive(function(note:Note) {
@@ -3564,6 +3577,14 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.SPACE) {
+			if(boyfriend.animOffsets.exists('hey')) {
+				boyfriend.playAnim('hey', true);
+				boyfriend.specialAnim = true;
+				boyfriend.heyTimer = 0.6;
+			}
+		}
+
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)

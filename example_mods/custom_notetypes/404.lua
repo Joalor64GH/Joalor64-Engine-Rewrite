@@ -3,7 +3,7 @@ function onCreate()
 	for i = 0, getProperty('unspawnNotes.length')-1 do
 		--Check if the note is an Instakill Note
 		if getPropertyFromGroup('unspawnNotes', i, 'noteType') == '404' then
-			setPropertyFromGroup('unspawnNotes', i, 'texture', 'noteassetshit\\BSODNOTE_assets'); --Change texture
+			setPropertyFromGroup('unspawnNotes', i, 'texture', 'BSODNOTE_assets'); --Change texture
 			if getPropertyFromGroup('unspawnNotes', i, 'mustPress') then --Doesn't let Dad/Opponent notes get ignored
 				setPropertyFromGroup('unspawnNotes', i, 'ignoreNote', true); --Miss has no penalties
 			end
