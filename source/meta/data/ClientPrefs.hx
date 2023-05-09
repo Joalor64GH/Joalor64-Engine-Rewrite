@@ -38,6 +38,7 @@ class ClientPrefs {
 	public static var comboStacking = true;
 	public static var colorBlindFilter:String = 'None';
 	public static var simpleMain:Bool = false;
+	public static var longBar:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -59,7 +60,7 @@ class ClientPrefs {
 		'opponentplay' => false
 	];
 
-	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
+	public static var comboOffset:Array<Int> = [0, 0, 0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
 	public static var sickWindow:Int = 45;
 	public static var goodWindow:Int = 90;
@@ -136,6 +137,7 @@ class ClientPrefs {
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.colorBlindFilter = colorBlindFilter;
 		FlxG.save.data.simpleMain = simpleMain;
+		FlxG.save.data.longBar = longBar;
 	
 		FlxG.save.flush();
 
@@ -276,6 +278,8 @@ class ClientPrefs {
 			colorBlindFilter = FlxG.save.data.colorBlindFilter;
 		if(FlxG.save.data.simpleMain != null)
 			simpleMain = FlxG.save.data.simpleMain;
+		if(FlxG.save.data.longBar != null)
+			longBar = FlxG.save.data.longBar;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

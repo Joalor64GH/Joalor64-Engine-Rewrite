@@ -201,6 +201,13 @@ class PreferencesSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		var option:Option = new Option('Long Health Bar',
+			'why would you want this anyways',
+			'longBar',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
