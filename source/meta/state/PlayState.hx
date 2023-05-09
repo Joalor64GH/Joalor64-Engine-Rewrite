@@ -259,6 +259,8 @@ class PlayState extends MusicBeatState
 	var phillyTrain:BGSprite;
 	var blammedLightsBlack:FlxSprite;
 	var phillyWindowEvent:BGSprite;
+	var phillyRain:BGSprite;
+	var phillyRainSplash:BGSprite;
 	var trainSound:FlxSound;
 
 	var phillyGlowGradient:PhillyGlow.PhillyGlowGradient;
@@ -634,6 +636,14 @@ class PlayState extends MusicBeatState
 
 				phillyStreet = new BGSprite('stages/philly/street', -40, 50);
 				add(phillyStreet);
+
+				phillyRain = new BGSprite('stages/philly/rain', 0, 0, 15, 0, ['rain', 'rain loop'], true);
+				phillyRain.scrollFactor.set(0.3, 0.3);
+				phillyRain.scale.set(0.85, 0.85);
+				add(phillyRain);
+
+				phillyRainSplash = new BGSprite('stages/philly/splash', 0, 50, 15, 0, ['splash', 'splash loop'], true);
+				add(phillyRainSplash);
 
 			case 'limo': //Week 4
 				var skyBG:BGSprite = new BGSprite('stages/limo/limoSunset', -120, -50, 0.1, 0.1);
