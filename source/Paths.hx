@@ -79,8 +79,7 @@ class Paths
 		'classes',
 		'libs',
 		'achievements',
-		'options',
-		'art'
+		'options'
 	];
 	#end
 

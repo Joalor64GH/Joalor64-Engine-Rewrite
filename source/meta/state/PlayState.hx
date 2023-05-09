@@ -37,6 +37,7 @@ import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
 import openfl.Lib;
+import lime.app.Application;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
@@ -359,6 +360,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -479,7 +482,6 @@ class PlayState extends MusicBeatState
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
-		// Stages and stuff
 		curStage = SONG.stage;
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
@@ -1351,6 +1353,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll)
 			botplayTxt.y = timeBarBG.y - 78;
 
+		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}', 12);
+		versionTxt.scrollFactor.set();
+		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionTxt);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1364,6 +1371,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		versionTxt.cameras = [camHUD];
 
 		startingSong = true;
 
@@ -2501,6 +2509,7 @@ class PlayState extends MusicBeatState
 				FlxG.camera.zoom *= 1.2;
 
 				// Well well well, what do we got here?
+				// EDUARDO???
 				cutsceneHandler.timer(0.1, function()
 				{
 					wellWellWell.play(true);
@@ -2914,6 +2923,10 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+						if (!PlayState.isPixelStage && curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo') {
+							boyfriend.playAnim('pre-attack', true);
+							boyfriend.specialAnim = true;
+						}
 					case 3:
 						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[3]));
 						countdownGo.cameras = [camHUD];
@@ -2936,6 +2949,19 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						if (!PlayState.isPixelStage && curStage != 'limo') {
+							if(boyfriend.animOffsets.exists('hey')) {
+								boyfriend.playAnim('hey', true);
+								boyfriend.specialAnim = true;
+								boyfriend.heyTimer = 0.6;
+							}
+
+							if(gf != null && gf.animOffsets.exists('cheer')) {
+								gf.playAnim('cheer', true);
+								gf.specialAnim = true;
+								gf.heyTimer = 0.6;
+							}
+						}
 				}
 
 				notes.forEachAlive(function(note:Note) {
@@ -3012,7 +3038,7 @@ class PlayState extends MusicBeatState
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses
-			+ ' // Accuracy: ' + '(' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)'
+			+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
 			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 		}
 
@@ -3551,6 +3577,14 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.SPACE) {
+			if(boyfriend.animOffsets.exists('hey')) {
+				boyfriend.playAnim('hey', true);
+				boyfriend.specialAnim = true;
+				boyfriend.heyTimer = 0.6;
+			}
+		}
+
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
@@ -3690,6 +3724,8 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
+			case 'schoolEvil':
+				randomString(FlxG.random.int(0, 16));
 		}
 
 		if(!inCutscene) {
@@ -4603,6 +4639,8 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+		
 		ButtplugUtils.stop();
 
 		if (useVideo)
@@ -6112,4 +6150,19 @@ class PlayState extends MusicBeatState
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
+
+	static inline var upperCase:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	static inline var lowerCase:String = "abcdefghijklmnopqrstuvwxyz";
+	static inline var numbers:String = "0123456789";
+	static inline var symbols:String = "!@#$%&()*+-,./:;<=>?^[]{}";
+
+	inline public static function randomString(len:Int) 
+	{
+		var str = "";
+		for (i in 0...len){
+			for (e in [upperCase, lowerCase, numbers, symbols])
+				str += e.charAt(FlxG.random.int(0, e.length - 1));
+		}
+		return str;
+	}
 }

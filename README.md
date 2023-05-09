@@ -5,6 +5,8 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
+NOTE: **I AM NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5, NOR AM I RESPONSIBLE FOR MAINTAINING HTML5.**
+
 # Features
 * Dark Mode Application Bar
 * In-Game Mod Downloader
@@ -25,8 +27,9 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 
 # Planned Features
 * [ ] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21)
+* [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [ ] Make a Template for HX Scripts
-* [ ] Hardcode the Lua Scripts to PlayState (Because yeah)
+* [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 
 # Downloads
