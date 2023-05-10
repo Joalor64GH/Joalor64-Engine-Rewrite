@@ -288,7 +288,6 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
-
 	public var healthTxt:FlxText;
 
 	var timeTxt:FlxText;
@@ -359,7 +358,11 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+		if (SONG.song.toLowerCase() == 'thorns') {
+			Application.current.window.title = randomString(len:Int);
+		} else {
+			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+		}
 
 		Paths.clearStoredMemory();
 
@@ -2287,9 +2290,7 @@ class PlayState extends MusicBeatState
 		return;
 		#end
 	}
-
-	// I fixed it joalor
-	public function startMovie(name:String, sound:String)
+	public function startMovie(name:String, sound:String) // I fixed it joalor
 	{
 		#if FLASH_MOVIE
 		inCutscene = true;
@@ -2511,7 +2512,6 @@ class PlayState extends MusicBeatState
 
 				// Well well well, what do we got here?
 				// EDUARDO???
-				// WELL WELL WELL
 				cutsceneHandler.timer(0.1, function()
 				{
 					wellWellWell.play(true);
