@@ -382,6 +382,8 @@ class PlayState extends MusicBeatState
 			'NOTE_RIGHT'
 		];
 
+		keysArray = [];
+
 		for (ass in controlArray)
 			keysArray.push(ClientPrefs.copyKey(ClientPrefs.keyBinds.get(ass.toLowerCase())));
 
@@ -2078,10 +2080,7 @@ class PlayState extends MusicBeatState
 			return FunkinLua.Function_Continue;
 		}
 		var method = hscriptMap.get(name).variables.get(func);
-		var ret:Dynamic = null;
-
-		// allows for infinite args
-		Reflect.callMethod(null, method, args);
+		var ret:Dynamic = Reflect.callMethod(null, method, args); // allows for infinite args
 
 		if (ret != null && ret != FunkinLua.Function_Continue) {
 			return ret;
@@ -2751,8 +2750,8 @@ class PlayState extends MusicBeatState
 		introAssets.set('default', [
 			'three',
 			'two', 
-		    	'one', 
-		    	'go'
+			'one', 
+			'go'
 		]);
 		introAssets.set('pixel', [
 			'pixelUI/three-pixel',
@@ -2988,7 +2987,7 @@ class PlayState extends MusicBeatState
 	{
 		insert(members.indexOf(boyfriendGroup), obj);
 	}
-	public function addBehindDad (obj:FlxObject)
+	public function addBehindDad(obj:FlxObject)
 	{
 		insert(members.indexOf(dadGroup), obj);
 	}
@@ -3000,10 +2999,8 @@ class PlayState extends MusicBeatState
 			var daNote:Note = unspawnNotes[i];
 			if(daNote.strumTime - 350 < time)
 			{
-				daNote.active = daNote.visible = false;
 				daNote.ignoreNote = true;
 
-				daNote.kill();
 				unspawnNotes.remove(daNote);
 				daNote.destroy();
 			}
@@ -3015,11 +3012,8 @@ class PlayState extends MusicBeatState
 			var daNote:Note = notes.members[i];
 			if(daNote.strumTime - 350 < time)
 			{
-				daNote.active = false;
-				daNote.visible = false;
 				daNote.ignoreNote = true;
 
-				daNote.kill();
 				notes.remove(daNote, true);
 				daNote.destroy();
 			}
@@ -3254,9 +3248,7 @@ class PlayState extends MusicBeatState
 						{
 							sustainNote.x += 310;
 							if(daNoteData > 1) //Up and Right
-							{
 								sustainNote.x += FlxG.width / 2 + 25;
-							}
 						}
 					}
 				}
@@ -3585,6 +3577,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// SECRET KEYS!! SHHHHHHHH
+		#if debug
 		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
 			endSong();
 		} else if (FlxG.keys.justPressed.F2 && !startingSong) { // 10 Seconds Forward
@@ -3616,6 +3609,7 @@ class PlayState extends MusicBeatState
 		} else if (FlxG.keys.justPressed.F10) { // Camera Zooms Out
 			defaultCamZoom -= 0.1;
 		}
+		#end
 
 		if (useVideo && GlobalVideo.get() != null)
 		{
@@ -3838,6 +3832,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// Does this work??
+		// the 2 icons do, but idk about 3 nor the 5 icons
 		switch (iconP2.widthThing) {
 			case 150:
 				iconP2.animation.curAnim.curFrame = 0;
@@ -3937,13 +3932,10 @@ class PlayState extends MusicBeatState
 
 			while (unspawnNotes.length > 0 && unspawnNotes[0].strumTime - Conductor.songPosition < time)
 			{
-				var dunceNote:Note = unspawnNotes[0];
+				var dunceNote:Note = unspawnNotes.shift();
 				notes.insert(0, dunceNote);
 				dunceNote.spawned=true;
 				callOnLuas('onSpawnNote', [notes.members.indexOf(dunceNote), dunceNote.noteData, dunceNote.noteType, dunceNote.isSustainNote]);
-
-				var index:Int = unspawnNotes.indexOf(dunceNote);
-				unspawnNotes.splice(index, 1);
 			}
 		}
 
@@ -3975,10 +3967,8 @@ class PlayState extends MusicBeatState
 					strumAngle += daNote.offsetAngle;
 					strumAlpha *= daNote.multAlpha;
 
-					if (strumScroll) //Downscroll
-						daNote.distance = (0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
-					else //Upscroll
-						daNote.distance = (-0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
+					// whether downscroll or not
+					daNote.distance = ((strumScroll) ? 0.45 : -0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
 
 					var angleDir = strumDirection * Math.PI / 180;
 					if (daNote.copyAngle)
@@ -4057,11 +4047,6 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
-
-						daNote.active = false;
-						daNote.visible = false;
-
-						daNote.kill();
 						notes.remove(daNote, true);
 						daNote.destroy();
 					}
@@ -4853,10 +4838,6 @@ class PlayState extends MusicBeatState
 	public function KillNotes() {
 		while(notes.length > 0) {
 			var daNote:Note = notes.members[0];
-			daNote.active = false;
-			daNote.visible = false;
-
-			daNote.kill();
 			notes.remove(daNote, true);
 			daNote.destroy();
 		}
@@ -5135,7 +5116,6 @@ class PlayState extends MusicBeatState
 					{
 						for (doubleNote in pressNotes) {
 							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
-								doubleNote.kill();
 								notes.remove(doubleNote, true);
 								doubleNote.destroy();
 							} else
@@ -5340,7 +5320,6 @@ class PlayState extends MusicBeatState
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
 			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1) {
-				note.kill();
 				notes.remove(note, true);
 				note.destroy();
 			}
@@ -5457,7 +5436,6 @@ class PlayState extends MusicBeatState
 
 		if (!note.isSustainNote)
 		{
-			note.kill();
 			notes.remove(note, true);
 			note.destroy();
 		}
@@ -5492,7 +5470,6 @@ class PlayState extends MusicBeatState
 				note.wasGoodHit = true;
 				if (!note.isSustainNote)
 				{
-					note.kill();
 					notes.remove(note, true);
 					note.destroy();
 				}
@@ -5562,7 +5539,6 @@ class PlayState extends MusicBeatState
 
 			if (!note.isSustainNote)
 			{
-				note.kill();
 				notes.remove(note, true);
 				note.destroy();
 			}
