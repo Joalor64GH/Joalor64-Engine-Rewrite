@@ -375,18 +375,15 @@ class PlayState extends MusicBeatState
 		PauseSubState.songName = null; //Reset to default
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 
-		keysArray = [
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_left')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_down')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
-		];
 		controlArray = [
 			'NOTE_LEFT',
 			'NOTE_DOWN',
 			'NOTE_UP',
 			'NOTE_RIGHT'
 		];
+
+		for (ass in controlArray)
+			keysArray.push(ClientPrefs.copyKey(ClientPrefs.keyBinds.get(ass.toLowerCase())));
 
 		comboFunction = () -> {
 			// Rating FC
@@ -1305,7 +1302,7 @@ class PlayState extends MusicBeatState
 
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite(if(ClientPrefs.longBar) 'healthBarLong' else 'healthBar');
+		healthBarBG = new AttachedSprite((ClientPrefs.longBar) ? 'healthBarLong' : 'healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -1693,7 +1690,8 @@ class PlayState extends MusicBeatState
 		RecalculateRating();
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
-		if(ClientPrefs.hitsoundVolume > 0) precacheList.set('hitsound', 'sound');
+		if(ClientPrefs.hitsoundVolume > 0) 
+			precacheList.set('hitsound', 'sound');
 		precacheList.set('missnote1', 'sound');
 		precacheList.set('missnote2', 'sound');
 		precacheList.set('missnote3', 'sound');
