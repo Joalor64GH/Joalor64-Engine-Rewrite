@@ -54,7 +54,6 @@ import llua.LuaL;
 import llua.State;
 import llua.Convert;
 #end
-
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
@@ -64,17 +63,14 @@ import VideoHandler as MP4Handler;
 import vlc.MP4Handler; 
 #end
 #end
-
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
 import meta.video.BackgroundVideo;
 import meta.video.VideoSubState;
 #end
-
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
-
 #if HSCRIPT_ALLOWED
 import hscript.*;
 import horny.*;
@@ -292,6 +288,8 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+
+	public var healthTxt:FlxText;
 
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -1317,7 +1315,6 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
 		add(healthBar);
@@ -1343,6 +1340,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
+		healthTxt = new FlxText(4, healthBarBG.y - 1, "", 20);
+		healthTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		healthTxt.scrollFactor.set();
+		healthTxt.screenCenter(X);
+		add(healthTxt);
+
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -1365,6 +1368,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		healthTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
@@ -3619,6 +3623,8 @@ class PlayState extends MusicBeatState
 				removedVideo = true;
 			}
 		}
+
+		healthTxt.text = healthBar.percent + '%';
 
 		callOnLuas('onUpdate', [elapsed]);
 
