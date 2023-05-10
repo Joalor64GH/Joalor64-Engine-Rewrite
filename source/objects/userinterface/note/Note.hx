@@ -393,6 +393,7 @@ class Note extends FlxSprite
 		}
 	}
 
+	// fix by NeeEoo
 	@:noCompletion override function set_clipRect(rect:FlxRect):FlxRect
 	{
 		clipRect = rect;
