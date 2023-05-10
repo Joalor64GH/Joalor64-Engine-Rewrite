@@ -32,7 +32,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
     * [X] Health Counter
     * [ ] Health Icon Bopping
-    * [ ] Rating Squares
+    * [ ] Ratings Counter
     * [ ] End Screen (Low Priority)
 * [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
 
