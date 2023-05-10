@@ -5,7 +5,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
-NOTE: **I AM NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5, NOR AM I RESPONSIBLE FOR MAINTAINING HTML5.**
+NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RESPONSIBLE FOR MAINTAINING HTML5/ANDROID.**
 
 # Features
 * Dark Mode Application Bar
