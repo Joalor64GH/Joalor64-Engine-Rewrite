@@ -54,7 +54,6 @@ import llua.LuaL;
 import llua.State;
 import llua.Convert;
 #end
-
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
@@ -64,17 +63,14 @@ import VideoHandler as MP4Handler;
 import vlc.MP4Handler; 
 #end
 #end
-
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
 import meta.video.BackgroundVideo;
 import meta.video.VideoSubState;
 #end
-
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
-
 #if HSCRIPT_ALLOWED
 import hscript.*;
 import horny.*;
@@ -163,6 +159,7 @@ class PlayState extends MusicBeatState
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
+
 	public static var curStage:String = '';
 	public static var isPixelStage:Bool = false;
 	public static var SONG:SwagSong = null;
@@ -237,7 +234,6 @@ class PlayState extends MusicBeatState
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
-
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
@@ -294,6 +290,7 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var healthTxt:FlxText;
 
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -334,12 +331,10 @@ class PlayState extends MusicBeatState
 
 	// Scripting shit
 	public static var instance:PlayState = null;
-
-	public var scriptArray:Array<FunkinTeaScript> = [];
 	public var luaArray:Array<FunkinLua> = [];
-
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
+	public var scriptArray:Array<FunkinTeaScript> = [];
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -365,7 +360,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+		if (curStage != 'schoolEvil')
+			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
 
 		Paths.clearStoredMemory();
 
@@ -379,19 +375,17 @@ class PlayState extends MusicBeatState
 		PauseSubState.songName = null; //Reset to default
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 
-		keysArray = [
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_left')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_down')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
-			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
-		];
-
 		controlArray = [
 			'NOTE_LEFT',
 			'NOTE_DOWN',
 			'NOTE_UP',
 			'NOTE_RIGHT'
 		];
+
+		keysArray = [];
+
+		for (ass in controlArray)
+			keysArray.push(ClientPrefs.copyKey(ClientPrefs.keyBinds.get(ass.toLowerCase())));
 
 		comboFunction = () -> {
 			// Rating FC
@@ -534,6 +528,7 @@ class PlayState extends MusicBeatState
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
+		
 		BF_X = stageData.boyfriend[0];
 		BF_Y = stageData.boyfriend[1];
 		GF_X = stageData.girlfriend[0];
@@ -987,7 +982,6 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
@@ -1318,7 +1312,7 @@ class PlayState extends MusicBeatState
 
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite(if(ClientPrefs.longBar) 'healthBarLong' else 'healthBar');
+		healthBarBG = new AttachedSprite((ClientPrefs.longBar) ? 'healthBarLong' : 'healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -1331,7 +1325,6 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
 		add(healthBar);
@@ -1357,6 +1350,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
+		healthTxt = new FlxText(4, healthBarBG.y - 1, "", 20);
+		healthTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		healthTxt.scrollFactor.set();
+		healthTxt.screenCenter(X);
+		add(healthTxt);
+
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -1379,6 +1378,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		healthTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
@@ -1438,6 +1438,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1488,6 +1489,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1706,7 +1708,8 @@ class PlayState extends MusicBeatState
 		RecalculateRating();
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
-		if(ClientPrefs.hitsoundVolume > 0) precacheList.set('hitsound', 'sound');
+		if(ClientPrefs.hitsoundVolume > 0) 
+			precacheList.set('hitsound', 'sound');
 		precacheList.set('missnote1', 'sound');
 		precacheList.set('missnote2', 'sound');
 		precacheList.set('missnote3', 'sound');
@@ -2093,10 +2096,7 @@ class PlayState extends MusicBeatState
 			return FunkinLua.Function_Continue;
 		}
 		var method = hscriptMap.get(name).variables.get(func);
-		var ret:Dynamic = null;
-
-		// allows for infinite args
-		Reflect.callMethod(null, method, args);
+		var ret:Dynamic = Reflect.callMethod(null, method, args); // allows for infinite args
 
 		if (ret != null && ret != FunkinLua.Function_Continue) {
 			return ret;
@@ -2299,9 +2299,7 @@ class PlayState extends MusicBeatState
 		return;
 		#end
 	}
-
-	// I fixed it joalor
-	public function startMovie(name:String, sound:String)
+	public function startMovie(name:String, sound:String) // I fixed it joalor
 	{
 		#if FLASH_MOVIE
 		inCutscene = true;
@@ -2765,8 +2763,8 @@ class PlayState extends MusicBeatState
 		introAssets.set('default', [
 			'three',
 			'two', 
-		    	'one', 
-		    	'go'
+			'one', 
+			'go'
 		]);
 		introAssets.set('pixel', [
 			'pixelUI/three-pixel',
@@ -3002,7 +3000,7 @@ class PlayState extends MusicBeatState
 	{
 		insert(members.indexOf(boyfriendGroup), obj);
 	}
-	public function addBehindDad (obj:FlxObject)
+	public function addBehindDad(obj:FlxObject)
 	{
 		insert(members.indexOf(dadGroup), obj);
 	}
@@ -3014,10 +3012,8 @@ class PlayState extends MusicBeatState
 			var daNote:Note = unspawnNotes[i];
 			if(daNote.strumTime - 350 < time)
 			{
-				daNote.active = daNote.visible = false;
 				daNote.ignoreNote = true;
 
-				daNote.kill();
 				unspawnNotes.remove(daNote);
 				daNote.destroy();
 			}
@@ -3029,11 +3025,8 @@ class PlayState extends MusicBeatState
 			var daNote:Note = notes.members[i];
 			if(daNote.strumTime - 350 < time)
 			{
-				daNote.active = false;
-				daNote.visible = false;
 				daNote.ignoreNote = true;
 
-				daNote.kill();
 				notes.remove(daNote, true);
 				daNote.destroy();
 			}
@@ -3156,6 +3149,7 @@ class PlayState extends MusicBeatState
 
 	private var noteTypeMap:Map<String, Bool> = new Map<String, Bool>();
 	private var eventPushedMap:Map<String, Bool> = new Map<String, Bool>();
+	
 	private function generateSong():Void
 	{
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype','multiplicative');
@@ -3268,9 +3262,7 @@ class PlayState extends MusicBeatState
 						{
 							sustainNote.x += 310;
 							if(daNoteData > 1) //Up and Right
-							{
 								sustainNote.x += FlxG.width / 2 + 25;
-							}
 						}
 					}
 				}
@@ -3598,6 +3590,41 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		// SECRET KEYS!! SHHHHHHHH
+		#if debug
+		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
+			endSong();
+		} else if (FlxG.keys.justPressed.F2 && !startingSong) { // 10 Seconds Forward
+			Conductor.songPosition += 10000;
+			FlxG.sound.music.time = Conductor.songPosition;
+			vocals.time = Conductor.songPosition;
+		} else if (FlxG.keys.justPressed.F3 && !startingSong) { // 10 Seconds Back
+			Conductor.songPosition -= 10000;
+			FlxG.sound.music.time = Conductor.songPosition;
+			vocals.time = Conductor.songPosition;
+		} else if (FlxG.keys.justPressed.F4) { // Enable/Disable Botplay
+			if (!cpuControlled) {
+				cpuControlled = true;
+				botplayTxt.visible = true;
+			} else {
+				cpuControlled = false;
+				botplayTxt.visible = false;
+			}
+		} else if (FlxG.keys.justPressed.F5) { // Camera Speeds Up
+			cameraSpeed += 0.5;
+		} else if (FlxG.keys.justPressed.F6) { // Camera Slows Down
+			cameraSpeed -= 0.5;
+		} else if (FlxG.keys.justPressed.F7) { // Song Speeds Up
+			songSpeed += 0.1;
+		} else if (FlxG.keys.justPressed.F8) { // Song Slows Down
+			songSpeed -= 0.1;
+		} else if (FlxG.keys.justPressed.F9) { // Camera Zooms In
+			defaultCamZoom += 0.1;
+		} else if (FlxG.keys.justPressed.F10) { // Camera Zooms Out
+			defaultCamZoom -= 0.1;
+		}
+		#end
+
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
@@ -3606,6 +3633,8 @@ class PlayState extends MusicBeatState
 				removedVideo = true;
 			}
 		}
+
+		healthTxt.text = healthBar.percent + '%';
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -3738,7 +3767,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'schoolEvil':
-				randomString(FlxG.random.int(0, 16));
+				Application.current.window.title = randomString(FlxG.random.int(0, 16));
 		}
 
 		if(!inCutscene) {
@@ -3819,6 +3848,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// Does this work??
+		// the 2 icons do, but idk about 3 nor the 5 icons
 		switch (iconP2.widthThing) {
 			case 150:
 				iconP2.animation.curAnim.curFrame = 0;
@@ -3918,13 +3948,10 @@ class PlayState extends MusicBeatState
 
 			while (unspawnNotes.length > 0 && unspawnNotes[0].strumTime - Conductor.songPosition < time)
 			{
-				var dunceNote:Note = unspawnNotes[0];
+				var dunceNote:Note = unspawnNotes.shift();
 				notes.insert(0, dunceNote);
 				dunceNote.spawned=true;
 				callOnLuas('onSpawnNote', [notes.members.indexOf(dunceNote), dunceNote.noteData, dunceNote.noteType, dunceNote.isSustainNote]);
-
-				var index:Int = unspawnNotes.indexOf(dunceNote);
-				unspawnNotes.splice(index, 1);
 			}
 		}
 
@@ -3956,10 +3983,8 @@ class PlayState extends MusicBeatState
 					strumAngle += daNote.offsetAngle;
 					strumAlpha *= daNote.multAlpha;
 
-					if (strumScroll) //Downscroll
-						daNote.distance = (0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
-					else //Upscroll
-						daNote.distance = (-0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
+					// whether downscroll or not
+					daNote.distance = ((strumScroll) ? 0.45 : -0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
 
 					var angleDir = strumDirection * Math.PI / 180;
 					if (daNote.copyAngle)
@@ -4038,11 +4063,6 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
-
-						daNote.active = false;
-						daNote.visible = false;
-
-						daNote.kill();
 						notes.remove(daNote, true);
 						daNote.destroy();
 					}
@@ -4647,6 +4667,7 @@ class PlayState extends MusicBeatState
 
 
 	public var transitioning = false;
+
 	public function endSong():Void
 	{
 		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
@@ -4686,7 +4707,6 @@ class PlayState extends MusicBeatState
 		camZooming = false;
 		inCutscene = false;
 		updateTime = false;
-
 		deathCounter = 0;
 		seenCutscene = false;
 
@@ -4835,10 +4855,6 @@ class PlayState extends MusicBeatState
 	public function KillNotes() {
 		while(notes.length > 0) {
 			var daNote:Note = notes.members[0];
-			daNote.active = false;
-			daNote.visible = false;
-
-			daNote.kill();
 			notes.remove(daNote, true);
 			daNote.destroy();
 		}
@@ -5117,7 +5133,6 @@ class PlayState extends MusicBeatState
 					{
 						for (doubleNote in pressNotes) {
 							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
-								doubleNote.kill();
 								notes.remove(doubleNote, true);
 								doubleNote.destroy();
 							} else
@@ -5252,9 +5267,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public var useVideo = false;
-
 	public static var webmHandler:WebmHandler;
-
 	public var videoSprite:FlxSprite;
 
 	public function backgroundVideo(source:String) // for background videos
@@ -5322,7 +5335,6 @@ class PlayState extends MusicBeatState
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
 			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1) {
-				note.kill();
 				notes.remove(note, true);
 				note.destroy();
 			}
@@ -5439,7 +5451,6 @@ class PlayState extends MusicBeatState
 
 		if (!note.isSustainNote)
 		{
-			note.kill();
 			notes.remove(note, true);
 			note.destroy();
 		}
@@ -5474,7 +5485,6 @@ class PlayState extends MusicBeatState
 				note.wasGoodHit = true;
 				if (!note.isSustainNote)
 				{
-					note.kill();
 					notes.remove(note, true);
 					note.destroy();
 				}
@@ -5544,7 +5554,6 @@ class PlayState extends MusicBeatState
 
 			if (!note.isSustainNote)
 			{
-				note.kill();
 				notes.remove(note, true);
 				note.destroy();
 			}
@@ -5820,6 +5829,7 @@ class PlayState extends MusicBeatState
 		}
 
 		lastStepHit = curStep;
+
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
 	}
@@ -5828,7 +5838,6 @@ class PlayState extends MusicBeatState
 	var lightningOffset:Int = 8;
 
 	var lastBeatHit:Int = -1;
-
 	override function beatHit()
 	{
 		super.beatHit();
@@ -5912,6 +5921,7 @@ class PlayState extends MusicBeatState
 		{
 			lightningStrikeShit();
 		}
+
 		lastBeatHit = curBeat;
 
 		if (dad.curCharacter.startsWith('spirit') && dad.animation.curAnim.name.startsWith('sing') && SONG.song.toLowerCase() == 'thorns')

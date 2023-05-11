@@ -5,7 +5,7 @@ A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor6
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
-NOTE: **I AM NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5, NOR AM I RESPONSIBLE FOR MAINTAINING HTML5.**
+NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RESPONSIBLE FOR MAINTAINING HTML5/ANDROID.**
 
 # Features
 * Dark Mode Application Bar
@@ -30,7 +30,11 @@ NOTE: **I AM NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5, NOR AM I RESPONSIBLE FO
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [ ] Make a Template for HX Scripts
 * [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
-* [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
+    * [X] Health Counter
+    * [ ] Health Icon Bopping
+    * [ ] Ratings Counter
+    * [ ] End Screen (Low Priority)
+* [ ] Extra Notes (Hardcoded)
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
