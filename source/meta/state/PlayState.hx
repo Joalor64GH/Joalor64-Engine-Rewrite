@@ -358,11 +358,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		if (SONG.song.toLowerCase() == 'thorns') {
-			Application.current.window.title = randomString(len:Int);
-		} else {
+		if (curStage != 'schoolEvil')
 			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
-		}
 
 		Paths.clearStoredMemory();
 
@@ -1431,6 +1428,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1481,6 +1479,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypeMap.keys())
 		{
@@ -3140,6 +3139,7 @@ class PlayState extends MusicBeatState
 
 	private var noteTypeMap:Map<String, Bool> = new Map<String, Bool>();
 	private var eventPushedMap:Map<String, Bool> = new Map<String, Bool>();
+	
 	private function generateSong():Void
 	{
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype','multiplicative');
@@ -3757,7 +3757,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'schoolEvil':
-				randomString(FlxG.random.int(0, 16));
+				Application.current.window.title = randomString(FlxG.random.int(0, 16));
 		}
 
 		if(!inCutscene) {
@@ -4657,6 +4657,7 @@ class PlayState extends MusicBeatState
 
 
 	public var transitioning = false;
+
 	public function endSong():Void
 	{
 		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
@@ -5256,9 +5257,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public var useVideo = false;
-
 	public static var webmHandler:WebmHandler;
-
 	public var videoSprite:FlxSprite;
 
 	public function backgroundVideo(source:String) // for background videos
@@ -5820,6 +5819,7 @@ class PlayState extends MusicBeatState
 		}
 
 		lastStepHit = curStep;
+
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
 	}
@@ -5828,7 +5828,6 @@ class PlayState extends MusicBeatState
 	var lightningOffset:Int = 8;
 
 	var lastBeatHit:Int = -1;
-
 	override function beatHit()
 	{
 		super.beatHit();
@@ -5912,6 +5911,7 @@ class PlayState extends MusicBeatState
 		{
 			lightningStrikeShit();
 		}
+
 		lastBeatHit = curBeat;
 
 		if (dad.curCharacter.startsWith('spirit') && dad.animation.curAnim.name.startsWith('sing') && SONG.song.toLowerCase() == 'thorns')
