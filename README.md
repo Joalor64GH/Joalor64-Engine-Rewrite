@@ -34,7 +34,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
     * [ ] Health Icon Bopping
     * [ ] Ratings Counter
     * [ ] End Screen (Low Priority)
-* [ ] Extra Notes (Thinking about Hardcoded or Softcoded)
+* [ ] Extra Notes (Hardcoded)
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
