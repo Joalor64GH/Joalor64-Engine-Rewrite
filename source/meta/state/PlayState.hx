@@ -358,8 +358,13 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		#if desktop
 		if (curStage != 'schoolEvil')
 			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+
+		if (endingSong)
+			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+		#end
 
 		Paths.clearStoredMemory();
 
@@ -1428,7 +1433,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
-
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1479,7 +1483,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
-
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypeMap.keys())
 		{
@@ -3572,7 +3575,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.SPACE) {
+		if (FlxG.keys.justPressed.SPACE && curStage != 'limo' || curStage != 'school' || curStage != 'schoolEvil') {
 			if(boyfriend.animOffsets.exists('hey')) {
 				boyfriend.playAnim('hey', true);
 				boyfriend.specialAnim = true;
@@ -4660,8 +4663,6 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
-		
 		ButtplugUtils.stop();
 
 		if (useVideo)
@@ -5965,7 +5966,6 @@ class PlayState extends MusicBeatState
 		#end
 		return for (i in scriptArray) i.call(event, args);
 	}
-
 	public function setOnScripts(key:String, value:Dynamic):Void
 	{
 		#if !SCRIPT_EXTENSION
