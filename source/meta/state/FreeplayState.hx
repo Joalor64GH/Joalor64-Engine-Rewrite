@@ -14,6 +14,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
+import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 
@@ -54,6 +55,8 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);

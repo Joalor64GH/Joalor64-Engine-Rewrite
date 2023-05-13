@@ -7,7 +7,7 @@ hscripts = {}
 function onCreate(path)
   fixRH()
   luaDebugMode = true
-  addHaxeLibrary 'FunkinLua'
+  addHaxeLibrary ('FunkinLua', 'meta.data.scripts')
   addHaxeLibrary 'HScript'
   addHaxeLibrary('Lua_helper', 'llua')
   addHaxeLibrary 'Reflect'

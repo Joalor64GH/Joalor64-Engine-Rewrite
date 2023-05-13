@@ -23,7 +23,6 @@ import openfl.Assets;
 import meta.data.Achievements;
 import openfl.media.Video;
 import haxe.Json;
-
 import meta.*;
 import meta.data.*;
 import meta.state.*;
@@ -68,12 +67,12 @@ class MainMenuState extends MusicBeatState
 	public static var psychGitBuild:String = 'eb79a80';  
 	public static var curSelected:Int = 0;
 
-	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	
+	var menuItems:FlxTypedGroup<FlxSprite>;
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
@@ -94,12 +93,6 @@ class MainMenuState extends MusicBeatState
 
 	var menuJSON:MenuData;
 
-	#if !mac
-	var name:String = Sys.environment()["USERNAME"];
-	#else
-	var name:String = Sys.environment()["USER"];
-	#end
-
 	override function create()
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -108,18 +101,14 @@ class MainMenuState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		modShortcutKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
-
-		#if desktop
-		trace(Sys.environment()["COMPUTERNAME"]); // sussy test for a next menu x1
-		#end
-
-		trace(name);
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
