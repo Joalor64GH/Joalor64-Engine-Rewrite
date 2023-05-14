@@ -40,7 +40,7 @@ static long lastDefId = 0;
 @:dox(hide)
 class WinAPI {
     @:functionCode('
-        #if defined(__WIN32__) // make it only work on Windows platforms
+        #if defined(__WIN32__) // makes it only work on Windows platforms
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
         if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, 20, sizeof(darkMode))) {
@@ -51,7 +51,7 @@ class WinAPI {
         #endif
     ')
     public static function setDarkMode(enable:Bool) {
-        #if HXCPP_M32
+        #if windows
         return true;
         #else
         return false;
