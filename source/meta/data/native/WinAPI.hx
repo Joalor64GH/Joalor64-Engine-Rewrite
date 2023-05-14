@@ -38,7 +38,7 @@ import meta.data.windows.WindowsAPI.MessageBoxIcon;
 static long lastDefId = 0;
 ')
 @:dox(hide)
-class Win32API {
+class WinAPI {
     @:functionCode('
         // This only works for 32 bit systems/platforms
         #if defined(__WIN32__)

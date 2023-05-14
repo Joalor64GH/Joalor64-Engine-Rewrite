@@ -1,7 +1,6 @@
 package meta.data.windows;
 
-import meta.data.native.Win32API;
-import meta.data.native.Win64API;
+import meta.data.native.WinAPI;
 
 /**
  * Class for Windows-only functions, such as transparent windows, message boxes, and more.
@@ -13,8 +12,7 @@ class WindowsAPI {
      */
     public static function setDarkMode(enable:Bool) {
         #if windows
-        Win32API.setDarkMode(enable);
-        Win64API.setDarkMode(enable);
+        WinAPI.setDarkMode(enable);
         #end
     }
 
@@ -23,8 +21,7 @@ class WindowsAPI {
      */
     public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {
         #if windows
-        Win32API.showMessageBox(caption, message, icon);
-        Win64API.showMessageBox(caption, message, icon);
+        WinAPI.showMessageBox(caption, message, icon);
         #else
         lime.app.Application.current.window.alert(message, caption);
         #end
