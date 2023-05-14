@@ -59,7 +59,7 @@ end
 
 function onSongStart()
   zoom = getProperty('camGame.zoom')
-  speed = 240 / getPropertyFromClass('meta.data', 'ClientPrefs', 'framerate')
+  speed = 240 / getPropertyFromClass('meta.data.ClientPrefs', 'framerate')
   if downscroll then
     stompvalue = 40
   end
