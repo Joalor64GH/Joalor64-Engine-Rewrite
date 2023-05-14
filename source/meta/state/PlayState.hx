@@ -3,10 +3,12 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
+
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
+
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -290,7 +292,6 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
-	public var healthTxt:FlxText;
 
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -329,11 +330,12 @@ class PlayState extends MusicBeatState
 	var achievementsArray:Array<FunkinLua> = [];
 	var achievementWeeks:Array<String> = [];
 
-	// Scripting shit
+	// Lua shit
 	public static var instance:PlayState = null;
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
+
 	public var scriptArray:Array<FunkinTeaScript> = [];
 
 	// Debug buttons
@@ -1350,12 +1352,6 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		healthTxt = new FlxText(4, healthBarBG.y - 1, "", 20);
-		healthTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		healthTxt.scrollFactor.set();
-		healthTxt.screenCenter(X);
-		add(healthTxt);
-
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -1378,7 +1374,6 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
-		healthTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
@@ -1438,7 +1433,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
-
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1489,7 +1483,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
-
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypeMap.keys())
 		{
@@ -3038,11 +3031,13 @@ class PlayState extends MusicBeatState
 	{
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore 
+			+ ' // Health: ' + healthBar.percent + '%'
 			+ ' // Combo Breaks: ' + songMisses 
 			+ ' // Accuracy: ' + ratingName 
 			+ ' // Rank: N/A';
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
+			+ ' // Health: ' + healthBar.percent + '%'
 			+ ' // Combo Breaks: ' + songMisses
 			+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
 			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
@@ -3582,7 +3577,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.SPACE) {
+		if (FlxG.keys.justPressed.SPACE && curStage != 'limo' || curStage != 'school' || curStage != 'schoolEvil') {
 			if(boyfriend.animOffsets.exists('hey')) {
 				boyfriend.playAnim('hey', true);
 				boyfriend.specialAnim = true;
@@ -3633,8 +3628,6 @@ class PlayState extends MusicBeatState
 				removedVideo = true;
 			}
 		}
-
-		healthTxt.text = healthBar.percent + '%';
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -4670,8 +4663,6 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
-		
 		ButtplugUtils.stop();
 
 		if (useVideo)
@@ -5975,7 +5966,6 @@ class PlayState extends MusicBeatState
 		#end
 		return for (i in scriptArray) i.call(event, args);
 	}
-
 	public function setOnScripts(key:String, value:Dynamic):Void
 	{
 		#if !SCRIPT_EXTENSION

@@ -85,6 +85,8 @@ class SimpleMainMenuState extends MusicBeatState
 		DiscordClient.changePresence("Simple Main Menu Menu", null);
 		#end
 
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+
         	camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 

@@ -174,22 +174,22 @@ end
 function StoreTime()
 	-- Stores the time
 	Stored = getPropertyFromClass('flixel.FlxG', 'sound.music.time')
-	setPropertyFromClass('flixel.FlxG', 'sound.music.volume',1)
-	setProperty('vocals.volume',1)
+	setPropertyFromClass('flixel.FlxG', 'sound.music.volume', 1)
+	setProperty('vocals.volume', 1)
 end
 
 function onUpdate()
 	if FreezeTime==true then
-		setPropertyFromClass('Conductor', 'songPosition',Stored)
-		setPropertyFromClass('flixel.FlxG', 'sound.music.time',Stored)
+		setPropertyFromClass('Conductor', 'songPosition', Stored)
+		setPropertyFromClass('flixel.FlxG', 'sound.music.time', Stored)
 		setProperty('vocals.time',Stored)
-		setPropertyFromClass('flixel.FlxG', 'sound.music.volume',0)
+		setPropertyFromClass('flixel.FlxG', 'sound.music.volume' 0)
 		setProperty('vocals.volume',0)
 	end
 	if getPropertyFromClass('flixel.FlxG', 'keys.justPressed.ENTER') and FreezeTime==true then
 		FreezeTime=false
 		SeenRatingScreen=true
-		playSound('dialogueClose',0.35)
+		playSound('dialogueClose', 0.35)
 		endSong()
 	end
 end
