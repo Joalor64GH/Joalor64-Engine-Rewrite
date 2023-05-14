@@ -55,8 +55,6 @@
 	<define name="JOALOR64_WATERMARKS"/>
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
-	<define name="PRELOAD_ALL" unless="web" />
-	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
 	<!-- _____________________________ Export Folder ____________________________ -->
 
