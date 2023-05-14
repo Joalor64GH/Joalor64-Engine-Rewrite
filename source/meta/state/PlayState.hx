@@ -3,12 +3,10 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
-
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -3016,7 +3014,7 @@ class PlayState extends MusicBeatState
 	{
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore 
-			+ ' // Health: ' + healthBar.percent + '%'
+			+ ' // Health: ' + '50%'
 			+ ' // Combo Breaks: ' + songMisses 
 			+ ' // Accuracy: ' + ratingName 
 			+ ' // Rank: N/A';
@@ -3562,14 +3560,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.SPACE && curStage != 'limo' || curStage != 'school' || curStage != 'schoolEvil') {
-			if(boyfriend.animOffsets.exists('hey')) {
-				boyfriend.playAnim('hey', true);
-				boyfriend.specialAnim = true;
-				boyfriend.heyTimer = 0.6;
-			}
-		}
-
 		// SECRET KEYS!! SHHHHHHHH
 		#if debug
 		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
@@ -4643,7 +4633,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-
 	public var transitioning = false;
 
 	public function endSong():Void
@@ -5004,6 +4993,7 @@ class PlayState extends MusicBeatState
 				lastScore.remove(lastScore[0]);
 			}
 		}
+		while (seperatedScore[0] == 0) seperatedScore.remove(seperatedScore[0]);
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
@@ -5033,7 +5023,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = (!ClientPrefs.hideHud && showComboNum);
 
-			if(combo >= 10)
+			if(combo >= 0)
 			{
 				insert(members.indexOf(strumLineNotes), comboSpr);
 				insert(members.indexOf(strumLineNotes), numScore);
