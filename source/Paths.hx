@@ -16,9 +16,8 @@ import openfl.system.System;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
-import openfl.utils.Assets as OpenFlAssets;
+import openfl.utils.Assets as Assets;
 import lime.graphics.Image;
-import lime.utils.Assets;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
@@ -307,7 +306,8 @@ class Paths
 		return Assets.exists(asset, type);
 		#end
 	}
-	inline static public function getContent(asset:String):Null<String>{
+
+	inline static public function getContent(asset:String):Null<String> {
 		#if sys
 		if (FileSystem.exists(asset))
 			return File.getContent(asset);
@@ -377,7 +377,7 @@ class Paths
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			if (FileSystem.exists(path))
 			#else
-			if (OpenFlAssets.exists(path))
+			if (Assets.exists(path))
 			#end
 			{
 				return path;

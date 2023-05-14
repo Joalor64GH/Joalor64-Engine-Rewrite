@@ -228,7 +228,6 @@ class PlayState extends MusicBeatState
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
 	public var practiceMode:Bool = false;
-
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
 
@@ -258,7 +257,6 @@ class PlayState extends MusicBeatState
 	var phillyRain:BGSprite;
 	var phillyRainSplash:BGSprite;
 	var trainSound:FlxSound;
-
 	var phillyGlowGradient:PhillyGlow.PhillyGlowGradient;
 	var phillyGlowParticles:FlxTypedGroup<PhillyGlow.PhillyGlowParticle>;
 
@@ -1767,9 +1765,6 @@ class PlayState extends MusicBeatState
 		var foldersToCheck:Array<String> = [Paths.mods('shaders/')];
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/shaders/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
 		
 		for (folder in foldersToCheck)
 		{
