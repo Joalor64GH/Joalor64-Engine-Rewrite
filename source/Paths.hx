@@ -43,7 +43,7 @@ typedef I8frame = {
 
 class Paths
 {
-	inline public static var SOUND_EXT = "ogg";
+	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var FLASH_EXT = "swf";
 	public static final VIDEO_EXT = ['mp4', 'webm'];
 

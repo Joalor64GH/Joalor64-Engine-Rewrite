@@ -66,7 +66,8 @@
 
 	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
-	<assets path="assets"/> 
+	<assets path="assets" exclude=".ogg" if="web"/> 
+	<assets path="assets" exclude=".mp3" unless="web"/> 
 
 	<!-- EMBEDDED BY DEFAULT -->
 	<assets path="assets/core" embed='true'/>
