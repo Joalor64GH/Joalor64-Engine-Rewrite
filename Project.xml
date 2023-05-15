@@ -70,7 +70,6 @@
 	<assets path="assets" exclude=".mp3" unless="web"/> 
 
 	<!-- EMBEDDED BY DEFAULT -->
-	<assets path="assets/core" embed='true'/>
 	<assets path="assets/fonts" embed='true'/>
 	<assets path='art/header.lua' embed='true'/>
 
@@ -83,9 +82,9 @@
 		<assets path='modsList.txt'/>
 	</section>
 
-	<assets path="assets/videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
-	<assets path="assets/classes"       if="HSCRIPT_ALLOWED"/>
-	<assets path="assets/flash"         if="FLASH_MOVIE"/>
+	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
+	<assets path="assets/classes"       library="classes"       if="HSCRIPT_ALLOWED"/>
+	<assets path="assets/flash"         library="flash"         if="FLASH_MOVIE"/>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
