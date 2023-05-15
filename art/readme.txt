@@ -16,6 +16,7 @@ Mic'd Up - Verwex
 Gamer Engine - Mealthy/Betopia
 Psych Forever Engine - ClassicBoost
 Mag Engine - magnumsrt
+Troll Engine - nebulazorua
 Pull Requests - Psych Engine GitHub Contributors
 -------------------------------------------------------------
 So, yeah. That's pretty much it!
