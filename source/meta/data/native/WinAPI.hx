@@ -38,10 +38,9 @@ import meta.data.windows.WindowsAPI.MessageBoxIcon;
 static long lastDefId = 0;
 ')
 @:dox(hide)
-class Win32API {
+class WinAPI {
     @:functionCode('
-        // This only works for 32 bit systems/platforms
-        #if defined(__WIN32__)
+        #if defined(__WIN32__) // makes it only work on Windows platforms
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
         if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, 20, sizeof(darkMode))) {
@@ -52,7 +51,7 @@ class Win32API {
         #endif
     ')
     public static function setDarkMode(enable:Bool) {
-        #if HXCPP_M32
+        #if windows
         return true;
         #else
         return false;
