@@ -1377,21 +1377,21 @@ class PlayState extends MusicBeatState
 		for (notetype in noteTypeMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var luaToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.lua');
+			var luaToLoad:String = Paths.modFolders('notetypes/' + notetype + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
 			}
 			else
 			{
-				luaToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.lua');
+				luaToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.lua');
 				if(FileSystem.exists(luaToLoad))
 				{
 					luaArray.push(new FunkinLua(luaToLoad));
 				}
 			}
 			#elseif sys
-			var luaToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.lua');
+			var luaToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.lua');
 			if(OpenFlAssets.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
@@ -1401,21 +1401,21 @@ class PlayState extends MusicBeatState
 		for (event in eventPushedMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var luaToLoad:String = Paths.modFolders('custom_events/' + event + '.lua');
+			var luaToLoad:String = Paths.modFolders('events/' + event + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
 			}
 			else
 			{
-				luaToLoad = Paths.getPreloadPath('custom_events/' + event + '.lua');
+				luaToLoad = Paths.getPreloadPath('events/' + event + '.lua');
 				if(FileSystem.exists(luaToLoad))
 				{
 					luaArray.push(new FunkinLua(luaToLoad));
 				}
 			}
 			#elseif sys
-			var luaToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.lua');
+			var luaToLoad:String = Paths.getPreloadPath('events/' + event + '.lua');
 			if(OpenFlAssets.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
@@ -1427,21 +1427,21 @@ class PlayState extends MusicBeatState
 		for (notetype in noteTypeMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var hscriptToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hscript');
+			var hscriptToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
 			}
 			else
 			{
-				hscriptToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hscript');
+				hscriptToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.hscript');
 				if(FileSystem.exists(hscriptToLoad))
 				{
 					addHscript(hscriptToLoad);
 				}
 			}
 			#elseif sys
-			var hscriptToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hscript');
+			var hscriptToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hscript');
 			if(OpenFlAssets.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
@@ -1451,21 +1451,21 @@ class PlayState extends MusicBeatState
 		for (event in eventPushedMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var hscriptToLoad:String = Paths.modFolders('custom_events/' + event + '.hscript');
+			var hscriptToLoad:String = Paths.modFolders('events/' + event + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
 			}
 			else
 			{
-				hscriptToLoad = Paths.getPreloadPath('custom_events/' + event + '.hscript');
+				hscriptToLoad = Paths.getPreloadPath('events/' + event + '.hscript');
 				if(FileSystem.exists(hscriptToLoad))
 				{
 					addHscript(hscriptToLoad);
 				}
 			}
 			#elseif sys
-			var hscriptToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.hscript');
+			var hscriptToLoad:String = Paths.getPreloadPath('events/' + event + '.hscript');
 			if(OpenFlAssets.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
@@ -1477,21 +1477,21 @@ class PlayState extends MusicBeatState
 		for (notetype in noteTypeMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var hxToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.hx');
+			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			else
 			{
-				hxToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
+				hxToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
 					scriptArray.push(new FunkinTeaScript(hxToLoad));
 				}
 			}
 			#elseif sys
-			var hxToLoad:String = Paths.getPreloadPath('custom_notetypes/' + notetype + '.hx');
+			var hxToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinTeaScript(hxToLoad));
@@ -1501,21 +1501,21 @@ class PlayState extends MusicBeatState
 		for (event in eventPushedMap.keys())
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			var hxToLoad:String = Paths.modFolders('custom_events/' + event + '.hx');
+			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinTeaScript(hxToLoad));
 			}
 			else
 			{
-				hxToLoad = Paths.getPreloadPath('custom_events/' + event + '.hx');
+				hxToLoad = Paths.getPreloadPath('events/' + event + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
 					scriptArray.push(new FunkinTeaScript(hxToLoad));
 				}
 			}
 			#elseif sys
-			var hxToLoad:String = Paths.getPreloadPath('custom_events/' + event + '.hx');
+			var hxToLoad:String = Paths.getPreloadPath('events/' + event + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinTeaScript(hxToLoad));

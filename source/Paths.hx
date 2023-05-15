@@ -54,9 +54,6 @@ class Paths
 		'_merge', 
 		#end
 		'characters',
-		'custom_events',
-		'custom_notetypes',
-		'custom_gamechangers',
 		'data',
 		'songs',
 		'music',
@@ -71,9 +68,12 @@ class Paths
 		'scripts',
 		'classes',
 		'global',
-		'libs',
+		'events',
+		'notetypes',
+		'gamechangers',
 		'achievements',
-		'options'
+		'options',
+		'libs'
 	];
 	#end
 
