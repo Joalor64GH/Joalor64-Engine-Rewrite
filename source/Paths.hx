@@ -67,7 +67,6 @@ class Paths
 		'fonts',
 		'scripts',
 		'classes',
-		'global',
 		'events',
 		'notetypes',
 		'gamechangers',
@@ -130,7 +129,6 @@ class Paths
 
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
-
 	public static function clearStoredMemory()
 	{
 		// clear anything not in the tracked assets list
@@ -673,8 +671,6 @@ class Paths
 		return currentTrackedSounds.get(gottenPath);
 	}
 
-	public static var modsList:Array<String> = [];
-
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
 	static final modFolderPath:String = "mods/";
 
@@ -754,38 +750,71 @@ class Paths
 	inline static public function modsAchievements(key:String)
 		return modFolders('achievements/' + key + '.json');
 
-	static public function modFolders(key:String)
-	{
-		if (Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-		{
-			var fileToCheck = mods(Paths.currentModDirectory + '/' + key);
-			if (FileSystem.exists(fileToCheck))
+	static public function modFolders(key:String) {
+		if(currentModDirectory != null && currentModDirectory.length > 0) {
+			var fileToCheck:String = mods(currentModDirectory + '/' + key);
+			if(FileSystem.exists(fileToCheck)) {
 				return fileToCheck;
+			}
 		}
 
-		var fileToCheck = mods('global/' + key);
-		if (FileSystem.exists(fileToCheck))
-			return fileToCheck;
+		for(mod in getGlobalMods()){
+			var fileToCheck:String = mods(mod + '/' + key);
+			if(FileSystem.exists(fileToCheck))
+				return fileToCheck;
 
-		return mods(key);
+		}
+		return 'mods/' + key;
 	}
 
-	static public function getModDirectories():Array<String>
+	public static var globalMods:Array<String> = [];
+
+	static public function getGlobalMods()
+		return globalMods;
+
+	static public function pushGlobalMods() // prob a better way to do this but idc
 	{
-		var list:Array<String> = [];
-		if (FileSystem.exists(modFolderPath))
+		globalMods = [];
+		var path:String = 'modsList.txt';
+		if(FileSystem.exists(path))
 		{
-			for (folder in FileSystem.readDirectory(modFolderPath))
+			var list:Array<String> = CoolUtil.coolTextFile(path);
+			for (i in list)
 			{
-				var path = haxe.io.Path.join([modFolderPath, folder]);
-				if (sys.FileSystem.isDirectory(path) && !ignoreModFolders.contains(folder) && !list.contains(folder))
+				var dat = i.split("|");
+				if (dat[1] == "1")
 				{
+					var folder = dat[0];
+					var path = Paths.mods(folder + '/#if FUTURE_POLYMOD _polymod_meta.json #else pack.json #end');
+					if(FileSystem.exists(path)) {
+						try{
+							var rawJson:String = File.getContent(path);
+							if(rawJson != null && rawJson.length > 0) {
+								var stuff:Dynamic = Json.parse(rawJson);
+								var global:Bool = Reflect.getProperty(stuff, "runsGlobally");
+								if(global)globalMods.push(dat[0]);
+							}
+						} catch(e:Dynamic){
+							trace(e);
+						}
+					}
+				}
+			}
+		}
+		return globalMods;
+	}
+
+	static public function getModDirectories():Array<String> {
+		var list:Array<String> = [];
+		var modsFolder:String = mods();
+		if(FileSystem.exists(modsFolder)) {
+			for (folder in FileSystem.readDirectory(modsFolder)) {
+				var path = haxe.io.Path.join([modsFolder, folder]);
+				if (sys.FileSystem.isDirectory(path) && !ignoreModFolders.contains(folder) && !list.contains(folder)) {
 					list.push(folder);
 				}
 			}
 		}
-		modsList = list;
-
 		return list;
 	}
 
@@ -818,13 +847,4 @@ class Paths
 		return false;
 	}
 	#end
-
-	public static function loadTheFirstEnabledMod()
-	{
-		Paths.currentModDirectory = '';
-	}
-	public static function loadRandomMod()
-	{
-		Paths.currentModDirectory = '';
-	}
 }

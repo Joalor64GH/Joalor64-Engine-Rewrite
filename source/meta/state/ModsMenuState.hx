@@ -402,7 +402,7 @@ class ModsMenuState extends MusicBeatState
 
 		var path:String = 'modsList.txt';
 		File.saveContent(path, fileStr);
-		Paths.loadRandomMod();
+		Paths.pushGlobalMods();
 	}
 
 	var noModsSine:Float = 0;

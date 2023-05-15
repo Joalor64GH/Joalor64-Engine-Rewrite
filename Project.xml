@@ -76,7 +76,7 @@
 	<!-- SWF EXAMPLE -->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
 
-    <!-- PATH DEFINITIONS -->
+    	<!-- PATH DEFINITIONS -->
 	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt'/>
