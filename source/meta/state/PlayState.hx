@@ -2248,7 +2248,7 @@ class PlayState extends MusicBeatState
 
 	public function startVideo(name:String)
 	{
-		#if VIDEOS_ALLOWED
+		#if (VIDEOS_ALLOWED || WEBM_ALLOWED)
 		inCutscene = true;
 
 		var filepath:String = Paths.video(name);
