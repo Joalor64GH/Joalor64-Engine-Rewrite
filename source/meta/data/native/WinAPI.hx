@@ -60,11 +60,32 @@ class WinAPI {
 
     #if windows
     @:functionCode('
-        MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
+        int result = MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
     ')
-    #end
     public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {
-        
+        return switch (untyped __cpp__('result')){
+            case idabort:
+                3;
+            case idcancel:
+                2;
+            case idcontinue:
+                11;
+            case idignore:
+                5;
+            case idno:
+                7;
+            case idok:
+                1;
+            case idretry:
+                4;
+            case idtryagain:
+                10;
+            case idyes:
+                6;
+            default:
+                0;
+        }
     }
+    #end
 }
 #end
