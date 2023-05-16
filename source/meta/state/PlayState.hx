@@ -981,13 +981,11 @@ class PlayState extends MusicBeatState
 		#end
 
 		// "GLOBAL" SCRIPTS
-		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		foldersToCheck.insert(0, Paths.mods('global/scripts/'));
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
 		#end
@@ -998,73 +996,34 @@ class PlayState extends MusicBeatState
 			{
 				for (file in FileSystem.readDirectory(folder))
 				{
+					// this is smart ngl
+					#if LUA_ALLOWED
 					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
 					}
-				}
-			}
-		}
-		#end
-
-		#if HSCRIPT_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		foldersToCheck.insert(0, Paths.mods('global/scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
+					#elseif HSCRIPT_ALLOWED
 					if(file.endsWith('.hscript') && !filesPushed.contains(file))
 					{
 						addHscript(folder + file);
 						filesPushed.push(file);
 					}
-				}
-			}
-		}
-		#end
-
-		#if SCRIPT_EXTENSION
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		foldersToCheck.insert(0, Paths.mods('global/scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
+					#elseif SCRIPT_EXTENSION
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
 						scriptArray.push(new FunkinTeaScript(folder + file));
 						filesPushed.push(file);
 					}
+					#end
 				}
 			}
 		}
-		#end
 
 		// STAGE SCRIPTS
-		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED)
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		var doPush:Bool = false;
+		#if LUA_ALLOWED
 		var luaFile:String = 'stages/' + curStage + '.lua';
 		if(FileSystem.exists(Paths.modFolders(luaFile))) {
 			luaFile = Paths.modFolders(luaFile);
@@ -1078,10 +1037,7 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			luaArray.push(new FunkinLua(luaFile));
-		#end
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD && HSCRIPT_ALLOWED)
-		var doPush:Bool = false;
+		#elseif HSCRIPT_ALLOWED
 		var hscriptFile:String = 'stages/' + curStage + '.hscript';
 		if(FileSystem.exists(Paths.modFolders(hscriptFile))) {
 			hscriptFile = Paths.modFolders(hscriptFile);
@@ -1095,10 +1051,7 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			addHscript(hscriptFile);
-		#end
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD && SCRIPT_EXTENSION)
-		var doPush:Bool = false;
+		#elseif SCRIPT_EXTENSION
 		var scriptFile:String = 'stages/' + curStage + '.hx';
 		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
 			scriptFile = Paths.modFolders(scriptFile);
@@ -1112,6 +1065,7 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			scriptArray.push(new FunkinTeaScript(scriptFile));
+		#end
 		#end
 
 		var gfVersion:String = SONG.gfVersion;
@@ -1529,7 +1483,6 @@ class PlayState extends MusicBeatState
 		eventPushedMap = null;
 
 		// SONG SPECIFIC SCRIPTS
-		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
@@ -1548,73 +1501,28 @@ class PlayState extends MusicBeatState
 			{
 				for (file in FileSystem.readDirectory(folder))
 				{
+					#if LUA_ALLOWED
 					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
 					}
-				}
-			}
-		}
-		#end
-
-		#if HSCRIPT_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
+					#elseif HSCRIPT_ALLOWED
 					if(file.endsWith('.hscript') && !filesPushed.contains(file))
 					{
 						addHscript(folder + file);
 						filesPushed.push(file);
 					}
-				}
-			}
-		}
-		#end
-
-		#if SCRIPT_EXTENSION
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
+					#elseif SCRIPT_EXTENSION
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
 						scriptArray.push(new FunkinTeaScript(folder + file));
 						filesPushed.push(file);
 					}
+					#end
 				}
 			}
 		}
-		#end
 
 		if (isStoryMode && !seenCutscene)
 		{

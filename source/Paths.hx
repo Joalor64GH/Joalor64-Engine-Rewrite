@@ -45,6 +45,7 @@ class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 	inline public static var FLASH_EXT = "swf";
+
 	public static final VIDEO_EXT = ['mp4', 'webm'];
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -66,7 +67,6 @@ class Paths
 		'weeks',
 		'fonts',
 		'scripts',
-		'classes',
 		'events',
 		'notetypes',
 		'gamechangers',
@@ -104,8 +104,6 @@ class Paths
 					FlxG.bitmap._cache.remove(key);
 					obj.destroy();
 					currentTrackedAssets.remove(key);
-
-					// trace('cleared $key');
 				}
 			}
 		}
@@ -159,6 +157,7 @@ class Paths
 		Assets.cache.clear("songs");
 	}
 
+	// github stuff
 	public static function gitGetPath(path:String, branch:String = 'main')
 	{
 		trace('path: https://${APIShit.personalAccessToken}@raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
@@ -265,10 +264,12 @@ class Paths
 	{
 		return getPath('data/$key.txt', TEXT, library);
 	}
+
 	inline static public function xml(key:String, ?library:String) 
 	{
 		return getPath('data/$key.xml', TEXT, library);
 	}
+
 	inline static public function json(key:String, ?library:String)
 	{
 		return getPath('data/$key.json', TEXT, library);
@@ -278,6 +279,7 @@ class Paths
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
 	}
+
 	inline static public function shaderVertex(key:String, ?library:String) 
 	{
 		return getPath('shaders/$key.vert', TEXT, library);
@@ -287,10 +289,12 @@ class Paths
 	{
 		return getPath('$key.lua', TEXT, library);
 	}
+
 	inline static public function hscript(key:String, ?library:String)
 	{
 		return getPath('$key.hscript', TEXT, library);
 	}
+
 	inline static public function hx(key:String, ?library:String)
 	{
 		return getPath('$key.hx', TEXT, library);
@@ -530,17 +534,6 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
-	inline static public function haxescript(key:String)
-	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var file:String = modsHaxe(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
-		#end
-		return 'assets/classes/$key';
-	}
-
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -676,9 +669,6 @@ class Paths
 
 	inline static public function mods(key:String = '')
 		return modFolderPath + key;
-
-	inline static public function modsHaxe(key:String)
-		return modFolders('classes/' + key);
 
 	inline static public function modsFont(key:String)
 		return modFolders('fonts/' + key);

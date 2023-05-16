@@ -3,7 +3,7 @@ package meta.state;
 class MyPenis {
     public var length = 24;
     public var girth = 5;
-    public var insideOf = meta.state.YourMomState;
+    public var insideOf = YourMomState;
 }
 
 class YourMomState extends MyPenis
