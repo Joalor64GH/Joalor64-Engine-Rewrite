@@ -8,7 +8,7 @@ import('package.class');
 /* CLASSES */
 
 // current instance of HClass
-var class:HClass = new HClass("path/to/hscript/file.hx", [arguments, or, functions,]);
+var class:HClass = new HClass("path/to/hscript/file.hx", [arguments, or, functions]);
 
 // runs when creating HClass
 function new(/*add arguments here, if needed*/) {}
@@ -83,7 +83,7 @@ function executeFunc(funcName:String, ?args:Array<Any>) {}
 // That means you can do the same things with FlxState with HState.
 
 // current instance of HState
-var state:HState = new HState("path/to/hscript/file.hx", [arguements, for, functions]);
+var state:HState = new HState("path/to/hscript/file.hx", [arguements, or, functions]);
 
 // adds an object to layer "i"
 function insert(i:Int, obj:FlxBasic) {}
