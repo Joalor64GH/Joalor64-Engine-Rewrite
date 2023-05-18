@@ -3,7 +3,7 @@
 /* IMPORT CLASS */
 
 // how to import classes
-import('package.class');
+import('package.Class');
 
 /* CLASSES */
 
@@ -37,10 +37,10 @@ function update(elapsed) {}
 function updatePost(elapsed) {}
 
 // sets offsets of an animation for an object
-setOffset(animName, x, y)
+setOffset(animName, x, y);
 
 // applys offsets to current animation
-updateOffset()
+updateOffset();
 
 // destroys object
 function destroy() {}
@@ -122,7 +122,7 @@ function draw() {}
 // Also, "state" is unavailable in HSubState.
 
 // current instance of HSubState
-var substate:HSubState = new HSubState("path/to/hscript/file.hx", [arguements, for, functions]);
+var substate:HSubState = new HSubState("path/to/hscript/file.hx", [arguements, or, functions]);
 
 // closes substate
 function close() {}
