@@ -37,10 +37,10 @@ function update(elapsed) {}
 function updatePost(elapsed) {}
 
 // sets offsets of an animation for an object
-setOffset(animName, x, y)
+setOffset(animName, x, y);
 
 // applys offsets to current animation
-updateOffset()
+updateOffset();
 
 // destroys object
 function destroy() {}
