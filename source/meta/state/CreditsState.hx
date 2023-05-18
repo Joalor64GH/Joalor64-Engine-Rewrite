@@ -204,6 +204,14 @@ class CreditsState extends MusicBeatState
 				''
 			],
 			[
+				'ActualMandM',
+				'none',
+				'RGB Note Coloring System\n"this is a quote"',
+				'https://linktr.ee/ActualMandM',
+				'9C5D88',
+				''
+			],
+			[
 				'You',
 				'face',
 				'For playing :)\n"No problem! -You"',
