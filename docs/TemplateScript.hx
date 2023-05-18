@@ -3,7 +3,7 @@
 /* IMPORT CLASS */
 
 // how to import classes
-import('package.class');
+import('package.Class');
 
 /* CLASSES */
 
