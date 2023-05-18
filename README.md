@@ -11,7 +11,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
-* SWF Support (broken at the moment)
+* SWF Support (Actionscript 3.0 Only)
 * Polymod Support
 * HX and Hscript Support
 * 3D Notes
