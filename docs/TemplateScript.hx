@@ -122,7 +122,7 @@ function draw() {}
 // Also, "state" is unavailable in HSubState.
 
 // current instance of HSubState
-var substate:HSubState = new HSubState("path/to/hscript/file.hx", [arguements, for, functions]);
+var substate:HSubState = new HSubState("path/to/hscript/file.hx", [arguements, or, functions]);
 
 // closes substate
 function close() {}
