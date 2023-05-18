@@ -11,7 +11,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
-* SWF Support (broken at the moment)
+* SWF Support (Actionscript 3.0 Only)
 * Polymod Support
 * HX and Hscript Support
 * 3D Notes
@@ -28,7 +28,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 # Planned Features
 * [ ] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21)
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
-* [ ] Make a Template for HX Scripts
+* [X] Make a Template for HX Scripts **[Completed]**
 * [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
     * [X] Health Counter
     * [ ] Health Icon Bopping
