@@ -61,7 +61,6 @@ class Paths
 		'sounds',
 		'shaders',
 		'videos',
-		'flash',
 		'images',
 		'stages',
 		'weeks',
@@ -309,7 +308,8 @@ class Paths
 		#end
 	}
 
-	inline static public function getContent(asset:String):Null<String> {
+	inline static public function getContent(asset:String):Null<String> 
+	{
 		#if sys
 		if (FileSystem.exists(asset))
 			return File.getContent(asset);
@@ -324,7 +324,8 @@ class Paths
 	#if html5
 	static var pathMap = new Map<String, Array<String>>();
 
-	public static function initPaths() {	
+	public static function initPaths() 
+	{	
 		pathMap.clear();
 
 		for (path in Assets.list())
@@ -351,9 +352,7 @@ class Paths
 		for (i in pathMap.get(dir))
 			Func(i);
 	}
-
 	#else
-
 	inline static public function iterateDirectory(Directory:String, Func):Bool
 	{
 		if (!FileSystem.exists(Directory) || !FileSystem.isDirectory(Directory))
@@ -396,7 +395,7 @@ class Paths
 			return file;
 		}
 		#end
-		return 'assets/flash/$key.$FLASH_EXT';
+		return 'assets/videos/$key.$FLASH_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Sound
@@ -723,7 +722,7 @@ class Paths
 	}
 
 	inline static public function modsFlashMovie(key:String)
-		return modFolders('flash/' + key + '.' + FLASH_EXT);
+		return modFolders('videos/' + key + '.' + FLASH_EXT);
 
 	inline static public function modsSounds(path:String, key:String)
 		return modFolders(path + '/' + key + '.' + SOUND_EXT);
@@ -794,7 +793,8 @@ class Paths
 		return globalMods;
 	}
 
-	static public function getModDirectories():Array<String> {
+	static public function getModDirectories():Array<String> 
+	{
 		var list:Array<String> = [];
 		var modsFolder:String = mods();
 		if(FileSystem.exists(modsFolder)) {

@@ -83,8 +83,7 @@
 		<assets path='modsList.txt'/>
 	</section>
 
-	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
-	<assets path="assets/flash"         library="flash"         if="FLASH_MOVIE"/>
+	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
@@ -158,6 +157,7 @@
 	<!-- _______________________________ Errors ______________________________ -->
 
 	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
+	
 	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
 
 	<!-- _________________________________ Miscellaneous _______________________________ -->
