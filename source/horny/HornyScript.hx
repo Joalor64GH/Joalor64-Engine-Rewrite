@@ -111,17 +111,17 @@ class HornyScript extends FlxBasic {
 
         public function run()
         {
-			try
-			{
-				var ast:Any = parser.parseString(code);
+		try
+		{
+			var ast:Any = parser.parseString(code);
 
-				hscript.execute(ast);
-			}
-			catch (e)
-			{
-				Lib.application.window.alert(e.message, "HSCRIPT ERROR!1111");
-			}
+			hscript.execute(ast);
 		}
+		catch (e)
+		{
+			Lib.application.window.alert(e.message, "HSCRIPT ERROR!1111");
+		}
+	}
 
 	public function setVariable(name:String, val:Dynamic)
 	{
