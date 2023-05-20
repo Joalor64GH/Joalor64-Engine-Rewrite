@@ -1,11 +1,24 @@
-![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logo.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoReadme.png" width="750"/></a>
+  <h1 align="center">Joalor64 Engine Rewritten</h1>
+  <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs if you can!</h2>
+</p>
 
-# Joalor64 Engine Rewritten
-A remake of the original [Joalor64 Engine](https://github.com/Joalor64GH/Joalor64-Engine). Not everything is perfect, so contributions and/or [pull requests](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pulls) would be nice! Be sure to report bugs in [issues](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues) also!
+----------------------------------------------
+
 * [Discord Server](https://discord.gg/GnXqAVMFbA)
 * [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
+----------------------------------------------
+
 NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RESPONSIBLE FOR MAINTAINING HTML5/ANDROID.**
+
+----------------------------------------------
+
+### If you get an issue with polymod like this `Error: Could not find haxelib "polymod-joalor64", does it need to be installed?` do the following
+`haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
+
+----------------------------------------------
 
 # Features
 * Dark Mode Application Bar
@@ -22,9 +35,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Epic Modcharting Tools
 * Softcoded Achievements
 
-### If you get an issue with polymod like this `Error: Could not find haxelib "polymod-joalor64", does it need to be installed?` do the following
-`haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
-
 # Planned Features
 * [ ] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21)
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
@@ -39,10 +49,16 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
 * itch.io (Soon...)
 
+----------------------------------------------
+
 # Credits
+
+## Joalor64 Engine
 * [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer
 * [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
+
+### Special Thanks
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
 * [Stilic](https://github.com/Stilic) - Restored Combo Script
@@ -54,11 +70,9 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
+* [ThatOneFox](https://github.com/HinataOnYT) - Made the Cool New Logo
 
-# Friday Night Funkin' - Psych Engine
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
-
-## Credits:
+## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
 * [RiverOaken](https://twitter.com/RiverOaken) - Main Artist + Animator
 * [Yoshubs](https://github.com/Yoshubs) - Aditional Programmer + Epic Input System
