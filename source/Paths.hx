@@ -774,7 +774,7 @@ class Paths
 				if (dat[1] == "1")
 				{
 					var folder = dat[0];
-					var path = Paths.mods(folder + '/#if FUTURE_POLYMOD _polymod_meta.json #else pack.json #end');
+					var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
 					if(FileSystem.exists(path)) {
 						try{
 							var rawJson:String = File.getContent(path);
