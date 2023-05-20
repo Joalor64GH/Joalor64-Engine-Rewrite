@@ -36,7 +36,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Softcoded Achievements
 
 # Planned Features
-* [ ] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21)
+* [X] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21) **[yay]**
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [X] Make a Template for HX Scripts **[Completed]**
 * [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
