@@ -98,6 +98,7 @@ class MainMenuState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		Paths.pushGlobalMods();
 		#end
+
 		WeekData.loadTheFirstEnabledMod();
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
@@ -107,6 +108,7 @@ class MainMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
+		
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		modShortcutKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 

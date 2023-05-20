@@ -972,10 +972,10 @@ class ChartingState extends MusicBeatState
 		var directories:Array<String> = [];
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		directories.push(Paths.mods('custom_notetypes/'));
-		directories.push(Paths.mods(Paths.currentModDirectory + '/custom_notetypes/'));
+		directories.push(Paths.mods('notetypes/'));
+		directories.push(Paths.mods(Paths.currentModDirectory + '/notetypes/'));
 		for(mod in Paths.getGlobalMods())
-			directories.push(Paths.mods(mod + '/custom_notetypes/'));
+			directories.push(Paths.mods(mod + '/notetypes/'));
 		#end
 
 		for (i in 0...directories.length) {
@@ -1034,10 +1034,10 @@ class ChartingState extends MusicBeatState
 		var directories:Array<String> = [];
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		directories.push(Paths.mods('custom_events/'));
-		directories.push(Paths.mods(Paths.currentModDirectory + '/custom_events/'));
+		directories.push(Paths.mods('events/'));
+		directories.push(Paths.mods(Paths.currentModDirectory + '/events/'));
 		for(mod in Paths.getGlobalMods())
-			directories.push(Paths.mods(mod + '/custom_events/'));
+			directories.push(Paths.mods(mod + '/events/'));
 		#end
 
 		for (i in 0...directories.length) {

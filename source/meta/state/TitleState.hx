@@ -91,10 +91,9 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 	var gameName:Array<String> = [];
 
-	var mustUpdate:Bool = false;
-
 	var titleJSON:TitleData;
 
+	var mustUpdate:Bool = false;
 	public static var updateVersion:String = '';
 
 	var candance:Bool = true;
@@ -105,6 +104,10 @@ class TitleState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		#if html5
+		Paths.initPaths();
+		#end
 
 		#if LUA_ALLOWED
 		Paths.pushGlobalMods();
@@ -126,8 +129,6 @@ class TitleState extends MusicBeatState
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		gameName = getName();
-
-		// DEBUG BULLSHIT
 
 		swagShader = new ColorSwap();
 		super.create();
@@ -162,7 +163,6 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
-		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 
 		if(!initialized)

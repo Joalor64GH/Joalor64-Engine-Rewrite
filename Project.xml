@@ -54,9 +54,7 @@
 	<define name="VIDEOS_ALLOWED" if="windows || android"/>
 	<define name="JOALOR64_WATERMARKS"/>
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
-	<define name="CRASH_HANDLER" if="desktop release" />=
-	<define name="PRELOAD_ALL" unless="web" />
-	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
+	<define name="CRASH_HANDLER" if="desktop release" />
 
 	<!-- _____________________________ Export Folder ____________________________ -->
 
@@ -68,81 +66,24 @@
 
 	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
+	
+	<assets path="assets" exclude=".ogg" if="web"/> 
+	<assets path="assets" exclude=".mp3" unless="web"/> 
 
-	<assets path="assets/core" embed='true'/>
+	<!-- EMBEDDED BY DEFAULT -->
 	<assets path="assets/fonts" embed='true'/>
 	<assets path='art/header.lua' embed='true'/>
 
 	<!-- SWF EXAMPLE -->
 	<!--<library path="assets/flash/movie.swf" preload="true" id="id"/>-->
-	
-	<!-- ALWAYS PRELOADED -->
-	<library name="videos"        preload="true" />
-    
-	<!-- NOT ALWAYS PRELOADED -->
-	<section if="PRELOAD_ALL">
-		<library name="songs"         preload="true" />
-		<library name="shared"        preload="true" />
-		<library name="tutorial"      preload="true" />
-		<library name="week1"         preload="true" />
-		<library name="week2"         preload="true" />
-		<library name="week3"         preload="true" />
-		<library name="week4"         preload="true" />
-		<library name="week5"         preload="true" />
-		<library name="week6"         preload="true" />
-		<library name="week7"         preload="true" />
-	</section>
-	
-	<section if="NO_PRELOAD_ALL">
-		<library name="songs"         preload="true" />
-		<library name="shared"        preload="false" />
-		<library name="tutorial"      preload="false" />
-		<library name="week1"         preload="false" />
-		<library name="week2"         preload="false" />
-		<library name="week3"         preload="false" />
-		<library name="week4"         preload="false" />
-		<library name="week5"         preload="false" />
-		<library name="week6"         preload="false" />
-		<library name="week7"         preload="false" />
-	</section>
 
-        <!-- PATH DEFINITIONS -->
-	<section if="web">
-		<assets path="assets/preload" 	    rename="assets" 	    exclude="*.ogg"/>
-		<assets path="assets/songs"         library="songs"         exclude="*.ogg"/>
-		<assets path="assets/shared"        library="shared"        exclude="*.ogg"/>
-		<assets path="assets/tutorial"      library="tutorial"      exclude="*.ogg"/>
-		<assets path="assets/week1"         library="week1"         exclude="*.ogg"/>
-		<assets path="assets/week2"         library="week2"         exclude="*.ogg"/>
-		<assets path="assets/week3"         library="week3"         exclude="*.ogg"/>
-		<assets path="assets/week4"         library="week4"         exclude="*.ogg"/>
-		<assets path="assets/week5"         library="week5"         exclude="*.ogg"/>
-		<assets path="assets/week6"         library="week6"         exclude="*.ogg"/>
-		<assets path="assets/week7"         library="week7"         exclude="*.ogg"/>
-	</section>
-
-	<section unless="web">
-		<assets path="assets/preload" 	    rename="assets" 	    exclude="*.mp3|*.mp4"/>
-		<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.mp4"/>
-		<assets path="assets/tutorial"      library="tutorial"      exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week1"         library="week1"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week2"         library="week2"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week3"         library="week3"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week4"         library="week4"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week5"         library="week5"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week6"         library="week6"         exclude="*.mp3|*.mp4"/>
-		<assets path="assets/week7"         library="week7"         exclude="*.mp3|*.mp4"/>
-	</section>
-	
+    	<!-- PATH DEFINITIONS -->
 	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt'/>
 	</section>
 
-	<assets path="assets/videos"        library="videos" 		if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
-	<assets path="assets/classes"       library="classes" 		if="HSCRIPT_ALLOWED"/>
-	<assets path="assets/flash"         library="flash"   		if="FLASH_MOVIE"/>
+	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
@@ -216,6 +157,7 @@
 	<!-- _______________________________ Errors ______________________________ -->
 
 	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
+	
 	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
 
 	<!-- _________________________________ Miscellaneous _______________________________ -->
