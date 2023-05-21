@@ -140,6 +140,8 @@
 	<haxedef name="POLYMOD_MOD_ICON_FILE" value="_polymod_icon.png" />
 	<haxedef name="POLYMOD_DEBUG" if="debug" />
 
+	<haxedef name="no-deprecation-warnings" unless="debug" />
+
 	<section unless="debug">
 		<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
 		<haxedef name="FLX_NO_DEBUG" />
