@@ -4444,26 +4444,16 @@ class PlayState extends MusicBeatState
 				var newValue:Float = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed', 1) * val1;
 
 				if(val2 <= 0)
-				{
 					songSpeed = newValue;
-				}
 				else
-				{
-					songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, val2 / playbackRate, {ease: FlxEase.linear, onComplete:
-						function (twn:FlxTween)
-						{
-							songSpeedTween = null;
-						}
-					});
-				}
+					songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, val2 / playbackRate, {ease: FlxEase.linear, onComplete: _ -> songSpeedTween = null});
 
 			case 'Set Property':
 				var killMe:Array<String> = value1.split('.');
-				if(killMe.length > 1) {
+				if(killMe.length > 1)
 					FunkinLua.setVarInArray(FunkinLua.getPropertyLoopThingWhatever(killMe, true, true), killMe[killMe.length-1], value2);
-				} else {
+				else
 					FunkinLua.setVarInArray(this, value1, value2);
-				}
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -4481,16 +4471,8 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		if (!SONG.notes[curSection].mustHitSection)
-		{
-			moveCamera(true);
-			callOnLuas('onMoveCamera', ['dad']);
-		}
-		else
-		{
-			moveCamera(false);
-			callOnLuas('onMoveCamera', ['boyfriend']);
-		}
+		moveCamera(!SONG.notes[curSection].mustHitSection);
+		callOnLuas('onMoveCamera', !SONG.notes[curSection].mustHitSection ? ['dad'] : ['boyfriend']);
 	}
 
 	var cameraTwn:FlxTween;
@@ -4510,25 +4492,13 @@ class PlayState extends MusicBeatState
 			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
 			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
-			{
-				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut, onComplete:
-					function (twn:FlxTween)
-					{
-						cameraTwn = null;
-					}
-				});
-			}
+				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut, onComplete: _ -> cameraTwn = null});
 		}
 	}
 
 	inline function tweenCamIn() {
-		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3) {
-			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut, onComplete:
-				function (twn:FlxTween) {
-					cameraTwn = null;
-				}
-			});
-		}
+		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3)
+			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut, onComplete: _ -> cameraTwn = null});
 	}
 
 	inline function snapCamFollowToPos(x:Float, y:Float) {
