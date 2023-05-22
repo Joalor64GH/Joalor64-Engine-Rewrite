@@ -75,7 +75,9 @@ class ModchartFuncs
                 set(beat, argsAsString);
             });
             Lua_helper.add_callback(funkin.lua, 'ease', function(beat:Float, time:Float, easeStr:String, argsAsString:String){
+
                 ease(beat, time, easeStr, argsAsString);
+                
             });
         }
         #end
@@ -91,6 +93,10 @@ class ModchartFuncs
             FunkinLua.hscript.variables.set('ModchartFile', ModchartFile);
         }
         #end
+
+
+        #elseif LEATHER
+
         #end
     }
 
@@ -163,11 +169,8 @@ class ModchartFuncs
         {
             instance.playfieldRenderer.modchart.data.events.push(["set", [0, value+","+name+":"+subValName]]);
         }
-        if (instance.playfieldRenderer.modifiers.exists(name))
-            if (instance.playfieldRenderer.modifierTable.modifiers.exists(name))
+        if (instance.playfieldRenderer.modifierTable.modifiers.exists(name))
             instance.playfieldRenderer.modifierTable.modifiers.get(name).subValues.get(subValName).value = value;
-            else
-                instance.playfieldRenderer.modifierTable.modifiers.get(name).subValues.set(subValName, new Modifier.ModifierSubValue(value));
     }
     public static function setModTargetLane(name:String, value:Int, ?instance:ModchartMusicBeatState = null)
     {
@@ -255,11 +258,8 @@ class ModchartFuncs
                     {
                         var modName = subModCheck[0];
                         var subModName = subModCheck[1];
-                        if (instance.playfieldRenderer.modifiers.exists(modName))
-                            if (instance.playfieldRenderer.modifierTable.modifiers.exists(modName))
+                        if (instance.playfieldRenderer.modifierTable.modifiers.exists(modName))
                             instance.playfieldRenderer.modifierTable.modifiers.get(modName).subValues.get(subModName).value = value;
-                            else
-                                instance.playfieldRenderer.modifierTable.modifiers.get(name).subValues.set(subModName, new Modifier.ModifierSubValue(value));
                     }
                 }
                     

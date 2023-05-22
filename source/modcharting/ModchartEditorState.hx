@@ -67,7 +67,6 @@ import substates.MusicBeatSubstate;
 import objects.FlxUIDropDownMenuCustom;
 import objects.userinterface.note.*;
 import meta.state.LoadingState;
-import meta.state.TitleState;
 import meta.state.PlayState;
 import meta.state.editors.*;
 import meta.data.Section;
@@ -552,9 +551,9 @@ class ModchartEditorState extends MusicBeatState
         if (!blockInput)
         {
             #if PSYCH
-            FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+            FlxG.sound.muteKeys = [FlxKey.ZERO];
+		    FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+		    FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
             #end
             if (FlxG.keys.justPressed.SPACE)
             {
@@ -1047,7 +1046,7 @@ class ModchartEditorState extends MusicBeatState
                 swagNote.mustPress = gottaHitNote;
                 swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
                 swagNote.noteType = songNotes[3];
-                if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = editors.ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
+                if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
                 #elseif LEATHER 
                 var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, 0, songNotes[4], null, [0], gottaHitNote);
                 swagNote.sustainLength = songNotes[2];
