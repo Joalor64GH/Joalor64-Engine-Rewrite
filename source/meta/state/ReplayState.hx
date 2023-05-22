@@ -6,6 +6,8 @@ import openfl.events.KeyboardEvent;
 import sys.io.File;
 
 import objects.Character;
+import objects.userinterface.note.Note;
+import objects.userinterface.note.*;
 
 import meta.state.PlayState;
 import meta.data.*;
