@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import haxe.Json;
 import openfl.events.KeyboardEvent;
@@ -10,6 +10,7 @@ import objects.Character;
 import meta.state.PlayState;
 import meta.data.*;
 import meta.state.*;
+import meta.substate.*;
 import meta.*;
 
 using DateTools;

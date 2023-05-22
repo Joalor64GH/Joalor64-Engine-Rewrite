@@ -105,7 +105,7 @@ import meta.data.StageData;
 import meta.data.WeekData;
 import objects.Character;
 
-using CoolUtil;
+using meta.CoolUtil;
 using StringTools;
 
 class PlayState extends MusicBeatState
