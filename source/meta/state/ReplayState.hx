@@ -9,7 +9,6 @@ import objects.Character;
 import objects.userinterface.note.Note;
 import objects.userinterface.note.*;
 
-import meta.data.Song;
 import meta.state.PlayState;
 import meta.data.*;
 import meta.state.*;
@@ -51,7 +50,7 @@ class ReplayState extends PlayState
     {
         super.create();
 
-        Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - REPLAY OF: " + '${SONG.song}';
+        Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - REPLAY OF: " + '${_song}';
 
         _song = PlayState.SONG.song.toLowerCase().replace('-', ' ');
         var file:ReplayFile = Json.parse(File.getContent(Paths.getPreloadPath('replays/$_song $curDiff.json')));
