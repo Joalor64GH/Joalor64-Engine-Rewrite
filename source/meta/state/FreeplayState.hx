@@ -136,12 +136,12 @@ class FreeplayState extends MusicBeatState
 
 		add(scoreText);
 
-			repText = new FlxText(FlxG.width * 0.7 - 270, scoreText.y + 65, 600, "", 20);
+		repText = new FlxText(FlxG.width * 0.7 - 270, scoreText.y + 65, 600, "", 20);
 		repText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
 		add(repText);
 
 		if(curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
+			bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
 
 		if(lastDifficultyName == '')
