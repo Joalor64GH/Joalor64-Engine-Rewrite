@@ -197,33 +197,33 @@ class Alphabet extends FlxSpriteGroup
 
 		        switch (itemType)
 		        {
-		        case "Classic":
-			y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.16);
-			x = FlxMath.lerp(x, (targetY * 20) + 90, 0.16);
+		        	case "Classic":
+					y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.16);
+					x = FlxMath.lerp(x, (targetY * 20) + 90, 0.16);
 
-		        case "Vertical":
-			y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.5), 0.16);
-			x = FlxMath.lerp(x, (targetY * 0) + 308, 0.16);
-			x += targetX;
+		        	case "Vertical":
+					y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.5), 0.16);
+					x = FlxMath.lerp(x, (targetY * 0) + 308, 0.16);
+					x += targetX;
 
-		        case "C-Shape":
-			y = FlxMath.lerp(y, (scaledY * 65) + (FlxG.height * 0.39), 0.16);
+		        	case "C-Shape":
+					y = FlxMath.lerp(y, (scaledY * 65) + (FlxG.height * 0.39), 0.16);
 
-			x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * 70 + (FlxG.width * 0.1), 0.16);
-			if (scaledY < 0)
-				x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * 70 + (FlxG.width * 0.1), 0.16);
+					x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * 70 + (FlxG.width * 0.1), 0.16);
+					if (scaledY < 0)
+						x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * 70 + (FlxG.width * 0.1), 0.16);
 
-			if (x > FlxG.width + 30)
-				x = FlxG.width + 30;
-		        case "D-Shape":
-			y = FlxMath.lerp(y, (scaledY * 90) + (FlxG.height * 0.45), 0.16);
+					if (x > FlxG.width + 30)
+						x = FlxG.width + 30;
+		        	case "D-Shape":
+					y = FlxMath.lerp(y, (scaledY * 90) + (FlxG.height * 0.45), 0.16);
 
-			x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * -70 + (FlxG.width * 0.35), 0.16);
-			if (scaledY < 0)
-				x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * -70 + (FlxG.width * 0.35), 0.16);
+					x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * -70 + (FlxG.width * 0.35), 0.16);
+					if (scaledY < 0)
+						x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * -70 + (FlxG.width * 0.35), 0.16);
 
-			if (x < -900)
-				x = -900;
+					if (x < -900)
+						x = -900;
 		        }
 		}
 		super.update(elapsed);
