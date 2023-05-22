@@ -15,6 +15,8 @@ import meta.state.*;
 import meta.substate.*;
 import meta.*;
 
+import lime.app.Application;
+
 using DateTools;
 using StringTools;
 
@@ -47,6 +49,8 @@ class ReplayState extends PlayState
     override function create():Void
     {
         super.create();
+
+        Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - REPLAY OF: " + '${SONG.song}';
 
         _song = PlayState.SONG.song.toLowerCase().replace('-', ' ');
         var file:ReplayFile = Json.parse(File.getContent(Paths.getPreloadPath('replays/$_song $curDiff.json')));
@@ -198,6 +202,7 @@ class ReplayPauseSubstate extends PauseSubState
     public function new(x:Float, y:Float)
     {
         super(x, y);
+
         menuItemsOG = ['Resume', 'Restart Replay', 'Exit to menu'];
         menuItems = menuItemsOG;
         regenMenu();
