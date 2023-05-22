@@ -1,6 +1,6 @@
 package modcharting;
 
-
+import flixel.input.keyboard.FlxKey;
 import lime.utils.Assets;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.util.FlxAxes;
