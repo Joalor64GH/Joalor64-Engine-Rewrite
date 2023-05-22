@@ -27,7 +27,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * SWF Support (Actionscript 3.0 Only)
 * Polymod Support
 * HX and Hscript Support
-* 3D Notes
+* Replay System
 * Noteskins
 * Random LUA Scripts (Most will be hardcoded soon)
 * MP4/WebM Video Support

@@ -249,6 +249,8 @@ class PauseSubState extends MusicBeatSubstate
 					restartSong();
 				case "Skip Song":
 					PlayState.instance.endSong();
+				case 'Restart Replay':
+					FlxG.resetState();
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;

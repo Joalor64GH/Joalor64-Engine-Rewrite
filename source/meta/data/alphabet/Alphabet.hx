@@ -22,6 +22,7 @@ enum Alignment
 class Alphabet extends FlxSpriteGroup
 {
 	public var text(default, set):String;
+	public var menuType(default, set):String;
 
 	public var bold:Bool = false;
 	public var letters:Array<AlphaCharacter> = [];
@@ -169,11 +170,19 @@ class Alphabet extends FlxSpriteGroup
 
 		if (isMenuItem)
 		{
+			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
-			if(changeX)
-				x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
-			if(changeY)
-				y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
+			switch (menuType)
+			{
+				case 'Centered':
+					y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.5), 0.32);
+
+				default:
+					if(changeX)
+						x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
+					if(changeY)
+						y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
+			}
 			
 			if (isMenuItemCentered)
 			{
@@ -291,6 +300,15 @@ class Alphabet extends FlxSpriteGroup
 		}
 
 		if(letters.length > 0) rows++;
+	}
+
+	inline function set_menuType(value:String)
+	{
+		if (value == 'Centered')
+			screenCenter(X);
+
+		menuType = value;
+		return value;
 	}
 }
 
