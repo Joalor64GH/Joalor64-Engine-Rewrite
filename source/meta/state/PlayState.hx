@@ -3,10 +3,12 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
+
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
+
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -354,8 +356,10 @@ class PlayState extends MusicBeatState
 	
 	// stores the last judgement object
 	public static var lastRating:FlxSprite;
+
 	// stores the last combo sprite object
 	public static var lastCombo:FlxSprite;
+	
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
@@ -423,7 +427,11 @@ class PlayState extends MusicBeatState
 		}
 
 		//Ratings
-		ratingsData.push(new Rating('sick')); //default rating
+		var rating:Rating = new Rating('sick');
+		rating.ratingMod = 0.9825;
+		rating.score = 350;
+		rating.noteSplash = true;
+		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
@@ -2214,7 +2222,6 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
-
 		var video:SwfVideo = new SwfVideo();
 		video.playMovie(filepath, sound, function(){
 			startAndEnd();
@@ -5445,8 +5452,11 @@ class PlayState extends MusicBeatState
 				}
 				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)), time);
 			} else {
-				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)) % 4, 0);
-				spr.playAnim('confirm', true);
+				var spr = playerStrums.members[note.noteData];
+				if(spr != null)
+				{
+					spr.playAnim('confirm', true);
+				}
 			}
 			note.wasGoodHit = true;
 			vocals.volume = vocalsEnded ? 0 : 1;
