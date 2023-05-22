@@ -47,11 +47,11 @@ class ReplaySelectState extends MusicBeatState
     override function create()
     {
         var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
-		menuBG.updateHitbox();
-		menuBG.screenCenter();
-		menuBG.antialiasing = true;
-		add(menuBG);
+	menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
+	menuBG.updateHitbox();
+	menuBG.screenCenter();
+	menuBG.antialiasing = true;
+	add(menuBG);
 
         final song:String = songName.toLowerCase().coolReplace('-', ' ');
 
@@ -77,7 +77,8 @@ class ReplaySelectState extends MusicBeatState
         grpMenuShit = new FlxTypedGroup<Alphabet>();
         add(grpMenuShit);
 
-        if (menuItems.length > 0) {
+        if (menuItems.length > 0) 
+	{
             for (i in 0...menuItems.length)
             {
                 var replay:Alphabet = new Alphabet(0, (70 * i) + 10, 'Replay ${i + 1} ($song)', true, false);
@@ -106,25 +107,25 @@ class ReplaySelectState extends MusicBeatState
         FlxTween.tween(menuBG, {alpha: 1});
 
         dateText = new FlxText(10, 32, 0, "Replay save date: ", 30);
-		dateText.scrollFactor.set();
+	dateText.scrollFactor.set();
         dateText.borderSize = 2;
-		dateText.borderQuality = 2;
+	dateText.borderQuality = 2;
         dateText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(dateText);
+	add(dateText);
 
         diffText = new FlxText(10, 64, 0, "Used difficulty:", 30);
         diffText.scrollFactor.set();
         diffText.borderSize = 2;
-		diffText.borderQuality = 2;
+	diffText.borderQuality = 2;
         diffText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(diffText);
+	add(diffText);
 
         songText = new FlxText(10, 96, 0, 'Song Name: ${songName.toUpperCase()}', 30);
         songText.scrollFactor.set();
         songText.borderSize = 2;
-		songText.borderQuality = 2;
+	songText.borderQuality = 2;
         songText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(songText);
+	add(songText);
 
         super.create();
     }
@@ -175,28 +176,28 @@ class ReplaySelectState extends MusicBeatState
     }
 
     function changeSelection(change:Int = 0):Void
+    {
+	curSelected += change;
+
+	if (curSelected < 0)
+	    curSelected = menuItems.length - 1;
+
+	if (curSelected >= menuItems.length)
+	    curSelected = 0;
+
+	var bullShit:Int = 0;
+
+	for (item in grpMenuShit.members)
 	{
-		curSelected += change;
+	    item.targetY = bullShit - curSelected;
+	    bullShit++;
 
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
+	    item.alpha = 0.6;
 
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
-
-		var bullShit:Int = 0;
-
-		for (item in grpMenuShit.members)
-		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
-		}
-	}
+	    if (item.targetY == 0)
+	    {
+		item.alpha = 1;
+	    }
+        }
+    }
 } 
