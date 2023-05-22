@@ -1,4 +1,4 @@
-package;
+package meta.state;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -16,7 +16,7 @@ import meta.state.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 
-using CoolUtil;
+using meta.CoolUtil;
 using StringTools;
 
 class ReplaySelectState extends MusicBeatState
