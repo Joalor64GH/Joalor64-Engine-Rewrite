@@ -48,7 +48,7 @@ import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
-import flixel.input.keyboard.FlxKey;
+
 
 #if LEATHER
 import states.PlayState;
@@ -70,6 +70,8 @@ import meta.state.LoadingState;
 import meta.state.TitleState;
 import meta.state.PlayState;
 import meta.state.editors.*;
+import meta.data.Section;
+import meta.data.Song;
 import meta.data.*;
 import meta.*;
 #end
@@ -550,12 +552,9 @@ class ModchartEditorState extends MusicBeatState
         if (!blockInput)
         {
             #if PSYCH
-            // FlxG.sound.muteKeys = TitleState.muteKeys;
-			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
-			FlxG.sound.muteKeys = [FlxKey.ZERO];
-			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
-			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
+            FlxG.sound.muteKeys = TitleState.muteKeys;
+			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
             #end
             if (FlxG.keys.justPressed.SPACE)
             {
@@ -745,7 +744,7 @@ class ModchartEditorState extends MusicBeatState
         }
         if (dirtyUpdateModifiers)
         {
-            playfieldRenderer.modifiers.clear();
+            playfieldRenderer.modifierTable.clear();
             playfieldRenderer.modchart.loadModifiers();
             dirtyUpdateEvents = true;
             dirtyUpdateModifiers = false;
@@ -753,9 +752,8 @@ class ModchartEditorState extends MusicBeatState
         if (dirtyUpdateEvents)
         {
             FlxTween.globalManager.completeAll();
-            playfieldRenderer.events = [];
-            for (mod in playfieldRenderer.modifiers)
-                mod.reset();
+            playfieldRenderer.eventManager.clearEvents();
+            playfieldRenderer.modifierTable.resetMods();
             playfieldRenderer.modchart.loadEvents();
             dirtyUpdateEvents = false;
             playfieldRenderer.update(0);
@@ -816,7 +814,7 @@ class ModchartEditorState extends MusicBeatState
 		"\nStep: " + curStep + "\n";
 
         var leText = "Active Modifiers: \n";
-        for (modName => mod in playfieldRenderer.modifiers)
+        for (modName => mod in playfieldRenderer.modifierTable.modifiers)
         {
             if (mod.currentValue != mod.baseValue)
             {
@@ -1049,7 +1047,7 @@ class ModchartEditorState extends MusicBeatState
                 swagNote.mustPress = gottaHitNote;
                 swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
                 swagNote.noteType = songNotes[3];
-                if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
+                if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = editors.ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
                 #elseif LEATHER 
                 var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, 0, songNotes[4], null, [0], gottaHitNote);
                 swagNote.sustainLength = songNotes[2];
@@ -1238,9 +1236,9 @@ class ModchartEditorState extends MusicBeatState
     function updateSubModList(modName:String)
     {
         subMods = [""];
-        if (playfieldRenderer.modifiers.exists(modName))
+        if (playfieldRenderer.modifierTable.modifiers.exists(modName))
         {
-            for (subModName => subMod in playfieldRenderer.modifiers.get(modName).subValues)
+            for (subModName => subMod in playfieldRenderer.modifierTable.modifiers.get(modName).subValues)
             {
                 subMods.push(subModName);
             }
