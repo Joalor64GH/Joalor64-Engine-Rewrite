@@ -4770,7 +4770,7 @@ class PlayState extends MusicBeatState
 			pixelShitPart2 = '-pixel';
 		}
 
-		switch (ClientPrefs.uiSkin){
+		switch (ClientPrefs.uiSkin) {
 			case 'Default' if (PlayState.isPixelStage):
 				pixelShitPart1 = 'pixelUI/';
 				pixelShitPart2 = '-pixel';
@@ -4792,7 +4792,6 @@ class PlayState extends MusicBeatState
 					pixelShitPart2 = '-pixel';
 				else
 					pixelShitPart2 = '';
-
 		}
 
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
@@ -5446,7 +5445,8 @@ class PlayState extends MusicBeatState
 				}
 				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)), time);
 			} else {
-				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)) % 4, 0); spr.playAnim('confirm', true);
+				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)) % 4, 0);
+				spr.playAnim('confirm', true);
 			}
 			note.wasGoodHit = true;
 			vocals.volume = vocalsEnded ? 0 : 1;

@@ -81,7 +81,7 @@ class ReplaySelectState extends MusicBeatState
 	{
             for (i in 0...menuItems.length)
             {
-                var replay:Alphabet = new Alphabet(0, (70 * i) + 10, 'Replay ${i + 1} ($song)', true, false);
+                var replay:Alphabet = new Alphabet(0, (70 * i) + 10, 'Replay ${i + 1} ($song)', true);
                 replay.isMenuItem = true;
                 replay.targetY = i;
                 replay.menuType = "Centered";
@@ -95,7 +95,7 @@ class ReplaySelectState extends MusicBeatState
 
             for (i in 0...texts.length)
             {
-                var replay:Alphabet = new Alphabet(0, (70 * i) + 10, texts[i], true, false);
+                var replay:Alphabet = new Alphabet(0, (70 * i) + 10, texts[i], true);
                 replay.menuType = "Centered";
                 replay.screenCenter(X);
                 grpMenuShit.add(replay);

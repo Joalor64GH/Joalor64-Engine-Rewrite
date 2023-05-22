@@ -9,6 +9,7 @@ import objects.Character;
 import objects.userinterface.note.Note;
 import objects.userinterface.note.*;
 
+import meta.data.Song;
 import meta.state.PlayState;
 import meta.data.*;
 import meta.state.*;
