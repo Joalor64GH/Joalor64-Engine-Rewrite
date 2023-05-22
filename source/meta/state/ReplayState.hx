@@ -69,15 +69,12 @@ class ReplayState extends PlayState
 
         notes.forEachAlive(function(note:Note)
         {
-            if (note.mustPress && note.canBeHit && hits.contains(note.strumTime)
-                && !note.isSustainNote)
+            if (note.mustPress && note.canBeHit && hits.contains(note.strumTime) && !note.isSustainNote)
             {
                 if (note.strumTime <= Conductor.songPosition)
                     goodNoteHit(note);
             }
-
-            else if (note.isSustainNote && note.mustPress
-                && sustainHits[getSustain(Std.int(note.strumTime))] == Std.int(note.strumTime) && note.canBeHit)
+            else if (note.isSustainNote && note.mustPress && sustainHits[getSustain(Std.int(note.strumTime))] == Std.int(note.strumTime) && note.canBeHit)
             {
                 goodNoteHit(note);
             }
@@ -88,12 +85,13 @@ class ReplayState extends PlayState
         botplayTxt.visible = true;
         botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 
-        if (miss.length > 0 && getMiss(Conductor.songPosition) > -1)
+	if (miss.length > 0 && getMiss(Conductor.songPosition) > -1) {
             if (miss[getMiss(Conductor.songPosition)][0] == Std.int(Conductor.songPosition))
             {
                 StrumPress(Std.int(miss[getMiss(Conductor.songPosition)][1]));
                 noteMissPress(Std.int(miss[getMiss(Conductor.songPosition)][1]));
             }
+	}
 
         keyShit();
     }
@@ -116,15 +114,15 @@ class ReplayState extends PlayState
 
     override function keyShit():Void
     {
-		var char:Character = PlayState.instance.boyfriend;
+	var char:Character = PlayState.instance.boyfriend;
 
         if (char.holdTimer > Conductor.stepCrochet * char.singDuration * 0.001)
-		{
-			if (char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.name.endsWith('miss'))
-			{
-				char.dance();
-			}
-		}
+	{
+	    if (char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.name.endsWith('miss'))
+	    {
+	        char.dance();
+	    }
+	}
     }
 
     override function popUpScore(?note:Note, ?rating:Float):Void
@@ -137,20 +135,20 @@ class ReplayState extends PlayState
     {
         var spr:StrumNote = null;
 
-		if (isDad) 
-			spr = strumLineNotes.members[noteData];
-		else 
-			spr = playerStrums.members[noteData];
+	if (isDad) 
+	    spr = strumLineNotes.members[noteData];
+	else 
+	    spr = playerStrums.members[noteData];
 
-		spr.playAnim('confirm', true);
-		spr.resetAnim = 0.15;
+	spr.playAnim('confirm', true);
+	spr.resetAnim = 0.15;
     }
 
     override function StrumPress(id:Int, ?time:Float):Void
     {
-		var spr:StrumNote = playerStrums.members[id];
-		spr.playAnim('pressed');
-		spr.resetAnim = 0.2;
+	var spr:StrumNote = playerStrums.members[id];
+	spr.playAnim('pressed');
+	spr.resetAnim = 0.2;
     }
 
     function getNoteID(time:Float):Int
