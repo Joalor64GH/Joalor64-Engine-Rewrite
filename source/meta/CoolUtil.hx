@@ -50,14 +50,14 @@ class CoolUtil
 
 	//Example: "winter-horrorland" to "Winter Horrorland". Used for replays
 	public static function coolSongFormatter(song:String):String
-    {
-        var swag:String = coolReplace(song, '-', ' ');
-        var splitSong:Array<String> = swag.split(' ');
+    	{
+        	var swag:String = coolReplace(song, '-', ' ');
+        	var splitSong:Array<String> = swag.split(' ');
 
 		for (i in 0...splitSong.length)
 		{
-            var firstLetter = splitSong[i].substring(0, 1);
-            var coolSong:String = coolReplace(splitSong[i], firstLetter, firstLetter.toUpperCase());
+            		var firstLetter = splitSong[i].substring(0, 1);
+            		var coolSong:String = coolReplace(splitSong[i], firstLetter, firstLetter.toUpperCase());
 			var splitCoolSong:Array<String> = coolSong.split('');
 
 			coolSong = Std.string(splitCoolSong[0]).toUpperCase();
@@ -67,10 +67,10 @@ class CoolUtil
 
 			coolSong = coolReplace(coolSong, 'null', '');
 
-            for (l in 0...splitSong.length)
-            {
-                var stringSong:String = Std.string(splitSong[l+1]);
-                var stringFirstLetter:String = stringSong.substring(0, 1);
+            		for (l in 0...splitSong.length)
+            		{
+                		var stringSong:String = Std.string(splitSong[l+1]);
+                		var stringFirstLetter:String = stringSong.substring(0, 1);
 
 				var splitStringSong = stringSong.split('');
 				stringSong = Std.string(splitStringSong[0]).toUpperCase();
@@ -80,14 +80,14 @@ class CoolUtil
 
 				stringSong = coolReplace(stringSong, 'null', '');
 
-                coolSong += ' $stringSong';
-            }
+                		coolSong += ' $stringSong';
+            		}
 
 			song = coolSong.replace(' Null', '');
-            return song;
-        }
+            		return song;
+        	}
 
-        return swag;
+        	return swag;
 	}
 
 	#if sys
