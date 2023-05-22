@@ -374,7 +374,7 @@ class PlayState extends MusicBeatState
 		// for lua
 		instance = this;
 
-			if (!inReplay)
+		if (!inReplay)
 		{
 			ReplayState.hits = [];
 			ReplayState.miss = [];
@@ -4819,7 +4819,7 @@ class PlayState extends MusicBeatState
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
-				if (!inReplay)
+		if (!inReplay)
 		{
 			ReplayState.hits.push(note.strumTime);
 			ReplayState.judgements.push(noteDiff);
@@ -5960,7 +5960,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-		function StrumPress(id:Int, ?time:Float = 0)
+	function StrumPress(id:Int, ?time:Float = 0)
 	{
 		var spr:StrumNote = playerStrums.members[id];
 		spr.playAnim('pressed');
