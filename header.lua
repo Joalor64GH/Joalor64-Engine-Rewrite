@@ -667,6 +667,9 @@ function startDialogue(dialogueFile, music) end
 ---Starts a video cutscene
 ---@param videoFile string Directory of the video file to use. Root starts from `videos/`
 function startVideo(videoFile) end
+---Plays a flash file
+---@param flashFile string Directory of the swf to use. Root starts from `videos/`
+function startMovie(flashFile) end
 ---Points the camera towards the given target
 ---@param target "dad" | "boyfriend"
 function cameraSetTarget(target) end

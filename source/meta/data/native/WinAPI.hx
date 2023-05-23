@@ -38,7 +38,7 @@ import meta.data.windows.WindowsAPI.MessageBoxIcon;
 static long lastDefId = 0;
 ')
 @:dox(hide)
-class WinAPI {
+class WinAPI { // i have no idea how cpp works, but these functions don't affect any other platforms
     @:functionCode('
         #if defined(__WIN32__) // makes it only work on Windows platforms
         int darkMode = enable ? 1 : 0;
