@@ -1,0 +1,1 @@
+This folder is here so that the game can update.

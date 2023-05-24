@@ -32,17 +32,13 @@ mobile/*
 appveyor.yml
 appveyor-win32.yml
 
-### Git-Specific
-.gitconfig
-.gitinclude
-.gitkeep
-
 ### Stage Editor-Related
 assets/images/stageborder.png
 source/editors/StageEditorState.hx
 source/LayerFile.hx
 
 ### Stepmania Stuff
+### Maybe a new feature soon??
 assets/sm/
 source/smTools/
 
@@ -58,7 +54,7 @@ source/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
 * - Copy*
 
-### Add any of these regardless of them getting ignored.
+### You can add any of these regardless of them getting ignored.
 !appveyor-linux.yml
 !appveyor-macos.yml
 !appveyor-windows.yml
@@ -66,10 +62,6 @@ polymod-fix/PolymodFileSystem.hx
 !modchartexample.mc
 !.DS_Store
 !Thumbs.db
-!*.hxml
-!*.hxproj
-!*.hxp
-!*.jsonc
 
 ### VS Code
 export/*
