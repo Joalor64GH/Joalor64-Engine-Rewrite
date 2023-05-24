@@ -43,6 +43,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
     * [X] Health Counter
     * [ ] Health Icon Bopping
 * [ ] Extra Notes (Hardcoded)
+* [ ] (If possible) Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource)
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
