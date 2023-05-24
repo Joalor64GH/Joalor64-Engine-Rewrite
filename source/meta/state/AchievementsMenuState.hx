@@ -3,6 +3,7 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
+
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -102,7 +103,7 @@ class AchievementsMenuState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					for (i in 0...achievementArray.length) {
 						achievementArray[i].forget();
-						grpOptions.members[i].changeText('?');
+						grpOptions.members[i].text('?');
 					}
 				}, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
@@ -111,7 +112,7 @@ class AchievementsMenuState extends MusicBeatState
 				openSubState(new Prompt('This action will clear the progress of the selected achievement.\n\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					achievementArray[curSelected].forget();
-					grpOptions.members[curSelected].changeText('?');
+					grpOptions.members[curSelected].text('?');
 				}, function() {
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}, false));
