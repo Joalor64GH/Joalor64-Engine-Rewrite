@@ -57,6 +57,45 @@ class Alphabet extends FlxSpriteGroup
 		this.text = text;
 	}
 
+	public function changeText(newText:String, newTypingSpeed:Float = -1)
+	{
+		for (i in 0...lettersArray.length) {
+			var letter = lettersArray[0];
+			letter.destroy();
+			remove(letter);
+			lettersArray.remove(letter);
+		}
+		lettersArray = [];
+		splitWords = [];
+		loopNum = 0;
+		xPos = 0;
+		curRow = 0;
+		consecutiveSpaces = 0;
+		xPosResetted = false;
+		finishedText = false;
+		lastSprite = null;
+
+		var lastX = x;
+		x = 0;
+		_finalText = newText;
+		text = newText;
+		if(newTypingSpeed != -1) {
+			typingSpeed = newTypingSpeed;
+		}
+
+		if (text != "") {
+			if (typed)
+			{
+				startTypedText(typingSpeed);
+			} else {
+				addText();
+			}
+		} else {
+			finishedText = true;
+		}
+		x = lastX;
+	}
+
 	public function setAlignmentFromString(align:String)
 	{
 		switch(align.toLowerCase().trim())
@@ -311,7 +350,6 @@ class Alphabet extends FlxSpriteGroup
 		return value;
 	}
 }
-
 
 ///////////////////////////////////////////
 // ALPHABET LETTERS, SYMBOLS AND NUMBERS //
