@@ -98,12 +98,13 @@ class AchievementsMenuState extends MusicBeatState
 		}
 
 		if(controls.RESET) {
+			FlxG.mouse.visible = true;
 			if(FlxG.keys.pressed.ALT) {
 				openSubState(new Prompt('This action will clear ALL the progress.\n\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					for (i in 0...achievementArray.length) {
 						achievementArray[i].forget();
-						grpOptions.members[i].text('?');
+						grpOptions.members[i].text = '?';
 					}
 				}, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
@@ -112,11 +113,12 @@ class AchievementsMenuState extends MusicBeatState
 				openSubState(new Prompt('This action will clear the progress of the selected achievement.\n\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					achievementArray[curSelected].forget();
-					grpOptions.members[curSelected].text('?');
+					grpOptions.members[curSelected].text = '?';
 				}, function() {
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}, false));
 			}
+			FlxG.mouse.visible = false;
  		}
 
 		if (controls.BACK) {
