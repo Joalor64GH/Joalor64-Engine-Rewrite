@@ -40,6 +40,7 @@ class ClientPrefs {
 	public static var colorBlindFilter:String = 'None';
 	public static var simpleMain:Bool = false;
 	public static var longBar:Bool = false;
+	public static var floatyLetters:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -140,6 +141,7 @@ class ClientPrefs {
 		FlxG.save.data.colorBlindFilter = colorBlindFilter;
 		FlxG.save.data.simpleMain = simpleMain;
 		FlxG.save.data.longBar = longBar;
+		FlxG.save.data.floatyLetters = floatyLetters;
 	
 		FlxG.save.flush();
 
@@ -285,6 +287,8 @@ class ClientPrefs {
 			simpleMain = FlxG.save.data.simpleMain;
 		if(FlxG.save.data.longBar != null)
 			longBar = FlxG.save.data.longBar;
+		if(FlxG.save.data.floatyLetters != null)
+			floatyLetters = FlxG.save.data.floatyLetters;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

@@ -62,6 +62,14 @@ class PreferencesSubState extends BaseOptionsMenu
 			true); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Floating Letters', //Name
+			'If checked, makes the letters float like in hypnos lullaby', //Description
+			'floatyLetters', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+		option.onChange = () -> Alphabet.alphabet.shouldDisplace = true;
+
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",

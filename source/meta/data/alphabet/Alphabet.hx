@@ -28,16 +28,16 @@ class Alphabet extends FlxSpriteGroup
 	public var letters:Array<AlphaCharacter> = [];
 
 	public var forceX:Float = Math.NEGATIVE_INFINITY;
-        public var itemType:String = "";
-        public var isMenuItemCentered:Bool = false;
+	public var itemType:String = "";
+	public var isMenuItemCentered:Bool = false;
 	public var isMenuItem:Bool = false;
 	public var targetY:Int = 0;
 	public var targetX:Float = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
 	public var yMult:Float = 120;
-        public var xAdd:Float = 0;
-        public var yAdd:Float = 0;
+	public var xAdd:Float = 0;
+	public var yAdd:Float = 0;
 
 	public var alignment(default, set):Alignment = LEFT;
 	public var scaleX(default, set):Float = 1;
@@ -47,9 +47,15 @@ class Alphabet extends FlxSpriteGroup
 	public var distancePerItem:FlxPoint = new FlxPoint(20, 120);
 	public var startPosition:FlxPoint = new FlxPoint(0, 0); //for the calculations
 
+	public var shouldDisplace:Bool = false;
+
+	public static var alphabet:Alphabet = null;
+
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true)
 	{
 		super(x, y);
+
+		alphabet = this;
 
 		this.startPosition.x = x;
 		this.startPosition.y = y;
@@ -164,9 +170,28 @@ class Alphabet extends FlxSpriteGroup
 		return value;
 	}
 
+	var prevY:Float = 0;
+	var elapsedTotal:Float = 0;
+	var number:Int = 0;
+
+	// nabbed from lullaby lel
+	inline public function displacementFormula() {
+		elapsedTotal += FlxG.elapsed;
+		final elapsedAverage:Float = (1 / FlxG.drawFramerate);
+		final formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
+		for (letter in letters){
+			prevY += letter.y;
+			letter.y = prevY + formula;
+			prevY -= letter.y + formula;
+		}
+	}
+
 	override function update(elapsed:Float)
 	{
 		var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
+
+		if (elapsed > 0 && shouldDisplace)
+			displacementFormula();
 
 		if (isMenuItem)
 		{
@@ -188,11 +213,10 @@ class Alphabet extends FlxSpriteGroup
 			{
 				var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
 				y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-				if(forceX != Math.NEGATIVE_INFINITY) {
+				if(forceX != Math.NEGATIVE_INFINITY)
 					screenCenter(X);
-				} else {
+				else
 					screenCenter(X);
-				}
 			}
 
 		        switch (itemType)
