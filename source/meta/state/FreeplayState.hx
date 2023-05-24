@@ -15,7 +15,11 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import lime.app.Application;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
 import openfl.utils.Assets as OpenFlAssets;
 
 import meta.*;
@@ -302,7 +306,6 @@ class FreeplayState extends MusicBeatState
 				instPlaying = curSelected;
 			}
 		}
-
 		else if (accepted)
 		{
 			persistentUpdate = false;

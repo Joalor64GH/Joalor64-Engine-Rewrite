@@ -3,7 +3,9 @@ package meta.state;
 import haxe.Json;
 import openfl.events.KeyboardEvent;
 
+#if sys
 import sys.io.File;
+#end
 
 import objects.Character;
 import objects.userinterface.note.Note;
@@ -16,6 +18,7 @@ import meta.substate.*;
 import meta.*;
 
 import lime.app.Application;
+import openfl.utils.Assets;
 
 using DateTools;
 using StringTools;
@@ -53,7 +56,11 @@ class ReplayState extends PlayState
         Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - REPLAY OF: " + '${_song}';
 
         _song = PlayState.SONG.song.toLowerCase().replace('-', ' ');
-        var file:ReplayFile = Json.parse(File.getContent(Paths.getPreloadPath('replays/$_song $curDiff.json')));
+        #if sys
+        final file:ReplayFile = Json.parse(File.getContent(Paths.getPreloadPath('replays/$_song $curDiff.json')));
+        #else
+        final file:ReplayFile = Json.parse(Assets.getText(Paths.getPreloadPath('replays/$_song $curDiff.json')));
+        #end
 
         hits = file.hits;
         miss = file.misses;
