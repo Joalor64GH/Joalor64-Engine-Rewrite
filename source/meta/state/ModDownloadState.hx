@@ -306,7 +306,8 @@ class ModDownloadState extends MusicBeatState
 					if (FileSystem.exists('mods/$folder'))
 					{
 						if (FileSystem.readDirectory('mods/$folder/') != null
-							&& !FileSystem.readDirectory('mods/$folder/').contains('#if FUTURE_POLYMOD _polymod_meta.json #else pack.json #end'))
+							&& !FileSystem.readDirectory('mods/$folder/').contains(#if FUTURE_POLYMOD '_polymod_meta.json' #else 'pack.json' #end)
+							&& !FileSystem.readDirectory('mods/$folder/').contains(#if FUTURE_POLYMOD '_polymod_icon.png' #else 'pack.png' #end))
 						{
 							coolText.text = 'This Is Not A Joalor64 Engine Mod!';
 
