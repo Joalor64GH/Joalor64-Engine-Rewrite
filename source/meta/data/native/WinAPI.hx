@@ -40,7 +40,7 @@ static long lastDefId = 0;
 @:dox(hide)
 class WinAPI { // i have no idea how cpp works, but these functions don't affect any other platforms
     @:functionCode('
-        #if defined(__WIN32__) // makes it only work on Windows platforms
+        #if defined(HX_WINDOWS) // makes it only work on Windows platforms
         int darkMode = enable ? 1 : 0;
         HWND window = GetActiveWindow();
         if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, 20, sizeof(darkMode))) {

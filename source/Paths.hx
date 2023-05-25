@@ -536,7 +536,7 @@ class Paths
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		if (FileSystem.exists(mods(currentModDirectory + '/' + key)) || FileSystem.exists(mods(key)))
+		if (FileSystem.exists(mods('$currentModDirectory/$key')) || FileSystem.exists(mods(key)))
 			return true;
 		#end
 
@@ -652,7 +652,7 @@ class Paths
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		if (!currentTrackedSounds.exists(gottenPath))
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+			currentTrackedSounds.set(gottenPath, Sound.fromFile('./$gottenPath'));
 			#else
 				currentTrackedSounds.set(
 					gottenPath, 
@@ -670,44 +670,29 @@ class Paths
 		return modFolderPath + key;
 
 	inline static public function modsFont(key:String)
-		return modFolders('fonts/' + key);
+		return modFolders('fonts/$key');
 
 	inline static public function modsJson(key:String)
-		return modFolders('data/' + key + '.json');
+		return modFolders('data/$key.json');
 
 	#if FUTURE_POLYMOD
 	inline static public function appendTxt(key:String)
-		return modFolders('_append/data/' + key + '.txt');
+		return modFolders('_append/data/$key.txt');
 
 	inline static public function appendJson(key:String)
-		return modFolders('_append/data/' + key + '.json');
-
-	inline static public function appendCsv(key:String)
-		return modFolders('_append/data/' + key + '.csv');
+		return modFolders('_append/data/$key.json');
 
 	inline static public function appendXml(key:String)
-		return modFolders('_append/data/' + key + '.xml');
+		return modFolders('_append/data/$key.xml');
 
 	inline static public function mergeTxt(key:String)
-		return modFolders('_merge/data/' + key + '.txt');
+		return modFolders('_merge/data/$key.txt');
 
 	inline static public function mergeJson(key:String)
-		return modFolders('_merge/data/' + key + '.json');
-
-	inline static public function mergeCsv(key:String)
-		return modFolders('_merge/data/' + key + '.csv');
-
-	inline static public function mergeTsv(key:String)
-		return modFolders('_merge/data/' + key + '.tsv');
+		return modFolders('_merge/data/$key.json');
 
 	inline static public function mergeXml(key:String)
-		return modFolders('_merge/data/' + key + '.xml');
-
-	inline static public function csv(key:String)
-		return modFolders(key + '.csv');
-
-	inline static public function tsv(key:String)
-		return modFolders(key + '.tsv');
+		return modFolders('_merge/data/$key.xml');
 	#end
 
 	static public function modsVideo(key:String) {
@@ -722,38 +707,38 @@ class Paths
 	}
 
 	inline static public function modsFlashMovie(key:String)
-		return modFolders('videos/' + key + '.' + FLASH_EXT);
+		return modFolders('videos/$key.$FLASH_EXT');
 
 	inline static public function modsSounds(path:String, key:String)
-		return modFolders(path + '/' + key + '.' + SOUND_EXT);
+		return modFolders('$path/$key.$SOUND_EXT');
 
 	inline static public function modsImages(key:String)
-		return modFolders('images/' + key + '.png');
+		return modFolders('images/$key.png');
 
 	inline static public function modsXml(key:String)
-		return modFolders('images/' + key + '.xml');
+		return modFolders('images/$key.xml');
 
 	inline static public function modsTxt(key:String)
-		return modFolders('images/' + key + '.txt');
+		return modFolders('images/$key.txt');
 
 	inline static public function modsAchievements(key:String)
-		return modFolders('achievements/' + key + '.json');
+		return modFolders('achievements/$key.json');
 
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {
-			var fileToCheck:String = mods(currentModDirectory + '/' + key);
+			var fileToCheck:String = mods('$currentModDirectory/$key');
 			if(FileSystem.exists(fileToCheck)) {
 				return fileToCheck;
 			}
 		}
 
 		for(mod in getGlobalMods()){
-			var fileToCheck:String = mods(mod + '/' + key);
+			var fileToCheck:String = mods('$mod/$key');
 			if(FileSystem.exists(fileToCheck))
 				return fileToCheck;
 
 		}
-		return 'mods/' + key;
+		return 'mods/$key';
 	}
 
 	public static var globalMods:Array<String> = [];
