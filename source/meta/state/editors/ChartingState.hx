@@ -41,6 +41,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import lime.media.AudioBuffer;
 import lime.utils.Assets;
+import lime.app.Application;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
@@ -261,6 +262,8 @@ class ChartingState extends MusicBeatState
 	public var mouseQuant:Bool = false;
 	override function create()
 	{
+		Application.current.window.title = Application.current.meta.get('name');
+		
 		if (PlayState.SONG != null)
 			_song = PlayState.SONG;
 		else

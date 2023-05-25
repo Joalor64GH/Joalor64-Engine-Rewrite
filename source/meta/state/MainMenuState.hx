@@ -102,7 +102,7 @@ class MainMenuState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+		Application.current.window.title = Application.current.meta.get('name');
 
 		#if desktop
 		// Updating Discord Rich Presence

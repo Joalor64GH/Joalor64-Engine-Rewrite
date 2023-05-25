@@ -56,7 +56,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
+		Application.current.window.title = Application.current.meta.get('name');
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();

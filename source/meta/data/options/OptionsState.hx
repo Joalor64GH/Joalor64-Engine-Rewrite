@@ -13,6 +13,7 @@ import flixel.text.FlxText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import lime.app.Application;
 import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -77,11 +78,12 @@ class OptionsState extends MusicBeatState
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
-	override function create() 
-	{
+	override function create() {
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
+
+		Application.current.window.title = Application.current.meta.get('name');
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;

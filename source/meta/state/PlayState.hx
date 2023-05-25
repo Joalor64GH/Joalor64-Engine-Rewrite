@@ -3674,7 +3674,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'schoolEvil':
-				Application.current.window.title = randomString(FlxG.random.int(0, 16));
+				Application.current.window.title = randomString(FlxG.random.int(8, 16));
 		}
 
 		if(!inCutscene) {
