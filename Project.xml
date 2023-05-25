@@ -106,7 +106,7 @@
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
-	<haxelib name="TeaScript" if="SCRIPT_EXTENSION"/>
+	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 	<haxelib name="discord_rpc" if="desktop"/>
@@ -119,7 +119,6 @@
 
 	<!-- Script logging -->
 	<haxedef name="hscriptPos" value="true" />
-	<haxedef name="openflPos"/> <!-- This is for TeaScript btw -->
 	
 	<!--Enable the Flixel core recording system-->
 	<haxedef name="FLX_RECORD" />

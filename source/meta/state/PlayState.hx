@@ -342,7 +342,7 @@ class PlayState extends MusicBeatState
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
 
-	public var scriptArray:Array<FunkinTeaScript> = [];
+	public var scriptArray:Array<FunkinSScript> = [];
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -1028,7 +1028,7 @@ class PlayState extends MusicBeatState
 					#elseif SCRIPT_EXTENSION
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
-						scriptArray.push(new FunkinTeaScript(folder + file));
+						scriptArray.push(new FunkinSScript(folder + file));
 						filesPushed.push(file);
 					}
 					#end
@@ -1080,7 +1080,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(doPush)
-			scriptArray.push(new FunkinTeaScript(scriptFile));
+			scriptArray.push(new FunkinSScript(scriptFile));
 		#end
 		#end
 
@@ -1450,21 +1450,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinTeaScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinTeaScript(hxToLoad));
+					scriptArray.push(new FunkinSScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinTeaScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			#end
 		}
@@ -1474,21 +1474,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinTeaScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('events/' + event + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinTeaScript(hxToLoad));
+					scriptArray.push(new FunkinSScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('events/' + event + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinTeaScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			#end
 		}
@@ -1532,7 +1532,7 @@ class PlayState extends MusicBeatState
 					#elseif SCRIPT_EXTENSION
 					if(file.endsWith('.hx') && !filesPushed.contains(file))
 					{
-						scriptArray.push(new FunkinTeaScript(folder + file));
+						scriptArray.push(new FunkinSScript(folder + file));
 						filesPushed.push(file);
 					}
 					#end
@@ -2150,7 +2150,7 @@ class PlayState extends MusicBeatState
 			{
 				if(script.scriptFile == scriptFile) return;
 			}
-			scriptArray.push(new FunkinTeaScript(scriptFile));
+			scriptArray.push(new FunkinSScript(scriptFile));
 		}
 		#end
 	}

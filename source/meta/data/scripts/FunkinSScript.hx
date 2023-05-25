@@ -30,11 +30,11 @@ import meta.data.alphabet.*;
 import objects.userinterface.note.*;
 import objects.*;
 
-final class FunkinTeaScript extends tea.TeaScript
+final class FunkinSScript extends SScript
 {
-	public function new(?scriptPath:String = "", ?preset:Bool = true)
+	override public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
 	{
-		super(scriptPath, preset);
+		super(scriptFile, preset, false);
 
 		traces = false;
 		
