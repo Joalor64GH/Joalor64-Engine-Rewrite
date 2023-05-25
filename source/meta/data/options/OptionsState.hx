@@ -41,10 +41,12 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
-		'Preferences',
-		'Adjust Delay and Combo'/*, 
-		'The Special'*/
+		'Visuals and Graphics',
+		'Gameplay Preferences',
+		'Adjust Delay and Combo', 
+		'Miscellaneous'
 	];
+
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -59,19 +61,20 @@ class OptionsState extends MusicBeatState
 					FlxG.switchState(new OopsState());
 			#end
 			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB') {
+				if(ClientPrefs.arrowMode == 'RGB')
 					openSubState(new NotesRGBSubState());
-				} else {
+				else
 					openSubState(new NotesHSVSubState());
-				}
 			case 'Controls':
 				openSubState(new ControlsSubState());
-			case 'Preferences':
-				openSubState(new PreferencesSubState());
+			case 'Visuals and Graphics':
+				openSubState(new VisualsSubState());
+			case 'Gameplay Preferences':
+				openSubState(new GameplaySubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
-			/*case 'The Special':
-				FlxG.switchState(new TheSpecialState());*/
+			case 'Miscellaneous':
+				openSubState(new MiscSubState());
 		}
 	}
 
@@ -106,8 +109,7 @@ class OptionsState extends MusicBeatState
 		super.create();
 	}
 
-	function initOptions()
-	{
+	function initOptions() {
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 

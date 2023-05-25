@@ -140,7 +140,7 @@ class TitleState extends MusicBeatState
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates && !closedState) {
 			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/assets/update/gitVersion.txt");
+			var http = new haxe.Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{

@@ -31,66 +31,12 @@ import openfl.Lib;
 
 using StringTools;
 
-class PreferencesSubState extends BaseOptionsMenu
+class GameplaySubState extends BaseOptionsMenu
 {
 	public function new()
 	{
-		title = 'Preferences';
-		rpcTitle = 'Preference Settings Menu'; //for Discord Rich Presence
-
-		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
-		var option:Option = new Option('Low Quality', //Name
-			'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
-			'lowQuality', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
-		addOption(option);
-
-		var option:Option = new Option('Anti-Aliasing',
-			'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
-			'globalAntialiasing',
-			'bool',
-			true);
-		option.showBoyfriend = true;
-		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
-		addOption(option);
-
-		var option:Option = new Option('Shaders', //Name
-			'If unchecked, disables shaders.\nIt\'s used for some visual effects, and also CPU intensive for weaker PCs.', //Description
-			'shaders', //Save data variable name
-			'bool', //Variable type
-			true); //Default value
-		addOption(option);
-
-		var option:Option = new Option('Floating Letters', //Name
-			'If checked, makes the letters float like in hypnos lullaby', //Description
-			'floatyLetters', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
-		addOption(option);
-		option.onChange = () -> Alphabet.alphabet.shouldDisplace = true;
-
-		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
-		var option:Option = new Option('Framerate',
-			"Pretty self explanatory, isn't it?",
-			'framerate',
-			'int',
-			60);
-		addOption(option);
-
-		option.minValue = 60;
-		option.maxValue = 240;
-		option.displayFormat = '%v FPS';
-		option.onChange = onChangeFramerate;
-		#end
-
-		var option:Option = new Option('Note Coloring Method:',
-			"Determines which method is used for changing note colors.",
-			'arrowMode',
-			'string',
-			'RGB',
-			['RGB', 'HSV']);
-		addOption(option);
+		title = 'Gameplay Preferences';
+		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
 
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
@@ -112,13 +58,6 @@ class PreferencesSubState extends BaseOptionsMenu
 			'string',
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
-		addOption(option);
-
-		var option:Option = new Option('Flashing Lights',
-			"Uncheck this if you're sensitive to flashing lights!",
-			'flashing',
-			'bool',
-			true);
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',
@@ -146,34 +85,6 @@ class PreferencesSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
-		
-		#if !mobile
-		var option:Option = new Option('FPS Counter',
-			'If unchecked, hides FPS Counter.',
-			'showFPS',
-			'bool',
-			true);
-		addOption(option);
-		option.onChange = onChangeFPSCounter;
-		#end
-		
-		var option:Option = new Option('Pause Screen Song:',
-			"What song do you prefer for the Pause Screen?",
-			'pauseMusic',
-			'string',
-			'Tea Time',
-			['None', 'Breakfast', 'Tea Time']);
-		addOption(option);
-		option.onChange = onChangePauseMusic;
-		
-		#if CHECK_FOR_UPDATES
-		var option:Option = new Option('Check for Updates',
-			'On Release builds, turn this on to check for updates when you start the game.',
-			'checkForUpdates',
-			'bool',
-			true);
-		addOption(option);
-		#end
 
 		var option:Option = new Option('UI Skin:',
 			"What should your Judgements look like?",
@@ -186,27 +97,6 @@ class PreferencesSubState extends BaseOptionsMenu
 				'Kade', 
 				'Simplylove'
 			]);
-		addOption(option);
-	
-		var option:Option = new Option('Colorblind filter:',
-			"For Colorblind people",
-			'colorBlindFilter',
-			'string',
-			'None',
-			[
-				'None', 
-				'Deuteranopia', 
-				'Protanopia', 
-				'Tritanopia'
-			]);
-		addOption(option);
-		option.onChange = () -> meta.Colorblind.updateFilter();
-
-		var option:Option = new Option('Simple Main Menu',
-			'Just a simple version of the Main Menu for low-end users.',
-			'simpleMain',
-			'bool',
-			false);
 		addOption(option);
 
 		var option:Option = new Option('Long Health Bar',
@@ -327,70 +217,11 @@ class PreferencesSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Save Replays',
-			'If checked, the game will save a recording of your gameplay\nfor every song you beat in Story Mode.
-			Note that replays are not a video so\nreplay\'s size will be pretty small.',
-			'saveReplay',
-			'bool',
-			true);
-		addOption(option);
-
 		super();
-	}
-
-	var changedMusic:Bool = false;
-	function onChangePauseMusic()
-	{
-		if(ClientPrefs.pauseMusic == 'None')
-			FlxG.sound.music.volume = 0;
-		else
-			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
-
-		changedMusic = true;
-	}
-
-	override function destroy()
-	{
-		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
-		super.destroy();
-	}
-
-	#if !mobile
-	function onChangeFPSCounter()
-	{
-		if(Main.fpsVar != null)
-			Main.fpsVar.visible = ClientPrefs.showFPS;
-	}
-	#end
-
-	function onChangeAntiAliasing()
-	{
-		for (sprite in members)
-		{
-			var sprite:Dynamic = sprite; //Make it check for FlxSprite instead of FlxBasic
-			var sprite:FlxSprite = sprite; //Don't judge me ok
-			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
-				sprite.antialiasing = ClientPrefs.globalAntialiasing;
-			}
-		}
 	}
 
 	function onChangeHitsoundVolume()
 	{
 		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
-	}
-
-	function onChangeFramerate()
-	{
-		if(ClientPrefs.framerate > FlxG.drawFramerate)
-		{
-			FlxG.updateFramerate = ClientPrefs.framerate;
-			FlxG.drawFramerate = ClientPrefs.framerate;
-		}
-		else
-		{
-			FlxG.drawFramerate = ClientPrefs.framerate;
-			FlxG.updateFramerate = ClientPrefs.framerate;
-		}
 	}
 }
