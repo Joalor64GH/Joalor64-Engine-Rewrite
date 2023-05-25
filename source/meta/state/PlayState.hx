@@ -4789,10 +4789,10 @@ class PlayState extends MusicBeatState
 					pixelShitPart2 = '';
 			case 'Kade':
 				pixelShitPart1 = 'skins/kadeUI/';
-				if (!PlayState.isPixelStage)
-					pixelShitPart2 = '';
-				else
+				if (PlayState.isPixelStage)
 					pixelShitPart2 = '-pixel';
+				else
+					pixelShitPart2 = '';
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
 				if (PlayState.isPixelStage)

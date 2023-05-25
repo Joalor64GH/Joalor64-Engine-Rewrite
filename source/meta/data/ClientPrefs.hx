@@ -41,6 +41,7 @@ class ClientPrefs {
 	public static var simpleMain:Bool = false;
 	public static var longBar:Bool = false;
 	public static var floatyLetters:Bool = false;
+	public static var songDisplay:String = 'Classic';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -142,6 +143,7 @@ class ClientPrefs {
 		FlxG.save.data.simpleMain = simpleMain;
 		FlxG.save.data.longBar = longBar;
 		FlxG.save.data.floatyLetters = floatyLetters;
+		FlxG.save.data.songDisplay = songDisplay;
 	
 		FlxG.save.flush();
 
@@ -289,6 +291,8 @@ class ClientPrefs {
 			longBar = FlxG.save.data.longBar;
 		if(FlxG.save.data.floatyLetters != null)
 			floatyLetters = FlxG.save.data.floatyLetters;
+		if(FlxG.save.data.songDisplay != null)
+			songDisplay = FlxG.save.data.songDisplay;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

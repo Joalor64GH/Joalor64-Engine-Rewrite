@@ -70,6 +70,19 @@ class VisualsSubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = () -> Alphabet.alphabet.shouldDisplace = true;
 
+		var option:Option = new Option('Song Display Style:',
+			"How should the songs in Freeplay be displayed?",
+			'songDisplay',
+			'string',
+			'None',
+			[
+				'Classic', 
+				'Vertical', 
+				'C-Shape', 
+				'D-Shape'
+			]);
+		addOption(option);
+
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",
