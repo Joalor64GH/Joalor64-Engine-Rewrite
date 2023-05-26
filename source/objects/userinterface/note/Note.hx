@@ -106,14 +106,12 @@ class Note extends FlxSprite
 	public var hitsoundDisabled:Bool = false;
 
 	@:isVar
-	public var canBeHit(get, set):Bool = false;
+	public var canBeHit(get, default):Bool = false;
 
 	inline public function get_canBeHit(){
 		return (mustPress) ? strumTime > Conductor.songPosition - Conductor.safeZoneOffset * lateHitMult
 			&& strumTime < Conductor.songPosition + Conductor.safeZoneOffset * earlyHitMult : false;
 	}
-
-	inline function set_canBeHit(b:Bool) {return canBeHit = b;};
 
 	// a thing for modders
 	public var killNote:Bool = false;
@@ -369,9 +367,9 @@ class Note extends FlxSprite
 		if(isSustainNote) {
 			animation.add(colArray[noteData] + 'holdend', [pixelInt[noteData] + 4]);
 			animation.add(colArray[noteData] + 'hold', [pixelInt[noteData]]);
-		} else {
+		} 
+		else
 			animation.add(colArray[noteData] + 'Scroll', [pixelInt[noteData] + 4]);
-		}
 	}
 
 	override function update(elapsed:Float)
