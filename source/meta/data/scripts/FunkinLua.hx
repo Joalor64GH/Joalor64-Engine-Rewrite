@@ -2274,7 +2274,7 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
 		{
-			PlayState.instance.backgroundVideo(video);
+			PlayState.instance.backgroundVideo(Paths.modsVideo(video));
 		});
 
 		Lua_helper.add_callback(lua, "endBGVideo", function():Void
@@ -2381,11 +2381,10 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "debugPrint", function(text1:Dynamic = '', text2:Dynamic = '', text3:Dynamic = '', text4:Dynamic = '', text5:Dynamic = '') {
-			if (text1 == null) text1 = '';
-			if (text2 == null) text2 = '';
-			if (text3 == null) text3 = '';
-			if (text4 == null) text4 = '';
-			if (text5 == null) text5 = '';
+			for (i in [text1, text2, text3, text4, text5])
+				if (i == null)
+					i = '';
+
 			luaTrace('' + text1 + text2 + text3 + text4 + text5, true, false);
 		});
 		
@@ -2827,7 +2826,10 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "stringTrim", function(str:String) {
 			return str.trim();
 		});
-		
+		Lua_helper.add_callback(lua, "GetFromTypedGroup", (group:FlxTypedGroup<Dynamic>, obj:Dynamic) -> {
+			return group.getFirstAvailable(obj);
+		});
+
 		Lua_helper.add_callback(lua, "directoryFileList", function(folder:String) {
 			var list:Array<String> = [];
 			#if sys

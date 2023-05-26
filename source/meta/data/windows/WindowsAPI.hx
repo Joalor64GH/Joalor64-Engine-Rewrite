@@ -8,7 +8,7 @@ import meta.data.native.WinAPI;
  */
 class WindowsAPI {
     /**
-     * Sets the window titlebar to dark mode (Windows 10 only)
+     * Sets the window titlebar to dark mode
      */
     public static function setDarkMode(enable:Bool) {
         #if windows

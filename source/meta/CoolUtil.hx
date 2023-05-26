@@ -13,7 +13,7 @@ class CoolUtil
 		'Normal',
 		'Hard'
 	];
-	public static var defaultDifficulty:String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
+	public static final defaultDifficulty:String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
 
 	public static var difficulties:Array<String> = [];
 
@@ -35,29 +35,27 @@ class CoolUtil
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
 
-	inline public static function coolTextFile(path:String):Array<String> {
-		return (Assets.exists(path)) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
-	}
+	inline public static function coolTextFile(path:String):Array<String>
+		return Assets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
 
 	// this is actual source code from VS Null https://gamebanana.com/wips/70592
 	// now outdated 😅
-	public static inline function coolerTextFile(path:String, daString:String = ''):String {
+	public static inline function coolerTextFile(path:String, daString:String = ''):String
 		return Assets.exists(path) ? daString = Assets.getText(path).trim() : '';
-	}
 
 	public static function coolReplace(string:String, sub:String, by:String):String
 		return string.split(sub).join(by);
 
 	//Example: "winter-horrorland" to "Winter Horrorland". Used for replays
 	public static function coolSongFormatter(song:String):String
-    	{
-        	var swag:String = coolReplace(song, '-', ' ');
-        	var splitSong:Array<String> = swag.split(' ');
+	{
+		var swag:String = coolReplace(song, '-', ' ');
+		var splitSong:Array<String> = swag.split(' ');
 
 		for (i in 0...splitSong.length)
 		{
-            		var firstLetter = splitSong[i].substring(0, 1);
-            		var coolSong:String = coolReplace(splitSong[i], firstLetter, firstLetter.toUpperCase());
+			var firstLetter = splitSong[i].substring(0, 1);
+			var coolSong:String = coolReplace(splitSong[i], firstLetter, firstLetter.toUpperCase());
 			var splitCoolSong:Array<String> = coolSong.split('');
 
 			coolSong = Std.string(splitCoolSong[0]).toUpperCase();
@@ -67,10 +65,10 @@ class CoolUtil
 
 			coolSong = coolReplace(coolSong, 'null', '');
 
-            		for (l in 0...splitSong.length)
-            		{
-                		var stringSong:String = Std.string(splitSong[l+1]);
-                		var stringFirstLetter:String = stringSong.substring(0, 1);
+			for (l in 0...splitSong.length)
+			{
+				var stringSong:String = Std.string(splitSong[l+1]);
+				var stringFirstLetter:String = stringSong.substring(0, 1);
 
 				var splitStringSong = stringSong.split('');
 				stringSong = Std.string(splitStringSong[0]).toUpperCase();
@@ -80,26 +78,23 @@ class CoolUtil
 
 				stringSong = coolReplace(stringSong, 'null', '');
 
-                		coolSong += ' $stringSong';
-            		}
+					coolSong += ' $stringSong';
+			}
 
 			song = coolSong.replace(' Null', '');
-            		return song;
-        	}
+			return song;
+		}
 
-        	return swag;
+		return swag;
 	}
 
 	#if sys
 	public static function coolPathArray(path:String):Array<String>
-	{
 		return FileSystem.readDirectory(FileSystem.absolutePath(path));
-	}
 	#end
 	
-	inline public static function listFromString(string:String):Array<String> {
+	inline public static function listFromString(string:String):Array<String>
 		return string.trim().split('\n').map(str -> str.trim());
-	}
 
 	public static function dominantColor(sprite:flixel.FlxSprite):Int {
 		var countByColor:Map<Int, Int> = [];
@@ -128,7 +123,10 @@ class CoolUtil
 	}
 
 	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
-		return [for (i in min...max) i];
+		return [
+			for (i in min...max) 
+				i
+		];
 
 	//uhhhh does this even work at all? i'm starting to doubt
 	inline public static function precacheSound(sound:String, ?library:String = null):Void
