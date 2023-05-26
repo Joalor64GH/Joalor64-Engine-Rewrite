@@ -4859,7 +4859,7 @@ class PlayState extends MusicBeatState
 			pixelShitPart2 = '-pixel';
 		}
 
-		var ratingsGroup:FlxTypedGroup = new FlxTypedGroup();
+		var ratingsGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
 		final ratingsY:Float = 60;
 
@@ -4883,7 +4883,7 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		var comboGroup:FlxTypedGrop = new FlxTypedGroup();
+		var comboGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		var comboSpr:FlxSprite;
 		final comboX:Float = FlxG.width * 0.35;
 		final comboY:Float = 60;
@@ -4947,7 +4947,7 @@ class PlayState extends MusicBeatState
 		}
 		for (i in seperatedScore)
 		{
-			var numScoreGroup:FlxTypedGroup = new FlxTypedGroup();
+			var numScoreGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 			var numScore:FlxSprite;
 			final numScoreX:Float = FlxG.width * 0.35 + (43 * daLoop) - 90;
 			final numScoreY:Float = 80;
