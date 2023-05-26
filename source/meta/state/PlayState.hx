@@ -5004,7 +5004,7 @@ class PlayState extends MusicBeatState
 			daLoop++;
 		}
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete _ -> {
+		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
 				rating.kill();
 				rating.alpha = 1;
 			},

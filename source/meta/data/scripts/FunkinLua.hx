@@ -2826,7 +2826,7 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "stringTrim", function(str:String) {
 			return str.trim();
 		});
-		Lua_helper.add_callback(lua, "GetFromTypedGroup", (group:FlxTypedGroup<Dynamic>, obj:Dynamic) -> {
+		Lua_helper.add_callback(lua, "GetFromTypedGroup", (group:FlxTypedGroup, obj:Dynamic) -> {
 			return group.getFirstAvailable(obj);
 		});
 
