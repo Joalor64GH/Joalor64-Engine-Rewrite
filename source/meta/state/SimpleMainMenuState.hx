@@ -109,7 +109,7 @@ class SimpleMainMenuState extends MusicBeatState
 
         	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
-		final yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
+		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.scale.set(1.07, 1.07);

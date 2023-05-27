@@ -112,7 +112,7 @@ class OptionsState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		final yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
+		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.color = 0xFF98f0f8;
