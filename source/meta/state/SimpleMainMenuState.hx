@@ -63,6 +63,8 @@ class SimpleMainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 
+	var yScroll:Float;
+
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Story Mode':
@@ -109,7 +111,7 @@ class SimpleMainMenuState extends MusicBeatState
 
         	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
+		yScroll = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.scale.set(1.07, 1.07);
