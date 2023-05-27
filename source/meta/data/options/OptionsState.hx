@@ -25,8 +25,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import flixel.FlxCamera;
-import flixel.FlxObject;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -51,6 +49,7 @@ class OptionsState extends MusicBeatState
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
+	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -79,16 +78,8 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
-	var bg:FlxSprite;
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
-
-	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
-	var camMain:FlxCamera;
-	var camSub:FlxCamera;
-
-	var yScroll:Float;
 
 	override function create() {
 		#if desktop
@@ -97,41 +88,19 @@ class OptionsState extends MusicBeatState
 
 		Application.current.window.title = Application.current.meta.get('name');
 
-		camMain = new FlxCamera();
-		camSub = new FlxCamera();
-		camSub.bgColor.alpha = 0;
-
-		FlxG.cameras.reset(camMain);
-		FlxG.cameras.add(camSub, false);
-
-		FlxG.cameras.setDefaultDrawTarget(camMain, true);
-		CustomFadeTransition.nextCamera = camSub;
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-		add(camFollowPos);
-
-		FlxG.camera.follow(camFollowPos, null, 1);
-
-		yScroll = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
-		bg.scale.set(1.07, 1.07);
 		bg.updateHitbox();
-		bg.scrollFactor.set(0, yScroll / 3);
+
 		bg.screenCenter();
-		bg.y += 5;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		
 		initOptions();
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
-		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
-		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
 		changeSelection();
@@ -149,7 +118,6 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			optionText.scrollFactor.set(0, yScroll);
 			grpOptions.add(optionText);
 		}
 	}
@@ -162,14 +130,6 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		var lerpVal:Float = CoolUtil.clamp(elapsed * 7.5, 0, 1);
-		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
-
-		var mult:Float = FlxMath.lerp(1.07, bg.scale.x, CoolUtil.clamp(1 - (elapsed * 9), 0, 1));
-		bg.scale.set(mult, mult);
-		bg.updateHitbox();
-		bg.offset.set();
-		
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}

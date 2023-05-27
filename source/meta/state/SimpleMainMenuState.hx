@@ -23,7 +23,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.FlxCamera;
-import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
@@ -54,16 +53,9 @@ class SimpleMainMenuState extends MusicBeatState
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
+	public static var menuBG:FlxSprite;
 
-	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-
-	var bg:FlxSprite;
-
-	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
-
-	var yScroll:Float;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -89,43 +81,24 @@ class SimpleMainMenuState extends MusicBeatState
 
 	override function create() 
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		Paths.pushGlobalMods();
-		#end
-		
-		WeekData.loadTheFirstEnabledMod();
-
 		#if desktop
 		DiscordClient.changePresence("Simple Main Menu Menu", null);
 		#end
 
-		Application.current.window.title = Application.current.meta.get('name');
+		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
 
-		camGame = new FlxCamera();
         	camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
         	FlxG.cameras.add(camAchievement, false);
-		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
         	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
-		yScroll = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
-		bg = new FlxSprite().loadGraphic(Paths.image('menuBG'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		bg.scale.set(1.07, 1.07);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.updateHitbox();
-		bg.scrollFactor.set(0, yScroll / 3);
 		bg.screenCenter();
-		bg.y += 5;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-		add(camFollowPos);
-		FlxG.camera.follow(camFollowPos, null, 1);
 
         	initOptions();
 
@@ -143,10 +116,8 @@ class SimpleMainMenuState extends MusicBeatState
 		add(versionShit);
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
-		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
-		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
 		changeSelection();
@@ -181,8 +152,7 @@ class SimpleMainMenuState extends MusicBeatState
 		super.closeSubState();
 	}
 
-    	function initOptions() 
-	{
+    	function initOptions() {
         	grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -191,22 +161,12 @@ class SimpleMainMenuState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			optionText.scrollFactor.set(0, yScroll);
 			grpOptions.add(optionText);
 		}
     	}
 
-	override function update(elapsed:Float) 
-	{
+	override function update(elapsed:Float) {
 		super.update(elapsed);
-
-		var lerpVal:Float = CoolUtil.clamp(elapsed * 7.5, 0, 1);
-		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
-
-		var mult:Float = FlxMath.lerp(1.07, bg.scale.x, CoolUtil.clamp(1 - (elapsed * 9), 0, 1));
-		bg.scale.set(mult, mult);
-		bg.updateHitbox();
-		bg.offset.set();
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
