@@ -59,8 +59,8 @@ class Main extends Sprite
 		gameWidth = GameDimensions.width;
 		gameHeight = GameDimensions.height;
 		
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		final stageWidth:Int = Lib.current.stage.stageWidth;
+		final stageHeight:Int = Lib.current.stage.stageHeight;
 
 		if (zoom == -1)
 		{
@@ -70,7 +70,26 @@ class Main extends Sprite
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
-	
+
+		FlxG.signals.preStateSwitch.add(() ->{
+			#if cpp
+			cpp.NativeGc.run(true);
+			cpp.NativeGc.enable(true);
+			#end
+			FlxG.bitmap.dumpCache();
+			FlxG.bitmap.clearUnused();
+
+			openfl.system.System.gc();
+		});
+
+		FlxG.signals.postStateSwitch.add(() ->{
+			#if cpp
+			cpp.NativeGc.run(false);
+			cpp.NativeGc.enable(false);
+			#end
+			openfl.system.System.gc();
+		});
+
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(gameWidth, gameHeight, TitleState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 

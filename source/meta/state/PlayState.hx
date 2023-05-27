@@ -4929,6 +4929,7 @@ class PlayState extends MusicBeatState
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
 
+		// forever engine combo
 		var seperatedScore:Array<String> = (combo + "").split("");
 		var daLoop:Int = 0;
 
