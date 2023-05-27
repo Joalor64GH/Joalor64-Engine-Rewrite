@@ -173,7 +173,7 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 
     	function initOptions() 
-		{
+	{
         	grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
