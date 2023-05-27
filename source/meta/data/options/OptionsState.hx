@@ -51,7 +51,6 @@ class OptionsState extends MusicBeatState
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
-	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -80,6 +79,8 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
+	var bg:FlxSprite;
+	
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
@@ -109,21 +110,26 @@ class OptionsState extends MusicBeatState
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 		add(camFollowPos);
+
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
+		final yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.color = 0xFF98f0f8;
+		bg.scale.set(1.07, 1.07);
 		bg.updateHitbox();
-
+		bg.scrollFactor.set(0, yScroll / 3);
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.y += 5;
 		add(bg);
 		
 		initOptions();
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
+		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
+		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
 		changeSelection();
@@ -141,6 +147,7 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, yScroll);
 			grpOptions.add(optionText);
 		}
 	}
@@ -153,6 +160,14 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
+		var lerpVal:Float = CoolUtil.clamp(elapsed * 7.5, 0, 1);
+		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+
+		var mult:Float = FlxMath.lerp(1.07, bg.scale.x, CoolUtil.clamp(1 - (elapsed * 9), 0, 1));
+		bg.scale.set(mult, mult);
+		bg.updateHitbox();
+		bg.offset.set();
+		
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}
