@@ -71,7 +71,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
-* [ThatOneFox](https://github.com/HinataOnYT) - Made the Cool New Logo
+* [ThatOneFox](https://github.com/ThatOneFoxHX) - Made the Cool New Logo
 
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
