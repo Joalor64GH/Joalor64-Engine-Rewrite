@@ -25,6 +25,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import flixel.FlxCamera;
+import flixel.FlxObject;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -81,12 +83,33 @@ class OptionsState extends MusicBeatState
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
+	var camFollow:FlxObject;
+	var camFollowPos:FlxObject;
+	var camMain:FlxCamera;
+	var camSub:FlxCamera;
+
 	override function create() {
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
 		Application.current.window.title = Application.current.meta.get('name');
+
+		camMain = new FlxCamera();
+		camSub = new FlxCamera();
+		camSub.bgColor.alpha = 0;
+
+		FlxG.cameras.reset(camMain);
+		FlxG.cameras.add(camSub, false);
+
+		FlxG.cameras.setDefaultDrawTarget(camMain, true);
+		CustomFadeTransition.nextCamera = camSub;
+
+		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollowPos = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+		add(camFollowPos);
+		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;

@@ -23,6 +23,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.FlxCamera;
+import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
@@ -55,7 +56,11 @@ class SimpleMainMenuState extends MusicBeatState
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
+	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+
+	var camFollow:FlxObject;
+	var camFollowPos:FlxObject;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -81,16 +86,25 @@ class SimpleMainMenuState extends MusicBeatState
 
 	override function create() 
 	{
+		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		Paths.pushGlobalMods();
+		#end
+		
+		WeekData.loadTheFirstEnabledMod();
+
 		#if desktop
 		DiscordClient.changePresence("Simple Main Menu Menu", null);
 		#end
 
 		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
 
+		camGame = new FlxCamera();
         	camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
+		FlxG.cameras.reset(camGame);
         	FlxG.cameras.add(camAchievement, false);
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
         	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
@@ -99,6 +113,12 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollowPos = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+		add(camFollowPos);
+		FlxG.camera.follow(camFollowPos, null, 1);
 
         	initOptions();
 
@@ -152,7 +172,8 @@ class SimpleMainMenuState extends MusicBeatState
 		super.closeSubState();
 	}
 
-    	function initOptions() {
+    	function initOptions() 
+		{
         	grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -165,7 +186,8 @@ class SimpleMainMenuState extends MusicBeatState
 		}
     	}
 
-	override function update(elapsed:Float) {
+	override function update(elapsed:Float) 
+	{
 		super.update(elapsed);
 
 		if (controls.UI_UP_P) {
