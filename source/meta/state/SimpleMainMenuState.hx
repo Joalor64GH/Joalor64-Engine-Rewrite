@@ -111,7 +111,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 		final yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuBG'));
-		bg.color = 0xFF98f0f8;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.scale.set(1.07, 1.07);
 		bg.updateHitbox();
 		bg.scrollFactor.set(0, yScroll / 3);

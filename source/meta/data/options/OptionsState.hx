@@ -80,7 +80,6 @@ class OptionsState extends MusicBeatState
 	}
 
 	var bg:FlxSprite;
-	
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
@@ -115,6 +114,7 @@ class OptionsState extends MusicBeatState
 
 		final yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.color = 0xFF98f0f8;
 		bg.scale.set(1.07, 1.07);
 		bg.updateHitbox();
