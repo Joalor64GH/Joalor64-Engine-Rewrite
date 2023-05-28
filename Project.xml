@@ -119,6 +119,7 @@
 
 	<!-- Script logging -->
 	<haxedef name="hscriptPos" value="true" />
+	<haxedef name="openflPos"/>
 	
 	<!--Enable the Flixel core recording system-->
 	<haxedef name="FLX_RECORD" />
