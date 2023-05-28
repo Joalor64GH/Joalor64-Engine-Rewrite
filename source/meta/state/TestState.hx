@@ -28,7 +28,7 @@ class TestState extends MusicBeatState
 
         bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
         bg.scale.set(10, 10);
-		bg.screenCenter();
+	bg.screenCenter();
         add(bg);
         
         musplayer = new FlxSprite(0, 0).loadGraphic(Paths.image('test/musplayer'));
@@ -59,9 +59,9 @@ class TestState extends MusicBeatState
         {
             FlxG.sound.play(Paths.sound('cancelMenu'));
             if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
-			else
-				MusicBeatState.switchState(new MainMenuState());
+		MusicBeatState.switchState(new SimpleMainMenuState());
+	    else
+		MusicBeatState.switchState(new MainMenuState());
         }
     }
 
