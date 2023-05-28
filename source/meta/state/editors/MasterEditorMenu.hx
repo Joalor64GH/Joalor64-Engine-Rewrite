@@ -56,17 +56,7 @@ class MasterEditorMenu extends MusicBeatState
 		bg.color = 0xFF353535;
 		add(bg);
 
-		grpTexts = new FlxTypedGroup<Alphabet>();
-		add(grpTexts);
-
-		for (i in 0...options.length)
-		{
-			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
-			leText.isMenuItem = true;
-			leText.targetY = i;
-			grpTexts.add(leText);
-			leText.snapToPosition();
-		}
+		initOptions();
 		
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 42).makeGraphic(FlxG.width, 42, 0xFF000000);
@@ -91,6 +81,21 @@ class MasterEditorMenu extends MusicBeatState
 
 		FlxG.mouse.visible = false;
 		super.create();
+	}
+
+	function initOptions() 
+	{
+		grpTexts = new FlxTypedGroup<Alphabet>();
+		add(grpTexts);
+
+		for (i in 0...options.length)
+		{
+			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
+			leText.isMenuItem = true;
+			leText.targetY = i;
+			grpTexts.add(leText);
+			leText.snapToPosition();
+		}
 	}
 
 	override function update(elapsed:Float)
@@ -140,6 +145,11 @@ class MasterEditorMenu extends MusicBeatState
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
 			}
+
+			if (FlxG.keys.justPressed.T)
+			{
+				MusicBeatState.switchState(new TestState());
+			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
 		}
@@ -151,12 +161,10 @@ class MasterEditorMenu extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
 		super.update(elapsed);
