@@ -145,15 +145,15 @@ class MasterEditorMenu extends MusicBeatState
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
 			}
-
-			if (FlxG.keys.justPressed.T)
-			{
-				MusicBeatState.switchState(new TestState());
-			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
 		}
 		
+		if (FlxG.keys.justPressed.T)
+		{
+			MusicBeatState.switchState(new TestState());
+		}
+
 		var bullShit:Int = 0;
 		for (item in grpTexts.members)
 		{
