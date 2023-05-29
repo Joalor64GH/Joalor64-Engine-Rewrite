@@ -15,11 +15,11 @@ using StringTools;
 class TestState extends MusicBeatState
 {
     public var bg:FlxSprite;
+
     public var disc:FlxSprite;
     public var musplayer:FlxSprite;
     public var playerneedle:FlxSprite;
 
-    public var nameTxt:Alphabet;
     public var testTxt:Alphabet;
 
     override public function create()
@@ -35,20 +35,18 @@ class TestState extends MusicBeatState
         musplayer.screenCenter();
         musplayer.antialiasing = ClientPrefs.globalAntialiasing;
         add(musplayer);
-        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('test/playerneedle'));
-        playerneedle.screenCenter();
-        playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
-        add(playerneedle);
         disc = new FlxSprite(0, 0).loadGraphic(Paths.image('test/disk'));
         disc.setPosition(musplayer.x + 268, musplayer.y + 13);
         disc.antialiasing = ClientPrefs.globalAntialiasing;
         disc.angularVelocity = 30;
         add(disc);
+        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('test/playerneedle'));
+        playerneedle.screenCenter();
+        playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
+        add(playerneedle);
 
-        nameTxt = new Alphabet(musplayer.x + 90, musplayer.y - 120, 'Test', true);
+        nameTxt = new Alphabet(musplayer.x + 90, musplayer.y - 120, 'This is a test.', true);
         add(nameTxt);
-        testTxt = new Alphabet(nameTxt.x, musplayer.height + 140, 'This is a test.', true);
-        add(testTxt);
     }
 
     override public function update(elapsed:Float)
