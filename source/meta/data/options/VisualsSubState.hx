@@ -103,8 +103,14 @@ class VisualsSubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+
+		var option:Option = new Option('Rainbow FPS',
+		'If checked, makes the FPS have a chroma effect.',
+		'fpsRainbow',
+		'bool',
+		false);
+		addOption(option);
 		
-		#if !mobile
 		var option:Option = new Option('FPS Counter',
 			'If unchecked, hides FPS Counter.',
 			'showFPS',
@@ -112,7 +118,6 @@ class VisualsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
-		#end
 	
 		var option:Option = new Option('Colorblind Filter:',
 			"Filters for colorblind people.",

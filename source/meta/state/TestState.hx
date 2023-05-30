@@ -45,7 +45,7 @@ class TestState extends MusicBeatState
         playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
         add(playerneedle);
 
-        testTxt = new Alphabet(musplayer.x + 90, musplayer.y - 120, 'This is a test.', true);
+        testTxt = new Alphabet(musplayer.x + 90, 0, 'This is a test.', true);
         add(testTxt);
     }
 

@@ -28,20 +28,17 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Polymod Support
 * HX and Hscript Support
 * Replay System
+* Reorganized Source/Assets
 * Noteskins
-* Random LUA Scripts (Most will be hardcoded soon)
 * MP4/WebM Video Support
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
 * Softcoded Achievements
+* A bunch of others that ShadowMario refused to add
 
 # Planned Features
-* [X] [Reorganized Assets](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/pull/21) **[yay]**
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
-* [X] Make a Template for HX Scripts **[Completed]**
-* [ ] Hardcode most of the Lua Scripts to PlayState (Because yeah)
-    * [X] Health Counter
-    * [ ] Health Icon Bopping
+* [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
 * [ ] (If possible) Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource)
 
