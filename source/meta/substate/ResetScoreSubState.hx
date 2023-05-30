@@ -35,6 +35,9 @@ class ResetScoreSubState extends MusicBeatSubstate
 		this.difficulty = difficulty;
 		this.week = week;
 
+		if (character == '' || character.length <= 0)
+			character = 'face';
+
 		super();
 
 		var name:String = song;
@@ -90,7 +93,8 @@ class ResetScoreSubState extends MusicBeatSubstate
 			var spr = alphabetArray[i];
 			spr.alpha += elapsed * 2.5;
 		}
-		if(week == -1) icon.alpha += elapsed * 2.5;
+		if(week == -1) 
+			icon.alpha += elapsed * 2.5;
 
 		if(controls.UI_LEFT_P || controls.UI_RIGHT_P) {
 			FlxG.sound.play(Paths.sound('scrollMenu'), 1);
@@ -102,11 +106,10 @@ class ResetScoreSubState extends MusicBeatSubstate
 			close();
 		} else if(controls.ACCEPT) {
 			if(onYes) {
-				if(week == -1) {
+				if(week == -1)
 					Highscore.resetSong(song, difficulty);
-				} else {
+				else
 					Highscore.resetWeek(WeekData.weeksList[week], difficulty);
-				}
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
 			close();
@@ -117,12 +120,21 @@ class ResetScoreSubState extends MusicBeatSubstate
 	function updateOptions() {
 		var scales:Array<Float> = [0.75, 1];
 		var alphas:Array<Float> = [0.6, 1.25];
-		var confirmInt:Int = onYes ? 1 : icon.widthThing == 450 ? 2 : 0;
+		var confirmInt:Int = getIconAmount();
 
 		yesText.alpha = alphas[confirmInt];
 		yesText.scale.set(scales[confirmInt], scales[confirmInt]);
 		noText.alpha = alphas[1 - confirmInt];
 		noText.scale.set(scales[1 - confirmInt], scales[1 - confirmInt]);
-		if(week == -1) icon.animation.curAnim.curFrame = confirmInt;
+		if(week == -1) 
+			icon.animation.curAnim.curFrame = confirmInt;
+	}
+
+	inline function hasIcon():Bool{
+		return icon != null && icon.exists;
+	}
+
+	inline function getIconAmount():Int{
+		return onYes ? 1 : hasIcon() ? icon.widthThing == 450 ? 2 : 0 : 0;
 	}
 }
