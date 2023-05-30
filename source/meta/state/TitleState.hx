@@ -315,6 +315,12 @@ class TitleState extends MusicBeatState
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		add(titleText);
+		
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.3.5b (PE 0.6.3)", 12);
+		#if debug versionShit.text += " DEBUG BUILD"; #end
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -405,12 +411,6 @@ class TitleState extends MusicBeatState
 		credIconEvil.visible = false;
 		credIconEvil.flipX = true;
 		#end
-
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.3.5b (PE 0.6.3)", 12);
-		#if debug versionShit.text += " DEBUG BUILD"; #end
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
