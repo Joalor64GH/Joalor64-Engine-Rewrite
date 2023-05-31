@@ -78,6 +78,7 @@ class FlxTransitionableState extends FlxState
 		transitionIn();
 	}
 
+	#if (flixel < "5.3.0")
 	override public function switchTo(nextState:FlxState):Bool
 	{
 		if (!hasTransOut)
@@ -88,6 +89,23 @@ class FlxTransitionableState extends FlxState
 
 		return transOutFinished;
 	}
+	#else
+	// props to gabi!! (beastlyghost)
+	override function startOutro(onOutroComplete:() -> Void) {
+		if (!hasTransOut)
+			onOutroComplete();
+		else if (!_exiting) {
+			// play the exit transition, and when it's done call FlxG.switchState
+			_exiting = true;
+			transitionOut(onOutroComplete);
+
+			if (skipNextTransOut) {
+				skipNextTransOut = false;
+				finishTransOut();
+			}
+		}
+	}
+	#end
 
 	function transitionToState(nextState:FlxState):Void
 	{
