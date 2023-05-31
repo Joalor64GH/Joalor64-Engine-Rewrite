@@ -62,6 +62,13 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
     public var inEditor:Bool = false;
     public var editorPaused:Bool = false;
     public var speed:Float = 1.0;
+
+    public var modifiers(get, default):Map<String, Modifier>;
+
+    private function get_modifiers() : Map<String, Modifier>
+    {
+        return modifierTable.modifiers; //back compat with lua modcharts
+    }
     public function new(strumGroup:FlxTypedGroup<StrumNoteType>, notes:FlxTypedGroup<Note>,instance:ModchartMusicBeatState) 
     {
         super(0,0);
@@ -186,9 +193,9 @@ class PlayfieldRenderer extends FlxSprite //extending flxsprite just so i can ed
             noteScaleY = 1*PlayState.daPixelZoom;
         }
         var noteData:NotePositionData = NotePositionData.get();
-        playfields[playfieldIndex].applyOffsets(noteData);
         noteData.setupNote(noteX, noteY, noteZ, lane, noteScaleX, noteScaleY, playfieldIndex, noteAlpha, 
             curPos, noteDist, incomingAngle[0], incomingAngle[1], notes.members[noteIndex].strumTime, noteIndex);
+        playfields[playfieldIndex].applyOffsets(noteData);
         return noteData;
     }
 

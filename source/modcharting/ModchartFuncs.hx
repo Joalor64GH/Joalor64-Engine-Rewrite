@@ -42,6 +42,7 @@ class ModchartFuncs
             #end
             Lua_helper.add_callback(funkin.lua, 'startMod', function(name:String, modClass:String, type:String = '', pf:Int = -1){
                 startMod(name,modClass,type,pf);
+                
             });
             Lua_helper.add_callback(funkin.lua, 'setMod', function(name:String, value:Float){
                 setMod(name, value);
