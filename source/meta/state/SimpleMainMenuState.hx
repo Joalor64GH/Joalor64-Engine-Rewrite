@@ -6,6 +6,7 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -23,7 +24,6 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 import meta.state.editors.*;
 import meta.state.*;
-
 import meta.data.Achievements;
 
 using StringTools;
