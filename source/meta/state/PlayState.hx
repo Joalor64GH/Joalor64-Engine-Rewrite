@@ -66,7 +66,7 @@ import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") 
 import VideoHandler as MP4Handler;
 #else 
-import vlc.MP4Handler; 
+import vlc.MP4Handler;
 #end
 #end
 #if WEBM_ALLOWED
@@ -1344,7 +1344,7 @@ class PlayState extends MusicBeatState
 		startingSong = true;
 
 		#if LUA_ALLOWED
-		for (notetype in noteTypeMap.keys())
+		for (notetype in noteTypes)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var luaToLoad:String = Paths.modFolders('notetypes/' + notetype + '.lua');
@@ -1368,7 +1368,7 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-		for (event in eventPushedMap.keys())
+		for (event in eventsPushed)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var luaToLoad:String = Paths.modFolders('events/' + event + '.lua');
@@ -1394,7 +1394,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 		#if HSCRIPT_ALLOWED
-		for (notetype in noteTypeMap.keys())
+		for (notetype in noteTypes)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hscriptToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hscript');
@@ -1418,7 +1418,7 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-		for (event in eventPushedMap.keys())
+		for (event in eventsPushed)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hscriptToLoad:String = Paths.modFolders('events/' + event + '.hscript');
@@ -1444,7 +1444,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 		#if SCRIPT_EXTENSION
-		for (notetype in noteTypeMap.keys())
+		for (notetype in noteTypes)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
@@ -1468,7 +1468,7 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-		for (event in eventPushedMap.keys())
+		for (event in eventsPushed)
 		{
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
@@ -1493,10 +1493,8 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
-		noteTypeMap.clear();
-		noteTypeMap = null;
-		eventPushedMap.clear();
-		eventPushedMap = null;
+		noteTypes = null;
+		eventsPushed = null;
 
 		// SONG SPECIFIC SCRIPTS
 		var filesPushed:Array<String> = [];
@@ -3061,8 +3059,8 @@ class PlayState extends MusicBeatState
 		callOnLuas('onSongStart', []);
 	}
 
-	private var noteTypeMap:Map<String, Bool> = new Map<String, Bool>();
-	private var eventPushedMap:Map<String, Bool> = new Map<String, Bool>();
+	private var noteTypes:Array<String> = [];
+	private var eventsPushed:Array<String> = [];
 	
 	private function generateSong():Void
 	{
@@ -3192,8 +3190,8 @@ class PlayState extends MusicBeatState
 						swagNote.x += FlxG.width / 2 + 25;
 				}
 
-				if(!noteTypeMap.exists(swagNote.noteType))
-					noteTypeMap.set(swagNote.noteType, true);
+				if(!noteTypes.contains(swagNote.noteType))
+					noteTypes.push(swagNote.noteType);
 			}
 		}
 		for (event in SONG.events) //Event Notes
@@ -3299,8 +3297,8 @@ class PlayState extends MusicBeatState
 				insert(members.indexOf(phillyGlowGradient) + 1, phillyGlowParticles);
 		}
 
-		if(!eventPushedMap.exists(event.event)) {
-			eventPushedMap.set(event.event, true);
+		if(!eventsPushed.contains(event.event)) {
+			eventsPushed.push(event.event);
 		}
 	}
 
@@ -3553,6 +3551,7 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality && bgGhouls.animation.curAnim.finished) {
 					bgGhouls.visible = false;
 				}
+				Application.current.window.title = randomString(FlxG.random.int(8, 16));
 			case 'philly':
 				if (trainMoving)
 				{
@@ -3673,8 +3672,6 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
-			case 'schoolEvil':
-				Application.current.window.title = randomString(FlxG.random.int(8, 16));
 		}
 
 		if(!inCutscene) {
