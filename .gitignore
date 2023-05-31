@@ -34,8 +34,8 @@ appveyor-win32.yml
 
 ### Stage Editor-Related
 assets/images/stageborder.png
-source/editors/StageEditorState.hx
-source/LayerFile.hx
+source/meta/state/editors/StageEditorState.hx
+source/meta/data/LayerFile.hx
 
 ### Stepmania Stuff
 ### Maybe a new feature soon??
@@ -49,8 +49,8 @@ example_mods/modList.txt
 source/Snd.hx
 source/SndTV.hx
 source/ChartParser.hx
-source/editors/EditorLua.hx
-source/editors/EditorPlayState.hx
+source/meta/state/editors/EditorLua.hx
+source/meta/state/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
 * - Copy*
 

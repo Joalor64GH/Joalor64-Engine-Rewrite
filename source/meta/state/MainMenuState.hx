@@ -131,7 +131,8 @@ class MainMenuState extends MusicBeatState
 		}
 		else
 		{
-			optionShit = [
+			optionShit = 
+			[
 				'story_mode',
 				'freeplay',
 				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
@@ -267,19 +268,15 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 		#end
 
-		// Joalor64 Engine
+		// Watermarks
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, 'Joalor64 Engine Rewritten v$joalor64EngineVersion', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-
-		// Psych Engine
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, 'Psych Engine v$psychEngineVersion [$psychGitBuild]', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-
-		// FNF
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -352,16 +349,9 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UI_UP_P)
-			{
+			if (controls.UI_UP_P || controls.UI_DOWN_P) {
+				changeItem(controls.UI_UP_P ? -1 : 1);
 				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(-1);
-			}
-
-			if (controls.UI_DOWN_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
 			}
 
 			if (controls.BACK)
@@ -421,8 +411,6 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										LoadingState.loadAndSwitchState(new OptionsState());
-									default:
-										Main.toast.create('Oops!', 0xFFFFFF00, 'State not found!');
 								}
 							});
 						}
