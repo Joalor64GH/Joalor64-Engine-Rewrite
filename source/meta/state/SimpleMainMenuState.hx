@@ -3,30 +3,20 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
 import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.FlxCamera;
+import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
 import lime.app.Application;
+
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -78,6 +68,12 @@ class SimpleMainMenuState extends MusicBeatState
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
+	var camFollow:FlxObject;
+	var camFollowPos:FlxObject;
+	var camMain:FlxCamera;
+
+	var bg:FlxSprite;
+
 	override function create() 
 	{
 		#if desktop
@@ -86,16 +82,28 @@ class SimpleMainMenuState extends MusicBeatState
 
 		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
 
+		camMain = new FlxCamera();
         	camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
+		FlxG.cameras.reset(camMain);
         	FlxG.cameras.add(camAchievement, false);
+		FlxG.cameras.setDefaultDrawTarget(camMain, true);
 
         	debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBG'));
+		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollowPos = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+		add(camFollowPos);
+
+		FlxG.camera.follow(camFollowPos, null, 1);
+
+		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
+		bg = new FlxSprite().loadGraphic(Paths.image('menuBG'));
 		bg.updateHitbox();
 		bg.screenCenter();
+		bg.scrollFactor.set(0, yScroll / 3);
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
@@ -167,6 +175,14 @@ class SimpleMainMenuState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
+		var lerpVal:Float = CoolUtil.clamp(elapsed * 7.5, 0, 1);
+		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+	
+		var mult:Float = FlxMath.lerp(1.07, bg.scale.x, CoolUtil.clamp(1 - (elapsed * 9), 0, 1));
+		bg.scale.set(mult, mult);
+		bg.updateHitbox();
+		bg.offset.set();
+
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 		}
@@ -225,6 +241,8 @@ class SimpleMainMenuState extends MusicBeatState
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;
 				selectorRight.y = item.y;
+				var add:Float = (grpOptions.members.length > 4 ? grpOptions.members.length * 8 : 0);
+				camFollow.setPosition(item.getGraphicMidpoint().x, item.getGraphicMidpoint().y - add);
 			}
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
