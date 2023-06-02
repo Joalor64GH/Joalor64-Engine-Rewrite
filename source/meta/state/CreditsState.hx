@@ -212,6 +212,14 @@ class CreditsState extends MusicBeatState
 				''
 			],
 			[
+				'ThatOneFox',
+				'none',
+				'Cool New Logo\n"this is a quote"',
+				'https://github.com/ThatOneFoxHX',
+				'00A7D4',
+				''
+			],
+			[
 				'You',
 				'face',
 				'For playing :)\n"No problem! -You"',
