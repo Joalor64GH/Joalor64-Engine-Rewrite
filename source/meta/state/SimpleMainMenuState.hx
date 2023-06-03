@@ -123,8 +123,10 @@ class SimpleMainMenuState extends MusicBeatState
 		add(versionShit);
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
+		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
+		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
 		changeSelection();
@@ -154,8 +156,7 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 	#end
 
-    	override function closeSubState()
-	{
+    	override function closeSubState() {
 		super.closeSubState();
 	}
 
@@ -168,6 +169,7 @@ class SimpleMainMenuState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, yScroll);
 			grpOptions.add(optionText);
 		}
     	}

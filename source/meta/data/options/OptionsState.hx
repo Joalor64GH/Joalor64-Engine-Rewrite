@@ -87,7 +87,6 @@ class OptionsState extends MusicBeatState
 
 		FlxG.cameras.reset(camMain);
 		FlxG.cameras.add(camSub, false);
-
 		FlxG.cameras.setDefaultDrawTarget(camMain, true);
 		CustomFadeTransition.nextCamera = camSub;
 
@@ -110,8 +109,10 @@ class OptionsState extends MusicBeatState
 		initOptions();
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
+		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
+		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
 		changeSelection();
@@ -129,6 +130,7 @@ class OptionsState extends MusicBeatState
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, yScroll);
 			grpOptions.add(optionText);
 		}
 	}
