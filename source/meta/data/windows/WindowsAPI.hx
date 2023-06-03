@@ -14,6 +14,8 @@ class WindowsAPI {
         #if windows
         WinAPI.setDarkMode(enable);
         #end
+        lime.app.Application.current.window.borderless = true;
+		lime.app.Application.current.window.borderless = false;
     }
 
     /**
