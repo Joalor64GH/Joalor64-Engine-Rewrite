@@ -200,14 +200,14 @@ class Main extends Sprite
 	{
 		// Hippity, Hoppity, your code is now my property (from KadeEngine)
 		if (FlxG.save.data.fpsRainbow) {
-		if (currentColor >= array.length)
-			currentColor = 0;
-		currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.framerate));
-		(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
-		currentColor++;
-		skippedFrames++;
-		if (skippedFrames > ClientPrefs.framerate)
-			skippedFrames = 0;
+			if (currentColor >= array.length)
+				currentColor = 0;
+			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.framerate));
+			(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
+			currentColor++;
+			skippedFrames++;
+			if (skippedFrames > ClientPrefs.framerate)
+				skippedFrames = 0;
 		}
 		else fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
 	}

@@ -40,7 +40,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
-* [ ] (If possible) Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource)
+* [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
 
 # Downloads
 * [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
@@ -52,7 +52,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 # Credits
 
 ## Joalor64 Engine
-* [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer
+* [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
 * [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
