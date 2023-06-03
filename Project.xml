@@ -38,7 +38,7 @@
 
 	<!-- _______________________________ Custom Defines ______________________________ -->
 
-	<!-- UNCOMMENT THESE TO DISABLE THEM -->
+	<!-- COMMENT THESE TO DISABLE THEM -->
 	<section if="desktop">
 		<define name="MODS_ALLOWED" />
 		<define name="LUA_ALLOWED" />
@@ -71,7 +71,6 @@
 	<assets path="assets" exclude=".mp3" unless="web"/> 
 
 	<!-- EMBEDDED BY DEFAULT -->
-	<assets path="assets/fonts" embed='true'/>
 	<assets path='header.lua' embed='true'/>
 
 	<!-- SWF EXAMPLE -->
@@ -92,25 +91,34 @@
 
 	<haxedev set='webgl' />
 
+	<!-- Flixel -->
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
+	<haxelib name="flixel-tools" />
+	<haxelib name="flixel-ui" />
+
+	<!-- Hscript -->
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="hscript-ex" />
-	<haxelib name="actuate"/>
-	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
-	<haxelib name="tjson" />
-	<haxelib name="hxjsonast" />
-	<haxelib name="flixel-ui" />
-	<haxelib name="flixel-tools" />
-	<haxelib name="polymod-joalor64" if="FUTURE_POLYMOD"/>
+
+	<!-- Scripting/Modcharting -->
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
+
+	<!-- Videos -->
+	<haxelib name="actuate"/> <!-- Used for extension-webm -->
+	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
+
+	<!-- Discord Rich Prescence-->
 	<haxelib name="discord_rpc" if="desktop"/>
+
+	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
+	<haxelib name="polymod-joalor64" if="FUTURE_POLYMOD"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
