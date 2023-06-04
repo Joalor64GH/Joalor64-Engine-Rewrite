@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoReadme.png" width="750"/></a>
   <h1 align="center">Joalor64 Engine Rewritten</h1>
-  <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs if you can!</h2>
+  <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs/issues if you can!</h2>
 </p>
 
 ----------------------------------------------
