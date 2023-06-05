@@ -8,6 +8,7 @@ import meta.state.*;
 import meta.data.*;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.input.keyboard.FlxKey;
 
 #if FUTURE_POLYMOD
 import core.ModCore;
@@ -104,7 +105,6 @@ class Init extends FlxState
         	} else {
             		FlxG.switchState(new TitleState());
         	}
-
         	super.create();
     	}
 }

@@ -3,7 +3,6 @@ package meta.state;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.input.keyboard.FlxKey;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
@@ -44,7 +43,8 @@ import objects.shaders.*;
 
 using StringTools;
 
-typedef TitleData = {
+typedef TitleData = 
+{
 	titlex:Float,
 	titley:Float,
 	startx:Float,
