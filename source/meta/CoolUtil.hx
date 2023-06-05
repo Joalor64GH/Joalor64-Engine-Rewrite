@@ -1,10 +1,12 @@
 package meta;
 
-import meta.state.PlayState;
-import openfl.utils.Assets;
 import flixel.FlxG;
+import meta.state.PlayState;
+import openfl.utils.Assets as OpenFlAssets;
+import lime.utils.Assets as LimeAssets;
 
 using StringTools;
+using CoolUtil; // lmao
 
 class CoolUtil
 {
@@ -36,12 +38,15 @@ class CoolUtil
 		return Math.max(min, Math.min(max, value));
 
 	inline public static function coolTextFile(path:String):Array<String>
-		return Assets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
+		return OpenFlAssets.exists(path) ? [for (i in OpenFlAssets.getText(path).trim().split('\n')) i.trim()] : [];
 
 	// this is actual source code from VS Null https://gamebanana.com/wips/70592
 	// now outdated 😅
 	public static inline function coolerTextFile(path:String, daString:String = ''):String
-		return Assets.exists(path) ? daString = Assets.getText(path).trim() : '';
+		return OpenFlAssets.exists(path) ? daString = OpenFlAssets.getText(path).trim() : '';
+
+	inline public static function txtSplit(path:String)
+		return [for (i in LimeAssets.getText(path).trim().split('\n')) i.trim()];
 
 	public static function coolReplace(string:String, sub:String, by:String):String
 		return string.split(sub).join(by);
