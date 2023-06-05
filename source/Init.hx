@@ -4,7 +4,7 @@ package;
 import meta.data.dependency.Discord.DiscordClient;
 #end
 import meta.*;
-import meta.state.*
+import meta.state.*;
 import meta.data.*;
 import flixel.FlxG;
 import flixel.FlxState;
