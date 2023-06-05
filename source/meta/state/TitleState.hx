@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-import sys.thread.Thread;
-#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -25,7 +21,11 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
 import flixel.system.ui.FlxSoundTray;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -34,9 +34,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-#if FUTURE_POLYMOD
-import core.ModCore;
-#end
 
 import meta.*;
 import meta.data.*;
@@ -47,8 +44,7 @@ import objects.shaders.*;
 
 using StringTools;
 
-typedef TitleData = 
-{
+typedef TitleData = {
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -93,9 +89,6 @@ class TitleState extends MusicBeatState
 
 	var titleJSON:TitleData;
 
-	var mustUpdate:Bool = false;
-	public static var updateVersion:String = '';
-
 	var candance:Bool = true;
 
 	var leDate = Date.now();
@@ -105,91 +98,14 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		#if html5
-		Paths.initPaths();
-		#end
-
-		#if LUA_ALLOWED
-		Paths.pushGlobalMods();
-		#end
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
-		WeekData.loadTheFirstEnabledMod();
-
-		#if FUTURE_POLYMOD
-		ModCore.reload();
-		#end
-
-		FlxG.game.focusLostFramerate = 60;
-		FlxG.sound.muteKeys = [FlxKey.ZERO];
-		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
-		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
-		FlxG.keys.preventDefaultKeys = [TAB];
-
-		PlayerSettings.init();
-
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		gameName = getName();
 
 		swagShader = new ColorSwap();
 		super.create();
 
-		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
-
-		ClientPrefs.loadPrefs();
-
-		#if CHECK_FOR_UPDATES
-		if(ClientPrefs.checkForUpdates && !closedState) {
-			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
-
-			http.onData = function (data:String)
-			{
-				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.joalor64EngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
-				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdate = true;
-				}
-			}
-
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-
-			http.request();
-		}
-		#end
-
-		Highscore.load();
-
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 
-		if(!initialized)
-		{
-			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-			{
-				FlxG.fullscreen = FlxG.save.data.fullscreen;
-			}
-			persistentUpdate = true;
-			persistentDraw = true;
-		}
-
-		if (FlxG.save.data.weekCompleted != null)
-		{
-			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
-		FlxG.mouse.visible = false;
-		#if desktop
-		if (!DiscordClient.isInitialized)
-		{
-			DiscordClient.initialize();
-			Application.current.onExit.add (function (exitCode) {
-				DiscordClient.shutdown();
-			});
-		}
-		#end
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
@@ -303,8 +219,7 @@ class TitleState extends MusicBeatState
 			
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
 			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
+		} else {
 			newTitle = false;
 			
 			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
@@ -468,7 +383,6 @@ class TitleState extends MusicBeatState
 	}
 
 	var transitioning:Bool = false;
-	
 	var newTitle:Bool = false;
 	var titleTimer:Float = 0;
 
@@ -536,14 +450,10 @@ class TitleState extends MusicBeatState
 				candance = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (mustUpdate) {
-						MusicBeatState.switchState(new OutdatedState());
-					} else {
-						if (ClientPrefs.simpleMain)
-							MusicBeatState.switchState(new SimpleMainMenuState());
-						else
-							MusicBeatState.switchState(new MainMenuState());
-					}
+					if (ClientPrefs.simpleMain)
+						MusicBeatState.switchState(new SimpleMainMenuState());
+					else
+						MusicBeatState.switchState(new MainMenuState());
 					closedState = true;
 				});
 			}

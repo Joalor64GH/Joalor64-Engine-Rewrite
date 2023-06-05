@@ -14,7 +14,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import meta.data.ClientPrefs;
-import meta.state.TitleState;
 import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
@@ -97,7 +96,7 @@ class Main extends Sprite
 		});
 
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, TitleState, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false));
+		addChild(new FlxGame(gameWidth, gameHeight, Init, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
@@ -209,7 +208,8 @@ class Main extends Sprite
 			if (skippedFrames > ClientPrefs.framerate)
 				skippedFrames = 0;
 		}
-		else fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
+		else 
+			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
 	}
 	public function changeFPSColor(color:FlxColor)
 	{
