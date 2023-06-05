@@ -106,5 +106,5 @@ class Init extends FlxState
         	}
 
         	super.create();
-    }
+    	}
 }
