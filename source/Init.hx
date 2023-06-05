@@ -21,15 +21,15 @@ class Init extends FlxState
 {
 	public static var updateVersion:String = '';
 
-    var mustUpdate:Bool = false;
+    	var mustUpdate:Bool = false;
 
-    override function create()
-    {
-        #if html5
+	override function create()
+    	{
+        	#if html5
 		Paths.initPaths();
 		#end
 
-        #if LUA_ALLOWED
+        	#if LUA_ALLOWED
 		Paths.pushGlobalMods();
 		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
@@ -47,15 +47,15 @@ class Init extends FlxState
 		FlxG.keys.preventDefaultKeys = [TAB];
 
 		ClientPrefs.loadPrefs();
-        PlayerSettings.init();
-        Highscore.load();
+        	PlayerSettings.init();
+        	Highscore.load();
 
-        if (FlxG.save.data.weekCompleted != null)
+        	if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-        #if desktop
+        	#if desktop
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
@@ -64,18 +64,18 @@ class Init extends FlxState
 			});
 		}
 		#end
-        FlxG.mouse.visible = false;
+        	FlxG.mouse.visible = false;
 
-        FlxG.save.bind('j64enginerewrite', 'joalor64gh');
-        if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+        	FlxG.save.bind('j64enginerewrite', 'joalor64gh');
+        	if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 		}
 			
-        persistentUpdate = true;
+        	persistentUpdate = true;
 		persistentDraw = true;
 
-        #if CHECK_FOR_UPDATES
+        	#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates) {
 			trace('checking for update');
 			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
@@ -99,12 +99,12 @@ class Init extends FlxState
 		}
 		#end
 
-        if (mustUpdate) {
-            FlxG.switchState(new OutdatedState());
-        } else {
-            FlxG.switchState(new TitleState());
-        }
+        	if (mustUpdate) {
+            		FlxG.switchState(new OutdatedState());
+        	} else {
+            		FlxG.switchState(new TitleState());
+        	}
 
-        super.create();
+        	super.create();
     }
 }
