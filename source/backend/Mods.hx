@@ -38,7 +38,7 @@ class Mods
 		'libs'
 	];
 
-	private static var globalMods:Array<String> = [];
+	public static var globalMods:Array<String> = [];
 
 	public static function getGlobalMods()
 		return globalMods;
