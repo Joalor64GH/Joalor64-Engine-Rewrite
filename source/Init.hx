@@ -34,11 +34,11 @@ class Init extends FlxState
         	#if LUA_ALLOWED
 		Mods.pushGlobalMods();
 		#end
+		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
+		Mods.loadTheFirstEnabledMod();
 		#if FUTURE_POLYMOD
 		ModCore.reload();
 		#end
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
-		Mods.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
 
