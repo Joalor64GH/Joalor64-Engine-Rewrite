@@ -57,7 +57,7 @@ class ModOptionSelectState extends MusicBeatState
         	mods.insert(0, 'Global');
 
 		for (mod in mods) {
-			if (!Mods.optionsExist(mod == 'Global' ? '' : mod)) {
+			if (!Paths.optionsExist(mod == 'Global' ? '' : mod)) {
 				mods.remove(mod);
 			}
 		}

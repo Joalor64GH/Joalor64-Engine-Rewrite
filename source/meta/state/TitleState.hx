@@ -145,7 +145,7 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Paths.currentModDirectory + "/images/logoBumpin.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/logoBumpin.png";
 		if (!FileSystem.exists(path))
 		{
 			path = "mods/images/logoBumpin.png";
@@ -168,7 +168,7 @@ class TitleState extends MusicBeatState
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Paths.currentModDirectory + "/images/GF_assets.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/GF_assets.png";
 		if (!FileSystem.exists(path))
 		{
 			path = "mods/images/GF_assets.png";
@@ -196,7 +196,7 @@ class TitleState extends MusicBeatState
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/titleEnter.png";
 		if (!FileSystem.exists(path)){
 			path = "mods/images/titleEnter.png";
 		}
@@ -340,7 +340,7 @@ class TitleState extends MusicBeatState
 		var moddedFullText:String = '';
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Paths.currentModDirectory + "/introText.txt";
+		var path = "mods/" + Mods.currentModDirectory + "/introText.txt";
 		if (!FileSystem.exists(path)){
 			path = "mods/introText.txt";
 		}
