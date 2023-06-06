@@ -54,7 +54,7 @@ class OptionsState extends MusicBeatState
 		switch(label) {
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mod Options':
-			    	if (Paths.optionsExist())
+			    	if (Mods.optionsExist())
 					FlxG.switchState(new ModOptionSelectState());
 				else
 					FlxG.switchState(new OopsState());

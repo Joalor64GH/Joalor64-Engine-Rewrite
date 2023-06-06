@@ -16,6 +16,7 @@ import core.ModCore;
 
 import haxe.Http;
 import lime.app.Application;
+import backend.Mods;
 
 // this loads everything in
 class Init extends FlxState
@@ -31,14 +32,13 @@ class Init extends FlxState
 		#end
 
         	#if LUA_ALLOWED
-		Paths.pushGlobalMods();
+		Mods.pushGlobalMods();
 		#end
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
-		WeekData.loadTheFirstEnabledMod();
-
 		#if FUTURE_POLYMOD
 		ModCore.reload();
 		#end
+		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
+		Mods.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
 

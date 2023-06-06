@@ -101,7 +101,7 @@
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="hscript-ex" />
 
-	<!-- Scripting/Modcharting -->
+	<!-- Scripting/Modcharting Extensions -->
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>

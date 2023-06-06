@@ -22,7 +22,13 @@ import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
 import meta.Controls;
+#if !macro
 import Paths;
+#end
+
+#if (MODS_ALLOWED && FUTURE_POLYMOD)
+import backend.Mods;
+#end
 
 import objects.AttachedSprite;
 import meta.data.options.*;
