@@ -428,19 +428,19 @@ class PlayState extends MusicBeatState
 
 		//Ratings
 		var rating:Rating = new Rating('sick');
-		rating.ratingMod = 0.9825;
+		rating.ratingMod = 1;
 		rating.score = 350;
 		rating.noteSplash = true;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');
-		rating.ratingMod = 0.7;
+		rating.ratingMod = 0.75;
 		rating.score = 200;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('bad');
-		rating.ratingMod = 0.4;
+		rating.ratingMod = 0.5;
 		rating.score = 100;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
@@ -2662,6 +2662,7 @@ class PlayState extends MusicBeatState
 	public var countdownTwo:FlxSprite;
 	public var countdownOne:FlxSprite;
 	public var countdownGo:FlxSprite;
+	
 	public static var startOnTime:Float = 0;
 
 	function cacheCountdown()
