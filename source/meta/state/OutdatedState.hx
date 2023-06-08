@@ -31,7 +31,7 @@ class OutdatedState extends MusicBeatState
 			"Oh teh noes! You're running an   \n
 			outdated version of Joalor64 Engine Rewritten!\n
 			You are currently on version (" + MainMenuState.joalor64EngineVersion + ").\n
-			Please update to " + Init.updateVersion + "!\n
+			Please update to " + TitleState.updateVersion + "!\n
 			Press ENTER to open the downloads page!\n
 			Press ESCAPE to proceed anyway.\n
             Thank you for using the Engine! :)",
