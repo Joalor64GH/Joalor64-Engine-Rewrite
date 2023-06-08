@@ -104,7 +104,7 @@ class TitleState extends MusicBeatState
 
 	var leDate = Date.now();
 
-    var mustUpdate:Bool = false;
+    	var mustUpdate:Bool = false;
 
 	override public function create():Void
 	{
@@ -115,14 +115,13 @@ class TitleState extends MusicBeatState
 		Paths.initPaths();
 		#end
 
-        	#if LUA_ALLOWED
-		Mods.pushGlobalMods();
-		#end
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
-		Mods.loadTheFirstEnabledMod();
 		#if FUTURE_POLYMOD
 		ModCore.reload();
 		#end
+        	#if LUA_ALLOWED
+		Mods.pushGlobalMods();
+		#end
+		Mods.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
 
@@ -147,18 +146,19 @@ class TitleState extends MusicBeatState
         	FlxG.mouse.visible = false;
 
         	FlxG.save.bind('j64enginerewrite', 'joalor64gh');
-		
-        	if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+        	if(!initialized)
 		{
-			FlxG.fullscreen = FlxG.save.data.fullscreen;
+			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+			{
+				FlxG.fullscreen = FlxG.save.data.fullscreen;
+			}
+			persistentUpdate = true;
+			persistentDraw = true;
 		}
 		if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
-			
-        	persistentUpdate = true;
-		persistentDraw = true;
 
         	#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates) {
