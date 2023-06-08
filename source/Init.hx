@@ -51,11 +51,6 @@ class Init extends FlxState
         	PlayerSettings.init();
         	Highscore.load();
 
-        	if (FlxG.save.data.weekCompleted != null)
-		{
-			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
         	#if desktop
 		if (!DiscordClient.isInitialized)
 		{
@@ -68,9 +63,14 @@ class Init extends FlxState
         	FlxG.mouse.visible = false;
 
         	FlxG.save.bind('j64enginerewrite', 'joalor64gh');
+		
         	if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
+		}
+		if (FlxG.save.data.weekCompleted != null)
+		{
+			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 			
         	persistentUpdate = true;
