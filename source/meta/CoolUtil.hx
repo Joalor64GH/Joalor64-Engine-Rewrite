@@ -3,6 +3,9 @@ package meta;
 import meta.state.PlayState;
 import openfl.utils.Assets;
 import flixel.FlxG;
+#if sys
+import sys.FileSystem;
+#end
 
 using StringTools;
 
@@ -36,12 +39,12 @@ class CoolUtil
 		return Math.max(min, Math.min(max, value));
 
 	inline public static function coolTextFile(path:String):Array<String>
-		return Assets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
+		return FileAssets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
 
-	// this is actual source code from VS Null https://gamebanana.com/wips/70592
+	// this is actual source code from VS Null https://gamebanana.com/mods/447674
 	// now outdated 😅
 	public static inline function coolerTextFile(path:String, daString:String = ''):String
-		return Assets.exists(path) ? daString = Assets.getText(path).trim() : '';
+		return FileAssets.exists(path) ? daString = Assets.getText(path).trim() : '';
 
 	public static function coolReplace(string:String, sub:String, by:String):String
 		return string.split(sub).join(by);
@@ -143,3 +146,6 @@ class CoolUtil
 		#end
 	}
 }
+
+// there's a big difference between the two
+typedef FileAssets = #if sys FileSystem; #else openfl.utils.Assets; #end
