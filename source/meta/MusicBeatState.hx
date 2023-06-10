@@ -43,10 +43,6 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 			openSubState(new CustomFadeTransition(0.7, true));
 		}
 		FlxTransitionableState.skipNextTransOut = false;
-
-		#if MODS_ALLOWED 
-		Mods.updatedOnState = false; 
-		#end
 	}
 
 	override function update(elapsed:Float)

@@ -53,7 +53,7 @@ class ModOptionSelectState extends MusicBeatState
 		DiscordClient.changePresence("Mod Menu", null);
 		#end
 
-        	mods = Mods.getModDirectories();
+        	mods = Paths.getModDirectories();
         	mods.insert(0, 'Global');
 
 		for (mod in mods) {

@@ -282,7 +282,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 
-					Mods.loadTheFirstEnabledMod();
+					WeekData.loadTheFirstEnabledMod();
 					MusicBeatState.switchState(new OptionsState());
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -293,7 +293,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 
-					Mods.loadTheFirstEnabledMod();
+					WeekData.loadTheFirstEnabledMod();
 					MusicBeatState.switchState(new FreeplayState());
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -303,7 +303,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 
-					Mods.loadTheFirstEnabledMod();
+					WeekData.loadTheFirstEnabledMod();
 					if(PlayState.isStoryMode) {
 						MusicBeatState.switchState(new StoryMenuState());
 					} else {

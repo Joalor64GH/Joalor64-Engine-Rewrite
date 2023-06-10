@@ -318,7 +318,7 @@ class CreditsEditorState extends MusicBeatState
 			if(isSelectable) {
 				if(creditsStuff[i][5] != null)
 				{
-					Mods.currentModDirectory = creditsStuff[i][5];
+					Paths.currentModDirectory = creditsStuff[i][5];
 				}
 
 				var icon:AttachedSprite;
@@ -334,7 +334,7 @@ class CreditsEditorState extends MusicBeatState
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
-				Mods.currentModDirectory = '';
+				Paths.currentModDirectory = '';
 
 				if(curSelected == -1) curSelected = i;
 			}

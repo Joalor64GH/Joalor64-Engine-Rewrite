@@ -196,10 +196,10 @@ class Achievements {
 	#if (MODS_ALLOWED && FUTURE_POLYMOD && ACHIEVEMENTS_ALLOWED)
 	public static function loadModAchievements() {
 		achievementsStuff = copyAchievements.copy();
-		var oldPath:Array<String> = Mods.globalMods.copy();
-		Mods.globalMods = [];
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Mods.globalMods = oldPath;
+		Paths.globalMods = oldPath;
 		for(i in paths.copy()){
 			if(FileSystem.exists(i)){
 				for(l in FileSystem.readDirectory(i)){
@@ -238,10 +238,10 @@ class Achievements {
 	}
 
 	public static function getModAchievements():Array<String> {
-		var oldPath:Array<String> = Mods.globalMods.copy();
-		Mods.globalMods = [];
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Mods.globalMods = oldPath;
+		Paths.globalMods = oldPath;
 		var luas:Array<String> = [];
 		for(i in paths){
 			if(FileSystem.exists(i)){
@@ -260,10 +260,10 @@ class Achievements {
 	}
 
 	public static function getModAchievementMetas():Array<AchievementMeta> {
-		var oldPath:Array<String> = Mods.globalMods.copy();
-		Mods.globalMods = [];
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Mods.globalMods = oldPath;
+		Paths.globalMods = oldPath;
 		var metas = [];
 		for(i in paths)
 			if(FileSystem.exists(i))

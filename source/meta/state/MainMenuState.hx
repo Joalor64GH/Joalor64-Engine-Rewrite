@@ -96,10 +96,10 @@ class MainMenuState extends MusicBeatState
 	override function create()
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		Mods.pushGlobalMods();
+		Paths.pushGlobalMods();
 		#end
 
-		Mods.loadTheFirstEnabledMod();
+		WeekData.loadTheFirstEnabledMod();
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
 		Application.current.window.title = Application.current.meta.get('name');

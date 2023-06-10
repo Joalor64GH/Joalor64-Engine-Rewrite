@@ -119,9 +119,9 @@ class TitleState extends MusicBeatState
 		ModCore.reload();
 		#end
         	#if LUA_ALLOWED
-		Mods.pushGlobalMods();
+		Paths.pushGlobalMods();
 		#end
-		Mods.loadTheFirstEnabledMod();
+		WeekData.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
 
@@ -426,7 +426,7 @@ class TitleState extends MusicBeatState
 		var moddedFullText:String = '';
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/introText.txt";
+		var path = "mods/" + Paths.currentModDirectory + "/introText.txt";
 		if (!FileSystem.exists(path)){
 			path = "mods/introText.txt";
 		}
