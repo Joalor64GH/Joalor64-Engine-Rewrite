@@ -96,7 +96,7 @@ class Main extends Sprite
 		});
 
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, meta.state.TitleState, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false));
+		addChild(new FlxGame(gameWidth, gameHeight, Init, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);

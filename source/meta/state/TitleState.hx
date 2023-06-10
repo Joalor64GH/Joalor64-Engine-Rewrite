@@ -1,8 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -22,13 +19,11 @@ import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
 #if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
 #else
 import flixel.system.FlxSound;
 #end
-import flixel.system.ui.FlxSoundTray;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -36,10 +31,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
-import backend.Mods;
-import haxe.Http;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
@@ -68,7 +60,6 @@ typedef TitleData =
 class TitleState extends MusicBeatState
 {
 	public static var initialized:Bool = false;
-	public static var updateVersion:String = '';
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -104,85 +95,10 @@ class TitleState extends MusicBeatState
 
 	var leDate = Date.now();
 
-    	var mustUpdate:Bool = false;
-
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
-
-		#if html5
-		Paths.initPaths();
-		#end
-
-		#if FUTURE_POLYMOD
-		ModCore.reload();
-		#end
-        	#if LUA_ALLOWED
-		Paths.pushGlobalMods();
-		#end
-		WeekData.loadTheFirstEnabledMod();
-
-		FlxG.game.focusLostFramerate = 60;
-
-		FlxG.sound.muteKeys = [FlxKey.ZERO];
-		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
-		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
-		FlxG.keys.preventDefaultKeys = [TAB];
-
-		ClientPrefs.loadPrefs();
-        	PlayerSettings.init();
-        	Highscore.load();
-
-        	#if desktop
-		if (!DiscordClient.isInitialized)
-		{
-			DiscordClient.initialize();
-			Application.current.onExit.add (function (exitCode) {
-				DiscordClient.shutdown();
-			});
-		}
-		#end
-        	FlxG.mouse.visible = false;
-
-        	FlxG.save.bind('j64enginerewrite', 'joalor64gh');
-        	if(!initialized)
-		{
-			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-			{
-				FlxG.fullscreen = FlxG.save.data.fullscreen;
-			}
-			persistentUpdate = true;
-			persistentDraw = true;
-		}
-		if (FlxG.save.data.weekCompleted != null)
-		{
-			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
-        	#if CHECK_FOR_UPDATES
-		if(ClientPrefs.checkForUpdates) {
-			trace('checking for update');
-			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
-
-			http.onData = function (data:String)
-			{
-				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.joalor64EngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
-				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdate = true;
-				}
-			}
-
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-
-			http.request();
-		}
-		#end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		gameName = getName();
@@ -221,17 +137,15 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
-
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none")
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		else
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/logoBumpin.png";
+		var path = "mods/" + Paths.currentModDirectory + "/images/logoBumpin.png";
 		if (!FileSystem.exists(path))
 		{
 			path = "mods/images/logoBumpin.png";
@@ -254,7 +168,7 @@ class TitleState extends MusicBeatState
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/GF_assets.png";
+		var path = "mods/" + Paths.currentModDirectory + "/images/GF_assets.png";
 		if (!FileSystem.exists(path))
 		{
 			path = "mods/images/GF_assets.png";
@@ -282,7 +196,7 @@ class TitleState extends MusicBeatState
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/titleEnter.png";
+		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
 		if (!FileSystem.exists(path)){
 			path = "mods/images/titleEnter.png";
 		}
@@ -536,14 +450,10 @@ class TitleState extends MusicBeatState
 				candance = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (mustUpdate) {
-						MusicBeatState.switchState(new OutdatedState());
-					} else { 
-						if (ClientPrefs.simpleMain)
-							MusicBeatState.switchState(new SimpleMainMenuState());
-						else
-							MusicBeatState.switchState(new MainMenuState());
-					}
+					if (ClientPrefs.simpleMain)
+						MusicBeatState.switchState(new SimpleMainMenuState());
+					else
+						MusicBeatState.switchState(new MainMenuState());
 					closedState = true;
 				});
 			}

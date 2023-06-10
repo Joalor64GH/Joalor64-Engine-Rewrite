@@ -31,16 +31,16 @@ class TestState extends MusicBeatState
 	bg.screenCenter();
         add(bg);
         
-        musplayer = new FlxSprite(0, 0).loadGraphic(Paths.image('test/musplayer'));
+        musplayer = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/musplayer'));
         musplayer.screenCenter();
         musplayer.antialiasing = ClientPrefs.globalAntialiasing;
         add(musplayer);
-        disc = new FlxSprite(0, 0).loadGraphic(Paths.image('test/disk'));
+        disc = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/disc'));
         disc.setPosition(musplayer.x + 268, musplayer.y + 13);
         disc.antialiasing = ClientPrefs.globalAntialiasing;
         disc.angularVelocity = 30;
         add(disc);
-        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('test/playerneedle'));
+        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/playerneedle'));
         playerneedle.screenCenter();
         playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
         add(playerneedle);
