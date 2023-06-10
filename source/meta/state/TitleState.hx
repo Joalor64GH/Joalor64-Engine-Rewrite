@@ -3,8 +3,6 @@ package meta.state;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
 import haxe.Json;
@@ -31,16 +29,13 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import lime.app.Application;
-#if FUTURE_POLYMOD
-import core.ModCore;
-#end
 
 import meta.*;
 import meta.data.*;
 import meta.data.options.*;
 import meta.state.*;
 import meta.data.alphabet.*;
+
 import objects.shaders.*;
 
 using StringTools;
@@ -61,12 +56,15 @@ class TitleState extends MusicBeatState
 {
 	public static var initialized:Bool = false;
 
-	var blackScreen:FlxSprite;
-	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
+	
+	var credGroup:FlxGroup;
 	var textGroup:FlxGroup;
+
+	var blackScreen:FlxSprite;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -137,10 +135,12 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
+
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none")
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		else
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
@@ -197,10 +197,10 @@ class TitleState extends MusicBeatState
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
 		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
-		if (!FileSystem.exists(path)){
+		if (!FileSystem.exists(path)) {
 			path = "mods/images/titleEnter.png";
 		}
-		if (!FileSystem.exists(path)){
+		if (!FileSystem.exists(path)) {
 			path = "assets/images/titleEnter.png";
 		}
 		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
@@ -341,13 +341,13 @@ class TitleState extends MusicBeatState
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		var path = "mods/" + Paths.currentModDirectory + "/introText.txt";
-		if (!FileSystem.exists(path)){
+		if (!FileSystem.exists(path)) {
 			path = "mods/introText.txt";
 		}
-		if (!FileSystem.exists(path)){
+		if (!FileSystem.exists(path)) {
 			path = null;
 		}
-		if (path != null){
+		if (path != null) {
 			moddedFullText = File.getContent(path);
 		}			
 		#end
@@ -377,13 +377,13 @@ class TitleState extends MusicBeatState
 	function getName():Array<String>
 	{
 		var fullText:String = Assets.getText(Paths.txt('gameName'));
-
 		var firstArray:Array<String> = fullText.split('--');
 		return firstArray;
 	}
 
 	var transitioning:Bool = false;
 	var newTitle:Bool = false;
+
 	var titleTimer:Float = 0;
 
 	override function update(elapsed:Float)

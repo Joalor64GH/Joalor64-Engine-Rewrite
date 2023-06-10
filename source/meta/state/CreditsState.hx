@@ -248,20 +248,20 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Former Engine Members'],
 			[
-				'Yoshubs',
-				'shubs',
-				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
-				'https://twitter.com/yoshubs',
-				'5E99DF',
-				'JingleShubs'
-			],
-			[
 				'bbpanzu',
 				'bb',
 				'Ex-Programmer of Psych Engine',
 				'https://twitter.com/bbsub3',
 				'3E813A',
 				'JingleBB'
+			],
+			[
+				'Yoshubs',
+				'shubs',
+				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
+				'https://twitter.com/yoshubs',
+				'5E99DF',
+				'JingleShubs'
 			],
 			[''],
 			['Engine Contributors'],
