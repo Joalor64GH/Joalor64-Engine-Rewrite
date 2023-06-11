@@ -32,10 +32,10 @@ class Init extends FlxState
 		#end
 
         	#if LUA_ALLOWED
-		Paths.pushGlobalMods();
+		Mods.pushGlobalMods();
 		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
-		WeekData.loadTheFirstEnabledMod();
+		Mods.loadTheFirstEnabledMod();
 		#if FUTURE_POLYMOD
 		ModCore.reload();
 		#end

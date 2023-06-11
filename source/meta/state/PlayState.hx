@@ -1002,8 +1002,11 @@ class PlayState extends MusicBeatState
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/scripts/'));
+
+		for(mod in Mods.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
 		#end
 
 		for (folder in foldersToCheck)
@@ -1502,10 +1505,10 @@ class PlayState extends MusicBeatState
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
 
-		for(mod in Paths.getGlobalMods())
+		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
 		#end
 
@@ -1694,10 +1697,10 @@ class PlayState extends MusicBeatState
 		}
 
 		var foldersToCheck:Array<String> = [Paths.mods('shaders/')];
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/shaders/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/shaders/'));
 
-		for(mod in Paths.getGlobalMods())
+		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
 		
 		for (folder in foldersToCheck)
@@ -2659,7 +2662,7 @@ class PlayState extends MusicBeatState
 	public var countdownTwo:FlxSprite;
 	public var countdownOne:FlxSprite;
 	public var countdownGo:FlxSprite;
-
+	
 	public static var startOnTime:Float = 0;
 
 	function cacheCountdown()
@@ -4657,7 +4660,7 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
-					WeekData.loadTheFirstEnabledMod();
+					Mods.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
@@ -4718,7 +4721,7 @@ class PlayState extends MusicBeatState
 			else
 			{
 				trace('WENT BACK TO FREEPLAY??');
-				WeekData.loadTheFirstEnabledMod();
+				Mods.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
