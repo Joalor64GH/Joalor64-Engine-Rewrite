@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 
 // JOALOR64
+import animateatlas.AtlasFrameMaker;
 import meta.data.alphabet.Alphabet;
 import meta.data.dependency.Discord;
 import meta.data.Conductor;
@@ -16,6 +17,7 @@ import meta.data.Section;
 import meta.data.Song;
 import meta.CoolUtil;
 import meta.data.Highscore;
+import meta.data.PlayerSettings;
 import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
@@ -24,9 +26,9 @@ import Paths;
 
 #if MODS_ALLOWED import backend.Mods; #end
 
-import animateatlas.AtlasFrameMaker;
 import objects.AttachedSprite;
 import meta.data.options.*;
+import hscript.*;
 
 // MISCELLANEOUS
 #if (polymod && FUTURE_POLYMOD)

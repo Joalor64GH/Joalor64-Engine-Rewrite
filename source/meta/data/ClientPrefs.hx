@@ -315,6 +315,8 @@ class ClientPrefs {
 	}
 
 	public static function reloadControls() {
+		PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
+
 		FlxG.sound.muteKeys = [FlxKey.ZERO];
 		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
