@@ -315,15 +315,6 @@ class ClientPrefs {
 	}
 
 	public static function reloadControls() {
-		meta.data.PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
-
-		/*
-		TitleState.muteKeys = copyKey(keyBinds.get('volume_mute'));
-		TitleState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));
-		TitleState.volumeUpKeys = copyKey(keyBinds.get('volume_up'));
-		FlxG.sound.muteKeys = TitleState.muteKeys;
-		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;*/
 		FlxG.sound.muteKeys = [FlxKey.ZERO];
 		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];

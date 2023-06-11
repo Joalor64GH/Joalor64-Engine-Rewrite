@@ -349,7 +349,7 @@ class FunkinHscript extends InterpEx {
 	variables.set('buildTarget', 'unknown');
 	#end
 
-        variables.set('controls', PlayerSettings.player1.controls);
+        variables.set('controls', Controls);
         variables.set('instance', PlayState.instance);
         variables.set('window', Application.current.window);
 

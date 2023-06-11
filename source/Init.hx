@@ -6,6 +6,7 @@ import meta.data.dependency.Discord.DiscordClient;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
+
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.input.keyboard.FlxKey;
@@ -48,7 +49,6 @@ class Init extends FlxState
 		FlxG.keys.preventDefaultKeys = [TAB];
 
 		ClientPrefs.loadPrefs();
-        	PlayerSettings.init();
         	Highscore.load();
 
         	if (FlxG.save.data.weekCompleted != null)
