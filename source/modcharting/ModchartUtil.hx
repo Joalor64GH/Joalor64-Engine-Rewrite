@@ -33,8 +33,8 @@ class ModchartUtil
         return instance.currentOptions.downScroll;
         #elseif KADE 
         return PlayStateChangeables.useDownscroll;
-        /* #elseif FOREVER_LEGACY //forever might not work just yet because of the multiple strumgroups
-        return Init.trueSettings.get('Downscroll'); */
+        #elseif FOREVER_LEGACY //forever might not work just yet because of the multiple strumgroups
+        return Init.trueSettings.get('Downscroll');
         #elseif FPSPLUS 
         return Config.downscroll;
         #elseif MIC_D_UP //basically no one uses this anymore
