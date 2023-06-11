@@ -311,11 +311,11 @@ class ClientPrefs {
 	}
 
 	inline public static function getGameplaySetting(name:String, defaultValue:Dynamic):Dynamic {
-		return /*PlayState.isStoryMode ? defaultValue : */ (gameplaySettings.exists(name) ? gameplaySettings.get(name) : defaultValue);
+		return (gameplaySettings.exists(name) ? gameplaySettings.get(name) : defaultValue);
 	}
 
 	public static function reloadControls() {
-		PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
+		meta.data.PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
 
 		/*
 		TitleState.muteKeys = copyKey(keyBinds.get('volume_mute'));
