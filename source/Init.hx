@@ -30,7 +30,7 @@ class Init extends FlxState
 	var epicSprite:FlxSprite;
 
 	public static var updateVersion:String = '';
-    var mustUpdate:Bool = false;
+    	var mustUpdate:Bool = false;
 
 	public function new() 
 	{
@@ -160,16 +160,16 @@ class Init extends FlxState
 	function startGame() 
 	{
 		if (mustUpdate) {
-            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            {
+            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            		{
 				FlxG.switchState(new OutdatedState());
-	    	});
-        } else {
-            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            {
+	    		});
+        	} else {
+            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            		{
 				FlxG.switchState(new TitleState());
-	    	});
-        }
+	    		});
+        	}
 	}
 
 	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
