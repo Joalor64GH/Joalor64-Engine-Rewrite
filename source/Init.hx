@@ -1,11 +1,12 @@
 package;
 
 #if desktop
-import meta.data.dependency.Discord.DiscordClient;
+import meta.data.dependency.epicSpriteord.epicSpriteordClient;
 #end
 import meta.*;
 import meta.state.*;
 import meta.data.*;
+
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.input.keyboard.FlxKey;
@@ -15,7 +16,6 @@ import core.ModCore;
 #end
 
 import lime.app.Application;
-
 import haxe.Http;
 
 // this loads everything in
@@ -25,9 +25,38 @@ class Init extends FlxState
 
     	var mustUpdate:Bool = false;
 
+	var epicSprite:FlxSprite;
+
+	public function new() 
+	{
+		super();
+		persistentUpdate = true;
+		persistentDraw = true;
+	}
+
 	override function create()
-    	{
-        	#if html5
+    {
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
+		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+        bg.scale.set(10, 10);
+		bg.screenCenter();
+        add(bg);
+        
+        epicSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('credits/joalor'));
+        epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
+        epicSprite.angularVelocity = 30;
+        add(epicSprite);
+
+		load();
+
+        super.create();
+    }
+
+	function load()	
+	{
+			#if html5
 		Paths.initPaths();
 		#end
 
@@ -47,16 +76,20 @@ class Init extends FlxState
 		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 		FlxG.keys.preventDefaultKeys = [TAB];
 
-		ClientPrefs.loadPrefs();
 		PlayerSettings.init();
-        	Highscore.load();
 
-        	if (FlxG.save.data.weekCompleted != null)
+		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+		{
+			FlxG.fullscreen = FlxG.save.data.fullscreen;
+		}
+
+        if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-        	#if desktop
+		FlxG.mouse.visible = false;
+        #if desktop
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
@@ -65,20 +98,14 @@ class Init extends FlxState
 			});
 		}
 		#end
-        	FlxG.mouse.visible = false;
 
-        	FlxG.save.bind('j64enginerewrite', 'joalor64gh');
-        	if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-		{
-			FlxG.fullscreen = FlxG.save.data.fullscreen;
-		}
-			
-        	persistentUpdate = true;
-		persistentDraw = true;
+		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
+
+		ClientPrefs.loadPrefs();
 
         	#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates) {
-			trace('checking for update');
+			trace('checking for updates...');
 			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
 
 			http.onData = function (data:String)
@@ -87,7 +114,7 @@ class Init extends FlxState
 				var curVersion:String = MainMenuState.joalor64EngineVersion.trim();
 				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
+					trace('oh noo outdated!!');
 					mustUpdate = true;
 				}
 			}
@@ -100,11 +127,24 @@ class Init extends FlxState
 		}
 		#end
 
-        	if (mustUpdate) {
-            		FlxG.switchState(new OutdatedState());
-        	} else {
-            		FlxG.switchState(new TitleState());
-        	}
-        	super.create();
-    	}
+		Highscore.load();
+	}
+
+	override function update(elapsed) 
+	{
+		if (mustUpdate) 
+		{
+            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            {
+				FlxG.switchState(new OutdatedStateState());
+	    	});
+        } 
+		else 
+		{
+            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            {
+				FlxG.switchState(new TitleState());
+	    	});
+        }
+	}
 }

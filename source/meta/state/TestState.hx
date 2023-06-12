@@ -15,7 +15,6 @@ using StringTools;
 class TestState extends MusicBeatState
 {
     public var bg:FlxSprite;
-
     public var disc:FlxSprite;
     public var musplayer:FlxSprite;
     public var playerneedle:FlxSprite;
@@ -45,7 +44,8 @@ class TestState extends MusicBeatState
         playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
         add(playerneedle);
 
-        testTxt = new Alphabet(musplayer.x + 90, 0, 'This is a test.', true);
+        testTxt = new Alphabet(0, 0, 'This is a test.', true);
+        testTxt.setPosition(50, musplayer.y - 120);
         add(testTxt);
     }
 
