@@ -70,7 +70,7 @@ class Init extends FlxState
 
 	override function update(elapsed)
 	{
-		if (controls.ACCEPT || (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE))
+		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
 			skip();
 
 		super.update(elapsed);
