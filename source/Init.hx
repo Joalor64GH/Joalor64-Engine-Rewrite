@@ -9,12 +9,12 @@ import meta.data.*;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.FlxSprite;
 import flixel.input.keyboard.FlxKey;
 
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
-
 import lime.app.Application;
 import haxe.Http;
 
@@ -35,28 +35,28 @@ class Init extends FlxState
 	}
 
 	override function create()
-    {
+    	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
-        bg.scale.set(10, 10);
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+        	bg.scale.set(10, 10);
 		bg.screenCenter();
-        add(bg);
+        	add(bg);
         
-        epicSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('credits/joalor'));
-        epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
-        epicSprite.angularVelocity = 30;
-        add(epicSprite);
+        	epicSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('credits/joalor'));
+        	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
+        	epicSprite.angularVelocity = 30;
+        	add(epicSprite);
 
 		load();
 
-        super.create();
-    }
+        	super.create();
+    	}
 
 	function load()	
 	{
-			#if html5
+		#if html5
 		Paths.initPaths();
 		#end
 
@@ -83,13 +83,13 @@ class Init extends FlxState
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 		}
 
-        if (FlxG.save.data.weekCompleted != null)
+        	if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
 		FlxG.mouse.visible = false;
-        #if desktop
+        	#if desktop
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
@@ -134,17 +134,17 @@ class Init extends FlxState
 	{
 		if (mustUpdate) 
 		{
-            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            {
+            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            		{
 				FlxG.switchState(new OutdatedStateState());
-	    	});
-        } 
+	    		});
+        	} 
 		else 
 		{
-            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            {
+            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            		{
 				FlxG.switchState(new TitleState());
-	    	});
-        }
+	    		});
+        	}
 	}
 }
