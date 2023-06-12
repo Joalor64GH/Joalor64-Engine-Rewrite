@@ -40,6 +40,8 @@ class OutdatedState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+
+		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 	}
 
 	override function update(elapsed:Float)

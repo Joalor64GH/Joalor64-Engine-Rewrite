@@ -7,14 +7,17 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.input.keyboard.FlxKey;
+
 import lime.app.Application;
 import haxe.Http;
-#if FUTURE_POLYMOD
-import core.ModCore;
-#end
+
 import meta.*;
 import meta.state.*;
 import meta.data.*;
+
+#if FUTURE_POLYMOD
+import core.ModCore;
+#end
 
 // this loads everything in
 class Init extends FlxState
@@ -28,6 +31,7 @@ class Init extends FlxState
 	public function new() 
 	{
 		super();
+
 		persistentUpdate = true;
 		persistentDraw = true;
 	}
@@ -42,12 +46,18 @@ class Init extends FlxState
 		bg.screenCenter();
         	add(bg);
         
-        	epicSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('credits/joalor'));
+        	epicSprite = new FlxSprite().loadGraphic(Paths.image('credits/joalor'));
         	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
         	epicSprite.angularVelocity = 30;
+			epicSprite.screenCenter();
         	add(epicSprite);
 
-		load();
+			FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
+
+			new FlxTimer().start(4, function(timer) 
+			{
+				load();
+			});
 
         	super.create();
     	}
