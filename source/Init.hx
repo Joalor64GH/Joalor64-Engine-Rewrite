@@ -6,6 +6,7 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 
 import lime.app.Application;
@@ -14,7 +15,6 @@ import haxe.Http;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
@@ -49,15 +49,15 @@ class Init extends FlxState
         	epicSprite = new FlxSprite().loadGraphic(Paths.image('credits/joalor'));
         	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
         	epicSprite.angularVelocity = 30;
-			epicSprite.screenCenter();
+		epicSprite.screenCenter();
         	add(epicSprite);
 
-			FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
+		FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
 
-			new FlxTimer().start(4, function(timer) 
-			{
-				load();
-			});
+		new FlxTimer().start(4, function(timer) 
+		{
+			load();
+		});
 
         	super.create();
     	}
