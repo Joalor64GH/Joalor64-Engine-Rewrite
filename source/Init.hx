@@ -54,9 +54,11 @@ class Init extends FlxState
 
 		FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
 
+		load();
+
 		new FlxTimer().start(4, function(timer) 
 		{
-			load();
+			startGame();
 		});
 
         	super.create();
@@ -138,7 +140,7 @@ class Init extends FlxState
 		Highscore.load();
 	}
 
-	override function update(elapsed) 
+	function startGame() 
 	{
 		if (mustUpdate) 
 		{
@@ -154,7 +156,5 @@ class Init extends FlxState
 				FlxG.switchState(new TitleState());
 	    		});
         	}
-		
-		super.update(elapsed);
 	}
 }
