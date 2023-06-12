@@ -3,9 +3,6 @@ package;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import meta.*;
-import meta.state.*;
-import meta.data.*;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
@@ -15,6 +12,9 @@ import haxe.Http;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
+import meta.*;
+import meta.state.*;
+import meta.data.*;
 
 // this loads everything in
 class Init extends FlxState
@@ -134,7 +134,7 @@ class Init extends FlxState
 		{
             		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
             		{
-				FlxG.switchState(new OutdatedStateState());
+				FlxG.switchState(new OutdatedState());
 	    		});
         	} 
 		else 
