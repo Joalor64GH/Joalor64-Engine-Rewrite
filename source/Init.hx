@@ -1,7 +1,7 @@
 package;
 
 #if desktop
-import meta.data.dependency.epicSpriteord.epicSpriteordClient;
+import meta.data.dependency.Discord.DiscordClient;
 #end
 import meta.*;
 import meta.state.*;
