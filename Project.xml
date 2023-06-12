@@ -68,7 +68,7 @@
 	<source path="source" />
 	
 	<assets path="assets" exclude=".ogg" if="web"/> 
-	<assets path="assets" exclude=".mp3" unless="web"/> 
+	<assets path="assets" exclude=".mp3" if="desktop"/> 
 
 	<!-- EMBEDDED BY DEFAULT -->
 	<assets path='header.lua' embed='true'/>

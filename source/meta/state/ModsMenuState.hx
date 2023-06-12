@@ -48,6 +48,7 @@ class ModsMenuState extends MusicBeatState
 	var selector:AttachedSprite;
 	var descriptionTxt:FlxText;
 	var needaReset = false;
+
 	private static var curSelected:Int = 0;
 	public static var defaultColor:FlxColor = 0xFF665AFF;
 
@@ -60,9 +61,6 @@ class ModsMenuState extends MusicBeatState
 	var buttonsArray:Array<FlxButton> = [];
 	var debugKeys:Array<FlxKey>;
 
-	var installButton:FlxButton;
-	var removeButton:FlxButton;
-
 	var modsList:Array<Dynamic> = [];
 
 	var visibleWhenNoMods:Array<FlxBasic> = [];
@@ -72,6 +70,7 @@ class ModsMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+		
 		WeekData.setDirectoryFromWeek();
 
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
@@ -264,7 +263,7 @@ class ModsMenuState extends MusicBeatState
 			newMod.alphabet.y = i * 150;
 			newMod.alphabet.x = 310;
 			add(newMod.alphabet);
-			//Don't ever cache the icons, it's a waste of loaded memory
+			// Don't ever cache the icons, it's a waste of loaded memory
 			var loadedIcon:BitmapData = null;
 			var iconToUse:String = Paths.mods(values[0] + #if FUTURE_POLYMOD '/_polymod_icon.png' #else '/pack.png' #end);
 			if(FileSystem.exists(iconToUse))
@@ -273,16 +272,16 @@ class ModsMenuState extends MusicBeatState
 			}
 
 			newMod.icon = new AttachedSprite();
-			if(loadedIcon != null)
+			if(loadedIcon == null)
 			{
-				newMod.icon.loadGraphic(loadedIcon, true, 150, 150);//animated icon support
-				var totalFrames = Math.floor(loadedIcon.width / 150) * Math.floor(loadedIcon.height / 150);
-				newMod.icon.animation.add("icon", [for (i in 0...totalFrames) i],10);
-				newMod.icon.animation.play("icon");
+				newMod.icon.loadGraphic(Paths.image('unknownMod'));
 			}
 			else
 			{
-				newMod.icon.loadGraphic(Paths.image('unknownMod'));
+				newMod.icon.loadGraphic(loadedIcon, true, 150, 150); //animated icon support
+				var totalFrames = Math.floor(loadedIcon.width / 150) * Math.floor(loadedIcon.height / 150);
+				newMod.icon.animation.add("icon", [for (i in 0...totalFrames) i],10);
+				newMod.icon.animation.play("icon");
 			}
 			newMod.icon.sprTracker = newMod.alphabet;
 			newMod.icon.xAdd = -newMod.icon.width - 30;
@@ -600,8 +599,10 @@ class ModMetadata
 					this.description = "No description provided.";
 			}
 
-			if(pack.colors != null && pack.colors.length > 2)
-				this.color = FlxColor.fromRGB(pack.colors[0], pack.colors[1], pack.colors[2]);
+			if(pack.color != null)
+				this.color = FlxColor.fromRGB(pack.color[0] != null ? pack.color[0] : 170,
+											pack.color[1] != null ? pack.color[1] : 0,
+											pack.color[2] != null ? pack.color[2] : 255);
 
 			this.restart = pack.restart;
 		}

@@ -73,7 +73,7 @@ class Mods
 	{
 		if(folder == null) folder = Mods.currentModDirectory;
 
-		var path = Paths.mods(folder + '/pack.json');
+		var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
 		if(FileSystem.exists(path)) {
 			try {
 				var rawJson:String = File.getContent(path);

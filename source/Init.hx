@@ -22,11 +22,15 @@ import core.ModCore;
 // this loads everything in
 class Init extends FlxState
 {
-	public static var updateVersion:String = '';
-
-    	var mustUpdate:Bool = false;
-
+	public static var randomIcon:Array<String> = [
+		'joalor',
+		'meme',
+		'bot'
+	];
 	var epicSprite:FlxSprite;
+
+	public static var updateVersion:String = '';
+    var mustUpdate:Bool = false;
 
 	public function new() 
 	{
@@ -46,7 +50,7 @@ class Init extends FlxState
 		bg.screenCenter();
         	add(bg);
         
-        	epicSprite = new FlxSprite().loadGraphic(Paths.image('credits/joalor'));
+        	epicSprite = new FlxSprite().loadGraphic(randomizeIcon());
         	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
         	epicSprite.angularVelocity = 30;
 		epicSprite.screenCenter();
@@ -63,6 +67,14 @@ class Init extends FlxState
 
         	super.create();
     	}
+
+	override function update(elapsed)
+	{
+		if (controls.ACCEPT || (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE))
+			skip();
+
+		super.update(elapsed);
+	}
 
 	function load()	
 	{
@@ -140,21 +152,29 @@ class Init extends FlxState
 		Highscore.load();
 	}
 
+	function skip() 
+	{
+		startGame();
+	}
+
 	function startGame() 
 	{
-		if (mustUpdate) 
-		{
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
+		if (mustUpdate) {
+            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            {
 				FlxG.switchState(new OutdatedState());
-	    		});
-        	} 
-		else 
-		{
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
+	    	});
+        } else {
+            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+            {
 				FlxG.switchState(new TitleState());
-	    		});
-        	}
+	    	});
+        }
+	}
+
+	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
+	{
+		var chance:Int = FlxG.random.int(0, randomIcon.length - 1);
+		return Paths.image('credits/${randomIcon[chance]}');
 	}
 }

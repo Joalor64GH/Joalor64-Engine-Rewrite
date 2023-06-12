@@ -275,7 +275,7 @@ class CreditsState extends MusicBeatState
 			[
 				'KadeDev',
 				'kade',
-				'Fixed Chart Editor and other PRs\nExtension WebM',
+				'Fixed Chart Editor and other PRs\nExtension WebM Fork',
 				'https://twitter.com/kade0912',
 				'64A250',
 				''

@@ -37,7 +37,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * A bunch of others that ShadowMario refused to add
 
 # Planned Features
-* [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
+* [X] Upload 1.3.0 Builds for Windows, Mac and Linux **[sorry for bein lazy]**
 * [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
 * [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
@@ -73,12 +73,12 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
 * [RiverOaken](https://twitter.com/RiverOaken) - Main Artist + Animator
-* [Yoshubs](https://github.com/Yoshubs) - Aditional Programmer + Epic Input System
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
+* [Yoshubs](https://github.com/Yoshubs) - Aditional Ex-Programmer + Epic Input System
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
-* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM
+* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations

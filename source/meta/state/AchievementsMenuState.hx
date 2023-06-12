@@ -76,9 +76,9 @@ class AchievementsMenuState extends MusicBeatState
 		descText.borderSize = 2.4;
 		add(descText);
 
-		var resetText:FlxText = new FlxText(0, 680, FlxG.width, "Press R to reset current achievement. Press ALT + R to reset all achievements", 12);
+		var resetText:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press R to reset current achievement. Press ALT + R to reset all achievements.", 12);
 		resetText.borderSize = 5;
-		resetText.setFormat(Paths.font("vcr.ttf"), 28, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resetText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resetText.scrollFactor.set();
 		add(resetText);
 
@@ -90,17 +90,13 @@ class AchievementsMenuState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
-			changeSelection(-1);
-		}
-		if (controls.UI_DOWN_P) {
-			changeSelection(1);
-		}
-
+		if (controls.UI_UP_P || controls.UI_DOWN_P)
+			changeSelection(controls.UI_UP_P ? -1: 1);
+		
 		if(controls.RESET) {
 			FlxG.mouse.visible = true;
 			if(FlxG.keys.pressed.ALT) {
-				openSubState(new Prompt('This action will clear ALL the progress.\n\nProceed?', 0, function() {
+				openSubState(new Prompt('This action will clear ALL the progress.\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					for (i in 0...achievementArray.length) {
 						achievementArray[i].forget();
@@ -110,7 +106,7 @@ class AchievementsMenuState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 				}, false));
 			} else {
-				openSubState(new Prompt('This action will clear the progress of the selected achievement.\n\nProceed?', 0, function() {
+				openSubState(new Prompt('This action will clear the progress of the selected achievement.\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					achievementArray[curSelected].forget();
 					grpOptions.members[curSelected].text = '?';
