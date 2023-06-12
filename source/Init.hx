@@ -6,17 +6,15 @@ import meta.data.dependency.epicSpriteord.epicSpriteordClient;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.input.keyboard.FlxKey;
-
+import lime.app.Application;
+import haxe.Http;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
-import lime.app.Application;
-import haxe.Http;
 
 // this loads everything in
 class Init extends FlxState
@@ -146,5 +144,7 @@ class Init extends FlxState
 				FlxG.switchState(new TitleState());
 	    		});
         	}
+		
+		super.update(elapsed);
 	}
 }
