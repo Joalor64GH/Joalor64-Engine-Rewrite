@@ -28,10 +28,6 @@ assets/images/androidcontrols/
 art/dependencyFiles/android/
 mobile/*
 
-### Appveyor-Specific
-appveyor.yml
-appveyor-win32.yml
-
 ### Stage Editor-Related
 assets/images/stageborder.png
 source/meta/state/editors/StageEditorState.hx
