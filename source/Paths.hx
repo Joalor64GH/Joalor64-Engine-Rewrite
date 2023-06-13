@@ -17,8 +17,8 @@ import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as Assets;
-import lime.graphics.Image;
 import flixel.FlxSprite;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import haxe.CallStack;
@@ -592,7 +592,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no!!' + '$key' + 'returned null!');
+		trace('oh no!!' + ' $key ' + 'returned null!');
 		return null;
 	}
 

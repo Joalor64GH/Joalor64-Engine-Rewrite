@@ -271,6 +271,7 @@ class ModsMenuState extends MusicBeatState
 				loadedIcon = BitmapData.fromFile(iconToUse);
 			}
 
+			// idk modpack icons wont load at the moment, but WHATEVER
 			newMod.icon = new AttachedSprite();
 			if(loadedIcon == null)
 			{

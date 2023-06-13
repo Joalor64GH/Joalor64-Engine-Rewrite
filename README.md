@@ -21,6 +21,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ----------------------------------------------
 
 # Features
+* JSONI8 Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
@@ -37,7 +38,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * A bunch of others that ShadowMario refused to add
 
 # Planned Features
-* [X] Upload 1.3.0 Builds for Windows, Mac and Linux **[sorry for bein lazy]**
 * [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
 * [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
