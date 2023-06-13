@@ -67,8 +67,8 @@
 	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
 	
-	<assets path="assets" exclude=".mp3"/> 
-	<!-- <assets path="assets" exclude=".ogg"/> -->
+	<assets path="assets" exclude="*.mp3" if="web"/> 
+	<assets path="assets" exclude="*.ogg" unless="web"/>
 
 	<!-- EMBEDDED BY DEFAULT -->
 	<assets path='header.lua' embed='true'/>
