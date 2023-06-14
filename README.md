@@ -6,15 +6,18 @@
 
 ----------------------------------------------
 
-[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
+<div align="center">
+  
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
 
-[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.3.5b)
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.3.5b)
 
-![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)
+  ![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)
 
-[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
 
-[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+</div>
 
 ----------------------------------------------
 
@@ -28,7 +31,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ----------------------------------------------
 
 # Features
-* JSONI8 Support
+* JSONI8 Sprite Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
@@ -42,7 +45,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
 * Softcoded Achievements
-* A bunch of others that ShadowMario refused to add
 
 # Planned Features
 * [ ] Hardcode Icon Bopping Script
