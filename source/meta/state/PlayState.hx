@@ -3,12 +3,10 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
-
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -2842,7 +2840,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage && curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo') {
+						if (!PlayState.isPixelStage && (curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo')) {
 							boyfriend.playAnim('pre-attack', true);
 							boyfriend.specialAnim = true;
 						}
@@ -3275,7 +3273,6 @@ class PlayState extends MusicBeatState
 				smoke.flipX = true;
 				dadbattleSmokes.add(smoke);
 
-
 			case 'Philly Glow':
 				if (curStage != 'philly')
 					return;
@@ -3288,7 +3285,6 @@ class PlayState extends MusicBeatState
 				phillyWindowEvent.updateHitbox();
 				phillyWindowEvent.visible = false;
 				insert(members.indexOf(blammedLightsBlack) + 1, phillyWindowEvent);
-
 
 				phillyGlowGradient = new PhillyGlow.PhillyGlowGradient(-400, 225); //This shit was refusing to properly load FlxGradient so fuck it
 				phillyGlowGradient.visible = false;
@@ -4557,8 +4553,21 @@ class PlayState extends MusicBeatState
 			GlobalVideo.get().stop();
 			PlayState.instance.remove(PlayState.instance.videoSprite);
 		}
-
 		endBGVideo();
+
+		#if sys
+		if (!inReplay)
+		{
+			var files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
+			var length:Null<Int> = null;
+			var song:String = SONG.song.coolSongFormatter().toLowerCase();
+
+			(files == null) ? length = 0 : length = files.length;
+
+			if (ClientPrefs.saveReplay)
+				File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
+		}
+		#end
 
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
@@ -4640,24 +4649,6 @@ class PlayState extends MusicBeatState
 				campaignMisses += songMisses;
 
 				storyPlaylist.remove(storyPlaylist[0]);
-				#if sys
-				if (!inReplay)
-				{
-					var files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
-					var length:Null<Int> = null;
-					var song:String = SONG.song.coolSongFormatter().toLowerCase();
-
-					if (files == null)
-						length = 0;
-
-					else
-						length = files.length;
-
-					if (ClientPrefs.saveReplay)
-						File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
-				}
-				#end
-
 				if (storyPlaylist.length <= 0)
 				{
 					Mods.loadTheFirstEnabledMod();
@@ -4864,11 +4855,10 @@ class PlayState extends MusicBeatState
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
 		final ratingsY:Float = 60;
 
-		if (ratingsGroup.countDead() > 0){
+		if (ratingsGroup.countDead() > 0) {
 			rating = ratingsGroup.getFirstDead();
 			rating.reset(ratingsX, ratingsY);
-		}
-		else{
+		} else {
 			rating = new FlxSprite();
 			ratingsGroup.add(rating);
 		}
