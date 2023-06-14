@@ -6,8 +6,15 @@
 
 ----------------------------------------------
 
-* [Discord Server](https://discord.gg/GnXqAVMFbA)
-* [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
+
+[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.3.5b)
+
+![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)
+
+[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
+
+[![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
 
 ----------------------------------------------
 
@@ -41,11 +48,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
 * [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
-
-# Downloads
-* [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
-* [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
-* itch.io (Soon...)
 
 ----------------------------------------------
 
