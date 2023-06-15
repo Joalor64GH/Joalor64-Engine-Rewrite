@@ -210,7 +210,7 @@ class ReplayPauseSubstate extends PauseSubState
     {
         super(x, y);
 
-        menuItemsOG = ['Resume', 'Restart Replay', 'Exit to menu'];
+        menuItemsOG = ['Resume', 'Restart Replay', 'Exit to freeplay', 'Exit to menu'];
         menuItems = menuItemsOG;
         regenMenu();
     }

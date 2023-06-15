@@ -170,28 +170,9 @@ class Alphabet extends FlxSpriteGroup
 		return value;
 	}
 
-	var prevY:Float = 0;
-	var elapsedTotal:Float = 0;
-	var number:Int = 0;
-
-	// nabbed from lullaby lel
-	inline public function displacementFormula() {
-		elapsedTotal += FlxG.elapsed;
-		final elapsedAverage:Float = (1 / FlxG.drawFramerate);
-		final formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
-		for (letter in letters){
-			prevY += letter.y;
-			letter.y = prevY + formula;
-			prevY -= letter.y + formula;
-		}
-	}
-
 	override function update(elapsed:Float)
 	{
 		var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-
-		if (elapsed > 0 && shouldDisplace)
-			displacementFormula();
 
 		if (isMenuItem)
 		{
@@ -511,5 +492,27 @@ class AlphaCharacter extends FlxSprite
 		{
 			offset.y += -(110 - height);
 		}
+	}
+
+	var prevY:Float = 0;
+	var elapsedTotal:Float = 0;
+	var number:Int = 0;
+
+	// nabbed from lullaby lel
+	inline public function displacementFormula() {
+		elapsedTotal += FlxG.elapsed;
+		var elapsedAverage:Float = (1 / FlxG.drawFramerate);
+		var formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
+		prevY += y;
+		y = prevY + formula;
+		prevY -= y + formula;
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (elapsed > 0 && parent.shouldDisplace)
+			displacementFormula();
 	}
 }
