@@ -115,14 +115,6 @@ class CreditsState extends MusicBeatState
 				'Ghost'
 			],
 			[
-				'Stilic',
-				'stilic',
-				'Restored Combo Script\n"French Programmer"',
-				'https://github.com/Stilic',
-				'C74B22',
-				'meowmeowmeowAAAA'
-			],
-			[
 				'TheWorldMachinima',
 				'machinima',
 				'SScript and Funkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
