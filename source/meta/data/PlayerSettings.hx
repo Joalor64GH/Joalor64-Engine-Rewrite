@@ -20,7 +20,7 @@ class PlayerSettings
 	static public function init():Void
 	{
 		if (player1 == null)
-			player1 = new PlayerSettings(0, Solo);
+			player1 = new PlayerSettings(Solo);
 
 		var numGamepads = FlxG.gamepads.numActiveGamepads;
 		if (numGamepads > 0)
