@@ -510,9 +510,9 @@ class AlphaCharacter extends FlxSprite
 		final elapsedAverage:Float = (1 / FlxG.drawFramerate);
 		final formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
 		for (cool in parent.letters) {
-			prevY += letter.y;
-			letter.y = prevY + formula;
-			prevY -= letter.y + formula;
+			prevY += cool.y;
+			cool.y = prevY + formula;
+			prevY -= cool.y + formula;
 		}
 	}
 
