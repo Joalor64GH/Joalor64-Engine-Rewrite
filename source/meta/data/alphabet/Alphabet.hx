@@ -396,9 +396,13 @@ class AlphaCharacter extends FlxSprite
 
 	public var row:Int = 0;
 	public var rowWidth:Float = 0;
+
+	public static var instance:AlphaCharacter = null;
+
 	public function new(x:Float, y:Float, character:String, bold:Bool, parent:Alphabet)
 	{
 		super(x, y);
+		instance = this;
 		this.parent = parent;
 		image = 'alphabet';
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -498,14 +502,18 @@ class AlphaCharacter extends FlxSprite
 	var elapsedTotal:Float = 0;
 	var number:Int = 0;
 
+	var cool:this = letters[i];
+
 	// nabbed from lullaby lel
 	inline public function displacementFormula() {
 		elapsedTotal += FlxG.elapsed;
-		var elapsedAverage:Float = (1 / FlxG.drawFramerate);
-		var formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
-		prevY += y;
-		y = prevY + formula;
-		prevY -= y + formula;
+		final elapsedAverage:Float = (1 / FlxG.drawFramerate);
+		final formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
+		for (cool in parent.letters) {
+			prevY += letter.y;
+			letter.y = prevY + formula;
+			prevY -= letter.y + formula;
+		}
 	}
 
 	override function update(elapsed:Float)
