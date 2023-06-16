@@ -20,6 +20,7 @@ class OutdatedState extends MusicBeatState
 	public static var leftState:Bool = false;
 
 	var warnText:FlxText;
+	
 	override function create()
 	{
 		super.create();
@@ -28,10 +29,10 @@ class OutdatedState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Oh teh noes! You're running an   \n
+			"Oh teh noes! You're running an\n
 			outdated version of Joalor64 Engine Rewritten!\n
-			You are currently on version (" + MainMenuState.joalor64EngineVersion + ").\n
-			Please update to " + TitleState.updateVersion + "!\n
+			Your current version is v" + MainMenuState.joalor64EngineVersion + "!\n
+			Please update to v" + Init.updateVersion + "!\n
 			Press ENTER to open the downloads page!\n
 			Press ESCAPE to proceed anyway.\n
             Thank you for using the Engine! :)",
@@ -39,6 +40,8 @@ class OutdatedState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+
+		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 	}
 
 	override function update(elapsed:Float)
@@ -57,10 +60,7 @@ class OutdatedState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
-						if (ClientPrefs.simpleMain)
-							MusicBeatState.switchState(new SimpleMainMenuState());
-						else
-							MusicBeatState.switchState(new MainMenuState());
+						MusicBeatState.switchState(new TitleState());
 					}
 				});
 			}

@@ -65,8 +65,8 @@ class MiscSubState extends BaseOptionsMenu
 		#end
 
 		var option:Option = new Option('Save Replays',
-			'If checked, the game will save a recording of your gameplay\nfor every song you beat in Story Mode.
-			Note that replays are not a video so\nreplay\'s size will be pretty small.',
+			'If checked, the game will save a recording of your gameplay\nfor every song you complete.
+			Note that replays are not a video, so\na replay\'s size will be pretty small.',
 			'saveReplay',
 			'bool',
 			true);

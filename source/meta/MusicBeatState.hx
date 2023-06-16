@@ -29,10 +29,10 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	private var curDecBeat:Float = 0;
 	private var controls(get, never):Controls;
 
-	public static var camBeat:FlxCamera;
-
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
+
+	public static var camBeat:FlxCamera;
 
 	override function create() {
 		camBeat = FlxG.camera;
@@ -43,6 +43,10 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 			openSubState(new CustomFadeTransition(0.7, true));
 		}
 		FlxTransitionableState.skipNextTransOut = false;
+
+		#if MODS_ALLOWED 
+		Mods.updatedOnState = false; 
+		#end
 	}
 
 	override function update(elapsed:Float)

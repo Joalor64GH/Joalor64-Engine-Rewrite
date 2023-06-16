@@ -48,6 +48,7 @@ class ModsMenuState extends MusicBeatState
 	var selector:AttachedSprite;
 	var descriptionTxt:FlxText;
 	var needaReset = false;
+
 	private static var curSelected:Int = 0;
 	public static var defaultColor:FlxColor = 0xFF665AFF;
 
@@ -60,9 +61,6 @@ class ModsMenuState extends MusicBeatState
 	var buttonsArray:Array<FlxButton> = [];
 	var debugKeys:Array<FlxKey>;
 
-	var installButton:FlxButton;
-	var removeButton:FlxButton;
-
 	var modsList:Array<Dynamic> = [];
 
 	var visibleWhenNoMods:Array<FlxBasic> = [];
@@ -72,6 +70,7 @@ class ModsMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+		
 		WeekData.setDirectoryFromWeek();
 
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
@@ -100,34 +99,8 @@ class ModsMenuState extends MusicBeatState
 		noModsTxt.screenCenter();
 		visibleWhenNoMods.push(noModsTxt);
 
-		var path:String = 'modsList.txt';
-		if(FileSystem.exists(path))
-		{
-			var leMods:Array<String> = CoolUtil.coolTextFile(path);
-			for (i in 0...leMods.length)
-			{
-				if(leMods.length > 1 && leMods[0].length > 0) {
-					var modSplit:Array<String> = leMods[i].split('|');
-					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()))
-					{
-						addToModsList([modSplit[0], (modSplit[1] == '1')]);
-					}
-				}
-			}
-		}
-
-		// FIND MOD FOLDERS
-		var boolshit = true;
-		if (FileSystem.exists("modsList.txt")){
-			for (folder in Paths.getModDirectories())
-			{
-				if(!Paths.ignoreModFolders.contains(folder))
-				{
-					addToModsList([folder, true]); //i like it false by default. -bb //Well, i like it True! -Shadow
-				}
-			}
-		}
-		saveTxt();
+		var list:ModsList = Mods.parseList();
+		for (mod in list.all) modsList.push([mod, list.enabled.contains(mod)]);
 
 		selector = new AttachedSprite();
 		selector.xAdd = -205;
@@ -290,7 +263,7 @@ class ModsMenuState extends MusicBeatState
 			newMod.alphabet.y = i * 150;
 			newMod.alphabet.x = 310;
 			add(newMod.alphabet);
-			//Don't ever cache the icons, it's a waste of loaded memory
+			// Don't ever cache the icons, it's a waste of loaded memory
 			var loadedIcon:BitmapData = null;
 			var iconToUse:String = Paths.mods(values[0] + #if FUTURE_POLYMOD '/_polymod_icon.png' #else '/pack.png' #end);
 			if(FileSystem.exists(iconToUse))
@@ -298,17 +271,18 @@ class ModsMenuState extends MusicBeatState
 				loadedIcon = BitmapData.fromFile(iconToUse);
 			}
 
+			// idk modpack icons wont load at the moment, but WHATEVER
 			newMod.icon = new AttachedSprite();
-			if(loadedIcon != null)
+			if(loadedIcon == null)
 			{
-				newMod.icon.loadGraphic(loadedIcon, true, 150, 150);//animated icon support
-				var totalFrames = Math.floor(loadedIcon.width / 150) * Math.floor(loadedIcon.height / 150);
-				newMod.icon.animation.add("icon", [for (i in 0...totalFrames) i],10);
-				newMod.icon.animation.play("icon");
+				newMod.icon.loadGraphic(Paths.image('unknownMod'));
 			}
 			else
 			{
-				newMod.icon.loadGraphic(Paths.image('unknownMod'));
+				newMod.icon.loadGraphic(loadedIcon, true, 150, 150); //animated icon support
+				var totalFrames = Math.floor(loadedIcon.width / 150) * Math.floor(loadedIcon.height / 150);
+				newMod.icon.animation.add("icon", [for (i in 0...totalFrames) i],10);
+				newMod.icon.animation.play("icon");
 			}
 			newMod.icon.sprTracker = newMod.alphabet;
 			newMod.icon.xAdd = -newMod.icon.width - 30;
@@ -332,15 +306,6 @@ class ModsMenuState extends MusicBeatState
 		FlxG.mouse.visible = true;
 
 		super.create();
-	}
-
-	function addToModsList(values:Array<Dynamic>)
-	{
-		for (i in 0...modsList.length)
-			if(modsList[i][0] == values[0])
-				return;
-
-		modsList.push(values);
 	}
 
 	function updateButtonToggle()
@@ -402,7 +367,7 @@ class ModsMenuState extends MusicBeatState
 
 		var path:String = 'modsList.txt';
 		File.saveContent(path, fileStr);
-		Paths.pushGlobalMods();
+		Mods.pushGlobalMods();
 	}
 
 	var noModsSine:Float = 0;
@@ -616,40 +581,31 @@ class ModMetadata
 		this.restart = false;
 
 		//Try loading json
-		var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
-		if(FileSystem.exists(path)) {
-			var rawJson:String = File.getContent(path);
-			if(rawJson != null && rawJson.length > 0) {
-				var stuff:Dynamic = Json.parse(rawJson);
-					//using reflects cuz for some odd reason my haxe hates the stuff.var shit
-					var colors:Array<Int> = Reflect.getProperty(stuff, "color");
-					var description:String = Reflect.getProperty(stuff, "description");
-					var name:String = Reflect.getProperty(stuff, "name");
-					var restart:Bool = Reflect.getProperty(stuff, "restart");
-
-				if(name != null && name.length > 0)
-				{
-					this.name = name;
-				}
-				if(description != null && description.length > 0)
-				{
-					this.description = description;
-				}
-				if(name == 'Name')
-				{
-					this.name = folder;
-				}
-				if(description == 'Description')
-				{
-					this.description = "No description provided.";
-				}
-				if(colors != null && colors.length > 2)
-				{
-					this.color = FlxColor.fromRGB(colors[0], colors[1], colors[2]);
-				}
-
-				this.restart = restart;
+		var pack:Dynamic = Mods.getPack(folder);
+		if(pack != null) {
+			//using reflects cuz for some odd reason my haxe hates the stuff.var shit
+			if(pack.name != null && pack.name.length > 0)
+			{
+				if(pack.name != 'Name')
+					this.name = pack.name;
+				else
+					this.name = pack.folder;
 			}
+
+			if(pack.description != null && pack.description.length > 0)
+			{
+				if(pack.description != 'Description')
+					this.description = pack.description;
+				else
+					this.description = "No description provided.";
+			}
+
+			if(pack.color != null)
+				this.color = FlxColor.fromRGB(pack.color[0] != null ? pack.color[0] : 170,
+											pack.color[1] != null ? pack.color[1] : 0,
+											pack.color[2] != null ? pack.color[2] : 255);
+
+			this.restart = pack.restart;
 		}
 	}
 }

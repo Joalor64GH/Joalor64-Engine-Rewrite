@@ -1,6 +1,6 @@
 ### FNF-Specific
 # File used for the NG API. Should not be shared with others.
-APIStuff.hx
+source/APIStuff.hx
 art/build_x32-officialrelease.bat
 art/build_x64-officialrelease.bat
 art/test_x64-debug-officialrelease.bat
@@ -27,10 +27,6 @@ assets/android/*
 assets/images/androidcontrols/
 art/dependencyFiles/android/
 mobile/*
-
-### Appveyor-Specific
-appveyor.yml
-appveyor-win32.yml
 
 ### Stage Editor-Related
 assets/images/stageborder.png

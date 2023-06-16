@@ -59,32 +59,7 @@ class CreditsState extends MusicBeatState
 		add(grpOptions);
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var path:String = 'modsList.txt';
-		if (FileSystem.exists(path))
-		{
-			var leMods:Array<String> = CoolUtil.coolTextFile(path);
-			for (i in 0...leMods.length)
-			{
-				if (leMods.length > 1 && leMods[0].length > 0)
-				{
-					var modSplit:Array<String> = leMods[i].split('|');
-					if (!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()) && !modsAdded.contains(modSplit[0]))
-					{
-						if (modSplit[1] == '1')
-							pushModCreditsToList(modSplit[0]);
-						else
-							modsAdded.push(modSplit[0]);
-					}
-				}
-			}
-		}
-
-		var arrayOfFolders:Array<String> = Paths.getModDirectories();
-		arrayOfFolders.push('');
-		for (folder in arrayOfFolders)
-		{
-			pushModCreditsToList(folder);
-		}
+		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
 
 		var pisspoop:Array<Array<String>> = [
@@ -138,14 +113,6 @@ class CreditsState extends MusicBeatState
 				'https://github.com/BeastlyGhost',
 				'8CC4FF',
 				'Ghost'
-			],
-			[
-				'Stilic',
-				'stilic',
-				'Restored Combo Script\n"French Programmer"',
-				'https://github.com/Stilic',
-				'C74B22',
-				'meowmeowmeowAAAA'
 			],
 			[
 				'TheWorldMachinima',
@@ -245,14 +212,6 @@ class CreditsState extends MusicBeatState
 				'B42F71',
 				'JingleRiver'
 			],
-			[
-				'Yoshubs',
-				'shubs',
-				'Additional Programmer of Psych Engine\nEpic Input System',
-				'https://twitter.com/yoshubs',
-				'5E99DF',
-				'JingleShubs'
-			],
 			[''],
 			['Former Engine Members'],
 			[
@@ -262,6 +221,14 @@ class CreditsState extends MusicBeatState
 				'https://twitter.com/bbsub3',
 				'3E813A',
 				'JingleBB'
+			],
+			[
+				'Yoshubs',
+				'shubs',
+				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
+				'https://twitter.com/yoshubs',
+				'5E99DF',
+				'JingleShubs'
 			],
 			[''],
 			['Engine Contributors'],
@@ -300,7 +267,7 @@ class CreditsState extends MusicBeatState
 			[
 				'KadeDev',
 				'kade',
-				'Fixed Chart Editor and other PRs\nExtension WebM',
+				'Fixed Chart Editor and other PRs\nExtension WebM Fork',
 				'https://twitter.com/kade0912',
 				'64A250',
 				''
@@ -384,7 +351,7 @@ class CreditsState extends MusicBeatState
 			{
 				if (creditsStuff[i][5] != null)
 				{
-					Paths.currentModDirectory = creditsStuff[i][5];
+					Mods.currentModDirectory = creditsStuff[i][5];
 				}
 
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
@@ -394,7 +361,7 @@ class CreditsState extends MusicBeatState
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
-				Paths.currentModDirectory = '';
+				Mods.currentModDirectory = '';
 
 				if (curSelected == -1)
 					curSelected = i;
@@ -579,13 +546,8 @@ class CreditsState extends MusicBeatState
 	}
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
-	private var modsAdded:Array<String> = [];
-
 	function pushModCreditsToList(folder:String)
 	{
-		if (modsAdded.contains(folder))
-			return;
-
 		var creditsFile:String = null;
 		if (folder != null && folder.trim().length > 0)
 			creditsFile = Paths.mods(folder + '/data/credits.txt');
@@ -604,7 +566,6 @@ class CreditsState extends MusicBeatState
 			}
 			creditsStuff.push(['']);
 		}
-		modsAdded.push(folder);
 	}
 	#end
 

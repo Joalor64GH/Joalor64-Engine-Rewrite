@@ -42,16 +42,16 @@ using StringTools;
 
 class ModDownloadState extends MusicBeatState
 {
+	private var camMain:FlxCamera;
+	private var camHUD:FlxCamera;
+	private var camInput:FlxCamera;
+	private var camBG:FlxCamera;
+	
 	public static var curID:String;
 	public static var daList:Array<String> = [];
 	public static var cleanedDirectory = [];
 	public static var idInputText:FlxUIInputText;
 	public static var directory:String;
-
-	private var camMain:FlxCamera;
-	private var camHUD:FlxCamera;
-	private var camInput:FlxCamera;
-	private var camBG:FlxCamera;
 
 	public static var writer:Writer;
 
@@ -59,22 +59,17 @@ class ModDownloadState extends MusicBeatState
 
 	public static var coolText:FlxText;
 
-	public static var canExit:Bool = true;
-
-	public static var alreadyPressed:Bool = false;
-
-	public static var completed:Bool = false;
-
-	public static var finished:Bool = false;
-
-	public static var alreadyExcecuted:Bool = false;
-
 	public static var copier:Process;
 	public static var deleter:Process;
 	public static var cleaner:Process;
 	public static var extractor:Process;
 
 	public static var fileConfirmed:Bool = false;
+	public static var canExit:Bool = true;
+	public static var alreadyPressed:Bool = false;
+	public static var completed:Bool = false;
+	public static var finished:Bool = false;
+	public static var alreadyExcecuted:Bool = false;
 
 	var UI_box:FlxUITabMenu;
 

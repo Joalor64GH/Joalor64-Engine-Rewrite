@@ -15,7 +15,6 @@ using StringTools;
 class TestState extends MusicBeatState
 {
     public var bg:FlxSprite;
-
     public var disc:FlxSprite;
     public var musplayer:FlxSprite;
     public var playerneedle:FlxSprite;
@@ -31,21 +30,22 @@ class TestState extends MusicBeatState
 	bg.screenCenter();
         add(bg);
         
-        musplayer = new FlxSprite(0, 0).loadGraphic(Paths.image('test/musplayer'));
+        musplayer = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/musplayer'));
         musplayer.screenCenter();
         musplayer.antialiasing = ClientPrefs.globalAntialiasing;
         add(musplayer);
-        disc = new FlxSprite(0, 0).loadGraphic(Paths.image('test/disk'));
+        disc = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/disc'));
         disc.setPosition(musplayer.x + 268, musplayer.y + 13);
         disc.antialiasing = ClientPrefs.globalAntialiasing;
         disc.angularVelocity = 30;
         add(disc);
-        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('test/playerneedle'));
+        playerneedle = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/playerneedle'));
         playerneedle.screenCenter();
         playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
         add(playerneedle);
 
-        testTxt = new Alphabet(musplayer.x + 90, 0, 'This is a test.', true);
+        testTxt = new Alphabet(0, 0, 'This is a test.', true);
+        testTxt.setPosition(50, musplayer.y - 120);
         add(testTxt);
     }
 

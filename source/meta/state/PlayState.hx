@@ -3,12 +3,10 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
-
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -428,19 +426,19 @@ class PlayState extends MusicBeatState
 
 		//Ratings
 		var rating:Rating = new Rating('sick');
-		rating.ratingMod = 0.9825;
+		rating.ratingMod = 1;
 		rating.score = 350;
 		rating.noteSplash = true;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');
-		rating.ratingMod = 0.7;
+		rating.ratingMod = 0.75;
 		rating.score = 200;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('bad');
-		rating.ratingMod = 0.4;
+		rating.ratingMod = 0.5;
 		rating.score = 100;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
@@ -1002,8 +1000,11 @@ class PlayState extends MusicBeatState
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/scripts/'));
+
+		for(mod in Mods.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
 		#end
 
 		for (folder in foldersToCheck)
@@ -1502,10 +1503,10 @@ class PlayState extends MusicBeatState
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
 
-		for(mod in Paths.getGlobalMods())
+		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
 		#end
 
@@ -1694,10 +1695,10 @@ class PlayState extends MusicBeatState
 		}
 
 		var foldersToCheck:Array<String> = [Paths.mods('shaders/')];
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/shaders/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/shaders/'));
 
-		for(mod in Paths.getGlobalMods())
+		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
 		
 		for (folder in foldersToCheck)
@@ -2659,6 +2660,7 @@ class PlayState extends MusicBeatState
 	public var countdownTwo:FlxSprite;
 	public var countdownOne:FlxSprite;
 	public var countdownGo:FlxSprite;
+	
 	public static var startOnTime:Float = 0;
 
 	function cacheCountdown()
@@ -2838,7 +2840,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage && curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo') {
+						if (!PlayState.isPixelStage && (curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo')) {
 							boyfriend.playAnim('pre-attack', true);
 							boyfriend.specialAnim = true;
 						}
@@ -3271,7 +3273,6 @@ class PlayState extends MusicBeatState
 				smoke.flipX = true;
 				dadbattleSmokes.add(smoke);
 
-
 			case 'Philly Glow':
 				if (curStage != 'philly')
 					return;
@@ -3284,7 +3285,6 @@ class PlayState extends MusicBeatState
 				phillyWindowEvent.updateHitbox();
 				phillyWindowEvent.visible = false;
 				insert(members.indexOf(blammedLightsBlack) + 1, phillyWindowEvent);
-
 
 				phillyGlowGradient = new PhillyGlow.PhillyGlowGradient(-400, 225); //This shit was refusing to properly load FlxGradient so fuck it
 				phillyGlowGradient.visible = false;
@@ -4553,8 +4553,21 @@ class PlayState extends MusicBeatState
 			GlobalVideo.get().stop();
 			PlayState.instance.remove(PlayState.instance.videoSprite);
 		}
-
 		endBGVideo();
+
+		#if sys
+		if (!inReplay)
+		{
+			var files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
+			var length:Null<Int> = null;
+			var song:String = SONG.song.coolSongFormatter().toLowerCase();
+
+			(files == null) ? length = 0 : length = files.length;
+
+			if (ClientPrefs.saveReplay)
+				File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
+		}
+		#end
 
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
@@ -4636,27 +4649,9 @@ class PlayState extends MusicBeatState
 				campaignMisses += songMisses;
 
 				storyPlaylist.remove(storyPlaylist[0]);
-				#if sys
-				if (!inReplay)
-				{
-					var files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
-					var length:Null<Int> = null;
-					var song:String = SONG.song.coolSongFormatter().toLowerCase();
-
-					if (files == null)
-						length = 0;
-
-					else
-						length = files.length;
-
-					if (ClientPrefs.saveReplay)
-						File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
-				}
-				#end
-
 				if (storyPlaylist.length <= 0)
 				{
-					WeekData.loadTheFirstEnabledMod();
+					Mods.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
@@ -4717,7 +4712,7 @@ class PlayState extends MusicBeatState
 			else
 			{
 				trace('WENT BACK TO FREEPLAY??');
-				WeekData.loadTheFirstEnabledMod();
+				Mods.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
@@ -4860,11 +4855,10 @@ class PlayState extends MusicBeatState
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
 		final ratingsY:Float = 60;
 
-		if (ratingsGroup.countDead() > 0){
+		if (ratingsGroup.countDead() > 0) {
 			rating = ratingsGroup.getFirstDead();
 			rating.reset(ratingsX, ratingsY);
-		}
-		else{
+		} else {
 			rating = new FlxSprite();
 			ratingsGroup.add(rating);
 		}

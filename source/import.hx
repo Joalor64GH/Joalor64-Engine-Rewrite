@@ -24,6 +24,8 @@ import meta.state.PlayState;
 import meta.Controls;
 import Paths;
 
+#if MODS_ALLOWED import backend.Mods; #end
+
 import objects.AttachedSprite;
 import meta.data.options.*;
 import hscript.*;

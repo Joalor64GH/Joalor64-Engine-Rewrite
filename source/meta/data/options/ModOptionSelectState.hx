@@ -53,7 +53,7 @@ class ModOptionSelectState extends MusicBeatState
 		DiscordClient.changePresence("Mod Menu", null);
 		#end
 
-        	mods = Paths.getModDirectories();
+        	mods = Mods.getModDirectories();
         	mods.insert(0, 'Global');
 
 		for (mod in mods) {
@@ -102,12 +102,8 @@ class ModOptionSelectState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
-			changeSelection(-1);
-		}
-		if (controls.UI_DOWN_P) {
-			changeSelection(1);
-		}
+		if (controls.UI_UP_P || controls.UI_DOWN_P)
+			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

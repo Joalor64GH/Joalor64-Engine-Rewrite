@@ -1,13 +1,23 @@
 <p align="center">
   <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoReadme.png" width="750"/></a>
   <h1 align="center">Joalor64 Engine Rewritten</h1>
-  <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs if you can!</h2>
+  <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs/issues if you can!</h2>
 </p>
 
 ----------------------------------------------
 
-* [Discord Server](https://discord.gg/GnXqAVMFbA)
-* [Wiki](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+<div align="center">
+  
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
+
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.3.5b)
+
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)](https://joalor64.itch.io/joalor64-engine-rewritten)
+
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
+
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+</div>
 
 ----------------------------------------------
 
@@ -21,6 +31,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ----------------------------------------------
 
 # Features
+* JSONI8 Sprite Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
@@ -34,18 +45,11 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
 * Softcoded Achievements
-* A bunch of others that ShadowMario refused to add
 
 # Planned Features
-* [ ] Upload 1.3.0 Builds for Windows, Mac and Linux
 * [ ] Hardcode Icon Bopping Script
 * [ ] Extra Notes (Hardcoded)
 * [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
-
-# Downloads
-* [GitHub](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
-* [GitHub (Actions)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/actions)
-* itch.io (Soon...)
 
 ----------------------------------------------
 
@@ -59,7 +63,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ### Special Thanks
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
-* [Stilic](https://github.com/Stilic) - Restored Combo Script
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
 * [Magnumsrt](https://github.com/Magnumsrt) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
@@ -73,12 +76,12 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
 * [RiverOaken](https://twitter.com/RiverOaken) - Main Artist + Animator
-* [Yoshubs](https://github.com/Yoshubs) - Aditional Programmer + Epic Input System
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
+* [Yoshubs](https://github.com/Yoshubs) - Aditional Ex-Programmer + Epic Input System
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
-* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM
+* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations
