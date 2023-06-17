@@ -102,9 +102,8 @@ class Main extends Sprite
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
+		if(fpsVar != null)
 			fpsVar.visible = ClientPrefs.showFPS;
-		}
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
 
@@ -198,7 +197,7 @@ class Main extends Sprite
 	public function coloring():Void
 	{
 		// Hippity, Hoppity, your code is now my property (from KadeEngine)
-		if (FlxG.save.data.fpsRainbow) {
+		if (ClientPrefs.fpsRainbow) {
 			if (currentColor >= array.length)
 				currentColor = 0;
 			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.framerate));
@@ -211,10 +210,8 @@ class Main extends Sprite
 		else 
 			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
 	}
-	public function changeFPSColor(color:FlxColor)
-	{
+	inline public function changeFPSColor(color:FlxColor)
 		fpsVar.textColor = color;
-	}
 
 	public static var webmHandler:WebmHandler;
 }
