@@ -8,8 +8,6 @@ import sys.FileSystem;
 import flash.media.Sound;
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
-import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
-import openfl.geom.Rectangle;
 import flixel.math.FlxRect;
 import haxe.xml.Access;
 import openfl.system.System;
@@ -27,7 +25,6 @@ import haxe.Json;
 
 import github.APIShit;
 import meta.CoolUtil;
-
 #if MODS_ALLOWED
 import backend.Mods;
 #end
@@ -219,19 +216,22 @@ class Paths
 		return shit;
 	}
 
-	public static function getPath(file:String, ?type:AssetType, ?library:Null<String> = null)
+	public static function getPath(file:String, ?type:AssetType = TEXT, ?library:Null<String> = null, ?modsAllowed:Bool = false):String
 	{
+		#if MODS_ALLOWED
+		if(modsAllowed)
+		{
+			var modded:String = modFolders(file);
+			if(FileSystem.exists(modded)) return modded;
+		}
+		#end
+
 		return getPreloadPath(file);
 	}
 
 	inline public static function getPreloadPath(file:String = '')
 	{
 		return 'assets/$file';
-	}
-
-	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
-	{
-		return getPath(file, type, library);
 	}
 
 	inline static public function txt(key:String, ?library:String)
