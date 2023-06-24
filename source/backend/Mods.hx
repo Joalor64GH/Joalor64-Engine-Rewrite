@@ -13,11 +13,13 @@ typedef ModsList = {
 class Mods
 {
 	static public var currentModDirectory:String = '';
+	static public var currentModAddons:Array<String> = []; // not sure what to do with this just yet
 	public static var ignoreModFolders:Array<String> = [
 		#if FUTURE_POLYMOD 
 		'_append', 
 		'_merge', 
 		#end
+		'addons',
 		'characters',
 		'data',
 		'songs',

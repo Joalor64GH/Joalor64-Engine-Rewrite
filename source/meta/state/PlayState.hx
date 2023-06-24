@@ -59,7 +59,9 @@ import llua.State;
 import llua.Convert;
 #end
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "2.6.1") 
+#if (hxCodec >= "2.7.0") 
+import hxcodec.flixel.FlxVideo as MP4Handler;
+#elseif (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") 
 import VideoHandler as MP4Handler;
