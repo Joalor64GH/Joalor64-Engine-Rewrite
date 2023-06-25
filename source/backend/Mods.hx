@@ -13,13 +13,15 @@ typedef ModsList = {
 class Mods
 {
 	static public var currentModDirectory:String = '';
-	static public var currentModAddons:Array<String> = []; // not sure what to do with this just yet
+	
+	static public var currentModLibraries:Array<String> = [];
+	static public var currentModAddons:Array<String> = [];
+
 	public static var ignoreModFolders:Array<String> = [
 		#if FUTURE_POLYMOD 
 		'_append', 
 		'_merge', 
 		#end
-		'addons',
 		'characters',
 		'data',
 		'songs',
@@ -73,7 +75,8 @@ class Mods
 
 	public static function getPack(?folder:String = null):Dynamic
 	{
-		if(folder == null) folder = Mods.currentModDirectory;
+		if(folder == null) 
+			folder = Mods.currentModDirectory;
 
 		var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
 		if(FileSystem.exists(path)) {
