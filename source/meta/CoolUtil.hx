@@ -2,7 +2,9 @@ package meta;
 
 import meta.state.PlayState;
 import openfl.utils.Assets;
+import lime.utils.Assets as LimeAssets;
 import flixel.FlxG;
+
 #if sys
 import sys.FileSystem;
 #end
@@ -37,6 +39,13 @@ class CoolUtil
 	
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
+
+	inline public static function txtSplit(path:String)
+	{
+		return [
+			for (i in Assets.getText(path).trim().split('\n')) i.trim()
+		];
+	}
 
 	inline public static function coolTextFile(path:String):Array<String>
 		return FileAssets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];

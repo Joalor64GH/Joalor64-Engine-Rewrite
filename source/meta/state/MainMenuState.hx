@@ -62,13 +62,14 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5b'; //This is also used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.3.5b'; //Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
 	public static var curSelected:Int = 0;
 
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	
@@ -79,6 +80,7 @@ class MainMenuState extends MusicBeatState
 	var tipTextMargin:Float = 10;
 	var tipTextScrolling:Bool = false;
 
+	var bg:FlxSprite;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
@@ -153,7 +155,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite();
+		bg = new FlxSprite();
 		bg.loadGraphic(Paths.image('menuBG'));
 
 		if (menuJSON.backgroundStatic != null && menuJSON.backgroundStatic.length > 0 && menuJSON.backgroundStatic != "none")
@@ -363,10 +365,12 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == '${menuJSON.links[0]}') {
+				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
+				{
 					CoolUtil.browserLoad('${menuJSON.links[1]}');
-				}
-				else if (optionShit[curSelected] == 'donate') {
+				} 
+				else if (optionShit[curSelected] == 'donate') 
+				{
 					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
 				}
 				else
@@ -377,10 +381,15 @@ class MainMenuState extends MusicBeatState
 					if (ClientPrefs.flashing)
 						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-					menuItems.forEach(function(spr:FlxSprite)
+					menuItems.forEach((spr:FlxSprite) ->
 					{
 						if (curSelected != spr.ID)
 						{
+							FlxTween.tween(FlxG.camera, {zoom: 5}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(bg, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(magenta, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
 								onComplete: function(twn:FlxTween)
@@ -443,11 +452,7 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			if (menuJSON.centerOptions)
-				spr.screenCenter(X);
-		});
+		menuItems.forEach((spr:FlxSprite) -> spr.screenCenter(X));
 	}
 
 	function tipTextStartScrolling()
@@ -474,7 +479,7 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach((spr:FlxSprite) ->
 		{
 			spr.animation.play('idle');
 			spr.updateHitbox();

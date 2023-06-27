@@ -36,8 +36,7 @@ class Init extends FlxState
 	{
 		super();
 
-		persistentUpdate = true;
-		persistentDraw = true;
+		persistentUpdate = persistentDraw = true;
 	}
 
 	override function create()
@@ -70,8 +69,9 @@ class Init extends FlxState
 
 	override function update(elapsed)
 	{
-		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
+		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE) {
 			skip();
+		}
 
 		super.update(elapsed);
 	}

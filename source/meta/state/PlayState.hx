@@ -59,8 +59,9 @@ import llua.State;
 import llua.Convert;
 #end
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "2.7.0") 
+#if (hxCodec >= "3.0.0") 
 import hxcodec.flixel.FlxVideo as MP4Handler;
+import lime.app.Event;
 #elseif (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") 
@@ -2194,12 +2195,24 @@ class PlayState extends MusicBeatState
 		return;
 		#else
 		var video:MP4Handler = new MP4Handler();
+		#if (hxCodec >= "3.0.0")
+		// Recent versions
+		video.play(filepath);
+		video.onEndReached.add(function()
+		{
+			video.dispose();
+			startAndEnd();
+			return;
+		}, true);
+		#else
+		// Older versions
 		video.playVideo(filepath);
 		video.finishCallback = function()
 		{
 			startAndEnd();
-			return;
+				return;
 		}
+		#end
 		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
