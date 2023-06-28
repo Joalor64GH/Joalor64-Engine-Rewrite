@@ -13,9 +13,9 @@ import meta.data.alphabet.*;
 
 class CreditState extends MusicBeatState
 {
-    private var grpControls:FlxTypedGroup<Alphabet>;
+    	private var grpControls:FlxTypedGroup<Alphabet>;
 
-    public static var coolColors:Array<FlxColor> = [
+    	public static var coolColors:Array<FlxColor> = [
 		0x00000000, // Transparent
 		0xFFFFFFFF, // White
 		0xFF808080, // Gray
@@ -36,20 +36,20 @@ class CreditState extends MusicBeatState
 	var theCool:Array<String> = [
 		"BandLab Radio Player",
 		"BandLab OST Player",
-        "2048 Clicker"
+        	"2048 Clicker"
 	];
 
-    var curSelected:Int = 0;
-    var menuBG:FlxSprite;
+    	var curSelected:Int = 0;
+   	var menuBG:FlxSprite;
 
 	override function create()
 	{
 		menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        menuBG.antialiasing = ClientPrefs.globalAntialiasing;
-        menuBG.color = randomizeColor();
+        	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
+        	menuBG.color = randomizeColor();
 		add(menuBG);
 
-        var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Check out my other projects!", 12);
+        	var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Check out my other projects!", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -65,7 +65,7 @@ class CreditState extends MusicBeatState
 			grpControls.add(label);
 		}
 
-        changeSelection();
+        	changeSelection();
 
 		super.create();
 	}
@@ -74,7 +74,7 @@ class CreditState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-        if (controls.UI_UP_P || controls.UI_DOWN_P)
+        	if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK)
@@ -83,12 +83,12 @@ class CreditState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			switch (curSelected)
-            {
+            		{
 				case 0:
-					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLab-Radio-Player);
+					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLab-Radio-Player');
 				case 1:
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLabOST-Player');
-                case 2:
+        			case 2:
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/2048-Clicker');
 			}
 		}
@@ -121,10 +121,10 @@ class CreditState extends MusicBeatState
 		}
 	}
 
-    public static function randomizeColor()
-    {
+    	public static function randomizeColor()
+    	{
 		var chance:Int = FlxG.random.int(0, coolColors.length - 1);
 		var color:FlxColor = coolColors[chance];
 		return color;
-    }
+   	}
 }
