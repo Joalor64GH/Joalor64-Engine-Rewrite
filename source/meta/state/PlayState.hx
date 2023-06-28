@@ -2210,7 +2210,7 @@ class PlayState extends MusicBeatState
 		video.finishCallback = function()
 		{
 			startAndEnd();
-				return;
+			return;
 		}
 		#end
 		#end

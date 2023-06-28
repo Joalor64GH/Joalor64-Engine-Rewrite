@@ -84,10 +84,8 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
-
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
-
 	var tipBackground:FlxSprite;
 	var tipText:FlxText;
 
@@ -250,7 +248,8 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
+				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {
+					ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
 					{
 						finishedFunnyMove = true; 
 						changeItem();
@@ -339,6 +338,8 @@ class MainMenuState extends MusicBeatState
 				tipTextStartScrolling();
 			}
 		}
+
+		if (FlxG.keys.justPressed.E) MusicBeatState.switchState(new EpicState());
 		
 		if (FlxG.sound.music.volume < 0.8)
 		{
