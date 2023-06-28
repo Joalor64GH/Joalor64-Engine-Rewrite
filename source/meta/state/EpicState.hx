@@ -11,7 +11,7 @@ import meta.state.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 
-class CreditState extends MusicBeatState
+class EpicState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 
