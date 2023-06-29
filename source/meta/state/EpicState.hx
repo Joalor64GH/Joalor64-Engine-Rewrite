@@ -87,7 +87,7 @@ class EpicState extends MusicBeatState
 			switch (curSelected)
             		{
 				case 0:
-					CoolUtil.browserLoad('https://gamebanana.com/mods/417238);
+					CoolUtil.browserLoad('https://gamebanana.com/mods/417238');
 				case 1:
 					CoolUtil.browserLoad('https://joalor64.itch.io/joalor64-engine');
 				case 2:
