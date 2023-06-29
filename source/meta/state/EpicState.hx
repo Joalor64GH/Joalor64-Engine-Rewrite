@@ -34,6 +34,8 @@ class EpicState extends MusicBeatState
 	];
 
 	var theCool:Array<String> = [
+		"VS Joalor64",
+		"Joalor64 Engine",
 		"BandLab Radio Player",
 		"BandLab OST Player",
         	"2048 Clicker"
@@ -85,10 +87,14 @@ class EpicState extends MusicBeatState
 			switch (curSelected)
             		{
 				case 0:
-					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLab-Radio-Player');
+					CoolUtil.browserLoad('https://gamebanana.com/mods/417238);
 				case 1:
+					CoolUtil.browserLoad('https://joalor64.itch.io/joalor64-engine');
+				case 2:
+					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLab-Radio-Player');
+				case 3:
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/BandLabOST-Player');
-        			case 2:
+        			case 4:
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/2048-Clicker');
 			}
 		}

@@ -41,9 +41,9 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
-		'Visuals and Graphics',
-		'Gameplay Preferences',
-		'Adjust Delay and Combo', 
+		'Visuals',
+		'Gameplay',
+		'Offsets', 
 		'Miscellaneous'
 	];
 
@@ -66,11 +66,11 @@ class OptionsState extends MusicBeatState
 					openSubState(new NotesHSVSubState());
 			case 'Controls':
 				openSubState(new ControlsSubState());
-			case 'Visuals and Graphics':
+			case 'Visuals':
 				openSubState(new VisualsSubState());
-			case 'Gameplay Preferences':
+			case 'Gameplay':
 				openSubState(new GameplaySubState());
-			case 'Adjust Delay and Combo':
+			case 'Offsets':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
 			case 'Miscellaneous':
 				openSubState(new MiscSubState());

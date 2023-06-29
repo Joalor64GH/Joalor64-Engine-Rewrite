@@ -4995,8 +4995,12 @@ class PlayState extends MusicBeatState
 
 			if(combo >= 0)
 			{
-				insert(members.indexOf(strumLineNotes), comboSpr);
 				insert(members.indexOf(strumLineNotes), numScore);
+			}
+
+			if(combo >= 10)
+			{
+				insert(members.indexOf(strumLineNotes), comboSpr);
 			}
 
 			insert(members.indexOf(strumLineNotes), rating);
