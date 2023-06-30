@@ -63,6 +63,7 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -126,21 +127,17 @@ class TitleState extends MusicBeatState
 		if (!initialized)
 		{
 			if(FlxG.sound.music == null) 
-			{
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-			}
 		}
 
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
-
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none")
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		else
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
@@ -384,6 +381,7 @@ class TitleState extends MusicBeatState
 
 	var transitioning:Bool = false;
 	var newTitle:Bool = false;
+	
 	var titleTimer:Float = 0;
 
 	override function update(elapsed:Float)
@@ -482,6 +480,7 @@ class TitleState extends MusicBeatState
 				credGroup.add(money);
 				textGroup.add(money);
 			}
+			FlxTween.tween(money, {y: money.y + 350}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
@@ -493,10 +492,11 @@ class TitleState extends MusicBeatState
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
 			textGroup.add(coolText);
+			FlxTween.tween(coolText, {y: coolText.y - 750}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
-	function deleteCoolText()
+	function deleteCoolText() // i wanna add a fade out tween here
 	{
 		while (textGroup.members.length > 0)
 		{

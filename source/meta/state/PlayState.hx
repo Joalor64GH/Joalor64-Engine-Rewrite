@@ -6122,6 +6122,7 @@ class PlayState extends MusicBeatState
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
 
+	// messing with ur application window lmao
 	static inline var upperCase:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	static inline var lowerCase:String = "abcdefghijklmnopqrstuvwxyz";
 	static inline var numbers:String = "0123456789";
