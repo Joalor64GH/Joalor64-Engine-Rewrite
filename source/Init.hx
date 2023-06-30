@@ -19,12 +19,12 @@ import meta.data.*;
 import core.ModCore;
 #end
 
-// this loads everything in
-class Init extends FlxState
+class Init extends FlxState // this loads everything in
 {
 	public static var randomIcon:Array<String> = [
 		'joalor',
 		'meme',
+		'fox',
 		'bot'
 	];
 	var epicSprite:FlxSprite;

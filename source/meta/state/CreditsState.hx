@@ -89,6 +89,14 @@ class CreditsState extends MusicBeatState
 				'omori' // funni sound goes here if you want
 			],
 			[
+				'ThatOneFox',
+				'fox',
+				'Epic New Logo\n"this is a quote"',
+				'https://github.com/ThatOneFoxHX',
+				'00A7D4',
+				'' // if you want, a funny sound effect can go here
+			],
+			[
 				'Bot 404',
 				'bot',
 				'Tiny little helper, Drew his own icon\n"expected more"',
@@ -176,14 +184,6 @@ class CreditsState extends MusicBeatState
 				'RGB Note Coloring System\n"this is a quote"',
 				'https://linktr.ee/ActualMandM',
 				'9C5D88',
-				''
-			],
-			[
-				'ThatOneFox',
-				'none',
-				'Cool New Logo\n"this is a quote"',
-				'https://github.com/ThatOneFoxHX',
-				'00A7D4',
 				''
 			],
 			[
