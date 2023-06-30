@@ -156,7 +156,7 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'KookerFoxYT',
-				'fox',
+				'kooker',
 				'Custom Options\n"fox"',
 				'https://github.com/KookerFoxYT',
 				'00B0B4', // it spelled bob lmao
