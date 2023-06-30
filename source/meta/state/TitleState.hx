@@ -63,11 +63,11 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
-
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
 	var credIcon3:FlxSprite;
+	var credIcon4:FlxSprite;
 	#elseif PSYCH_WATERMARKS
 	var credIconShadow:FlxSprite;
 	var credIconRiver:FlxSprite;
@@ -278,6 +278,12 @@ class TitleState extends MusicBeatState
 		add(credIcon3);
 		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;
+
+		credIcon4 = new FlxSprite(FlxG.width-300, FlxG.height-300).loadGraphic(Paths.image('credits/fox'));
+		add(credIcon4);
+		credIcon4.visible = false;
+		credIcon4.flipX = true;
+
 		#elseif PSYCH_WATERMARKS
 		credIconShadow = new FlxSprite(150,150).loadGraphic(Paths.image('credits/shadowmario'));
 		add(credIconShadow);
@@ -543,6 +549,7 @@ class TitleState extends MusicBeatState
 					credIcon1.visible = true;
 					credIcon2.visible = true;
 					credIcon3.visible = true;
+					credIcon4.visible = true;
 					#elseif PSYCH_WATERMARKS
  					createCoolText(['Psych Engine by'], 15);
 					#else
@@ -572,6 +579,7 @@ class TitleState extends MusicBeatState
 					credIcon1.destroy();
 					credIcon2.destroy();
 					credIcon3.destroy();
+					credIcon4.destroy();
 					#elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
@@ -640,6 +648,7 @@ class TitleState extends MusicBeatState
 			credIcon1.destroy();
 			credIcon2.destroy();
 			credIcon3.destroy();
+			credIcon4.destroy();
 			#elseif PSYCH_WATERMARKS
 			credIconShadow.destroy();
 			credIconRiver.destroy();
@@ -653,6 +662,17 @@ class TitleState extends MusicBeatState
 			#end
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
+
+			// nabbed from kade engine lmao
+			logoBl.angle = -4;
+
+			new FlxTimer().start(0.01, function(tmr:FlxTimer)
+			{
+				if (logoBl.angle == -4)
+					FlxTween.angle(logoBl, logoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
+				if (logoBl.angle == 4)
+					FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
+			}, 0);
 			
 			skippedIntro = true;
 		}

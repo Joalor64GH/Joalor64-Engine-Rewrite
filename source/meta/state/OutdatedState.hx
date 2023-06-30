@@ -10,7 +10,6 @@ import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
-import openfl.Lib;
 
 import meta.*;
 import meta.data.*;
@@ -20,15 +19,11 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
-	var sinMod:Float = 0;
 	var warnText:FlxText;
 	
 	override function create()
 	{
 		super.create();
-
-		var lol = (cast(Lib.current.getChildAt(0), Main)).lastY;
-		FlxTween.tween(Application.current.window, {y: lol}, 0.5, {ease: FlxEase.circOut});
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -51,9 +46,6 @@ class OutdatedState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		sinMod += 0.007;
-		warnText.y = Math.sin(sinMod) * 60 + 100;
-
 		if(!leftState) {
 			if (controls.ACCEPT) {
 				leftState = true;

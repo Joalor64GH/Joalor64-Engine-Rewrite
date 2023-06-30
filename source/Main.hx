@@ -39,8 +39,6 @@ class Main extends Sprite
 	public static var fpsVar:FPS;
 	public static var toast:ToastCore; // credits go to MAJigsaw77
 
-	public var lastY:Float = 0;
-
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
@@ -49,8 +47,6 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-
-		lastY = Application.current.window.y;
 
 		meta.data.windows.WindowsAPI.setDarkMode(true);
 
