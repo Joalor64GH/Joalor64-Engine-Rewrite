@@ -27,6 +27,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.util.FlxGradient;
 import lime.app.Application;
 import openfl.Assets;
 
@@ -63,6 +64,7 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+	
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -121,6 +123,8 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
+
+	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
 
 	function startIntro()
 	{
@@ -241,6 +245,13 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x0000ffd9, 0x0000fffe, 0x000000ff], 1, 90, true);
+		gradientBar.y = FlxG.height - gradientBar.height;
+		gradientBar.scale.y = 0;
+		gradientBar.updateHitbox();
+		add(gradientBar);
+		FlxTween.tween(gradientBar, {'scale.y': 1.3}, 4, {ease: FlxEase.quadInOut});
+
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
 
@@ -296,7 +307,7 @@ class TitleState extends MusicBeatState
 		credIconRiver.visible = false;
 		credIconRiver.flipX = true;
 
-		credIconShubs = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/shubs'));
+		credIconShubs = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/shubs'));
 		add(credIconShubs);
 		credIconShubs.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconShubs.visible = false;
@@ -318,7 +329,7 @@ class TitleState extends MusicBeatState
 		credIconPhantom.visible = false;
 		credIconPhantom.flipX = true;
 
-		credIconKawai = new FlxSprite(150,FlxG.width-300).loadGraphic(Paths.image('credits/kawaisprite'));
+		credIconKawai = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/kawaisprite'));
 		add(credIconKawai);
 		credIconKawai.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconKawai.visible = false;
@@ -392,7 +403,13 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
+		if (FlxG.sound.music != null) 
+			Conductor.songPosition = FlxG.sound.music.time;
+
+		Timer += 1;
+		gradientBar.scale.y += Math.sin(Timer / 10) * 0.001 / (ClientPrefs.framerate / 60);
+		gradientBar.updateHitbox();
+		gradientBar.y = FlxG.height - gradientBar.height;
 
 		if (FlxG.keys.justPressed.ESCAPE)
                 {
@@ -439,10 +456,12 @@ class TitleState extends MusicBeatState
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
-				if(titleText != null) titleText.animation.play('press');
+				if(titleText != null) 
+					titleText.animation.play('press');
 
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+
 				FlxTween.tween(logoBl, {x: -1500, angle: 10, alpha: 0}, 2, {ease: FlxEase.expoInOut});
 				FlxTween.tween(gfDance, {x: -1500}, 3.7, {ease: FlxEase.expoInOut});
 				FlxTween.tween(titleText, {y: 1500}, 3.7, {ease: FlxEase.expoInOut});
