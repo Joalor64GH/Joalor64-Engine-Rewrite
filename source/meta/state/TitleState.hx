@@ -274,7 +274,7 @@ class TitleState extends MusicBeatState
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
 
-		credIcon3 = new FlxSprite(150, -250).loadGraphic(Paths.image('credits/bot'));
+		credIcon3 = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/bot'));
 		add(credIcon3);
 		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;
@@ -392,8 +392,7 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
+		if (FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
 
 		if (FlxG.keys.justPressed.ESCAPE)
                 {
@@ -486,6 +485,7 @@ class TitleState extends MusicBeatState
 				credGroup.add(money);
 				textGroup.add(money);
 			}
+			money.y -= 350;
 			FlxTween.tween(money, {y: money.y + 350}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
@@ -498,6 +498,7 @@ class TitleState extends MusicBeatState
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
 			textGroup.add(coolText);
+			coolText.y += 750;
 			FlxTween.tween(coolText, {y: coolText.y - 750}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
