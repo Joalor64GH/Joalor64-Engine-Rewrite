@@ -134,7 +134,7 @@ class CreditsState extends MusicBeatState
 				'Magnumsrt',
 				'mag',
 				'In-Game Mod Downloader\n"why bro keep changing his user"',
-				'https://github.com/Magnumsrt',
+				'https://github.com/steve-studios',
 				'0000FF',
 				'squeak'
 			],
@@ -158,7 +158,7 @@ class CreditsState extends MusicBeatState
 				'KookerFoxYT',
 				'kooker',
 				'Custom Options\n"fox"',
-				'https://github.com/KookerFoxYT',
+				'https://twitter.com/kookerfoxyt',
 				'00B0B4', // it spelled bob lmao
 				''
 			],

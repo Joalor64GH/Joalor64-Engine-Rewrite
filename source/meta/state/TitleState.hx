@@ -27,7 +27,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import flixel.util.FlxGradient;
 import lime.app.Application;
 import openfl.Assets;
 
@@ -58,6 +57,7 @@ class TitleState extends MusicBeatState
 
 	public static var updateVersion:String = '';
 
+	var bg:FlxSprite;
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
@@ -95,8 +95,6 @@ class TitleState extends MusicBeatState
 
     	var mustUpdate:Bool = false;
 
-	var Timer:Float = 0;
-
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -124,8 +122,6 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
-
-	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
 
 	function startIntro()
 	{
@@ -186,9 +182,13 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.animation.addByPrefix('Hey', 'GF Cheer', 24, false);
-
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 
+		bg = new FlxSprite().loadGraphic(Paths.image('titleBG'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.screenCenter();
+
+		add(bg);
 		add(gfDance);
 		if (swagShader != null)
 			gfDance.shader = swagShader.shader;
@@ -245,13 +245,6 @@ class TitleState extends MusicBeatState
 
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
-
-		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x0000ffd9, 0x0000fffe, 0x000000ff], 1, 90, true);
-		gradientBar.y = FlxG.height - gradientBar.height;
-		gradientBar.scale.y = 0;
-		gradientBar.updateHitbox();
-		add(gradientBar);
-		FlxTween.tween(gradientBar, {'scale.y': 1.3}, 4, {ease: FlxEase.quadInOut});
 
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
@@ -406,11 +399,6 @@ class TitleState extends MusicBeatState
 	{
 		if (FlxG.sound.music != null) 
 			Conductor.songPosition = FlxG.sound.music.time;
-
-		Timer += 1;
-		gradientBar.scale.y += Math.sin(Timer / 10) * 0.001 / (ClientPrefs.framerate / 60);
-		gradientBar.updateHitbox();
-		gradientBar.y = FlxG.height - gradientBar.height;
 
 		if (FlxG.keys.justPressed.ESCAPE)
                 {
@@ -684,6 +672,8 @@ class TitleState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 
 			// nabbed from kade engine lmao
+			FlxTween.tween(logoBl, {y: -100}, 1.4, {ease: FlxEase.expoInOut});
+
 			logoBl.angle = -4;
 
 			new FlxTimer().start(0.01, function(tmr:FlxTimer)
