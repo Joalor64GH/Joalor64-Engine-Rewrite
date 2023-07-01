@@ -64,7 +64,6 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
-	
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -95,6 +94,8 @@ class TitleState extends MusicBeatState
 	var leDate = Date.now();
 
     	var mustUpdate:Bool = false;
+
+	var Timer:Float = 0;
 
 	override public function create():Void
 	{
@@ -456,8 +457,7 @@ class TitleState extends MusicBeatState
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
-				if(titleText != null) 
-					titleText.animation.play('press');
+				if(titleText != null) titleText.animation.play('press');
 
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
