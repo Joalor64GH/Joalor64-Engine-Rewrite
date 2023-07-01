@@ -64,6 +64,7 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -652,6 +653,7 @@ class TitleState extends MusicBeatState
 			remove(ngSpr);
 			remove(psychSpr);
 			remove(credGroup);
+			
 			#if JOALOR64_WATERMARKS
 			credIcon1.destroy();
 			credIcon2.destroy();
@@ -672,8 +674,6 @@ class TitleState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 
 			// nabbed from kade engine lmao
-			FlxTween.tween(logoBl, {y: -100}, 1.4, {ease: FlxEase.expoInOut});
-
 			logoBl.angle = -4;
 
 			new FlxTimer().start(0.01, function(tmr:FlxTimer)
