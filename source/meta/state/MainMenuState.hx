@@ -243,6 +243,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
+			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
@@ -339,7 +340,8 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.E) MusicBeatState.switchState(new EpicState());
+		if (FlxG.keys.justPressed.E) 
+			MusicBeatState.switchState(new EpicState());
 		
 		if (FlxG.sound.music.volume < 0.8)
 		{

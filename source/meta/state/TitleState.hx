@@ -64,7 +64,6 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
-
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
 	var credIcon2:FlxSprite;
@@ -451,7 +450,8 @@ class TitleState extends MusicBeatState
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
-				FlxTween.tween(logoBl, {x: -1500, angle: 10, alpha: 0}, 2, {ease: FlxEase.expoInOut});
+				FlxTween.tween(logoBl, {alpha: 0}, 1.2, {ease: FlxEase.expoInOut});
+				FlxTween.tween(logoBl, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
 				FlxTween.tween(gfDance, {x: -1500}, 3.7, {ease: FlxEase.expoInOut});
 				FlxTween.tween(titleText, {y: 1500}, 3.7, {ease: FlxEase.expoInOut});
 
