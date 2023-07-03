@@ -58,6 +58,7 @@ import llua.LuaL;
 import llua.State;
 import llua.Convert;
 #end
+
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0") 
 import hxcodec.flixel.FlxVideo as MP4Handler;
@@ -70,6 +71,7 @@ import VideoHandler as MP4Handler;
 import vlc.MP4Handler;
 #end
 #end
+
 #if WEBM_ALLOWED
 import webm.WebmPlayer;
 import meta.video.BackgroundVideo;
@@ -210,6 +212,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
+	public var maxHealth:Float = 2;
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
@@ -465,6 +468,8 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+		health = ClientPrefs.getGameplaySetting('startinghealth', 0.5) * 2.0;
+		maxHealth = ClientPrefs.getGameplaySetting('maxhealth', 1) * 2.0;
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -1519,6 +1524,7 @@ class PlayState extends MusicBeatState
 			{
 				for (file in FileSystem.readDirectory(folder))
 				{
+					// this is smart ngl
 					#if LUA_ALLOWED
 					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
@@ -3735,8 +3741,12 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
-		if (health > 2)
-			health = 2;
+		if (health > maxHealth) 
+			health = maxHealth;
+
+		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 25);
+		health = ClientPrefs.getGameplaySetting('startinghealth', 0.25) * 2.0;
+		maxHealth = ClientPrefs.getGameplaySetting('maxhealth', 0.5) * 2.0;
 
 		switch (iconP1.widthThing) {
 			case 150:
