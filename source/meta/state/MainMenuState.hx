@@ -469,7 +469,11 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach((spr:FlxSprite) -> spr.screenCenter(X));
+		menuItems.forEach((spr:FlxSprite) -> 
+		{
+			if (menuJSON.centerOptions) 
+				spr.screenCenter(X)
+		});
 	}
 
 	function tipTextStartScrolling()
