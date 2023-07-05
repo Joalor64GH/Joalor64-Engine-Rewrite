@@ -156,20 +156,20 @@ class Init extends FlxState // this loads everything in
 
 	function startGame() 
 	{
-        FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-        {
-		if (mustUpdate)
-		{
-			FlxG.switchState(new OutdatedState());
-		} 
-		else 
-		{
-			if (FlxG.save.data.flashing == null && !FlashingState.leftState)
-				FlxG.switchState(new FlashingState());
-			else
-				FlxG.switchState(new TitleState());
-		}
-	    });
+        	FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+        	{
+			if (mustUpdate)
+			{
+				FlxG.switchState(new OutdatedState());
+			} 
+			else 
+			{
+				if (FlxG.save.data.flashing == null && !FlashingState.leftState)
+					FlxG.switchState(new FlashingState());
+				else
+					FlxG.switchState(new TitleState());
+			}
+	    	});
 	}
 
 	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
