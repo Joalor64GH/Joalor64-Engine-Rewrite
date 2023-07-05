@@ -68,7 +68,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
-* [KookerFoxYT](https://github.com/KookerFoxYT) - Custom Options
+* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Custom Options
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System

@@ -141,7 +141,9 @@ class MainMenuState extends MusicBeatState
 				'awards',
 				#end
 				'credits',
-				#if !switch 'donate',
+				#if !switch 
+				'donate',
+				'kickstarter',
 				#end
 				'options'
 			];
@@ -370,11 +372,15 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
 				{
-					CoolUtil.browserLoad('${menuJSON.links[1]}');
+					CoolUtil.browserLoad('${menuJSON.links[1]}'); // but this is also custom link support???
 				} 
 				else if (optionShit[curSelected] == 'donate') 
 				{
-					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
+					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link'))); // custom link support idk
+				}
+				else if (optionShit[curSelected] == 'kickstarter')
+				{
+					CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
 				}
 				else
 				{

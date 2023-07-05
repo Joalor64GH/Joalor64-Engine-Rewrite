@@ -105,7 +105,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		super.create();
 
-		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
+		titleJSON = Json.parse(Paths.getTextFromFile('data/titleStuff.json'));
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
