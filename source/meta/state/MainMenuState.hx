@@ -142,8 +142,8 @@ class MainMenuState extends MusicBeatState
 				#end
 				'credits',
 				#if !switch 
-				'donate',
 				'kickstarter',
+				'donate',
 				#end
 				'options'
 			];
@@ -171,7 +171,7 @@ class MainMenuState extends MusicBeatState
 			bg.y = -80;
 
 		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -197,7 +197,7 @@ class MainMenuState extends MusicBeatState
 			magenta.y = -80;
 
 		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		magenta.setGraphicSize(Std.int(magenta.width * 1.2));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -242,6 +242,12 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
+			switch (optionShit[i])
+			{
+				case 'kickstarter':
+					menuItem.scale.set(0.865, 0.865);
+					menuItem.updateHitbox();
+			}
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
