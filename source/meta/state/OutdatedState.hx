@@ -2,14 +2,11 @@ package meta.state;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
 
 import meta.*;
 import meta.data.*;
@@ -60,7 +57,10 @@ class OutdatedState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
-						MusicBeatState.switchState(new TitleState());
+						if (FlxG.save.data.flashing == null && !FlashingState.leftState)
+							FlxG.switchState(new FlashingState());
+						else
+							FlxG.switchState(new TitleState());
 					}
 				});
 			}

@@ -8,7 +8,6 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
-
 import lime.app.Application;
 import haxe.Http;
 
@@ -35,7 +34,6 @@ class Init extends FlxState // this loads everything in
 	public function new() 
 	{
 		super();
-
 		persistentUpdate = persistentDraw = true;
 	}
 
@@ -69,9 +67,8 @@ class Init extends FlxState // this loads everything in
 
 	override function update(elapsed)
 	{
-		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE) {
+		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
 			skip();
-		}
 
 		super.update(elapsed);
 	}
@@ -159,17 +156,20 @@ class Init extends FlxState // this loads everything in
 
 	function startGame() 
 	{
-		if (mustUpdate) {
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
+        FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+        {
+			if (mustUpdate)
+			{
 				FlxG.switchState(new OutdatedState());
-	    		});
-        	} else {
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
-				FlxG.switchState(new TitleState());
-	    		});
-        	}
+			} 
+			else 
+			{
+				if (FlxG.save.data.flashing == null && !FlashingState.leftState)
+					FlxG.switchState(new FlashingState());
+				else
+					FlxG.switchState(new TitleState());
+			}
+	    });
 	}
 
 	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
