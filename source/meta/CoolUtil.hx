@@ -90,7 +90,7 @@ class CoolUtil
 
 				stringSong = coolReplace(stringSong, 'null', '');
 
-					coolSong += ' $stringSong';
+				coolSong += '$stringSong';
 			}
 
 			song = coolSong.replace(' Null', '');

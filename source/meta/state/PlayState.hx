@@ -115,7 +115,7 @@ using StringTools;
 
 class PlayState extends MusicBeatState
 {
-	public static var STRUM_X = 42;
+	public static var STRUM_X = 48.5;
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
@@ -183,7 +183,7 @@ class PlayState extends MusicBeatState
 
 	public var vocals:FlxSound;
 
-	var vocalsEnded:Bool = false;
+	var vocalsFinished:Bool = false;
 
 	public var dad:Character = null;
 	public var gf:Character = null;
@@ -1665,6 +1665,8 @@ class PlayState extends MusicBeatState
 					Paths.sound(key);
 				case 'music':
 					Paths.music(key);
+				case 'video':
+					Paths.video(key);
 			}
 		}
 		Paths.clearUnusedMemory();
@@ -3004,7 +3006,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.play();
 
-		if (!vocalsEnded){
+		if (!vocalsFinished){
 			if (Conductor.songPosition <= vocals.length)
 			{
 				vocals.time = time;
@@ -3044,7 +3046,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = finishSong.bind();
 		vocals.play();
-		vocals.onComplete = () -> vocalsEnded = true;
+		vocals.onComplete = () -> vocalsFinished = true;
 
 		if (useVideo)
 			GlobalVideo.get().resume();
@@ -3490,15 +3492,13 @@ class PlayState extends MusicBeatState
 
 	function resyncVocals():Void
 	{
-		if(finishTimer != null) return;
+		if(finishTimer != null || vocalsFinished || isDead || !SONG.needsVoices) return;
 
 		vocals.pause();
 
 		FlxG.sound.music.play();
 		FlxG.sound.music.pitch = playbackRate;
 		Conductor.songPosition = FlxG.sound.music.time;
-		if (vocalsEnded)
-			return;
 
 		if (Conductor.songPosition <= vocals.length)
 		{
@@ -3519,6 +3519,7 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		// SECRET KEYS!! SHHHHHHHH
+		// TODO: make this yandere dev code better
 		#if debug
 		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
 			endSong();
@@ -4583,11 +4584,11 @@ class PlayState extends MusicBeatState
 		#if sys
 		if (!inReplay)
 		{
-			var files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
+			final files:Array<String> = CoolUtil.coolPathArray(Paths.getPreloadPath('replays/'));
+			final song:String = SONG.song.coolSongFormatter().toLowerCase();
 			var length:Null<Int> = null;
-			var song:String = SONG.song.coolSongFormatter().toLowerCase();
 
-			(files == null) ? length = 0 : length = files.length;
+			length = (files == null) ? 0 : files.length;
 
 			if (ClientPrefs.saveReplay)
 				File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
@@ -4831,7 +4832,7 @@ class PlayState extends MusicBeatState
 	private function popUpScore(?note:Note, ?optionalRating:Float):Void
 	{
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
-		vocals.volume = vocalsEnded ? 0 : 1;
+		vocals.volume = vocalsFinished ? 0 : 1;
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
@@ -5387,7 +5388,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (SONG.needsVoices)
-			vocals.volume = vocalsEnded ? 0 : 1;
+			vocals.volume = vocalsFinished ? 0 : 1;
 
 		var time:Float = 0.15;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('end')) {
@@ -5498,7 +5499,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 			note.wasGoodHit = true;
-			vocals.volume = vocalsEnded ? 0 : 1;
+			vocals.volume = vocalsFinished ? 0 : 1;
 
 			var isSus:Bool = note.isSustainNote; //GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
 			var leData:Int = Math.round(Math.abs(note.noteData));
