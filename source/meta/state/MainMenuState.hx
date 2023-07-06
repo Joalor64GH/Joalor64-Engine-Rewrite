@@ -65,6 +65,7 @@ class MainMenuState extends MusicBeatState
 	public static var joalor64EngineVersion:String = '1.3.5'; //Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
+
 	public static var curSelected:Int = 0;
 
 	private var camGame:FlxCamera;
@@ -77,15 +78,17 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
-	var tipTextMargin:Float = 10;
-	var tipTextScrolling:Bool = false;
-
 	var bg:FlxSprite;
 	var magenta:FlxSprite;
+
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
+
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
+
+	var tipTextMargin:Float = 10;
+	var tipTextScrolling:Bool = false;
 	var tipBackground:FlxSprite;
 	var tipText:FlxText;
 
@@ -155,6 +158,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
+
 		bg = new FlxSprite();
 		bg.loadGraphic(Paths.image('menuBG'));
 
@@ -298,7 +302,7 @@ class MainMenuState extends MusicBeatState
 		add(tipBackground);
 
 		tipText = new FlxText(0, 0, 0,
-			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thank you!");
+			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thanks for playing!");
 		tipText.scrollFactor.set();
 		tipText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT);
 		tipText.updateHitbox();
@@ -511,6 +515,12 @@ class MainMenuState extends MusicBeatState
 				var add:Float = 0;
 				if(menuItems.length > 4) 
 					add = menuItems.length * 8;
+				
+				if (optionShit[curSelected] == 'kickstarter')
+				{
+					spr.offset.x += 60;
+					spr.offset.y += 10;
+				}
 				
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
 				spr.centerOffsets();
