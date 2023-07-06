@@ -293,7 +293,6 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 
 		tipBackground = new FlxSprite();
-		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 		tipBackground.scrollFactor.set();
 		tipBackground.alpha = 0.7;
 		add(tipBackground);
@@ -305,9 +304,10 @@ class MainMenuState extends MusicBeatState
 		tipText.updateHitbox();
 		add(tipText);
 
-		tipTextStartScrolling();
+		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 
 		changeItem();
+		tipTextStartScrolling();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
