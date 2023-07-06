@@ -62,8 +62,9 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5'; //Used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.3.5'; // Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
+
 	public static var psychGitBuild:String = 'eb79a80';  
 
 	public static var curSelected:Int = 0;
@@ -75,6 +76,7 @@ class MainMenuState extends MusicBeatState
 	public static var finishedFunnyMove:Bool = false;
 	
 	var menuItems:FlxTypedGroup<FlxSprite>;
+
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
@@ -101,8 +103,8 @@ class MainMenuState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		Mods.pushGlobalMods();
 		#end
-
 		Mods.loadTheFirstEnabledMod();
+
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
 		Application.current.window.title = Application.current.meta.get('name');
@@ -175,7 +177,7 @@ class MainMenuState extends MusicBeatState
 			bg.y = -80;
 
 		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -201,7 +203,7 @@ class MainMenuState extends MusicBeatState
 			magenta.y = -80;
 
 		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		magenta.setGraphicSize(Std.int(magenta.width * 1.2));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -246,12 +248,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
-			switch (optionShit[i])
-			{
-				case 'kickstarter':
-					menuItem.scale.set(0.865, 0.865);
-					menuItem.updateHitbox();
-			}
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
@@ -297,6 +293,7 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 
 		tipBackground = new FlxSprite();
+		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 		tipBackground.scrollFactor.set();
 		tipBackground.alpha = 0.7;
 		add(tipBackground);
@@ -308,10 +305,9 @@ class MainMenuState extends MusicBeatState
 		tipText.updateHitbox();
 		add(tipText);
 
-		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
+		tipTextStartScrolling();
 
 		changeItem();
-		tipTextStartScrolling();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
@@ -515,12 +511,6 @@ class MainMenuState extends MusicBeatState
 				var add:Float = 0;
 				if(menuItems.length > 4) 
 					add = menuItems.length * 8;
-				
-				if (optionShit[curSelected] == 'kickstarter')
-				{
-					spr.offset.x += 60;
-					spr.offset.y += 10;
-				}
 				
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
 				spr.centerOffsets();
