@@ -39,7 +39,7 @@ class CoolUtil
 	
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
-
+  
 	inline public static function txtSplit(path:String)
 	{
 		return [
@@ -154,6 +154,10 @@ class CoolUtil
 		FlxG.openURL(site);
 		#end
 	}
+
+	// thanks denpa engine team
+	inline public static function clamp(value:Float, min:Float, max:Float):Float
+		return Math.max(min, Math.min(max, value));
 }
 
 // there's a big difference between the two
