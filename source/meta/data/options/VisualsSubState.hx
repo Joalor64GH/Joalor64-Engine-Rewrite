@@ -3,12 +3,12 @@ package meta.data.options;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-
-import flixel.FlxG;
-
 import meta.*;
 import meta.data.*;
 import meta.data.options.*;
+
+import flixel.FlxG;
+import flixel.util.FlxText;
 
 using StringTools;
 
