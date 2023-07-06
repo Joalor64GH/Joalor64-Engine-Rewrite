@@ -8,7 +8,7 @@ import meta.data.*;
 import meta.data.options.*;
 
 import flixel.FlxG;
-import flixel.util.FlxText;
+import flixel.text.FlxText;
 
 using StringTools;
 
