@@ -94,6 +94,22 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.displayFormat = '%vX';
 		optionsArray.push(option);
 
+		var option:GameplayOption = new GameplayOption('Starting Health', 'startinghealth', 'percent', 0.5);
+		option.scrollSpeed = 1.7;
+		option.minValue = 0.01;
+		option.maxValue = 2;
+		option.changeValue = 0.01;
+		option.displayFormat = '%v%';
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Maximum Health', 'maxhealth', 'percent', 1);
+		option.scrollSpeed = 1.7;
+		option.minValue = 0.01;
+		option.maxValue = 2;
+		option.changeValue = 0.01;
+		option.displayFormat = '%v%';
+		optionsArray.push(option);
+
 		var option:GameplayOption = new GameplayOption('Instakill on Miss', 'instakill', 'bool', false);
 		optionsArray.push(option);
 

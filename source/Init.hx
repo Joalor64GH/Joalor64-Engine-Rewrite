@@ -8,7 +8,6 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
-
 import lime.app.Application;
 import haxe.Http;
 
@@ -19,12 +18,12 @@ import meta.data.*;
 import core.ModCore;
 #end
 
-// this loads everything in
-class Init extends FlxState
+class Init extends FlxState // this loads everything in
 {
 	public static var randomIcon:Array<String> = [
 		'joalor',
 		'meme',
+		'fox',
 		'bot'
 	];
 	var epicSprite:FlxSprite;
@@ -35,9 +34,7 @@ class Init extends FlxState
 	public function new() 
 	{
 		super();
-
-		persistentUpdate = true;
-		persistentDraw = true;
+		persistentUpdate = persistentDraw = true;
 	}
 
 	override function create()
@@ -159,17 +156,20 @@ class Init extends FlxState
 
 	function startGame() 
 	{
-		if (mustUpdate) {
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
+        	FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+        	{
+			if (mustUpdate)
+			{
 				FlxG.switchState(new OutdatedState());
-	    		});
-        	} else {
-            		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-            		{
-				FlxG.switchState(new TitleState());
-	    		});
-        	}
+			} 
+			else 
+			{
+				if (FlxG.save.data.flashing == null && !FlashingState.leftState)
+					FlxG.switchState(new FlashingState());
+				else
+					FlxG.switchState(new TitleState());
+			}
+	    	});
 	}
 
 	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset

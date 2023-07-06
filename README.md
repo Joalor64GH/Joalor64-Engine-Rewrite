@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoReadme.png" width="750"/></a>
+  <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoNew.png" width="750"/></a>
   <h1 align="center">Joalor64 Engine Rewritten</h1>
   <h2 align="center">A remake of the original Joalor64 Engine. Not everything is perfect, so contributions and/or pull requests would be nice! Be sure to also report bugs/issues if you can!</h2>
 </p>
@@ -58,20 +58,20 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ## Joalor64 Engine
 * [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
 * [MemeHovy](https://github.com/MemeHovy) - Additional Programmer
+* [ThatOneFox](https://github.com/ThatOneFoxHX) - Made the Epic New Logo
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
 * [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
-* [Magnumsrt](https://github.com/Magnumsrt) - In-Game Mod Downloader
+* [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
-* [KookerFoxYT](https://github.com/KookerFoxYT) - Custom Options
+* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Custom Options
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
-* [ThatOneFox](https://github.com/ThatOneFoxHX) - Made the Cool New Logo
 
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer

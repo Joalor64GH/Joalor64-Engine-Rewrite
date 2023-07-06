@@ -62,30 +62,35 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5b'; //This is also used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.3.5'; // Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
+
 	public static var psychGitBuild:String = 'eb79a80';  
+
 	public static var curSelected:Int = 0;
 
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	
 	var menuItems:FlxTypedGroup<FlxSprite>;
+
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
-	var tipTextMargin:Float = 10;
-	var tipTextScrolling:Bool = false;
-
+	var bg:FlxSprite;
 	var magenta:FlxSprite;
+
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
 
+	var tipTextMargin:Float = 10;
+	var tipTextScrolling:Bool = false;
 	var tipBackground:FlxSprite;
 	var tipText:FlxText;
 
@@ -98,8 +103,8 @@ class MainMenuState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		Mods.pushGlobalMods();
 		#end
-
 		Mods.loadTheFirstEnabledMod();
+
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
 		Application.current.window.title = Application.current.meta.get('name');
@@ -141,7 +146,9 @@ class MainMenuState extends MusicBeatState
 				'awards',
 				#end
 				'credits',
-				#if !switch 'donate',
+				#if !switch 
+				'kickstarter',
+				'donate',
 				#end
 				'options'
 			];
@@ -153,7 +160,8 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite();
+
+		bg = new FlxSprite();
 		bg.loadGraphic(Paths.image('menuBG'));
 
 		if (menuJSON.backgroundStatic != null && menuJSON.backgroundStatic.length > 0 && menuJSON.backgroundStatic != "none")
@@ -169,7 +177,7 @@ class MainMenuState extends MusicBeatState
 			bg.y = -80;
 
 		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -195,7 +203,7 @@ class MainMenuState extends MusicBeatState
 			magenta.y = -80;
 
 		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		magenta.setGraphicSize(Std.int(magenta.width * 1.2));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -243,12 +251,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
+			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			menuItem.updateHitbox();
 			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
+				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {
+					ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
 					{
 						finishedFunnyMove = true; 
 						changeItem();
@@ -283,21 +293,21 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 
 		tipBackground = new FlxSprite();
+		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 		tipBackground.scrollFactor.set();
 		tipBackground.alpha = 0.7;
 		add(tipBackground);
 
 		tipText = new FlxText(0, 0, 0,
-			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thank you!");
+			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thanks for playing!");
 		tipText.scrollFactor.set();
 		tipText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT);
 		tipText.updateHitbox();
 		add(tipText);
 
-		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
+		tipTextStartScrolling();
 
 		changeItem();
-		tipTextStartScrolling();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
@@ -337,6 +347,9 @@ class MainMenuState extends MusicBeatState
 				tipTextStartScrolling();
 			}
 		}
+
+		if (FlxG.keys.justPressed.E) 
+			MusicBeatState.switchState(new EpicState());
 		
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -363,11 +376,17 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == '${menuJSON.links[0]}') {
-					CoolUtil.browserLoad('${menuJSON.links[1]}');
+				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
+				{
+					CoolUtil.browserLoad('${menuJSON.links[1]}'); // but this is also custom link support???
+				} 
+				else if (optionShit[curSelected] == 'donate') 
+				{
+					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link'))); // custom link support idk
 				}
-				else if (optionShit[curSelected] == 'donate') {
-					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
+				else if (optionShit[curSelected] == 'kickstarter')
+				{
+					CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
 				}
 				else
 				{
@@ -377,10 +396,15 @@ class MainMenuState extends MusicBeatState
 					if (ClientPrefs.flashing)
 						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-					menuItems.forEach(function(spr:FlxSprite)
+					menuItems.forEach((spr:FlxSprite) ->
 					{
 						if (curSelected != spr.ID)
 						{
+							FlxTween.tween(FlxG.camera, {zoom: 5}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(bg, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(magenta, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+							FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
 								onComplete: function(twn:FlxTween)
@@ -405,8 +429,10 @@ class MainMenuState extends MusicBeatState
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
+									#if ACHIEVEMENTS_ALLOWED
 									case 'awards':
 										MusicBeatState.switchState(new AchievementsMenuState());
+									#end
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
@@ -443,9 +469,9 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach((spr:FlxSprite) -> 
 		{
-			if (menuJSON.centerOptions)
+			if (menuJSON.centerOptions) 
 				spr.screenCenter(X);
 		});
 	}
@@ -474,7 +500,7 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach((spr:FlxSprite) ->
 		{
 			spr.animation.play('idle');
 			spr.updateHitbox();
@@ -483,9 +509,9 @@ class MainMenuState extends MusicBeatState
 			{
 				spr.animation.play('selected');
 				var add:Float = 0;
-				if(menuItems.length > 4) {
+				if(menuItems.length > 4) 
 					add = menuItems.length * 8;
-				}
+				
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
 				spr.centerOffsets();
 			}

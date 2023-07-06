@@ -621,6 +621,20 @@ class WeekEditorFreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(90, 320, weekFile.songs[i][0], true);
 			songText.isMenuItem = true;
+			switch (ClientPrefs.songDisplay)
+			{
+				case 'Classic':
+					songText.itemType = 'Classic';
+
+				case 'Vertical':
+					songText.itemType = 'Vertical';
+
+				case 'C-Shape':
+					songText.itemType = 'C-Shape';
+
+				case 'D-Shape':
+					songText.itemType = 'D-Shape';
+			}
 			songText.targetY = i;
 			grpSongs.add(songText);
 			songText.snapToPosition();

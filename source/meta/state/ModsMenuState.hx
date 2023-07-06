@@ -271,18 +271,17 @@ class ModsMenuState extends MusicBeatState
 				loadedIcon = BitmapData.fromFile(iconToUse);
 			}
 
-			// idk modpack icons wont load at the moment, but WHATEVER
 			newMod.icon = new AttachedSprite();
-			if(loadedIcon == null)
-			{
-				newMod.icon.loadGraphic(Paths.image('unknownMod'));
-			}
-			else
+			if(loadedIcon != null)
 			{
 				newMod.icon.loadGraphic(loadedIcon, true, 150, 150); //animated icon support
 				var totalFrames = Math.floor(loadedIcon.width / 150) * Math.floor(loadedIcon.height / 150);
 				newMod.icon.animation.add("icon", [for (i in 0...totalFrames) i],10);
 				newMod.icon.animation.play("icon");
+			}
+			else
+			{
+				newMod.icon.loadGraphic(Paths.image('unknownMod'));
 			}
 			newMod.icon.sprTracker = newMod.alphabet;
 			newMod.icon.xAdd = -newMod.icon.width - 30;

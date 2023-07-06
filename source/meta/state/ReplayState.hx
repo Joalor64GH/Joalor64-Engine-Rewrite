@@ -107,7 +107,6 @@ class ReplayState extends PlayState
         keyShit();
     }
 
-
     override function onKeyPress(e:KeyboardEvent):Void
     {
         return;

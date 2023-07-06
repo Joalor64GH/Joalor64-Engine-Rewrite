@@ -7,15 +7,17 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
-import lime.app.Application;
-import flixel.FlxSubState;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.FlxObject;
+import flixel.util.FlxColor;
+import lime.app.Application;
+
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 import meta.data.options.*;
+
 import meta.state.*;
 import meta.state.error.*;
 import meta.substate.*;
@@ -28,9 +30,9 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
-		'Visuals and Graphics',
-		'Gameplay Preferences',
-		'Adjust Delay and Combo', 
+		'Visuals',
+		'Gameplay',
+		'Offsets', 
 		'Miscellaneous'
 	];
 
@@ -53,11 +55,11 @@ class OptionsState extends MusicBeatState
 					openSubState(new NotesHSVSubState());
 			case 'Controls':
 				openSubState(new ControlsSubState());
-			case 'Visuals and Graphics':
+			case 'Visuals':
 				openSubState(new VisualsSubState());
-			case 'Gameplay Preferences':
+			case 'Gameplay':
 				openSubState(new GameplaySubState());
-			case 'Adjust Delay and Combo':
+			case 'Offsets':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
 			case 'Miscellaneous':
 				openSubState(new MiscSubState());
@@ -143,7 +145,7 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		var lerpVal:Float = CoolUtil.clamp(elapsed * 7.5, 0, 1);
+		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 	
 		var mult:Float = FlxMath.lerp(1.07, bg.scale.x, CoolUtil.clamp(1 - (elapsed * 9), 0, 1));

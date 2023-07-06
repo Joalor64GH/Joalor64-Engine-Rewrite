@@ -188,6 +188,7 @@ class FreeplayState extends MusicBeatState
 		super.closeSubState();
 	}
 
+	// in case your mod uses a freeplay category system
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
 
