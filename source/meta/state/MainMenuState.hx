@@ -62,9 +62,11 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5'; //Used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.3.5'; // Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
+
 	public static var psychGitBuild:String = 'eb79a80';  
+
 	public static var curSelected:Int = 0;
 
 	private var camGame:FlxCamera;
@@ -74,18 +76,21 @@ class MainMenuState extends MusicBeatState
 	public static var finishedFunnyMove:Bool = false;
 	
 	var menuItems:FlxTypedGroup<FlxSprite>;
+
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
-	var tipTextMargin:Float = 10;
-	var tipTextScrolling:Bool = false;
-
 	var bg:FlxSprite;
 	var magenta:FlxSprite;
+
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
+
 	var debugKeys:Array<FlxKey>;
 	var modShortcutKeys:Array<FlxKey>;
+
+	var tipTextMargin:Float = 10;
+	var tipTextScrolling:Bool = false;
 	var tipBackground:FlxSprite;
 	var tipText:FlxText;
 
@@ -98,8 +103,8 @@ class MainMenuState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		Mods.pushGlobalMods();
 		#end
-
 		Mods.loadTheFirstEnabledMod();
+
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
 		Application.current.window.title = Application.current.meta.get('name');
@@ -155,6 +160,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
+
 		bg = new FlxSprite();
 		bg.loadGraphic(Paths.image('menuBG'));
 
@@ -171,7 +177,7 @@ class MainMenuState extends MusicBeatState
 			bg.y = -80;
 
 		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -197,7 +203,7 @@ class MainMenuState extends MusicBeatState
 			magenta.y = -80;
 
 		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		magenta.setGraphicSize(Std.int(magenta.width * 1.2));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -242,12 +248,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
-			switch (optionShit[i])
-			{
-				case 'kickstarter':
-					menuItem.scale.set(0.865, 0.865);
-					menuItem.updateHitbox();
-			}
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
@@ -293,21 +293,21 @@ class MainMenuState extends MusicBeatState
 		add(versionShit);
 
 		tipBackground = new FlxSprite();
+		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
 		tipBackground.scrollFactor.set();
 		tipBackground.alpha = 0.7;
 		add(tipBackground);
 
 		tipText = new FlxText(0, 0, 0,
-			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thank you!");
+			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thanks for playing!");
 		tipText.scrollFactor.set();
 		tipText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT);
 		tipText.updateHitbox();
 		add(tipText);
 
-		tipBackground.makeGraphic(FlxG.width, Std.int((tipTextMargin * 2) + tipText.height), FlxColor.BLACK);
+		tipTextStartScrolling();
 
 		changeItem();
-		tipTextStartScrolling();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();

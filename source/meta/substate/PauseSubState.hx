@@ -51,6 +51,7 @@ class PauseSubState extends MusicBeatSubstate
 	public static var songName:String = '';
 
 	public static var fromPlayState:Bool = false;
+	public static var openGameplayChangers:Bool = false;
 
 	public function new(x:Float, y:Float)
 	{
@@ -138,6 +139,11 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, 'Press CTRL to open the Gameplay Changers Menu.', 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -166,12 +172,17 @@ class PauseSubState extends MusicBeatSubstate
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
+		if (PlayState.instance.useVideo || openGameplayChangers)
+			menuItems.remove('Resume');
+
 		super.update(elapsed);
 		updateSkipTextStuff();
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
+
+		var control = FlxG.keys.justPressed.CONTROL;
 
 		if (upP)
 		{
@@ -180,6 +191,13 @@ class PauseSubState extends MusicBeatSubstate
 		if (downP)
 		{
 			changeSelection(1);
+		}
+
+		if (control)
+		{
+			persistentUpdate = false;
+			openGameplayChangers = true;
+			openSubState(new GameplayChangersSubstate());
 		}
 
 		var daSelected:String = menuItems[curSelected];
