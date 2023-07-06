@@ -342,8 +342,10 @@ class PlayState extends MusicBeatState
 
 	// Lua shit
 	public static var instance:PlayState = null;
+	#if LUA_ALLOWED
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
+	#end
 	public var introSoundsSuffix:String = '';
 
 	public var scriptArray:Array<FunkinSScript> = [];
@@ -1774,7 +1776,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function addTextToDebug(text:String, color:FlxColor = FlxColor.WHITE) {
-		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		#if LUA_ALLOWED
 		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
 			spr.y += 20;
 		});
