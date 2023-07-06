@@ -4,7 +4,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-
 import meta.state.*;
 import meta.data.*;
 import meta.*;
@@ -50,11 +49,12 @@ class FlashingState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
-				onComplete: function (twn:FlxTween) {
-					MusicBeatState.switchState(new TitleState());
-				}
-			});
-		}}
+					onComplete: function (twn:FlxTween) {
+						MusicBeatState.switchState(new TitleState());
+					}
+				});
+			}
+		}
 		super.update(elapsed);
 	}
 }
