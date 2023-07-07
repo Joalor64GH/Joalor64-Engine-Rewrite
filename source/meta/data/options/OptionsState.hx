@@ -7,7 +7,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
-import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
@@ -82,6 +81,8 @@ class OptionsState extends MusicBeatState
 		#end
 
 		Application.current.window.title = Application.current.meta.get('name');
+
+		FlxG.sound.playMusic(Paths.music('configurator'));
 
 		camMain = new FlxCamera();
 		camSub = new FlxCamera();
@@ -163,6 +164,7 @@ class OptionsState extends MusicBeatState
 				StageData.loadDirectory(PlayState.SONG);
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				if (ClientPrefs.simpleMain)
 					MusicBeatState.switchState(new SimpleMainMenuState());
 				else
