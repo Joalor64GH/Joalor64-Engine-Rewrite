@@ -3,24 +3,20 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
-import lime.utils.Assets;
 import lime.app.Application;
 #if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
 #else
 import flixel.system.FlxSound;
 #end
-import openfl.utils.Assets as OpenFlAssets;
 
 import meta.*;
 import meta.data.*;
@@ -56,6 +52,13 @@ class FreeplayState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+
+	var colorArray:Array<FlxColor> = [
+		FlxColor.fromRGB(0, 255, 0), // green
+		FlxColor.fromRGB(255, 255, 0), // yellow
+		FlxColor.fromRGB(255, 0, 0), // red
+	];
+	var diffTween:FlxTween;
 
 	var repText:FlxText;
 
@@ -377,6 +380,15 @@ class FreeplayState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+
+		if (diffTween != null)
+			diffTween.cancel();
+
+		if (diffText.color != colorArray[curDifficulty])
+			diffTween = FlxTween.color(diffText, 0.3, diffText.color, colorArray[curDifficulty], {
+				onComplete: function(twn) diffTween = null
+			});
+
 		positionHighscore();
 	}
 

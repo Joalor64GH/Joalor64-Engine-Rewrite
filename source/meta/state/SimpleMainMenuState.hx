@@ -194,25 +194,23 @@ class SimpleMainMenuState extends MusicBeatState
 			MusicBeatState.switchState(new TitleState());
 		}
 
-		if (controls.ACCEPT && ClientPrefs.flashing)
+		if (controls.ACCEPT)
 		{
 			FlxG.sound.play(Paths.sound('confirmMenu'));
-			grpOptions.forEach(function(grpOptions:Alphabet)
-			{
-				FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)
+			if (ClientPrefs.flashing) {
+				grpOptions.forEach(function(grpOptions:Alphabet)
+				{
+					FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)
+					{
+						openSelectedSubstate(options[curSelected]);
+					});
+				});
+			} else {
+				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					openSelectedSubstate(options[curSelected]);
 				});
-			});
-		}
-
-		if (controls.ACCEPT && !ClientPrefs.flashing)
-		{
-			FlxG.sound.play(Paths.sound('confirmMenu'));
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-			{
-				openSelectedSubstate(options[curSelected]);
-			});
+			}
 		}
 
         	#if desktop
