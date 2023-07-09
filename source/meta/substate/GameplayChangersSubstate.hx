@@ -3,30 +3,19 @@ package meta.substate;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
 #end
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -92,22 +81,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.maxValue = 5;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
-		optionsArray.push(option);
-
-		var option:GameplayOption = new GameplayOption('Starting Health', 'startinghealth', 'percent', 0.5);
-		option.scrollSpeed = 1.7;
-		option.minValue = 0.01;
-		option.maxValue = 2;
-		option.changeValue = 0.01;
-		option.displayFormat = '%v%';
-		optionsArray.push(option);
-
-		var option:GameplayOption = new GameplayOption('Maximum Health', 'maxhealth', 'percent', 1);
-		option.scrollSpeed = 1.7;
-		option.minValue = 0.01;
-		option.maxValue = 2;
-		option.changeValue = 0.01;
-		option.displayFormat = '%v%';
 		optionsArray.push(option);
 
 		var option:GameplayOption = new GameplayOption('Instakill on Miss', 'instakill', 'bool', false);
