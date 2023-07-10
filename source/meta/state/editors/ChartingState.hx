@@ -150,6 +150,14 @@ class ChartingState extends MusicBeatState
 			"Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."
 		],
 		[
+			'Popup', 
+			"Value 1: Title\nValue 2: Message\nMakes a window popup with a message in it."
+		],
+		[
+			'Popup (No Pause)', 
+			"Value 1: Title\nValue 2: Message\nSame as popup but without a pause."
+		],
+		[
 			'Set Property', 
 			"Value 1: Variable name\nValue 2: New value"
 		]

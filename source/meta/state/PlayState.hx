@@ -4491,6 +4491,17 @@ class PlayState extends MusicBeatState
 				else
 					songSpeedTween = FlxTween.tween(this, {songSpeed: newValue}, val2 / playbackRate, {ease: FlxEase.linear, onComplete: _ -> songSpeedTween = null});
 
+			case 'Popup':
+				FlxG.sound.music.pause();
+				vocals.pause();
+
+				lime.app.Application.current.window.alert(value2, value1);
+				FlxG.sound.music.resume();
+				vocals.resume();
+
+			case 'Popup (No Pause)':
+				lime.app.Application.current.window.alert(value2, value1);
+
 			case 'Set Property':
 				var killMe:Array<String> = value1.split('.');
 				if(killMe.length > 1)
@@ -4902,11 +4913,10 @@ class PlayState extends MusicBeatState
 		var comboSpr:FlxSprite;
 		final comboX:Float = FlxG.width * 0.35;
 		final comboY:Float = 60;
-		if (comboGroup.countDead() > 0){
+		if (comboGroup.countDead() > 0) {
 			comboSpr = comboGroup.getFirstDead();
 			comboSpr.reset(comboX, comboY);
-		}
-		else{
+		} else {
 			comboSpr = new FlxSprite();
 			comboGroup.add(comboSpr);
 		}
