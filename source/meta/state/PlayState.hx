@@ -3138,6 +3138,18 @@ class PlayState extends MusicBeatState
 	private var noteTypes:Array<String> = [];
 	private var eventsPushed:Array<String> = [];
 	
+	public function lerpSongSpeed(num:Float, time:Float):Void
+	{
+		FlxTween.num(playbackRate, num, time, {onUpdate: function(tween:FlxTween){
+			var ting = FlxMath.lerp(playbackRate, num, tween.percent);
+			if (ting != 0) //divide by 0 is a verry bad
+				playbackRate = ting; //why cant i just tween a variable
+
+			FlxG.sound.music.time = Conductor.songPosition;
+			resyncVocals();
+		}});
+	}
+	
 	var stair:Int = 0;
 	private function generateSong():Void
 	{
