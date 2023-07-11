@@ -6178,6 +6178,7 @@ class PlayState extends MusicBeatState
 							}
 						}
 				}
+			}
 			comboFunction();
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
