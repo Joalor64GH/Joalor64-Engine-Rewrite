@@ -7,7 +7,6 @@ import meta.data.scripts.FunkinLua;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0") 
 import hxcodec.flixel.FlxVideo as MP4Handler;
-import lime.app.Event;
 #elseif (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") 

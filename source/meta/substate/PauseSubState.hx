@@ -8,7 +8,6 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
@@ -290,7 +289,6 @@ class PauseSubState extends MusicBeatSubstate
 					Mods.loadTheFirstEnabledMod();
 					MusicBeatState.switchState(new OptionsState());
 					PlayState.cancelMusicFadeTween();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 					fromPlayState = true;

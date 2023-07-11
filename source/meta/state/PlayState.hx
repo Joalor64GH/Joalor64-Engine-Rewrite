@@ -62,7 +62,6 @@ import llua.Convert;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0") 
 import hxcodec.flixel.FlxVideo as MP4Handler;
-import lime.app.Event;
 #elseif (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") 
@@ -254,6 +253,8 @@ class PlayState extends MusicBeatState
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
 	public var practiceMode:Bool = false;
+	public var botplaySine:Float = 0;
+	public var botplayTxt:FlxText;
 
 	var randomMode:Bool = false;
 	var flip:Bool = false;
@@ -261,9 +262,6 @@ class PlayState extends MusicBeatState
 	var waves:Bool = false;
 	var oneK:Bool = false;
 	var randomSpeedThing:Bool = false;
-
-	public var botplaySine:Float = 0;
-	public var botplayTxt:FlxText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -3843,7 +3841,8 @@ class PlayState extends MusicBeatState
 		if (health > 2) 
 			health = 2;
 
-		switch (iconP1.widthThing) {
+		switch (iconP1.widthThing) 
+		{
 			case 150:
 				iconP1.animation.curAnim.curFrame = 0;
 			case 300:
@@ -3873,7 +3872,8 @@ class PlayState extends MusicBeatState
 
 		// Does this work??
 		// the 2 icons do, but idk about 3 nor the 5 icons
-		switch (iconP2.widthThing) {
+		switch (iconP2.widthThing) 
+		{
 			case 150:
 				iconP2.animation.curAnim.curFrame = 0;
 			case 300:

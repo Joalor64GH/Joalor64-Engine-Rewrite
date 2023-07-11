@@ -205,10 +205,10 @@ class CreditsState extends MusicBeatState
 				'JingleShadow'
 			],
 			[
-				'RiverOaken',
-				'river',
+				'Riveren',
+				'riveren',
 				'Main Artist/Animator of Psych Engine',
-				'https://twitter.com/RiverOaken',
+				'https://twitter.com/riverennn',
 				'B42F71',
 				'JingleRiver'
 			],
@@ -226,7 +226,7 @@ class CreditsState extends MusicBeatState
 				'Yoshubs',
 				'shubs',
 				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
-				'https://twitter.com/yoshubs',
+				'https://gamebanana.com/members/1908070',
 				'5E99DF',
 				'JingleShubs'
 			],

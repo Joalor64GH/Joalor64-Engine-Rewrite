@@ -573,7 +573,7 @@ class TitleState extends MusicBeatState
 					addMoreText('present to you');
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
-					addMoreText('RiverOaken', 15);
+					addMoreText('Riveren', 15);
 					addMoreText('Yoshubs', 15);
 					addMoreText('BBPanzu', 15);
 					credIconShadow.visible = true;

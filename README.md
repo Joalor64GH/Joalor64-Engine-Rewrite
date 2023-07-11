@@ -75,13 +75,13 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
-* [RiverOaken](https://twitter.com/RiverOaken) - Main Artist + Animator
+* [Riveren](https://twitter.com/riverennn) - Main Artist + Animator
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
-* [Yoshubs](https://github.com/Yoshubs) - Aditional Ex-Programmer + Epic Input System
+* [Yoshubs](https://gamebanana.com/members/1908070) - Aditional Ex-Programmer + Epic Input System
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
-* [KadeDev](https://github.com/KadeDev) - Fixed Chart Editor and other PRs + Extension WebM Fork
+* [KadeDev](https://github.com/Kade-github) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations
