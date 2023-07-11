@@ -3206,7 +3206,7 @@ class PlayState extends MusicBeatState
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
 
-				if (!randomMode && !flip && !stairs	&& !waves)
+				if (!randomMode && !flip && !stairs && !waves)
 				{
 					daNoteData = Std.int(songNotes[1] % 4);
 				}
