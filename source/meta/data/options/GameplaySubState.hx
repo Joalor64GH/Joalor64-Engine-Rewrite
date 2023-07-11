@@ -41,6 +41,14 @@ class GameplaySubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 
+		var option:Option = new Option('Score Text Style:',
+			"How should the score text look like?",
+			'scoreTxtType',
+			'string',
+			'Default',
+			['Default', 'Psych', 'Simple']);
+		addOption(option);
+
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
 			'camZooms',

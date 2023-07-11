@@ -139,6 +139,19 @@ class PlayState extends MusicBeatState
 		['P', 1.0]
 	];
 
+	public static var psychRatings:Array<Dynamic> = [
+		['You Suck!', 0.2],
+		['Shit', 0.4],
+		['Bad', 0.5],
+		['Bruh', 0.6],
+		['Meh', 0.69],
+		['Nice', 0.7],
+		['Good', 0.8],
+		['Great', 0.9],
+		['Sick!', 1],
+		['Perfect!!', 1]
+	];
+
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
 
@@ -241,6 +254,14 @@ class PlayState extends MusicBeatState
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
 	public var practiceMode:Bool = false;
+
+	var randomMode:Bool = false;
+	var flip:Bool = false;
+	var stairs:Bool = false;
+	var waves:Bool = false;
+	var oneK:Bool = false;
+	var randomSpeedThing:Bool = false;
+
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
 
@@ -412,23 +433,35 @@ class PlayState extends MusicBeatState
 
 		comboFunction = () -> {
 			// Rating FC
-			ratingFC = "CB";
-			if (songMisses < 1){
-				if (shits > 0)
-					ratingFC = "FC";
-				else if (bads > 0)
-					ratingFC = "GFC";
-				else if (goods > 0)
-					ratingFC = "MFC";
-				else if (sicks > 0)
-					ratingFC = "SFC";
-			}
-			else if (songMisses < 10){
-				ratingFC = "SDCB";
-			}
-			else if (cpuControlled){
-				ratingFC = "Cheater!";
-			}
+			switch (ClientPrefs.scoreTxtType)
+			{
+				case 'Default':
+					ratingFC = "CB";
+					if (songMisses < 1){
+						if (shits > 0)
+							ratingFC = "FC";
+						else if (bads > 0)
+							ratingFC = "GFC";
+						else if (goods > 0)
+							ratingFC = "MFC";
+						else if (sicks > 0)
+							ratingFC = "SFC";
+					}
+					else if (songMisses < 10){
+						ratingFC = "SDCB";
+					}
+					else if (cpuControlled){
+						ratingFC = "Cheater!";
+					}
+				
+				case 'Psych':
+					ratingFC = "";
+					if (sicks > 0) ratingFC = "SFC";
+					if (goods > 0) ratingFC = "GFC";
+					if (bads > 0 || shits > 0) ratingFC = "FC";
+					if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
+					else if (songMisses >= 10) ratingFC = "Clear";
+			}		
 		}
 
 		//Ratings
@@ -469,6 +502,12 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+		randomMode = ClientPrefs.getGameplaySetting('randommode', false);
+		flip = ClientPrefs.getGameplaySetting('flip', false);
+		stairs = ClientPrefs.getGameplaySetting('stairmode', false);
+		waves = ClientPrefs.getGameplaySetting('wavemode', false);
+		oneK = ClientPrefs.getGameplaySetting('onekey', false);
+		randomSpeedThing = ClientPrefs.getGameplaySetting('randomspeed', false);
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -2964,18 +3003,31 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore 
-			+ ' // Health: ' + '50%'
-			+ ' // Combo Breaks: ' + songMisses 
-			+ ' // Accuracy: ' + ratingName 
-			+ ' // Rank: N/A';
-		} else {
-			scoreTxt.text = 'Score: ' + songScore 
-			+ ' // Health: ' + healthBar.percent + '%'
-			+ ' // Combo Breaks: ' + songMisses
-			+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
-			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
+		switch (ClientPrefs.scoreTxtType)
+		{
+			case 'Default':
+				if(ratingName == '?') {
+					scoreTxt.text = 'Score: ' + songScore 
+					+ ' // Health: ' + '50%'
+					+ ' // Combo Breaks: ' + songMisses 
+					+ ' // Accuracy: ' + ratingName 
+					+ ' // Rank: N/A';
+				} else {
+					scoreTxt.text = 'Score: ' + songScore 
+					+ ' // Health: ' + healthBar.percent + '%'
+					+ ' // Combo Breaks: ' + songMisses
+					+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
+					+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
+				}
+
+			case 'Psych':
+				scoreTxt.text = 'Score: ' + songScore
+				+ ' | Misses: ' + songMisses
+				+ ' | Rating: ' + ratingName
+				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+
+			case 'Simple':
+				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses;
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -3086,6 +3138,7 @@ class PlayState extends MusicBeatState
 	private var noteTypes:Array<String> = [];
 	private var eventsPushed:Array<String> = [];
 	
+	var stair:Int = 0;
 	private function generateSong():Void
 	{
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype','multiplicative');
@@ -3152,6 +3205,37 @@ class PlayState extends MusicBeatState
 			{
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
+
+				if (!randomMode && !flip && !stairs	&& !waves)
+				{
+					daNoteData = Std.int(songNotes[1] % 4);
+				}
+				if (oneK)
+				{
+					daNoteData = 2;
+				}
+				if (randomMode || randomMode && flip || randomMode && flip && stairs || randomMode && flip && stairs && waves) { //gotta specify that random mode must at least be turned on for this to work
+					daNoteData = FlxG.random.int(0, 3);
+				}
+				if (flip && !stairs && !waves) {
+					daNoteData = Std.int(Math.abs((songNotes[1] % 4) - 3));
+				}
+				if (stairs && !waves) {
+					daNoteData = stair % 4;
+					stair++;
+				}
+				if (waves) {
+					switch (stair % 6)
+					{
+						case 0 | 1 | 2 | 3:
+							daNoteData = stair % 6;
+						case 4:
+							daNoteData = 2;
+						case 5:
+							daNoteData = 1;
+					}
+					stair++;
+				}
 
 				var gottaHitNote:Bool = section.mustHitSection;
 
@@ -3855,6 +3939,12 @@ class PlayState extends MusicBeatState
 
 		FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 		camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
+
+		if (curBeat % 32 == 0 && randomSpeedThing)
+		{
+			var randomShit = FlxMath.roundDecimal(FlxG.random.float(0.4, 3), 2);
+			lerpSongSpeed(randomShit, 1);
+		}
 
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
@@ -6052,22 +6142,42 @@ class PlayState extends MusicBeatState
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 
 				// Rating Name
-				if(ratingPercent >= 1)
+				switch (ClientPrefs.scoreTxtType)
 				{
-					ratingName = ratingStuff[ratingStuff.length-1][0]; //Uses last string
-				}
-				else
-				{
-					for (i in 0...ratingStuff.length-1)
-					{
-						if(ratingPercent < ratingStuff[i][1])
+					case 'Default':
+						if(ratingPercent >= 1)
 						{
-							ratingName = ratingStuff[i][0];
-							break;
+							ratingName = ratingStuff[ratingStuff.length-1][0]; //Uses last string
 						}
-					}
+						else
+						{
+							for (i in 0...ratingStuff.length-1)
+							{
+								if(ratingPercent < ratingStuff[i][1])
+								{
+									ratingName = ratingStuff[i][0];
+									break;
+								}
+							}
+						}
+
+					case 'Psych':
+						if(ratingPercent >= 1)
+						{
+							ratingName = psychRatings[psychRatings.length-1][0]; //Uses last string
+						}
+						else
+						{
+							for (i in 0...psychRatings.length-1)
+							{
+								if(ratingPercent < psychRatings[i][1])
+								{
+									ratingName = psychRatings[i][0];
+									break;
+								}
+							}
+						}
 				}
-			}
 			comboFunction();
 		}
 		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce -Ghost
