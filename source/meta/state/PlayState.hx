@@ -1039,45 +1039,21 @@ class PlayState extends MusicBeatState
 		#end
 
 		// "GLOBAL" SCRIPTS
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/scripts/'));
-
-		for(mod in Mods.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
-		#end
-
+		var foldersToCheck:Array<String> = Mods.getFoldersList(Paths.getPreloadPath(), 'scripts/');
 		for (folder in foldersToCheck)
 		{
-			if(FileSystem.exists(folder))
+			for (file in FileSystem.readDirectory(folder))
 			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					// this is smart ngl
-					#if LUA_ALLOWED
-					if(file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-					#elseif HSCRIPT_ALLOWED
-					if(file.endsWith('.hscript') && !filesPushed.contains(file))
-					{
-						addHscript(folder + file);
-						filesPushed.push(file);
-					}
-					#elseif SCRIPT_EXTENSION
-					if(file.endsWith('.hx') && !filesPushed.contains(file))
-					{
-						scriptArray.push(new FunkinSScript(folder + file));
-						filesPushed.push(file);
-					}
-					#end
-				}
+				#if LUA_ALLOWED
+				if(file.toLowerCase().endsWith('.lua'))
+					luaArray.push(new FunkinLua(folder + file));
+				#elseif HSCRIPT_ALLOWED
+				if(file.toLowerCase().endsWith('.hscript'))
+					addHscript(folder + file);
+				#elseif SCRIPT_EXTENSION
+				if(file.toLowerCase().endsWith('.hx'))
+					scriptArray.push(new FunkinSScript(folder + file));
+				#end
 			}
 		}
 
@@ -1542,45 +1518,21 @@ class PlayState extends MusicBeatState
 		eventsPushed = null;
 
 		// SONG SPECIFIC SCRIPTS
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
-		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/data/' + Paths.formatToSongPath(SONG.song) + '/'));
-
-		for(mod in Mods.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/data/' + Paths.formatToSongPath(SONG.song) + '/' ));// using push instead of insert because these should run after everything else
-		#end
-
+		var foldersToCheck:Array<String> = Mods.getFoldersList(Paths.getPreloadPath(), 'data/' + songName + '/');
 		for (folder in foldersToCheck)
 		{
-			if(FileSystem.exists(folder))
+			for (file in FileSystem.readDirectory(folder))
 			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					// this is smart ngl
-					#if LUA_ALLOWED
-					if(file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-					#elseif HSCRIPT_ALLOWED
-					if(file.endsWith('.hscript') && !filesPushed.contains(file))
-					{
-						addHscript(folder + file);
-						filesPushed.push(file);
-					}
-					#elseif SCRIPT_EXTENSION
-					if(file.endsWith('.hx') && !filesPushed.contains(file))
-					{
-						scriptArray.push(new FunkinSScript(folder + file));
-						filesPushed.push(file);
-					}
-					#end
-				}
+				#if LUA_ALLOWED
+				if(file.toLowerCase().endsWith('.lua'))
+					luaArray.push(new FunkinLua(folder + file));
+				#elseif HSCRIPT_ALLOWED
+				if(file.toLowerCase().endsWith('.hscript'))
+					addHscript(folder + file);
+				#elseif SCRIPT_EXTENSION
+				if(file.toLowerCase().endsWith('.hx'))
+					scriptArray.push(new FunkinSScript(folder + file));
+				#end
 			}
 		}
 
@@ -2925,7 +2877,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage && curStage != 'limo') {
+						if (!PlayState.isPixelStage || curStage != 'limo') {
 							if(boyfriend.animOffsets.exists('hey')) {
 								boyfriend.playAnim('hey', true);
 								boyfriend.specialAnim = true;
