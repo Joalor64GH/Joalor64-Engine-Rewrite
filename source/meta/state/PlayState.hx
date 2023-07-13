@@ -485,15 +485,15 @@ class PlayState extends MusicBeatState
 						ratingFC = "Botplay";
 
 					if (songMisses == 0 && goods == 0 && bads == 0 && shits == 0)
-						ratingFC = "(MFC)"
+						ratingFC = "(MFC)";
 					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
-						ratingFC = "(GFC)"
+						ratingFC = "(GFC)";
 					else if (songMisses == 0)
-						ratingFC = "(FC)"
+						ratingFC = "(FC)";
 					else if (songMisses <= 10)
-						ratingFC = "(SDCB)"
+						ratingFC = "(SDCB)";
 					else
-						ratingFC = "(Clear)"
+						ratingFC = "(Clear)";
 			}		
 		}
 
