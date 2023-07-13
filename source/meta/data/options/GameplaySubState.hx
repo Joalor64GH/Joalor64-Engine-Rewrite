@@ -46,7 +46,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'scoreTxtType',
 			'string',
 			'Default',
-			['Default', 'Psych', 'Simple']);
+			['Default', 'Psych', 'Kade', 'Simple']);
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',
@@ -80,12 +80,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'uiSkin',
 			'string',
 			'Default',
-			[
-				'Default', 
-				'Forever', 
-				'Kade', 
-				'Simplylove'
-			]);
+			['Default', 'Forever', 'Kade', 'Simplylove']);
 		addOption(option);
 
 		var option:Option = new Option('Long Health Bar',

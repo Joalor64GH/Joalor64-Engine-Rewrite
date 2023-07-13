@@ -60,15 +60,10 @@ import llua.Convert;
 #end
 
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "3.0.0") 
-import hxcodec.flixel.FlxVideo as MP4Handler;
-#elseif (hxCodec >= "2.6.1") 
-import hxcodec.VideoHandler as MP4Handler;
-#elseif (hxCodec == "2.6.0") 
-import VideoHandler as MP4Handler;
-#else 
-import vlc.MP4Handler;
-#end
+#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as MP4Handler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
+#elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
+#else import vlc.MP4Handler; #end
 #end
 
 #if WEBM_ALLOWED
@@ -79,6 +74,7 @@ import meta.video.VideoSubState;
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
+
 #if HSCRIPT_ALLOWED
 import hscript.*;
 import horny.*;
@@ -149,6 +145,25 @@ class PlayState extends MusicBeatState
 		['Great', 0.9],
 		['Sick!', 1],
 		['Perfect!!', 1]
+	];
+
+	public static var kadeRatings:Array<Dynamic> = [
+		['D', 0.59],
+		['C', 0.6],
+		['B', 0.7],
+		['A', 0.8],
+		['A.', 0.85],
+		['A:', 0.90],
+		['AA', 0.93],
+		['AA.', 0.965],
+		['AA:', 0.99],
+		['AAA', 0.997],
+		['AAA.', 0.998],
+		['AAA:', 0.999],
+		['AAAA', 0.99955],
+		['AAAA.', 0.9997],
+		['AAAA:', 0.9998],
+		['AAAAA', 0.999935]
 	];
 
 	//event variables
@@ -239,6 +254,8 @@ class PlayState extends MusicBeatState
 	public var goods:Int = 0;
 	public var bads:Int = 0;
 	public var shits:Int = 0;
+	public var nps:Int = 0; // for kade engine score hud
+	public var maxNPS:Int = 0;
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -269,6 +286,8 @@ class PlayState extends MusicBeatState
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
+
+	var notesHitArray:Array<Date> = [];
 
 	var dialogue:Array<String> = null;
 	var dialogueJson:DialogueFile = null;
@@ -459,6 +478,22 @@ class PlayState extends MusicBeatState
 					if (bads > 0 || shits > 0) ratingFC = "FC";
 					if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 					else if (songMisses >= 10) ratingFC = "Clear";
+
+				case 'Kade':
+					ratingFC = "N/A";
+					if (cpuControlled)
+						ratingFC = "Botplay";
+
+					if (songMisses == 0 && goods == 0 && bads == 0 && shits == 0)
+						ratingFC = "(MFC)"
+					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
+						ratingFC = "(GFC)"
+					else if (songMisses == 0)
+						ratingFC = "(FC)"
+					else if (songMisses <= 10)
+						ratingFC = "(SDCB)"
+					else
+						ratingFC = "(Clear)"
 			}		
 		}
 
@@ -2976,6 +3011,13 @@ class PlayState extends MusicBeatState
 				+ ' | Rating: ' + ratingName
 				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
+			case 'Kade':
+				scoreTxt.text = 'NPS: ' + nps + '(Max ' + maxNPS + ')' 
+				+ ' | Score: ' + songScore 
+				+ ' | Combo Breaks: ' + songMisses
+				+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
+				+ ' | ' + ratingFC + ratingName;
+
 			case 'Simple':
 				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses;
 		}
@@ -3606,6 +3648,23 @@ class PlayState extends MusicBeatState
 				remove(videoSprite);
 				removedVideo = true;
 			}
+		}
+
+		if (ClientPrefs.scoreTxtType == 'Kade')
+		{
+			var balls = notesHitArray.length - 1;
+			while (balls >= 0)
+			{
+				var cock:Date = notesHitArray[balls];
+				if (cock != null && cock.getTime() + 1000 < Date.now().getTime())
+					notesHitArray.remove(cock);
+				else
+					balls = 0;
+				balls--;
+			}
+			nps = notesHitArray.length;
+			if (nps > maxNPS)
+				maxNPS = nps;
 		}
 
 		callOnLuas('onUpdate', [elapsed]);
@@ -4850,36 +4909,26 @@ class PlayState extends MusicBeatState
 
 	private function cachePopUpScore()
 	{
-		var pixelShitPart1:String = '';
-		var pixelShitPart2:String = '';
-		if (isPixelStage)
-		{
-			pixelShitPart1 = 'pixelUI/';
-			pixelShitPart2 = '-pixel';
-		}
+		var pixelShitPart1:String;
+		var pixelShitPart2:String;
 
-		switch (ClientPrefs.uiSkin) {
-			case 'Default' if (PlayState.isPixelStage):
-				pixelShitPart1 = 'pixelUI/';
-				pixelShitPart2 = '-pixel';
+		switch (ClientPrefs.uiSkin) 
+		{
+			case 'Default':
+				pixelShitPart1 = (isPixelStage) ? 'pixelUI/' : '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
 			case 'Forever':
 				pixelShitPart1 = 'skins/foreverUI/';
-				if (PlayState.isPixelStage)
-					pixelShitPart2 = '-pixel';
-				else
-					pixelShitPart2 = '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
 			case 'Kade':
 				pixelShitPart1 = 'skins/kadeUI/';
-				if (PlayState.isPixelStage)
-					pixelShitPart2 = '-pixel';
-				else
-					pixelShitPart2 = '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
-				if (PlayState.isPixelStage)
-					pixelShitPart2 = '-pixel';
-				else
-					pixelShitPart2 = '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
 		}
 
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
@@ -4931,15 +4980,27 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		var pixelShitPart1:String = "";
-		var pixelShitPart2:String = '';
+		var pixelShitPart1:String;
+		var pixelShitPart2:String;
 
-		if (PlayState.isPixelStage)
+		switch (ClientPrefs.uiSkin) 
 		{
-			pixelShitPart1 = 'pixelUI/';
-			pixelShitPart2 = '-pixel';
-		}
+			case 'Default':
+				pixelShitPart1 = (isPixelStage) ? 'pixelUI/' : '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
 
+			case 'Forever':
+				pixelShitPart1 = 'skins/foreverUI/';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
+			case 'Kade':
+				pixelShitPart1 = 'skins/kadeUI/';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
+			case 'Simplylove':
+				pixelShitPart1 = 'skins/simplylove/';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+		}
 		var ratingsGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
 		final ratingsY:Float = 60;
@@ -6111,11 +6172,11 @@ class PlayState extends MusicBeatState
 					case 'Default':
 						if(ratingPercent >= 1)
 						{
-							ratingName = ratingStuff[ratingStuff.length-1][0]; //Uses last string
+							ratingName = ratingStuff[ratingStuff.length - 1][0]; //Uses last string
 						}
 						else
 						{
-							for (i in 0...ratingStuff.length-1)
+							for (i in 0...ratingStuff.length - 1)
 							{
 								if(ratingPercent < ratingStuff[i][1])
 								{
@@ -6128,15 +6189,32 @@ class PlayState extends MusicBeatState
 					case 'Psych':
 						if(ratingPercent >= 1)
 						{
-							ratingName = psychRatings[psychRatings.length-1][0]; //Uses last string
+							ratingName = psychRatings[psychRatings.length - 1][0]; //Uses last string
 						}
 						else
 						{
-							for (i in 0...psychRatings.length-1)
+							for (i in 0...psychRatings.length - 1)
 							{
 								if(ratingPercent < psychRatings[i][1])
 								{
 									ratingName = psychRatings[i][0];
+									break;
+								}
+							}
+						}
+
+					case 'Kade':
+						if(ratingPercent >= 1)
+						{
+							ratingName = kadeRatings[kadeRatings.length - 1][0]; //Uses last string
+						}
+						else
+						{
+							for (i in 0...kadeRatings.length - 1)
+							{
+								if(ratingPercent < kadeRatings[i][1])
+								{
+									ratingName = kadeRatings[i][0];
 									break;
 								}
 							}

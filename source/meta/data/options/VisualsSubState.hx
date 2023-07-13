@@ -56,12 +56,7 @@ class VisualsSubState extends BaseOptionsMenu
 			'songDisplay',
 			'string',
 			'None',
-			[
-				'Classic', 
-				'Vertical', 
-				'C-Shape', 
-				'D-Shape'
-			]);
+			['Classic', 'Vertical', 'C-Shape', 'D-Shape']);
 		addOption(option);
 
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
@@ -105,12 +100,7 @@ class VisualsSubState extends BaseOptionsMenu
 			'colorBlindFilter',
 			'string',
 			'None',
-			[
-				'None', 
-				'Deuteranopia', 
-				'Protanopia', 
-				'Tritanopia'
-			]);
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
 		addOption(option);
 		option.onChange = () -> meta.Colorblind.updateFilter();
 
