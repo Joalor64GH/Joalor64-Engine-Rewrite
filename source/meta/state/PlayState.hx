@@ -147,25 +147,6 @@ class PlayState extends MusicBeatState
 		['Perfect!!', 1]
 	];
 
-	public static var kadeRatings:Array<Dynamic> = [
-		['D', 0.59],
-		['C', 0.6],
-		['B', 0.7],
-		['A', 0.8],
-		['A.', 0.85],
-		['A:', 0.90],
-		['AA', 0.93],
-		['AA.', 0.965],
-		['AA:', 0.99],
-		['AAA', 0.997],
-		['AAA.', 0.998],
-		['AAA:', 0.999],
-		['AAAA', 0.99955],
-		['AAAA.', 0.9997],
-		['AAAA:', 0.9998],
-		['AAAAA', 0.999935]
-	];
-
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
 
@@ -254,8 +235,6 @@ class PlayState extends MusicBeatState
 	public var goods:Int = 0;
 	public var bads:Int = 0;
 	public var shits:Int = 0;
-	public var nps:Int = 0; // for kade engine score hud
-	public var maxNPS:Int = 0;
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -478,22 +457,6 @@ class PlayState extends MusicBeatState
 					if (bads > 0 || shits > 0) ratingFC = "FC";
 					if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 					else if (songMisses >= 10) ratingFC = "Clear";
-
-				case 'Kade':
-					ratingFC = "N/A";
-					if (cpuControlled)
-						ratingFC = "Botplay";
-
-					if (songMisses == 0 && goods == 0 && bads == 0 && shits == 0)
-						ratingFC = "(MFC)";
-					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
-						ratingFC = "(GFC)";
-					else if (songMisses == 0)
-						ratingFC = "(FC)";
-					else if (songMisses <= 10)
-						ratingFC = "(SDCB)";
-					else
-						ratingFC = "(Clear)";
 			}		
 		}
 
@@ -3011,13 +2974,6 @@ class PlayState extends MusicBeatState
 				+ ' | Rating: ' + ratingName
 				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
-			case 'Kade':
-				scoreTxt.text = 'NPS: ' + nps + '(Max ' + maxNPS + ')' 
-				+ ' | Score: ' + songScore 
-				+ ' | Combo Breaks: ' + songMisses
-				+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
-				+ ' | ' + ratingFC + ratingName;
-
 			case 'Simple':
 				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses;
 		}
@@ -3648,23 +3604,6 @@ class PlayState extends MusicBeatState
 				remove(videoSprite);
 				removedVideo = true;
 			}
-		}
-
-		if (ClientPrefs.scoreTxtType == 'Kade')
-		{
-			var balls = notesHitArray.length - 1;
-			while (balls >= 0)
-			{
-				var cock:Date = notesHitArray[balls];
-				if (cock != null && cock.getTime() + 1000 < Date.now().getTime())
-					notesHitArray.remove(cock);
-				else
-					balls = 0;
-				balls--;
-			}
-			nps = notesHitArray.length;
-			if (nps > maxNPS)
-				maxNPS = nps;
 		}
 
 		callOnLuas('onUpdate', [elapsed]);
@@ -4924,7 +4863,7 @@ class PlayState extends MusicBeatState
 
 			case 'Kade':
 				pixelShitPart1 = 'skins/kadeUI/';
-				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+				pixelShitPart2 = (!isPixelStage) ? '' : '-pixel';
 
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
@@ -4995,7 +4934,7 @@ class PlayState extends MusicBeatState
 
 			case 'Kade':
 				pixelShitPart1 = 'skins/kadeUI/';
-				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+				pixelShitPart2 = (!isPixelStage) ? '' : '-pixel';
 
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
@@ -5131,7 +5070,6 @@ class PlayState extends MusicBeatState
 			{
 				insert(members.indexOf(strumLineNotes), numScore);
 			}
-
 			if(combo >= 10)
 			{
 				insert(members.indexOf(strumLineNotes), comboSpr);
@@ -5216,8 +5154,7 @@ class PlayState extends MusicBeatState
 						}
 
 					}
-				}
-				else{
+				}else{
 					callOnLuas('onGhostTap', [key]);
 					if (canMiss && !ClientPrefs.ghostTapping) {
 						noteMissPress(key);
@@ -6198,23 +6135,6 @@ class PlayState extends MusicBeatState
 								if(ratingPercent < psychRatings[i][1])
 								{
 									ratingName = psychRatings[i][0];
-									break;
-								}
-							}
-						}
-
-					case 'Kade':
-						if(ratingPercent >= 1)
-						{
-							ratingName = kadeRatings[kadeRatings.length - 1][0]; //Uses last string
-						}
-						else
-						{
-							for (i in 0...kadeRatings.length - 1)
-							{
-								if(ratingPercent < kadeRatings[i][1])
-								{
-									ratingName = kadeRatings[i][0];
 									break;
 								}
 							}

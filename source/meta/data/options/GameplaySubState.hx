@@ -46,7 +46,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'scoreTxtType',
 			'string',
 			'Default',
-			['Default', 'Psych', 'Kade', 'Simple']);
+			['Default', 'Psych', 'Simple']);
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',
