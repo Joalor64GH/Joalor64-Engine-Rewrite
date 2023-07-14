@@ -90,6 +90,7 @@ class OptionsState extends MusicBeatState
 
 		FlxG.cameras.reset(camMain);
 		FlxG.cameras.add(camSub, false);
+
 		FlxG.cameras.setDefaultDrawTarget(camMain, true);
 		CustomFadeTransition.nextCamera = camSub;
 
@@ -97,7 +98,6 @@ class OptionsState extends MusicBeatState
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 		add(camFollowPos);
-
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
@@ -138,9 +138,17 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
+	override function openSubState(subState:FlxSubState) {
+		super.openSubState(subState);
+		if (!(subState is CustomFadeTransition)) {
+			persistentDraw = persistentUpdate = false;
+		}
+	}
+
 	override function closeSubState() {
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		persistentDraw = persistentUpdate = true;
 	}
 
 	override function update(elapsed:Float) {
