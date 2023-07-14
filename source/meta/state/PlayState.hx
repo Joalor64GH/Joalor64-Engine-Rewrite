@@ -4867,7 +4867,7 @@ class PlayState extends MusicBeatState
 
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
-				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+				pixelShitPart2 = ''; // no pixel assets for simplylove oops
 		}
 
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
@@ -4938,7 +4938,7 @@ class PlayState extends MusicBeatState
 
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
-				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+				pixelShitPart2 = '';
 		}
 		var ratingsGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
