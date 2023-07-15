@@ -71,6 +71,7 @@ import webm.WebmPlayer;
 import meta.video.BackgroundVideo;
 import meta.video.VideoSubState;
 #end
+
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
@@ -2230,8 +2231,7 @@ class PlayState extends MusicBeatState
 			startAndEnd();
 			return;
 		}
-		var video:SwfVideo = new SwfVideo();
-		video.playMovie(filepath, sound, function(){
+		var video:SwfVideo = new SwfVideo(filepath, sound, function() {
 			startAndEnd();
 			return;
 		});

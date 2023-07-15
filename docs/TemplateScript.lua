@@ -12,7 +12,6 @@ function onDestroy()
 	-- triggered when the lua file is ended (Song fade out finished)
 end
 
-
 -- Gameplay/Song interactions
 function onBeatHit()
 	-- triggered 4 times per section
@@ -54,7 +53,6 @@ function onEndSong()
 	return Function_Continue;
 end
 
-
 -- Substate interactions
 function onPause()
 	-- Called when you press Pause while not on a cutscene/etc
@@ -77,7 +75,6 @@ function onGameOverConfirm(retry)
 	-- If you've pressed Esc, value "retry" will be false
 end
 
-
 -- Dialogue (When a dialogue is finished, it calls startCountdown again)
 function onNextDialogue(line)
 	-- triggered when the next dialogue line starts, dialogue line starts with 1
@@ -86,7 +83,6 @@ end
 function onSkipDialogue(line)
 	-- triggered when you press Enter and skip a dialogue line that was still being typed, dialogue line starts with 1
 end
-
 
 -- Note miss/hit
 function goodNoteHit(id, direction, noteType, isSustainNote)
@@ -111,7 +107,6 @@ function noteMiss(id, direction, noteType, isSustainNote)
 	-- Player missed a note by letting it go offscreen
 end
 
-
 -- Other function hooks
 function onRecalculateRating()
 	-- return Function_Stop if you want to do your own rating calculation,
@@ -127,7 +122,6 @@ function onMoveCamera(focus)
 		-- called when the camera focus on dad
 	end
 end
-
 
 -- Event notes hooks
 function onEvent(name, value1, value2)
@@ -150,7 +144,6 @@ function eventEarlyTrigger(name)
 	-- write your shit under this line, the new return value will override the ones hardcoded on the engine
 end
 
-
 -- Tween/Timer hooks
 function onTweenCompleted(tag)
 	-- A tween you called has been completed, value "tag" is it's tag
@@ -161,22 +154,21 @@ function onTimerCompleted(tag, loops, loopsLeft)
 	-- loops = how many loops it will have done when it ends completely
 	-- loopsLeft = how many are remaining
 end
-function onCheckForAchievement(name)
+function giveAchievement(name)
 	
-	--deals with achievement checks
+	--grants an achievement through .lua
 	
 	--EX:
 --[[
-  if name == 'sick-full-combo' and getProperty('bads') == 0 and getProperty('goods') == 0 and getProperty('shits') == 0 and getProperty('endingSong') then
-    return Function_Continue
-  end
-  if name == 'bad-health-finish' and getProperty('health') < 0.01 and getProperty('endingSong') then
-    return Function_Continue
-  end
-  if name == 'halfway' and getSongPosition >  getPropertyFromClass('flixel.FlxG','sound.music.length')/2 then
-    return Function_Continue
-  end
-	
+
+  	function onEndSong() 
+    	if not allowEnd and not isStoryMode then
+        	giveAchievement("mod_complete")
+        	allowEnd = true;
+        	return Function_Stop;
+    	end
+    	return Function_Continue;
+	end
 	
 	]]--
 end
