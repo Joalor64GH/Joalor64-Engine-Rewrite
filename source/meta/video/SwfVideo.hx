@@ -1,7 +1,11 @@
 package meta.video;
 
 import openfl.utils.Assets;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
 import openfl.display.Sprite;
 import openfl.Lib;
 import openfl.events.Event;
@@ -15,13 +19,10 @@ class SwfVideo extends Sprite
     private var barLeft:Sprite;
     private var barRight:Sprite;
 
-    public function new():Void
+    public function new(movieClip:String, sound:String, onComplete:Void->Void):Void
     {
         super();
-    }
-	
-    public function playMovie(movieClip:String, sound:String, onComplete:Void->Void):Void
-    {
+
         barLeft = new Sprite();
         barRight = new Sprite();
 
