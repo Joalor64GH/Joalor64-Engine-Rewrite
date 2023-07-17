@@ -60,7 +60,7 @@ class OptionsState extends MusicBeatState
 			case 'Gameplay':
 				openSubState(new GameplaySubState());
 			case 'Offsets':
-				LoadingState.loadAndSwitchState(new NoteOffsetState());
+				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Miscellaneous':
 				openSubState(new MiscSubState());
 		}
