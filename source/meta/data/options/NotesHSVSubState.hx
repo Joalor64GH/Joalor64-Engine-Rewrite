@@ -81,6 +81,8 @@ class NotesHSVSubState extends MusicBeatSubstate
 		add(hsbText);
 
 		changeSelection();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	var changingNote:Bool = false;
