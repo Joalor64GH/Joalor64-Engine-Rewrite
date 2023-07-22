@@ -7,8 +7,15 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
+#if flash
 import flash.media.Sound;
+#end
+import objects.shaders.ColorSwap;
 
 using StringTools;
 
@@ -23,6 +30,8 @@ class Alphabet extends FlxSpriteGroup
 {
 	public var text(default, set):String;
 	public var menuType(default, set):String;
+
+	public var image(default, set):String;
 
 	public var bold:Bool = false;
 	public var letters:Array<AlphaCharacter> = [];
@@ -51,7 +60,10 @@ class Alphabet extends FlxSpriteGroup
 
 	public static var alphabet:Alphabet = null;
 
-	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true)
+	public var useColorSwap(default, set):Bool = false;
+	public var colorEffect(default, set):Null<Float> = 0.1;
+
+	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'alphabet')
 	{
 		super(x, y);
 
@@ -61,6 +73,7 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.y = y;
 		this.bold = bold;
 		this.text = text;
+		this.image = image;
 	}
 
 	public function setAlignmentFromString(align:String)
@@ -112,6 +125,17 @@ class Alphabet extends FlxSpriteGroup
 		updateAlignment();
 		this.text = newText;
 		return newText;
+	}
+
+	private function set_image(v:String):String {
+		if(v == image)
+			return v;
+		image = v;
+		for (let in letters) {
+			let.image = image;
+		}
+		updateAlignment();
+		return image;
 	}
 
 	public function clearLetters()
@@ -276,7 +300,7 @@ class Alphabet extends FlxSpriteGroup
 					}
 					consecutiveSpaces = 0;
 
-					var letter:AlphaCharacter = new AlphaCharacter(xPos, rows * Y_PER_ROW * scaleY, character, bold, this);
+					var letter:AlphaCharacter = new AlphaCharacter(xPos, rows * Y_PER_ROW * scaleY, character, bold, this, image);
 					letter.x += letter.letterOffset[0] * scaleX;
 					letter.y -= letter.letterOffset[1] * scaleY;
 					letter.row = rows;
@@ -315,6 +339,31 @@ class Alphabet extends FlxSpriteGroup
 		menuType = value;
 		return value;
 	}
+
+	public function setAlpha(newAlpha:Float) {
+		forEach(function(alp:AlphaCharacter) {
+			alp.alpha = newAlpha;
+		});
+	}
+
+	public function setVisible(newVisible:Bool) {
+		forEach(function(alp:AlphaCharacter) {
+			alp.visible = newVisible;
+		});
+	}
+
+	function set_useColorSwap(v:Bool) {
+		forEach(function(spr:AlphaCharacter) {
+			spr.useSwap = v;
+		});
+		return useColorSwap = v;
+	}
+	function set_colorEffect(v:Null<Float>):Null<Float> {
+		forEach(function(spr:AlphaCharacter) {
+			spr.colorEffect = v;
+		});
+		return colorEffect = v;
+	}
 }
 
 ///////////////////////////////////////////
@@ -340,6 +389,10 @@ class AlphaCharacter extends FlxSprite
 	//public static var symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
 
 	public var image(default, set):String;
+
+	var colorSwap:ColorSwap;
+	public var useSwap(default, set):Bool = false;
+	public var colorEffect:Null<Float> = 0.1;
 
 	public static var allLetters:Map<String, Null<Letter>> = [
 		//alphabet
@@ -396,11 +449,11 @@ class AlphaCharacter extends FlxSprite
 
 	public var row:Int = 0;
 	public var rowWidth:Float = 0;
-	public function new(x:Float, y:Float, character:String, bold:Bool, parent:Alphabet)
+	public function new(x:Float, y:Float, character:String, bold:Bool, parent:Alphabet, image:String = 'alphabet')
 	{
 		super(x, y);
 		this.parent = parent;
-		image = 'alphabet';
+		this.image = image;
 		antialiasing = ClientPrefs.globalAntialiasing;
 
 		var curLetter:Letter = allLetters.get('?');
@@ -436,6 +489,8 @@ class AlphaCharacter extends FlxSprite
 				letterOffset[1] = curLetter.offsetsBold[1];
 			}
 		}
+
+		colorSwap = new ColorSwap();
 
 		var alphaAnim:String = lowercase;
 		if(curLetter != null && curLetter.anim != null) alphaAnim = curLetter.anim;
@@ -484,6 +539,30 @@ class AlphaCharacter extends FlxSprite
 		return name;
 	}
 
+	private function set_image(name:String)
+	{
+		var lastAnim:String = null;
+		if (animation != null)
+		{
+			lastAnim = animation.name;
+		}
+		image = name;
+		frames = Paths.getSparrowAtlas(name);
+		this.scale.x = parent.scaleX;
+		this.scale.y = parent.scaleY;
+		alignOffset = 0;
+		
+		if (lastAnim != null)
+		{
+			animation.addByPrefix(lastAnim, lastAnim, 24);
+			animation.play(lastAnim, true);
+			
+			updateHitbox();
+			updateLetterOffset();
+		}
+		return name;
+	}
+
 	public function updateLetterOffset()
 	{
 		if (animation.curAnim == null) return;
@@ -498,8 +577,37 @@ class AlphaCharacter extends FlxSprite
 	var elapsedTotal:Float = 0;
 	var number:Int = 0;
 
+	function set_useSwap(v:Bool):Bool {
+		if(v) {
+			if(shader == null && colorSwap != null && image == 'otherAlphabet') {
+				shader = colorSwap.shader;
+			}
+		} else {
+			if(shader != null) {
+				shader = null;
+			}
+		}
+		return useSwap = v;
+	}
+
 	override function update(elapsed:Float)
 	{
+		if(useSwap) {
+			if(image == 'otherAlphabet') { // old support
+				if(colorSwap != null) {
+					if(colorEffect == null)
+						colorSwap.hue += elapsed;
+					else
+						colorSwap.hue += elapsed * colorEffect;
+				}
+			} else {
+				if(colorEffect == null)
+					color.hue += elapsed;
+				else
+					color.hue += elapsed * colorEffect;
+			}
+		}
+
 		super.update(elapsed);
 
 		if (elapsed > 0 && parent.shouldDisplace)
