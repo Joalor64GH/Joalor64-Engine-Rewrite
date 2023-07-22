@@ -59,10 +59,10 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 
 	public var shouldDisplace:Bool = false;
 
-	public static var alphabet:Alphabet = null;
-
 	public var useColorSwap(default, set):Bool = false;
 	public var colorEffect(default, set):Null<Float> = 0.1;
+
+	public static var alphabet:Alphabet = null;
 
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'alphabet')
 	{
@@ -385,9 +385,6 @@ typedef Letter = {
 
 class AlphaCharacter extends FlxSprite
 {
-	//public static var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
-	//public static var numbers:String = "1234567890";
-	//public static var symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
 
 	public var image(default, set):String;
 
@@ -514,30 +511,6 @@ class AlphaCharacter extends FlxSprite
 	{
 		var ascii = StringTools.fastCodeAt(c, 0);
 		return (ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122);
-	}
-
-	private function set_image(name:String)
-	{
-		var lastAnim:String = null;
-		if (animation != null)
-		{
-			lastAnim = animation.name;
-		}
-		image = name;
-		frames = Paths.getSparrowAtlas(name);
-		this.scale.x = parent.scaleX;
-		this.scale.y = parent.scaleY;
-		alignOffset = 0;
-		
-		if (lastAnim != null)
-		{
-			animation.addByPrefix(lastAnim, lastAnim, 24);
-			animation.play(lastAnim, true);
-			
-			updateHitbox();
-			updateLetterOffset();
-		}
-		return name;
 	}
 
 	private function set_image(name:String)
