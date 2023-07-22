@@ -498,21 +498,21 @@ class AlphaCharacter extends FlxSprite
 	var elapsedTotal:Float = 0;
 	var number:Int = 0;
 
-	// nabbed from lullaby lel
-	inline public function displacementFormula() {
-		elapsedTotal += FlxG.elapsed;
-		var elapsedAverage:Float = (1 / FlxG.drawFramerate);
-		var formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
-		prevY += y;
-		y = prevY + formula;
-		prevY -= y + formula;
-	}
-
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		if (elapsed > 0 && parent.shouldDisplace)
 			displacementFormula();
+	}
+
+	// nabbed from lullaby lel
+	public function displacementFormula() {
+		elapsedTotal += FlxG.elapsed;
+		var elapsedAverage:Float = (1 / FlxG.drawFramerate);
+		var formula:Float = Math.sin(Math.PI * (elapsedTotal + ((number * elapsedAverage) * 24))) * ((FlxG.elapsed / (1 / 120)) / 16);
+		prevY += y;
+		y = prevY + formula;
+		prevY -= y + formula;
 	}
 }
