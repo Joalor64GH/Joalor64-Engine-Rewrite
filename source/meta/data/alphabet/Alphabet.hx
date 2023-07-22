@@ -3,6 +3,7 @@ package meta.data.alphabet;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
@@ -26,7 +27,7 @@ enum Alignment
 	RIGHT;
 }
 
-class Alphabet extends FlxSpriteGroup
+class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 {
 	public var text(default, set):String;
 	public var menuType(default, set):String;
