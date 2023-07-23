@@ -97,7 +97,7 @@ class ReplaySelectState extends MusicBeatState
             {
                 var replay:Alphabet = new Alphabet(0, (70 * i) + 10, texts[i], true);
                 replay.menuType = "Centered";
-                replay.screenCenter(X);
+                replay.screenCenter(XY);
                 grpMenuShit.add(replay);
             }
         }
