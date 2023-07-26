@@ -47,9 +47,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Softcoded Achievements
 
 # Planned Features
-* [X] Hardcode Icon Bopping Script **[Done]**
-* [ ] Extra Notes (Hardcoded)
-* [ ] Add an option to make letters float like in [Hypno's Lullaby](https://github.com/PopcornColonell/hypnosource) **[kinda WIP]**
+You can check planned/upcoming features [here](/TODO).
 
 ----------------------------------------------
 

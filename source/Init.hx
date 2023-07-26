@@ -14,21 +14,17 @@ import haxe.Http;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
+import meta.state.PlayState;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
 
 class Init extends FlxState // this loads everything in
 {
-	public static var randomIcon:Array<String> = [
-		'joalor',
-		'meme',
-		'fox',
-		'bot'
-	];
-	var epicSprite:FlxSprite;
-
+	public static var randomIcon:Array<String> = ['joalor', 'meme', 'fox', 'bot'];
 	public static var updateVersion:String = '';
+
+	var epicSprite:FlxSprite;
     	var mustUpdate:Bool = false;
 
 	public function new() 
@@ -89,7 +85,6 @@ class Init extends FlxState // this loads everything in
 		#end
 
 		FlxG.game.focusLostFramerate = 60;
-
 		FlxG.sound.muteKeys = [FlxKey.ZERO];
 		FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 		FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -105,6 +100,11 @@ class Init extends FlxState // this loads everything in
         	if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+		}
+
+		if (FlxG.save.data.beatTankman != null)
+		{
+			PlayState.beatTankman = FlxG.save.data.beatTankman;
 		}
 
 		FlxG.mouse.visible = false;

@@ -267,7 +267,7 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	var notesHitArray:Array<Date> = [];
+	public static var beatTankman:Bool = false;
 
 	var dialogue:Array<String> = null;
 	var dialogueJson:DialogueFile = null;
@@ -4746,6 +4746,11 @@ class PlayState extends MusicBeatState
 						CustomFadeTransition.nextCamera = null;
 					}
 					MusicBeatState.switchState(new StoryMenuState());
+
+					if (SONG.song.toLowerCase() == "stress")
+					{
+						FlxG.save.data.beatTankman = true;
+					}
 
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);

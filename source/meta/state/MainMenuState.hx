@@ -34,6 +34,7 @@ import system.*;
 
 import core.ToastCore;
 import meta.data.Achievements;
+import meta.state.PlayState;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -148,8 +149,11 @@ class MainMenuState extends MusicBeatState
 				#end
 				'credits',
 				#if !switch 
-				'kickstarter',
-				'donate',
+				if (PlayState.beatTankman) {
+					'kickstarter',
+				} else {
+					'donate',
+				}
 				#end
 				'options'
 			];
