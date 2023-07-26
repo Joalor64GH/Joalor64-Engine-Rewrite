@@ -53,6 +53,13 @@ class MiscSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('In-Game Crash Handler',
+			'If checked, the game will use the crash handler already coded inside.',
+			'inGameCrash',
+			'bool',
+			false);
+		addOption(option);
+
 		super();
 	}
 

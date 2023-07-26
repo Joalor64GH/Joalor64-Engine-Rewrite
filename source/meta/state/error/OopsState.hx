@@ -33,14 +33,21 @@ class OopsState extends FlxState
 			{
 				case 0:
 					trace('Go to TitleState');
-					FlxG.switchState(new TitleState());
+					TitleState.initialized = false;
+					TitleState.closedState = false;
+					FlxG.sound.music.fadeOut(0.3);
+					FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 				case 1:
-					trace('Exit');
-					#if sys
-					Sys.exit(0);
-					#else
-					openfl.system.System.exit(0);
-					#end
+					trace('Close Game');
+					FlxG.sound.music.fadeOut(0.3);
+	            	FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+	            	{
+						#if sys
+		        		Sys.exit(0);
+						#else
+						openfl.system.System.exit(0);
+						#end
+	            	}, false);
 				default:
 					trace('something is fucked');
 			}
