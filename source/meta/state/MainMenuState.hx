@@ -149,11 +149,8 @@ class MainMenuState extends MusicBeatState
 				#end
 				'credits',
 				#if !switch 
-				if (PlayState.beatTankman) {
-					'kickstarter',
-				} else {
-					'donate',
-				}
+				'kickstarter',
+				'donate',
 				#end
 				'options'
 			];

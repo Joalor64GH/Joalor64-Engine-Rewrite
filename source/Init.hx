@@ -21,10 +21,15 @@ import core.ModCore;
 
 class Init extends FlxState // this loads everything in
 {
-	public static var randomIcon:Array<String> = ['joalor', 'meme', 'fox', 'bot'];
-	public static var updateVersion:String = '';
-
+	public static var randomIcon:Array<String> = [
+		'joalor', 
+		'meme', 
+		'fox', 
+		'bot'
+	];
 	var epicSprite:FlxSprite;
+
+	public static var updateVersion:String = '';
     	var mustUpdate:Bool = false;
 
 	public function new() 
@@ -100,11 +105,6 @@ class Init extends FlxState // this loads everything in
         	if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
-		if (FlxG.save.data.beatTankman != null)
-		{
-			PlayState.beatTankman = FlxG.save.data.beatTankman;
 		}
 
 		FlxG.mouse.visible = false;
