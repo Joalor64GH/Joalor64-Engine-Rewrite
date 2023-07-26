@@ -20,9 +20,9 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
 import openfl.Assets;
-import meta.data.Achievements;
 import openfl.media.Video;
 import haxe.Json;
+
 import meta.*;
 import meta.data.*;
 import meta.state.*;
@@ -33,6 +33,7 @@ import meta.state.editors.*;
 import system.*;
 
 import core.ToastCore;
+import meta.data.Achievements;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -279,18 +280,17 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		// Watermarks
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, 'Joalor64 Engine Rewritten v$joalor64EngineVersion', 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, 'Psych Engine v$psychEngineVersion [$psychGitBuild]', 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+		var texts:Array<String> = [
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion',
+			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
+			"Friday Night Funkin' v" + Application.current.meta.get('version')
+		];
+		for (i in 0...texts.length) {
+			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);
+			versionShit.scrollFactor.set();
+			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(versionShit);
+		}
 
 		tipBackground = new FlxSprite();
 		tipBackground.scrollFactor.set();
