@@ -37,7 +37,7 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
-	var intendedColor:Int;
+	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 
@@ -117,7 +117,7 @@ class CreditsState extends MusicBeatState
 			[
 				'BeastlyGhost',
 				'beastly',
-				'Customizable Main Menu with .JSON\nCredits Sounds\n"just happy to be here!"',
+				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
 				'https://github.com/BeastlyGhost',
 				'8CC4FF',
 				'Ghost'
@@ -207,7 +207,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Riveren',
 				'riveren',
-				'Main Artist/Animator of Psych Engine',
+				'Main Artist/Animator of Psych Engine\nNew Latin Support',
 				'https://twitter.com/riverennn',
 				'B42F71',
 				'JingleRiver'
@@ -395,7 +395,7 @@ class CreditsState extends MusicBeatState
 		keyText.scrollFactor.set();
 		add(keyText);
 
-		bg.color = getCurrentBGColor();
+		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
 		super.create();
@@ -501,7 +501,8 @@ class CreditsState extends MusicBeatState
 		}
 		while (unselectableCheck(curSelected));
 
-		var newColor:Int = getCurrentBGColor();
+		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		trace('The BG color is: $newColor');
 		if (newColor != intendedColor)
 		{
 			if (colorTween != null)
@@ -568,16 +569,6 @@ class CreditsState extends MusicBeatState
 		}
 	}
 	#end
-
-	function getCurrentBGColor()
-	{
-		var bgColor:String = creditsStuff[curSelected][4];
-		if (!bgColor.startsWith('0x'))
-		{
-			bgColor = '0xFF' + bgColor;
-		}
-		return Std.parseInt(bgColor);
-	}
 
 	private function unselectableCheck(num:Int):Bool
 	{

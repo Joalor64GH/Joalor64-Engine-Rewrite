@@ -282,9 +282,9 @@ class MainMenuState extends MusicBeatState
 
 		// Watermarks
 		var texts:Array<String> = [
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion',
+			"Friday Night Funkin' v" + Application.current.meta.get('version'),
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
-			"Friday Night Funkin' v" + Application.current.meta.get('version')
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion'
 		];
 		for (i in 0...texts.length) {
 			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);

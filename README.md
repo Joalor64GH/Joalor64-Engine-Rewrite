@@ -31,6 +31,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ----------------------------------------------
 
 # Features
+* Latin Alphabet Support
 * JSONI8 Sprite Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
@@ -73,7 +74,7 @@ You can check planned/upcoming features [here](/TODO).
 
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
-* [Riveren](https://twitter.com/riverennn) - Main Artist + Animator
+* [Riveren](https://twitter.com/riverennn) - Main Artist + Animator + Latin Support
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
 * [Yoshubs](https://gamebanana.com/members/1908070) - Aditional Ex-Programmer + Epic Input System
 

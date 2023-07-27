@@ -3,6 +3,7 @@ package meta;
 import meta.state.PlayState;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
+import flixel.util.FlxColor;
 import flixel.FlxG;
 
 #if sys
@@ -104,6 +105,17 @@ class CoolUtil
 	public static function coolPathArray(path:String):Array<String>
 		return FileSystem.readDirectory(FileSystem.absolutePath(path));
 	#end
+
+	inline public static function colorFromString(color:String):FlxColor
+	{
+		var hideChars = ~/[\t\n\r]/;
+		var color:String = hideChars.split(color).join('').trim();
+		if(color.startsWith('0x')) color = color.substr(4);
+
+		var colorNum:Null<FlxColor> = FlxColor.fromString(color);
+		if(colorNum == null) colorNum = FlxColor.fromString('#$color');
+		return colorNum != null ? colorNum : FlxColor.WHITE;
+	}
 	
 	inline public static function listFromString(string:String):Array<String>
 		return string.trim().split('\n').map(str -> str.trim());
