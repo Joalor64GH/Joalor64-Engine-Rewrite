@@ -4863,9 +4863,11 @@ class PlayState extends MusicBeatState
 				pixelShitPart1 = 'skins/kadeUI/';
 				pixelShitPart2 = (!isPixelStage) ? '' : '-pixel';
 
+			// no pixel assets for simplylove oops
+			// it isn't even meant for pixel stages anyways
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
-				pixelShitPart2 = ''; // no pixel assets for simplylove oops
+				pixelShitPart2 = ''; 
 		}
 
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
