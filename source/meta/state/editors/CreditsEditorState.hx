@@ -177,7 +177,7 @@ class CreditsEditorState extends MusicBeatState
 	var linkInput:FlxUIInputText;
 	var colorInput:FlxUIInputText;
 	var colorSquare:FlxSprite;
-	var soundInput:FlxUIInputText;
+	// var soundInput:FlxUIInputText; // can we fix this please??
 
 	function addCreditsUI():Void
 	{
@@ -206,7 +206,7 @@ class CreditsEditorState extends MusicBeatState
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		colorInput = new FlxUIInputText(60, linkInput.y + yDist, 70, '', 8);
 		colorSquare = new FlxSprite(colorInput.x + 80, colorInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		soundInput = new FlxUIInputText(60, soundInput.y + yDist, 50, '', 8); // we'll probably get this fixed
+		// soundInput = new FlxUIInputText(60, soundInput.y + yDist, 50, '', 8);
 		var getIconColor:FlxButton = new FlxButton(colorSquare.x + 23, colorSquare.y - 2, "Get Icon Color", function()
 		{
 			var icon:String;
@@ -273,13 +273,13 @@ class CreditsEditorState extends MusicBeatState
 		tab_group_credits.add(makeSquareBorder(colorSquare, 18));
 		tab_group_credits.add(colorSquare);
 		tab_group_credits.add(getIconColor);
-		tab_group_credits.add(soundInput);
+		// tab_group_credits.add(soundInput);
 		tab_group_credits.add(new FlxText(creditNameInput.x - 40, creditNameInput.y, 0, 'Name:'));
 		tab_group_credits.add(new FlxText(iconInput.x - 40, iconInput.y, 0, 'Icon:'));
 		tab_group_credits.add(new FlxText(descInput.x - 80, descInput.y, 0, 'Description:'));
 		tab_group_credits.add(new FlxText(linkInput.x - 40, linkInput.y, 0, 'Link:'));
 		tab_group_credits.add(new FlxText(colorInput.x - 40, colorInput.y, 0, 'Color:'));
-		tab_group_credits.add(new FlxText(soundInput.x - 40, soundInput.y, 0, 'Sound:'));
+		// tab_group_credits.add(new FlxText(soundInput.x - 40, soundInput.y, 0, 'Sound:'));
 		tab_group_credits.add(titleAdd);
 		tab_group_credits.add(creditAdd);
 
@@ -380,7 +380,7 @@ class CreditsEditorState extends MusicBeatState
 			descInput.text = creditsStuff[curSelected][2];
 			linkInput.text = creditsStuff[curSelected][3];
 			colorInput.text = creditsStuff[curSelected][4];
-			soundInput.text = creditsStuff[curSelected][5];
+			// soundInput.text = creditsStuff[curSelected][5];
 			showIconExist(iconInput.text);
 			iconColorShow();
 		}
@@ -393,7 +393,7 @@ class CreditsEditorState extends MusicBeatState
 		descInput.text = '';
 		linkInput.text = '';
 		colorInput.text = '';
-		soundInput.text = '';
+		// soundInput.text = '';
 		showIconExist(iconInput.text);
 		iconColorShow();
 	}
@@ -417,8 +417,8 @@ class CreditsEditorState extends MusicBeatState
 				creditsStuff[curSelected][4] = colorInput.text;
 			} else { creditsStuff[curSelected][4] = 'e1e1e1'; }
 			
-			if(soundInput.text != null && soundInput.text.length > 0) creditsStuff[curSelected][5] = soundInput.text;
-			else creditsStuff[curSelected][5] = '';
+			/* if(soundInput.text != null && soundInput.text.length > 0) creditsStuff[curSelected][5] = soundInput.text;
+			else creditsStuff[curSelected][5] = ''; */
 		}
 	}
 

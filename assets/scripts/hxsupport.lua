@@ -39,7 +39,7 @@ function onCreate(path)
   --character scripts
   local chars = {boyfriendName, dadName, gfName}
   for i,char in pairs(chars) do
-    if checkFileExists('scripts/characters/'..char..'.hx') then
+    if checkFileExists('characters/'..char..'.hx') then
       addScript('characters/'..char..'.hx')
     end
   end
