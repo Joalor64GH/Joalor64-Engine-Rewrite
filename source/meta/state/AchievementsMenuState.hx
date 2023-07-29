@@ -104,7 +104,7 @@ class AchievementsMenuState extends MusicBeatState
 						grpOptions.members[i].text = '?';
 					}
 				}, function() {
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}, false));
 			} else {
 				openSubState(new Prompt('This action will reset the selected achievement.\nProceed?', 0, function() {
