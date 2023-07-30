@@ -18,14 +18,6 @@ class MiscSubState extends BaseOptionsMenu
 	{
 		title = 'Miscellaneous';
 		rpcTitle = 'Miscellaneous Settings Menu'; //for Discord Rich Presence
-
-		var option:Option = new Option('Note Coloring Method:',
-			"Determines which method is used for changing note colors.",
-			'arrowMode',
-			'string',
-			'RGB',
-			['RGB', 'HSV']);
-		addOption(option);
 		
 		var option:Option = new Option('Pause Screen Song:',
 			"What song do you prefer for the Pause Screen?",

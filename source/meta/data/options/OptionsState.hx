@@ -49,10 +49,7 @@ class OptionsState extends MusicBeatState
 					FlxG.switchState(new OopsState());
 			#end
 			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB')
-					openSubState(new NotesRGBSubState());
-				else
-					openSubState(new NotesHSVSubState());
+				openSubState(new NotesSubState());
 			case 'Controls':
 				openSubState(new ControlsSubState());
 			case 'Visuals':

@@ -19,7 +19,7 @@ import objects.userinterface.menu.*;
 
 using StringTools;
 
-class NotesRGBSubState extends MusicBeatSubstate
+class NotesSubState extends MusicBeatSubstate
 {
 	private static var curSelected:Int = 0;
 	private static var typeSelected:Int = 0;
