@@ -384,6 +384,11 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	// nps
+	var nps:Int = 0;
+	var npsArray:Array<Date> = [];
+	var maxNPS:Int = 0;
+
 	//the payload for beat-based buttplug support
 	public var bpPayload:String = "";
 
@@ -2953,14 +2958,14 @@ class PlayState extends MusicBeatState
 		{
 			case 'Default':
 				if(ratingName == '?') {
-					scoreTxt.text = 'Score: ' + songScore 
-					+ ' // Health: ' + '50%'
+					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
+					+ ' // Score: ' + songScore 
 					+ ' // Combo Breaks: ' + songMisses 
 					+ ' // Accuracy: ' + ratingName 
 					+ ' // Rank: N/A';
 				} else {
-					scoreTxt.text = 'Score: ' + songScore 
-					+ ' // Health: ' + healthBar.percent + '%'
+					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
+					+ ' // Score: ' + songScore 
 					+ ' // Combo Breaks: ' + songMisses
 					+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
 					+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
@@ -3754,6 +3759,20 @@ class PlayState extends MusicBeatState
 
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
+
+		var pooper = npsArray.length - 1;
+			while (pooper >= 0) {
+				var fondler:Date = npsArray[pooper];
+				if (fondler != null && fondler.getTime() + 1000 < Date.now().getTime()) {
+					npsArray.remove(fondler);
+				}
+				else
+					pooper = 0;
+				pooper--;
+			}
+			nps = npsArray.length;
+			if (nps > maxNPS)
+				maxNPS = nps;
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -5471,6 +5490,9 @@ class PlayState extends MusicBeatState
 		if (!note.wasGoodHit)
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+
+			if (!note.isSustainNote)
+				npsArray.unshift(Date.now());
 
 			if (ClientPrefs.hitsoundVolume > 0 && !note.hitsoundDisabled)
 				FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
