@@ -197,6 +197,7 @@ class Note extends FlxSprite
 		if(noteData > -1) {
 			texture = '';
 			colorMask = new ColorMask();
+			shader = colorMask.shader;
 
 			x += swagWidth * (noteData);
 			if(!isSustainNote && noteData > -1 && noteData < 4) { //Doing this 'if' check to fix the warnings on Senpai songs

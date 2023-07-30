@@ -183,7 +183,7 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByPrefix('Hey', 'GF Cheer', 24, false);
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 
-		bg = new FlxSprite().loadGraphic(Paths.image('titleBG'));
+		bg = new FlxSprite().loadGraphic(Paths.image('titlescreen/titleBG'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.screenCenter();
 
