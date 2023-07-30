@@ -129,7 +129,7 @@
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
 
 	<!-- Script logging -->
-	<haxedef name="hscriptPos" value="true" />
+	<haxedef name="hscriptPos"/>
 	<haxedef name="openflPos"/>
 	
 	<!--Enable the Flixel core recording system-->
