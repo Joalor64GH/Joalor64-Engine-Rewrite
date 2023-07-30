@@ -268,7 +268,7 @@ class Note extends FlxSprite
 		var skin:String = texture;
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
-			if(skin == null || skin.length < 1) {
+			if(skin == null || skin.length < 1 || shader == null) {
 				skin = 'NOTE_assets';
 				shader = colorMask.shader;
 			}
