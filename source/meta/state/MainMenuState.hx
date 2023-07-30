@@ -282,15 +282,15 @@ class MainMenuState extends MusicBeatState
 
 		// Watermarks
 		var texts:Array<String> = [
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion'
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion',
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
-			"Friday Night Funkin' v" + Application.current.meta.get('version'),
+			"Friday Night Funkin' v" + Application.current.meta.get('version')
 		];
+		texts.reverse();
 		for (i in 0...texts.length) {
 			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			versionShit.reverse();
 			add(versionShit);
 		}
 
