@@ -64,7 +64,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 
 	public static var alphabet:Alphabet = null;
 
-	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'alphabet')
+	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'UI/alphabet')
 	{
 		super(x, y);
 
@@ -461,7 +461,7 @@ class AlphaCharacter extends FlxSprite
 
 	public var row:Int = 0;
 	public var rowWidth:Float = 0;
-	public function new(x:Float, y:Float, character:String, bold:Bool, parent:Alphabet, image:String = 'alphabet')
+	public function new(x:Float, y:Float, character:String, bold:Bool, parent:Alphabet, image:String = 'UI/alphabet')
 	{
 		super(x, y);
 		this.parent = parent;
@@ -575,7 +575,7 @@ class AlphaCharacter extends FlxSprite
 
 	function set_useSwap(v:Bool):Bool {
 		if(v) {
-			if(shader == null && colorSwap != null && image == 'otherAlphabet') {
+			if(shader == null && colorSwap != null && image == 'UI/otherAlphabet') {
 				shader = colorSwap.shader;
 			}
 		} else {
@@ -589,7 +589,7 @@ class AlphaCharacter extends FlxSprite
 	override function update(elapsed:Float)
 	{
 		if(useSwap) {
-			if(image == 'otherAlphabet') { // old support
+			if(image == 'UI/otherAlphabet') { // old support
 				if(colorSwap != null) {
 					if(colorEffect == null)
 						colorSwap.hue += elapsed;

@@ -142,18 +142,18 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/logoBumpin.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/logoBumpin.png";
 		if (!FileSystem.exists(path))
 		{
-			path = "mods/images/logoBumpin.png";
+			path = "mods/images/titlescreen/logoBumpin.png";
 		}
 		if (!FileSystem.exists(path))
 		{
-			path = "assets/images/logoBumpin.png";
+			path = "assets/images/titlescreen/logoBumpin.png";
 		}
 		logoBl.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path), File.getContent(StringTools.replace(path, ".png", ".xml")));
 		#else
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.frames = Paths.getSparrowAtlas('titlescreen/logoBumpin');
 		#end
 
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
@@ -165,18 +165,18 @@ class TitleState extends MusicBeatState
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/GF_assets.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/GF_assets.png";
 		if (!FileSystem.exists(path))
 		{
-			path = "mods/images/GF_assets.png";
+			path = "mods/images/titlescreen/GF_assets.png";
 		}
 		if (!FileSystem.exists(path))
 		{
-			path = "assets/images/GF_assets.png";
+			path = "assets/images/titlescreen/GF_assets.png";
 		}
 		gfDance.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path), File.getContent(StringTools.replace(path, ".png", ".xml")));
 		#else
-		gfDance.frames = Paths.getSparrowAtlas('GF_assets');
+		gfDance.frames = Paths.getSparrowAtlas('titlescreen/GF_assets');
 		#end
 		gfDance.animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
@@ -197,17 +197,17 @@ class TitleState extends MusicBeatState
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
-		var path = "mods/" + Mods.currentModDirectory + "/images/titleEnter.png";
+		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/titleEnter.png";
 		if (!FileSystem.exists(path)){
-			path = "mods/images/titleEnter.png";
+			path = "mods/images/titlescreen/titleEnter.png";
 		}
 		if (!FileSystem.exists(path)){
-			path = "assets/images/titleEnter.png";
+			path = "assets/images/titlescreen/titleEnter.png";
 		}
 		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
 
-		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		titleText.frames = Paths.getSparrowAtlas('titlescreen/titleEnter');
 		#end
 		var animFrames:Array<FlxFrame> = [];
 		@:privateAccess {
@@ -250,7 +250,7 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
-		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psych_logo'));
+		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('titlescreen/psych_logo'));
 		add(psychSpr);
 		psychSpr.visible = false;
 		psychSpr.setGraphicSize(Std.int(psychSpr.width * 0.8));
@@ -258,7 +258,7 @@ class TitleState extends MusicBeatState
 		psychSpr.screenCenter(X);
 		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
-		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
+		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('titlescreen/newgrounds_logo'));
 		add(ngSpr);
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
