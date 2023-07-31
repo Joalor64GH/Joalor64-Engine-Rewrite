@@ -5079,7 +5079,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = (!ClientPrefs.hideHud && showComboNum);
 
-			if (SONG.song.toLowerCase() == 'satin panties' || SONG.song.toLowerCase() == 'high' || SONG.song.toLowerCase() == 'milf') 
+			if (SONG.song.toLowerCase() == 'satin-panties' || SONG.song.toLowerCase() == 'high' || SONG.song.toLowerCase() == 'milf') 
 			{
 				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
 				{

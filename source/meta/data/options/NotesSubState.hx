@@ -7,6 +7,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.ui.FlxButton;
 
 import meta.*;
 import meta.data.*;
@@ -26,7 +27,12 @@ class NotesSubState extends MusicBeatSubstate
 	private var grpNumbers:FlxTypedGroup<Alphabet>;
 	private var grpNotes:FlxTypedGroup<FlxSprite>;
 	private var shaderArray:Array<ColorMask> = [];
-	private var defaultColors:Array<Array<Int>> = [[194, 75, 153], [0, 255, 255], [18, 250, 5], [249, 57, 63]];
+	private var defaultColors:Array<Array<Int>> = [
+		[194, 75, 153], 
+		[0, 255, 255], 
+		[18, 250, 5], 
+		[249, 57, 63]
+	];
 	var curValue:Float = 0;
 	var holdTime:Float = 0;
 	var nextAccept:Int = 5;
@@ -35,7 +41,8 @@ class NotesSubState extends MusicBeatSubstate
 	var hsbText:Alphabet;
 
 	var posX = 230;
-	public function new() {
+	public function new() 
+	{
 		super();
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -86,6 +93,11 @@ class NotesSubState extends MusicBeatSubstate
 		hsbText.scaleX = 0.6;
 		hsbText.scaleY = 0.6;
 		add(hsbText);
+
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press P for Note Presets (WIP).", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 
 		changeSelection();
 
@@ -176,6 +188,10 @@ class NotesSubState extends MusicBeatSubstate
 			}
 			changingNote = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+		}
+
+		if (FlxG.keys.justPressed.P) {
+			openSubState(new NotePresetsSubState());
 		}
 
 		if(nextAccept > 0) {
@@ -272,6 +288,53 @@ class NotesSubState extends MusicBeatSubstate
 		for (letter in item.letters)
 		{
 			letter.offset.x += add;
+		}
+	}
+}
+
+class NotePresetsSubState extends MusicBeatSubstate
+{
+	var bg:FlxSprite;
+
+	var btn1:FlxButton;
+	var btn2:FlxButton;
+
+	public function new() 
+	{
+		super();
+
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.screenCenter();
+		add(bg);
+
+		btn1 = new FlxButton(0, FlxG.height / 2 + 50, "Preset 1", () ->
+		{
+            close();
+        });
+		btn1.scale.set(2, 2);
+		btn1.screenCenter(X);
+		add(btn1);
+
+		btn2 = new FlxButton(0, btn1.y + 70, "Preset 2", () ->
+		{
+            close();
+        });
+		btn2.scale.set(2, 2);
+		btn2.screenCenter(X);
+		add(btn2);
+
+		FlxG.mouse.visible = true;
+	}
+
+	override public function update(elapsed) 
+	{
+		super.update(elapsed);
+
+		if (controls.BACK) 
+		{
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			close();
 		}
 	}
 }
