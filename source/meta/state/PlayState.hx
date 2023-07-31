@@ -5085,6 +5085,16 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = (!ClientPrefs.hideHud && showComboNum);
 
+			if (SONG.song.toLowerCase() == 'satin panties' || SONG.song.toLowerCase() == 'high' || SONG.song.toLowerCase() == 'milf') 
+			{
+				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
+				{
+					comboSpr.acceleration.x = 1250;
+					rating.acceleration.x = 1250;
+					numScore.acceleration.x = 1250;
+				});
+			}
+
 			if(combo >= 0)
 			{
 				insert(members.indexOf(strumLineNotes), numScore);

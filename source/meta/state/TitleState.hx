@@ -56,12 +56,14 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 
 	var bg:FlxSprite;
-	var blackScreen:FlxSprite;
-	var credGroup:FlxGroup;
-	var credTextShit:Alphabet;
-	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	var psychSpr:FlxSprite;
+	var blackScreen:FlxSprite;
+
+	var credTextShit:Alphabet;
+
+	var textGroup:FlxGroup;
+	var credGroup:FlxGroup;
 	
 	#if JOALOR64_WATERMARKS
 	var credIcon1:FlxSprite;
@@ -520,7 +522,6 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-	private var sickBeats:Int = 0; //Basically curBeat but won't be skipped if you hold the tab or resize the screen
 	public static var closedState:Bool = false;
 
 	override function beatHit()
@@ -545,8 +546,7 @@ class TitleState extends MusicBeatState
 		}
 
 		if(!closedState) {
-			sickBeats++;
-			switch (sickBeats)
+			switch (curBeat)
 			{
 				case 1:
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
