@@ -53,6 +53,8 @@ typedef TitleData =
 
 class TitleState extends MusicBeatState
 {
+	public static var titleJSON:TitleData;
+	
 	public static var initialized:Bool = false;
 
 	var bg:FlxSprite;
@@ -87,8 +89,6 @@ class TitleState extends MusicBeatState
 
 	var curWacky:Array<String> = [];
 	var gameName:Array<String> = [];
-
-	var titleJSON:TitleData;
 
 	var candance:Bool = true;
 
