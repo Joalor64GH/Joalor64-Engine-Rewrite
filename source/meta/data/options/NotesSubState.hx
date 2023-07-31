@@ -6,6 +6,7 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 
@@ -39,7 +40,6 @@ class NotesSubState extends MusicBeatSubstate
 
 	var blackBG:FlxSprite;
 	var hsbText:Alphabet;
-
 	var posX = 230;
 	public function new() 
 	{
@@ -310,16 +310,16 @@ class NotePresetsSubState extends MusicBeatSubstate
 
 		btn1 = new FlxButton(0, FlxG.height / 2 + 50, "Preset 1", () ->
 		{
-            close();
-        });
+            		close();
+        	});
 		btn1.scale.set(2, 2);
 		btn1.screenCenter(X);
 		add(btn1);
 
 		btn2 = new FlxButton(0, btn1.y + 70, "Preset 2", () ->
 		{
-            close();
-        });
+            		close();
+        	});
 		btn2.scale.set(2, 2);
 		btn2.screenCenter(X);
 		add(btn2);
