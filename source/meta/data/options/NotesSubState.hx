@@ -299,13 +299,14 @@ class NotePresetsSubState extends MusicBeatSubstate
 	var btn1:FlxButton;
 	var btn2:FlxButton;
 
-	public function new() 
+	override function create() 
 	{
-		super();
+		super.create();
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.screenCenter();
+		bg.alpha = 0.4;
 		add(bg);
 
 		btn1 = new FlxButton(0, FlxG.height / 2 + 50, "Preset 1", () ->
@@ -334,6 +335,7 @@ class NotePresetsSubState extends MusicBeatSubstate
 		if (controls.BACK) 
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.mouse.visible = false;
 			close();
 		}
 	}
