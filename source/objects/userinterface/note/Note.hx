@@ -262,15 +262,13 @@ class Note extends FlxSprite
 	var lastNoteScaleToo:Float = 1;
 	public var originalHeightForCalcs:Float = 6;
 	function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '') {
-		shader = null;
 		for (e in [prefix, texture, suffix]) if (e == null) e = '';
 
 		var skin:String = texture;
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
-			if(skin == null || skin.length < 1 || shader == null) {
+			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';
-				shader = colorMask.shader;
 			}
 		}
 
