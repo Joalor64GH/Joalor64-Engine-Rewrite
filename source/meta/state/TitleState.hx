@@ -54,7 +54,6 @@ typedef TitleData =
 class TitleState extends MusicBeatState
 {
 	public static var titleJSON:TitleData;
-	
 	public static var initialized:Bool = false;
 
 	var bg:FlxSprite;
@@ -91,10 +90,9 @@ class TitleState extends MusicBeatState
 	var gameName:Array<String> = [];
 
 	var candance:Bool = true;
+	var mustUpdate:Bool = false;
 
 	var leDate = Date.now();
-
-    	var mustUpdate:Bool = false;
 
 	override public function create():Void
 	{
@@ -522,6 +520,7 @@ class TitleState extends MusicBeatState
 		}
 	}
 
+	private var sickBeats:Int = 0; //Basically curBeat but won't be skipped if you hold the tab or resize the screen
 	public static var closedState:Bool = false;
 
 	override function beatHit()
@@ -546,7 +545,8 @@ class TitleState extends MusicBeatState
 		}
 
 		if(!closedState) {
-			switch (curBeat)
+			sickBeats++;
+			switch (sickBeats)
 			{
 				case 1:
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);

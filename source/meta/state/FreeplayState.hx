@@ -100,6 +100,8 @@ class FreeplayState extends MusicBeatState
 		}
 		Mods.loadTheFirstEnabledMod();
 
+		if (!curPlaying) Conductor.changeBPM(TitleState.titleJSON.bpm);
+
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);

@@ -92,9 +92,9 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
-		btn1 = new FlxButton(15, 40, "Joalor64 Style", () ->
+		btn1 = new FlxButton(15, 40, "Joalor64", () ->
 		{
-			defaultColors = [
+			ClientPrefs.arrowRGB = [
 				[89, 0, 153], 
 				[0, 255, 255], 
 				[18, 255, 175], 
@@ -104,13 +104,13 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn1.scale.set(1.5, 1.5);
 		btn1.color = 0x7b2977;
-		btn1.label.setFormat("VCR OSD Mono", 10, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn1.updateHitbox();
 		add(btn1);
 
 		btn2 = new FlxButton(15, btn1.y + 50, "Vibrant", () ->
 		{
-			defaultColors = [
+			ClientPrefs.arrowRGB = [
 				[221, 0, 255], 
 				[0, 213, 255], 
 				[0, 255, 110], 
@@ -120,7 +120,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn2.scale.set(1.5, 1.5);
 		btn2.color = 0xfff700;
-		btn2.label.setFormat("VCR OSD Mono", 10, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn2.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn2.updateHitbox();
 		add(btn2);
 
