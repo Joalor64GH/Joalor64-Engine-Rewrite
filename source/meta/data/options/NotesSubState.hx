@@ -96,7 +96,7 @@ class NotesSubState extends MusicBeatSubstate
 		{
 			ClientPrefs.saveSettings();
         	});
-		btn.color = 0x7b2977;
+		btn1.color = 0x7b2977;
 		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn1.updateHitbox();
 		add(btn1);
@@ -105,7 +105,7 @@ class NotesSubState extends MusicBeatSubstate
 		{
 			ClientPrefs.saveSettings();
         	});
-		btn.color = 0x7b2977;
+		btn2.color = 0x7b2977;
 		btn2.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn2.updateHitbox();
 		add(btn2);
