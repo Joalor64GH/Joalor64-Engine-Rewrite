@@ -38,6 +38,9 @@ class NotesSubState extends MusicBeatSubstate
 	var holdTime:Float = 0;
 	var nextAccept:Int = 5;
 
+	var btn1:FlxButton;
+	var btn2:FlxButton;
+
 	var blackBG:FlxSprite;
 	var hsbText:Alphabet;
 	var posX = 230;
@@ -89,17 +92,37 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
+		btn1 = new FlxButton(15, 40, "Preset 1", () ->
+		{
+			ClientPrefs.saveSettings();
+        	});
+		btn.color = 0x7b2977;
+		btn2.setGraphicSize(btn2.width * 2, 2)
+		btn1.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(btn1);
+
+		btn2 = new FlxButton(15, btn1.y + 50, "Preset 2", () ->
+		{
+			ClientPrefs.saveSettings();
+        	});
+		btn.color = 0x7b2977;
+		btn2.setGraphicSize(btn2.width * 2, 2)
+		btn2.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(btn2);
+
 		hsbText = new Alphabet(posX + 550, 0, "Red        Green      Blue", false);
 		hsbText.scaleX = 0.6;
 		hsbText.scaleY = 0.6;
 		add(hsbText);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press P for Note Presets (WIP).", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press LEFT or RIGHT for Noteskins (WIP).", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		changeSelection();
+
+		FlxG.mouse.visible = true;
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
@@ -182,16 +205,13 @@ class NotesSubState extends MusicBeatSubstate
 
 		if (controls.BACK || (changingNote && controls.ACCEPT)) {
 			if(!changingNote) {
+				FlxG.mouse.visible = false;
 				close();
 			} else {
 				changeSelection();
 			}
 			changingNote = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-		}
-
-		if (FlxG.keys.justPressed.P) {
-			openSubState(new NotePresetsSubState());
 		}
 
 		if(nextAccept > 0) {
@@ -288,57 +308,6 @@ class NotesSubState extends MusicBeatSubstate
 		for (letter in item.letters)
 		{
 			letter.offset.x += add;
-		}
-	}
-}
-
-class NotePresetsSubState extends MusicBeatSubstate
-{
-	var bg:FlxSprite;
-
-	var btn1:FlxButton;
-	var btn2:FlxButton;
-
-	override function create() 
-	{
-		super.create();
-
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		bg.screenCenter();
-		bg.alpha = 0.4;
-		add(bg);
-
-		btn1 = new FlxButton(0, FlxG.height / 2 + 50, "Preset 1", () ->
-		{
-			ClientPrefs.saveSettings();
-            		close();
-        	});
-		btn1.scale.set(2, 2);
-		btn1.screenCenter(X);
-		add(btn1);
-
-		btn2 = new FlxButton(0, btn1.y + 70, "Preset 2", () ->
-		{
-			ClientPrefs.saveSettings();
-            		close();
-        	});
-		btn2.scale.set(2, 2);
-		btn2.screenCenter(X);
-		add(btn2);
-
-		FlxG.mouse.visible = true;
-	}
-
-	override public function update(elapsed) 
-	{
-		super.update(elapsed);
-
-		if (controls.BACK) 
-		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			FlxG.mouse.visible = false;
-			close();
 		}
 	}
 }
