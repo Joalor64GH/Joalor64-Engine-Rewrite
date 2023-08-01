@@ -311,6 +311,7 @@ class NotePresetsSubState extends MusicBeatSubstate
 
 		btn1 = new FlxButton(0, FlxG.height / 2 + 50, "Preset 1", () ->
 		{
+			ClientPrefs.saveSettings();
             		close();
         	});
 		btn1.scale.set(2, 2);
@@ -319,6 +320,7 @@ class NotePresetsSubState extends MusicBeatSubstate
 
 		btn2 = new FlxButton(0, btn1.y + 70, "Preset 2", () ->
 		{
+			ClientPrefs.saveSettings();
             		close();
         	});
 		btn2.scale.set(2, 2);
