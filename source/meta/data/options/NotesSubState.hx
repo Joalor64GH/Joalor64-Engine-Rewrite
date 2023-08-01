@@ -28,7 +28,7 @@ class NotesSubState extends MusicBeatSubstate
 	private var grpNumbers:FlxTypedGroup<Alphabet>;
 	private var grpNotes:FlxTypedGroup<FlxSprite>;
 	private var shaderArray:Array<ColorMask> = [];
-	private var defaultColors:Array<Array<Int>> = [
+	public var defaultColors:Array<Array<Int>> = [
 		[194, 75, 153], 
 		[0, 255, 255], 
 		[18, 250, 5], 
@@ -92,21 +92,35 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
-		btn1 = new FlxButton(15, 40, "Preset 1", () ->
+		btn1 = new FlxButton(15, 40, "Joalor64 Style", () ->
 		{
+			defaultColors = [
+				[89, 0, 153], 
+				[0, 255, 255], 
+				[18, 255, 175], 
+				[223, 0, 118]
+			];
 			ClientPrefs.saveSettings();
         	});
+		btn1.scale.set(1.5, 1.5);
 		btn1.color = 0x7b2977;
-		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn1.label.setFormat("VCR OSD Mono", 10, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn1.updateHitbox();
 		add(btn1);
 
-		btn2 = new FlxButton(15, btn1.y + 50, "Preset 2", () ->
+		btn2 = new FlxButton(15, btn1.y + 50, "Vibrant", () ->
 		{
+			defaultColors = [
+				[221, 0, 255], 
+				[0, 213, 255], 
+				[0, 255, 110], 
+				[255, 0, 200]
+			];
 			ClientPrefs.saveSettings();
         	});
-		btn2.color = 0x7b2977;
-		btn2.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn2.scale.set(1.5, 1.5);
+		btn2.color = 0xfff700;
+		btn2.label.setFormat("VCR OSD Mono", 10, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn2.updateHitbox();
 		add(btn2);
 
@@ -114,11 +128,6 @@ class NotesSubState extends MusicBeatSubstate
 		hsbText.scaleX = 0.6;
 		hsbText.scaleY = 0.6;
 		add(hsbText);
-
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press LEFT or RIGHT for Noteskins (WIP).", 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
 
 		changeSelection();
 
