@@ -43,6 +43,8 @@ class CreditsState extends MusicBeatState
 
 	var offsetThing:Float = -75;
 
+	var noLink:Bool;
+
 	override function create()
 	{
 		#if desktop
@@ -446,8 +448,28 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.ENTER && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4))
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			if (creditsStuff[curSelected][3] == 'nolink')
+			{
+				noLink = true;
+			}
+			else
+			{
+				noLink = false;
+			}
+			if (noLink)
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+			}
+			else
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
+			}
 			if (FlxG.keys.justPressed.SPACE)
 				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
 
