@@ -42,7 +42,7 @@ class NotesSubState extends MusicBeatSubstate
 	var btn2:FlxButton;
 
 	var blackBG:FlxSprite;
-	var hsbText:Alphabet;
+	var rgbText:Alphabet;
 	var posX = 230;
 	public function new() 
 	{
@@ -124,10 +124,10 @@ class NotesSubState extends MusicBeatSubstate
 		btn2.updateHitbox();
 		add(btn2);
 
-		hsbText = new Alphabet(posX + 550, 0, "Red        Green      Blue", false);
-		hsbText.scaleX = 0.6;
-		hsbText.scaleY = 0.6;
-		add(hsbText);
+		rgbText = new Alphabet(posX + 550, 0, "Red        Green      Blue", false);
+		rgbText.scaleX = 0.6;
+		rgbText.scaleY = 0.6;
+		add(rgbText);
 
 		changeSelection();
 
@@ -253,7 +253,7 @@ class NotesSubState extends MusicBeatSubstate
 			if (curSelected == i) {
 				item.alpha = 1;
 				item.scale.set(1, 1);
-				hsbText.y = item.y - 70;
+				rgbText.y = item.y - 70;
 				blackBG.y = item.y - 20;
 			}
 		}
