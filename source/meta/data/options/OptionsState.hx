@@ -13,6 +13,8 @@ import flixel.FlxObject;
 import flixel.util.FlxColor;
 import lime.app.Application;
 
+import core.ToastCore;
+
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -46,7 +48,7 @@ class OptionsState extends MusicBeatState
 			    	if (Paths.optionsExist())
 					FlxG.switchState(new ModOptionSelectState());
 				else
-					FlxG.switchState(new OopsState());
+					Main.toast.create('No mod options exist!', 0xFFFFFF00, 'Please add your custom options to access this menu!');
 			#end
 			case 'Note Colors':
 				if(ClientPrefs.arrowMode == 'RGB')
