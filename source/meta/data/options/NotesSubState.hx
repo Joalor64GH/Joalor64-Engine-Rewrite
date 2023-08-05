@@ -101,6 +101,7 @@ class NotesSubState extends MusicBeatSubstate
 				[223, 0, 118]
 			];
 			updateValue();
+			// updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn1.scale.set(1.5, 1.5);
@@ -118,6 +119,7 @@ class NotesSubState extends MusicBeatSubstate
 				[255, 0, 200]
 			];
 			updateValue();
+			// updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn2.scale.set(1.5, 1.5);
@@ -320,5 +322,9 @@ class NotesSubState extends MusicBeatSubstate
 		{
 			letter.offset.x += add;
 		}
+	}
+	function updateAll() 
+	{
+		// does nothing yet
 	}
 }
