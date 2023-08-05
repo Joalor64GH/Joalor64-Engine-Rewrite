@@ -37,7 +37,7 @@ class PauseSubState extends MusicBeatSubstate
 	];
 	var exitChoices = [
 		'Exit to Freeplay', 
-		'Exit to Main Menu', 
+		'Exit to Menu', 
 		'Exit Game', 
 		'Back'
 	];
