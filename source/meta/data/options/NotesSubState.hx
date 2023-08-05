@@ -142,6 +142,7 @@ class NotesSubState extends MusicBeatSubstate
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
+	var lastSelected:Int = 99;
 	var changingNote:Bool = false;
 	override function update(elapsed:Float) {
 		var rownum = 0;

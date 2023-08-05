@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.effects.FlxFlicker;
+import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.math.FlxMath;
@@ -14,7 +15,6 @@ import flixel.FlxObject;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
-
 import meta.state.*;
 
 using StringTools;
