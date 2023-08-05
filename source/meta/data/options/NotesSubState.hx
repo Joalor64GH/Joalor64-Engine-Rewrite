@@ -41,6 +41,9 @@ class NotesSubState extends MusicBeatSubstate
 	var holdTime:Float = 0;
 	var nextAccept:Int = 5;
 
+	var angleTween:FlxTween;
+	var scaleTween:FlxTween;
+
 	var btn1:FlxButton;
 	var btn2:FlxButton;
 
@@ -127,7 +130,7 @@ class NotesSubState extends MusicBeatSubstate
 		btn2.updateHitbox();
 		add(btn2);
 
-		rgbText = new Alphabet(posX + 550, 0, "Red        Green      Blue", false);
+		rgbText = new Alphabet(posX + 720, 0, "Red        Green      Blue", false);
 		rgbText.scaleX = 0.6;
 		rgbText.scaleY = 0.6;
 		add(rgbText);
@@ -160,6 +163,19 @@ class NotesSubState extends MusicBeatSubstate
 				rgbText.y = item.y - 70;
 				blackBG.y = item.y - 20;
 				blackBG.x = item.x - 20;
+				if (lastSelected != curSelected) {
+					lastSelected = curSelected;
+					if (angleTween != null) angleTween.cancel();
+					angleTween = null;
+					if (scaleTween != null) scaleTween.cancel();
+					scaleTween = null;
+					item.scale.set(0.78,0.78);
+					angleTween = FlxTween.angle(item, -12, 12, 2, {ease: FlxEase.quadInOut, type: FlxTweenType.PINGPONG});
+					scaleTween = FlxTween.tween(item, {"scale.x": 0.92, "scale.y": 0.92}, 1, {ease: FlxEase.quadInOut, type: FlxTweenType.PINGPONG});
+				}
+			} else {
+				item.scale.set(0.6,0.6);
+				item.angle = 0;
 			}
 		}
 
