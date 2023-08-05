@@ -8,6 +8,9 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.math.FlxMath;
 import flixel.ui.FlxButton;
 
 import meta.*;
@@ -54,7 +57,7 @@ class NotesSubState extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		blackBG = new FlxSprite(posX - 25).makeGraphic(870, 200, FlxColor.BLACK);
+		blackBG = new FlxSprite(posX - 25).makeGraphic(1140, 200, FlxColor.BLACK);
 		blackBG.alpha = 0.4;
 		add(blackBG);
 
@@ -66,15 +69,10 @@ class NotesSubState extends MusicBeatSubstate
 		for (i in 0...ClientPrefs.arrowRGB.length) {
 			var yPos:Float = (165 * i) + 35;
 			for (j in 0...3) {
-				var optionText:Alphabet = new Alphabet(posX + (205 * j) + 250, yPos + 60, Std.string(ClientPrefs.arrowRGB[i][j]), true);
+				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.arrowRGB[i][j]), true);
+				optionText.x = posX + (225 * j) + 250;
+				optionText.ID = i;
 				grpNumbers.add(optionText);
-
-				var item = grpNumbers.members[(i * 3) + j];
-				var add = (40 * (item.letters.length - 1)) / 2;
-				for (letter in item.letters)
-				{
-					letter.offset.x += add;
-				}
 			}
 
 			var note:FlxSprite = new FlxSprite(posX, yPos);
@@ -83,6 +81,7 @@ class NotesSubState extends MusicBeatSubstate
 			note.animation.addByPrefix('idle', animations[i]);
 			note.animation.play('idle');
 			note.antialiasing = ClientPrefs.globalAntialiasing;
+			note.ID = i;
 			grpNotes.add(note);
 
 			var newShader:ColorMask = new ColorMask();
@@ -142,6 +141,28 @@ class NotesSubState extends MusicBeatSubstate
 
 	var changingNote:Bool = false;
 	override function update(elapsed:Float) {
+		var rownum = 0;
+		var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
+		for (i in 0...grpNumbers.length) {
+			var item = grpNumbers.members[i];
+			var scaledY = FlxMath.remapToRange(item.ID, 0, 1, 0, 1.3);
+			item.y = FlxMath.lerp(item.y, (scaledY * 165) + 270 + 60, lerpVal);
+			item.x = FlxMath.lerp(item.x, (item.ID * 20) + 90 + posX + (225 * rownum + 250), lerpVal);
+			rownum++;
+			if (rownum == 3) rownum = 0;
+		}
+		for (i in 0...grpNotes.length) {
+			var item = grpNotes.members[i];
+			var scaledY = FlxMath.remapToRange(item.ID, 0, 1, 0, 1.3);
+			item.y = FlxMath.lerp(item.y, (scaledY * 165) + 270, lerpVal);
+			item.x = FlxMath.lerp(item.x, (item.ID * 20) + 90, lerpVal);
+			if (i == curSelected) {
+				rgbText.y = item.y - 70;
+				blackBG.y = item.y - 20;
+				blackBG.x = item.x - 20;
+			}
+		}
+
 		if(changingNote) {
 			if(holdTime < 0.5) {
 				if(controls.UI_LEFT_P) {
@@ -236,18 +257,28 @@ class NotesSubState extends MusicBeatSubstate
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = ClientPrefs.arrowRGB.length-1;
+			curSelected = ClientPrefs.arrowRGB.length - 1;
 		if (curSelected >= ClientPrefs.arrowRGB.length)
 			curSelected = 0;
 
 		curValue = ClientPrefs.arrowRGB[curSelected][typeSelected];
 		updateValue();
 
+		var bullshit = 0;
+		var rownum = 0;
+		//var currow;
+		var bullshit2 = 0;
 		for (i in 0...grpNumbers.length) {
 			var item = grpNumbers.members[i];
 			item.alpha = 0.6;
 			if ((curSelected * 3) + typeSelected == i) {
 				item.alpha = 1;
+			}
+			item.ID = bullshit - curSelected;
+			rownum++;
+			if (rownum == 3) {
+				rownum = 0;
+				bullshit++;
 			}
 		}
 		for (i in 0...grpNotes.length) {
@@ -260,6 +291,8 @@ class NotesSubState extends MusicBeatSubstate
 				rgbText.y = item.y - 70;
 				blackBG.y = item.y - 20;
 			}
+			item.ID = bullshit2 - curSelected;
+			bullshit2++;
 		}
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
