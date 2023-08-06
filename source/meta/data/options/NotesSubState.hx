@@ -312,7 +312,7 @@ class NotesSubState extends MusicBeatSubstate
 			if (curSelected == i) {
 				item.alpha = 1;
 				item.scale.set(0.6, 0.6);
-				hsbText.y = item.y - 40;
+				rgbText.y = item.y - 40;
 				blackBG.y = item.y + 28;
 			}
 			item.ID = bullshit2 - curSelected;
