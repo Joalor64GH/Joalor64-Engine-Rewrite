@@ -6,6 +6,7 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
@@ -53,6 +54,11 @@ class Init extends FlxState // this loads everything in
         	epicSprite.angularVelocity = 30;
 		epicSprite.screenCenter();
         	add(epicSprite);
+
+		var coolText:FlxText = new FlxText(5, FlxG.height - 24, 0, "Loading...", 22);
+		coolText.scrollFactor.set();
+		coolText.setFormat("VCR OSD Mono", 26, 0xFFffffff, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(coolText);
 
 		FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
 

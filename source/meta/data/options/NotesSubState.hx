@@ -70,7 +70,7 @@ class NotesSubState extends MusicBeatSubstate
 		add(grpNumbers);
 
 		for (i in 0...ClientPrefs.arrowRGB.length) {
-			var yPos:Float = (165 * i) + 35;
+			var yPos:Float = (80 * i) - 40;
 			for (j in 0...3) {
 				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.arrowRGB[i][j]), true);
 				optionText.x = posX + (225 * j) + 250;
@@ -270,6 +270,14 @@ class NotesSubState extends MusicBeatSubstate
 		super.update(elapsed);
 	}
 
+	override function destroy() {
+		if (angleTween != null) angleTween.cancel();
+		angleTween = null;
+		if (scaleTween != null) scaleTween.cancel();
+		scaleTween = null;
+		super.destroy();
+	}
+
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
@@ -300,12 +308,12 @@ class NotesSubState extends MusicBeatSubstate
 		for (i in 0...grpNotes.length) {
 			var item = grpNotes.members[i];
 			item.alpha = 0.6;
-			item.scale.set(0.75, 0.75);
+			item.scale.set(0.5, 0.5);
 			if (curSelected == i) {
 				item.alpha = 1;
-				item.scale.set(1, 1);
-				rgbText.y = item.y - 70;
-				blackBG.y = item.y - 20;
+				item.scale.set(0.6, 0.6);
+				hsbText.y = item.y - 40;
+				blackBG.y = item.y + 28;
 			}
 			item.ID = bullshit2 - curSelected;
 			bullshit2++;
