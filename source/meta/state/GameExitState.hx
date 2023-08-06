@@ -68,7 +68,7 @@ class GameExitState extends MusicBeatState
 		bg.antialiasing = true;
 		add(bg);
 
-		var header:Alphabet = new Alphabet(0, -34, 'Exit the game?', true);
+		var header:Alphabet = new Alphabet(0, -30, 'Exit the game?', true);
 		header.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
 		header.screenCenter(X);
         	add(header);
