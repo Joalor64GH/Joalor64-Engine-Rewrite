@@ -48,8 +48,7 @@ class GameExitState extends FlxState
 
 	var bg:FlxSprite;
 
-	override function create() 
-	{
+	override function create() {
 		camMain = new FlxCamera();
 		FlxG.cameras.reset(camMain);
 		FlxG.cameras.setDefaultDrawTarget(camMain, true);
@@ -57,6 +56,7 @@ class GameExitState extends FlxState
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 		add(camFollowPos);
+		
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (options.length - 4)), 0.1);
@@ -67,7 +67,7 @@ class GameExitState extends FlxState
 		bg.antialiasing = true;
 		add(bg);
 
-		var header:Alphabet = new Alphabet(0, -55, 'Exit the game?', true);
+		var header:Alphabet = new Alphabet(0, -40, 'Exit the game?', true);
 		header.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
 		header.screenCenter(X);
         	add(header);
@@ -113,8 +113,7 @@ class GameExitState extends FlxState
 		bg.updateHitbox();
 		bg.offset.set();
 
-		if (allowInputs)
-		{
+		if (allowInputs) {
 			if ((FlxG.keys.justPressed.UP || FlxG.keys.justPressed.DOWN) && !accepted) {
 				changeSelection(FlxG.keys.justPressed.UP ? -1 : 1);
 			}
@@ -122,20 +121,9 @@ class GameExitState extends FlxState
 			if (FlxG.keys.justPressed.ENTER && !accepted) {
 				accepted = true; // locks inputs
 				FlxG.sound.play(Paths.sound('confirmMenu'));
-				if (ClientPrefs.flashing) {
-				grpOptions.forEach(function(grpOptions:Alphabet)
-				{
-					FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)
-					{
-						openSelectedSubstate(options[curSelected]);
-					});
-				});
-			} else {
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
+				new FlxTimer().start(1, function(tmr:FlxTimer) {
 					openSelectedSubstate(options[curSelected]);
 				});
-			}
 			}
 		}
 	}
