@@ -35,10 +35,10 @@ class ScriptEditorState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-        if (controls.BACK)
-        {
-            MusicBeatState.switchState(new MasterEditorMenu());
+        	if (controls.BACK)
+        	{
+            		MusicBeatState.switchState(new MasterEditorMenu());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-        }
+        	}
 	}
 }
