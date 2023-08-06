@@ -30,8 +30,8 @@ class GameExitState extends MusicBeatState
 			case 'Yes':
 				quitGame();
 			case 'No':
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				StageData.loadDirectory(PlayState.SONG);
+				LoadingState.loadAndSwitchState(new PlayState());
 		}
 	}
 
