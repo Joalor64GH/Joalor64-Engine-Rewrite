@@ -14,6 +14,7 @@ import flixel.FlxObject;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
+
 import meta.state.*;
 
 using StringTools;
@@ -117,6 +118,7 @@ class GameExitState extends MusicBeatState
 		if (allowInputs) {
 			if ((controls.UI_UP_P || controls.UI_DOWN_P) && !accepted) {
 				changeSelection(controls.UI_UP_P ? -1 : 1);
+				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 
 			if (controls.ACCEPT && !accepted) {

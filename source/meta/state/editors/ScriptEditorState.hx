@@ -1,6 +1,7 @@
 package meta.state.editors;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUIInputText;
 
@@ -22,11 +23,18 @@ using StringTools;
 class ScriptEditorState extends MusicBeatState
 {
 	var notePad:FlxUIInputText;
+	var bg:FlxSprite;
 
 	override function create()
 	{
-		notePad = new FlxUIInputText(50, 20, 500, "");
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		add(bg);
+
+		notePad = new FlxUIInputText(0, 0, 1024, "");
+		notePad.screenCenter(XY);
 		add(notePad);
+
+		FlxG.mouse.visible = true;
 
 		super.create();
 	}
@@ -35,7 +43,7 @@ class ScriptEditorState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-        	if (controls.BACK)
+        	if (FlxG.keys.justPressed.ESCAPE)
         	{
             		MusicBeatState.switchState(new MasterEditorMenu());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));

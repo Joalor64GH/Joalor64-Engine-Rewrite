@@ -486,11 +486,6 @@ class CreditsEditorState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
 		var blockInput:Bool = false;
 		for (inputText in blockPressWhileTypingOn) {
 			if(inputText.hasFocus) {
@@ -569,6 +564,7 @@ class CreditsEditorState extends MusicBeatState
 				}
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				MusicBeatState.switchState(new MasterEditorMenu());
 				quitting = true;
 			}
