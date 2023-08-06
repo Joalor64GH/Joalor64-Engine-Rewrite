@@ -274,7 +274,7 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
 						case "Exit Game":
-							FlxG.switchState(new GameExitState());
+							MusicBeatState.switchState(new GameExitState());
 					}
 					return;
 				}
