@@ -15,6 +15,7 @@ import meta.state.*;
 class SaveDataState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
+	
 	var controlsStrings:Array<String> = [
 		"Reset High Scores",
 		"Reset Week Progress",
@@ -125,28 +126,31 @@ class SaveDataState extends MusicBeatState
 		}
 	}
 
-    function clearScores() {
-        Highscore.songScores.clear();
-        Highscore.songRating.clear();
-        Highscore.weekScores.clear();
-        FlxG.save.data.songScores = Highscore.songScores;
-        FlxG.save.data.songRating = Highscore.songRating;
-        FlxG.save.data.weekScores = Highscore.weekScores;
-        FlxG.save.flush();
+    function clearScores() 
+    {
+            Highscore.songScores.clear();
+            Highscore.songRating.clear();
+            Highscore.weekScores.clear();
+            FlxG.save.data.songScores = Highscore.songScores;
+            FlxG.save.data.songRating = Highscore.songRating;
+            FlxG.save.data.weekScores = Highscore.weekScores;
+            FlxG.save.flush();
     }
 
-    function clearWeeks() {
-        StoryMenuState.weekCompleted.clear();
-        FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
-        FlxG.save.flush();
+    function clearWeeks() 
+    {
+            StoryMenuState.weekCompleted.clear();
+            FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+            FlxG.save.flush();
     }
 
-    function clearAchievements() {
-        Achievements.achievementsMap.clear();
-	Achievements.henchmenDeath = 0;
-        FlxG.save.data.achievementsMap = Achievements.achievementsMap;
-	FlxG.save.data.achievementsUnlocked = null;
-	FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
-        FlxG.save.flush();
+    function clearAchievements() 
+    {
+            Achievements.achievementsMap.clear();
+	    Achievements.henchmenDeath = 0;
+            FlxG.save.data.achievementsMap = Achievements.achievementsMap;
+	    FlxG.save.data.achievementsUnlocked = null;
+	    FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+            FlxG.save.flush();
     }
 }
