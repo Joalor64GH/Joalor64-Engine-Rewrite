@@ -26,14 +26,14 @@ class ScriptEditorState extends MusicBeatState
 
 	var saveBtn:FlxButton;
 
+	var bg:FlxSprite;
+
 	override function create()
 	{
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 
 		notePad = new FlxUIInputText(0, 0, 1024, "");
-		notePad.scale.set(640, 320);
-		notePad.screenCenter(XY);
 		add(notePad);
 
 		saveBtn = new FlxButton(22, 40, "Save");
