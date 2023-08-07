@@ -37,10 +37,10 @@ class ScriptEditorState extends MusicBeatState
 		notePad.screenCenter(XY);
 		add(notePad);
 
-		btn1 = new FlxButton(15, 40, "Save");
-		btn1.scale.set(1.5, 1.5);
-		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(btn1);
+		saveBtn = new FlxButton(15, 40, "Save");
+		saveBtn.scale.set(1.5, 1.5);
+		saveBtn.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(saveBtn);
 
 		FlxG.mouse.visible = true;
 
