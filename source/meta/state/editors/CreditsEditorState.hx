@@ -62,7 +62,7 @@ class CreditsEditorState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
-	var intendedColor:Int;
+	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 	var UI_box:FlxUITabMenu;
@@ -159,7 +159,7 @@ class CreditsEditorState extends MusicBeatState
 
 		updateCreditObjects();
 
-		bg.color = getCurrentBGColor();
+		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
 
@@ -605,9 +605,10 @@ class CreditsEditorState extends MusicBeatState
 		if(unselectableCheck(curSelected)) curSelIsTitle = true;
 		else curSelIsTitle = false;
 
-		var newColor:Int;
+		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		trace('The BG color is: $newColor');
 		if(unselectableCheck(curSelected)) newColor =  Std.parseInt('0xFFe1e1e1');
-		else newColor =  getCurrentBGColor();
+		else newColor =  CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
@@ -655,14 +656,6 @@ class CreditsEditorState extends MusicBeatState
 	private function nullCheck(num:Int):Bool {
 		if(creditsStuff[num].length <= 1 && creditsStuff[num][0].length <= 0) return true;
 		return false;
-	}
-
-	function getCurrentBGColor() {
-		var bgColor:String = creditsStuff[curSelected][4];
-		if(!bgColor.startsWith('0x')) {
-			bgColor = '0xFF' + bgColor;
-		}
-		return Std.parseInt(bgColor);
 	}
 
 	function makeSquareBorder(object:FlxSprite, size:Int){ // Just to make color squares look a little nice and easier to see

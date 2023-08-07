@@ -2,6 +2,7 @@ package meta.state.editors;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUIInputText;
 
@@ -25,6 +26,8 @@ class ScriptEditorState extends MusicBeatState
 	var notePad:FlxUIInputText;
 	var bg:FlxSprite;
 
+	var saveBtn:FlxButton;
+
 	override function create()
 	{
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -33,6 +36,11 @@ class ScriptEditorState extends MusicBeatState
 		notePad = new FlxUIInputText(0, 0, 1024, "");
 		notePad.screenCenter(XY);
 		add(notePad);
+
+		btn1 = new FlxButton(15, 40, "Save");
+		btn1.scale.set(1.5, 1.5);
+		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(btn1);
 
 		FlxG.mouse.visible = true;
 
