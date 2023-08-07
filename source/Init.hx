@@ -88,7 +88,7 @@ class Init extends FlxState
 		coolText.setFormat("VCR OSD Mono", 26, 0xFFffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(coolText);
 
-		loadingSpeen = new FlxSprite(FlxG.width - 91 ,FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
+		loadingSpeen = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
 		loadingSpeen.angularVelocity = 180;
 		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadingSpeen);
@@ -97,7 +97,7 @@ class Init extends FlxState
 
 		load();
 
-		new FlxTimer().start(4, function(timer) 
+		new FlxTimer().start(10, function(timer) 
 		{
 			startGame();
 		});
