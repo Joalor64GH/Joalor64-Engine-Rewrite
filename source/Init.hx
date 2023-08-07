@@ -28,6 +28,23 @@ import core.ModCore;
 class Init extends FlxState
 {
 	public static var randomIcon:Array<String> = ['joalor', 'meme', 'fox', 'bot']; // WILL BE REPLACED LATER!!!
+	public static var coolColors:Array<FlxColor> = [
+		0x00000000, // Transparent
+		0xFFFFFFFF, // White
+		0xFF808080, // Gray
+		0xFF000000, // Black
+		0xFF008000, // Green
+		0xFF00FF00, // Lime
+		0xFFFFFF00, // Yellow
+		0xFFFFA500, // Orange
+		0xFFFF0000, // Red
+		0xFF800080, // Purple
+		0xFF0000FF, // Blue
+		0xFF8B4513, // Brown
+		0xFFFFC0CB, // Pink
+		0xFFFF00FF, // Magenta
+		0xFF00FFFF // Cyan
+	];
 	public static var updateVersion:String = '';
 
 	var loadingSpeen:FlxSprite;
