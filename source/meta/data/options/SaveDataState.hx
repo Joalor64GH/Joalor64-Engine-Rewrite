@@ -45,6 +45,8 @@ class SaveDataState extends MusicBeatState
 
         	changeSelection();
 
+		FlxG.mouse.visible = true;
+
 		super.create();
 	}
 
@@ -84,7 +86,7 @@ class SaveDataState extends MusicBeatState
 					    FlxG.sound.play(Paths.sound('cancelMenu'));
 				    	}, false));
 				case 3:
-					openSubState(new Prompt('Are you sure you want to ALL of your data?\nThis action is irreversible.', function() {
+					openSubState(new Prompt('Are you sure you want to reset ALL of your data?\nThis action is irreversible.', function() {
                         			clearWeeks();
                         			clearScores();                        
 				        	clearAchievements();
