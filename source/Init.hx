@@ -268,7 +268,7 @@ class Init extends FlxState
 		return Paths.image('credits/${randomIcon[chance]}');
 	}
 
-		public static function randomizeColor()
+	public static function randomizeColor()
     	{
 		var chance:Int = FlxG.random.int(0, coolColors.length - 1);
 		var color:FlxColor = coolColors[chance];
