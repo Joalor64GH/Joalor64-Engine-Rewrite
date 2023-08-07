@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
+import flixel.text.FlxText;
 import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
@@ -108,6 +109,11 @@ class OptionsState extends MusicBeatState
 		bg.scrollFactor.set(0, yScroll / 3);
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+			var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press S for save data settings.", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 		
 		initOptions();
 
@@ -161,6 +167,10 @@ class OptionsState extends MusicBeatState
 		bg.scale.set(mult, mult);
 		bg.updateHitbox();
 		bg.offset.set();
+
+		if (FlxG.keys.justPressed.S) {
+			MusicBeatState.switchState(new SaveDataState());
+		}
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);

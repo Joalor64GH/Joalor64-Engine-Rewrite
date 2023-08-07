@@ -31,14 +31,14 @@ class ScriptEditorState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 
-		notePad = new FlxUIInputText(0, 0, 1024, "", 15);
-		notePad.scale.set(9.5, 9.5);
+		notePad = new FlxUIInputText(0, 0, 1024, "", 15, FlxColor.BLACK);
+		notePad.scale.set(95, 95);
 		notePad.screenCenter(XY);
 		add(notePad);
 
-		saveBtn = new FlxButton(15, 40, "Save");
+		saveBtn = new FlxButton(20, 40, "Save");
 		saveBtn.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		saveBtn.label.screenCenter();
+		saveBtn.label.screenCenter(XY);
 		saveBtn.scale.set(1.5, 1.5);
 		add(saveBtn);
 
