@@ -64,34 +64,34 @@ class SaveDataState extends MusicBeatState
             		{
 				case 0:
 					openSubState(new Prompt('Are you sure you want to reset your high scores?\nThis action is irreversible.', function() {
-				        clearScores();
-				        FlxG.sound.play(Paths.sound('confirmMenu'));
-			        }, function() {
-					    FlxG.sound.play(Paths.sound('cancelMenu'));
-				    }, false));
+				        	clearScores();
+				        	FlxG.sound.play(Paths.sound('confirmMenu'));
+			        	}, function() {
+					    	FlxG.sound.play(Paths.sound('cancelMenu'));
+				    	}, false));
 				case 1:
 					openSubState(new Prompt('Are you sure you want to reset your week progress?\nThis action is irreversible.', function() {
-				        clearWeeks();
-				        FlxG.sound.play(Paths.sound('confirmMenu'));
-			        }, function() {
-					    FlxG.sound.play(Paths.sound('cancelMenu'));
-				    }, false));
+				        	clearWeeks();
+				        	FlxG.sound.play(Paths.sound('confirmMenu'));
+			        	}, function() {
+					    	FlxG.sound.play(Paths.sound('cancelMenu'));
+				    	}, false));
 				case 2:
 					openSubState(new Prompt('Are you sure you want to reset all of your achievements?\nThis action is irreversible.', function() {
-				        clearAchievements();
-				        FlxG.sound.play(Paths.sound('confirmMenu'));
-			        }, function() {
+				        	clearAchievements();
+				        	FlxG.sound.play(Paths.sound('confirmMenu'));
+			        	}, function() {
 					    FlxG.sound.play(Paths.sound('cancelMenu'));
-				    }, false));
+				    	}, false));
 				case 3:
 					openSubState(new Prompt('Are you sure you want to ALL of your data?\nThis action is irreversible.', function() {
-                        clearWeeks();
-                        clearScores();                        
-				        clearAchievements();
-				        FlxG.sound.play(Paths.sound('confirmMenu'));
-			        }, function() {
+                        			clearWeeks();
+                        			clearScores();                        
+				        	clearAchievements();
+				        	FlxG.sound.play(Paths.sound('confirmMenu'));
+			        	}, function() {
 					    FlxG.sound.play(Paths.sound('cancelMenu'));
-				    }, false));
+				    	}, false));
 			}
 		}
 	}
@@ -133,18 +133,18 @@ class SaveDataState extends MusicBeatState
         FlxG.save.flush();
     }
 
-	function clearWeeks() {
+    function clearWeeks() {
         StoryMenuState.weekCompleted.clear();
         FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
         FlxG.save.flush();
     }
 
-	function clearAchievements() {
+    function clearAchievements() {
         Achievements.achievementsMap.clear();
-		Achievements.henchmenDeath = 0;
+	Achievements.henchmenDeath = 0;
         FlxG.save.data.achievementsMap = Achievements.achievementsMap;
-		FlxG.save.data.achievementsUnlocked = null;
-		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+	FlxG.save.data.achievementsUnlocked = null;
+	FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
         FlxG.save.flush();
     }
 }
