@@ -37,7 +37,7 @@ import sys.io.File;
 
 using StringTools;
 
-typedef MenuData =
+typedef MenuDataExtra =
 {
 	enableReloadKey:Bool,
 	alignToCenter:Bool,
@@ -79,11 +79,11 @@ class ExtrasMenuState extends MusicBeatState
 
 	var invalidPosition:Null<Int> = null;
 
-	var menuJSON:MenuData;
+	var menuJSONExtra:MenuDataExtra;
 
 	override function create()
 	{
-		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences_extra.json'));
+		menuJSONExtra = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences_extra.json'));
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -103,9 +103,9 @@ class ExtrasMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		if (menuJSON.options != null && menuJSON.options.length > 0 && menuJSON.options.length < 13)
+		if (menuJSONExtra.options != null && menuJSONExtra.options.length > 0 && menuJSONExtra.options.length < 13)
 		{
-			optionShit = menuJSON.options;
+			optionShit = menuJSONExtra.options;
 		}
 		else
 		{
@@ -121,7 +121,7 @@ class ExtrasMenuState extends MusicBeatState
 			];
 		}
 
-		for (i in menuJSON.links)
+		for (i in menuJSONExtra.links)
 		{
 			linkArray.push(i);
 		}
@@ -131,15 +131,15 @@ class ExtrasMenuState extends MusicBeatState
 		bg = new FlxSprite();
 		bg.loadGraphic(Paths.image('menuBG'));
 
-		if (menuJSON.backgroundStatic != null && menuJSON.backgroundStatic.length > 0 && menuJSON.backgroundStatic != "none")
-			bg.loadGraphic(Paths.image(menuJSON.backgroundStatic));
+		if (menuJSONExtra.backgroundStatic != null && menuJSONExtra.backgroundStatic.length > 0 && menuJSONExtra.backgroundStatic != "none")
+			bg.loadGraphic(Paths.image(menuJSONExtra.backgroundStatic));
 		else
 			bg.loadGraphic(Paths.image('menuBG'));
 
-		if (menuJSON.bgX != invalidPosition)
-			bg.x = menuJSON.bgX;
-		if (menuJSON.bgY != invalidPosition)
-			bg.y = menuJSON.bgY;
+		if (menuJSONExtra.bgX != invalidPosition)
+			bg.x = menuJSONExtra.bgX;
+		if (menuJSONExtra.bgY != invalidPosition)
+			bg.y = menuJSONExtra.bgY;
 		else
 			bg.y = -80;
 
@@ -157,15 +157,15 @@ class ExtrasMenuState extends MusicBeatState
 
 		magenta = new FlxSprite();
 
-		if (menuJSON.backgroundConfirm != null && menuJSON.backgroundConfirm.length > 0 && menuJSON.backgroundConfirm != "none")
-			magenta.loadGraphic(Paths.image(menuJSON.backgroundConfirm));
+		if (menuJSONExtra.backgroundConfirm != null && menuJSONExtra.backgroundConfirm.length > 0 && menuJSONExtra.backgroundConfirm != "none")
+			magenta.loadGraphic(Paths.image(menuJSONExtra.backgroundConfirm));
 		else
 			magenta.loadGraphic(Paths.image('menuDesat'));
 
-		if (menuJSON.bgX != invalidPosition)
-			magenta.x = menuJSON.bgX;
-		if (menuJSON.bgY != invalidPosition)
-			magenta.y = menuJSON.bgY;
+		if (menuJSONExtra.bgX != invalidPosition)
+			magenta.x = menuJSONExtra.bgX;
+		if (menuJSONExtra.bgY != invalidPosition)
+			magenta.y = menuJSONExtra.bgY;
 		else
 			magenta.y = -80;
 
@@ -175,8 +175,8 @@ class ExtrasMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
-		if (menuJSON.colorOnConfirm != null && menuJSON.colorOnConfirm.length > 0)
-			magenta.color = FlxColor.fromRGB(menuJSON.colorOnConfirm[0], menuJSON.colorOnConfirm[1], menuJSON.colorOnConfirm[2]);
+		if (menuJSONExtra.colorOnConfirm != null && menuJSONExtra.colorOnConfirm.length > 0)
+			magenta.color = FlxColor.fromRGB(menuJSONExtra.colorOnConfirm[0], menuJSONExtra.colorOnConfirm[1], menuJSONExtra.colorOnConfirm[2]);
 		else
 			magenta.color = 0xFFfd719b;
 
@@ -193,21 +193,21 @@ class ExtrasMenuState extends MusicBeatState
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 
-			if (menuJSON.optionX != invalidPosition)
-				menuItem.x = menuJSON.optionX;
-			if (menuJSON.optionY != invalidPosition)
-				menuItem.y = menuJSON.optionY;
+			if (menuJSONExtra.optionX != invalidPosition)
+				menuItem.x = menuJSONExtra.optionX;
+			if (menuJSONExtra.optionY != invalidPosition)
+				menuItem.y = menuJSONExtra.optionY;
 
-			if (menuJSON.angle != invalidPosition)
-				menuItem.angle = menuJSON.angle;
+			if (menuJSONExtra.angle != invalidPosition)
+				menuItem.angle = menuJSONExtra.angle;
 
-			if (menuJSON.scaleX != invalidPosition)
-				menuItem.scale.x = menuJSON.scaleX;
+			if (menuJSONExtra.scaleX != invalidPosition)
+				menuItem.scale.x = menuJSONExtra.scaleX;
 			else
 				menuItem.scale.x = scale;
 
-			if (menuJSON.scaleY != invalidPosition)
-				menuItem.scale.y = menuJSON.scaleY;
+			if (menuJSONExtra.scaleY != invalidPosition)
+				menuItem.scale.y = menuJSONExtra.scaleY;
 			else
 				menuItem.scale.y = scale;
 
@@ -216,7 +216,7 @@ class ExtrasMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			if (menuJSON.alignToCenter)
+			if (menuJSONExtra.alignToCenter)
 				menuItem.screenCenter(X);
 			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
 			menuItems.add(menuItem);
@@ -271,9 +271,9 @@ class ExtrasMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
+				if (optionShit[curSelected] == '${menuJSONExtra.links[0]}') 
 				{
-					CoolUtil.browserLoad('${menuJSON.links[1]}');
+					CoolUtil.browserLoad('${menuJSONExtra.links[1]}');
 				} 
 				else if (optionShit[curSelected] == 'discord') 
 				{
@@ -331,7 +331,7 @@ class ExtrasMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.RESET && menuJSON.enableReloadKey)
+			if (controls.RESET && menuJSONExtra.enableReloadKey)
 				FlxG.resetState();
 		}
 
@@ -339,7 +339,7 @@ class ExtrasMenuState extends MusicBeatState
 
 		menuItems.forEach((spr:FlxSprite) -> 
 		{
-			if (menuJSON.centerOptions) 
+			if (menuJSONExtra.centerOptions) 
 				spr.screenCenter(X);
 		});
 	}

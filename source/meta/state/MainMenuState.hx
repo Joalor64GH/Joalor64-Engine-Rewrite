@@ -33,6 +33,7 @@ import meta.state.editors.*;
 import system.*;
 
 import core.ToastCore;
+import meta.data.Achievements;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
