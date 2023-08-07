@@ -3,7 +3,6 @@ package;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
@@ -19,7 +18,6 @@ import haxe.Http;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
@@ -27,7 +25,6 @@ import core.ModCore;
 // this loads everything in
 class Init extends FlxState
 {
-	public static var randomIcon:Array<String> = ['joalor', 'meme', 'fox', 'bot']; // WILL BE REPLACED LATER!!!
 	public static var coolColors:Array<FlxColor> = [
 		0x00000000, // Transparent
 		0xFFFFFFFF, // White
@@ -48,7 +45,7 @@ class Init extends FlxState
 	public static var updateVersion:String = '';
 
 	var loadingSpeen:FlxSprite;
-	var epicSprite:FlxSprite;
+	var epicLogo:FlxSprite;
 
 	var coolText:FlxText;
 
@@ -73,11 +70,12 @@ class Init extends FlxState
 		bg.screenCenter();
         	add(bg);
         
-        	epicSprite = new FlxSprite().loadGraphic(randomizeIcon());
-        	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
-        	epicSprite.angularVelocity = 30;
-		epicSprite.screenCenter();
-        	add(epicSprite);
+        	epicLogo = new FlxSprite().loadGraphic(Paths.image('loader/startupLogo'));
+        	epicLogo.antialiasing = ClientPrefs.globalAntialiasing;
+		epicLogo.screenCenter();
+        	add(epicLogo);
+
+		logoTween();
 
 		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
 		bottomPanel.alpha = 0.5;
@@ -93,7 +91,7 @@ class Init extends FlxState
 		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadingSpeen);
 
-		FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
+		FlxG.sound.play(Paths.sound('startup'));
 
 		load();
 
@@ -262,10 +260,17 @@ class Init extends FlxState
 	    	});
 	}
 
-	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
+	function logoTween()
 	{
-		var chance:Int = FlxG.random.int(0, randomIcon.length - 1);
-		return Paths.image('credits/${randomIcon[chance]}');
+		epicLogo.angle = -4;
+
+		new FlxTimer().start(0.01, function(tmr:FlxTimer)
+		{
+			if (epicLogo.angle == -4)
+				FlxTween.angle(epicLogo, epicLogo.angle, 4, 4, {ease: FlxEase.quartInOut});
+			if (epicLogo.angle == 4)
+				FlxTween.angle(epicLogo, epicLogo.angle, -4, 4, {ease: FlxEase.quartInOut});
+		}, 0);
 	}
 
 	public static function randomizeColor()
