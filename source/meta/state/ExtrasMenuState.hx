@@ -115,6 +115,7 @@ class ExtrasMenuState extends MusicBeatState
 				#if !switch 
 				'kickstarter',
 				'discord',
+				'manual',
 				#end
 				'more'
 			];
@@ -277,6 +278,10 @@ class ExtrasMenuState extends MusicBeatState
 				else if (optionShit[curSelected] == 'discord') 
 				{
 					CoolUtil.browserLoad('https://discord.gg/GnXqAVMFbA');
+				}
+				else if (optionShit[curSelected] == 'manual') 
+				{
+					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
 				}
 				else if (optionShit[curSelected] == 'kickstarter')
 				{
