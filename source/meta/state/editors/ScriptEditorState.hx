@@ -2,15 +2,13 @@ package meta.state.editors;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUIInputText;
 
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-import openfl.utils.Assets as OpenFlAssets;
-import openfl.utils.ByteArray;
-
 import openfl.net.FileReference;
 
 import meta.*;
@@ -33,13 +31,15 @@ class ScriptEditorState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 
-		notePad = new FlxUIInputText(0, 0, 1024, "");
+		notePad = new FlxUIInputText(0, 0, 1024, "", 15);
+		notePad.scale.set(9.5, 9.5);
 		notePad.screenCenter(XY);
 		add(notePad);
 
 		saveBtn = new FlxButton(15, 40, "Save");
-		saveBtn.scale.set(1.5, 1.5);
 		saveBtn.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		saveBtn.label.screenCenter();
+		saveBtn.scale.set(1.5, 1.5);
 		add(saveBtn);
 
 		FlxG.mouse.visible = true;
