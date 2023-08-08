@@ -57,7 +57,7 @@
 		}
 	],
 	"no_antialiasing": true,
-	"image": "characters/mg/picojpg",
+	"image": "characters/picojpg",
 	"position": [
 		-70,
 		240

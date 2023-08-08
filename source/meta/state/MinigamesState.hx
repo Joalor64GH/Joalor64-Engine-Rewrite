@@ -22,8 +22,8 @@ class MinigamesState extends MusicBeatState
         private var iconArray:Array<HealthIcon> = [];
 
 	var controlStrings:Array<Minigame> = [
-		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\nType: Mania', 'sus'),
-		new Minigame('Low Quality .jpegs are funny', "they are and you can't tell me otherwise\nType: Mania", 'picojpg')
+		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
+		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/picojpg')
 	];
 
 	var descTxt:FlxText;
@@ -98,7 +98,7 @@ class MinigamesState extends MusicBeatState
                     			LoadingState.loadAndSwitchState(new PlayState());
 
 				case 1:
-					PlayState.SONG = Song.loadFromJson('compression', 'commpresion');
+					PlayState.SONG = Song.loadFromJson('compression', 'commpression');
                     			LoadingState.loadAndSwitchState(new PlayState());
 			}
 		}
