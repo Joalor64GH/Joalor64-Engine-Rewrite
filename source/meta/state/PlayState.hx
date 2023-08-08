@@ -1350,12 +1350,13 @@ class PlayState extends MusicBeatState
 		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionTxt);
 
+		var versionTxtAlt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}', 12);
+		versionTxtAlt.scrollFactor.set();
+		versionTxtAlt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
 		if (!inMini)
 		{
 			remove(versionTxt);
-			var versionTxtAlt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}', 12);
-			versionTxtAlt.scrollFactor.set();
-			versionTxtAlt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionTxtAlt);
 		}
 
