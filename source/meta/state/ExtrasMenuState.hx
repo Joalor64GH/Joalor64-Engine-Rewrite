@@ -26,7 +26,6 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 import meta.data.alphabet.*;
-import meta.data.options.*;
 
 import core.ToastCore;
 

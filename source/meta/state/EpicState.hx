@@ -47,7 +47,6 @@ class EpicState extends MusicBeatState
 	override function create()
 	{
 		menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
         	menuBG.color = randomizeColor();
 		add(menuBG);
 
@@ -79,8 +78,13 @@ class EpicState extends MusicBeatState
         	if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
-		if (controls.BACK)
-			MusicBeatState.switchState(new MainMenuState());
+		if (controls.BACK) 
+		{
+			if (ClientPrefs.simpleMain)
+				MusicBeatState.switchState(new SimpleMainMenuState());
+			else
+				MusicBeatState.switchState(new MainMenuState());
+		}
             
 		if (controls.ACCEPT)
 		{

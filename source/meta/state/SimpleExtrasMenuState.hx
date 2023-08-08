@@ -19,26 +19,16 @@ import lime.app.Application;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
-import meta.data.options.*;
-import meta.state.editors.*;
 import meta.state.*;
-import meta.data.Achievements;
 
 using StringTools;
 
 class SimpleMainMenuState extends MusicBeatState
 {
 	var options:Array<String> = [
-		'Story Mode',
-		'Freeplay',
-		'Extras',
-		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'Awards', #end
-		'Credits',
-		'Options'
+		'Minigames',
+		'More'
 	];
-
-	var debugKeys:Array<FlxKey>;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
@@ -47,22 +37,10 @@ class SimpleMainMenuState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Story Mode':
-				MusicBeatState.switchState(new StoryMenuState());
-			case 'Freeplay':
-				MusicBeatState.switchState(new FreeplayState());
-			case 'Extras':
-				MusicBeatState.switchState(new SimpleExtrasMenuState());
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			case 'Mods':
-				MusicBeatState.switchState(new ModsMenuState());
-			#end
-			case 'Awards':
-				MusicBeatState.switchState(new AchievementsMenuState());
-			case 'Credits':
-				MusicBeatState.switchState(new CreditsState());
-			case 'Options':
-				MusicBeatState.switchState(new OptionsState());
+			case 'Minigames':
+				MusicBeatState.switchState(new MinigamesState());
+			case 'More':
+				MusicBeatState.switchState(new EpicState());
 		}
 	}
 
@@ -78,26 +56,13 @@ class SimpleMainMenuState extends MusicBeatState
 	override function create() 
 	{
 		#if desktop
-		DiscordClient.changePresence("Simple Main Menu", null);
+		DiscordClient.changePresence("Simple Extras Menu", null);
 		#end
-
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		Mods.pushGlobalMods();
-		#end
-
-		Mods.loadTheFirstEnabledMod();
-
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
 
 		camMain = new FlxCamera();
-		camAchievement = new FlxCamera();
-		camAchievement.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camMain);
-		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camMain, true);
-
-		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -116,19 +81,6 @@ class SimpleMainMenuState extends MusicBeatState
 
 		initOptions();
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + MainMenuState.psychEngineVersion + " [" + MainMenuState.psychGitBuild + "]", 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		selectorLeft.scrollFactor.set(0, yScroll);
 		add(selectorLeft);
@@ -138,30 +90,8 @@ class SimpleMainMenuState extends MusicBeatState
 
 		changeSelection();
 
-		#if ACHIEVEMENTS_ALLOWED
-		Achievements.loadAchievements();
-		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
-			var achieveID:Int = Achievements.getAchievementIndex('friday_night_play');
-			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
-				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
-				giveAchievement();
-				ClientPrefs.saveSettings();
-			}
-		}
-		#end
-
 		super.create();
 	}
-
-	#if ACHIEVEMENTS_ALLOWED
-	// Unlocks "Freaky on a Friday Night" achievement
-	function giveAchievement() {
-		add(new AchievementObject('friday_night_play', camAchievement));
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-		trace('Giving achievement "friday_night_play"');
-	}
-	#end
 
 	function initOptions() {
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -215,13 +145,6 @@ class SimpleMainMenuState extends MusicBeatState
 				});
 			}
 		}
-
-        	#if desktop
-		else if (FlxG.keys.anyJustPressed(debugKeys))
-		{
-			MusicBeatState.switchState(new MasterEditorMenu());
-		}
-		#end
 	}
 	
 	function changeSelection(change:Int = 0) {

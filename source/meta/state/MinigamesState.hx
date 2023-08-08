@@ -23,7 +23,7 @@ class MinigamesState extends MusicBeatState
 
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\nType: Mania', 'sus'),
-		new Minigame('Low Quality .jpegs are funny', 'they are and you can't tell me otherwise\nType: Mania', 'pico')
+		new Minigame('Low Quality .jpegs are funny', "they are and you can't tell me otherwise\nType: Mania", 'pico')
 	];
 
     	var curSelected:Int = 0;
@@ -50,7 +50,11 @@ class MinigamesState extends MusicBeatState
 			controlLabel.targetY = i;
 			grpControls.add(controlLabel);
 
-            var icon:FlxSprite = new FlxSprite(Paths.image('minigames/icons/' + controlStrings[i].icon));
+            var icon:FlxSprite = new FlxSprite;
+            if (Paths.fileExists)
+                icon.loadGraphic(Paths.image('minigames/icons/' + controlStrings[i].icon));
+            else
+                icon.loadGraphic(Paths.image('minigames/icons/none'));
 			icon.sprTracker = controlLabel;
             icon.scale.set(0.7, 0.7);
             icon.updateHitbox();
@@ -82,8 +86,13 @@ class MinigamesState extends MusicBeatState
         	if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
-		if (controls.BACK)
-			MusicBeatState.switchState(new MainMenuState());
+		if (controls.BACK) 
+        {
+			if (ClientPrefs.simpleMain)
+				MusicBeatState.switchState(new SimpleMainMenuState());
+			else
+				MusicBeatState.switchState(new MainMenuState());
+        }
             
 		if (controls.ACCEPT)
 		{
