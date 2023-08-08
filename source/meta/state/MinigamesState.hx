@@ -1,5 +1,9 @@
 package meta.state;
 
+#if sys
+import sys.FileSystem;
+#end
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -21,8 +25,8 @@ class MinigamesState extends MusicBeatState
         private var iconArray:Array<FlxSprite> = [];
 
 	var controlStrings:Array<Minigame> = [
-		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\nType: Mania', 'sus'),
-		new Minigame('Low Quality .jpegs are funny', "they are and you can't tell me otherwise\nType: Mania", 'pico')
+		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\nType: Mania', 'minigames/icons/sus'),
+		new Minigame('Low Quality .jpegs are funny', "they are and you can't tell me otherwise\nType: Mania", 'minigames/icons/pico')
 	];
 
     	var curSelected:Int = 0;
@@ -44,19 +48,20 @@ class MinigamesState extends MusicBeatState
 
 		for (i in 0...controlStrings.length)
 		{
-			var controlLabel:Alphabet = new Alphabet(90, 320, controlStrings[i], true);
+			var controlLabel:Alphabet = new Alphabet(90, 320, controlStrings[i][1], true);
 			controlLabel.isMenuItem = true;
 			controlLabel.targetY = i;
 			grpControls.add(controlLabel);
 
             		var icon:FlxSprite = new FlxSprite();
-            		if (Paths.fileExists)
-                		icon.loadGraphic(Paths.image('minigames/icons/' + controlStrings[i].icon));
+            		if (Filestystem.exists(Paths.image(controlStrings[i][3])))
+                		icon.loadGraphic(Paths.image('minigames/icons/' + controlStrings[i][3]));
             		else
                 		icon.loadGraphic(Paths.image('minigames/icons/none'));
 			icon.sprTracker = controlLabel;
             		icon.scale.set(0.7, 0.7);
             		icon.updateHitbox();
+					
 			iconArray.push(icon);
 			add(icon);
 		}
@@ -65,7 +70,7 @@ class MinigamesState extends MusicBeatState
 		bottomPanel.alpha = 0.5;
 		add(bottomPanel);
 
-        	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, controlStrings[i].description, 22);
+        	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, controlStrings[i][2], 22);
         	descTxt.screenCenter(X);
 		descTxt.scrollFactor.set();
 		descTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -119,6 +124,11 @@ class MinigamesState extends MusicBeatState
 			curSelected = 0;
 
 		var bullShit:Int = 0;
+
+		for (i in 0...iconArray.length)
+			iconArray[i].alpha = 0.6;
+
+		iconArray[curSelected].alpha = 1;
 
 		for (item in grpControls.members)
 		{
