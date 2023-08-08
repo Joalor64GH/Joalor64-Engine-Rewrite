@@ -26,6 +26,8 @@ class MinigamesState extends MusicBeatState
 		new Minigame('Low Quality .jpegs are funny', "they are and you can't tell me otherwise\nType: Mania", 'picojpg')
 	];
 
+	var descTxt:FlxText;
+
     	var curSelected:Int = 0;
    	var menuBG:FlxSprite;
 
@@ -60,7 +62,7 @@ class MinigamesState extends MusicBeatState
 		bottomPanel.alpha = 0.5;
 		add(bottomPanel);
 
-        	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, "", 22);
+        	descTxt = new FlxText(20, FlxG.height - 80, 1000, "", 22);
         	descTxt.screenCenter(X);
 		descTxt.scrollFactor.set();
 		descTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
