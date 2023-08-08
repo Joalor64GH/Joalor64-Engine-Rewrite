@@ -7,19 +7,18 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
 import meta.*;
-import meta.state.*;
 import meta.data.*;
+import meta.state.*;
 import meta.data.alphabet.*;
 
 import meta.state.PlayState;
-
 import core.ToastCore;
 
 class MinigamesState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 
-        private var iconArray:Array<HealthIcon> = [];
+        private var iconArray:Array<FlxSprite> = [];
 
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\nType: Mania', 'sus'),
@@ -58,8 +57,6 @@ class MinigamesState extends MusicBeatState
 			icon.sprTracker = controlLabel;
             icon.scale.set(0.7, 0.7);
             icon.updateHitbox();
-
-			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
 		}
@@ -68,7 +65,7 @@ class MinigamesState extends MusicBeatState
 		bottomPanel.alpha = 0.5;
 		add(bottomPanel);
 
-        	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, controlStrings[0].description, 22);
+        	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, controlStrings[i].description, 22);
         descTxt.screenCenter(X);
 		descTxt.scrollFactor.set();
 		descTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -96,20 +93,17 @@ class MinigamesState extends MusicBeatState
             
 		if (controls.ACCEPT)
 		{
-            Main.toast.create('WIP', 0xFFFFFF00, 'This is a wip!');
-            /*
             PlayState.inMini = true;
 			switch (curSelected)
             		{
 				case 0:
-					PlayState.SONG = Song.loadFromJson('CHART', 'FOLDER');
+					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
                     LoadingState.loadAndSwitchState(new PlayState());
 
 				case 1:
-					PlayState.SONG = Song.loadFromJson('CHART', 'FOLDER');
+					PlayState.SONG = Song.loadFromJson('compression', 'commpresion');
                     LoadingState.loadAndSwitchState(new PlayState());
 			}
-            */
 		}
 	}
 

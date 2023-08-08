@@ -63,7 +63,7 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5'; // Used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.4.0 (UNRELEASED)'; // Used for Discord RPC
 	
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  

@@ -9,12 +9,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
-import flixel.text.FlxText;
 import flixel.util.FlxTimer;
 import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
-import lime.app.Application;
 
 import meta.*;
 import meta.data.*;
@@ -23,7 +21,7 @@ import meta.state.*;
 
 using StringTools;
 
-class SimpleMainMenuState extends MusicBeatState
+class SimpleExtrasMenuState extends MusicBeatState
 {
 	var options:Array<String> = [
 		'Minigames',
@@ -124,7 +122,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new TitleState());
+			MusicBeatState.switchState(new SimpleMainMenuState());
 		}
 
 		if (controls.ACCEPT)
