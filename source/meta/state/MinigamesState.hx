@@ -113,7 +113,7 @@ class MinigamesState extends MusicBeatState
 		if (curSelected >= grpControls.length)
 			curSelected = 0;
 
-		descText.text = controlStrings[curSelected].description;
+		descTxt.text = controlStrings[curSelected].description;
 
 		var bullShit:Int = 0;
 
