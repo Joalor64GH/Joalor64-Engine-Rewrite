@@ -14,7 +14,6 @@ import meta.state.*;
 import meta.data.alphabet.*;
 
 import objects.userinterface.HealthIcon;
-
 import meta.state.PlayState;
 
 class MinigamesState extends MusicBeatState
@@ -54,9 +53,10 @@ class MinigamesState extends MusicBeatState
 			var controlLabel:Alphabet = new Alphabet(90, 320, controlStrings[i].name, true);
 			controlLabel.isMenuItem = true;
 			controlLabel.targetY = i;
+			controlLabel.snapToPosition();
 			grpControls.add(controlLabel);
 
-            var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
+            	var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
 			icon.sprTracker = controlLabel;
 			icon.scale.set(0.7, 0.7);
 			icon.updateHitbox();

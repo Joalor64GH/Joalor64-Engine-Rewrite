@@ -52,6 +52,7 @@ class SaveDataSubState extends MusicBeatSubstate
 			var controlLabel:Alphabet = new Alphabet(90, 320, controlsStrings[i], true);
 			controlLabel.isMenuItem = true;
 			controlLabel.targetY = i;
+			controlLabel.snapToPosition();
 			grpControls.add(controlLabel);
 		}
 
@@ -69,8 +70,7 @@ class SaveDataSubState extends MusicBeatSubstate
         	if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
-		if (controls.BACK)
-		{
+		if (controls.BACK) {
 			FlxG.mouse.visible = false;
 			close();
 		}
