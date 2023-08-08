@@ -189,7 +189,7 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.E)
-			MusicBeatState.switchState.(new EpicState());
+			MusicBeatState.switchState(new EpicState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);
