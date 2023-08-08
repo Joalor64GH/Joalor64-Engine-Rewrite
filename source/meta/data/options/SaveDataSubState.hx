@@ -18,7 +18,7 @@ import meta.state.*;
 
 using StringTools;
 
-class SaveDataSubState extends MusicBeatSubState
+class SaveDataSubState extends MusicBeatSubstate
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 	

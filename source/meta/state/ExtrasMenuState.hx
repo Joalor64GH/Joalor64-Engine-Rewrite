@@ -252,7 +252,7 @@ class ExtrasMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (FlxG.keys.justPressed.E)
-			MusicBeatState.switchState.(new EpicState());
+			MusicBeatState.switchState(new EpicState());
 		
 		if (!selectedSomethin)
 		{
