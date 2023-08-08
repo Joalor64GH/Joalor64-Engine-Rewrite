@@ -113,9 +113,9 @@ class ExtrasMenuState extends MusicBeatState
 			[
 				'mini',
 				#if !switch 
-				'kickstarter',
-				'discord',
 				'manual',
+				'discord',
+				'kickstarter',
 				#end
 				'more'
 			];
@@ -321,7 +321,7 @@ class ExtrasMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'mini':
-										Main.toast.create('WIP', 0xFFFFFF00, 'This menu is a wip!');
+										MusicBeatState.switchState(new MinigamesState());
 									case 'more':
 										MusicBeatState.switchState(new EpicState());
 								}

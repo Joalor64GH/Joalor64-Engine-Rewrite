@@ -31,6 +31,7 @@ class SimpleMainMenuState extends MusicBeatState
 	var options:Array<String> = [
 		'Story Mode',
 		'Freeplay',
+		'Extras',
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'Awards', #end
 		'Credits',
@@ -50,6 +51,8 @@ class SimpleMainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new StoryMenuState());
 			case 'Freeplay':
 				MusicBeatState.switchState(new FreeplayState());
+			case 'Extras':
+				MusicBeatState.switchState(new ExtrasMenuState());
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mods':
 				MusicBeatState.switchState(new ModsMenuState());

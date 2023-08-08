@@ -261,7 +261,9 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.seenCutscene = false;
 
 							Mods.loadTheFirstEnabledMod();
-							if (PlayState.isStoryMode) {
+							if (PlayState.inMini) {
+								MusicBeatState.switchState(new MinigamesState());
+							} else if (PlayState.isStoryMode) {
 								MusicBeatState.switchState(new StoryMenuState());
 							} else {
 								if (ClientPrefs.simpleMain)

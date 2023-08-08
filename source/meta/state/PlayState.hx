@@ -377,14 +377,11 @@ class PlayState extends MusicBeatState
 	
 	// stores the last judgement object
 	public static var lastRating:FlxSprite;
-
 	// stores the last combo sprite object
 	public static var lastCombo:FlxSprite;
-	
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
-	// nps
 	var nps:Int = 0;
 	var npsArray:Array<Date> = [];
 	var maxNPS:Int = 0;
@@ -393,6 +390,8 @@ class PlayState extends MusicBeatState
 	public var bpPayload:String = "";
 
 	public var comboFunction:Void->Void = null;
+
+	public static var inMini:Bool = false;
 
 	override public function create()
 	{
@@ -4815,7 +4814,10 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
+				if (inMini)
+					MusicBeatState.switchState(new MinigamesState());
+				else
+					MusicBeatState.switchState(new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
