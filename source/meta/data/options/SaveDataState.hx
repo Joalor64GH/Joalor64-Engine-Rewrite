@@ -1,5 +1,9 @@
 package meta.data.options;
 
+#if desktop
+import meta.data.dependency.Discord.DiscordClient;
+#end
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -28,6 +32,10 @@ class SaveDataState extends MusicBeatState
 
 	override function create()
 	{
+		#if desktop
+		DiscordClient.changePresence("Save Data Menu", null);
+		#end
+
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
         	bg.antialiasing = ClientPrefs.globalAntialiasing;
         	bg.color = 0xFFea71fd;

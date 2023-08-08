@@ -23,7 +23,7 @@ class MinigamesState extends MusicBeatState
 
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
-		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/picojpg')
+		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico')
 	];
 
 	var descTxt:FlxText;
@@ -54,6 +54,8 @@ class MinigamesState extends MusicBeatState
 
             var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
 			icon.sprTracker = controlLabel;
+			icon.scale.set(0.7, 0.7);
+			icon.updateHitbox();
 			iconArray.push(icon);
 			add(icon);
 		}

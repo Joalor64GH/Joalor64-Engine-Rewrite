@@ -31,7 +31,7 @@ class SimpleMainMenuState extends MusicBeatState
 	var options:Array<String> = [
 		'Story Mode',
 		'Freeplay',
-		'Extras',
+		'Minigames',
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'Awards', #end
 		'Credits',
@@ -51,8 +51,8 @@ class SimpleMainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new StoryMenuState());
 			case 'Freeplay':
 				MusicBeatState.switchState(new FreeplayState());
-			case 'Extras':
-				MusicBeatState.switchState(new SimpleExtrasMenuState());
+			case 'Minigames':
+				MusicBeatState.switchState(new MinigamesState());
 			#if (MODS_ALLOWED && FUTURE_POLYMOD)
 			case 'Mods':
 				MusicBeatState.switchState(new ModsMenuState());
@@ -187,6 +187,9 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.scale.set(mult, mult);
 		bg.updateHitbox();
 		bg.offset.set();
+
+		if (FlxG.keys.justPressed.E)
+			MusicBeatState.switchState.(new EpicState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);

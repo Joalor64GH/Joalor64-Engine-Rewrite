@@ -112,10 +112,8 @@ class ExtrasMenuState extends MusicBeatState
 				'mini',
 				#if !switch 
 				'manual',
-				'discord',
 				'kickstarter',
 				#end
-				'more'
 			];
 		}
 
@@ -253,6 +251,9 @@ class ExtrasMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
+		if (FlxG.keys.justPressed.E)
+			MusicBeatState.switchState.(new EpicState());
+		
 		if (!selectedSomethin)
 		{
 			if (controls.UI_UP_P || controls.UI_DOWN_P) {
@@ -273,10 +274,6 @@ class ExtrasMenuState extends MusicBeatState
 				{
 					CoolUtil.browserLoad('${menuJSONExtra.links[1]}');
 				} 
-				else if (optionShit[curSelected] == 'discord') 
-				{
-					CoolUtil.browserLoad('https://discord.gg/GnXqAVMFbA');
-				}
 				else if (optionShit[curSelected] == 'manual') 
 				{
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
@@ -320,8 +317,6 @@ class ExtrasMenuState extends MusicBeatState
 								{
 									case 'mini':
 										MusicBeatState.switchState(new MinigamesState());
-									case 'more':
-										MusicBeatState.switchState(new EpicState());
 								}
 							});
 						}
