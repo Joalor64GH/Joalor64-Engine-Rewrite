@@ -100,7 +100,7 @@ class MinigamesState extends MusicBeatState
                     			LoadingState.loadAndSwitchState(new PlayState());
 
 				case 1:
-					PlayState.SONG = Song.loadFromJson('compression', 'commpression');
+					PlayState.SONG = Song.loadFromJson('compression', 'compression');
                     			LoadingState.loadAndSwitchState(new PlayState());
 			}
 		}
