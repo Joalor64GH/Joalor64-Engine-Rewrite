@@ -16,7 +16,9 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 import meta.state.*;
 
-class SaveDataState extends MusicBeatState
+using StringTools;
+
+class SaveDataSubState extends MusicBeatSubState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 	
@@ -30,14 +32,15 @@ class SaveDataState extends MusicBeatState
     	var curSelected:Int = 0;
    	var bg:FlxSprite;
 
-	override function create()
+	public function new()
 	{
+		super();
+
 		#if desktop
 		DiscordClient.changePresence("Save Data Menu", null);
 		#end
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        	bg.antialiasing = ClientPrefs.globalAntialiasing;
         	bg.color = 0xFFea71fd;
 		add(bg);
 
@@ -56,7 +59,7 @@ class SaveDataState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 
-		super.create();
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	override function update(elapsed:Float)
@@ -67,7 +70,10 @@ class SaveDataState extends MusicBeatState
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK)
-			MusicBeatState.switchState(new OptionsState());
+		{
+			FlxG.mouse.visible = false;
+			close();
+		}
             
 		if (controls.ACCEPT)
 		{

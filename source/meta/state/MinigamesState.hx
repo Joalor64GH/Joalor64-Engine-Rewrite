@@ -6,6 +6,8 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
+import lime.app.Application;
+
 import meta.*;
 import meta.data.*;
 import meta.state.*;
@@ -33,6 +35,8 @@ class MinigamesState extends MusicBeatState
 
 	override function create()
 	{
+		Application.current.window.title = Application.current.meta.get('name');
+		
 		menuBG = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
         	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);

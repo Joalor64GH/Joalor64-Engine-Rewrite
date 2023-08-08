@@ -33,9 +33,9 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
+		'Offsets',
 		'Visuals',
-		'Gameplay',
-		'Offsets', 
+		'Gameplay', 
 		'Miscellaneous'
 	];
 
@@ -55,12 +55,12 @@ class OptionsState extends MusicBeatState
 				openSubState(new NotesSubState());
 			case 'Controls':
 				openSubState(new ControlsSubState());
+			case 'Offsets':
+				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Visuals':
 				openSubState(new VisualsSubState());
 			case 'Gameplay':
 				openSubState(new GameplaySubState());
-			case 'Offsets':
-				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Miscellaneous':
 				openSubState(new MiscSubState());
 		}
@@ -169,7 +169,7 @@ class OptionsState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.S) {
-			MusicBeatState.switchState(new SaveDataState());
+			openSubState(new SaveDataSubState());
 		}
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
