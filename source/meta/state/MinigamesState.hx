@@ -34,12 +34,12 @@ class MinigamesState extends MusicBeatState
         	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);
 
-        var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
+        	var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
 		slash.antialiasing = ClientPrefs.globalAntialiasing;
 		slash.screenCenter();
 		add(slash);
 
-        grpControls = new FlxTypedGroup<Alphabet>();
+        	grpControls = new FlxTypedGroup<Alphabet>();
 		add(grpControls);
 
 		for (i in 0...controlStrings.length)
@@ -49,24 +49,24 @@ class MinigamesState extends MusicBeatState
 			controlLabel.targetY = i;
 			grpControls.add(controlLabel);
 
-            var icon:FlxSprite = new FlxSprite;
-            if (Paths.fileExists)
-                icon.loadGraphic(Paths.image('minigames/icons/' + controlStrings[i].icon));
-            else
-                icon.loadGraphic(Paths.image('minigames/icons/none'));
+            		var icon:FlxSprite = new FlxSprite();
+            		if (Paths.fileExists)
+                		icon.loadGraphic(Paths.image('minigames/icons/' + controlStrings[i].icon));
+            		else
+                		icon.loadGraphic(Paths.image('minigames/icons/none'));
 			icon.sprTracker = controlLabel;
-            icon.scale.set(0.7, 0.7);
-            icon.updateHitbox();
+            		icon.scale.set(0.7, 0.7);
+            		icon.updateHitbox();
 			iconArray.push(icon);
 			add(icon);
 		}
         
-        var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
+        	var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
 		bottomPanel.alpha = 0.5;
 		add(bottomPanel);
 
         	var descTxt:FlxText = new FlxText(20, FlxG.height - 80, 1000, controlStrings[i].description, 22);
-        descTxt.screenCenter(X);
+        	descTxt.screenCenter(X);
 		descTxt.scrollFactor.set();
 		descTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(descTxt);
@@ -84,25 +84,25 @@ class MinigamesState extends MusicBeatState
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) 
-        {
+        	{
 			if (ClientPrefs.simpleMain)
 				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
 				MusicBeatState.switchState(new MainMenuState());
-        }
+        	}
             
 		if (controls.ACCEPT)
 		{
-            PlayState.inMini = true;
+            		PlayState.inMini = true;
 			switch (curSelected)
             		{
 				case 0:
 					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
-                    LoadingState.loadAndSwitchState(new PlayState());
+                    			LoadingState.loadAndSwitchState(new PlayState());
 
 				case 1:
 					PlayState.SONG = Song.loadFromJson('compression', 'commpresion');
-                    LoadingState.loadAndSwitchState(new PlayState());
+                    			LoadingState.loadAndSwitchState(new PlayState());
 			}
 		}
 	}
@@ -137,14 +137,14 @@ class MinigamesState extends MusicBeatState
 
 class Minigame
 {
-    public var name:String;
-    public var description:String;
-    public var icon:String;
+	public var name:String;
+	public var description:String;
+	public var icon:String;
 
-    public function new(Name:String, dsc:String, img:String)
-    {
-        name = Name;
-        description = dsc;
-        icon = img;
-    }
+	public function new(Name:String, dsc:String, img:String)
+	{
+		name = Name;
+        	description = dsc;
+        	icon = img;
+	}
 }
