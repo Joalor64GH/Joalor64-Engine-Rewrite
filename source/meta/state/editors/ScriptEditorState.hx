@@ -18,8 +18,7 @@ import meta.state.editors.*;
 
 using StringTools;
 
-// this is basically just a notepad
-// TODO: file saving cuz idk how (save as .lua)
+// TODO: file saving cuz idk how (save as .lua), make input size bigger
 class ScriptEditorState extends MusicBeatState
 {
 	var notePad:FlxUIInputText;
@@ -34,6 +33,7 @@ class ScriptEditorState extends MusicBeatState
 		add(bg);
 
 		notePad = new FlxUIInputText(0, 0, 1024, "");
+		notePad.screenCenter(XY);
 		add(notePad);
 
 		saveBtn = new FlxButton(22, 40, "Save");
