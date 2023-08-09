@@ -46,6 +46,12 @@ class NotesSubState extends MusicBeatSubstate
 
 	var btn1:FlxButton;
 	var btn2:FlxButton;
+	var btn3:FlxButton;
+	var btn4:FlxButton;
+	var btn5:FlxButton;
+	var btn6:FlxButton;
+	var btn7:FlxButton;
+	var btn8:FlxButton;
 
 	var blackBG:FlxSprite;
 	var rgbText:Alphabet;
@@ -115,10 +121,10 @@ class NotesSubState extends MusicBeatSubstate
 		btn2 = new FlxButton(15, btn1.y + 50, "Vibrant", () ->
 		{
 			ClientPrefs.arrowRGB = [
-				[221, 0, 255], 
-				[0, 213, 255], 
-				[0, 255, 110], 
-				[255, 0, 200]
+				[250, 52, 15], 
+				[255, 255, 3], 
+				[30, 252, 42], 
+				[0, 192, 255]
 			];
 			updateValue();
 			// updateAll();
@@ -129,6 +135,114 @@ class NotesSubState extends MusicBeatSubstate
 		btn2.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn2.updateHitbox();
 		add(btn2);
+
+		btn3 = new FlxButton(15, btn2.y + 50, "Warm", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[135, 0, 9], 
+				[179, 0, 65], 
+				[215, 0, 138], 
+				[237, 48, 205]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn3.scale.set(1.5, 1.5);
+		btn3.color = 0xac415e;
+		btn3.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn3.updateHitbox();
+		add(btn3);
+
+		btn4 = new FlxButton(15, btn3.y + 50, "Cold", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[0, 229, 75], 
+				[0, 212, 176], 
+				[0, 183, 216], 
+				[24, 138, 240]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn4.scale.set(1.5, 1.5);
+		btn4.color = 0x417ea3;
+		btn4.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn4.updateHitbox();
+		add(btn4);
+
+		btn5 = new FlxButton(15, btn4.y + 50, "Cum", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[255, 255, 255], 
+				[255, 255, 255], 
+				[255, 255, 255], 
+				[255, 255, 255]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn5.scale.set(1.5, 1.5);
+		btn5.color = 0xffffff;
+		btn5.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn5.updateHitbox();
+		add(btn5);
+
+		btn6 = new FlxButton(15, btn5.y + 50, "Void", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[0, 0, 0], 
+				[0, 0, 0], 
+				[0, 0, 0], 
+				[0, 0, 0]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn6.scale.set(1.5, 1.5);
+		btn6.color = 0x000000;
+		btn6.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn6.updateHitbox();
+		add(btn6);
+
+		btn7 = new FlxButton(15, btn6.y + 50, "DDR", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[255, 124, 232], 
+				[0, 255, 255], 
+				[0, 255, 255], 
+				[255, 124, 232]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn7.scale.set(1.5, 1.5);
+		btn7.color = 0xea00ff;
+		btn7.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn7.updateHitbox();
+		add(btn7);
+
+		btn8 = new FlxButton(15, btn7.y + 50, "Pastel", () ->
+		{
+			ClientPrefs.arrowRGB = [
+				[186, 144, 198], 
+				[192, 219, 234], 
+				[221, 255, 187], 
+				[242, 190, 209]
+			];
+			updateValue();
+			// updateAll();
+			ClientPrefs.saveSettings();
+        	});
+		btn8.scale.set(1.5, 1.5);
+		btn8.color = 0xa26dad;
+		btn8.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn8.updateHitbox();
+		add(btn8);
 
 		rgbText = new Alphabet(posX + 720, 0, "Red        Green      Blue", false);
 		rgbText.scaleX = 0.6;

@@ -56,7 +56,7 @@ class MinigamesState extends MusicBeatState
 			controlLabel.snapToPosition();
 			grpControls.add(controlLabel);
 
-            	var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
+            		var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
 			icon.sprTracker = controlLabel;
 			icon.scale.set(0.7, 0.7);
 			icon.updateHitbox();
