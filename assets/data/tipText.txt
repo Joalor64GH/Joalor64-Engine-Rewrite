@@ -15,6 +15,7 @@ You're currently playing--Joalor64 Engine v1.4.0 (UNRELEASED)
 Do people actually read these?
 diagnosis:--skill issue
 USELESS INFO:--J64E was publicly released on April 14th, 2022.
+USELESS INFO:--J64E Rewritten started development on November 9th, 2022.
 As long as there's 2 people left on the planet,--someone is gonna want someone dead.
 His name isn't Keith.
 One arrow is enough.

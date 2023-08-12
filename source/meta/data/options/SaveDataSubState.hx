@@ -7,7 +7,6 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
 import meta.*;
@@ -70,7 +69,8 @@ class SaveDataSubState extends MusicBeatSubstate
         	if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
-		if (controls.BACK) {
+		if (controls.BACK) 
+		{
 			FlxG.mouse.visible = false;
 			close();
 		}

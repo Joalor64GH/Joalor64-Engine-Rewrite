@@ -62,7 +62,7 @@ You can check planned/upcoming features [here](/TODO).
 
 ### Special Thanks
 * [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
-* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds
+* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
 * [TheWorldMachinima](https://github.com/TheWorldMachinima) - SScript and Funkin Cocoa Code + Softcoded Achievements
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
@@ -74,7 +74,7 @@ You can check planned/upcoming features [here](/TODO).
 
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
-* [Riveren](https://twitter.com/riverennn) - Main Artist + Animator + Latin Support
+* [Riveren](https://twitter.com/riverennn) - Main Artist + Animator
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
 * [Yoshubs](https://gamebanana.com/members/1908070) - Aditional Ex-Programmer + Epic Input System
 
@@ -83,6 +83,6 @@ You can check planned/upcoming features [here](/TODO).
 * [KadeDev](https://github.com/Kade-github) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
-* [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations
+* [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations + New Latin Support
 * [Smokey](https://twitter.com/Smokey_5_) - Sprite Atlas Support
 * [Nebula the Zorua](https://twitter.com/nebula_zorua) - LUA JIT Fork and some Lua reworks
