@@ -1,4 +1,4 @@
-package meta.states.exception;
+package meta.state.exception;
 
 import flixel.math.FlxMath.lerp;
 import flixel.FlxG;
@@ -8,6 +8,8 @@ import flixel.math.FlxRect;
 import flixel.math.FlxPoint;
 import flixel.util.FlxSignal;
 import flixel.util.FlxAxes;
+
+import meta.CoolUtil;
 
 /**
  * A scrollable text allows you to scroll the text using the mouse in case it is too long.
@@ -85,8 +87,8 @@ class ScrollableText extends FlxTypedSpriteGroup<FlxSprite>
 			scrollPoint.add(0, FlxG.mouse.wheel * 4);
         }
 
-		scrollPoint.x = lerp(scrollPoint.x, 0, Tools.boundFPS(0.05));
-		scrollPoint.y = lerp(scrollPoint.y, 0, Tools.boundFPS(0.05));
+		scrollPoint.x = lerp(scrollPoint.x, 0, CoolUtil.boundFPS(0.05));
+		scrollPoint.y = lerp(scrollPoint.y, 0, CoolUtil.boundFPS(0.05));
 		// scrollPoint.y = FlxMath.bound(scrollPoint.y, y, height + y);
 		updateScroll(scrollPoint);
 		super.update(elapsed);

@@ -178,6 +178,8 @@ class CoolUtil
 
 	public static final GithubRepoURL:String = "https://github.com/Joalor64GH/Joalor64-Engine-Rewrite";
 
+	@:keep public static inline function boundFPS(input:Float) @:privateAccess return input;
+
 	@:keep public static inline function killMusic(songsArray:Array<FlxSound>) {
 		// neat function thing for songs
 		for (i in 0...songsArray.length) {

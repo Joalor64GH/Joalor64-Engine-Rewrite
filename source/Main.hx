@@ -243,9 +243,7 @@ class Joalor64Game extends FlxGame {
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
 		final formattedMessage:String = getCallStack().join("\n");
-		var errorMessage = formattedMessage + '\nUncaught Error: ${e.message}\nPlease report this error to the GitHub page: ${GithubRepoURL}';
-
-		writeLog(getLogPath(), errorMessage);
+		var errorMessage = formattedMessage + '\nUncaught Error: ${e.message}\nPlease report this error to the GitHub page: ${CoolUtil.GithubRepoURL}';
 
 		meta.data.Conductor.songPosition = 0;
 		CoolUtil.killMusic([FlxG.sound.music]);
@@ -261,9 +259,7 @@ class Joalor64Game extends FlxGame {
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
 		final formattedMessage:String = getCallStack().join("\n");
-		var errorMessage = formattedMessage + '\nUncaught Error: ${e.error}\nPlease report this error to the GitHub page: ${GithubRepoURL}';
-
-		writeLog(getLogPath(), errorMessage);
+		var errorMessage = formattedMessage + '\nUncaught Error: ${e.error}\nPlease report this error to the GitHub page: ${CoolUtil.GithubRepoURL}';
 
 		meta.data.Conductor.songPosition = 0;
 		CoolUtil.killMusic([FlxG.sound.music]);
@@ -292,7 +288,7 @@ class Joalor64Game extends FlxGame {
 					caughtErrors.push('Local Function (${name})');
 			}
 
-			print(stackItem, ERROR);
+			Sys.println(stackItem);
 		}
 
 		return caughtErrors;
@@ -312,8 +308,8 @@ class Joalor64Game extends FlxGame {
 			FileSystem.createDirectory("crash/");
 		File.saveContent(path, '${errMsg}\n');
 
-		print(errMsg, ERROR);
-		print('Crash dump saved in ${Path.normalize(path)}', ERROR);
+		Sys.println(errMsg);
+		Sys.println('Crash dump saved in ${Path.normalize(path)}');
 	}
 
 	private function getLogPath():String {
