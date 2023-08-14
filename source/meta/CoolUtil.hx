@@ -176,17 +176,9 @@ class CoolUtil
 	inline public static function clamp(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
 
-	public static final GithubRepoURL:String = "https://github.com/Joalor64GH/Joalor64-Engine-Rewrite";
-
-	@:keep public static inline function boundFPS(input:Float) @:privateAccess return input;
-
-	@:keep public static inline function killMusic(songsArray:Array<FlxSound>) {
-		// neat function thing for songs
-		for (i in 0...songsArray.length) {
-			// stop
-			songsArray[i].stop();
-			songsArray[i].destroy();
-		}
+	@:keep public static inline function boundFPS(input:Float) {
+		@:privateAccess 
+		return input;
 	}
 }
 

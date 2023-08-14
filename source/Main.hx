@@ -243,15 +243,11 @@ class Joalor64Game extends FlxGame {
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
 		final formattedMessage:String = getCallStack().join("\n");
-		var errorMessage = formattedMessage + '\nUncaught Error: ${e.message}\nPlease report this error to the GitHub page: ${CoolUtil.GithubRepoURL}';
 
-		meta.data.Conductor.songPosition = 0;
-		CoolUtil.killMusic([FlxG.sound.music]);
+		FlxG.sound.music.volume = 0;
 
 		DiscordClient.shutdown();
 
-		// doing visuals later, just force switch this thing for now
-		Lib.application.window.alert(errorMessage + "\n\nFriday Night Funkin, Joalor64 Engine Rewritten - ERROR ALERT!");
 		goToExceptionState(e.message, formattedMessage, true, callStack);
 	}
 
@@ -259,15 +255,11 @@ class Joalor64Game extends FlxGame {
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
 		final formattedMessage:String = getCallStack().join("\n");
-		var errorMessage = formattedMessage + '\nUncaught Error: ${e.error}\nPlease report this error to the GitHub page: ${CoolUtil.GithubRepoURL}';
 
-		meta.data.Conductor.songPosition = 0;
-		CoolUtil.killMusic([FlxG.sound.music]);
+		FlxG.sound.music.volume = 0;
 
 		DiscordClient.shutdown();
 
-		// doing visuals later, just force switch this thing for now
-		Lib.application.window.alert(errorMessage + "\n\nFriday Night Funkin, Joalor64 Engine Rewritten - ERROR ALERT!");
 		goToExceptionState(e.error, formattedMessage, true, callStack);
 	}
 

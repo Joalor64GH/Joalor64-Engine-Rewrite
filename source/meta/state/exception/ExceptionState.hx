@@ -32,12 +32,14 @@ class ExceptionState extends FlxState {
 		if (callStack != null)
 			errorText.text += '\nCallStack: ${try CallStack.toString(callStack) catch(e) "Unknown (Failed parsing CallStack)"}\n';
 		if (shouldGithubReport)
-			errorText.text += '\nTake a screenshot of this error and\nreport it to the GitHub page!';
+			errorText.text += '\nTake a screenshot of this error and report it to the GitHub page!';
         errorText.text += '\nPress G to go to the GitHub page.\nPress Q to quit the game.\nPress R to restart the game.';
 		errorText.screenCenter(X);
 		errorScrollable.add(errorText);
 
 		add(errorScrollable);
+
+		FlxG.mouse.visible = true;
 
 		errorText.antialiasing = ClientPrefs.globalAntialiasing;
 	}
