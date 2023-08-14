@@ -5,6 +5,11 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
+import flixel.system.FlxSound;
+#end
 
 #if sys
 import sys.FileSystem;
@@ -170,6 +175,17 @@ class CoolUtil
 	// thanks denpa engine team
 	inline public static function clamp(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
+
+	public static final GithubRepoURL:String = "https://github.com/Joalor64GH/Joalor64-Engine-Rewrite";
+
+	@:keep public static inline function killMusic(songsArray:Array<FlxSound>) {
+		// neat function thing for songs
+		for (i in 0...songsArray.length) {
+			// stop
+			songsArray[i].stop();
+			songsArray[i].destroy();
+		}
+	}
 }
 
 // there's a big difference between the two

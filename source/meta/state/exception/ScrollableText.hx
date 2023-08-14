@@ -12,7 +12,6 @@ import flixel.util.FlxAxes;
 /**
  * A scrollable text allows you to scroll the text using the mouse in case it is too long.
  * - Original Class from Plank Engine
- * - TODO: Scroll Header
  * @see https://github.com/ThePlank/PlankEngine/blob/main/source/display/objects/ScrollableSprite.hx
  */
 class ScrollableText extends FlxTypedSpriteGroup<FlxSprite>

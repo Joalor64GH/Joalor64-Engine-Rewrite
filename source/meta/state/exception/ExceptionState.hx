@@ -1,4 +1,4 @@
-package forever.states;
+package meta.state.exception;
 
 import haxe.CallStack;
 
@@ -15,7 +15,7 @@ import meta.state.exception.ScrollableText;
 /**
  * Cool In-Game Crash Handler
  * @author Sword352
- * @see https://github.com/Sword352/Forever-Engine-Eternal
+ * @see https://github.com/FunknecionCubeFNF/Forever-Engine-Eternal
  */
 class ExceptionState extends FlxState {
 	var errorText:FlxText;
