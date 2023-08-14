@@ -22,7 +22,7 @@ class ExceptionState extends FlxState
 	var errorText:FlxText;
 
 	public function new(exception:String, errorMsg:String, shouldGithubReport:Bool, ?callStack:CallStack) 
-    {
+        {
 		super();
 
 		var errorScrollable:ScrollableText = new ScrollableText(0, FlxG.height * 0.05, FlxG.width, FlxG.height * 0.75);
@@ -33,7 +33,7 @@ class ExceptionState extends FlxState
 			errorText.text += '\nCallStack: ${try CallStack.toString(callStack) catch(e) "Unknown (Failed parsing CallStack)"}\n';
 		if (shouldGithubReport)
 			errorText.text += '\nTake a screenshot of this error and report it to the GitHub page!';
-        errorText.text += '\nPress G to go to the GitHub page.\nPress Q to quit the game.\nPress R to restart the game.';
+        	errorText.text += '\nPress G to go to the GitHub page.\nPress Q to quit the game.\nPress R to restart the game.';
 		errorText.screenCenter(X);
 		errorScrollable.add(errorText);
 
@@ -44,27 +44,27 @@ class ExceptionState extends FlxState
 		errorText.antialiasing = ClientPrefs.globalAntialiasing;
 	}
 
-    override public function create()
-    {
-        FlxG.sound.play(Paths.sound('crash'));
-        super.create();
-    }
+    	override public function create()
+    	{
+        	FlxG.sound.play(Paths.sound('crash'));
+        	super.create();
+    	}
 
 	override function update(elapsed:Float) 
-    {
+    	{
 		super.update(elapsed);
 
-        if (FlxG.keys.justPressed.G)
-			CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite');
+        	if (FlxG.keys.justPressed.G)
+			CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues');
 
-        if (FlxG.keys.justPressed.Q)
-	        FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() {Sys.exit(0);}, false);
+        	if (FlxG.keys.justPressed.Q)
+	        	FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() {Sys.exit(0);}, false);
 
 		if (FlxG.keys.justPressed.R) 
-        {
+        	{
 			TitleState.initialized = false;
 			TitleState.closedState = false;
 			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
-        }
+        	}
 	}
 }
