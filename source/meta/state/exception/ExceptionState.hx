@@ -44,9 +44,9 @@ class ExceptionState extends FlxState
 		errorText.antialiasing = ClientPrefs.globalAntialiasing;
 	}
 
-    override function create()
+    override public function create()
     {
-        FlxG.sound.play(Paths.sound('bsod'));
+        FlxG.sound.play(Paths.sound('crash'));
         super.create();
     }
 
