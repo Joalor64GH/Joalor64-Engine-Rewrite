@@ -10,6 +10,7 @@ import flixel.util.FlxColor;
 import meta.*;
 import meta.data.*;
 import meta.state.TitleState;
+import meta.state.OutdatedState;
 import meta.state.exception.ScrollableText;
 
 /**
@@ -64,6 +65,7 @@ class ExceptionState extends FlxState
         	{
 			TitleState.initialized = false;
 			TitleState.closedState = false;
+			OutdatedState.leftState = false;
 			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
         	}
 	}

@@ -50,7 +50,7 @@
 		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
-	<define name="PSYCH"/>
+	<define name="PSYCH"/> <!-- For the fnf-modcharting-tools library -->
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
