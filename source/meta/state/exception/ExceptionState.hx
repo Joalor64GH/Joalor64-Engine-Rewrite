@@ -9,7 +9,7 @@ import flixel.util.FlxColor;
 
 import meta.*;
 import meta.data.*;
-import meta.data.TitleState;
+import meta.state.TitleState;
 import meta.state.exception.ScrollableText;
 
 /**
