@@ -22,7 +22,7 @@ import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
 import meta.Controls;
-import Paths;
+#if !macro import Paths; #end
 
 #if MODS_ALLOWED import backend.Mods; #end
 

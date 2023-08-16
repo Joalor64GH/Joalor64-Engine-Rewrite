@@ -6,7 +6,11 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.util.FlxTimer;
+import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 import haxe.Http;
@@ -14,23 +18,41 @@ import haxe.Http;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-import meta.state.PlayState;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
 
-class Init extends FlxState // this loads everything in
+// this loads everything in
+class Init extends FlxState
 {
-	public static var randomIcon:Array<String> = [
-		'joalor', 
-		'meme', 
-		'fox', 
-		'bot'
+	public static var coolColors:Array<FlxColor> = [
+		0x00000000, // Transparent
+		0xFFFFFFFF, // White
+		0xFF808080, // Gray
+		0xFF000000, // Black
+		0xFF008000, // Green
+		0xFF00FF00, // Lime
+		0xFFFFFF00, // Yellow
+		0xFFFFA500, // Orange
+		0xFFFF0000, // Red
+		0xFF800080, // Purple
+		0xFF0000FF, // Blue
+		0xFF8B4513, // Brown
+		0xFFFFC0CB, // Pink
+		0xFFFF00FF, // Magenta
+		0xFF00FFFF // Cyan
 	];
-	var epicSprite:FlxSprite;
-
 	public static var updateVersion:String = '';
+
+	var loadingSpeen:FlxSprite;
+	var epicLogo:FlxSprite;
+
+	var coolText:FlxText;
+
     	var mustUpdate:Bool = false;
+	var isTweening:Bool = false;
+
+	var lastString:String = '';
 
 	public function new() 
 	{
@@ -43,33 +65,68 @@ class Init extends FlxState // this loads everything in
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
-        	bg.scale.set(10, 10);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("loader/bgDesat"));
+		bg.color = randomizeColor();
 		bg.screenCenter();
         	add(bg);
         
-        	epicSprite = new FlxSprite().loadGraphic(randomizeIcon());
-        	epicSprite.antialiasing = ClientPrefs.globalAntialiasing;
-        	epicSprite.angularVelocity = 30;
-		epicSprite.screenCenter();
-        	add(epicSprite);
+        	epicLogo = new FlxSprite().loadGraphic(Paths.image('loader/startupLogo'));
+        	epicLogo.antialiasing = ClientPrefs.globalAntialiasing;
+		epicLogo.screenCenter();
+        	add(epicLogo);
 
-		FlxG.sound.play(Paths.sound('credits/goofyahhphone'));
+		logoTween();
+
+		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
+		bottomPanel.alpha = 0.5;
+		add(bottomPanel);
+
+		coolText = new FlxText(20, FlxG.height - 80, 1000, "", 22);
+		coolText.scrollFactor.set();
+		coolText.setFormat("VCR OSD Mono", 26, 0xFFffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(coolText);
+
+		loadingSpeen = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
+		loadingSpeen.angularVelocity = 180;
+		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
+		add(loadingSpeen);
+
+		FlxG.sound.play(Paths.sound('startup'));
 
 		load();
 
-		new FlxTimer().start(4, function(timer) 
+		new FlxTimer().start(10, function(timer) 
 		{
 			startGame();
 		});
 
+		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
+
         	super.create();
     	}
 
+	var selectedSomethin:Bool = false;
+	var timer:Float = 0;
+
 	override function update(elapsed)
 	{
-		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
-			skip();
+		if (!selectedSomethin) {
+			if (isTweening) {
+				coolText.screenCenter(X);
+				timer = 0;
+			} else {
+				coolText.screenCenter(X);
+				timer += elapsed;
+				if (timer >= 3)
+				{
+					changeText();
+				}
+			}
+		}
+
+		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE) {
+			startGame(); // in case you wanna skip
+		}
 
 		super.update(elapsed);
 	}
@@ -149,9 +206,40 @@ class Init extends FlxState // this loads everything in
 		Highscore.load();
 	}
 
-	function skip() 
+	function changeText()
 	{
-		startGame();
+		var selectedText:String = '';
+		var textArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('tipText')); // basically introText.txt
+
+		coolText.alpha = 1;
+		isTweening = true;
+		selectedText = textArray[FlxG.random.int(0, (textArray.length - 1))].replace('--', '\n');
+		FlxTween.tween(coolText, {alpha: 0}, 1, {
+			ease: FlxEase.linear,
+			onComplete: function(shit:FlxTween)
+			{
+				if (selectedText != lastString)
+				{
+					coolText.text = selectedText;
+					lastString = selectedText;
+				}
+				else
+				{
+					selectedText = textArray[FlxG.random.int(0, (textArray.length - 1))].replace('--', '\n');
+					coolText.text = selectedText;
+				}
+
+				coolText.alpha = 0;
+
+				FlxTween.tween(coolText, {alpha: 1}, 1, {
+					ease: FlxEase.linear,
+					onComplete: function(shit:FlxTween)
+					{
+						isTweening = false;
+					}
+				});
+			}
+		});
 	}
 
 	function startGame() 
@@ -172,9 +260,23 @@ class Init extends FlxState // this loads everything in
 	    	});
 	}
 
-	public static function randomizeIcon():flixel.system.FlxAssets.FlxGraphicAsset
+	function logoTween()
 	{
-		var chance:Int = FlxG.random.int(0, randomIcon.length - 1);
-		return Paths.image('credits/${randomIcon[chance]}');
+		epicLogo.angle = -4;
+
+		new FlxTimer().start(0.01, function(tmr:FlxTimer)
+		{
+			if (epicLogo.angle == -4)
+				FlxTween.angle(epicLogo, epicLogo.angle, 4, 4, {ease: FlxEase.quartInOut});
+			if (epicLogo.angle == 4)
+				FlxTween.angle(epicLogo, epicLogo.angle, -4, 4, {ease: FlxEase.quartInOut});
+		}, 0);
 	}
+
+	public static function randomizeColor()
+    	{
+		var chance:Int = FlxG.random.int(0, coolColors.length - 1);
+		var color:FlxColor = coolColors[chance];
+		return color;
+   	}
 }

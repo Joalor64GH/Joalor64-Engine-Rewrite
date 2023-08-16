@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
+import flixel.text.FlxText;
 import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
@@ -32,9 +33,9 @@ class OptionsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
+		'Offsets',
 		'Visuals',
-		'Gameplay',
-		'Offsets', 
+		'Gameplay', 
 		'Miscellaneous'
 	];
 
@@ -51,18 +52,15 @@ class OptionsState extends MusicBeatState
 					Main.toast.create('No mod options exist!', 0xFFFFFF00, 'Please add your custom options to access this menu!');
 			#end
 			case 'Note Colors':
-				if(ClientPrefs.arrowMode == 'RGB')
-					openSubState(new NotesRGBSubState());
-				else
-					openSubState(new NotesHSVSubState());
+				openSubState(new NotesSubState());
 			case 'Controls':
 				openSubState(new ControlsSubState());
+			case 'Offsets':
+				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Visuals':
 				openSubState(new VisualsSubState());
 			case 'Gameplay':
 				openSubState(new GameplaySubState());
-			case 'Offsets':
-				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Miscellaneous':
 				openSubState(new MiscSubState());
 		}
@@ -111,6 +109,11 @@ class OptionsState extends MusicBeatState
 		bg.scrollFactor.set(0, yScroll / 3);
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press D for save data settings.", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 		
 		initOptions();
 
@@ -164,6 +167,10 @@ class OptionsState extends MusicBeatState
 		bg.scale.set(mult, mult);
 		bg.updateHitbox();
 		bg.offset.set();
+
+		if (FlxG.keys.justPressed.D) {
+			openSubState(new SaveDataSubState());
+		}
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);

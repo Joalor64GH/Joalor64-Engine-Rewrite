@@ -50,7 +50,7 @@
 		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
-	<define name="PSYCH"/>
+	<define name="PSYCH"/> <!-- For the fnf-modcharting-tools library -->
 	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
@@ -129,7 +129,7 @@
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
 
 	<!-- Script logging -->
-	<haxedef name="hscriptPos" value="true" />
+	<haxedef name="hscriptPos"/>
 	<haxedef name="openflPos"/>
 	
 	<!--Enable the Flixel core recording system-->
@@ -167,6 +167,10 @@
 
 	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
 	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
+
+	<!-- Fix for macros -->
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
 
 	<!-- _________________________________ Miscellaneous _______________________________ -->
 	

@@ -34,7 +34,6 @@ import system.*;
 
 import core.ToastCore;
 import meta.data.Achievements;
-import meta.state.PlayState;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -64,7 +63,7 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
-	public static var joalor64EngineVersion:String = '1.3.5'; // Used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.4.0 (UNRELEASED)'; // Used for Discord RPC
 	
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
@@ -142,6 +141,7 @@ class MainMenuState extends MusicBeatState
 			[
 				'story_mode',
 				'freeplay',
+				'extras',
 				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
 				#end
 				#if ACHIEVEMENTS_ALLOWED
@@ -149,7 +149,6 @@ class MainMenuState extends MusicBeatState
 				#end
 				'credits',
 				#if !switch 
-				'kickstarter',
 				'donate',
 				#end
 				'options'
@@ -281,13 +280,14 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		// Watermarks
-		var texts:Array<String> = [
-			"Friday Night Funkin' v" + Application.current.meta.get('version'),
+		var versionShitArray:Array<String> = [
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion',
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion'
+			"Friday Night Funkin' v" + Application.current.meta.get('version')
 		];
-		for (i in 0...texts.length) {
-			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);
+		versionShitArray.reverse();
+		for (i in 0...versionShitArray.length) {
+			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, versionShitArray[i], 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
@@ -348,9 +348,6 @@ class MainMenuState extends MusicBeatState
 				tipTextStartScrolling();
 			}
 		}
-
-		if (FlxG.keys.justPressed.E) 
-			MusicBeatState.switchState(new EpicState());
 		
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -384,10 +381,6 @@ class MainMenuState extends MusicBeatState
 				else if (optionShit[curSelected] == 'donate') 
 				{
 					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link'))); // custom link support idk
-				}
-				else if (optionShit[curSelected] == 'kickstarter')
-				{
-					CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
 				}
 				else
 				{
@@ -426,6 +419,8 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
+									case 'extras':
+										MusicBeatState.switchState(new ExtrasMenuState());
 									#if (MODS_ALLOWED && FUTURE_POLYMOD)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());

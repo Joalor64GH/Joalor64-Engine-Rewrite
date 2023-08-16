@@ -43,6 +43,8 @@ class CreditsState extends MusicBeatState
 
 	var offsetThing:Float = -75;
 
+	var noLink:Bool;
+
 	override function create()
 	{
 		#if desktop
@@ -106,14 +108,6 @@ class CreditsState extends MusicBeatState
 			],
 			[''],
 			['Special Thanks'],
-			[
-				'PE Discord Server Members',
-				'discord',
-				'They made the Scripts lmao\n"I got banned tho lmao"',
-				'https://discord.gg/2ka77eMXDv',
-				'6732E3',
-				'discordo'
-			],
 			[
 				'BeastlyGhost',
 				'beastly',
@@ -207,7 +201,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Riveren',
 				'riveren',
-				'Main Artist/Animator of Psych Engine\nNew Latin Support',
+				'Main Artist/Animator of Psych Engine',
 				'https://twitter.com/riverennn',
 				'B42F71',
 				'JingleRiver'
@@ -275,7 +269,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Keoiki',
 				'keoiki',
-				'Note Splash Animations',
+				'Note Splash Animations\nNew Latin Support',
 				'https://twitter.com/Keoiki_',
 				'D2D2D2',
 				''
@@ -446,8 +440,28 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.ENTER && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4))
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			if (creditsStuff[curSelected][3] == 'nolink')
+			{
+				noLink = true;
+			}
+			else
+			{
+				noLink = false;
+			}
+			if (noLink)
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+			}
+			else
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
+			}
 			if (FlxG.keys.justPressed.SPACE)
 				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
 
