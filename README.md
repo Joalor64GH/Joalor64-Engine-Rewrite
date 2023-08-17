@@ -31,21 +31,25 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 ----------------------------------------------
 
 # Features
+* Minigames
+* RGB Note Coloring
 * Latin Alphabet Support
 * JSONI8 Sprite Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
+* In-Game Crash Handler
 * Custom Options
 * SWF Support (Actionscript 3.0 Only)
 * Polymod Support
 * HX and Hscript Support
 * Replay System
 * Reorganized Source/Assets
-* Noteskins
 * MP4/WebM Video Support
 * Uncapped BPM :trollface:
 * Epic Modcharting Tools
 * Softcoded Achievements
+
+And a bunch more that ShadowMario will probably refuse to add.
 
 # Planned Features
 You can check planned/upcoming features [here](/TODO).
