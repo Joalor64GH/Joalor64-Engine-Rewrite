@@ -28,7 +28,7 @@ class ExceptionState extends FlxState
 
 		var errorScrollable:ScrollableText = new ScrollableText(0, FlxG.height * 0.05, FlxG.width, FlxG.height * 0.75);
 
-		errorText = new FlxText(0, 200, 0, "Joalor64 Engine Rewritten - Exception Report\n").setFormat(Paths.font('vcr.ttf'), 22, FlxColor.WHITE, CENTER);
+		errorText = new FlxText(0, 200, 0, "Joalor64 Engine Rewritten - Exception Report\n").setFormat(Paths.font('vcr.ttf'), 25, FlxColor.WHITE, CENTER);
 		errorText.text += 'Exception: ${exception}\n${errorMsg}\n';
 		if (callStack != null)
 			errorText.text += '\nCallStack: ${try CallStack.toString(callStack) catch(e) "Unknown (Failed parsing CallStack)"}\n';
