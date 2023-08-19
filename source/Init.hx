@@ -196,7 +196,7 @@ class Init extends FlxState
 				trace(data);
 		    	var newVersionData:EngineVersion = Json.parse(data);
 		    	trace('cur Version: ${MainMenuState.joalor64EngineVersion} // new Version: ${newVersionData.version}');
-				if(MainMenuState.joalor64EngineVersion != curVersion) {
+				if(MainMenuState.joalor64EngineVersion != newVersionData.version) {
 					trace('oh noo outdated!!');
 					mustUpdate = true;
 				}
