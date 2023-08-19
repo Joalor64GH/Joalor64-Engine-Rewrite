@@ -13,6 +13,8 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
+
+import haxe.Json;
 import haxe.Http;
 
 import meta.*;
@@ -21,6 +23,11 @@ import meta.data.*;
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
+
+typedef EngineVersion = {
+	var version:String;
+	var patchNotes:Array<String>;
+}
 
 // this loads everything in
 class Init extends FlxState
@@ -182,14 +189,14 @@ class Init extends FlxState
         	#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates) {
 			trace('checking for updates...');
-			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.txt");
+			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json");
 
 			http.onData = function (data:String)
 			{
-				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.joalor64EngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
-				if(updateVersion != curVersion) {
+				trace(data);
+		    	var newVersionData:EngineVersion = Json.parse(data);
+		    	trace('cur Version: ${MainMenuState.joalor64EngineVersion} // new Version: ${newVersionData.version}');
+				if(MainMenuState.joalor64EngineVersion != curVersion) {
 					trace('oh noo outdated!!');
 					mustUpdate = true;
 				}

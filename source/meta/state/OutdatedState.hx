@@ -8,13 +8,18 @@ import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 
+import haxe.Json;
+
 import meta.*;
 import meta.data.*;
 import meta.state.*;
 
+import Init;
+
 class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
+	public static var newVer:EngineVersion = null;
 
 	var warnText:FlxText;
 	
@@ -25,17 +30,22 @@ class OutdatedState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
+		var ver = MainMenuState.joalor64EngineVersion;
+		var patchNotes:String = "";
+
+		for (i in newVer.patchNotes)
+			patchNotes += '$i\n';
+
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Oh teh noes! You're running an\n
-			outdated version of Joalor64 Engine Rewritten!\n
-			Your current version is v" + MainMenuState.joalor64EngineVersion + "!\n
-			Please update to v" + Init.updateVersion + "!\n
-			Press ENTER to open the downloads page!\n
-			Press ESCAPE to proceed anyway.\n
+			"Oh teh noes! You're running an outdated version of Joalor64 Engine Rewritten!\n
+			Your current version is v" + ver + ", while the most recent version is v" + newVer.version + "!\n
+			What's Changed:\n"
+			+ patchNotes +
+			"\nPress ENTER to go to GitHub. Otherwise, press ESCAPE to proceed anyways.\n
  			Thank you for using the Engine! :)",
 			32);
-		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
-		warnText.screenCenter(Y);
+		warnText.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, CENTER);
+		warnText.screenCenter(XY);
 		add(warnText);
 
 		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
