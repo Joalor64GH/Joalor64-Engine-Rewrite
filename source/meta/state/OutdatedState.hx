@@ -14,12 +14,11 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 
-import Init;
-
 class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
-	public static var newVer:EngineVersion = null;
+	public static var mustUpdate:Bool = false;
+	public static var daJson:Dynamic;
 
 	var warnText:FlxText;
 	
@@ -30,17 +29,11 @@ class OutdatedState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		var ver = MainMenuState.joalor64EngineVersion;
-		var patchNotes:String = "";
-
-		for (i in newVer.patchNotes)
-			patchNotes += '$i\n';
-
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Oh teh noes! You're running an outdated version of Joalor64 Engine Rewritten!\n
-			Your current version is v" + ver + ", while the most recent version is v" + newVer.version + "!\n
+			Your current version is v" + MainMenuState.joalor64EngineVersion + ", while the most recent version is v" + daJson.version + "!\n
 			What's Changed:\n"
-			+ patchNotes +
+			+ daJson.description +
 			"\nPress ENTER to go to GitHub. Otherwise, press ESCAPE to proceed anyways.\n
  			Thank you for using the Engine! :)",
 			32);
@@ -49,6 +42,31 @@ class OutdatedState extends MusicBeatState
 		add(warnText);
 
 		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
+	}
+
+	public static function updateCheck()
+	{
+		trace('checking for updates...');
+		var http:Http = new Http('https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json');
+		http.onData = function(data:String)
+		{
+			var daRawJson:Dynamic = Json.parse(data);
+			if (daRawJson.version != MainMenuState.joalor64EngineVersion)
+			{
+				trace('oh noo outdated!!');
+				daJson = daRawJson;
+				mustUpdate = true;
+			}
+			else
+				mustUpdate = false;
+		}
+
+		http.onError = function(error)
+		{
+			trace('error: $error');
+		}
+
+		http.request();
 	}
 
 	override function update(elapsed:Float)

@@ -12,22 +12,14 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.input.keyboard.FlxKey;
-import lime.app.Application;
-
-import haxe.Json;
-import haxe.Http;
 
 import meta.*;
 import meta.state.*;
 import meta.data.*;
+
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end
-
-typedef EngineVersion = {
-	var version:String;
-	var patchNotes:Array<String>;
-}
 
 // this loads everything in
 class Init extends FlxState
@@ -49,14 +41,12 @@ class Init extends FlxState
 		0xFFFF00FF, // Magenta
 		0xFF00FFFF // Cyan
 	];
-	public static var updateVersion:String = '';
 
 	var loadingSpeen:FlxSprite;
 	var epicLogo:FlxSprite;
 
 	var coolText:FlxText;
-
-    	var mustUpdate:Bool = false;
+    	
 	var isTweening:Bool = false;
 
 	var lastString:String = '';
@@ -185,29 +175,10 @@ class Init extends FlxState
 		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
 
 		ClientPrefs.loadPrefs();
-
-        	#if CHECK_FOR_UPDATES
-		if(ClientPrefs.checkForUpdates) {
-			trace('checking for updates...');
-			var http = new Http("https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json");
-
-			http.onData = function (data:String)
-			{
-				trace(data);
-		    	var newVersionData:EngineVersion = Json.parse(data);
-		    	trace('cur Version: ${MainMenuState.joalor64EngineVersion} // new Version: ${newVersionData.version}');
-				if(MainMenuState.joalor64EngineVersion != newVersionData.version) {
-					trace('oh noo outdated!!');
-					mustUpdate = true;
-				}
-			}
-
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-
-			http.request();
-		}
+        
+		#if CHECK_FOR_UPDATES
+		if (ClientPrefs.checkForUpdates && !OutdatedState.leftState)
+			OutdatedState.updateCheck();
 		#end
 
 		Highscore.load();
@@ -253,7 +224,7 @@ class Init extends FlxState
 	{
         	FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
         	{
-			if (mustUpdate)
+			if (OutdatedState.mustUpdate && !OutdatedState.leftState)
 			{
 				FlxG.switchState(new OutdatedState());
 			} 
