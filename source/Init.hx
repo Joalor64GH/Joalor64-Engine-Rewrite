@@ -12,11 +12,11 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.input.keyboard.FlxKey;
+import lime.app.Application;
 
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-
 #if FUTURE_POLYMOD
 import core.ModCore;
 #end

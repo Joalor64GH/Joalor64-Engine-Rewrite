@@ -9,6 +9,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 
 import haxe.Json;
+import haxe.Htpp;
 
 import meta.*;
 import meta.data.*;
@@ -18,6 +19,7 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 	public static var mustUpdate:Bool = false;
+	
 	public static var daJson:Dynamic;
 
 	var warnText:FlxText;
@@ -32,7 +34,7 @@ class OutdatedState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Oh teh noes! You're running an outdated version of Joalor64 Engine Rewritten!\n
 			Your current version is v" + MainMenuState.joalor64EngineVersion + ", while the most recent version is v" + daJson.version + "!\n
-			What's Changed:\n"
+			What's New:\n"
 			+ daJson.description +
 			"\nPress ENTER to go to GitHub. Otherwise, press ESCAPE to proceed anyways.\n
  			Thank you for using the Engine! :)",
