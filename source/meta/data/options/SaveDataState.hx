@@ -17,7 +17,7 @@ import meta.state.*;
 
 using StringTools;
 
-class SaveDataSubState extends MusicBeatSubstate
+class SaveDataState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 	
@@ -29,11 +29,12 @@ class SaveDataSubState extends MusicBeatSubstate
 	];
 
     	var curSelected:Int = 0;
+	
    	var bg:FlxSprite;
 
-	public function new()
+	override public function create()
 	{
-		super();
+		super.create();
 
 		#if desktop
 		DiscordClient.changePresence("Save Data Menu", null);
@@ -58,8 +59,6 @@ class SaveDataSubState extends MusicBeatSubstate
         	changeSelection();
 
 		FlxG.mouse.visible = true;
-
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	override function update(elapsed:Float)
@@ -71,8 +70,9 @@ class SaveDataSubState extends MusicBeatSubstate
 
 		if (controls.BACK) 
 		{
+			MusicBeatState.switchState(new OptionsState());
+			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.mouse.visible = false;
-			close();
 		}
             
 		if (controls.ACCEPT)

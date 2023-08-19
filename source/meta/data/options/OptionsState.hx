@@ -169,7 +169,7 @@ class OptionsState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.D) {
-			openSubState(new SaveDataSubState());
+			MusicBeatState.switchState(new SaveDataState());
 		}
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
