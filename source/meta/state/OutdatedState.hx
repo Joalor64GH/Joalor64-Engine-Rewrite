@@ -9,7 +9,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 
 import haxe.Json;
-import haxe.Htpp;
+import haxe.Http;
 
 import meta.*;
 import meta.data.*;
@@ -19,7 +19,7 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 	public static var mustUpdate:Bool = false;
-	
+
 	public static var daJson:Dynamic;
 
 	var warnText:FlxText;
