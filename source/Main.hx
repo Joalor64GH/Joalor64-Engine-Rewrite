@@ -32,6 +32,13 @@ import sys.io.File;
 
 using StringTools;
 
+#if linux
+@:cppFileCode('
+	#define GAMEMODE_AUTO
+	#include "gamemode_client.h"
+')
+#end
+
 class Main extends Sprite
 {
 	var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
