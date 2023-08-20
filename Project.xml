@@ -2,18 +2,24 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<!-- Main Stuff -->
-	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" package="com.joalor64gh.j64enginere" main="Main" version="0.2.8" company="Joalor64GH" />
+	<!-- Application Window Title and Executable File Name -->
+	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" />
 	<app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
 
-	<!-- Just for clarfication -->
+	<!-- For debug builds -->
 	<section if="debug">
 		<app file="J64EngineRE_WIN DEBUG" if="windows" />
 		<app file="J64EngineRE_APP DEBUG" if="linux" />
 		<app file="J64EngineRE_MAC DEBUG" if="mac" />
 	</section>
+
+	<!-- Package Name (Mac) -->
+	<app package="com.joalor64gh.j64enginere" />
+
+	<!-- Main Class State, Game Version, Company (save data) Name -->
+	<app main="Main" version="0.2.8" company="Joalor64GH" />
 
 	<!--Preloader-->
 	<app preloader="flixel.system.FlxPreloader" />
@@ -119,6 +125,9 @@
 	<!-- Discord Rich Prescence-->
 	<haxelib name="discord_rpc" if="desktop"/>
 
+	<!-- djFlixel -->
+	<haxelib name="djFlixel"/>
+
 	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 	<haxelib name="polymod-joalor64" if="FUTURE_POLYMOD"/>
@@ -168,7 +177,8 @@
 	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
 	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
 
-	<!-- Fix for macros -->
+	<!-- _______________________________ Macros Fixes ______________________________ -->
+
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
 
