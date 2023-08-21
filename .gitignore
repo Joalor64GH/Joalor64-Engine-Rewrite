@@ -5,8 +5,8 @@ art/build_x32-officialrelease.bat
 art/build_x64-officialrelease.bat
 art/test_x64-debug-officialrelease.bat
 # Newgrounds IO Stuff
-source/NGio.hx
-source/io/
+NGio.hx
+/io/
 # Misc
 Preloader.hx
 
@@ -14,51 +14,27 @@ Preloader.hx
 FNFBot.exe
 
 ### GameJolt-Specific
-source/GJKeys.hx
-source/GameJolt.hx
-source/gamejolt/*
+GJKeys.hx
+GameJolt.hx
+/gamejolt/*
 
 ### Android-Specific
-source/SUtil.hx
-source/android/*
-source/mobile/*
-source/mobile/flixel/*
+SUtil.hx
+android/*
+mobile/*
+/android/*
+/mobile/flixel/*
 assets/android/*
 assets/images/androidcontrols/
-art/dependencyFiles/android/
 mobile/*
-
-### Appveyor-Specific
-appveyor.yml
-appveyor-win32.yml
-
-### Git-Specific
-.gitconfig
-.gitinclude
-.gitkeep
-
-### Stage Editor-Related
-assets/images/stageborder.png
-source/editors/StageEditorState.hx
-source/LayerFile.hx
-
-### Stepmania Stuff
-assets/sm/
-source/smTools/
 
 ### Misc
 art/mod.url
-polymod_mods/*
 example_mods/modList.txt
-source/Snd.hx
-source/SndTV.hx
-source/ChartParser.hx
-source/editors/EditorLua.hx
-source/editors/EditorPlayState.hx
 polymod-fix/PolymodFileSystem.hx
-* - Copy.*
+* - Copy*
 
-### Add any of these regardless of them getting ignored.
+### You can add any of these regardless of them getting ignored.
 !appveyor-linux.yml
 !appveyor-macos.yml
 !appveyor-windows.yml
@@ -66,20 +42,12 @@ polymod-fix/PolymodFileSystem.hx
 !modchartexample.mc
 !.DS_Store
 !Thumbs.db
-!*.hxml
-!*.hxproj
-!*.hxp
-!*.jsonc
-!source/spine/
-
-# Why wouldn't we allow introMod?
-!example_mods/introMod/* 
 
 ### VS Code
 export/*
 .vscode/*
 .vscode/.temp
-source/.vscode/launch.json
+.vscode/launch.json
 # Local history which shouldn't be shared.
 desktop.ini
 .history/

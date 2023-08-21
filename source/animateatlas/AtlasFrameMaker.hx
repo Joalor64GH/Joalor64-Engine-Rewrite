@@ -29,6 +29,7 @@ class AtlasFrameMaker extends FlxFramesCollection
 	// for caching
 	static var framesLoaded:Map<String, FlxFramesCollection> = new Map();
 
+	// TODO: compatibility for newer atlas vers
 	public static function construct(key:String,?_excludeArray:Array<String> = null, ?noAntialiasing:Bool = false):FlxFramesCollection
 	{
 		var frameCollection:FlxFramesCollection;
@@ -116,7 +117,6 @@ class AtlasFrameMaker extends FlxFramesCollection
 		return daFramez;
 	}
 
-	inline public static function clearCachedFrames(){
+	inline public static function clearCachedFrames()
 		return framesLoaded.clear();
-	}
 }

@@ -1,29 +1,14 @@
 package meta.data.options;
 
-import flixel.addons.transition.FlxTransitionableState;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
+
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -53,7 +38,7 @@ class ModOptionSelectState extends MusicBeatState
 		DiscordClient.changePresence("Mod Menu", null);
 		#end
 
-        	mods = Paths.getModDirectories();
+        	mods = Mods.getModDirectories();
         	mods.insert(0, 'Global');
 
 		for (mod in mods) {
@@ -102,12 +87,8 @@ class ModOptionSelectState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
-			changeSelection(-1);
-		}
-		if (controls.UI_DOWN_P) {
-			changeSelection(1);
-		}
+		if (controls.UI_UP_P || controls.UI_DOWN_P)
+			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

@@ -37,11 +37,13 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
-	var intendedColor:Int;
+	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+
+	var noLink:Bool;
 
 	override function create()
 	{
@@ -59,32 +61,7 @@ class CreditsState extends MusicBeatState
 		add(grpOptions);
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var path:String = 'modsList.txt';
-		if (FileSystem.exists(path))
-		{
-			var leMods:Array<String> = CoolUtil.coolTextFile(path);
-			for (i in 0...leMods.length)
-			{
-				if (leMods.length > 1 && leMods[0].length > 0)
-				{
-					var modSplit:Array<String> = leMods[i].split('|');
-					if (!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()) && !modsAdded.contains(modSplit[0]))
-					{
-						if (modSplit[1] == '1')
-							pushModCreditsToList(modSplit[0]);
-						else
-							modsAdded.push(modSplit[0]);
-					}
-				}
-			}
-		}
-
-		var arrayOfFolders:Array<String> = Paths.getModDirectories();
-		arrayOfFolders.push('');
-		for (folder in arrayOfFolders)
-		{
-			pushModCreditsToList(folder);
-		}
+		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
 
 		var pisspoop:Array<Array<String>> = [
@@ -114,6 +91,14 @@ class CreditsState extends MusicBeatState
 				'omori' // funni sound goes here if you want
 			],
 			[
+				'ThatOneFox',
+				'fox',
+				'Epic New Logo\n"this is a quote"',
+				'https://github.com/ThatOneFoxHX',
+				'00A7D4',
+				'' // if you want, a funny sound effect can go here
+			],
+			[
 				'Bot 404',
 				'bot',
 				'Tiny little helper, Drew his own icon\n"expected more"',
@@ -124,28 +109,12 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Special Thanks'],
 			[
-				'PE Discord Server Members',
-				'discord',
-				'They made the Scripts lmao\n"I got banned tho lmao"',
-				'https://discord.gg/2ka77eMXDv',
-				'6732E3',
-				'discordo'
-			],
-			[
 				'BeastlyGhost',
 				'beastly',
-				'Customizable Main Menu with .JSON\nCredits Sounds\n"just happy to be here!"',
+				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
 				'https://github.com/BeastlyGhost',
 				'8CC4FF',
 				'Ghost'
-			],
-			[
-				'Stilic',
-				'stilic',
-				'Restored Combo Script\n"French Programmer"',
-				'https://github.com/Stilic',
-				'C74B22',
-				'meowmeowmeowAAAA'
 			],
 			[
 				'TheWorldMachinima',
@@ -156,10 +125,10 @@ class CreditsState extends MusicBeatState
 				'nyaw'
 			],
 			[
-				'magnumsrt',
+				'Magnumsrt',
 				'mag',
 				'In-Game Mod Downloader\n"why bro keep changing his user"',
-				'https://github.com/magnumsrt',
+				'https://github.com/steve-studios',
 				'0000FF',
 				'squeak'
 			],
@@ -181,9 +150,9 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'KookerFoxYT',
-				'fox',
+				'kooker',
 				'Custom Options\n"fox"',
-				'https://github.com/KookerFoxYT',
+				'https://twitter.com/kookerfoxyt',
 				'00B0B4', // it spelled bob lmao
 				''
 			],
@@ -201,6 +170,14 @@ class CreditsState extends MusicBeatState
 				'Micd Up Paths System\n"hell"',
 				'https://github.com/Verwex',
 				'8FFFFF',
+				''
+			],
+			[
+				'ActualMandM',
+				'none',
+				'RGB Note Coloring System\n"this is a quote"',
+				'https://linktr.ee/ActualMandM',
+				'9C5D88',
 				''
 			],
 			[
@@ -222,20 +199,12 @@ class CreditsState extends MusicBeatState
 				'JingleShadow'
 			],
 			[
-				'RiverOaken',
-				'river',
+				'Riveren',
+				'riveren',
 				'Main Artist/Animator of Psych Engine',
-				'https://twitter.com/RiverOaken',
+				'https://twitter.com/riverennn',
 				'B42F71',
 				'JingleRiver'
-			],
-			[
-				'Yoshubs',
-				'shubs',
-				'Additional Programmer of Psych Engine\nEpic Input System',
-				'https://twitter.com/yoshubs',
-				'5E99DF',
-				'JingleShubs'
 			],
 			[''],
 			['Former Engine Members'],
@@ -246,6 +215,14 @@ class CreditsState extends MusicBeatState
 				'https://twitter.com/bbsub3',
 				'3E813A',
 				'JingleBB'
+			],
+			[
+				'Yoshubs',
+				'shubs',
+				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
+				'https://gamebanana.com/members/1908070',
+				'5E99DF',
+				'JingleShubs'
 			],
 			[''],
 			['Engine Contributors'],
@@ -284,7 +261,7 @@ class CreditsState extends MusicBeatState
 			[
 				'KadeDev',
 				'kade',
-				'Fixed Chart Editor and other PRs\nExtension WebM',
+				'Fixed Chart Editor and other PRs\nExtension WebM Fork',
 				'https://twitter.com/kade0912',
 				'64A250',
 				''
@@ -292,7 +269,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Keoiki',
 				'keoiki',
-				'Note Splash Animations',
+				'Note Splash Animations\nNew Latin Support',
 				'https://twitter.com/Keoiki_',
 				'D2D2D2',
 				''
@@ -368,7 +345,7 @@ class CreditsState extends MusicBeatState
 			{
 				if (creditsStuff[i][5] != null)
 				{
-					Paths.currentModDirectory = creditsStuff[i][5];
+					Mods.currentModDirectory = creditsStuff[i][5];
 				}
 
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
@@ -378,7 +355,7 @@ class CreditsState extends MusicBeatState
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
-				Paths.currentModDirectory = '';
+				Mods.currentModDirectory = '';
 
 				if (curSelected == -1)
 					curSelected = i;
@@ -412,7 +389,7 @@ class CreditsState extends MusicBeatState
 		keyText.scrollFactor.set();
 		add(keyText);
 
-		bg.color = getCurrentBGColor();
+		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
 		super.create();
@@ -463,8 +440,28 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.ENTER && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4))
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			if (creditsStuff[curSelected][3] == 'nolink')
+			{
+				noLink = true;
+			}
+			else
+			{
+				noLink = false;
+			}
+			if (noLink)
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+			}
+			else
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
+			}
 			if (FlxG.keys.justPressed.SPACE)
 				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
 
@@ -475,7 +472,10 @@ class CreditsState extends MusicBeatState
 					colorTween.cancel();
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				if (ClientPrefs.simpleMain)
+					MusicBeatState.switchState(new SimpleMainMenuState());
+				else
+					MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
 		}
@@ -515,7 +515,8 @@ class CreditsState extends MusicBeatState
 		}
 		while (unselectableCheck(curSelected));
 
-		var newColor:Int = getCurrentBGColor();
+		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		trace('The BG color is: $newColor');
 		if (newColor != intendedColor)
 		{
 			if (colorTween != null)
@@ -560,13 +561,8 @@ class CreditsState extends MusicBeatState
 	}
 
 	#if (MODS_ALLOWED && FUTURE_POLYMOD)
-	private var modsAdded:Array<String> = [];
-
 	function pushModCreditsToList(folder:String)
 	{
-		if (modsAdded.contains(folder))
-			return;
-
 		var creditsFile:String = null;
 		if (folder != null && folder.trim().length > 0)
 			creditsFile = Paths.mods(folder + '/data/credits.txt');
@@ -585,19 +581,8 @@ class CreditsState extends MusicBeatState
 			}
 			creditsStuff.push(['']);
 		}
-		modsAdded.push(folder);
 	}
 	#end
-
-	function getCurrentBGColor()
-	{
-		var bgColor:String = creditsStuff[curSelected][4];
-		if (!bgColor.startsWith('0x'))
-		{
-			bgColor = '0xFF' + bgColor;
-		}
-		return Std.parseInt(bgColor);
-	}
 
 	private function unselectableCheck(num:Int):Bool
 	{

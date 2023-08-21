@@ -14,6 +14,7 @@ import polymod.format.ParseRules;
  * Class based originally from ChainSaw Engine.
  * Credits: MAJigsaw77.
  */
+ 
 class ModCore
 {
 	private static final API_VER:String = '1.0.0';
@@ -21,29 +22,21 @@ class ModCore
 
 	#if FUTURE_POLYMOD
 	private static final extensions:Map<String, PolymodAssetType> = [
-		'ogg' => AUDIO_GENERIC,
-		'mp3' => AUDIO_GENERIC,
+		#if !web 'ogg' #else 'mp3' #end => AUDIO_GENERIC,
 		'png' => IMAGE,
 		'xml' => TEXT,
 		'txt' => TEXT,
 		'json' => TEXT,
-		'jsonc' => TEXT,
-		'csv' => TEXT,
-		'tsv' => TEXT,
 		'hx' => TEXT,
 		'hscript' => TEXT,
 		'lua' => TEXT,
-		'py' => TEXT,
 		'frag' => TEXT,
 		'vert' => TEXT,
 		'ttf' => FONT,
 		'otf' => FONT,
 		'webm' => VIDEO,
 		'mp4' => VIDEO,
-		'swf' => VIDEO,
-		'fla' => BINARY,
-		'flp' => BINARY,
-		'zip' => BINARY
+		'swf' => VIDEO
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];

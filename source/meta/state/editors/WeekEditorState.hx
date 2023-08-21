@@ -28,6 +28,7 @@ import flash.net.FileFilter;
 import lime.system.Clipboard;
 import haxe.Json;
 import meta.data.WeekData;
+import flixel.input.keyboard.FlxKey;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -451,9 +452,12 @@ class WeekEditorState extends MusicBeatState
 		}
 
 		if(!blockInput) {
-			FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			// FlxG.sound.muteKeys = TitleState.muteKeys;
+			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			FlxG.sound.muteKeys = [FlxKey.ZERO];
+			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -617,6 +621,20 @@ class WeekEditorFreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(90, 320, weekFile.songs[i][0], true);
 			songText.isMenuItem = true;
+			switch (ClientPrefs.songDisplay)
+			{
+				case 'Classic':
+					songText.itemType = 'Classic';
+
+				case 'Vertical':
+					songText.itemType = 'Vertical';
+
+				case 'C-Shape':
+					songText.itemType = 'C-Shape';
+
+				case 'D-Shape':
+					songText.itemType = 'D-Shape';
+			}
 			songText.targetY = i;
 			grpSongs.add(songText);
 			songText.snapToPosition();
@@ -814,9 +832,12 @@ class WeekEditorFreeplayState extends MusicBeatState
 				iconInputText.hasFocus = false;
 			}
 		} else {
-			FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			// FlxG.sound.muteKeys = TitleState.muteKeys;
+			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			FlxG.sound.muteKeys = [FlxKey.ZERO];
+			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));

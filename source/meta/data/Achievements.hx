@@ -196,10 +196,10 @@ class Achievements {
 	#if (MODS_ALLOWED && FUTURE_POLYMOD && ACHIEVEMENTS_ALLOWED)
 	public static function loadModAchievements() {
 		achievementsStuff = copyAchievements.copy();
-		var oldPath:Array<String> = Paths.globalMods.copy();
-		Paths.globalMods = [];
+		var oldPath:Array<String> = Mods.globalMods.copy();
+		Mods.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Paths.globalMods = oldPath;
+		Mods.globalMods = oldPath;
 		for(i in paths.copy()){
 			if(FileSystem.exists(i)){
 				for(l in FileSystem.readDirectory(i)){
@@ -238,10 +238,10 @@ class Achievements {
 	}
 
 	public static function getModAchievements():Array<String> {
-		var oldPath:Array<String> = Paths.globalMods.copy();
-		Paths.globalMods = [];
+		var oldPath:Array<String> = Mods.globalMods.copy();
+		Mods.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Paths.globalMods = oldPath;
+		Mods.globalMods = oldPath;
 		var luas:Array<String> = [];
 		for(i in paths){
 			if(FileSystem.exists(i)){
@@ -260,10 +260,10 @@ class Achievements {
 	}
 
 	public static function getModAchievementMetas():Array<AchievementMeta> {
-		var oldPath:Array<String> = Paths.globalMods.copy();
-		Paths.globalMods = [];
+		var oldPath:Array<String> = Mods.globalMods.copy();
+		Mods.globalMods = [];
 		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
-		Paths.globalMods = oldPath;
+		Mods.globalMods = oldPath;
 		var metas = [];
 		for(i in paths)
 			if(FileSystem.exists(i))
@@ -297,6 +297,21 @@ class AttachedAchievement extends FlxSprite {
 	public function changeAchievement(tag:String) {
 		this.tag = tag;
 		reloadAchievementImage();
+	}
+
+	public function forget()
+	{
+		if (Achievements.isAchievementUnlocked(tag))
+		{
+			if (FlxG.save.data.achievementsMap != null)
+			{
+				var savedStuff:Map<String, String> = FlxG.save.data.achievementsMap;
+				if (savedStuff.exists(tag))
+					savedStuff.remove(tag);
+				FlxG.save.data.achievementsMap = savedStuff;
+				loadGraphic(Paths.image('achievements/lockedachievement'));
+			}
+		}
 	}
 
 	public function reloadAchievementImage() {
@@ -348,7 +363,7 @@ class AchievementObject extends FlxSpriteGroup {
 		add(achievementText);
 		add(achievementIcon);
 
-		var cam:Array<FlxCamera> = FlxCamera.defaultCameras;
+		var cam:Array<FlxCamera> = @:privateAccess FlxCamera._defaultCameras;
 		if(camera != null) {
 			cam = [camera];
 		}

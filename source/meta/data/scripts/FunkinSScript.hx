@@ -30,14 +30,13 @@ import meta.data.alphabet.*;
 import objects.userinterface.note.*;
 import objects.*;
 
-final class FunkinSScript extends SScript
+final class FunkinSScript extends tea.SScript
 {
-	override public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
+	public function new(?scriptFile:String = "", ?preset:Bool = true)
 	{
-		super(scriptFile, preset, false);
+		super(scriptFile, preset);
 
 		traces = false;
-		privateAccess = true;
 		
 		execute();
 	}

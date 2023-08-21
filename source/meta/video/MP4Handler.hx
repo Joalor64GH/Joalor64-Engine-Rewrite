@@ -14,6 +14,7 @@ import vlc.VlcBitmap;
 
 // THIS IS FOR TESTING
 // DONT STEAL MY CODE >:(
+// we stole it :trollface:
 class MP4Handler
 {
 	public var finishCallback:Void->Void;

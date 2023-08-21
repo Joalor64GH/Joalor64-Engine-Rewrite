@@ -1,0 +1,1 @@
+Your replays will be saved here after finishing a song in story mode!

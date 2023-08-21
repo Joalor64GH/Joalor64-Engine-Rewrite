@@ -5,7 +5,6 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxCamera;
 import flixel.math.FlxRect;
 import flixel.math.FlxPoint;
-import horny.*;
 
 class HornyObject extends FlxSprite {
 	public var offsets:Map<String, Array<Float>> = [];
@@ -75,11 +74,11 @@ class HornyObject extends FlxSprite {
         super.destroy();
     }
 	
-	override public function update(elapsed:Float) {
-		script.executeFunc("update", [elapsed]);
-		super.update(elapsed);
-		script.executeFunc("updatePost", [elapsed]);
-	}
+    override public function update(elapsed:Float) {
+	script.executeFunc("update", [elapsed]);
+	super.update(elapsed);
+	script.executeFunc("updatePost", [elapsed]);
+    }
 
     public function set(name:String, val:Dynamic) {
         script.setVariable(name, val);

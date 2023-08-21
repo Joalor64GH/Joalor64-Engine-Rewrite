@@ -3,6 +3,7 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
+
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -74,6 +75,15 @@ class AchievementsMenuState extends MusicBeatState
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
+
+		var resetText:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press R to reset the currently selected achievement. Press ALT + R to reset all achievements.", 12);
+		resetText.borderSize = 5;
+		resetText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resetText.scrollFactor.set();
+		add(resetText);
+
+		FlxG.mouse.visible = true;
+
 		changeSelection();
 
 		super.create();
@@ -82,16 +92,37 @@ class AchievementsMenuState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
-			changeSelection(-1);
-		}
-		if (controls.UI_DOWN_P) {
-			changeSelection(1);
-		}
+		if (controls.UI_UP_P || controls.UI_DOWN_P)
+			changeSelection(controls.UI_UP_P ? -1: 1);
+		
+		if(controls.RESET) {
+			if(FlxG.keys.pressed.ALT) {
+				openSubState(new Prompt('This action will reset ALL of the achievements.\nProceed?', 0, function() {
+					FlxG.sound.play(Paths.sound('confirmMenu'));
+					for (i in 0...achievementArray.length) {
+						achievementArray[i].forget();
+						grpOptions.members[i].text = '?';
+					}
+				}, function() {
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}, false));
+			} else {
+				openSubState(new Prompt('This action will reset the selected achievement.\nProceed?', 0, function() {
+					FlxG.sound.play(Paths.sound('confirmMenu'));
+					achievementArray[curSelected].forget();
+					grpOptions.members[curSelected].text = '?';
+				}, function() {
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}, false));
+			}
+ 		}
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			if (ClientPrefs.simpleMain)
+				MusicBeatState.switchState(new SimpleMainMenuState());
+			else
+				MusicBeatState.switchState(new MainMenuState());
 		}
 	}
 

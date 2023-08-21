@@ -7,7 +7,7 @@ import flixel.math.FlxMath;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
-// FNF
+// JOALOR64
 import animateatlas.AtlasFrameMaker;
 import meta.data.alphabet.Alphabet;
 import meta.data.dependency.Discord;
@@ -22,7 +22,9 @@ import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
 import meta.Controls;
-import Paths;
+#if !macro import Paths; #end
+
+#if MODS_ALLOWED import backend.Mods; #end
 
 import objects.AttachedSprite;
 import meta.data.options.*;
@@ -36,9 +38,7 @@ import polymod.Polymod;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import tjson.TJSON as Json;
 import openfl.utils.Assets as OpenFlAssets;
-import lime.utils.Assets as LimeAssets;
 
 using StringTools;
 using meta.CoolUtil;

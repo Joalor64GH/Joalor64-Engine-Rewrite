@@ -18,10 +18,10 @@ using StringTools;
 **/
 class ToastCore extends Sprite
 {
-	public static var ENTER_TIME:Float = 0.5;
-	public static var DISPLAY_TIME:Float = 3.0;
-	public static var LEAVE_TIME:Float = 0.5;
-	public static var TOTAL_TIME:Float = ENTER_TIME + DISPLAY_TIME + LEAVE_TIME;
+	public static final ENTER_TIME:Float = 0.5;
+	public static final DISPLAY_TIME:Float = 3.0;
+	public static final LEAVE_TIME:Float = 0.5;
+	public static final TOTAL_TIME:Float = ENTER_TIME + DISPLAY_TIME + LEAVE_TIME;
 
 	public var onFinish:Void->Void = null;
 
