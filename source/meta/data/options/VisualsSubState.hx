@@ -3,31 +3,12 @@ package meta.data.options;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
-import flixel.FlxCamera;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
 import meta.*;
 import meta.data.*;
 import meta.data.options.*;
-import openfl.Lib;
+
+import flixel.FlxG;
+import flixel.text.FlxText;
 
 using StringTools;
 
@@ -75,12 +56,7 @@ class VisualsSubState extends BaseOptionsMenu
 			'songDisplay',
 			'string',
 			'None',
-			[
-				'Classic', 
-				'Vertical', 
-				'C-Shape', 
-				'D-Shape'
-			]);
+			['Classic', 'Vertical', 'C-Shape', 'D-Shape']);
 		addOption(option);
 
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
@@ -124,12 +100,7 @@ class VisualsSubState extends BaseOptionsMenu
 			'colorBlindFilter',
 			'string',
 			'None',
-			[
-				'None', 
-				'Deuteranopia', 
-				'Protanopia', 
-				'Tritanopia'
-			]);
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
 		addOption(option);
 		option.onChange = () -> meta.Colorblind.updateFilter();
 

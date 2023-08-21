@@ -37,11 +37,13 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
-	var intendedColor:Int;
+	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+
+	var noLink:Bool;
 
 	override function create()
 	{
@@ -89,6 +91,14 @@ class CreditsState extends MusicBeatState
 				'omori' // funni sound goes here if you want
 			],
 			[
+				'ThatOneFox',
+				'fox',
+				'Epic New Logo\n"this is a quote"',
+				'https://github.com/ThatOneFoxHX',
+				'00A7D4',
+				'' // if you want, a funny sound effect can go here
+			],
+			[
 				'Bot 404',
 				'bot',
 				'Tiny little helper, Drew his own icon\n"expected more"',
@@ -99,17 +109,9 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Special Thanks'],
 			[
-				'PE Discord Server Members',
-				'discord',
-				'They made the Scripts lmao\n"I got banned tho lmao"',
-				'https://discord.gg/2ka77eMXDv',
-				'6732E3',
-				'discordo'
-			],
-			[
 				'BeastlyGhost',
 				'beastly',
-				'Customizable Main Menu with .JSON\nCredits Sounds\n"just happy to be here!"',
+				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
 				'https://github.com/BeastlyGhost',
 				'8CC4FF',
 				'Ghost'
@@ -126,7 +128,7 @@ class CreditsState extends MusicBeatState
 				'Magnumsrt',
 				'mag',
 				'In-Game Mod Downloader\n"why bro keep changing his user"',
-				'https://github.com/Magnumsrt',
+				'https://github.com/steve-studios',
 				'0000FF',
 				'squeak'
 			],
@@ -148,9 +150,9 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'KookerFoxYT',
-				'fox',
+				'kooker',
 				'Custom Options\n"fox"',
-				'https://github.com/KookerFoxYT',
+				'https://twitter.com/kookerfoxyt',
 				'00B0B4', // it spelled bob lmao
 				''
 			],
@@ -179,14 +181,6 @@ class CreditsState extends MusicBeatState
 				''
 			],
 			[
-				'ThatOneFox',
-				'none',
-				'Cool New Logo\n"this is a quote"',
-				'https://github.com/ThatOneFoxHX',
-				'00A7D4',
-				''
-			],
-			[
 				'You',
 				'face',
 				'For playing :)\n"No problem! -You"',
@@ -205,10 +199,10 @@ class CreditsState extends MusicBeatState
 				'JingleShadow'
 			],
 			[
-				'RiverOaken',
-				'river',
+				'Riveren',
+				'riveren',
 				'Main Artist/Animator of Psych Engine',
-				'https://twitter.com/RiverOaken',
+				'https://twitter.com/riverennn',
 				'B42F71',
 				'JingleRiver'
 			],
@@ -226,7 +220,7 @@ class CreditsState extends MusicBeatState
 				'Yoshubs',
 				'shubs',
 				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
-				'https://twitter.com/yoshubs',
+				'https://gamebanana.com/members/1908070',
 				'5E99DF',
 				'JingleShubs'
 			],
@@ -275,7 +269,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Keoiki',
 				'keoiki',
-				'Note Splash Animations',
+				'Note Splash Animations\nNew Latin Support',
 				'https://twitter.com/Keoiki_',
 				'D2D2D2',
 				''
@@ -395,7 +389,7 @@ class CreditsState extends MusicBeatState
 		keyText.scrollFactor.set();
 		add(keyText);
 
-		bg.color = getCurrentBGColor();
+		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
 		super.create();
@@ -446,8 +440,28 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.ENTER && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4))
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			if (creditsStuff[curSelected][3] == 'nolink')
+			{
+				noLink = true;
+			}
+			else
+			{
+				noLink = false;
+			}
+			if (noLink)
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+			}
+			else
+			{
+				if (FlxG.keys.justPressed.ENTER)
+				{
+					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				}
+			}
 			if (FlxG.keys.justPressed.SPACE)
 				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
 
@@ -501,7 +515,8 @@ class CreditsState extends MusicBeatState
 		}
 		while (unselectableCheck(curSelected));
 
-		var newColor:Int = getCurrentBGColor();
+		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		trace('The BG color is: $newColor');
 		if (newColor != intendedColor)
 		{
 			if (colorTween != null)
@@ -568,16 +583,6 @@ class CreditsState extends MusicBeatState
 		}
 	}
 	#end
-
-	function getCurrentBGColor()
-	{
-		var bgColor:String = creditsStuff[curSelected][4];
-		if (!bgColor.startsWith('0x'))
-		{
-			bgColor = '0xFF' + bgColor;
-		}
-		return Std.parseInt(bgColor);
-	}
 
 	private function unselectableCheck(num:Int):Bool
 	{

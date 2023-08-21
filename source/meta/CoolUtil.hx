@@ -2,6 +2,8 @@ package meta;
 
 import meta.state.PlayState;
 import openfl.utils.Assets;
+import lime.utils.Assets as LimeAssets;
+import flixel.util.FlxColor;
 import flixel.FlxG;
 #if sys
 import sys.FileSystem;
@@ -37,6 +39,13 @@ class CoolUtil
 	
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
+  
+	inline public static function txtSplit(path:String)
+	{
+		return [
+			for (i in Assets.getText(path).trim().split('\n')) i.trim()
+		];
+	}
 
 	inline public static function coolTextFile(path:String):Array<String>
 		return FileAssets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
@@ -81,7 +90,7 @@ class CoolUtil
 
 				stringSong = coolReplace(stringSong, 'null', '');
 
-					coolSong += ' $stringSong';
+				coolSong += '$stringSong';
 			}
 
 			song = coolSong.replace(' Null', '');
@@ -95,6 +104,17 @@ class CoolUtil
 	public static function coolPathArray(path:String):Array<String>
 		return FileSystem.readDirectory(FileSystem.absolutePath(path));
 	#end
+
+	inline public static function colorFromString(color:String):FlxColor
+	{
+		var hideChars = ~/[\t\n\r]/;
+		var color:String = hideChars.split(color).join('').trim();
+		if(color.startsWith('0x')) color = color.substr(4);
+
+		var colorNum:Null<FlxColor> = FlxColor.fromString(color);
+		if(colorNum == null) colorNum = FlxColor.fromString('#$color');
+		return colorNum != null ? colorNum : FlxColor.WHITE;
+	}
 	
 	inline public static function listFromString(string:String):Array<String>
 		return string.trim().split('\n').map(str -> str.trim());
@@ -144,6 +164,15 @@ class CoolUtil
 		#else
 		FlxG.openURL(site);
 		#end
+	}
+
+	// thanks denpa engine team
+	inline public static function clamp(value:Float, min:Float, max:Float):Float
+		return Math.max(min, Math.min(max, value));
+
+		@:keep public static inline function boundFPS(input:Float) {
+		@:privateAccess 
+		return input;
 	}
 }
 

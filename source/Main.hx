@@ -6,7 +6,6 @@ import flixel.util.FlxColor;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
-import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
@@ -17,6 +16,8 @@ import meta.data.ClientPrefs;
 import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
+
+import meta.CoolUtil;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -38,11 +39,17 @@ class Main extends Sprite
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions. (Removed from Flixel 5.0.0)
 	
 	public static var fpsVar:FPS;
+	public static var game:Joalor64Game; // the main game
 	public static var toast:ToastCore; // credits go to MAJigsaw77
 
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
+
+		#if CRASH_HANDLER
+		@:privateAccess
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, function(e) game.exceptionCaughtOpenFL(e));
+		#end
 	}
 
 	public function new()
@@ -96,15 +103,15 @@ class Main extends Sprite
 		});
 
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, Init, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false));
+		game = new Joalor64Game(gameWidth, gameHeight, Init, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false);
+		addChild(game);
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
+		if(fpsVar != null)
 			fpsVar.visible = ClientPrefs.showFPS;
-		}
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
 
@@ -129,47 +136,6 @@ class Main extends Sprite
 
 		#if html5
 		FlxG.autoPause = FlxG.mouse.visible = false;
-		#end
-		
-		// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
-		// very cool person for real they don't get enough credit for their work
-		#if CRASH_HANDLER
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, (e) -> {
-			var errMsg:String = "";
-			var path:String;
-			var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-			var dateNow:String = Date.now().toString();
-	
-			dateNow = dateNow.replace(" ", "_");
-			dateNow = dateNow.replace(":", "'");
-	
-			path = "./crash/" + "Joalor64Engine_" + dateNow + ".txt";
-	
-			for (stackItem in callStack)
-			{
-				switch (stackItem)
-				{
-					case FilePos(s, file, line, column):
-						errMsg += file + " (line " + line + ")\n";
-					default:
-						Sys.println(stackItem);
-				}
-			}
-	
-			errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues\n\n> Crash Handler written by: sqirra-rng";
-	
-			if (!FileSystem.exists("./crash/"))
-				FileSystem.createDirectory("./crash/");
-	
-			File.saveContent(path, errMsg + "\n");
-	
-			Sys.println(errMsg);
-			Sys.println("Crash dump saved in " + Path.normalize(path));
-	
-			Application.current.window.alert(errMsg, "Error!");
-			DiscordClient.shutdown();
-			Sys.exit(1);
-		});
 		#end
 
 		toast = new ToastCore();
@@ -198,7 +164,7 @@ class Main extends Sprite
 	public function coloring():Void
 	{
 		// Hippity, Hoppity, your code is now my property (from KadeEngine)
-		if (FlxG.save.data.fpsRainbow) {
+		if (ClientPrefs.fpsRainbow) {
 			if (currentColor >= array.length)
 				currentColor = 0;
 			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.framerate));
@@ -211,10 +177,141 @@ class Main extends Sprite
 		else 
 			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
 	}
-	public function changeFPSColor(color:FlxColor)
-	{
+	inline public function changeFPSColor(color:FlxColor)
 		fpsVar.textColor = color;
-	}
 
 	public static var webmHandler:WebmHandler;
+}
+
+class Joalor64Game extends FlxGame {
+	/**
+	 * Used to instantiate the guts of the flixel game object once we have a valid reference to the root.
+	 */
+	override function create(_):Void {
+		try super.create(_)
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	/**
+	 * Called when the user on the game window
+	 */
+	override function onFocus(_):Void {
+		try super.onFocus(_)
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	/**
+	 * Called when the user clicks off the game window
+	 */
+	override function onFocusLost(_):Void {
+		try super.onFocusLost(_)
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	/**
+	 * Handles the `onEnterFrame` call and figures out how many updates and draw calls to do.
+	 */
+	override function onEnterFrame(_):Void {
+		try super.onEnterFrame(_)
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	/**
+	 * This function is called by `step()` and updates the actual game state.
+	 * May be called multiple times per "frame" or draw call.
+	 */
+	override function update():Void {
+		try super.update()
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	/**
+	 * Goes through the game state and draws all the game objects and special effects.
+	 */
+	override function draw():Void {
+		try super.draw()
+		catch (e:haxe.Exception)
+			return exceptionCaught(e);
+	}
+
+	private function exceptionCaught(e:haxe.Exception) {
+		var callStack:CallStack = CallStack.exceptionStack(true);
+
+		final formattedMessage:String = getCallStack().join("\n");
+
+		FlxG.sound.music.volume = 0;
+
+		DiscordClient.shutdown();
+
+		goToExceptionState(e.message, formattedMessage, true, callStack);
+	}
+
+	private function exceptionCaughtOpenFL(e:UncaughtErrorEvent) {
+		var callStack:CallStack = CallStack.exceptionStack(true);
+
+		final formattedMessage:String = getCallStack().join("\n");
+
+		FlxG.sound.music.volume = 0;
+
+		DiscordClient.shutdown();
+
+		goToExceptionState(e.error, formattedMessage, true, callStack);
+	}
+
+	private function getCallStack():Array<String> {
+		var caughtErrors:Array<String> = [];
+
+		for (stackItem in CallStack.exceptionStack(true)) {
+			switch (stackItem) {
+				case CFunction:
+					caughtErrors.push('Non-Haxe (C) Function');
+				case Module(moduleName):
+					caughtErrors.push('Module (${moduleName})');
+				case FilePos(s, file, line, column):
+					caughtErrors.push('${file} (line ${line})');
+				case Method(className, method):
+					caughtErrors.push('${className} (method ${method})');
+				case LocalFunction(name):
+					caughtErrors.push('Local Function (${name})');
+			}
+
+			Sys.println(stackItem);
+		}
+
+		return caughtErrors;
+	}
+
+	private function goToExceptionState(exception:String, errorMsg:String, shouldGithubReport:Bool, ?callStack:CallStack) {
+		var arguments:Array<Dynamic> = [exception, errorMsg, shouldGithubReport];
+		if (callStack != null)
+			arguments.push(callStack);
+
+		_requestedState = Type.createInstance(meta.state.exception.ExceptionState, arguments);
+		switchState();
+	}
+
+	private function writeLog(path:String, errMsg:String) {
+		if (!FileSystem.exists("crash/"))
+			FileSystem.createDirectory("crash/");
+		File.saveContent(path, '${errMsg}\n');
+
+		Sys.println(errMsg);
+		Sys.println('Crash dump saved in ${Path.normalize(path)}');
+	}
+
+	private function getLogPath():String {
+		return "crash/" + "J64E_" + formatDate() + ".txt";
+	}
+
+	private function formatDate():String {
+		var dateNow:String = Date.now().toString();
+		dateNow = StringTools.replace(dateNow, " ", "_");
+		dateNow = StringTools.replace(dateNow, ":", "'");
+		return dateNow;
+	}
 }

@@ -38,11 +38,12 @@ jobs:
           haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
+          haxelib git djFlixel https://github.com/john32b/djFlixel
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript https://github.com/TheWorldMachinima/SScript
+          haxelib install SScript 4.0.0
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -83,11 +84,12 @@ jobs:
           haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
+          haxelib git djFlixel https://github.com/john32b/djFlixel
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript https://github.com/TheWorldMachinima/SScript
+          haxelib install SScript 4.0.0
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -129,11 +131,12 @@ jobs:
           haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
           haxelib install hxCodec 2.5.1
           haxelib install swf 3.2.0
+          haxelib git djFlixel https://github.com/john32b/djFlixel
           haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript https://github.com/TheWorldMachinima/SScript
+          haxelib install SScript 4.0.0
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc

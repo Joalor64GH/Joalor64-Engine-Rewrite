@@ -3,30 +3,19 @@ package meta.substate;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
 #end
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
 import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
@@ -101,6 +90,24 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(option);
 
 		var option:GameplayOption = new GameplayOption('Botplay', 'botplay', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Random Mode', 'randommode', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Stair Mode', 'stairmode', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Wave Mode', 'wavemode', 'bool', false);
+		optionsArray.push(option);
+	
+		var option:GameplayOption = new GameplayOption('Flip Mode', 'flip', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('One Key', 'onekey', 'bool', false);
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Random Playback Rate', 'randomspeed', 'bool', false);
 		optionsArray.push(option);
 
 		#if LUA_ALLOWED

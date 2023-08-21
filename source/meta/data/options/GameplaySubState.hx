@@ -3,31 +3,12 @@ package meta.data.options;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
-import flixel.FlxCamera;
+
 import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
+
 import meta.*;
 import meta.data.*;
 import meta.data.options.*;
-import openfl.Lib;
 
 using StringTools;
 
@@ -58,6 +39,14 @@ class GameplaySubState extends BaseOptionsMenu
 			'string',
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
+		addOption(option);
+
+		var option:Option = new Option('Score Text Style:',
+			"How should the score text look like?",
+			'scoreTxtType',
+			'string',
+			'Default',
+			['Default', 'Psych', 'Simple']);
 		addOption(option);
 
 		var option:Option = new Option('Camera Zooms',
@@ -91,12 +80,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'uiSkin',
 			'string',
 			'Default',
-			[
-				'Default', 
-				'Forever', 
-				'Kade', 
-				'Simplylove'
-			]);
+			['Default', 'Forever', 'Kade', 'Simplylove']);
 		addOption(option);
 
 		var option:Option = new Option('Long Health Bar',

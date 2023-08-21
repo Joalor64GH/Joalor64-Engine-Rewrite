@@ -107,7 +107,6 @@ class ReplayState extends PlayState
         keyShit();
     }
 
-
     override function onKeyPress(e:KeyboardEvent):Void
     {
         return;
@@ -210,7 +209,7 @@ class ReplayPauseSubstate extends PauseSubState
     {
         super(x, y);
 
-        menuItemsOG = ['Resume', 'Restart Replay', 'Exit to freeplay', 'Exit to menu'];
+        menuItemsOG = ['Resume', 'Restart Replay', 'Exit'];
         menuItems = menuItemsOG;
         regenMenu();
     }

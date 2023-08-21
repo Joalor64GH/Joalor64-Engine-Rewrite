@@ -150,6 +150,14 @@ class ChartingState extends MusicBeatState
 			"Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."
 		],
 		[
+			'Popup', 
+			"Value 1: Title\nValue 2: Message\nMakes a window popup with a message in it."
+		],
+		[
+			'Popup (No Pause)', 
+			"Value 1: Title\nValue 2: Message\nSame as popup but without a pause."
+		],
+		[
 			'Set Property', 
 			"Value 1: Variable name\nValue 2: New value"
 		]
@@ -547,10 +555,12 @@ class ChartingState extends MusicBeatState
 		var directories:Array<String> = [Paths.getPreloadPath('characters/')];
 		#end
 
-		var tempMap:Map<String, Bool> = new Map<String, Bool>();
-		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
-		for (i in 0...characters.length) {
-			tempMap.set(characters[i], true);
+		var tempArray:Array<String> = [];
+		var characters:Array<String> = Mods.mergeAllTextsNamed('data/characterList.txt', Paths.getPreloadPath());
+		for (character in characters)
+		{
+			if(character.trim().length > 0)
+				tempArray.push(character);
 		}
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -561,8 +571,8 @@ class ChartingState extends MusicBeatState
 					var path = haxe.io.Path.join([directory, file]);
 					if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
 						var charToCheck:String = file.substr(0, file.length - 5);
-						if(!charToCheck.endsWith('-dead') && !tempMap.exists(charToCheck)) {
-							tempMap.set(charToCheck, true);
+						if(charToCheck.trim().length > 0 && !charToCheck.endsWith('-dead') && !tempArray.contains(charToCheck)) {
+							tempArray.push(charToCheck);
 							characters.push(charToCheck);
 						}
 					}
@@ -570,6 +580,7 @@ class ChartingState extends MusicBeatState
 			}
 		}
 		#end
+		tempArray = [];
 
 		var player1DropDown = new FlxUIDropDownMenuCustom(10, stepperSpeed.y + 45, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
 		{
@@ -603,15 +614,13 @@ class ChartingState extends MusicBeatState
 		var directories:Array<String> = [Paths.getPreloadPath('stages/')];
 		#end
 
-		tempMap.clear();
-		var stageFile:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
+		var stageFile:Array<String> = Mods.mergeAllTextsNamed('data/stageList.txt', Paths.getPreloadPath());
 		var stages:Array<String> = [];
-		for (i in 0...stageFile.length) { //Prevent duplicates
-			var stageToCheck:String = stageFile[i];
-			if(!tempMap.exists(stageToCheck)) {
-				stages.push(stageToCheck);
+		for (stage in stageFile) {
+			if(stage.trim().length > 0) {
+				stages.push(stage);
 			}
-			tempMap.set(stageToCheck, true);
+			tempArray.push(stage);
 		}
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		for (i in 0...directories.length) {
@@ -621,8 +630,8 @@ class ChartingState extends MusicBeatState
 					var path = haxe.io.Path.join([directory, file]);
 					if (!FileSystem.isDirectory(path) && file.endsWith('.json')) {
 						var stageToCheck:String = file.substr(0, file.length - 5);
-						if(!tempMap.exists(stageToCheck)) {
-							tempMap.set(stageToCheck, true);
+						if(stageToCheck.trim().length > 0 && !tempArray.contains(stageToCheck)) {
+							tempArray.push(stageToCheck);
 							stages.push(stageToCheck);
 						}
 					}
@@ -978,7 +987,6 @@ class ChartingState extends MusicBeatState
 			key++;
 		}
 
-		#if LUA_ALLOWED
 		var directories:Array<String> = [];
 
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -993,7 +1001,12 @@ class ChartingState extends MusicBeatState
 			if(FileSystem.exists(directory)) {
 				for (file in FileSystem.readDirectory(directory)) {
 					var path = haxe.io.Path.join([directory, file]);
-					if (!FileSystem.isDirectory(path) && file.endsWith('.lua')) {
+					if (!FileSystem.isDirectory(path) && file.endsWith(
+						#if LUA_ALLOWED '.lua'
+						#elseif HSCRIPT_ALLOWED '.hscript'
+						#elseif SCRIPT_EXTENSION '.hx'
+						#end
+					)) {
 						var fileToCheck:String = file.substr(0, file.length - 4);
 						if(!noteTypeMap.exists(fileToCheck)) {
 							displayNameList.push(fileToCheck);
@@ -1005,7 +1018,6 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		}
-		#end
 
 		for (i in 1...displayNameList.length) {
 			displayNameList[i] = i + '. ' + displayNameList[i];
@@ -1039,7 +1051,7 @@ class ChartingState extends MusicBeatState
 		var tab_group_event = new FlxUI(null, UI_box);
 		tab_group_event.name = 'Events';
 
-		#if LUA_ALLOWED
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED || SCRIPT_EXTENSION)
 		var eventPushedMap:Map<String, Bool> = new Map<String, Bool>();
 		var directories:Array<String> = [];
 

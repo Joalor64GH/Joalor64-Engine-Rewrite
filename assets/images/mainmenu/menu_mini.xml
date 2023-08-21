@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_mini.png">
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="mini basic0000" x="10" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0001" x="10" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0002" x="10" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0003" x="712" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0004" x="712" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0005" x="712" y="10" width="692" height="145"/>
+	<SubTexture name="mini basic0006" x="10" y="165" width="692" height="145"/>
+	<SubTexture name="mini basic0007" x="10" y="165" width="692" height="145"/>
+	<SubTexture name="mini basic0008" x="10" y="165" width="692" height="145"/>
+	<SubTexture name="mini white0000" x="712" y="165" width="844" height="189" frameX="-3" frameY="0" frameWidth="847" frameHeight="194"/>
+	<SubTexture name="mini white0001" x="10" y="364" width="841" height="181" frameX="-1" frameY="-7" frameWidth="847" frameHeight="194"/>
+	<SubTexture name="mini white0002" x="861" y="364" width="841" height="185" frameX="0" frameY="-9" frameWidth="847" frameHeight="194"/>
+</TextureAtlas>

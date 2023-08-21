@@ -39,7 +39,7 @@ function onCreate(path)
   --character scripts
   local chars = {boyfriendName, dadName, gfName}
   for i,char in pairs(chars) do
-    if checkFileExists('scripts/characters/'..char..'.hx') then
+    if checkFileExists('characters/'..char..'.hx') then
       addScript('characters/'..char..'.hx')
     end
   end
@@ -65,8 +65,8 @@ function onCreatePost()
     end
   end
   for k,v in pairs(noteTypes) do
-    if checkFileExists('custom_notetypes/'..v..'.hx') then
-      addScript('custom_notetypes/'..v..'.hx')
+    if checkFileExists('notetypes/'..v..'.hx') then
+      addScript('notetypes/'..v..'.hx')
     end
   end
   for i=0,getProperty('eventNotes.length')-1 do
@@ -82,8 +82,8 @@ function onCreatePost()
     end
   end
   for k,v in pairs(events) do
-    if checkFileExists('custom_events/'..v..'.hx') then
-      addScript('custom_events/'..v..'.hx')
+    if checkFileExists('events/'..v..'.hx') then
+      addScript('events/'..v..'.hx')
     end
   end
 end
