@@ -46,16 +46,10 @@ class WinAPI { // i have no idea how cpp works, but these functions don't affect
         if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, reinterpret_cast<LPCVOID>(&darkMode), sizeof(darkMode))) {
             DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, reinterpret_cast<LPCVOID>(&darkMode), sizeof(darkMode));
         }
-        #else
-        return false;
         #endif
     ')
     public static function setDarkMode(enable:Bool) {
-        #if windows
         return true;
-        #else
-        return false;
-        #end
     }
 
     #if windows
