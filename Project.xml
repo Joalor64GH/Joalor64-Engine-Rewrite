@@ -4,6 +4,7 @@
 
 	<!-- Application Window Title and Executable File Name -->
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" />
+	
 	<app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
@@ -13,6 +14,13 @@
 		<app file="J64EngineRE_WIN DEBUG" if="windows" />
 		<app file="J64EngineRE_APP DEBUG" if="linux" />
 		<app file="J64EngineRE_MAC DEBUG" if="mac" />
+	</section>
+
+	<!-- For nightly builds -->
+	<section if="nightly">
+		<app file="J64EngineRE_WIN NIGHTLY" if="windows" />
+		<app file="J64EngineRE_APP NIGHTLY" if="linux" />
+		<app file="J64EngineRE_MAC NIGHTLY" if="mac" />
 	</section>
 
 	<!-- Package Name (Mac) -->
@@ -166,7 +174,7 @@
 		<haxedef name="no-deprecation-warnings"/>
 	</section>
 	
-	<!--Used for Izzy Engine's crash handler-->
+	<!--Crash screen stuff-->
 	<section if="CRASH_HANDLER">
 		<haxedef name="HXCPP_CHECK_POINTER" />
 		<haxedef name="HXCPP_STACK_LINE" />
@@ -182,14 +190,16 @@
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
 
-	<!-- _________________________________ Miscellaneous _______________________________ -->
+	<!-- _________________________________ Icons _______________________________ -->
+
+	<assets path='art/iconOG.png' rename='icon.png' if="linux" /> <!-- workaround for linux -->
 	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>
 	<icon path="art/iconOG.png" />
 
-	<!-- ________________________ Import Platform-Specific Stuff _____________________________ -->
+	<!-- _________________________________ Miscellaneous _______________________________ -->
 
 	<target id="haxe" tool="linker" if="linux">
 		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" /> <!--linux support-->

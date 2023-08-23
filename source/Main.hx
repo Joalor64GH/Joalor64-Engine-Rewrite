@@ -30,6 +30,10 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
+#if linux
+import lime.graphics.Image;
+#end
+
 using StringTools;
 
 #if linux
@@ -139,6 +143,11 @@ class Main extends Sprite
 		webmHandle.webm.name = str1;
 		addChild(webmHandle.webm);
 		GlobalVideo.setWebm(webmHandle);
+		#end
+
+		#if linux
+		var icon = Image.fromFile("icon.png");
+		Lib.current.stage.window.setIcon(icon);
 		#end
 
 		#if html5

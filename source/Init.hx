@@ -90,7 +90,7 @@ class Init extends FlxState
 
 		FlxG.sound.play(Paths.sound('startup'));
 
-		load();
+		loadEverything();
 
 		new FlxTimer().start(10, function(timer) 
 		{
@@ -128,7 +128,7 @@ class Init extends FlxState
 		super.update(elapsed);
 	}
 
-	function load()	
+	function loadEverything()	
 	{
 		#if html5
 		Paths.initPaths();

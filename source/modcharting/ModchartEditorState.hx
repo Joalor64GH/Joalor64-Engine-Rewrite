@@ -3,7 +3,6 @@ package modcharting;
 import flixel.input.keyboard.FlxKey;
 import lime.utils.Assets;
 import flixel.graphics.frames.FlxFramesCollection;
-import flixel.util.FlxAxes;
 import flixel.math.FlxPoint;
 import flixel.addons.ui.FlxUITooltipManager;
 import flixel.addons.ui.FlxUITooltipManager.FlxUITooltipData;
@@ -395,10 +394,10 @@ class ModchartEditorState extends MusicBeatState
         //strumLineNotes.cameras = [camHUD];
 		//notes.cameras = [camHUD];
 
-        #if ("flixel-addons" >= "3.0.0")
-        grid = new FlxBackdrop(FlxGraphic.fromBitmapData(createGrid(gridSize, gridSize, Std.int(gridSize*48), gridSize)), FlxAxes.X, 0, 0);
-        #else 
+        #if (flixel-addons < "3.0.0")
         grid = new FlxBackdrop(FlxGraphic.fromBitmapData(createGrid(gridSize, gridSize, Std.int(gridSize*48), gridSize)), 0, 0, true, false);
+        #else 
+        grid = new FlxBackdrop(FlxGraphic.fromBitmapData(createGrid(gridSize, gridSize, Std.int(gridSize*48), gridSize)));
         #end
         
         add(grid);

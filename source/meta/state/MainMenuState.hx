@@ -63,6 +63,8 @@ typedef MenuData =
 
 class MainMenuState extends MusicBeatState
 {
+	public static var nightly:String = #if nightly '-nightly' #else '' #end;
+	
 	public static var joalor64EngineVersion:String = '1.4.0 (UNRELEASED)'; // Used for Discord RPC
 	
 	public static var psychEngineVersion:String = '0.6.3';
@@ -281,7 +283,7 @@ class MainMenuState extends MusicBeatState
 
 		// Watermarks
 		var versionShitArray:Array<String> = [
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion',
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion' + nightly,
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
 			"Friday Night Funkin' v" + Application.current.meta.get('version')
 		];
