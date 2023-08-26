@@ -16,6 +16,7 @@ class ClientPrefs {
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
+	public static var wigglySustain:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var shaders:Bool = true;
 	public static var framerate:Int = 60;
@@ -40,6 +41,7 @@ class ClientPrefs {
 	public static var colorBlindFilter:String = 'None';
 	public static var simpleMain:Bool = false;
 	public static var longBar:Bool = false;
+	public static var longTimeBar:Bool = false;
 	public static var floatyLetters:Bool = false;
 	public static var songDisplay:String = 'Classic';
 	public static var gameplaySettings:Map<String, Dynamic> = [
@@ -110,6 +112,7 @@ class ClientPrefs {
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.wigglySustain = wigglySustain;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
@@ -142,6 +145,7 @@ class ClientPrefs {
 		FlxG.save.data.colorBlindFilter = colorBlindFilter;
 		FlxG.save.data.simpleMain = simpleMain;
 		FlxG.save.data.longBar = longBar;
+		FlxG.save.data.longTimeBar = longTimeBar;
 		FlxG.save.data.floatyLetters = floatyLetters;
 		FlxG.save.data.songDisplay = songDisplay;
 	
@@ -181,6 +185,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;
+		}
+		if(FlxG.save.data.wigglySustain != null) {
+			wigglySustain = FlxG.save.data.wigglySustain;
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;
@@ -289,6 +296,8 @@ class ClientPrefs {
 			simpleMain = FlxG.save.data.simpleMain;
 		if(FlxG.save.data.longBar != null)
 			longBar = FlxG.save.data.longBar;
+		if(FlxG.save.data.longTimeBar != null)
+			longTimeBar = FlxG.save.data.longTimeBar;
 		if(FlxG.save.data.floatyLetters != null)
 			floatyLetters = FlxG.save.data.floatyLetters;
 		if(FlxG.save.data.songDisplay != null)
