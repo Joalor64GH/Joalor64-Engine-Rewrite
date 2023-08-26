@@ -16,7 +16,7 @@ class ResultsSubState extends MusicBeatSubState
 	var titleTxt:FlxText;
 	var resultsTxt:FlxText;
 
-    var bg:FlxSprite;
+    	var bg:FlxSprite;
 
 	var sick = 0;
 	var good = 0;
@@ -27,9 +27,9 @@ class ResultsSubState extends MusicBeatSubState
 	var percentage = 0.0;
 	var rate = '';
 
-    public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String) 
+    	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String) 
 	{
-        super();
+        	super();
 
 		sick = sicks;
 		good = goods;
@@ -45,17 +45,17 @@ class ResultsSubState extends MusicBeatSubState
 	{
 		persistentUpdate = true;
 
-        bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+        	bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.screenCenter();
-        bg.alpha = 0.4;
-        add(bg);
+        	bg.alpha = 0.4;
+        	add(bg);
 
-        titleTxt = new FlxText(0, 0, 0, (PauseSubState.daSelected == 'Skip Song') ? 'y u skip??' : 'RESULTS', 72);
-	titleTxt.scrollFactor.set();
-	titleTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-	titleTxt.screenCenter(X);
-	titleTxt.updateHitbox();
-	add(titleTxt);
+        	titleTxt = new FlxText(0, 0, 0, (PauseSubState.daSelected == 'Skip Song') ? 'y u skip??' : 'RESULTS', 72);
+		titleTxt.scrollFactor.set();
+		titleTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleTxt.screenCenter(X);
+		titleTxt.updateHitbox();
+		add(titleTxt);
 
 		resultsTxt = new FlxText(0, 0, 0, 
 			'Sicks: ' + sick
@@ -79,7 +79,7 @@ class ResultsSubState extends MusicBeatSubState
     }
 
     override function update(elapsed:Float) 
-	{
+    {
 	super.update(elapsed);
 
 	if (controls.ACCEPT) 
@@ -87,7 +87,7 @@ class ResultsSubState extends MusicBeatSubState
 	    if (PlayState.isStoryMode)
 		MusicBeatState.switchState(new StoryMenuState());
 	    else 
-		{
+	    {
 		if (PlayState.inMini) {
 		    inMini = false;
 		    MusicBeatState.switchState(new MinigamesState());
