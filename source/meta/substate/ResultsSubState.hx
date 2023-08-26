@@ -48,7 +48,7 @@ class ResultsSubState extends MusicBeatSubstate
 		persistentUpdate = true;
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-        bg.scale.set(10, 10);
+        	bg.scale.set(10, 10);
         	bg.alpha = 0.5;
         	add(bg);
 
@@ -102,7 +102,7 @@ class ResultsSubState extends MusicBeatSubstate
 		    MusicBeatState.switchState(new FreeplayState());
 		}
             }
-		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+	    FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
     }
 }
