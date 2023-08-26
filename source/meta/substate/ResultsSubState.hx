@@ -7,8 +7,8 @@ import flixel.util.FlxColor;
 
 import meta.*;
 import meta.state.*;
+
 import meta.state.PlayState;
-import meta.substate.PauseSubState;
 
 // ? <-- looks like the glottal stop!!
 class ResultsSubState extends MusicBeatSubstate 
@@ -50,7 +50,7 @@ class ResultsSubState extends MusicBeatSubstate
         	bg.alpha = 0.4;
         	add(bg);
 
-        	titleTxt = new FlxText(0, 0, 0, (PauseSubState.daSelected == 'Skip Song') ? 'y u skip??' : 'RESULTS', 72);
+        	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);
 		titleTxt.scrollFactor.set();
 		titleTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleTxt.screenCenter(X);
@@ -89,7 +89,7 @@ class ResultsSubState extends MusicBeatSubstate
 	    else 
 	    {
 		if (PlayState.inMini) {
-		    inMini = false;
+		    PlayState.inMini = false;
 		    MusicBeatState.switchState(new MinigamesState());
 		} else {
 		    MusicBeatState.switchState(new FreeplayState());
