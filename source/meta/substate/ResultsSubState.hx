@@ -11,7 +11,7 @@ import meta.state.PlayState;
 import meta.substate.PauseSubState;
 
 // ? <-- looks like the glottal stop!!
-class ResultsSubState extends MusicBeatSubState 
+class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
 	var resultsTxt:FlxText;
