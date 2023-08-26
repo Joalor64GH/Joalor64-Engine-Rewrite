@@ -22,7 +22,7 @@ class ResultsSubState extends MusicBeatSubstate
 	var good = 0;
 	var bad = 0;
 	var shit = 0;
-	var score = 0;
+	var points = 0;
 	var miss = 0;
 	var percentage = 0.0;
 	var rate = '';
@@ -35,7 +35,7 @@ class ResultsSubState extends MusicBeatSubstate
 		good = goods;
 		bad = bads;
 		shit = shits;
-		score = score;
+		points = score;
 		miss = misses;
 		percentage = percent;
 		rate = rating;
@@ -62,7 +62,7 @@ class ResultsSubState extends MusicBeatSubstate
 			+ '\nGoods: ' + good
 			+ '\nBads: ' + bad
 			+ '\nShits: ' + shit
-			+ '\nScore: ' + score
+			+ '\nScore: ' + points
 			+ '\nMisses: ' + miss
 			+ '\nPercent Rating: ' + percentage
 			+ '\nRating: ' + rate
