@@ -106,7 +106,7 @@ import meta.data.StageData;
 import meta.data.WeekData;
 import objects.Character;
 
-import objects.shaders.WiggleEffect;
+import objects.shaders.WiggleEffect.WiggleEffectType;
 
 using meta.CoolUtil;
 using StringTools;
@@ -316,6 +316,7 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	var susWiggle:ShaderFilter;
+	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
