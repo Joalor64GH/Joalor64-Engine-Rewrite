@@ -26,8 +26,9 @@ class ResultsSubState extends MusicBeatSubstate
 	var miss = 0;
 	var percentage = 0.0;
 	var rate = '';
+	var combo = '';
 
-    	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String) 
+    	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String, fc:String) 
 	{
         	super();
 
@@ -39,20 +40,26 @@ class ResultsSubState extends MusicBeatSubstate
 		miss = misses;
 		percentage = percent;
 		rate = rating;
+		combo = fc;
 	}
 
 	override function create() 
 	{
 		persistentUpdate = true;
 
-        	bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.screenCenter();
-        	bg.alpha = 0.4;
+        	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        bg.scale.set(10, 10);
+        	bg.alpha = 0.5;
         	add(bg);
+
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, 'Press ACCEPT to continue.', 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 
         	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);
 		titleTxt.scrollFactor.set();
-		titleTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleTxt.setFormat("VCR OSD Mono", 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleTxt.screenCenter(X);
 		titleTxt.updateHitbox();
 		add(titleTxt);
@@ -64,11 +71,11 @@ class ResultsSubState extends MusicBeatSubstate
 			+ '\nShits: ' + shit
 			+ '\nScore: ' + points
 			+ '\nMisses: ' + miss
-			+ '\nPercent Rating: ' + percentage
-			+ '\nRating: ' + rate
+			+ '\nPercent Rating: ' + percentage + '%'
+			+ '\nRating: ' + rate + ' (' + combo + ')'
 		, 72);
 		resultsTxt.scrollFactor.set();
-		resultsTxt.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		add(resultsTxt);
@@ -95,6 +102,7 @@ class ResultsSubState extends MusicBeatSubstate
 		    MusicBeatState.switchState(new FreeplayState());
 		}
             }
+		FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
     }
 }

@@ -3318,7 +3318,7 @@ class PlayState extends MusicBeatState
 				dadbattleBlack.visible = false;
 				add(dadbattleBlack);
 
-				dadbattleLight = new BGSprite('spotlight', 400, -400);
+				dadbattleLight = new BGSprite('stages/stage/spotlight', 400, -400);
 				dadbattleLight.alpha = 0.375;
 				dadbattleLight.blend = ADD;
 				dadbattleLight.visible = false;
@@ -3336,7 +3336,7 @@ class PlayState extends MusicBeatState
 				smoke.velocity.x = FlxG.random.float(15, 22);
 				smoke.active = true;
 				dadbattleSmokes.add(smoke);
-				var smoke:BGSprite = new BGSprite('smoke', 1550 + offsetX, 660 + FlxG.random.float(-20, 20), 1.2, 1.05);
+				var smoke:BGSprite = new BGSprite('stages/stage/smoke', 1550 + offsetX, 660 + FlxG.random.float(-20, 20), 1.2, 1.05);
 				smoke.setGraphicSize(Std.int(smoke.width * FlxG.random.float(1.1, 1.22)));
 				smoke.updateHitbox();
 				smoke.velocity.x = FlxG.random.float(-15, -22);
@@ -4750,7 +4750,6 @@ class PlayState extends MusicBeatState
 				if (storyPlaylist.length <= 0)
 				{
 					Mods.loadTheFirstEnabledMod();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
@@ -4759,7 +4758,7 @@ class PlayState extends MusicBeatState
 
 					persistentUpdate = true;
 					openSubState(new ResultsSubState(sicks, goods, bads, shits, Std.int(campaignScore), Std.int(campaignMisses), 
-						Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)); 
+						Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
 
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
@@ -4821,9 +4820,8 @@ class PlayState extends MusicBeatState
 				
 				persistentUpdate = true;
 				openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
-				 	Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)); 
-
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				 	Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
+				
 				changedDifficulty = false;
 			}
 			transitioning = true;
