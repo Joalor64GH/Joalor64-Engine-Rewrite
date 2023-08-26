@@ -1,47 +1,93 @@
 package meta.substate;
 
 import flixel.FlxG;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
 import meta.*;
 import meta.state.*;
 import meta.state.PlayState;
+import meta.substate.PauseSubState;
 
-import meta.substate.*;
-
-// nothing much yet...
 // ? <-- looks like the glottal stop!!
-class ResultsSubState extends MusicBeatSubState {
+class ResultsSubState extends MusicBeatSubState 
+{
+	var titleTxt:FlxText;
+	var resultsTxt:FlxText;
 
     var bg:FlxSprite;
 
-    public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, ?weekScore:Int, ?weekMisses:Int, percent:Float, rating:String) {
+	var sick = 0;
+	var good = 0;
+	var bad = 0;
+	var shit = 0;
+	var score = 0;
+	var miss = 0;
+	var percentage = 0.0;
+	var rate = '';
+
+    public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String) 
+	{
         super();
 
+		sick = sicks;
+		good = goods;
+		bad = bads;
+		shit = shits;
+		score = score;
+		miss = misses;
+		percentage = percent;
+		rate = rating;
+	}
+
+	override function create() 
+	{
+		persistentUpdate = true;
+
         bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.screenCenter();
         bg.alpha = 0.4;
         add(bg);
 
-        var titleTxt:FlxText = new FlxText(5, 0, 0, (PauseSubState.daSelected == 'Skip Song') ? 'y u skip??' : 'RESULTS', 72);
+        titleTxt = new FlxText(0, 0, 0, (PauseSubState.daSelected == 'Skip Song') ? 'y u skip??' : 'RESULTS', 72);
 	titleTxt.scrollFactor.set();
 	titleTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	titleTxt.screenCenter(X);
 	titleTxt.updateHitbox();
 	add(titleTxt);
+
+		resultsTxt = new FlxText(0, 0, 0, 
+			'Sicks: ' + sick
+			+ '\nGoods: ' + good
+			+ '\nBads: ' + bad
+			+ '\nShits: ' + shit
+			+ '\nScore: ' + score
+			+ '\nMisses: ' + miss
+			+ '\nPercent Rating: ' + percentage
+			+ '\nRating: ' + rate
+		, 72);
+		resultsTxt.scrollFactor.set();
+		resultsTxt.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsTxt.screenCenter(XY);
+		resultsTxt.updateHitbox();
+		add(resultsTxt);
+
+		super.create();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
     }
 
-    override function update(elapsed:Float) {
+    override function update(elapsed:Float) 
+	{
 	super.update(elapsed);
 
-	if (controls.ACCEPT) {
+	if (controls.ACCEPT) 
+	{
 	    if (PlayState.isStoryMode)
 		MusicBeatState.switchState(new StoryMenuState());
-	    else {
+	    else 
+		{
 		if (PlayState.inMini) {
 		    inMini = false;
 		    MusicBeatState.switchState(new MinigamesState());
@@ -49,7 +95,6 @@ class ResultsSubState extends MusicBeatSubState {
 		    MusicBeatState.switchState(new FreeplayState());
 		}
             }
-            FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
     }
 }

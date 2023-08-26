@@ -26,13 +26,6 @@ class GameplaySubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Wiggly Sustain Notes',
-			"If unchecked, sustain notes won't wiggle to the beat.",
-			'wigglySustain',
-			'bool',
-			true);
-		addOption(option);
-
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',
@@ -93,13 +86,6 @@ class GameplaySubState extends BaseOptionsMenu
 		var option:Option = new Option('Long Health Bar',
 			'why would you want this anyways',
 			'longBar',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Long Time Bar',
-			'what',
-			'longTimeBar',
 			'bool',
 			false);
 		addOption(option);

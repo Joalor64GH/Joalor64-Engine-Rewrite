@@ -106,8 +106,6 @@ import meta.data.StageData;
 import meta.data.WeekData;
 import objects.Character;
 
-import objects.shaders.WiggleEffect.WiggleEffectType;
-
 using meta.CoolUtil;
 using StringTools;
 
@@ -265,7 +263,6 @@ class PlayState extends MusicBeatState
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	
-	public var camSus:FlxCamera;
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
@@ -314,9 +311,6 @@ class PlayState extends MusicBeatState
 	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
-
-	var susWiggle:ShaderFilter;
-	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -517,15 +511,12 @@ class PlayState extends MusicBeatState
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
-		camSus = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-		camSus.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
-		FlxG.cameras.add(camSus, false);
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
@@ -1239,7 +1230,7 @@ class PlayState extends MusicBeatState
 
 		updateTime = showTime;
 
-		timeBarBG = new AttachedSprite((ClientPrefs.longTimeBar) ? 'healthBar' : 'timeBar');
+		timeBarBG = new AttachedSprite('timeBar');
 		timeBarBG.x = timeTxt.x;
 		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
 		timeBarBG.scrollFactor.set();
@@ -1273,24 +1264,6 @@ class PlayState extends MusicBeatState
 		var splash:NoteSplash = new NoteSplash(100, 100, 0);
 		grpNoteSplashes.add(splash);
 		splash.alpha = 0.0;
-
-		// credits to mic'd up engine
-		// le wiggle
-		wiggleShit.waveAmplitude = 0.07;
-		wiggleShit.effectType = WiggleEffect.WiggleEffectType.DREAMY;
-		wiggleShit.waveFrequency = 0;
-		wiggleShit.waveSpeed = 1.8; // fasto
-		wiggleShit.shader.uTime.value = [(strumLine.y - Note.swagWidth * 4) / FlxG.height]; // from 4mbr0s3 2
-		susWiggle = new ShaderFilter(wiggleShit.shader);
-		// le wiggle 2
-		var wiggleShit2:WiggleEffect = new WiggleEffect();
-		wiggleShit2.waveAmplitude = 0.10;
-		wiggleShit2.effectType = WiggleEffect.WiggleEffectType.HEAT_WAVE_VERTICAL;
-		wiggleShit2.waveFrequency = 0;
-		wiggleShit2.waveSpeed = 1.8; // fasto
-		wiggleShit2.shader.uTime.value = [(strumLine.y - Note.swagWidth * 4) / FlxG.height]; // from 4mbr0s3 2
-		var susWiggle2 = new ShaderFilter(wiggleShit2.shader);
-		camSus.setFilters([susWiggle]); // only enable it for sustain notes
 
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
@@ -3786,10 +3759,6 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		wiggleShit.waveAmplitude = FlxMath.lerp(wiggleShit.waveAmplitude, 0, 0.035 / (ClientPrefs.framerate / 60));
-		wiggleShit.waveFrequency = FlxMath.lerp(wiggleShit.waveFrequency, 0, 0.035 / (ClientPrefs.framerate / 60));
-		wiggleShit.update(elapsed);
-
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
 
@@ -4004,15 +3973,6 @@ class PlayState extends MusicBeatState
 					strumY += daNote.offsetY;
 					strumAngle += daNote.offsetAngle;
 					strumAlpha *= daNote.multAlpha;
-
-					if(ClientPrefs.wigglySustain && daNote.isSustainNote)
-					{
-						daNote.cameras = [camSus];
-					}
-					else
-					{
-						daNote.cameras = [camHUD];
-					}
 
 					// whether downscroll or not
 					daNote.distance = ((strumScroll) ? 0.45 : -0.45 * (Conductor.songPosition - daNote.strumTime) * songSpeed * daNote.multSpeed);
@@ -4797,14 +4757,9 @@ class PlayState extends MusicBeatState
 						CustomFadeTransition.nextCamera = null;
 					}
 
-					// WIP
-					/* 
-					openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses, 
-						Std.int(campaignScore), Std.int(campaignMisses), Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)
-					); 
-					*/
-					
-					MusicBeatState.switchState(new StoryMenuState());
+					persistentUpdate = true;
+					openSubState(new ResultsSubState(sicks, goods, bads, shits, Std.int(campaignScore), Std.int(campaignMisses), 
+						Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)); 
 
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
@@ -4864,18 +4819,10 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				
-				/* 
+				persistentUpdate = true;
 				openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
-				 		Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)
-				); 
-				*/
+				 	Highscore.floorDecimal(ratingPercent * 100, 2), ratingFC)); 
 
-				if (inMini) {
-					inMini = false;
-					MusicBeatState.switchState(new MinigamesState());
-				} else {
-					MusicBeatState.switchState(new FreeplayState());
-				}
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
@@ -5932,9 +5879,6 @@ class PlayState extends MusicBeatState
 
 		if (generatedMusic)
 			notes.sort(FlxSort.byY, ClientPrefs.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
-
-		wiggleShit.waveAmplitude = 0.035;
-		wiggleShit.waveFrequency = 10;
 
 		iconP1.bounce();
 		iconP2.bounce();
