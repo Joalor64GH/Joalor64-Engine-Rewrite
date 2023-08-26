@@ -3,11 +3,14 @@ package meta.substate;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 import meta.*;
 import meta.state.*;
-
 import meta.state.PlayState;
 
 // ? <-- looks like the glottal stop!!
@@ -49,12 +52,12 @@ class ResultsSubState extends MusicBeatSubstate
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         	bg.scale.set(10, 10);
-        	bg.alpha = 0.5;
+        	bg.alpha = 0;
         	add(bg);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, 'Press ACCEPT to continue.', 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
         	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);
@@ -79,6 +82,15 @@ class ResultsSubState extends MusicBeatSubstate
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		add(resultsTxt);
+
+		versionShit.alpha = 0;
+		resultsTxt.alpha = 0;
+		titleTxt.alpha = 0;
+
+		FlxTween.tween(bg, {alpha: 0.5}, 0.75, {ease: FlxEase.quadOut});
+		FlxTween.tween(titleTxt, {alpha: 1}, 1, {ease: FlxEase.quadOut});
+		FlxTween.tween(resultsTxt, {alpha: 1}, 2, {ease: FlxEase.quadOut});
+		FlxTween.tween(versionShit, {alpha: 1}, 3, {ease: FlxEase.quadOut});
 
 		super.create();
 
