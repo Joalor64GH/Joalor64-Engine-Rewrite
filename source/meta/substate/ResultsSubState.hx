@@ -5,7 +5,6 @@ import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
@@ -13,7 +12,6 @@ import meta.*;
 import meta.state.*;
 import meta.state.PlayState;
 
-// ? <-- looks like the glottal stop!!
 class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
@@ -49,6 +47,8 @@ class ResultsSubState extends MusicBeatSubstate
 	override function create() 
 	{
 		persistentUpdate = true;
+
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0);
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         	bg.scale.set(10, 10);
