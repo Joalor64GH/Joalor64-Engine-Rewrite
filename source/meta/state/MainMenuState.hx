@@ -143,7 +143,7 @@ class MainMenuState extends MusicBeatState
 			[
 				'story_mode',
 				'freeplay',
-				'extras',
+				'mini',
 				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
 				#end
 				#if ACHIEVEMENTS_ALLOWED
@@ -360,6 +360,9 @@ class MainMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
+		if (FlxG.keys.justPressed.E)
+			MusicBeatState.switchState(new EpicState());
+		
 		if (!selectedSomethin)
 		{
 			if (controls.UI_UP_P || controls.UI_DOWN_P) {
@@ -380,10 +383,6 @@ class MainMenuState extends MusicBeatState
 				{
 					CoolUtil.browserLoad('${menuJSON.links[1]}'); // but this is also custom link support???
 				} 
-				else if (optionShit[curSelected] == 'donate') 
-				{
-					CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link'))); // custom link support idk
-				}
 				else
 				{
 					selectedSomethin = true;
@@ -421,8 +420,8 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
-									case 'extras':
-										MusicBeatState.switchState(new ExtrasMenuState());
+									case 'mini':
+										MusicBeatState.switchState(new MinigamesState());
 									#if (MODS_ALLOWED && FUTURE_POLYMOD)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
@@ -433,6 +432,8 @@ class MainMenuState extends MusicBeatState
 									#end
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
+									case 'donate':
+										MusicBeatState.switchState(new DonateScreenState());
 									case 'options':
 										LoadingState.loadAndSwitchState(new OptionsState());
 								}
