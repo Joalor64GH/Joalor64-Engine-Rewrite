@@ -2,7 +2,9 @@ package meta.substate;
 
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.FlxSubState;
+import flixel.text.FlxText;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
@@ -39,17 +41,46 @@ class GameOverSubstate extends MusicBeatSubstate
 		endSoundName = 'gameOverEnd';
 	}
 
+	var resultsTxt:FlxText;
+
+	var points = 0;
+	var miss = 0;
+	var percentage = 0.0;
+	var rate = '';
+	var combo = '';
+
 	override function create()
 	{
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 
+		resultsTxt = new FlxText(12, FlxG.height - 44, 0,  
+			'Score: ' + points
+			+ ' | Misses: ' + miss
+			+ ' | Percent Rating: ' + percentage + '%'
+			+ ' | Rating: ' + rate + ' (' + combo + ')'
+		, 12);
+		resultsTxt.scrollFactor.set();
+		resultsTxt.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsTxt.updateHitbox();
+		add(resultsTxt);
+
+		resultsTxt.alpha = 0;
+
+		FlxTween.tween(resultsTxt, {alpha: 1}, 4, {ease: FlxEase.quadOut});
+
 		super.create();
 	}
 
-	public function new(x:Float, y:Float, camX:Float, camY:Float)
+	public function new(x:Float, y:Float, camX:Float, camY:Float, score:Int, misses:Int, percent:Float, rating:String, fc:String)
 	{
 		super();
+
+		points = score;
+		miss = misses;
+		percentage = percent;
+		rate = rating;
+		combo = fc;
 
 		PlayState.instance.setOnLuas('inGameOver', true);
 

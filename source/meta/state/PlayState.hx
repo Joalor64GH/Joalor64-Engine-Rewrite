@@ -4150,7 +4150,8 @@ class PlayState extends MusicBeatState
 				if (SONG.song.toLowerCase() == 'tutorial')
 					trace('bro how tf did you die on tutorial :skull:');
 				
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
+				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y, 
+					songScore, songMisses, Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC));
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
