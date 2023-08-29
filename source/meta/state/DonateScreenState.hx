@@ -11,7 +11,6 @@ import openfl.Assets;
 import meta.*;
 import meta.data.*;
 import meta.state.*;
-
 import meta.data.alphabet.*;
 
 /*
@@ -84,20 +83,17 @@ class DonateScreenState extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
-			FlxG.switchState(new MainMenuState());
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if (controls.ACCEPT)
-		{
-			if (FlxG.keys.justPressed.K) // added other links lol
-				CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
-			else if (FlxG.keys.justPressed.M)
-				CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
-			else if (FlxG.keys.justPressed.W)
-				CoolUtil.browserLoad('https://sites.google.com/view/joalor64website-new/home');
-			else
-				CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
-		}
+			CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
+		else if (FlxG.keys.justPressed.K) // added other links lol
+			CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
+		else if (FlxG.keys.justPressed.M)
+			CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
+		else if (FlxG.keys.justPressed.W)
+			CoolUtil.browserLoad('https://sites.google.com/view/joalor64website-new/home');
 
 		super.update(elapsed);
 	}
