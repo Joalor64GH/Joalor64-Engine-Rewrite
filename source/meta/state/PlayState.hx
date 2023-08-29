@@ -3557,7 +3557,6 @@ class PlayState extends MusicBeatState
 	}
 
 	public var paused:Bool = false;
-	public var canReset:Bool = true;
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
@@ -3763,18 +3762,18 @@ class PlayState extends MusicBeatState
 		setOnLuas('curDecBeat', curDecBeat);
 
 		var pooper = npsArray.length - 1;
-			while (pooper >= 0) {
-				var fondler:Date = npsArray[pooper];
-				if (fondler != null && fondler.getTime() + 1000 < Date.now().getTime()) {
-					npsArray.remove(fondler);
-				}
-				else
-					pooper = 0;
-				pooper--;
+		while (pooper >= 0) {
+			var fondler:Date = npsArray[pooper];
+			if (fondler != null && fondler.getTime() + 1000 < Date.now().getTime()) {
+				npsArray.remove(fondler);
 			}
-			nps = npsArray.length;
-			if (nps > maxNPS)
-				maxNPS = nps;
+			else
+				pooper = 0;
+			pooper--;
+		}
+		nps = npsArray.length;
+		if (nps > maxNPS)
+			maxNPS = nps;
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -3924,7 +3923,7 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("stepShit", curStep);
 
 		// RESET = Quick Game Over Screen
-		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
+		if (!ClientPrefs.noReset && controls.RESET && !inCutscene && !endingSong)
 		{
 			doDeathCheck(true);
 			trace("RESET = True");
