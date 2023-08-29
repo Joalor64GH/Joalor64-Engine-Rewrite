@@ -461,10 +461,14 @@ class TitleState extends MusicBeatState
 				candance = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
+					#if html5
+					MusicBeatState.switchState(new BruhState());
+					#else
 					if (ClientPrefs.simpleMain)
 						MusicBeatState.switchState(new SimpleMainMenuState());
 					else
 						MusicBeatState.switchState(new MainMenuState());
+					#end
 					closedState = true;
 				});
 			}
