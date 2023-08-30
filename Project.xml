@@ -99,7 +99,10 @@
 	</section>
 
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
-	<assets path="plugins/"        	    rename=""        	    if="VIDEOS_ALLOWED windows"/>
+	<section if="VIDEOS_ALLOWED">
+		<assets path="plugins/"        	                rename=""        	    if="windows"/>
+		<assets path="plugins/plugins (but for mac)"	rename="plugins/"       if="mac"/>
+	</section>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
@@ -132,9 +135,6 @@
 
 	<!-- Discord Rich Prescence-->
 	<haxelib name="discord_rpc" if="desktop"/>
-
-	<!-- djFlixel -->
-	<haxelib name="djFlixel"/>
 
 	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
