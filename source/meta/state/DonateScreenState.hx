@@ -9,8 +9,9 @@ import flixel.FlxSprite;
 import openfl.Assets;
 
 import meta.*;
-import meta.data.*;
 import meta.state.*;
+
+import meta.data.*;
 import meta.data.alphabet.*;
 
 /*
@@ -40,7 +41,6 @@ class DonateScreenState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFF4E4E;
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
@@ -88,12 +88,8 @@ class DonateScreenState extends MusicBeatState
 
 		if (controls.ACCEPT)
 			CoolUtil.browserLoad(Assets.getText(Paths.txt('donate_button_link')));
-		else if (FlxG.keys.justPressed.K) // added other links lol
+		else if (FlxG.keys.justPressed.K) // support the funkin crew as well!!
 			CoolUtil.browserLoad('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
-		else if (FlxG.keys.justPressed.M)
-			CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
-		else if (FlxG.keys.justPressed.W)
-			CoolUtil.browserLoad('https://sites.google.com/view/joalor64website-new/home');
 
 		super.update(elapsed);
 	}

@@ -27,12 +27,10 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 import meta.video.*;
-import meta.data.alphabet.*;
 import meta.data.options.*;
 import meta.state.editors.*;
 import system.*;
 
-import core.ToastCore;
 import meta.data.Achievements;
 
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
@@ -141,9 +139,7 @@ class MainMenuState extends MusicBeatState
 		{
 			optionShit = 
 			[
-				'story_mode',
-				'freeplay',
-				'mini',
+				'play',
 				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
 				#end
 				#if ACHIEVEMENTS_ALLOWED
@@ -151,6 +147,7 @@ class MainMenuState extends MusicBeatState
 				#end
 				'credits',
 				#if !switch 
+				'manual',
 				'donate',
 				#end
 				'options'
@@ -381,8 +378,12 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
 				{
-					CoolUtil.browserLoad('${menuJSON.links[1]}'); // but this is also custom link support???
+					CoolUtil.browserLoad('${menuJSON.links[1]}');
 				} 
+				else if (optionShit[curSelected] == 'manual') 
+				{
+					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
+				}
 				else
 				{
 					selectedSomethin = true;
@@ -416,12 +417,8 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
-									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
-									case 'mini':
-										MusicBeatState.switchState(new MinigamesState());
+									case 'play':
+										MusicBeatState.switchState(new PlayMenuState());
 									#if (MODS_ALLOWED && FUTURE_POLYMOD)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
