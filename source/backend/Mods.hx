@@ -27,6 +27,8 @@ class Mods
 		'_append', 
 		'_merge', 
 		#end
+		'addons',
+		'libraries',
 		'characters',
 		'data',
 		'songs',
