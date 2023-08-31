@@ -1638,11 +1638,6 @@ class PlayState extends MusicBeatState
 
 		ModchartFuncs.loadLuaFunctions();
 
-		#if HSCRIPT_ALLOWED
-		postSetHscript();
-		#end
-		callOnLuas('onCreatePost', []);
-
 		super.create();
 
 		cacheCountdown();
@@ -1664,6 +1659,16 @@ class PlayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		CustomFadeTransition.nextCamera = camOther;
+	}
+
+	public function createPost() 
+	{
+		#if HSCRIPT_ALLOWED
+		postSetHscript();
+		#end
+		callOnLuas('onCreatePost', []);
+		
+		super.createPost();
 	}
 
 	#if (!flash && sys)

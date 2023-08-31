@@ -56,9 +56,9 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		resultsTxt = new FlxText(12, FlxG.height - 44, 0,  
 			'Score: ' + points
-			+ ' | Misses: ' + miss
-			+ ' | Percent Rating: ' + percentage + '%'
-			+ ' | Rating: ' + rate + ' (' + combo + ')'
+			+ ' // Misses: ' + miss
+			+ ' // Rating: ' + percentage + '%'
+			+ ' // ' + rate + ' (' + combo + ')'
 		, 12);
 		resultsTxt.scrollFactor.set();
 		resultsTxt.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -154,7 +154,6 @@ class GameOverSubstate extends MusicBeatSubstate
 					coolStartDeath(0.2);
 					
 					var exclude:Array<Int> = [];
-					//if(!ClientPrefs.cursing) exclude = [1, 3, 8, 13, 17, 21];
 
 					FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25, exclude)), 1, false, null, true, function() {
 						if(!isEnding)

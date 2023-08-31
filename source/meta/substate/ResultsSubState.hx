@@ -48,7 +48,7 @@ class ResultsSubState extends MusicBeatSubstate
 	{
 		persistentUpdate = true;
 
-		FlxG.sound.playMusic(Paths.music('breakfast'), 0);
+		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         	bg.scale.set(10, 10);
