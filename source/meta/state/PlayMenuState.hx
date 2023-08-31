@@ -37,8 +37,6 @@ class PlayMenuState extends MusicBeatState
 
 	override function create()
 	{
-		WeekData.loadTheFirstEnabledMod();
-
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -106,8 +104,6 @@ class PlayMenuState extends MusicBeatState
 	{
 		if (FlxG.sound.music.volume < 0.8)
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-
-		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 
 		if (!selectedSomethin)
 		{

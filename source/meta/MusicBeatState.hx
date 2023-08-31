@@ -49,7 +49,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		#end
 	}
 
-	override public function createPost()
+	public function createPost()
 	{
 		// do nothing
 	}
