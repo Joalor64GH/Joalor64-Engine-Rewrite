@@ -418,6 +418,8 @@ class PlayState extends MusicBeatState
 		if (curStage != 'schoolEvil')
 			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
 
+		openfl.system.System.gc();
+
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -1673,6 +1675,18 @@ class PlayState extends MusicBeatState
 
 		ModchartFuncs.loadLuaFunctions();
 
+		#if HSCRIPT_ALLOWED
+		postSetHscript();
+		#end
+		callOnLuas('onCreatePost', []);
+
+		if (boyfriend.antialiasing == true)
+			boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
+		if (dad.antialiasing == true)
+			dad.antialiasing = ClientPrefs.globalAntialiasing;
+		if (gf.antialiasing == true)
+			gf.antialiasing = ClientPrefs.globalAntialiasing;
+
 		super.create();
 
 		cacheCountdown();
@@ -1694,16 +1708,6 @@ class PlayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		CustomFadeTransition.nextCamera = camOther;
-	}
-
-	override public function createPost() 
-	{
-		#if HSCRIPT_ALLOWED
-		postSetHscript();
-		#end
-		callOnLuas('onCreatePost', []);
-
-		super.createPost();
 	}
 
 	#if (!flash && sys)
@@ -3356,6 +3360,13 @@ class PlayState extends MusicBeatState
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
 
+				if (boyfriend.antialiasing == true)
+					boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
+				if (dad.antialiasing == true)
+					dad.antialiasing = ClientPrefs.globalAntialiasing;
+				if (gf.antialiasing == true)
+			    	gf.antialiasing = ClientPrefs.globalAntialiasing;
+
 			case 'Dadbattle Spotlight':
 				if (curStage != 'stage')
 					return;
@@ -3610,7 +3621,7 @@ class PlayState extends MusicBeatState
 
 	public var removedVideo = false;
 
-	function truncateFloat(numberFloat, precision:Int):Float 
+	function truncateFloat(number:Float, precision:Int):Float 
 	{
 		var num = number;
 		num = num * Math.pow(10, precision);
@@ -4699,6 +4710,8 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
+		openfl.system.System.gc();
+
 		ButtplugUtils.stop();
 
 		if (useVideo)

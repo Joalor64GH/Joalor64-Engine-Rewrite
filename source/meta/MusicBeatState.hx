@@ -49,12 +49,6 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		#end
 	}
 
-	override public function createPost()
-	{
-		// doesn't do a lot
-		super.createPost();
-	}
-
 	override function update(elapsed:Float)
 	{
 		//everyStep();
