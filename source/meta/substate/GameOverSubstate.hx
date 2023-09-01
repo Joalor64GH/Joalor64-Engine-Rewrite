@@ -67,7 +67,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		resultsTxt.alpha = 0;
 
-		FlxTween.tween(resultsTxt, {alpha: 1}, 4, {ease: FlxEase.quadOut});
+		FlxTween.tween(resultsTxt, {alpha: 1}, 4.5, {ease: FlxEase.quadOut});
 
 		super.create();
 	}
