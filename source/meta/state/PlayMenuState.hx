@@ -87,7 +87,7 @@ class PlayMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			menuItem.screenCenter(XY);
 			menuItems.add(menuItem);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			menuItem.updateHitbox();
@@ -161,9 +161,9 @@ class PlayMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach((spr:FlxSprite) ->
 		{
-			spr.screenCenter(XY);
+			spr.screenCenter(X);
 		});
 	}
 

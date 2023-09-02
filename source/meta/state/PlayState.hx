@@ -488,7 +488,7 @@ class PlayState extends MusicBeatState
 					if (cpuControlled)
 						ratingFC = "Botplay";
 
-					if (songMisses == 0 && sicks > 0 && goods == 0 && bads == 0 && shits == 0)
+					if (songMisses == 0 && sicks >= 0 && goods == 0 && bads == 0 && shits == 0)
 						ratingFC = "(MFC) ";
 					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
 						ratingFC = "(GFC) ";
@@ -1680,6 +1680,7 @@ class PlayState extends MusicBeatState
 		#end
 		callOnLuas('onCreatePost', []);
 
+		// no point in these if antialiasing is off
 		if (boyfriend.antialiasing == true)
 			boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
 		if (dad.antialiasing == true)
@@ -3365,7 +3366,7 @@ class PlayState extends MusicBeatState
 				if (dad.antialiasing == true)
 					dad.antialiasing = ClientPrefs.globalAntialiasing;
 				if (gf.antialiasing == true)
-			    	gf.antialiasing = ClientPrefs.globalAntialiasing;
+			    		gf.antialiasing = ClientPrefs.globalAntialiasing;
 
 			case 'Dadbattle Spotlight':
 				if (curStage != 'stage')
