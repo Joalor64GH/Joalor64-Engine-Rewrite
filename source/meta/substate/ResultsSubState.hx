@@ -12,6 +12,8 @@ import meta.*;
 import meta.state.*;
 import meta.state.PlayState;
 
+import meta.data.*;
+
 class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
