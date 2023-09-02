@@ -74,14 +74,17 @@ class ResultsSubState extends MusicBeatSubstate
 			+ '\nShits: ' + shit
 			+ '\nScore: ' + points
 			+ '\nMisses: ' + miss
-			+ '\nPercent Rating: ' + percentage + '%'
-			+ '\nRating: ' + rate + ' (' + combo + ')'
 		, 72);
 		resultsTxt.scrollFactor.set();
 		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		add(resultsTxt);
+
+		if (ClientPrefs.scoreTxtType != 'Simple')
+		{
+			resultsTxt.text += '\nPercent Rating: ' + percentage + '%' + '\nRating: ' + rate + ' (' + combo + ')';
+		}
 
 		versionShit.alpha = 0;
 		resultsTxt.alpha = 0;
