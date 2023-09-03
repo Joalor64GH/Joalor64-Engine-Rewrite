@@ -13,6 +13,7 @@ class DumbKidLol extends RealDumbass
 
 	function set_ratio(r:Int):Int
 	{
+		// shut the hell up bitch, go kys go sit in the middle of the road and let a car run over you
 		switch(stupidKid){
 			case 'NimuDevUwU':
 				return 9999;
