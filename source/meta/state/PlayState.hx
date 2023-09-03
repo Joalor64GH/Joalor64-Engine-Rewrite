@@ -4825,7 +4825,7 @@ class PlayState extends MusicBeatState
 						CustomFadeTransition.nextCamera = null;
 					}
 
-					new FlxTimer().start(1, function(tmr:FlxTimer) {
+					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 						persistentUpdate = true;
 						openSubState(new ResultsSubState(sicks, goods, bads, shits, Std.int(campaignScore), Std.int(campaignMisses), 
 							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
@@ -4889,7 +4889,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				
-				new FlxTimer().start(1, function(tmr:FlxTimer) {
+				new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 					persistentUpdate = true;
 					openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
 				 		Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 

@@ -11,7 +11,6 @@ import flixel.util.FlxTimer;
 import meta.*;
 import meta.state.*;
 import meta.state.PlayState;
-
 import meta.data.*;
 
 class ResultsSubState extends MusicBeatSubstate 
@@ -81,6 +80,8 @@ class ResultsSubState extends MusicBeatSubstate
 		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
+		resultsTxt.x = titleTxt.x;
+		resultsTxt.y = titleTxt.y;
 		add(resultsTxt);
 
 		if (ClientPrefs.scoreTxtType != 'Simple')
