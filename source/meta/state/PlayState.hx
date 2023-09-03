@@ -5167,6 +5167,16 @@ class PlayState extends MusicBeatState
 				});
 			}
 
+			if (curStage == 'philly' && trainMoving && !trainFinishing) 
+			{
+				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
+				{
+					comboSpr.acceleration.x = -1250;
+					rating.acceleration.x = -1250;
+					numScore.acceleration.x = -1250;
+				});
+			}
+
 			if(combo >= 0)
 			{
 				insert(members.indexOf(strumLineNotes), numScore);
