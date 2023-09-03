@@ -317,7 +317,7 @@ class Paths
 		return pathMap;
 	}
 	
-	inline static public function iterateDirectory(Directory:String, Func:Dynamic<String>)
+	inline static public function iterateDirectory(Directory:String, Func:String->Void)
 	{
 		var dir:String = Directory.endsWith("/") ? Directory.substr(0, -1) : Directory; // remove ending slash
 
@@ -328,7 +328,7 @@ class Paths
 			Func(i);
 	}
 	#else
-	inline static public function iterateDirectory(Directory:String, Func:Dynamic<String>):Bool
+	inline static public function iterateDirectory(Directory:String, Func:String->Void):Bool
 	{
 		if (!FileSystem.exists(Directory) || !FileSystem.isDirectory(Directory))
 			return false;
