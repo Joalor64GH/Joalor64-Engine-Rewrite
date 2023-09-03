@@ -11,7 +11,6 @@ package system;
 import sys.io.File;
 import sys.io.Process;
 #end
-import haxe.io.Bytes;
 
 class CoolSystemStuff
 {
@@ -46,7 +45,7 @@ class CoolSystemStuff
 		#end
 	}
 
-	public static function executableFileName():Dynamic // idk what type it was originally
+	public static function executableFileName():Null<String> // idk what type it was originally
 	{
 		#if windows
 		var programPath = Sys.programPath().split("\\");
