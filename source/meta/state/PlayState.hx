@@ -3637,36 +3637,43 @@ class PlayState extends MusicBeatState
 	{
 		// SECRET KEYS!! SHHHHHHHH
 		#if debug
-		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
-			endSong();
-		} else if (FlxG.keys.justPressed.F2 && !startingSong) { // 10 Seconds Forward
-			Conductor.songPosition += 10000;
-			FlxG.sound.music.time = Conductor.songPosition;
-			vocals.time = Conductor.songPosition;
-		} else if (FlxG.keys.justPressed.F3 && !startingSong) { // 10 Seconds Back
-			Conductor.songPosition -= 10000;
-			FlxG.sound.music.time = Conductor.songPosition;
-			vocals.time = Conductor.songPosition;
-		} else if (FlxG.keys.justPressed.F4) { // Enable/Disable Botplay
-			if (!cpuControlled) {
-				cpuControlled = true;
-				botplayTxt.visible = true;
-			} else {
-				cpuControlled = false;
-				botplayTxt.visible = false;
+		final keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+		if (keyPressed != FlxKey.NONE){
+			switch(keyPressed){
+				case F1: // End Song
+				if (!startingSong)
+					endSong();
+				case F2 if (!startingSong): // 10 Seconds Forward
+					Conductor.songPosition += 10000;
+					FlxG.sound.music.time = Conductor.songPosition;
+					vocals.time = Conductor.songPosition;
+				case F3 if (!startingSong): // 10 Seconds Back
+					Conductor.songPosition -= 10000;
+					FlxG.sound.music.time = Conductor.songPosition;
+					vocals.time = Conductor.songPosition;
+				case F4: // Enable/Disable Botplay
+					if (!cpuControlled) {
+						cpuControlled = true;
+						botplayTxt.visible = true;
+					} else {
+						cpuControlled = false;
+						botplayTxt.visible = false;
+					}
+				case F5: // Camera Speeds Up
+					cameraSpeed += 0.5;
+				case F6: // Camera Slows Down
+					cameraSpeed -= 0.5;
+				case F7: // Song Speeds Up
+					songSpeed += 0.1;
+				case F8: // Song Slows Down
+					songSpeed -= 0.1;
+				case F9: // Camera Zooms In
+					defaultCamZoom += 0.1;
+				case F10: // Camera Zooms Out
+					defaultCamZoom -= 0.1;
+				default:
+					// nothing
 			}
-		} else if (FlxG.keys.justPressed.F5) { // Camera Speeds Up
-			cameraSpeed += 0.5;
-		} else if (FlxG.keys.justPressed.F6) { // Camera Slows Down
-			cameraSpeed -= 0.5;
-		} else if (FlxG.keys.justPressed.F7) { // Song Speeds Up
-			songSpeed += 0.1;
-		} else if (FlxG.keys.justPressed.F8) { // Song Slows Down
-			songSpeed -= 0.1;
-		} else if (FlxG.keys.justPressed.F9) { // Camera Zooms In
-			defaultCamZoom += 0.1;
-		} else if (FlxG.keys.justPressed.F10) { // Camera Zooms Out
-			defaultCamZoom -= 0.1;
 		}
 		#end
 
