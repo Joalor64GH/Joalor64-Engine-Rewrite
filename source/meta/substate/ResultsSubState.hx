@@ -81,7 +81,6 @@ class ResultsSubState extends MusicBeatSubstate
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		resultsTxt.x = titleTxt.x;
-		resultsTxt.y = titleTxt.y;
 		add(resultsTxt);
 
 		if (ClientPrefs.scoreTxtType != 'Simple')
