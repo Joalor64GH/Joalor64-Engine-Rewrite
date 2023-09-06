@@ -109,7 +109,7 @@ class NotesSubState extends MusicBeatSubstate
 				[223, 0, 118]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn1.scale.set(1.5, 1.5);
@@ -128,7 +128,7 @@ class NotesSubState extends MusicBeatSubstate
 				[0, 192, 255]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn2.scale.set(1.5, 1.5);
@@ -147,7 +147,7 @@ class NotesSubState extends MusicBeatSubstate
 				[237, 48, 205]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn3.scale.set(1.5, 1.5);
@@ -166,7 +166,7 @@ class NotesSubState extends MusicBeatSubstate
 				[24, 138, 240]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn4.scale.set(1.5, 1.5);
@@ -185,7 +185,7 @@ class NotesSubState extends MusicBeatSubstate
 				[255, 255, 255]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn5.scale.set(1.5, 1.5);
@@ -204,7 +204,7 @@ class NotesSubState extends MusicBeatSubstate
 				[0, 0, 0]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn6.scale.set(1.5, 1.5);
@@ -223,7 +223,7 @@ class NotesSubState extends MusicBeatSubstate
 				[255, 124, 232]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn7.scale.set(1.5, 1.5);
@@ -242,7 +242,7 @@ class NotesSubState extends MusicBeatSubstate
 				[242, 190, 209]
 			];
 			updateValue();
-			// updateAll();
+			updateAll();
 			ClientPrefs.saveSettings();
         	});
 		btn8.scale.set(1.5, 1.5);
@@ -347,8 +347,8 @@ class NotesSubState extends MusicBeatSubstate
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 			if(controls.RESET) {
-				for (i in 0...3) {
-					resetValue(curSelected, i);
+				for (i in 0...grpNotes.members.length) {
+					resetValue(grpNotes.members.length, i);
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
@@ -504,6 +504,27 @@ class NotesSubState extends MusicBeatSubstate
 	}
 	function updateAll() 
 	{
-		// does nothing yet
+		var roundedValue:Int = Math.round(curValue);
+
+		if(roundedValue < 0) {
+			curValue = 0;
+		} else if(roundedValue > 255) {
+			curValue = 255;
+		}
+		roundedValue = Math.round(curValue);
+		ClientPrefs.arrowRGB[curSelected][typeSelected] = roundedValue;
+
+		for (i in 0...grpNotes.members.length){
+			shaderArray[i].rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[curSelected][0], ClientPrefs.arrowRGB[curSelected][1], ClientPrefs.arrowRGB[curSelected][2]);
+			shaderArray[i].gCol = shaderArray[i].rCol.getDarkened(0.6);
+		}
+		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
+		item.text = Std.string(roundedValue);
+
+		var add = (40 * (item.letters.length - 1)) / 2;
+		for (letter in item.letters)
+		{
+			letter.offset.x += add;
+		}
 	}
 }
