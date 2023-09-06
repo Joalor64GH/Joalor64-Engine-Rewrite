@@ -418,6 +418,9 @@ class PlayState extends MusicBeatState
 		if (curStage != 'schoolEvil')
 			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
 
+		#if cpp
+		cpp.vm.Gc.enable(true);
+		#end
 		openfl.system.System.gc();
 
 		Paths.clearStoredMemory();
@@ -3633,7 +3636,6 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		// SECRET KEYS!! SHHHHHHHH
-		// TODO: make this yandere dev code better
 		#if debug
 		if (FlxG.keys.justPressed.F1 && !startingSong) { // End Song
 			endSong();
@@ -3687,7 +3689,7 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality && bgGhouls.animation.curAnim.finished) {
 					bgGhouls.visible = false;
 				}
-				Application.current.window.title = randomString(FlxG.random.int(8, 16));
+				Application.current.window.title = randomString();
 			case 'philly':
 				if (trainMoving)
 				{
@@ -5908,6 +5910,10 @@ class PlayState extends MusicBeatState
 		hscriptMap.clear();
 		#end
 
+		#if cpp
+		cpp.vm.Gc.enable(false);
+		#end
+
 		#if hscript
 		if(FunkinLua.hscript != null) FunkinLua.hscript = null;
 		#end
@@ -6341,13 +6347,12 @@ class PlayState extends MusicBeatState
 	static inline var numbers:String = "0123456789";
 	static inline var symbols:String = "!@#$%&()*+-,./:;<=>?^[]{}";
 
-	inline public static function randomString(len:Int) 
+	inline public static function randomString() 
 	{
 		var str = "";
-		for (i in 0...len){
 			for (e in [upperCase, lowerCase, numbers, symbols])
 				str += e.charAt(FlxG.random.int(0, e.length - 1));
-		}
+
 		return str;
 	}
 }

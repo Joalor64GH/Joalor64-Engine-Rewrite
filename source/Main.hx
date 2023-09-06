@@ -256,6 +256,7 @@ class Joalor64Game extends FlxGame {
 	}
 
 	private function exceptionCaught(e:haxe.Exception) {
+		#if CRASH_HANDLER
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
 		final formattedMessage:String = getCallStack().join("\n");
@@ -265,8 +266,12 @@ class Joalor64Game extends FlxGame {
 		DiscordClient.shutdown();
 
 		goToExceptionState(e.message, formattedMessage, true, callStack);
+		#else
+		throw e;
+		#end
 	}
 
+	#if CRASH_HANDLER
 	private function exceptionCaughtOpenFL(e:UncaughtErrorEvent) {
 		var callStack:CallStack = CallStack.exceptionStack(true);
 
@@ -319,10 +324,10 @@ class Joalor64Game extends FlxGame {
 		Sys.println(errMsg);
 		Sys.println('Crash dump saved in ${Path.normalize(path)}');
 	}
+	#end
 
-	private function getLogPath():String {
+	private function getLogPath():String
 		return "crash/" + "J64E_" + formatDate() + ".txt";
-	}
 
 	private function formatDate():String {
 		var dateNow:String = Date.now().toString();
