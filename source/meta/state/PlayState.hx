@@ -413,6 +413,9 @@ class PlayState extends MusicBeatState
 
 	public static var inMini:Bool = false;
 
+	// need to make this global
+	var ratingSprite:FlxSprite;
+
 	override public function create()
 	{
 		if (curStage != 'schoolEvil')
@@ -3677,6 +3680,15 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		if (ClientPrefs.uiSkin == 'Simplylove'){
+			final lerp = FlxMath.lerp(ratingSprite.scale.x, 1, elapsed * 6 / playbackRate);
+			final lerp2 = FlxMath.lerp(ratingSprite.scale.y, 1, elapsed * 6 / playbackRate); // can't do both at once
+			if (ratingSprite != null){
+				ratingSprite.scale.x = lerp;
+				ratingSprite.scale.y = lerp2;
+			}
+		}
+
 		if (useVideo && GlobalVideo.get() != null)
 		{
 			if (GlobalVideo.get().ended && !removedVideo)
@@ -4985,7 +4997,8 @@ class PlayState extends MusicBeatState
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
 		vocals.volume = vocalsFinished ? 0 : 1;
 
-		var rating:FlxSprite = new FlxSprite();
+		ratingSprite = new FlxSprite();
+
 		var score:Int = 350;
 
 		if (!inReplay)
@@ -5045,23 +5058,28 @@ class PlayState extends MusicBeatState
 		final ratingsY:Float = 60;
 
 		if (ratingsGroup.countDead() > 0) {
-			rating = ratingsGroup.getFirstDead();
-			rating.reset(ratingsX, ratingsY);
+			ratingSprite = ratingsGroup.getFirstDead();
+			ratingSprite.reset(ratingsX, ratingsY);
 		} else {
-			rating = new FlxSprite();
-			ratingsGroup.add(rating);
+			ratingSprite = new FlxSprite();
+			ratingsGroup.add(ratingSprite);
 		}
-		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
-		rating.cameras = [camHUD];
-		rating.screenCenter();
-		rating.x = ratingsX;
-		rating.y -= ratingsY;
-		rating.acceleration.y = 550 * playbackRate * playbackRate;
-		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
-		rating.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
-		rating.visible = (!ClientPrefs.hideHud && showRating);
-		rating.x += ClientPrefs.comboOffset[0];
-		rating.y -= ClientPrefs.comboOffset[1];
+		ratingSprite.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
+		ratingSprite.cameras = [camHUD];
+		ratingSprite.screenCenter();
+		ratingSprite.x = ratingsX;
+		ratingSprite.y -= ratingsY;
+		if (ClientPrefs.uiSkin != 'Simplylove'){
+			ratingSprite.acceleration.y = 550 * playbackRate * playbackRate;
+			ratingSprite.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
+			ratingSprite.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
+			ratingSprite.x += ClientPrefs.comboOffset[0];
+			ratingSprite.y -= ClientPrefs.comboOffset[1];
+		}
+		else
+			ratingSprite.scale.x += ratingSprite.scale.y += 50;
+
+		ratingSprite.visible = (!ClientPrefs.hideHud && showRating);
 
 		var comboGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 		var comboSpr:FlxSprite;
@@ -5080,33 +5098,33 @@ class PlayState extends MusicBeatState
 		comboSpr.x = comboX;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
+		comboSpr.visible = (!ClientPrefs.hideHud && showCombo && (ClientPrefs.uiSkin != 'Simplylove'));
 		comboSpr.x += ClientPrefs.comboOffset[4];
 		comboSpr.y -= ClientPrefs.comboOffset[5];
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
 		
-		if (!ClientPrefs.comboStacking)
+		if (!ClientPrefs.comboStacking || (ClientPrefs.uiSkin == 'Simplylove'))
 		{
 			if (lastRating != null) 
 				lastRating.kill();
-			lastRating = rating;
+			lastRating = ratingSprite;
 		}
 
 		if (!PlayState.isPixelStage)
 		{
-			rating.setGraphicSize(Std.int(rating.width * 0.7));
-			rating.antialiasing = ClientPrefs.globalAntialiasing;
+			ratingSprite.setGraphicSize(Std.int(ratingSprite.width * 0.7));
+			ratingSprite.antialiasing = ClientPrefs.globalAntialiasing;
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
 			comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
+			ratingSprite.setGraphicSize(Std.int(ratingSprite.width * daPixelZoom * 0.85));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
 		}
 
 		comboSpr.updateHitbox();
-		rating.updateHitbox();
+		ratingSprite.updateHitbox();
 
 		// forever engine combo
 		var seperatedScore:Array<String> = (combo + "").split("");
@@ -5171,7 +5189,7 @@ class PlayState extends MusicBeatState
 				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
 				{
 					comboSpr.acceleration.x = 1250;
-					rating.acceleration.x = 1250;
+					ratingSprite.acceleration.x = 1250;
 					numScore.acceleration.x = 1250;
 				});
 			}
@@ -5181,7 +5199,7 @@ class PlayState extends MusicBeatState
 				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
 				{
 					comboSpr.acceleration.x = -1250;
-					rating.acceleration.x = -1250;
+					ratingSprite.acceleration.x = -1250;
 					numScore.acceleration.x = -1250;
 				});
 			}
@@ -5195,7 +5213,7 @@ class PlayState extends MusicBeatState
 				insert(members.indexOf(strumLineNotes), comboSpr);
 			}
 
-			insert(members.indexOf(strumLineNotes), rating);
+			insert(members.indexOf(strumLineNotes), ratingSprite);
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
 					numScore.kill();
@@ -5207,9 +5225,9 @@ class PlayState extends MusicBeatState
 			daLoop++;
 		}
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
-				rating.kill();
-				rating.alpha = 1;
+		FlxTween.tween(ratingSprite, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
+				ratingSprite.kill();
+				ratingSprite.alpha = 1;
 			},
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
