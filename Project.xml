@@ -174,7 +174,7 @@
 		<haxedef name="no-deprecation-warnings"/>
 	</section>
 	
-	<!--Crash screen stuff-->
+	<!-- Crash handler stuff -->
 	<section if="CRASH_HANDLER">
 		<haxedef name="HXCPP_CHECK_POINTER" />
 		<haxedef name="HXCPP_STACK_LINE" />
@@ -192,7 +192,7 @@
 
 	<!-- _________________________________ Icons _______________________________ -->
 
-	<assets path='art/iconOG.png' rename='icon.png' if="linux" /> <!-- workaround for linux -->
+	<assets path='art/iconOG.png' rename='icon.png' if="linux" /> <!-- icon workaround for linux -->
 	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
