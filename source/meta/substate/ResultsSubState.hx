@@ -49,6 +49,7 @@ class ResultsSubState extends MusicBeatSubstate
 	{
 		persistentUpdate = true;
 
+		FlxG.sound.music.fadeIn(4, 0, 0.7);
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -68,7 +69,7 @@ class ResultsSubState extends MusicBeatSubstate
 		titleTxt.updateHitbox();
 		add(titleTxt);
 
-		resultsTxt = new FlxText(0, 0, 0, 
+		resultsTxt = new FlxText(titleTxt.x, 0, 0, 
 			'Sicks: ' + sick
 			+ '\nGoods: ' + good
 			+ '\nBads: ' + bad
@@ -80,7 +81,6 @@ class ResultsSubState extends MusicBeatSubstate
 		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
-		resultsTxt.x = titleTxt.x;
 		add(resultsTxt);
 
 		if (ClientPrefs.scoreTxtType != 'Simple')
