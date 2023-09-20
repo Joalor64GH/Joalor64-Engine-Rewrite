@@ -170,10 +170,9 @@ class CoolUtil
 	inline public static function clamp(value:Float, min:Float, max:Float):Float
 		return Math.max(min, Math.min(max, value));
 
-		@:keep public static inline function boundFPS(input:Float) {
+	@:keep public static inline function boundFPS(input:Float)
 		@:privateAccess 
 		return input;
-	}
 }
 
 // there's a big difference between the two
