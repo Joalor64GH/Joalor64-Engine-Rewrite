@@ -1,4 +1,4 @@
-package meta.data;
+package meta.substate;
 
 import meta.*;
 import flixel.*;

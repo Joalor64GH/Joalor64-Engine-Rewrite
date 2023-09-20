@@ -4,20 +4,17 @@ package meta.state;
 import meta.data.dependency.Discord.DiscordClient;
 #end
 
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
 
 import meta.*;
 import meta.data.*;
 import meta.state.*;
+import meta.substate.*;
 import meta.data.alphabet.*;
 import meta.data.Achievements;
 

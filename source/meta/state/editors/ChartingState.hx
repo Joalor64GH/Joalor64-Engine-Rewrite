@@ -59,6 +59,7 @@ import sys.io.File;
 import meta.*;
 import meta.data.*;
 import meta.state.*;
+import meta.substate.*;
 import meta.state.editors.*;
 import objects.userinterface.note.*;
 import objects.userinterface.*;

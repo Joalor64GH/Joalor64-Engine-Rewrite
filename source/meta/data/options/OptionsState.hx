@@ -22,7 +22,6 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 
 import meta.state.*;
-import meta.state.error.*;
 import meta.substate.*;
 
 using StringTools;
@@ -52,17 +51,17 @@ class OptionsState extends MusicBeatState
 					Main.toast.create('No mod options exist!', 0xFFFFFF00, 'Please add your custom options to access this menu!');
 			#end
 			case 'Note Colors':
-				openSubState(new NotesSubState());
+				openSubState(new OptionsSubState.NotesSubState());
 			case 'Controls':
-				openSubState(new ControlsSubState());
+				openSubState(new OptionsSubState.ControlsSubState());
 			case 'Offsets':
 				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Visuals':
-				openSubState(new VisualsSubState());
+				openSubState(new OptionsSubState.VisualsSubState());
 			case 'Gameplay':
-				openSubState(new GameplaySubState());
+				openSubState(new OptionsSubState.GameplaySubState());
 			case 'Miscellaneous':
-				openSubState(new MiscSubState());
+				openSubState(new OptionsSubState.MiscSubState());
 		}
 	}
 

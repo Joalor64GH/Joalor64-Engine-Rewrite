@@ -39,6 +39,7 @@ import openfl.utils.ByteArray;
 
 import meta.*;
 import meta.state.*;
+import meta.substate.*;
 import meta.state.editors.*;
 import meta.data.alphabet.*;
 import meta.data.*;

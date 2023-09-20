@@ -13,6 +13,7 @@ import meta.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 import meta.data.options.*;
+import meta.substate.*;
 import meta.state.*;
 
 using StringTools;
@@ -29,8 +30,6 @@ class SaveDataState extends MusicBeatState
 	];
 
     	var curSelected:Int = 0;
-	
-   	var bg:FlxSprite;
 
 	override public function create()
 	{
@@ -40,7 +39,8 @@ class SaveDataState extends MusicBeatState
 		DiscordClient.changePresence("Save Data Menu", null);
 		#end
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
         	bg.color = 0xFFea71fd;
 		add(bg);
 
