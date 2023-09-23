@@ -35,8 +35,6 @@ final class FunkinBrewScript extends brew.BrewScript
 	public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
 	{
 		super(scriptFile, preset, false);
-
-		traces = false;
 		
 		execute();
 	}
