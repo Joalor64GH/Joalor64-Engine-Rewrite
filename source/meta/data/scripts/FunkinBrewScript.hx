@@ -30,11 +30,11 @@ import meta.data.alphabet.*;
 import objects.userinterface.note.*;
 import objects.*;
 
-final class FunkinSScript extends tea.SScript
+final class FunkinBrewScript extends brew.BrewScript
 {
-	public function new(?scriptFile:String = "", ?preset:Bool = true)
+	public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
 	{
-		super(scriptFile, preset);
+		super(scriptFile, preset, false);
 
 		traces = false;
 		

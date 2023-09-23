@@ -42,7 +42,7 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-New https://github.com/Joalor64GH/SScript-New
+          haxelib git BrewScript https://github.com/tahirk786/BrewScript
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -87,7 +87,7 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-New https://github.com/Joalor64GH/SScript-New
+          haxelib git BrewScript https://github.com/tahirk786/BrewScript
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -133,7 +133,7 @@ jobs:
           haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-New https://github.com/Joalor64GH/SScript-New
+          haxelib git BrewScript https://github.com/tahirk786/BrewScript
           haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
