@@ -383,7 +383,7 @@ class PlayState extends MusicBeatState
 	#end
 	public var introSoundsSuffix:String = '';
 
-	public var scriptArray:Array<FunkinBrewScript> = [];
+	public var scriptArray:Array<FunkinSScript> = [];
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -1094,7 +1094,7 @@ class PlayState extends MusicBeatState
 					addHscript(folder + file);
 				#elseif SCRIPT_EXTENSION
 				if(file.toLowerCase().endsWith('.hx'))
-					scriptArray.push(new FunkinBrewScript(folder + file));
+					scriptArray.push(new FunkinSScript(folder + file));
 				#end
 			}
 		}
@@ -1143,7 +1143,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(doPush)
-			scriptArray.push(new FunkinBrewScript(scriptFile));
+			scriptArray.push(new FunkinSScript(scriptFile));
 		#end
 		#end
 
@@ -1515,21 +1515,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinBrewScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinBrewScript(hxToLoad));
+					scriptArray.push(new FunkinSScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinBrewScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			#end
 		}
@@ -1539,21 +1539,21 @@ class PlayState extends MusicBeatState
 			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinBrewScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			else
 			{
 				hxToLoad = Paths.getPreloadPath('events/' + event + '.hx');
 				if(FileSystem.exists(hxToLoad))
 				{
-					scriptArray.push(new FunkinBrewScript(hxToLoad));
+					scriptArray.push(new FunkinSScript(hxToLoad));
 				}
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('events/' + event + '.hx');
 			if(OpenFlAssets.exists(hxToLoad))
 			{
-				scriptArray.push(new FunkinBrewScript(hxToLoad));
+				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
 			#end
 		}
@@ -1575,7 +1575,7 @@ class PlayState extends MusicBeatState
 					addHscript(folder + file);
 				#elseif SCRIPT_EXTENSION
 				if(file.toLowerCase().endsWith('.hx'))
-					scriptArray.push(new FunkinBrewScript(folder + file));
+					scriptArray.push(new FunkinSScript(folder + file));
 				#end
 			}
 		}
@@ -2200,7 +2200,7 @@ class PlayState extends MusicBeatState
 			{
 				if(script.scriptFile == scriptFile) return;
 			}
-			scriptArray.push(new FunkinBrewScript(scriptFile));
+			scriptArray.push(new FunkinSScript(scriptFile));
 		}
 		#end
 	}
