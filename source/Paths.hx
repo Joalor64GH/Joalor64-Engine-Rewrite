@@ -229,9 +229,14 @@ class Paths
 		return getPreloadPath(file);
 	}
 
+	static var currentLevel:String;
+	
 	inline public static function getPreloadPath(file:String = '')
 	{
-		return 'assets/$file';
+		var path = 'assets/$file';
+		if (currentLevel != null && Assets.exists('$currentLevel:$path'))
+			return '$currentLevel:$path';
+		return path;
 	}
 
 	inline static public function txt(key:String, ?library:String)

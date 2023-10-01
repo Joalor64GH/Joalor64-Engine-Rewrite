@@ -1,4 +1,5 @@
 // This just contains global imports.
+#if !macro
 // FLIXEL
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
@@ -22,7 +23,7 @@ import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
 import meta.Controls;
-#if !macro import Paths; #end
+import Paths;
 
 #if MODS_ALLOWED import backend.Mods; #end
 
@@ -42,3 +43,4 @@ import openfl.utils.Assets as OpenFlAssets;
 
 using StringTools;
 using meta.CoolUtil;
+#end
