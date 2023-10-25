@@ -120,7 +120,7 @@ class CreditsState extends MusicBeatState
 				'TheWorldMachinima',
 				'machinima',
 				'SScript and Funkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
-				'https://github.com/TheWorldMachinima',
+				'https://github.com/tahirk786',
 				'638F5B',
 				'nyaw'
 			],
