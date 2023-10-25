@@ -6061,7 +6061,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//buttplug fuckery
-		if (ButtplugUtils.depsRunning) // so to not spam the console
+		if (ButtplugUtils.depsRunning || (bpPayload != 'BPDEPSNOTRUNNING')) // so to not spam the console
 			ButtplugUtils.sendPayload(bpPayload);
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
@@ -6101,17 +6101,15 @@ class PlayState extends MusicBeatState
 
 	public function callOnScripts(event:String, args:Array<Dynamic>):Void
 	{
-		#if !SCRIPT_EXTENSION
-		return;
+		#if SCRIPT_EXTENSION
+		for (i in scriptArray) i.call(event, args);
 		#end
-		return for (i in scriptArray) i.call(event, args);
 	}
 	public function setOnScripts(key:String, value:Dynamic):Void
 	{
-		#if !SCRIPT_EXTENSION
-		return;
+		#if SCRIPT_EXTENSION
+		for (i in scriptArray) i.set(key, value);
 		#end
-		return for (i in scriptArray) i.set(key, value);
 	}
 
 	public function callOnLuas(event:String, args:Array<Dynamic>, ?callOnScript:Bool = true, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
