@@ -3643,12 +3643,16 @@ class PlayState extends MusicBeatState
 				case F1: // End Song
 				if (!startingSong)
 					endSong();
+					KillNotes();
+					FlxG.sound.music.onComplete();
 				case F2 if (!startingSong): // 10 Seconds Forward
-					Conductor.songPosition += 10000;
+					setSongTime(Conductor.songPosition + 10000);
+					clearNotesBefore(Conductor.songPosition);
 					FlxG.sound.music.time = Conductor.songPosition;
 					vocals.time = Conductor.songPosition;
 				case F3 if (!startingSong): // 10 Seconds Back
-					Conductor.songPosition -= 10000;
+					setSongTime(Conductor.songPosition - 10000);
+					clearNotesBefore(Conductor.songPosition);
 					FlxG.sound.music.time = Conductor.songPosition;
 					vocals.time = Conductor.songPosition;
 				case F4: // Enable/Disable Botplay
@@ -4144,19 +4148,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 		checkEventNote();
-
-		#if debug
-		if(!endingSong && !startingSong) {
-			if (FlxG.keys.justPressed.ONE) {
-				KillNotes();
-				FlxG.sound.music.onComplete();
-			}
-			if(FlxG.keys.justPressed.TWO) { //Go 10 seconds into the future :O
-				setSongTime(Conductor.songPosition + 10000);
-				clearNotesBefore(Conductor.songPosition);
-			}
-		}
-		#end
 
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);

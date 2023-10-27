@@ -1,6 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -53,6 +52,7 @@ class FlashingState extends MusicBeatState
 						MusicBeatState.switchState(new TitleState());
 					}
 				});
+				leftState = true;
 			}
 		}
 		super.update(elapsed);
