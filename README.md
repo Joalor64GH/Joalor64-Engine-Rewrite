@@ -66,7 +66,7 @@ You can check planned/upcoming features [here](/TODO).
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
-* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support + SScript
+* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support + SScript
 * [TheWorldMachinima](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + OG SScript
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib

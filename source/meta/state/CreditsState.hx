@@ -3,10 +3,8 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -17,7 +15,6 @@ import flixel.tweens.FlxEase;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import lime.utils.Assets;
 
 import meta.*;
 import meta.data.*;
@@ -109,18 +106,18 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Special Thanks'],
 			[
-				'BeastlyGhost',
+				'crowplexus',
 				'beastly',
-				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
-				'https://github.com/BeastlyGhost',
+				'SScript\nCustomizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
+				'https://github.com/crowplexus',
 				'8CC4FF',
 				'Ghost'
 			],
 			[
 				'TheWorldMachinima',
 				'machinima',
-				'SScript and Funkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
-				'https://github.com/tahirk786',
+				'OG SScript\nFunkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
+				'https://github.com/TahirKarabekiroglu',
 				'638F5B',
 				'nyaw'
 			],
