@@ -17,6 +17,7 @@
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
+  
 </div>
 
 ----------------------------------------------
@@ -65,9 +66,8 @@ You can check planned/upcoming features [here](/TODO).
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
-* [People on the PE Discord Server](https://discord.gg/2ka77eMXDv) - They made the Scripts lol
-* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
-* [TheWorldMachinima](https://github.com/tahirk786) - SScript and Funkin Cocoa Code + Softcoded Achievements
+* [BeastlyGhost](https://github.com/BeastlyGhost) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support + SScript
+* [TheWorldMachinima](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + OG SScript
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
