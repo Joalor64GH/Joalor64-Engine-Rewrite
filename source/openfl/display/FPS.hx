@@ -48,9 +48,10 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
-		autoSize = LEFT;
-		multiline = true;
+		defaultTextFormat = new TextFormat(Paths.font('vcr.ttf'), 16, color);
+		// set text area for the time being
+		width = Main.gameWidth;
+		height = Main.gameHeight;
 		text = "FPS: ";
 
 		cacheCount = 0;

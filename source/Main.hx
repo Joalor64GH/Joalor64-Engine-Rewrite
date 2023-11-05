@@ -45,13 +45,13 @@ using StringTools;
 
 class Main extends Sprite
 {
-	var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions. (Removed from Flixel 5.0.0)
-	
-	public static var fpsVar:FPS;
+	public static var fpsVar:FPS; // fps
 	public static var game:Joalor64Game; // the main game
-	public static var toast:ToastCore; // credits go to MAJigsaw77
+	public static var toast:ToastCore; // notification thing, credits go to MAJigsaw77
+	public static var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	public static var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	
+	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions. (Removed from Flixel 5.0.0)
 
 	public static function main():Void
 	{
