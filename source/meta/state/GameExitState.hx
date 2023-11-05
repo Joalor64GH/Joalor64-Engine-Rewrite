@@ -21,20 +21,10 @@ using StringTools;
 
 class GameExitState extends MusicBeatState
 {
-	var options:Array<String> = ['Yes', 'No'];
-
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 
-	function openSelectedSubstate(label:String) {
-		switch(label) {
-			case 'Yes':
-				quitGame();
-			case 'No':
-				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(new PlayState());
-		}
-	}
+	var options:Array<String> = ['Yes', 'No'];
 
 	var accepted:Bool;
 	var allowInputs:Bool = false;
@@ -74,7 +64,17 @@ class GameExitState extends MusicBeatState
 		header.screenCenter(X);
         	add(header);
 		
-		initOptions();
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
+			grpOptions.add(optionText);
+		}
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		selectorLeft.scrollFactor.set(0, yScroll);
@@ -88,20 +88,6 @@ class GameExitState extends MusicBeatState
 		allowInputs = true;
 
 		super.create();
-	}
-
-	function initOptions() {
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
-
-		for (i in 0...options.length)
-		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
-			grpOptions.add(optionText);
-		}
 	}
 
 	override function update(elapsed:Float) {
@@ -123,7 +109,7 @@ class GameExitState extends MusicBeatState
 
 			if (controls.ACCEPT && !accepted) {
 				accepted = true; // locks inputs
-				openSelectedSubstate(options[curSelected]);
+				selectOption(options[curSelected]);
 			}
 		}
 	}
@@ -154,7 +140,13 @@ class GameExitState extends MusicBeatState
 		}
 	}
 
-	function quitGame() {
-	    FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { Sys.exit(0); }, false);
+	function selectOption(label:String) {
+		switch(label) {
+			case 'Yes':
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { Sys.exit(0); }, false);
+			case 'No':
+				StageData.loadDirectory(PlayState.SONG);
+				LoadingState.loadAndSwitchState(new PlayState());
+		}
 	}
 }

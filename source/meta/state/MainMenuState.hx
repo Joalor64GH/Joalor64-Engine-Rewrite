@@ -251,11 +251,12 @@ class MainMenuState extends MusicBeatState
 			menuItem.ID = i;
 			if (menuJSON.alignToCenter)
 				menuItem.screenCenter(X);
-			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			menuItem.updateHitbox();
+			if (optionShit[i] == '') menuItem.visible = false;
+			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
 			if (firstStart)
 				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {
 					ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
@@ -267,6 +268,8 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 60 + (i * 160);
 		}
+
+		firstStart = false;
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
@@ -376,6 +379,11 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
+				if (optionShit[curSelected] == '')
+				{
+					return;
+				}
+
 				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
 				{
 					CoolUtil.browserLoad('${menuJSON.links[1]}');
@@ -489,12 +497,15 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{
-		curSelected += huh;
+		if (finishedFunnyMove) 
+		{
+			curSelected += huh;
 
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
+			if (curSelected >= menuItems.length)
+				curSelected = 0;
+			if (curSelected < 0)
+				curSelected = menuItems.length - 1;
+		}
 
 		menuItems.forEach((spr:FlxSprite) ->
 		{
