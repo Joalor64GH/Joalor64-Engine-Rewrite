@@ -5,16 +5,15 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-
 import lime.app.Application;
 
 import meta.*;
 import meta.data.*;
 import meta.state.*;
+import meta.state.PlayState;
 import meta.data.alphabet.*;
 
 import objects.userinterface.HealthIcon;
-import meta.state.PlayState;
 
 class MinigamesState extends MusicBeatState
 {
@@ -96,15 +95,13 @@ class MinigamesState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
             		PlayState.inMini = true;
+			LoadingState.loadAndSwitchState(new PlayState());
 			switch (curSelected)
             		{
 				case 0:
 					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
-                    			LoadingState.loadAndSwitchState(new PlayState());
-
 				case 1:
 					PlayState.SONG = Song.loadFromJson('compression', 'compression');
-                    			LoadingState.loadAndSwitchState(new PlayState());
 			}
 		}
 	}
