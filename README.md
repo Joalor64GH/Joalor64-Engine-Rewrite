@@ -41,7 +41,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * In-Game Crash Handler
 * Custom Options
 * SWF Support (Actionscript 3.0 Only)
-* Polymod Support
+* Polymod Support (ft. My polymod fork)
 * HX and Hscript Support
 * Replay System
 * Reorganized Source/Assets
@@ -66,8 +66,8 @@ You can check planned/upcoming features [here](/TODO).
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
-* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support + SScript
-* [TheWorldMachinima](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + OG SScript
+* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
+* [TheWorldMachinima](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + SScript
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore

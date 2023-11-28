@@ -108,7 +108,7 @@ class CreditsState extends MusicBeatState
 			[
 				'crowplexus',
 				'beastly',
-				'SScript\nCustomizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
+				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
 				'https://github.com/crowplexus',
 				'8CC4FF',
 				'Ghost'
@@ -116,8 +116,8 @@ class CreditsState extends MusicBeatState
 			[
 				'TheWorldMachinima',
 				'machinima',
-				'OG SScript\nFunkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
-				'https://github.com/TahirKarabekiroglu',
+				'SScript\nFunkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
+				'nolink',
 				'638F5B',
 				'nyaw'
 			],
