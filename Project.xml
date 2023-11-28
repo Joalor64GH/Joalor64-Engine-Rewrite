@@ -125,7 +125,7 @@
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
-	<haxelib name="SScript" if="SCRIPT_EXTENSION"/>
+	<haxelib name="SScript-new" if="SCRIPT_EXTENSION"/>
 
 	<!-- Videos -->
 	<haxelib name="actuate"/> <!-- Used for extension-webm -->

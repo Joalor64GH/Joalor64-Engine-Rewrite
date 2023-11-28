@@ -32,9 +32,9 @@ import objects.*;
 
 final class FunkinSScript extends tea.SScript
 {
-	public function new(?scriptFile:String = "", ?preset:Bool = true, ?startExecute:Bool = true)
+	public function new(?scriptFile:String = "", ?preset:Bool = true)
 	{
-		super(scriptFile, preset, false);
+		super(scriptFile, preset;
 		
 		execute();
 	}
