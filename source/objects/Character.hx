@@ -8,7 +8,6 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 import objects.background.*;
-import backend.animation.PsychAnimationController;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.io.File;
 import sys.FileSystem;
@@ -86,8 +85,6 @@ class Character extends FlxSprite
 	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
 	{
 		super(x, y);
-
-		animation = new PsychAnimationController(this);
 
 		animOffsets = new Map();
 		curCharacter = character;

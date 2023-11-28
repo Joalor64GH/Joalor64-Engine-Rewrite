@@ -13,8 +13,6 @@ import meta.data.*;
 
 import objects.shaders.*;
 
-import backend.animation.PsychAnimationController;
-
 using StringTools;
 
 typedef EventNote = {
@@ -180,8 +178,6 @@ class Note extends FlxSprite
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
 	{
 		super();
-
-		animation = new PsychAnimationController(this);
 
 		if (prevNote == null)
 			prevNote = this;

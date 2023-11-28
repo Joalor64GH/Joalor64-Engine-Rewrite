@@ -10,8 +10,6 @@ import meta.state.*;
 import objects.shaders.*;
 import objects.userinterface.note.*;
 
-import backend.animation.PsychAnimationController;
-
 using StringTools;
 
 class StrumNote extends FlxSprite
@@ -40,8 +38,6 @@ class StrumNote extends FlxSprite
 		this.player = player;
 		this.noteData = leData;
 		super(x, y);
-
-		animation = new PsychAnimationController(this);
 
 		var skin:String = 'NOTE_assets';
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
