@@ -13,11 +13,6 @@ Preloader.hx
 ### FNF-Bot
 FNFBot.exe
 
-### GameJolt-Specific
-GJKeys.hx
-GameJolt.hx
-/gamejolt/*
-
 ### Android-Specific
 SUtil.hx
 android/*
@@ -33,15 +28,6 @@ art/mod.url
 example_mods/modList.txt
 polymod-fix/PolymodFileSystem.hx
 * - Copy*
-
-### You can add any of these regardless of them getting ignored.
-!appveyor-linux.yml
-!appveyor-macos.yml
-!appveyor-windows.yml
-!azure-pipelines.yml
-!modchartexample.mc
-!.DS_Store
-!Thumbs.db
 
 ### VS Code
 export/*
