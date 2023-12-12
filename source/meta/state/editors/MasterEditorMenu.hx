@@ -5,13 +5,10 @@ import meta.data.dependency.Discord.DiscordClient;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import flixel.system.FlxSound;
 import objects.Character;
 #if (MODS_ALLOWED && FUTURE_POLYMOD)
 import sys.FileSystem;
@@ -134,8 +131,6 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Credits Editor':
 					MusicBeatState.switchState(new CreditsEditorState());
-				case 'Script Editor (WIP)':
-					MusicBeatState.switchState(new ScriptEditorState());
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
 			}
@@ -144,9 +139,7 @@ class MasterEditorMenu extends MusicBeatState
 		}
 		
 		if (FlxG.keys.justPressed.T)
-		{
 			MusicBeatState.switchState(new TestState());
-		}
 
 		var bullShit:Int = 0;
 		for (item in grpTexts.members)

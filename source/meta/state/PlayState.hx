@@ -491,7 +491,7 @@ class PlayState extends MusicBeatState
 					if (cpuControlled)
 						ratingFC = "Botplay";
 
-					if (songMisses == 0 && sicks >= 0 && goods == 0 && bads == 0 && shits == 0)
+					else if (songMisses == 0 && sicks >= 0 && goods == 0 && bads == 0 && shits == 0)
 						ratingFC = "(MFC) ";
 					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
 						ratingFC = "(GFC) ";
@@ -4882,7 +4882,6 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
 				Mods.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {

@@ -20,29 +20,29 @@ class ResultsSubState extends MusicBeatSubstate
 
     	var bg:FlxSprite;
 
-	var sick = 0;
-	var good = 0;
-	var bad = 0;
-	var shit = 0;
-	var points = 0;
-	var miss = 0;
-	var percentage = 0.0;
-	var rate = '';
-	var combo = '';
+	var sicks:Int;
+	var goods:Int;
+	var bads:Int;
+	var shits:Int;
+	var score:Int;
+	var misses:Int;
+	var percent:Float;
+	var rating:String;
+	var fc:String;
 
     	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String, fc:String) 
 	{
         	super();
 
-		sick = sicks;
-		good = goods;
-		bad = bads;
-		shit = shits;
-		points = score;
-		miss = misses;
-		percentage = percent;
-		rate = rating;
-		combo = fc;
+		this.sicks = sicks;
+		this.goods = goods;
+		this.bads = bads;
+		this.shits = shits;
+		this.score = score;
+		this.misses = misses;
+		this.percent = percent;
+		this.rating = rating;
+		this.fc = fc;
 	}
 
 	override function create() 
