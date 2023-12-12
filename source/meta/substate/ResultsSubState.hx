@@ -53,8 +53,6 @@ class ResultsSubState extends MusicBeatSubstate
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
         	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-        	bg.scale.set(10, 10);
-        	bg.alpha = 0;
         	add(bg);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, 'Press ACCEPT to continue.', 12);
@@ -70,12 +68,12 @@ class ResultsSubState extends MusicBeatSubstate
 		add(titleTxt);
 
 		resultsTxt = new FlxText(titleTxt.x, 0, 0, 
-			'Sicks: ' + sick
-			+ '\nGoods: ' + good
-			+ '\nBads: ' + bad
-			+ '\nShits: ' + shit
-			+ '\nScore: ' + points
-			+ '\nMisses: ' + miss
+			'Sicks: ' + sicks
+			+ '\nGoods: ' + goods
+			+ '\nBads: ' + bads
+			+ '\nShits: ' + shits
+			+ '\nScore: ' + score
+			+ '\nMisses: ' + misses
 		, 72);
 		resultsTxt.scrollFactor.set();
 		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -85,12 +83,13 @@ class ResultsSubState extends MusicBeatSubstate
 
 		if (ClientPrefs.scoreTxtType != 'Simple')
 		{
-			resultsTxt.text += '\nPercent Rating: ' + percentage + '%' + '\nRating: ' + rate + ' (' + combo + ')';
+			resultsTxt.text += '\nPercent Rating: ' + percent + '%' + '\nRating: ' + rating + ' (' + fc + ')';
 		}
 
 		versionShit.alpha = 0;
 		resultsTxt.alpha = 0;
 		titleTxt.alpha = 0;
+		bg.alpha = 0;
 
 		FlxTween.tween(bg, {alpha: 0.5}, 0.75, {ease: FlxEase.quadOut});
 		FlxTween.tween(titleTxt, {alpha: 1}, 1, {ease: FlxEase.quadOut});
