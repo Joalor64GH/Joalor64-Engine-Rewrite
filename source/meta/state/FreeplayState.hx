@@ -384,6 +384,8 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 		super.update(elapsed);
+
+		for (icon in iconArray) icon.y = icon.sprTracker.y - 36;
 	}
 
 	override function beatHit() {
