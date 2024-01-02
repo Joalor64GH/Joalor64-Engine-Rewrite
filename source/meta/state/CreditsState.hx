@@ -460,7 +460,12 @@ class CreditsState extends MusicBeatState
 				}
 			}
 			if (FlxG.keys.justPressed.SPACE)
-				FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
+			{
+				if (creditsStuff[curSelected][5] != '')
+					FlxG.sound.play(Paths.sound('credits/' + creditsStuff[curSelected][5]));
+				else
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+			}
 
 			if (controls.BACK)
 			{
