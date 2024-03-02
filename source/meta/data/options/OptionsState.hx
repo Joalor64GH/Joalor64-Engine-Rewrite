@@ -188,7 +188,6 @@ class OptionsState extends MusicBeatState
 
 		for (num => item in grpOptions.members) {
 			item.targetY = num - curSelected;
-			bullShit++;
 
 			item.alpha = 0.6;
 			if (item.targetY == 0) {
