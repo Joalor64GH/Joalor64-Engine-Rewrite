@@ -1,7 +1,2 @@
-# Auto detect text files and perform LF normalization
 * text=auto
-
-# Include Script files
-*.lua linguist-language=Lua
 *.hscript linguist-language=Haxe
-*.hx linguist-language=Haxe

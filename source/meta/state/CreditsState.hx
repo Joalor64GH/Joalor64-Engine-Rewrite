@@ -522,9 +522,8 @@ class CreditsState extends MusicBeatState
 		if (newColor != intendedColor)
 		{
 			if (colorTween != null)
-			{
 				colorTween.cancel();
-			}
+			
 			intendedColor = newColor;
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween)

@@ -75,9 +75,9 @@ class WeekData {
 	}
 
 	public function new(weekFile:WeekFile, fileName:String) {
-		for (field in Reflect.fields(weekFile)) {
-			Reflect.setProperty(this, field, Reflect.getProperty(weekFile, field));
-		}
+		for (field in Reflect.fields(weekFile))
+			if (Reflect.fields(this).contains(field))
+				Reflect.setProperty(this, field, Reflect.getProperty(weekFile, field));
 
 		this.fileName = fileName;
 	}

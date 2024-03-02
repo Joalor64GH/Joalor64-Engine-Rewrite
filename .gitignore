@@ -1,48 +1,17 @@
-### FNF-Specific
-# File used for the NG API. Should not be shared with others.
 APIStuff.hx
-art/build_x32-officialrelease.bat
-art/build_x64-officialrelease.bat
-art/test_x64-debug-officialrelease.bat
-# Newgrounds IO Stuff
 NGio.hx
 /io/
-# Misc
-Preloader.hx
 
-### FNF-Bot
 FNFBot.exe
 
-### Android-Specific
-SUtil.hx
-android/*
-mobile/*
-/android/*
-/mobile/flixel/*
-assets/android/*
-assets/images/androidcontrols/
-mobile/*
-
-### Misc
 art/mod.url
-example_mods/modList.txt
-polymod-fix/PolymodFileSystem.hx
+!example_mods/introMod/
 * - Copy*
 
-### VS Code
-export/*
+export/
 .vscode/*
-.vscode/.temp
-.vscode/launch.json
-# Local history which shouldn't be shared.
 desktop.ini
 .history/
 .ionide
-# ! means a file should be added regardless of it getting ignored prior.
-# Including to allow others to use already set-up configuration tweaked for the project.
 !.code-workspace
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.vs/*
+dump/

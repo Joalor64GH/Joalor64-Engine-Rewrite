@@ -46,16 +46,8 @@ class Init extends FlxState
 	var epicLogo:FlxSprite;
 
 	var coolText:FlxText;
-    	
 	var isTweening:Bool = false;
-
 	var lastString:String = '';
-
-	public function new() 
-	{
-		super();
-		persistentUpdate = persistentDraw = true;
-	}
 
 	override function create()
     	{
@@ -101,29 +93,22 @@ class Init extends FlxState
 
         	super.create();
     	}
-
-	var selectedSomethin:Bool = false;
 	var timer:Float = 0;
 
 	override function update(elapsed)
 	{
-		if (!selectedSomethin) {
-			if (isTweening) {
-				coolText.screenCenter(X);
-				timer = 0;
-			} else {
-				coolText.screenCenter(X);
-				timer += elapsed;
-				if (timer >= 3)
-				{
-					changeText();
-				}
-			}
+		if (isTweening) {
+			coolText.screenCenter(X);
+			timer = 0;
+		} else {
+			coolText.screenCenter(X);
+			timer += elapsed;
+			if (timer >= 3)
+				changeText();
 		}
 
-		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE) {
+		if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE)
 			startGame(); // in case you wanna skip
-		}
 
 		super.update(elapsed);
 	}
@@ -151,7 +136,7 @@ class Init extends FlxState
 
 		PlayerSettings.init();
 
-		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+		if (FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 		}
@@ -166,7 +151,7 @@ class Init extends FlxState
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
-			Application.current.onExit.add (function (exitCode) {
+			Application.current.onExit.add (function(exitCode) {
 				DiscordClient.shutdown();
 			});
 		}

@@ -29,12 +29,6 @@
 	<!-- Main Class State, Game Version, Company (save data) Name -->
 	<app main="Main" version="0.2.8" company="Joalor64GH" />
 
-	<!--Preloader-->
-	<app preloader="flixel.system.FlxPreloader" />
-
-	<!-- Misc -->
-	<set name="SWF_VERSION" value="11.8" />
-
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--All targets-->
@@ -193,7 +187,6 @@
 	<!-- _________________________________ Icons _______________________________ -->
 
 	<assets path='art/iconOG.png' rename='icon.png' if="linux" /> <!-- icon workaround for linux -->
-	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>

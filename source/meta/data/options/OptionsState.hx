@@ -113,7 +113,17 @@ class OptionsState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		
-		initOptions();
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
+			grpOptions.add(optionText);
+		}
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		selectorLeft.scrollFactor.set(0, yScroll);
@@ -126,20 +136,6 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 
 		super.create();
-	}
-
-	function initOptions() {
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
-
-		for (i in 0...options.length)
-		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
-			grpOptions.add(optionText);
-		}
 	}
 
 	override function openSubState(subState:FlxSubState) {
@@ -166,13 +162,11 @@ class OptionsState extends MusicBeatState
 		bg.updateHitbox();
 		bg.offset.set();
 
-		if (FlxG.keys.justPressed.D) {
+		if (FlxG.keys.justPressed.D)
 			MusicBeatState.switchState(new SaveDataState());
-		}
 
-		if (controls.UI_UP_P || controls.UI_DOWN_P) {
+		if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
-		}
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -181,29 +175,19 @@ class OptionsState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				if (ClientPrefs.simpleMain)
-					MusicBeatState.switchState(new SimpleMainMenuState());
-				else
-					MusicBeatState.switchState(new MainMenuState());
+				MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
 			}
 		}
 
-		if (controls.ACCEPT) {
+		if (controls.ACCEPT)
 			openSelectedSubstate(options[curSelected]);
-		}
 	}
 	
 	function changeSelection(change:Int = 0) {
-		curSelected += change;
-		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, options.length - 1);
 
-		var bullShit:Int = 0;
-
-		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
+		for (num => item in grpOptions.members) {
+			item.targetY = num - curSelected;
 			bullShit++;
 
 			item.alpha = 0.6;
