@@ -17,8 +17,7 @@ class DumbKidLol extends RealDumbass
 		switch(stupidKid){
 			case 'NimuDevUwU':
 				return 9999;
-			// why'd you make it my new github username .__.
-			case 'MemeHoovy':
+			case 'Moxie':
 				return 0;
 			default:
 				return ratio = r;
