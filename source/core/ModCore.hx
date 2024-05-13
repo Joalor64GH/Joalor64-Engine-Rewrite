@@ -6,7 +6,6 @@ import polymod.Polymod.ModMetadata;
 import polymod.Polymod.PolymodError;
 import polymod.backends.PolymodAssets.PolymodAssetType;
 import polymod.format.ParseRules;
-#end
 
 /**
  * Class based originally from ChainSaw Engine.

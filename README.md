@@ -71,7 +71,8 @@ You can check planned/upcoming features [here](/TODO).
 * [Magnumsrt](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
-* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Custom Options
+* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Old Custom Options
+* [NexIsDumb](https://linktr.ee/just_nex) - New Custom Options
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
@@ -79,8 +80,10 @@ You can check planned/upcoming features [here](/TODO).
 ## Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
 * [Riveren](https://twitter.com/riverennn) - Main Artist + Animator
+
+### Former Members
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
-* [Yoshubs](https://gamebanana.com/members/1908070) - Aditional Ex-Programmer + Epic Input System
+* [Yoshubs](https://gamebanana.com/members/1908070) - Ex-Programmer
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
