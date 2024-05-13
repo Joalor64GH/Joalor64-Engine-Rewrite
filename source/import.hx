@@ -44,6 +44,8 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
+import haxe.Json;
+
 import openfl.utils.Assets as OpenFlAssets;
 
 using Global;

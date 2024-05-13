@@ -90,7 +90,7 @@
         "url": "https://github.com/nebulazorua/linc_luajit"
       },
       {
-        "name": "SScript",
+        "name": "SScript-Latest",
         "type": "git",
         "dir": null,
         "ref": "testing",

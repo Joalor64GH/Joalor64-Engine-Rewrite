@@ -42,6 +42,8 @@ class CreditsState extends MusicBeatState
 
 	var noLink:Bool;
 
+	var keoikiStr:String = "";
+
 	override function create()
 	{
 		#if desktop
@@ -60,6 +62,8 @@ class CreditsState extends MusicBeatState
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
+
+		keoikiStr = (FlxG.random.bool(30)) ? 'keoiki2' : 'keoiki';
 
 		var pisspoop:Array<Array<String>> = [
 			/**
@@ -265,7 +269,7 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'Keoiki',
-				if (FlxG.random.bool(30)) 'keoiki2' else 'keoiki',
+				keoikiStr,
 				'Note Splash Animations\nNew Latin Support',
 				'https://twitter.com/Keoiki_',
 				'D2D2D2',

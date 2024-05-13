@@ -18,13 +18,9 @@ class BruhState extends MusicBeatState
 	override function update(elapsed:Float) 
 	{
 		if (FlxG.keys.justPressed.ESCAPE) 
-		{
 			CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest');
-		}
 		else if (FlxG.keys.justPressed.ENTER) 
-		{
 			MusicBeatState.switchState(new MainMenuState());
-		}
 		super.update(elapsed);
 	}
 }

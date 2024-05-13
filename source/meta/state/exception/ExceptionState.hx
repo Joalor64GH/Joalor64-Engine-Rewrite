@@ -2,15 +2,11 @@ package meta.state.exception;
 
 import haxe.CallStack;
 
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-
 import meta.*;
 import meta.data.*;
 import meta.state.TitleState;
 import meta.state.OutdatedState;
+
 import meta.state.exception.ScrollableText;
 
 /**

@@ -10,6 +10,7 @@ import sys.FileSystem;
 
 using StringTools;
 
+@:keep
 class CoolUtil
 {
 	public static final defaultDifficulties:Array<String> = [

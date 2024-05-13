@@ -142,8 +142,7 @@ class MainMenuState extends MusicBeatState
 				'play',
 				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
 				#end
-				#if ACHIEVEMENTS_ALLOWED
-				'awards',
+				#if ACHIEVEMENTS_ALLOWED 'awards',
 				#end
 				'credits',
 				#if !switch 
@@ -380,18 +379,12 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == '')
-				{
 					return;
-				}
 
 				if (optionShit[curSelected] == '${menuJSON.links[0]}') 
-				{
 					CoolUtil.browserLoad('${menuJSON.links[1]}');
-				} 
 				else if (optionShit[curSelected] == 'manual') 
-				{
 					CoolUtil.browserLoad('https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki');
-				}
 				else
 				{
 					selectedSomethin = true;
