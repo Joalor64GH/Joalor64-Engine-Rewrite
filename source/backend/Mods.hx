@@ -22,13 +22,11 @@ class Mods
 	static public var currentModLibraries:Array<String> = [];
 	static public var currentModAddons:Array<String> = [];
 
-	public static var ignoreModFolders:Array<String> = [
+	public static final ignoreModFolders:Array<String> = [
 		#if FUTURE_POLYMOD 
 		'_append', 
 		'_merge', 
 		#end
-		'addons',
-		'libraries',
 		'characters',
 		'data',
 		'songs',
@@ -45,8 +43,7 @@ class Mods
 		'notetypes',
 		'gamechangers',
 		'achievements',
-		'options',
-		'libs'
+		'options'
 	];
 
 	public static var globalMods:Array<String> = [];
@@ -65,9 +62,10 @@ class Mods
 		return globalMods;
 	}
 
-	inline public static function getModDirectories():Array<String>
+	inline public static function getModDirectories(inclMainFol:Bool = false):Array<String>
 	{
 		var list:Array<String> = [];
+		if (inclMainFol) list.push('');
 		var modsFolder:String = Paths.mods();
 		if(FileSystem.exists(modsFolder)) {
 			for (folder in FileSystem.readDirectory(modsFolder))
@@ -78,6 +76,23 @@ class Mods
 			}
 		}
 		return list;
+	}
+
+	static public function getActiveModsDir(inclMainFol:Bool = false):Array<String> {
+		var finalList:Array<String> = [];
+		if (inclMainFol) finalList.push('');  // This will include the main mods folder  - Nex_isDumb
+		var path:String = 'modsList.txt';
+		if(FileSystem.exists(path))
+		{
+			var genList:Array<String> = getModDirectories();
+			var list:Array<String> = CoolUtil.coolTextFile(path);
+			for (i in list)
+			{
+				var dat = i.split("|");
+				if (dat[1] == "1" && genList.contains(dat[0])) finalList.push(dat[0]);
+			}
+		}
+		return finalList;
 	}
 
 	inline public static function mergeAllTextsNamed(path:String, defaultDirectory:String = null, allowDuplicates:Bool = false)
@@ -148,10 +163,8 @@ class Mods
 		var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
 		if(FileSystem.exists(path)) {
 			try {
-				#if sys
-				var rawJson:String = File.getContent(path);
-				#else
-				var rawJson:String = Assets.getText(path);
+				#if sys var rawJson:String = File.getContent(path);
+				#else var rawJson:String = Assets.getText(path);
 				#end
 				if(rawJson != null && rawJson.length > 0) return Json.parse(rawJson);
 			} catch(e:Dynamic) {

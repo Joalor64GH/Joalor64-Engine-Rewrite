@@ -310,6 +310,11 @@ class ClientPrefs {
 		}
 	}
 
+	// idk where to put this ok
+	#if MODS_ALLOWED
+	public var modsOptsSaves:Map<String, Map<String, Dynamic>> = [];
+	#end
+
 	inline public static function getGameplaySetting(name:String, defaultValue:Dynamic):Dynamic {
 		return (gameplaySettings.exists(name) ? gameplaySettings.get(name) : defaultValue);
 	}

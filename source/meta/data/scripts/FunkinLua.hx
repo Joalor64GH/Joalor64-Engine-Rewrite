@@ -69,6 +69,10 @@ import hscript.Expr;
 import meta.data.dependency.Discord;
 #end
 
+#if MODS_ALLOWED
+import haxe.Json;
+#end
+
 using StringTools;
 
 class FunkinLua {
@@ -76,7 +80,6 @@ class FunkinLua {
 	public static var Function_Continue:Dynamic = 0;
 	public static var Function_StopLua:Dynamic = 2;
 
-	//public var errorHandler:String->Void;
 	#if LUA_ALLOWED
 	public var lua:State = null;
 	#end
@@ -96,16 +99,8 @@ class FunkinLua {
 		LuaL.openlibs(lua);
 		Lua.init_callbacks(lua);
 
-		//trace('Lua version: ' + Lua.version());
-		//trace("LuaJIT version: " + Lua.versionJIT());
-
-		//LuaL.dostring(lua, CLENSE);
 		try{
-			var result;
-			if(scriptCode != null) 
-				result = LuaL.dostring(lua, scriptCode);
-			else
-				result = LuaL.dofile(lua, script);
+			var result:Int = scriptCode != null ? LuaL.dostring(lua, scriptCode) : LuaL.dofile(lua, script);
 			var resultStr:String = Lua.tostring(lua, result);
 			if(resultStr != null && result != 0) {
 				trace('Error on lua script! ' + resultStr);
@@ -283,6 +278,26 @@ class FunkinLua {
 				return true;
 			}
 			return false;
+		});
+
+		Lua_helper.add_callback(lua, "giveAchievement", function(name:String){
+			var me = this;
+			if (Achievements.isAchievementUnlocked(name) || !PlayState.instance.achievementArray.contains(me))
+			{
+				if (!PlayState.instance.achievementArray.contains(me)) {
+					luaTrace("giveAchievement: This lua file is not a custom achievement lua.", false, false, FlxColor.RED);
+				}
+
+				return false;
+			}
+			@:privateAccess
+			if (PlayState.instance != null) {
+				Achievements.unlockAchievement(name);
+				PlayState.instance.startAchievement(name);
+				ClientPrefs.saveSettings();
+				return true;
+			}
+			else return false;
 		});
 
 		// shader shit
@@ -2542,6 +2557,76 @@ class FunkinLua {
 				return;
 			}
 			luaTrace('setDataFromSave: Save file not initialized: ' + name, false, false, FlxColor.RED);
+		});
+
+		Lua_helper.add_callback(lua, "loadJsonOptions", function(inclMainFol:Bool = true, ?modNames:Array<String> = null) {
+			#if MODS_ALLOWED
+			if (modNames == null) modNames = [];
+			if (modNames.length < 1) modNames.push(Paths.currentModDirectory);
+			for(mod in Paths.getModDirectories(inclMainFol)) if(modNames.contains(mod) || (inclMainFol && mod == '')) {
+				var path:String = haxe.io.Path.join([Paths.mods(), mod, 'options']);
+				if(FileSystem.exists(path)) for(file in FileSystem.readDirectory(path)) {
+					var folder:String = path + '/' + file;
+					if(FileSystem.isDirectory(folder)) for(rawFile in FileSystem.readDirectory(folder)) if(rawFile.endsWith('.json')) {
+						var rawJson = File.getContent(folder + '/' + rawFile);
+						if (rawJson != null && rawJson.length > 0) {
+							var json = Json.parse(rawJson);
+							if (!ClientPrefs.modsOptsSaves.exists(mod)) ClientPrefs.modsOptsSaves.set(mod, []);
+							if (!ClientPrefs.modsOptsSaves[mod].exists(json.variable)) {
+								if (!Reflect.hasField(json, 'defaultValue')) {
+									var type:String = 'bool';
+									if (Reflect.hasField(json, 'type')) type = json.type;
+									ClientPrefs.modsOptsSaves[mod][json.variable] =
+										CoolUtil.getOptionDefVal(type, Reflect.field(json, 'options'));
+								} else {
+									ClientPrefs.modsOptsSaves[mod][json.variable] = json.defaultValue;
+								}
+							}
+						}
+					}
+				}
+			}
+			return ClientPrefs.modsOptsSaves.toString();
+			#else
+			funk.luaTrace('loadJsonOptions: Platform unsupported for Json Options!', false, false, FlxColor.RED);
+			return false;
+			#end
+		});
+		Lua_helper.add_callback(lua, "getOptionSave", function(variable:String, isJson:Bool = false, ?modName:String = null) {
+			if (!isJson) {
+				return Reflect.getProperty(ClientPrefs, variable);
+			} else if (isJson) {
+				#if MODS_ALLOWED
+				if (modName == null) modName = Paths.currentModDirectory;
+				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
+					return ClientPrefs.modsOptsSaves[modName][variable];
+				}
+				#else
+				funk.luaTrace('getOptionSave: Platform unsupported for Json Options!', false, false, FlxColor.RED);
+				#end
+			}
+			return null;
+		});
+		Lua_helper.add_callback(lua, "setOptionSave", function(variable:String, value:Dynamic, isJson:Bool = false, ?modName:String = null) {
+			if (!isJson) {
+				Reflect.setProperty(ClientPrefs, variable, value);
+				return Reflect.getProperty(ClientPrefs, variable) != null ? true : false;
+			} else if (isJson) {
+				#if MODS_ALLOWED
+				if (modName == null) modName = Paths.currentModDirectory;
+				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
+					ClientPrefs.modsOptsSaves[modName][variable] = value;
+					return true;
+				}
+				#else
+				funk.luaTrace('setOptionSave: Platform unsupported for Json Options!', false, false, FlxColor.RED);
+				#end
+			}
+			return false;
+		});
+		Lua_helper.add_callback(lua, "saveSettings", function() {
+			ClientPrefs.saveSettings();
+			return true;
 		});
 
 		Lua_helper.add_callback(lua, "checkFileExists", function(filename:String, ?absolute:Bool = false) {

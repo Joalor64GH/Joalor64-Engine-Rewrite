@@ -215,11 +215,11 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'Yoshubs',
-				'shubs',
-				'Additional Ex-Programmer of Psych Engine\nEpic Input System',
+				'face',
+				'Additional Ex-Programmer of Psych Engine\',
 				'https://gamebanana.com/members/1908070',
-				'5E99DF',
-				'JingleShubs'
+				'888888',
+				''
 			],
 			[''],
 			['Engine Contributors'],
@@ -265,7 +265,7 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'Keoiki',
-				'keoiki',
+				if (FlxG.random.bool(30)) 'keoiki2' else 'keoiki',
 				'Note Splash Animations\nNew Latin Support',
 				'https://twitter.com/Keoiki_',
 				'D2D2D2',

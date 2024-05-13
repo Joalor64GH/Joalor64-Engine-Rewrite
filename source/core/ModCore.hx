@@ -1,7 +1,5 @@
 package core;
 
-import flixel.FlxG;
-import openfl.Lib;
 #if FUTURE_POLYMOD
 import polymod.Polymod;
 import polymod.Polymod.ModMetadata;
@@ -20,7 +18,6 @@ class ModCore
 	private static final API_VER:String = '1.0.0';
 	private static final MOD_DIR:String = 'mods';
 
-	#if FUTURE_POLYMOD
 	private static final extensions:Map<String, PolymodAssetType> = [
 		#if !web 'ogg' #else 'mp3' #end => AUDIO_GENERIC,
 		'png' => IMAGE,
@@ -40,7 +37,6 @@ class ModCore
 	];
 
 	public static var trackedMods:Array<ModMetadata> = [];
-	#end
 
 	public static function reload():Void
 	{
@@ -52,7 +48,6 @@ class ModCore
 		#end
 	}
 
-	#if FUTURE_POLYMOD
 	public static function loadMods(folders:Array<String>):Void
 	{
 		var loadedModlist:Array<ModMetadata> = Polymod.init({
@@ -116,5 +111,5 @@ class ModCore
 				trace(error.message);
 		}
 	}
-	#end
 }
+#end

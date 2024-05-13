@@ -28,7 +28,6 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
-		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mod Options', #end
 		'Note Colors', 
 		'Controls', 
 		'Offsets',
@@ -42,13 +41,6 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
-			case 'Mod Options':
-			    	if (Paths.optionsExist())
-					FlxG.switchState(new ModOptionSelectState());
-				else
-					Main.toast.create('No mod options exist!', 0xFFFFFF00, 'Please add your custom options to access this menu!');
-			#end
 			case 'Note Colors':
 				openSubState(new OptionsSubState.NotesSubState());
 			case 'Controls':
@@ -132,6 +124,17 @@ class OptionsState extends MusicBeatState
 		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
+		#if MODS_ALLOWED
+		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
+		textBG.alpha = 0.6;
+		add(textBG);
+
+		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, "Press RESET to access the Modpacks Options saves Reset menu.", 18);
+		text.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, RIGHT);
+		text.scrollFactor.set();
+		add(text);
+		#end
+
 		changeSelection();
 		ClientPrefs.saveSettings();
 
@@ -181,6 +184,11 @@ class OptionsState extends MusicBeatState
 
 		if (controls.ACCEPT)
 			openSelectedSubstate(options[curSelected]);
+
+		#if MODS_ALLOWED
+		if (controls.RESET)
+			openSubState(new options.DeleteSavesSubState());
+		#end
 	}
 	
 	function changeSelection(change:Int = 0) {

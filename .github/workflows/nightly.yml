@@ -18,6 +18,16 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.2.5
+      - name: Restore Cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-linux
+          path: |
+            .haxelib/
+            export/nightly/linux/haxe/
+            export/nightly/linux/obj/
+          restore-keys: |
+            cache-build-linux
       - name: Install Haxelib
         run: |
           sudo apt-get update
@@ -26,31 +36,10 @@ jobs:
           sudo apt-get install libvlccore-dev
           sudo apt-get install vlc-bin
           sudo apt-get -y install libidn12
-          haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
-          haxelib install hxCodec 2.5.1
-          haxelib install swf 3.2.0
-          haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
-          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-Latest https://github.com/Joalor64GH/SScript-Latest
-          haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+      - name: Rebuild extension-webm
+        run: |
           haxelib run lime rebuild extension-webm linux
-          haxelib install hxcpp-debug-server
-          haxelib install actuate
-          haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
@@ -59,7 +48,17 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: linuxBuild
-          path: 'export/release/linux/bin'
+          path: 'export/nightly/linux/bin'
+      - name: Uploading new cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-linux
+          path: |
+            .haxelib/
+            export/nightly/linux/haxe/
+            export/nightly/linux/obj/
+          restore-keys: |
+            cache-build-linux
   buildWindows64:
     runs-on: windows-latest
 
@@ -69,34 +68,22 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.2.5
+      - name: Restore Cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-windows
+          path: |
+            .haxelib/
+            export/nightly/windows/haxe/
+            export/nightly/windows/obj/
+          restore-keys: |
+            cache-build-windows
       - name: Install Haxelib
         run: |
-          haxelib setup C:/haxelib
-          haxelib install hxcpp > nul
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
-          haxelib install hxCodec 2.5.1
-          haxelib install swf 3.2.0
-          haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
-          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-Latest https://github.com/Joalor64GH/SScript-Latest
-          haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+      - name: Rebuild extension-webm
+        run: |
           haxelib run lime rebuild extension-webm windows
-          haxelib install hxcpp-debug-server
-          haxelib install actuate
-          haxelib list
-        shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
@@ -105,7 +92,17 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: windows64Build
-          path: export/release/windows/bin
+          path: export/nightly/windows/bin
+      - name: Uploading new cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-windows
+          path: |
+            .haxelib/
+            export/nightly/windows/haxe/
+            export/nightly/windows/obj/
+          restore-keys: |
+            cache-build-windows
   buildMacOS:
     runs-on: macos-latest
 
@@ -115,33 +112,22 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.2.5
+      - name: Restore Cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-mac
+          path: |
+            .haxelib/
+            export/nightly/macos/haxe/
+            export/nightly/macos/obj/
+          restore-keys: |
+            cache-build-mac
       - name: Install Haxelib
         run: |
-          haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel 5.2.2
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons.git dev
-          haxelib install hxCodec 2.5.1
-          haxelib install swf 3.2.0
-          haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64
-          haxelib git fnf-modcharting-tools https://github.com/TheZoroForce240/FNF-Modcharting-Tools
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git SScript-Latest https://github.com/Joalor64GH/SScript-Latest
-          haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+      - name: Rebuild extension-webm
+        run: |
           haxelib run lime rebuild extension-webm mac
-          haxelib install hxcpp-debug-server
-          haxelib install actuate
-          haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
@@ -150,4 +136,14 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: macOSBuild
-          path: export/release/macos/bin
+          path: export/nightly/macos/bin
+      - name: Uploading new cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-mac
+          path: |
+            .haxelib/
+            export/nightly/macos/haxe/
+            export/nightly/macos/obj/
+          restore-keys: |
+            cache-build-mac

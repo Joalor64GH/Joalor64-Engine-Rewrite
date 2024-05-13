@@ -70,6 +70,7 @@
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
+	<set name="BUILD_DIR" value="export/nightly" if="nightly" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
@@ -108,7 +109,6 @@
 	<!-- Flixel -->
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
-	<haxelib name="flixel-tools" />
 	<haxelib name="flixel-ui" />
 
 	<!-- Hscript -->
@@ -118,7 +118,6 @@
 	<!-- Scripting/Modcharting Extensions -->
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
-	<haxelib name="hxvm-luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION"/>
 
 	<!-- Videos -->
@@ -173,6 +172,9 @@
 		<haxedef name="HXCPP_CHECK_POINTER" />
 		<haxedef name="HXCPP_STACK_LINE" />
 	</section>
+
+	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
+	<haxedef name="message.reporting" value="pretty" />
 
 	<!-- _______________________________ Errors ______________________________ -->
 

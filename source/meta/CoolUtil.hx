@@ -42,9 +42,7 @@ class CoolUtil
   
 	inline public static function txtSplit(path:String)
 	{
-		return [
-			for (i in Assets.getText(path).trim().split('\n')) i.trim()
-		];
+		return [for (i in Assets.getText(path).trim().split('\n')) i.trim()];
 	}
 
 	inline public static function coolTextFile(path:String):Array<String>
@@ -146,10 +144,27 @@ class CoolUtil
 	}
 
 	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
-		return [
-			for (i in min...max) 
-				i
-		];
+		return [for (i in min...max) i];
+
+	public static function getOptionDefVal(type:String, ?options:Array<String> = null):Dynamic
+	{
+		switch(type)
+		{
+			case 'bool':
+				return false;
+			case 'int' | 'float':
+				return 0;
+			case 'percent':
+				return 1;
+			case 'string':
+				if(options.length > 0) {
+					return options[0];
+				} else {
+					return '';
+				}
+		}
+		return null;
+	}
 
 	//uhhhh does this even work at all? i'm starting to doubt
 	inline public static function precacheSound(sound:String, ?library:String = null):Void

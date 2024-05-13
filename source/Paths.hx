@@ -9,17 +9,14 @@ import flash.media.Sound;
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import haxe.xml.Access;
 import openfl.system.System;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
-import openfl.utils.Assets as Assets;
+import openfl.utils.Assets;
 import flixel.FlxSprite;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
-import haxe.CallStack;
 import haxe.io.Bytes;
 import haxe.Json;
 
@@ -729,7 +726,8 @@ class Paths
 		return 'mods/$key';
 	}
 
-	static public function optionsExist(?key:String = null) // basically checks if a mod contains options
+	@:deprecated("please ignore this")
+	static public function optionsExist(?key:String = null)
 	{
 		var modsFolder:Array<String> = Mods.getModDirectories();
 		modsFolder.insert(0, '');

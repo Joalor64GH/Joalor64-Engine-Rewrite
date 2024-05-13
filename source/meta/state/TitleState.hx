@@ -195,6 +195,8 @@ class TitleState extends MusicBeatState
 		if (swagShader != null)
 			logoBl.shader = swagShader.shader;
 
+		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
+
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
 		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/titleEnter.png";
@@ -515,12 +517,18 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-	function deleteCoolText() // i wanna add a fade out tween here
+	function deleteCoolText()
 	{
 		while (textGroup.members.length > 0)
 		{
-			credGroup.remove(textGroup.members[0], true);
-			textGroup.remove(textGroup.members[0], true);
+			FlxTween.tween(credGroup, {alpha: 0}, 0.5, {
+				ease: FlxEase.quadOut, onComplete: function(twn:Flxtween) {
+					credGroup.remove(textGroup.members[0], true);
+				}});
+			FlxTween.tween(textGroup, {alpha: 0}, 0.5, {
+				ease: FlxEase.quadOut, onComplete: function(twn:Flxtween) {
+					textGroup.remove(textGroup.members[0], true);
+				}});
 		}
 	}
 
@@ -559,18 +567,12 @@ class TitleState extends MusicBeatState
 					#if JOALOR64_WATERMARKS
 					var teamStuff = Assets.getText(Paths.txt('team')).split('--');
 					createCoolText(teamStuff);
-					credIcon1.visible = true;
-					credIcon2.visible = true;
-					credIcon3.visible = true;
-					credIcon4.visible = true;
+					credIcon1.visible = credIcon2.visible = credIcon3.visible = credIcon4.visible = true;
 					#elseif PSYCH_WATERMARKS
  					createCoolText(['Psych Engine by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'PhantomArcade', 'KawaiSprite', 'Evilsk8er']);
-					credIconMuff.visible = true;
-					credIconPhantom.visible = true;
-					credIconKawai.visible = true;
-					credIconEvil.visible = true;
+					credIconMuff.visible = credIconPhantom.visible = credIconKawai.visible = credIconEvil.visible = true;
 					#end
 				case 4:
 					#if JOALOR64_WATERMARKS
@@ -580,10 +582,7 @@ class TitleState extends MusicBeatState
 					addMoreText('Riveren', 15);
 					addMoreText('Yoshubs', 15);
 					addMoreText('BBPanzu', 15);
-					credIconShadow.visible = true;
-					credIconRiver.visible = true;
-					credIconShubs.visible = true;
-					credIconBB.visible = true;
+					credIconShadow.visible = credIconRiver.visible = credIconShubs.visible = credIconBB.visible = true;
 					#else
 					addMoreText('present');
 					#end

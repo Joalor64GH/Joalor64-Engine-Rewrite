@@ -1,4 +1,5 @@
 APIStuff.hx
+.DS_STORE
 NGio.hx
 /io/
 
@@ -10,8 +11,10 @@ art/mod.url
 
 export/
 .vscode/*
+.haxelib/
 desktop.ini
 .history/
 .ionide
 !.code-workspace
+vscode-project.hxml
 dump/

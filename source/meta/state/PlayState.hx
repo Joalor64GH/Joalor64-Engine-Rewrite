@@ -39,7 +39,6 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
-import openfl.Lib;
 import lime.app.Application;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
