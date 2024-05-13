@@ -50,8 +50,6 @@ class Main extends Sprite
 	public static var toast:ToastCore; // notification thing, credits go to MAJigsaw77
 	public static var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	
-	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions. (Removed from Flixel 5.0.0)
 
 	public static function main():Void
 	{
@@ -81,18 +79,6 @@ class Main extends Sprite
 		
 		gameWidth = GameDimensions.width;
 		gameHeight = GameDimensions.height;
-		
-		final stageWidth:Int = Lib.current.stage.stageWidth;
-		final stageHeight:Int = Lib.current.stage.stageHeight;
-
-		if (zoom == -1)
-		{
-			final ratioX:Float = stageWidth / gameWidth;
-			final ratioY:Float = stageHeight / gameHeight;
-			zoom = Math.min(ratioX, ratioY);
-			gameWidth = Math.ceil(stageWidth / zoom);
-			gameHeight = Math.ceil(stageHeight / zoom);
-		}
 
 		FlxG.signals.preStateSwitch.add(() ->{
 			#if cpp
@@ -114,7 +100,7 @@ class Main extends Sprite
 		});
 
 		ClientPrefs.loadDefaultKeys();
-		game = new Joalor64Game(gameWidth, gameHeight, Init, #if (flixel < "5.0.0") zoom, #end 60, 60, true, false);
+		game = new Joalor64Game(gameWidth, gameHeight, Init, 60, 60, true, false);
 		addChild(game);
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);

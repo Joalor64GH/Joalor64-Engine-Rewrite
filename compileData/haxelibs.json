@@ -34,7 +34,7 @@
         "type": "haxelib"
       },
       {
-        "name": "hscript-improved",
+        "name": "hscript",
         "type": "git",
         "dir": null,
         "ref": "master",
