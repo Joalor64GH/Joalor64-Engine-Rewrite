@@ -127,7 +127,7 @@
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 
 	<!-- Discord Rich Prescence-->
-	<haxelib name="discord_rpc" if="desktop"/>
+	<haxelib name="linc_discord-rpc" if="desktop"/>
 
 	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>

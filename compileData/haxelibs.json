@@ -97,7 +97,7 @@
         "url": "https://github.com/Joalor64GH/SScript-Latest"
       },
       {
-        "name": "discord_rpc",
+        "name": "linc_discord-rpc",
         "type": "git",
         "dir": null,
         "ref": "master",
