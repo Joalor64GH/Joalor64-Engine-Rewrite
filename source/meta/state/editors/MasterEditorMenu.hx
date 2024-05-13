@@ -32,7 +32,8 @@ class MasterEditorMenu extends MusicBeatState
 		'Character Editor',
 		'Credits Editor',
 		'Modchart Editor',
-		'Chart Editor'
+		'Chart Editor',
+		'Mod Folder Setup'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -135,6 +136,8 @@ class MasterEditorMenu extends MusicBeatState
 					MusicBeatState.switchState(new modcharting.ModchartEditorState());
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
+				case 'Mod Folder Setup':
+					MusicBeatState.switchState(new ModsSetupState());
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();

@@ -2,7 +2,6 @@ package meta;
 
 import meta.state.PlayState;
 import openfl.utils.Assets;
-import lime.utils.Assets as LimeAssets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 #if sys
@@ -19,7 +18,6 @@ class CoolUtil
 		'Hard'
 	];
 	public static final defaultDifficulty:String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
-
 	public static var difficulties:Array<String> = [];
 
 	inline public static function quantize(f:Float, snap:Float){
@@ -157,11 +155,7 @@ class CoolUtil
 			case 'percent':
 				return 1;
 			case 'string':
-				if(options.length > 0) {
-					return options[0];
-				} else {
-					return '';
-				}
+				return (options.length > 0) ? options[0] : '';
 		}
 		return null;
 	}

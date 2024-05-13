@@ -216,7 +216,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Yoshubs',
 				'face',
-				'Additional Ex-Programmer of Psych Engine\',
+				'Additional Ex-Programmer of Psych Engine',
 				'https://gamebanana.com/members/1908070',
 				'888888',
 				''

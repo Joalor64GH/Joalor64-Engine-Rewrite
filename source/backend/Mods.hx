@@ -17,10 +17,6 @@ typedef ModsList = {
 class Mods
 {
 	static public var currentModDirectory:String = '';
-	
-	// not sure what to do with these yet
-	static public var currentModLibraries:Array<String> = [];
-	static public var currentModAddons:Array<String> = [];
 
 	public static final ignoreModFolders:Array<String> = [
 		#if FUTURE_POLYMOD 

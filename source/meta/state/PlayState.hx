@@ -249,6 +249,13 @@ class PlayState extends MusicBeatState
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
 
+	public var ratingsArray:Array<Array<Dynamic> = [
+		["sick", 1, 350, true],
+		["good", 0.75, 200, false],
+		["bad", 0.5, 100, false],
+		["shit", 0, 50, false]
+	];
+
 	public var ratingsData:Array<Rating> = [];
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
@@ -406,7 +413,7 @@ class PlayState extends MusicBeatState
 	var maxNPS:Int = 0;
 
 	//the payload for beat-based buttplug support
-	public var bpPayload:String = "";
+	public var bpPayload:String = ""; // why was this added again??
 
 	public var comboFunction:Void->Void = null;
 
@@ -502,6 +509,17 @@ class PlayState extends MusicBeatState
 						ratingFC = "(Clear) ";
 			}		
 		}
+
+		// i have absolutely no idea if this works
+		/*
+		for (i in ratingsArray) {
+			var rating:Rating = new Rating(i[0]);
+			rating.ratingMod = i[1];
+			rating.score = i[2];
+			rating.noteSplash = i[3];
+			ratingsData.push(rating);
+		}
+		*/
 
 		//Ratings
 		var rating:Rating = new Rating('sick');
@@ -3628,7 +3646,7 @@ class PlayState extends MusicBeatState
 	{
 		var num = number;
 		num = num * Math.pow(10, precision);
-		num = Math.round( num ) / Math.pow(10, precision);
+		num = Math.round(num) / Math.pow(10, precision);
 		return num;
 	}
 
