@@ -522,11 +522,11 @@ class TitleState extends MusicBeatState
 		while (textGroup.members.length > 0)
 		{
 			FlxTween.tween(credGroup, {alpha: 0}, 0.5, {
-				ease: FlxEase.quadOut, onComplete: function(twn:Flxtween) {
+				ease: FlxEase.quadOut, onComplete: function(twn:FlxTween) {
 					credGroup.remove(textGroup.members[0], true);
 				}});
 			FlxTween.tween(textGroup, {alpha: 0}, 0.5, {
-				ease: FlxEase.quadOut, onComplete: function(twn:Flxtween) {
+				ease: FlxEase.quadOut, onComplete: function(twn:FlxTween) {
 					textGroup.remove(textGroup.members[0], true);
 				}});
 		}

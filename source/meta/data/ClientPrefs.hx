@@ -312,7 +312,7 @@ class ClientPrefs {
 
 	// idk where to put this ok
 	#if MODS_ALLOWED
-	public var modsOptsSaves:Map<String, Map<String, Dynamic>> = [];
+	public static var modsOptsSaves:Map<String, Map<String, Dynamic>> = [];
 	#end
 
 	inline public static function getGameplaySetting(name:String, defaultValue:Dynamic):Dynamic {

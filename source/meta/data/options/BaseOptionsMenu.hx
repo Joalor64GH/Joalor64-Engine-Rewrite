@@ -97,7 +97,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		modDisp.borderSize = 1.4;
 		add(modDisp);
 
-		for (folder in Paths.getActiveModsDir(true)) {
+		for (folder in Mods.getActiveModsDir(true)) {
 			var path:String = haxe.io.Path.join([Paths.mods(), folder, 'options', FlxStringUtil.getClassName(this, true)]);
 			if(FileSystem.exists(path)) for(file in FileSystem.readDirectory(path)) if(file.endsWith('.json')) {
 				var rawJson = File.getContent(path + '/' + file);
