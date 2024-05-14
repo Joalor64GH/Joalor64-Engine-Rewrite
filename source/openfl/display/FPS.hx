@@ -2,7 +2,7 @@ package openfl.display;
 
 import flixel.util.FlxStringUtil;
 
-class Info extends openfl.text.TextField
+class FPS extends openfl.text.TextField
 {
 	var times:Array<Float> = [];
 

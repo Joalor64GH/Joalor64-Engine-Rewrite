@@ -318,6 +318,8 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 
+	public var judgementCounter:FlxText;
+
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -1369,6 +1371,17 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+
+		// thanks, kade
+		judgementCounter = new FlxText(20, 0, 0, "", 20);
+		judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter.borderSize = 2;
+		judgementCounter.borderQuality = 2;
+		judgementCounter.scrollFactor.set();
+		judgementCounter.cameras = [camHUD];
+		judgementCounter.screenCenter(Y);
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${misses}';
+		add(judgementCounter);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -2948,7 +2961,7 @@ class PlayState extends MusicBeatState
 				});
 				callOnLuas('onCountdownTick', [swagCounter]);
 
-				swagCounter += 1;
+				swagCounter++;
 			}, 4);
 		}
 	}
@@ -3673,6 +3686,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${misses}';
 
 		if (useVideo && GlobalVideo.get() != null)
 		{
@@ -5169,14 +5184,11 @@ class PlayState extends MusicBeatState
 				});
 			}
 
-			if(combo >= 0)
-			{
+			if (combo >= 0)
 				insert(members.indexOf(strumLineNotes), numScore);
-			}
-			if(combo >= 10)
-			{
+			
+			if (combo >= 10)
 				insert(members.indexOf(strumLineNotes), comboSpr);
-			}
 
 			insert(members.indexOf(strumLineNotes), rating);
 
@@ -5609,7 +5621,7 @@ class PlayState extends MusicBeatState
 
 			if (!note.isSustainNote)
 			{
-				combo += 1;
+				combo++;
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 			}
@@ -6015,7 +6027,7 @@ class PlayState extends MusicBeatState
 					fastCarDrive();
 			case "philly":
 				if (!trainMoving)
-					trainCooldown += 1;
+					trainCooldown++;
 
 				if (curBeat % 4 == 0)
 				{

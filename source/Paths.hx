@@ -10,21 +10,13 @@ import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import openfl.system.System;
-import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
-import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import haxe.io.Bytes;
 import haxe.Json;
-
-import github.APIShit;
-import meta.CoolUtil;
-#if MODS_ALLOWED
-import backend.Mods;
-#end
 
 using StringTools;
 using haxe.io.Path;
