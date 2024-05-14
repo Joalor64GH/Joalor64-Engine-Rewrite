@@ -2562,8 +2562,8 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "loadJsonOptions", function(inclMainFol:Bool = true, ?modNames:Array<String> = null) {
 			#if MODS_ALLOWED
 			if (modNames == null) modNames = [];
-			if (modNames.length < 1) modNames.push(Paths.currentModDirectory);
-			for(mod in Paths.getModDirectories(inclMainFol)) if(modNames.contains(mod) || (inclMainFol && mod == '')) {
+			if (modNames.length < 1) modNames.push(Mods.currentModDirectory);
+			for(mod in Mods.getModDirectories(inclMainFol)) if(modNames.contains(mod) || (inclMainFol && mod == '')) {
 				var path:String = haxe.io.Path.join([Paths.mods(), mod, 'options']);
 				if(FileSystem.exists(path)) for(file in FileSystem.readDirectory(path)) {
 					var folder:String = path + '/' + file;
@@ -2597,7 +2597,7 @@ class FunkinLua {
 				return Reflect.getProperty(ClientPrefs, variable);
 			} else if (isJson) {
 				#if MODS_ALLOWED
-				if (modName == null) modName = Paths.currentModDirectory;
+				if (modName == null) modName = Mods.currentModDirectory;
 				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
 					return ClientPrefs.modsOptsSaves[modName][variable];
 				}
@@ -2613,7 +2613,7 @@ class FunkinLua {
 				return Reflect.getProperty(ClientPrefs, variable) != null ? true : false;
 			} else if (isJson) {
 				#if MODS_ALLOWED
-				if (modName == null) modName = Paths.currentModDirectory;
+				if (modName == null) modName = Mods.currentModDirectory;
 				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
 					ClientPrefs.modsOptsSaves[modName][variable] = value;
 					return true;

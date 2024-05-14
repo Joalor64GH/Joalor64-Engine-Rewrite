@@ -379,8 +379,8 @@ class PlayState extends MusicBeatState
 	var keysPressed:Array<Bool> = [];
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
-	var achievementsArray:Array<FunkinLua> = [];
-	var achievementWeeks:Array<String> = [];
+	public static var achievementsArray:Array<FunkinLua> = [];
+	public static var achievementWeeks:Array<String> = [];
 
 	// Lua shit
 	public static var instance:PlayState = null;
@@ -3121,7 +3121,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.onComplete = finishSong.bind();
+		FlxG.sound.music.onComplete = () -> finishSong.bind();
 		vocals.play();
 		vocals.onComplete = () -> vocalsFinished = true;
 

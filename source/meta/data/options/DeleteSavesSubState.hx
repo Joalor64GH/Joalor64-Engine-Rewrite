@@ -26,7 +26,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.antialiasing;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
         noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODPACK OPTIONS SAVES FOUND\nPRESS BACK TO EXIT", 48);
@@ -71,7 +71,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
 		text.scrollFactor.set();
 		add(text);
 
-        var active:Array<String> = Paths.getActiveModsDir();
+        var active:Array<String> = Mods.getActiveModsDir();
         for (save in ClientPrefs.modsOptsSaves.keys())
         {
             var toCheck:Array<Dynamic> = [save, null, false];
