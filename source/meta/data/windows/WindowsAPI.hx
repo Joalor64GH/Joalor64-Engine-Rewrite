@@ -1,4 +1,4 @@
-package backend.system;
+package meta.data.windows;
 
 #if windows
 @:buildXml('

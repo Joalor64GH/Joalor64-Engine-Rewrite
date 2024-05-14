@@ -11,11 +11,7 @@ import openfl.filters.ShaderFilter;
 
 import flixel.addons.effects.FlxTrail;
 import flixel.addons.transition.FlxTransitionableState;
-#if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
-#else
-import flixel.system.FlxSound;
-#end
 import flixel.ui.FlxBar;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
@@ -52,7 +48,6 @@ import meta.video.SwfVideo;
 
 #if HSCRIPT_ALLOWED
 import hscript.*;
-import horny.*;
 #end
 
 import meta.*;

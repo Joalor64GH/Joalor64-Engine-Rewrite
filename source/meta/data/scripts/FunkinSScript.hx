@@ -1,25 +1,9 @@
 package meta.data.scripts;
 
-import flixel.FlxG;
-import flixel.FlxBasic;
-import flixel.FlxCamera;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxAngle;
-import flixel.math.FlxMath;
-import flixel.system.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
+import flixel.sound.FlxSound;
 import flixel.ui.FlxBar;
-import flixel.util.FlxColor;
-import flixel.util.FlxSave;
-import flixel.util.FlxTimer;
-import lime.app.Application;
 import openfl.Assets;
 import openfl.Lib;
 import meta.*;

@@ -1,7 +1,6 @@
 package meta.video;
 
 import meta.video.*;
-import flixel.FlxG;
 import openfl.display.Sprite;
 #if WEBM_ALLOWED
 import webm.*;
@@ -15,9 +14,7 @@ class WebmHandler
 	public var io:WebmIo;
 	public var initialized:Bool = false;
 
-	public function new()
-	{
-	}
+	public function new() {}
 
 	public function source(?vPath:String):Void
 	{

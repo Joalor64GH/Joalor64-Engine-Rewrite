@@ -109,6 +109,34 @@ class Paths
 		FlxG.bitmap.remove(graphic);
 	}
 
+	private static var trackedBitmaps:Map<String, BitmapData> = new Map();
+
+	public static function setBitmap(id:String, ?bitmap:BitmapData):BitmapData
+	{
+		if (!trackedBitmaps.exists(id) && bitmap != null)
+			trackedBitmaps.set(id, bitmap);
+		pushTracked(id);
+		return trackedBitmaps.get(id);
+	}
+
+	public static function disposeBitmap(id:String)
+	{
+		var obj:Null<BitmapData> = trackedBitmaps.get(id);
+		if (obj != null)
+		{
+			obj.dispose();
+			obj.disposeImage();
+			obj = null;
+			trackedBitmaps.remove(id);
+		}
+	}
+
+	public static function pushTracked(file:String)
+	{
+		if (!localTrackedAssets.contains(file))
+			localTrackedAssets.push(file);
+	}
+
 	public static function getPath(file:String, ?type:AssetType = TEXT, ?modsAllowed:Bool = false):String
 	{
 		#if MODS_ALLOWED
@@ -151,7 +179,7 @@ class Paths
 	inline static public function hx(key:String)
 		return getPath('$key.hx', TEXT);
 
-	inline static public function exists(asset:String, ?type:openfl.utils.AssetType)
+	inline static public function exists(asset:String, ?type:AssetType)
 	{
 		#if sys 
 		return FileSystem.exists(asset);

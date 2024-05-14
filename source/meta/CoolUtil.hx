@@ -2,13 +2,9 @@ package meta;
 
 import meta.state.PlayState;
 import openfl.utils.Assets;
-import flixel.util.FlxColor;
-import flixel.FlxG;
 #if sys
 import sys.FileSystem;
 #end
-
-using StringTools;
 
 @:keep
 class CoolUtil
@@ -40,9 +36,7 @@ class CoolUtil
 		return Math.max(min, Math.min(max, value));
   
 	inline public static function txtSplit(path:String)
-	{
 		return [for (i in Assets.getText(path).trim().split('\n')) i.trim()];
-	}
 
 	inline public static function coolTextFile(path:String):Array<String>
 		return FileAssets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];

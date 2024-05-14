@@ -2,19 +2,8 @@ package meta.video;
 
 import meta.*;
 import meta.video.*;
-import flixel.FlxState;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
 import lime.app.Application;
-#if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
-#else
-import flixel.system.FlxSound;
-#end
 import openfl.utils.Assets;
 import openfl.utils.AssetType;
 

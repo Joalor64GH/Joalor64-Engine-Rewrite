@@ -1,32 +1,12 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
-import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
-#if MODS_ALLOWED
-import sys.FileSystem;
-import sys.io.File;
-#end
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-#if (flixel >= "5.3.0")
-import flixel.sound.FlxSound;
-#else
-import flixel.system.FlxSound;
-#end
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 
@@ -36,8 +16,6 @@ import meta.data.options.*;
 import meta.state.*;
 import meta.data.alphabet.*;
 import objects.shaders.*;
-
-using StringTools;
 
 typedef TitleData = 
 {
@@ -249,7 +227,6 @@ class TitleState extends MusicBeatState
 
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
-
 		credTextShit.visible = false;
 
 		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('titlescreen/psych_logo'));

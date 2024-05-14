@@ -11,8 +11,7 @@
       },
       {
         "name": "flixel",
-        "type": "haxelib",
-        "version": "5.2.2"
+        "type": "haxelib"
       },
       {
         "name": "flixel-addons",
@@ -35,10 +34,7 @@
       },
       {
         "name": "hscript",
-        "type": "git",
-        "dir": null,
-        "ref": "1e55d0200b8bbaba55acc267c8c4f7a941225266",
-        "url": "https://github.com/YoshiCrafter29/hscript-improved"
+        "type": "haxelib"
       },
       {
         "name": "hscript-ex",

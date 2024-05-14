@@ -52,7 +52,7 @@ import haxe.Json;
 import lime.app.Application;
 import openfl.utils.Assets as OpenFlAssets;
 
-using Global;
+using Globals;
 using StringTools;
 using meta.CoolUtil;
 

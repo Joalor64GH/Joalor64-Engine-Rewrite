@@ -10,7 +10,6 @@ import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 import openfl.net.NetConnection;
 import openfl.net.NetStream;
-import flixel.FlxG;
 
 using StringTools;
 
