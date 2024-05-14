@@ -63,11 +63,7 @@ class OutdatedState extends MusicBeatState
 				mustUpdate = false;
 		}
 
-		http.onError = function(error)
-		{
-			trace('error: $error');
-		}
-
+		http.onError = (error) -> trace('error: $error');
 		http.request();
 	}
 

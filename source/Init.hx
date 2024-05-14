@@ -24,24 +24,6 @@ import core.ModCore;
 // this loads everything in
 class Init extends FlxState
 {
-	public static var coolColors:Array<FlxColor> = [
-		0x00000000, // Transparent
-		0xFFFFFFFF, // White
-		0xFF808080, // Gray
-		0xFF000000, // Black
-		0xFF008000, // Green
-		0xFF00FF00, // Lime
-		0xFFFFFF00, // Yellow
-		0xFFFFA500, // Orange
-		0xFFFF0000, // Red
-		0xFF800080, // Purple
-		0xFF0000FF, // Blue
-		0xFF8B4513, // Brown
-		0xFFFFC0CB, // Pink
-		0xFFFF00FF, // Magenta
-		0xFF00FFFF // Cyan
-	];
-
 	var loadingSpeen:FlxSprite;
 	var epicLogo:FlxSprite;
 
@@ -55,7 +37,7 @@ class Init extends FlxState
 		Paths.clearUnusedMemory();
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("loader/bgDesat"));
-		bg.color = randomizeColor();
+		bg.color = FlxColor.fromRGB(FlxG.random.int(0, 255), FlxG.random.int(0, 255), FlxG.random.int(0, 255));
 		bg.screenCenter();
         	add(bg);
         
@@ -64,7 +46,15 @@ class Init extends FlxState
 		epicLogo.screenCenter();
         	add(epicLogo);
 
-		logoTween();
+		epicLogo.angle = -4;
+
+		new FlxTimer().start(0.01, function(tmr:FlxTimer)
+		{
+			if (epicLogo.angle == -4)
+				FlxTween.angle(epicLogo, epicLogo.angle, 4, 4, {ease: FlxEase.quartInOut});
+			if (epicLogo.angle == 4)
+				FlxTween.angle(epicLogo, epicLogo.angle, -4, 4, {ease: FlxEase.quartInOut});
+		}, 0);
 
 		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
 		bottomPanel.alpha = 0.5;
@@ -222,24 +212,4 @@ class Init extends FlxState
 			}
 	    	});
 	}
-
-	function logoTween()
-	{
-		epicLogo.angle = -4;
-
-		new FlxTimer().start(0.01, function(tmr:FlxTimer)
-		{
-			if (epicLogo.angle == -4)
-				FlxTween.angle(epicLogo, epicLogo.angle, 4, 4, {ease: FlxEase.quartInOut});
-			if (epicLogo.angle == 4)
-				FlxTween.angle(epicLogo, epicLogo.angle, -4, 4, {ease: FlxEase.quartInOut});
-		}, 0);
-	}
-
-	public static function randomizeColor()
-    	{
-		var chance:Int = FlxG.random.int(0, coolColors.length - 1);
-		var color:FlxColor = coolColors[chance];
-		return color;
-   	}
 }
