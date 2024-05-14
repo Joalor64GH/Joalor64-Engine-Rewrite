@@ -47,18 +47,14 @@ class Localization
         switchLanguage(DEFAULT_LANGUAGE);
     }
 
-    public static function loadLanguages(languages:Array<String>):Bool
+    public static function loadLanguages(languages:Array<String>)
     {
-        var allLoaded:Bool = true;
-
         data = new Map<String, Dynamic>();
 
         for (language in languages) {
             var languageData:Dynamic = loadLanguageData(language);
             data.set(language, languageData);
         }
-
-        return allLoaded;
     }
 
     private static function loadLanguageData(language:String):Dynamic
