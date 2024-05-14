@@ -1,33 +1,49 @@
-package meta.data.windows;
+package backend.system;
 
-import meta.data.native.WinAPI;
+#if windows
+@:buildXml('
+    <target id="haxe">
+        <lib name="dwmapi.lib" if="windows" />
+    </target>
+    ')
+@:cppFileCode('
+    #include <Windows.h>
+    #include <cstdio>
+    #include <iostream>
+    #include <tchar.h>
+    #include <dwmapi.h>
+    #include <winuser.h>
 
-/**
- * Class for Windows-only functions, such as transparent windows, message boxes, and more.
- * Does not have any effect on other platforms.
- */
-class WindowsAPI {
-    /**
-     * Sets the window titlebar to dark mode
-     */
-    public static function setDarkMode(enable:Bool) {
-        #if windows
-        WinAPI.setDarkMode(enable);
-        #end
-        // temporary solution for dark mode
-        lime.app.Application.current.window.borderless = true;
-		lime.app.Application.current.window.borderless = false;
+    #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
+    #define DWMWA_USE_IMMERSIVE_DARK_MODE 20 // support for windows 11
+    #endif
+    ')
+@:dox(hide)
+class WindowsAPI
+{
+    @:functionCode('
+        int darkMode = enable ? 1 : 0;
+        HWND window = GetActiveWindow();
+        if (S_OK != DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, reinterpret_cast<LPCVOID>(&darkMode), sizeof(darkMode)))
+            DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, reinterpret_cast<LPCVOID>(&darkMode), sizeof(darkMode));
+    ')
+    public static function setDarkMode(enable:Bool) {}
+
+    public static function darkMode(enable:Bool)
+    {
+        setDarkMode(enable);
+        Application.current.window.borderless = true;
+        Application.current.window.borderless = false;
     }
 
-    /**
-     * Shows a message box
-     */
-    public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {
-        #if windows
-        WinAPI.showMessageBox(caption, message, icon);
-        #else
-        lime.app.Application.current.window.alert(message, caption);
-        #end
+    @:functionCode('
+        int result = MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
+    ')
+    public static function showMessageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING) {}
+
+    public static function messageBox(caption:String, message:String, icon:MessageBoxIcon = MSG_WARNING)
+    {
+        showMessageBox(caption, message, icon);
     }
 }
 
@@ -37,3 +53,4 @@ class WindowsAPI {
     var MSG_WARNING:MessageBoxIcon = 0x00000030;
     var MSG_INFORMATION:MessageBoxIcon = 0x00000040;
 }
+#end

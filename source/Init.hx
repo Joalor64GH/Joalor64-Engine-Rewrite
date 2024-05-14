@@ -3,14 +3,6 @@ package;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.FlxSprite;
-import flixel.text.FlxText;
-import flixel.util.FlxTimer;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 
@@ -109,7 +101,6 @@ class Init extends FlxState
         	#if LUA_ALLOWED
 		Mods.pushGlobalMods();
 		#end
-		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		Mods.loadTheFirstEnabledMod();
 
 		FlxG.game.focusLostFramerate = 60;
