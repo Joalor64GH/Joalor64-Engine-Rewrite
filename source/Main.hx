@@ -23,11 +23,12 @@ import haxe.io.Path;
 class Main extends Sprite
 {
 	public static var fpsVar:FPS; // fps
-	public static var instance:Main;
-	public static var game:Joalor64Game; // the main game
 	public static var toast:ToastCore; // notification thing, credits go to MAJigsaw77
 	public static var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+
+	public static var instance:Main; // instance
+	private var game:Joalor64Game; // the main game
 
 	public final config:Dynamic = {
 		gameDimensions: [GameDimensions.width, GameDimensions.height],

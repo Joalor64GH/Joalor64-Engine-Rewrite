@@ -118,7 +118,8 @@ class CrashHandler extends Sprite
 		"You should take a break.",
 		"um",
 		"error",
-		"You can't go back."
+		"You can't go back.",
+		"got dam"
 	];
 
 	public function new(stack:String):Void 
@@ -208,6 +209,7 @@ class CrashHandler extends Sprite
 				_stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyActions);
 				FlxG.switchState(new Init());
 				_active = false;
+				@:privateAccess
 				Main.instance.game._viewingCrash = false;
 				if (Main.instance != null && Main.instance.contains(this))
 					Main.instance.removeChild(this);
