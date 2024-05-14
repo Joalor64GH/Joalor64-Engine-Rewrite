@@ -2,38 +2,22 @@ package meta.state;
 
 import openfl.events.IOErrorEvent;
 import openfl.events.ErrorEvent;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import openfl.system.System;
-import sys.io.Process;
 import openfl.events.Event;
-import cpp.vm.Thread;
-import flixel.ui.FlxBar;
-import flixel.FlxG;
 import openfl.net.URLLoader;
-import openfl.net.URLStream;
-import flixel.addons.ui.FlxUIInputText;
-import flash.display.PNGEncoderOptions;
 import openfl.net.URLRequest;
 import openfl.utils.ByteArray;
-import sys.FileSystem;
-import flixel.util.FlxTimer;
-import haxe.Json;
-import haxe.format.JsonParser;
-import sys.io.FileInput;
-import sys.io.File;
-import haxe.io.BytesInput;
-import openfl.display.BitmapData;
+
+import sys.io.Process;
 import sys.io.FileOutput;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
-import haxe.zip.Entry;
-import haxe.zip.Uncompress;
+
+import haxe.Json;
+
 import haxe.zip.Writer;
 import haxe.io.Bytes;
+
 import flixel.ui.FlxButton;
-import haxe.io.Input;
 import flixel.addons.ui.FlxUITabMenu;
+import flixel.addons.ui.FlxUIInputText;
 
 import meta.*;
 import meta.state.*;

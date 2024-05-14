@@ -249,7 +249,8 @@ class PlayState extends MusicBeatState
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
 
-	public var ratingsArray:Array<Array<Dynamic> = [
+	public var ratingsArray:Array<Array<Dynamic>> = [
+		// name, hit window, score, notesplash
 		["sick", 1, 350, true],
 		["good", 0.75, 200, false],
 		["bad", 0.5, 100, false],
@@ -510,7 +511,7 @@ class PlayState extends MusicBeatState
 			}		
 		}
 
-		// i have absolutely no idea if this works
+		// i think this works, i just haven't tested it
 		/*
 		for (i in ratingsArray) {
 			var rating:Rating = new Rating(i[0]);

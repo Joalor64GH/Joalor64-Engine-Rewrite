@@ -5,7 +5,7 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
-import flash.media.Sound;
+import openfl.media.Sound;
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
@@ -41,6 +41,7 @@ typedef I8frame = {
 }
 
 @:keep
+@:access(openfl.display.BitmapData)
 class Paths
 {
 	inline public static final SOUND_EXT = #if !web "ogg" #else "mp3" #end;
@@ -206,59 +207,43 @@ class Paths
 	{
 		#if MODS_ALLOWED
 		if(modsAllowed)
-		{
-			var modded:String = modFolders(file);
-			if(FileSystem.exists(modded)) return modded;
-		}
+			if(FileSystem.exists(modFolders(file))) return modFolders(file);
 		#end
 
 		return getPreloadPath(file);
 	}
 	
 	inline public static function getPreloadPath(file:String = '')
-	{
 		return 'assets/$file';
-	}
 
 	inline static public function txt(key:String)
-	{
 		return getPath('data/$key.txt', TEXT);
-	}
 
 	inline static public function xml(key:String) 
-	{
 		return getPath('data/$key.xml', TEXT);
-	}
 
 	inline static public function json(key:String)
-	{
 		return getPath('data/$key.json', TEXT);
-	}
+
+	#if yaml
+	inline static public function yaml(key:String)
+		return getPath('data/$key.yaml', TEXT);
+	#end
 
 	inline static public function shaderFragment(key:String) 
-	{
 		return getPath('shaders/$key.frag', TEXT);
-	}
 
 	inline static public function shaderVertex(key:String) 
-	{
 		return getPath('shaders/$key.vert', TEXT);
-	}
 	
 	inline static public function lua(key:String)
-	{
 		return getPath('$key.lua', TEXT);
-	}
 
 	inline static public function hscript(key:String)
-	{
 		return getPath('$key.hscript', TEXT);
-	}
 
 	inline static public function hx(key:String)
-	{
 		return getPath('$key.hx', TEXT);
-	}
 
 	inline static public function exists(asset:String, ?type:openfl.utils.AssetType)
 	{
@@ -329,10 +314,7 @@ class Paths
 	static public function video(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var file:String = modsVideo(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
+		if (FileSystem.exists(modsVideo(key))) return modsVideo(key);
 		#end
 		for (i in VIDEO_EXT) {
 			var path = 'assets/videos/$key.$i';
@@ -351,51 +333,31 @@ class Paths
 	static public function flashMovie(key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var file:String = modsFlashMovie(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
+		if (FileSystem.exists(modsFlashMovie(key))) return modsFlashMovie(key);
 		#end
 		return 'assets/videos/$key.$FLASH_EXT';
 	}
 
 	static public function sound(key:String):Sound
-	{
-		var sound:Sound = returnSound('sounds', key);
-		return sound;
-	}
+		return returnSound('sounds', key);
 
 	inline static public function soundRandom(key:String, min:Int, max:Int)
-	{
 		return sound(key + FlxG.random.int(min, max));
-	}
 
 	static public function music(key:String):Sound
-	{
-		var file:Sound = returnSound('music', key);
-		return file;
-	}
+		return returnSound('music', key);
 
 	inline static public function track(song:String, track:String):Any
-	{
 		return returnSound('songs', '${formatToSongPath(song)}/$track');
-	}
 
 	inline static public function voices(song:String):Any
-	{
 		return track(song, "Voices");
-	}
 
 	inline static public function inst(song:String):Any
-	{
 		return track(song, "Inst");
-	}
 
 	static public function image(key:String):FlxGraphic
-	{
-		var returnAsset:FlxGraphic = returnGraphic(key);
-		return returnAsset;
-	}
+		return returnGraphic(key);
 
 	public static function fromI8(key:String):Null<Dynamic> {
 		var Description:String = null;
@@ -505,18 +467,21 @@ class Paths
 	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false = null)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		if(!ignoreMods)
+		if (!ignoreMods)
 		{
-			for(mod in Mods.getGlobalMods())
+			for (mod in Mods.getGlobalMods())
 				if (FileSystem.exists(mods('$mod/$key')))
 					return true;
 
 			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)) || FileSystem.exists(mods(key)))
 				return true;
+
+			if (FileSystem.exists(mods('$key')))
+				return true;
 		}
 		#end
 
-		return Paths.exists(getPath(key, type));
+		return (Assets.exists(getPath(key, false))) ? true : false;
 	}
 
 	inline static public function getSparrowAtlas(key:String):FlxAtlasFrames
@@ -602,13 +567,9 @@ class Paths
 	public static function returnSoundPath(path:String, key:String)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
-		var file:String = modsSounds(path, key);
-		if (FileSystem.exists(file))
-			return file;
-		
+		if (FileSystem.exists(modsSounds(path, key))) return modsSounds(path, key);
 		#end
-		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND);
-		return gottenPath;
+		return getPath('$path/$key.$SOUND_EXT', SOUND);
 	}
 
 	public static function returnSound(path:String, key:String)
@@ -624,7 +585,6 @@ class Paths
 			return currentTrackedSounds.get(file);
 		}
 		#end
-		// I hate this so god damn much
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		if (!currentTrackedSounds.exists(gottenPath))
@@ -702,19 +662,14 @@ class Paths
 		return modFolders('achievements/$key.json');
 
 	static public function modFolders(key:String) {
-		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
-			var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck)) {
-				return fileToCheck;
-			}
-		}
+		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)))
+				return mods(Mods.currentModDirectory + '/' + key);
 
-		for(mod in Mods.getGlobalMods()){
-			var fileToCheck:String = mods('$mod/$key');
-			if(FileSystem.exists(fileToCheck))
-				return fileToCheck;
-
-		}
+		for (mod in Mods.getGlobalMods())
+			if (FileSystem.exists(mods('$mod/$key')))
+				return mods('$mod/$key');
+		
 		return 'mods/$key';
 	}
 
@@ -747,6 +702,5 @@ class Paths
 		}
 		return false;
 	}
-
 	#end
 }

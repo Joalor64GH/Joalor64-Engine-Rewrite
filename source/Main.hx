@@ -30,10 +30,6 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-#if linux
-import lime.graphics.Image;
-#end
-
 using StringTools;
 
 #if linux
@@ -132,8 +128,7 @@ class Main extends Sprite
 		#end
 
 		#if linux
-		var icon = Image.fromFile("icon.png");
-		Lib.current.stage.window.setIcon(icon);
+		Lib.current.stage.window.setIcon(lime.graphics.Image.fromFile("icon.png"));
 		#end
 
 		#if html5
