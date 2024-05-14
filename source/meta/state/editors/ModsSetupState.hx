@@ -119,8 +119,11 @@ class ModSetupTabs extends FlxUITabMenu
             }
 
             if (FileSystem.exists('mods/$modFolder')) {
-                FlxG.state.openSubState(new meta.substate.Prompt("Mod folder\n$modFolder\nalready exists\n\nAre you sure you want to\noverwrite this folder?", 
-                    0, createFunc, () -> {
+                FlxG.state.openSubState(new meta.substate.Prompt("Mod folder $modFolder already exists!\nAre you sure you want tooverwrite this folder?", 
+                    0, () -> {
+                        createFunc();
+                        FlxG.state.closeSubState();
+                    }, () -> {
                         FlxG.state.closeSubState();
                     }));
             }
@@ -187,8 +190,7 @@ class ModsSetupState extends MusicBeatState
         "characters" => [],
         "notetypes" => [],
         "events" => [],
-        "_append" => ["data"],
-        "_merge" => ["data"]
+        "_append" => ["data"]
     ];
 
     public static function setupModFolder(name:String)

@@ -59,7 +59,6 @@
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
 	<define name="PSYCH"/> <!-- For the fnf-modcharting-tools library -->
-	<define name="FUTURE_POLYMOD" if="MODS_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
 	<define name="JOALOR64_WATERMARKS"/>
@@ -88,7 +87,7 @@
 	<!--<library path="assets/videos/movie.swf" preload="true" id="id"/>-->
 
     	<!-- PATH DEFINITIONS -->
-	<section if="MODS_ALLOWED || FUTURE_POLYMOD">
+	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>
 		<assets path='modsList.txt'/>
 	</section>
@@ -131,7 +130,6 @@
 
 	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
-	<haxelib name="polymod-joalor64" if="FUTURE_POLYMOD"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

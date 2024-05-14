@@ -117,92 +117,6 @@ class Paths
 		FlxG.bitmap.remove(graphic);
 	}
 
-	// github stuff
-	public static function gitGetPath(path:String, branch:String = 'main')
-	{
-		trace('path: https://${APIShit.personalAccessToken}@raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
-		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
-		var contents:String = '';
-		http.onData = function(data:String) {
-			contents = data;
-		}
-		http.onError = function(error) {
-			trace('error: $error');
-		}
-		http.request();
-		return contents;
-	}
-	public static function gitImage(path:String, branch:String) {
-		var http = new haxe.Http('https://raw.githubusercontent.com/${APIShit.repoHolder}/${APIShit.repoName}/$branch/assets/$path');
-		var spr:FlxSprite = new FlxSprite();
-		http.onBytes = function(bytes:Bytes) {
-			var bmp:BitmapData = BitmapData.fromBytes(bytes);
-			spr.pixels = bmp;
-		}
-		http.onError = function(error) {
-			trace('error: $error');
-		}
-		http.request();
-
-		return spr;
-	}
-	public static function loadGraphicFromURL(url:String, sprite:FlxSprite):FlxSprite
-	{
-		var http = new haxe.Http(url);
-		var spr:FlxSprite = new FlxSprite();
-		http.onBytes = function(bytes:Bytes) {
-			var bmp:BitmapData = BitmapData.fromBytes(bytes);
-			spr.pixels = bmp;
-		}
-		http.onError = function(error) {
-			trace('error: $error');
-			return null;
-		}
-		http.request();
-
-		return spr;
-	}
-	public static function loadSparrowAtlasFromURL(xmlUrl:String, imageUrl:String)
-	{
-		var xml:String;
-		var xmlHttp = new haxe.Http(xmlUrl);
-		xmlHttp.onData = function (data:String) {
-			xml = data;
-		}
-		xmlHttp.onError = function (e) {
-			trace('error: $e');
-			return null;
-		}
-		xmlHttp.request();
-
-		var http = new haxe.Http(imageUrl);
-		var bmp:BitmapData;
-		http.onBytes = function (bytes:Bytes) {
-			bmp = BitmapData.fromBytes(bytes);
-			trace(bmp.height);
-		}
-		http.onError = function(error) {
-			trace('error: $error');
-			return null;
-		}
-		http.request();
-		return FlxAtlasFrames.fromSparrow(bmp, xml);
-	}
-	public static function loadFileFromURL(url:String):String
-	{
-		var shit:String;
-		var http = new haxe.Http(url);
-		http.onData = function (data:String)
-			shit = data;
-		http.onError = function (e)
-		{
-			trace('error: $e');
-			return null;
-		}
-		http.request();
-		return shit;
-	}
-
 	public static function getPath(file:String, ?type:AssetType = TEXT, ?modsAllowed:Bool = false):String
 	{
 		#if MODS_ALLOWED
@@ -313,12 +227,12 @@ class Paths
 	
 	static public function video(key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(modsVideo(key))) return modsVideo(key);
 		#end
 		for (i in VIDEO_EXT) {
 			var path = 'assets/videos/$key.$i';
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			if (FileSystem.exists(path))
 			#else
 			if (Assets.exists(path))
@@ -332,7 +246,7 @@ class Paths
 
 	static public function flashMovie(key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(modsFlashMovie(key))) return modsFlashMovie(key);
 		#end
 		return 'assets/videos/$key.$FLASH_EXT';
@@ -361,7 +275,7 @@ class Paths
 
 	public static function fromI8(key:String):Null<Dynamic> {
 		var Description:String = null;
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(getPath('images/$key.json', TEXT)))
 			Description = getPath('images/$key.json', TEXT);
 		else if (FileSystem.exists(modFolders('images/$key.json')))
@@ -391,7 +305,7 @@ class Paths
 
 		frames = new FlxAtlasFrames(graphic);
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(Description))
 			Description = File.getContent(Description);
 		#else
@@ -433,7 +347,7 @@ class Paths
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
 		#if sys
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (!ignoreMods && FileSystem.exists(modFolders(key)))
 			return File.getContent(modFolders(key));
 		#end
@@ -447,7 +361,7 @@ class Paths
 
 	inline static public function font(key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(modsFont(key))) return modsFont(key);
 		#end
 
@@ -466,7 +380,7 @@ class Paths
 
 	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (!ignoreMods)
 		{
 			for (mod in Mods.getGlobalMods())
@@ -486,7 +400,7 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String):FlxAtlasFrames
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 
 		return FlxAtlasFrames.fromSparrow(
@@ -500,7 +414,7 @@ class Paths
 
 	inline static public function getPackerAtlas(key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 		var txtExists:Bool = FileSystem.exists(modFolders('images/$key.txt'));
 		
@@ -532,7 +446,7 @@ class Paths
 
 	public static function returnGraphic(key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var modKey:String = modsImages(key);
 		if (FileSystem.exists(modKey))
 		{
@@ -566,7 +480,7 @@ class Paths
 	
 	public static function returnSoundPath(path:String, key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(modsSounds(path, key))) return modsSounds(path, key);
 		#end
 		return getPath('$path/$key.$SOUND_EXT', SOUND);
@@ -574,7 +488,7 @@ class Paths
 
 	public static function returnSound(path:String, key:String)
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var file:String = modsSounds(path, key);
 		if (FileSystem.exists(file))
 		{
@@ -588,7 +502,7 @@ class Paths
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND);
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		if (!currentTrackedSounds.exists(gottenPath))
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			currentTrackedSounds.set(gottenPath, Sound.fromFile('./$gottenPath'));
 			#else
 				currentTrackedSounds.set(
@@ -600,7 +514,7 @@ class Paths
 		return currentTrackedSounds.get(gottenPath);
 	}
 
-	#if (MODS_ALLOWED && FUTURE_POLYMOD)
+	#if MODS_ALLOWED
 	static final modFolderPath:String = "mods/";
 
 	inline static public function mods(key:String = '')
@@ -611,26 +525,6 @@ class Paths
 
 	inline static public function modsJson(key:String)
 		return modFolders('data/$key.json');
-
-	#if FUTURE_POLYMOD
-	inline static public function appendTxt(key:String)
-		return modFolders('_append/data/$key.txt');
-
-	inline static public function appendJson(key:String)
-		return modFolders('_append/data/$key.json');
-
-	inline static public function appendXml(key:String)
-		return modFolders('_append/data/$key.xml');
-
-	inline static public function mergeTxt(key:String)
-		return modFolders('_merge/data/$key.txt');
-
-	inline static public function mergeJson(key:String)
-		return modFolders('_merge/data/$key.json');
-
-	inline static public function mergeXml(key:String)
-		return modFolders('_merge/data/$key.xml');
-	#end
 
 	static public function modsVideo(key:String) {
 		for (i in VIDEO_EXT) {

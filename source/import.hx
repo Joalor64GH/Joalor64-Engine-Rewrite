@@ -13,7 +13,9 @@ import flixel.*;
 // JOALOR64
 import animateatlas.AtlasFrameMaker;
 import meta.data.alphabet.Alphabet;
+#if desktop
 import meta.data.dependency.Discord;
+#end
 import meta.data.Conductor;
 import meta.data.Conductor.BPMChangeEvent;
 import meta.data.Section;
@@ -31,7 +33,6 @@ import meta.data.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.*;
-
 import Paths;
 
 #if MODS_ALLOWED 
@@ -42,16 +43,13 @@ import objects.*;
 import hscript.*;
 
 // MISCELLANEOUS
-#if (polymod && FUTURE_POLYMOD)
-import polymod.Polymod;
-#end
-#if (sys || desktop)
+#if (sys || desktop || MODS_ALLOWED)
 import sys.io.File;
 import sys.FileSystem;
 #end
 
 import haxe.Json;
-
+import lime.app.Application;
 import openfl.utils.Assets as OpenFlAssets;
 
 using Global;

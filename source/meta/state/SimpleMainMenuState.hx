@@ -32,7 +32,7 @@ class SimpleMainMenuState extends MusicBeatState
 		'Story Mode',
 		'Freeplay',
 		'Minigames',
-		#if (MODS_ALLOWED && FUTURE_POLYMOD) 'Mods', #end
+		#if MODS_ALLOWED 'Mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'Awards', #end
 		'Credits',
 		'Options'
@@ -53,7 +53,7 @@ class SimpleMainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new FreeplayState());
 			case 'Minigames':
 				MusicBeatState.switchState(new MinigamesState());
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			case 'Mods':
 				MusicBeatState.switchState(new ModsMenuState());
 			#end
@@ -81,7 +81,7 @@ class SimpleMainMenuState extends MusicBeatState
 		DiscordClient.changePresence("Simple Main Menu", null);
 		#end
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
 		#end
 

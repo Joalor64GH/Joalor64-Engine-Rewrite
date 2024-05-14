@@ -2,7 +2,7 @@ package objects.userinterface.menu;
 
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
 #end

@@ -1,6 +1,6 @@
 package meta.data;
 
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
 #end
@@ -86,7 +86,7 @@ class WeekData {
 	{
 		weeksList = [];
 		weeksLoaded.clear();
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var directories:Array<String> = [Paths.mods(), Paths.getPreloadPath()];
 		var originalLength:Int = directories.length;
 
@@ -106,7 +106,7 @@ class WeekData {
 					if(week != null) {
 						var weekFile:WeekData = new WeekData(week, sexList[i]);
 
-						#if (MODS_ALLOWED && FUTURE_POLYMOD)
+						#if MODS_ALLOWED
 						if(j >= originalLength) {
 							weekFile.folder = directories[j].substring(Paths.mods().length, directories[j].length-1);
 						}
@@ -121,7 +121,7 @@ class WeekData {
 			}
 		}
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		for (i in 0...directories.length) {
 			var directory:String = directories[i] + 'weeks/';
 			if(FileSystem.exists(directory)) {
@@ -158,7 +158,7 @@ class WeekData {
 				var weekFile:WeekData = new WeekData(week, weekToCheck);
 				if(i >= originalLength)
 				{
-					#if (MODS_ALLOWED && FUTURE_POLYMOD)
+					#if MODS_ALLOWED
 					weekFile.folder = directory.substring(Paths.mods().length, directory.length-1);
 					#end
 				}
@@ -173,7 +173,7 @@ class WeekData {
 
 	private static function getWeekFile(path:String):WeekFile {
 		var rawJson:String = null;
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if(FileSystem.exists(path)) {
 			rawJson = File.getContent(path);
 		}

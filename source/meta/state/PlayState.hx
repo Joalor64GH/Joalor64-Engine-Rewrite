@@ -3,47 +3,22 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-#if sys
-import sys.FileSystem;
-import sys.io.File;
-#end
+
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
-import flixel.FlxBasic;
-import flixel.FlxCamera;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.FlxSubState;
 import flixel.addons.effects.FlxTrail;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
 #if (flixel >= "5.3.0")
 import flixel.sound.FlxSound;
 #else
 import flixel.system.FlxSound;
 #end
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.ui.FlxBar;
-import flixel.util.FlxColor;
-import flixel.util.FlxSort;
-import flixel.util.FlxStringUtil;
-import flixel.util.FlxTimer;
-import haxe.Json;
-import lime.utils.Assets;
-import lime.app.Application;
-import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
-import flixel.util.FlxSave;
 import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
 import modcharting.ModchartFuncs;
@@ -496,7 +471,7 @@ class PlayState extends MusicBeatState
 				case 'Kade':
 					ratingFC = "N/A";
 					if (cpuControlled)
-						ratingFC = "Botplay";
+						ratingFC = "BotPlay";
 
 					else if (songMisses == 0 && sicks >= 0 && goods == 0 && bads == 0 && shits == 0)
 						ratingFC = "(MFC) ";
@@ -1058,7 +1033,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//CUSTOM ACHIVEMENTS
-		#if (MODS_ALLOWED && FUTURE_POLYMOD && LUA_ALLOWED && ACHIEVEMENTS_ALLOWED)
+		#if (MODS_ALLOWED && LUA_ALLOWED && ACHIEVEMENTS_ALLOWED)
 		var luaFiles:Array<String> = Achievements.getModAchievements().copy();
 		if(luaFiles.length > 0)
 		{
@@ -1118,7 +1093,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// STAGE SCRIPTS
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var doPush:Bool = false;
 		#if LUA_ALLOWED
 		var luaFile:String = 'stages/' + curStage + '.lua';
@@ -1429,7 +1404,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		for (notetype in noteTypes)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var luaToLoad:String = Paths.modFolders('notetypes/' + notetype + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
@@ -1453,7 +1428,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventsPushed)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var luaToLoad:String = Paths.modFolders('events/' + event + '.lua');
 			if(FileSystem.exists(luaToLoad))
 			{
@@ -1479,7 +1454,7 @@ class PlayState extends MusicBeatState
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypes)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var hscriptToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
@@ -1503,7 +1478,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventsPushed)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var hscriptToLoad:String = Paths.modFolders('events/' + event + '.hscript');
 			if(FileSystem.exists(hscriptToLoad))
 			{
@@ -1529,7 +1504,7 @@ class PlayState extends MusicBeatState
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypes)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
@@ -1553,7 +1528,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventsPushed)
 		{
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
 			if(FileSystem.exists(hxToLoad))
 			{
@@ -1738,7 +1713,7 @@ class PlayState extends MusicBeatState
 	{
 		if(!ClientPrefs.shaders) return new FlxRuntimeShader();
 
-		#if (!flash && MODS_ALLOWED && FUTURE_POLYMOD && sys)
+		#if (!flash && MODS_ALLOWED && sys)
 		if(!runtimeShaders.exists(name) && !initLuaShader(name))
 		{
 			FlxG.log.warn('Shader $name is missing!');
@@ -1963,7 +1938,7 @@ class PlayState extends MusicBeatState
 			interp.variables.set('addScript', function(name:String, ?ignoreAlreadyRunning:Bool = false) {
 				var cervix = '$name.hscript';
 				var doPush = false;
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				if (FileSystem.exists(Paths.modFolders(cervix))) {
 					cervix = Paths.modFolders(cervix);
 					doPush = true;
@@ -1973,7 +1948,7 @@ class PlayState extends MusicBeatState
 					if (OpenFlAssets.exists(cervix)) {
 						doPush = true;
 					}
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)	
+				#if MODS_ALLOWED	
 				}
 				#end
 
@@ -1992,7 +1967,7 @@ class PlayState extends MusicBeatState
 			interp.variables.set('removeScript', function(name:String) {
 				var cervix = '$name.hscript';
 				var doPush = false;
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				if (FileSystem.exists(Paths.modFolders(cervix))) {
 					cervix = Paths.modFolders(cervix);
 					doPush = true;
@@ -2002,7 +1977,7 @@ class PlayState extends MusicBeatState
 					if (OpenFlAssets.exists(cervix)) {
 						doPush = true;
 					}
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)	
+				#if MODS_ALLOWED	
 				}
 				#end
 
@@ -2142,7 +2117,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
 		var luaFile:String = 'characters/' + name + '.lua';
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if(FileSystem.exists(Paths.modFolders(luaFile))) {
 			luaFile = Paths.modFolders(luaFile);
 			doPush = true;
@@ -2172,7 +2147,7 @@ class PlayState extends MusicBeatState
 		#if HSCRIPT_ALLOWED
 		var doPush:Bool = false;
 		var hscriptFile:String = 'characters/$name.hscript';
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(Paths.modFolders(hscriptFile))) {
 			hscriptFile = Paths.modFolders(hscriptFile);
 			doPush = true;
@@ -2182,7 +2157,7 @@ class PlayState extends MusicBeatState
 			if (OpenFlAssets.exists(hscriptFile)) {
 				doPush = true;
 			}
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		}
 		#end
 		
@@ -2195,7 +2170,7 @@ class PlayState extends MusicBeatState
 		#if SCRIPT_EXTENSION
 		var doPush:Bool = false;
 		var scriptFile:String = 'characters/' + name + '.hx';
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
 			scriptFile = Paths.modFolders(scriptFile);
 			doPush = true;
@@ -3121,7 +3096,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.onComplete = () -> finishSong.bind();
+		FlxG.sound.music.onComplete = () -> finishSong();
 		vocals.play();
 		vocals.onComplete = () -> vocalsFinished = true;
 
@@ -3213,7 +3188,7 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
 		if (OpenFlAssets.exists(file)) {

@@ -10,7 +10,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import objects.Character;
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.FileSystem;
 #end
 
@@ -58,7 +58,7 @@ class MasterEditorMenu extends MusicBeatState
 
 		initOptions();
 		
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 42).makeGraphic(FlxG.width, 42, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
@@ -103,7 +103,7 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 		
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		if(controls.UI_LEFT_P || controls.UI_RIGHT_P)
 			changeDirectory(controls.UI_LEFT_P ? -1 : 1);
 		#end
@@ -174,7 +174,7 @@ class MasterEditorMenu extends MusicBeatState
 			curSelected = 0;
 	}
 
-	#if (MODS_ALLOWED && FUTURE_POLYMOD)
+	#if MODS_ALLOWED
 	function changeDirectory(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);

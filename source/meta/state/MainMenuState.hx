@@ -33,7 +33,7 @@ import system.*;
 
 import meta.data.Achievements;
 
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -101,7 +101,7 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
 		#end
 		Mods.loadTheFirstEnabledMod();
@@ -140,7 +140,7 @@ class MainMenuState extends MusicBeatState
 			optionShit = 
 			[
 				'play',
-				#if (MODS_ALLOWED && FUTURE_POLYMOD) 'mods',
+				#if MODS_ALLOWED 'mods',
 				#end
 				#if ACHIEVEMENTS_ALLOWED 'awards',
 				#end
@@ -420,7 +420,7 @@ class MainMenuState extends MusicBeatState
 								{
 									case 'play':
 										MusicBeatState.switchState(new PlayMenuState());
-									#if (MODS_ALLOWED && FUTURE_POLYMOD)
+									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end

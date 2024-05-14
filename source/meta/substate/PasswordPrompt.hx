@@ -3,10 +3,6 @@ package meta.substate;
 import meta.*;
 import flixel.*;
 import flixel.addons.ui.FlxUIInputText;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-
-using StringTools;
 
 /**
  * @author bbpanzu

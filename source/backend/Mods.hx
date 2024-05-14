@@ -19,10 +19,7 @@ class Mods
 	static public var currentModDirectory:String = '';
 
 	public static final ignoreModFolders:Array<String> = [
-		#if FUTURE_POLYMOD 
-		'_append', 
-		'_merge', 
-		#end
+		'_append'
 		'characters',
 		'data',
 		'songs',
@@ -156,7 +153,7 @@ class Mods
 		if(folder == null) 
 			folder = Mods.currentModDirectory;
 
-		var path = Paths.mods(folder + #if FUTURE_POLYMOD '/_polymod_meta.json' #else '/pack.json' #end);
+		var path = Paths.mods(folder + '/pack.json');
 		if(FileSystem.exists(path)) {
 			try {
 				#if sys var rawJson:String = File.getContent(path);

@@ -11,7 +11,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -59,7 +59,7 @@ class CreditsState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
 
@@ -565,7 +565,7 @@ class CreditsState extends MusicBeatState
 		descBox.updateHitbox();
 	}
 
-	#if (MODS_ALLOWED && FUTURE_POLYMOD)
+	#if MODS_ALLOWED
 	function pushModCreditsToList(folder:String)
 	{
 		var creditsFile:String = null;

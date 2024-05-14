@@ -1,11 +1,6 @@
 package;
 
 import webm.WebmPlayer;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-import flixel.graphics.FlxGraphic;
-import flixel.FlxG;
-import flixel.FlxGame;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
@@ -47,6 +42,14 @@ class Main extends Sprite
 	public static var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 
+	public final config:Dynamic = {
+		gameDimensions: [GameDimensions.width, GameDimensions.height],
+		initialState: Init,
+		defaultFPS: 60,
+		skipSplash: true,
+		startFullscreen: false
+	};
+
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
@@ -72,9 +75,6 @@ class Main extends Sprite
 			if (fpsVar.textColor == 0) 
 				fpsVar.textColor = -4775566; // needs to be done because textcolor becomes black for a frame
 		}
-		
-		gameWidth = GameDimensions.width;
-		gameHeight = GameDimensions.height;
 
 		FlxG.signals.preStateSwitch.add(() ->{
 			#if cpp
@@ -83,7 +83,7 @@ class Main extends Sprite
 			#end
 			FlxG.bitmap.dumpCache();
 			FlxG.bitmap.clearUnused();
-
+			Paths.clearStoredMemory();
 			openfl.system.System.gc();
 		});
 
@@ -92,14 +92,16 @@ class Main extends Sprite
 			cpp.NativeGc.run(false);
 			cpp.NativeGc.enable(false);
 			#end
+			Paths.clearUnusedMemory();
 			openfl.system.System.gc();
 		});
 
 		ClientPrefs.loadDefaultKeys();
-		game = new Joalor64Game(gameWidth, gameHeight, Init, 60, 60, true, false);
+		game = new Joalor64Game(config.gameDimensions[0], config.gameDimensions[1], config.initialState, 
+			config.defaultFPS, config.defaultFPS, config.skipSplash, config.startFullscreen);
 		addChild(game);
 
-		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -127,7 +129,7 @@ class Main extends Sprite
 		GlobalVideo.setWebm(webmHandle);
 		#end
 
-		#if linux
+		#if (linux || mac)
 		Lib.current.stage.window.setIcon(lime.graphics.Image.fromFile("icon.png"));
 		#end
 
@@ -181,55 +183,36 @@ class Main extends Sprite
 }
 
 class Joalor64Game extends FlxGame {
-	/**
-	 * Used to instantiate the guts of the flixel game object once we have a valid reference to the root.
-	 */
 	override function create(_):Void {
 		try super.create(_)
 		catch (e:haxe.Exception)
 			return exceptionCaught(e);
 	}
 
-	/**
-	 * Called when the user on the game window
-	 */
 	override function onFocus(_):Void {
 		try super.onFocus(_)
 		catch (e:haxe.Exception)
 			return exceptionCaught(e);
 	}
 
-	/**
-	 * Called when the user clicks off the game window
-	 */
 	override function onFocusLost(_):Void {
 		try super.onFocusLost(_)
 		catch (e:haxe.Exception)
 			return exceptionCaught(e);
 	}
 
-	/**
-	 * Handles the `onEnterFrame` call and figures out how many updates and draw calls to do.
-	 */
 	override function onEnterFrame(_):Void {
 		try super.onEnterFrame(_)
 		catch (e:haxe.Exception)
 			return exceptionCaught(e);
 	}
 
-	/**
-	 * This function is called by `step()` and updates the actual game state.
-	 * May be called multiple times per "frame" or draw call.
-	 */
 	override function update():Void {
 		try super.update()
 		catch (e:haxe.Exception)
 			return exceptionCaught(e);
 	}
 
-	/**
-	 * Goes through the game state and draws all the game objects and special effects.
-	 */
 	override function draw():Void {
 		try super.draw()
 		catch (e:haxe.Exception)

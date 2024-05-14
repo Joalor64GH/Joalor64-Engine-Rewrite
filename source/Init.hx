@@ -17,9 +17,6 @@ import lime.app.Application;
 import meta.*;
 import meta.state.*;
 import meta.data.*;
-#if FUTURE_POLYMOD
-import core.ModCore;
-#end
 
 // this loads everything in
 class Init extends FlxState
@@ -114,9 +111,6 @@ class Init extends FlxState
 		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		Mods.loadTheFirstEnabledMod();
-		#if FUTURE_POLYMOD
-		ModCore.reload();
-		#end
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = [FlxKey.ZERO];

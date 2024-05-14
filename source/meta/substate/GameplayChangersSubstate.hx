@@ -114,7 +114,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		var customGameplayChangers:Map<String, Bool> = new Map<String, Bool>();
 		var directories:Array<String> = [];
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		directories.push(Paths.mods('gamechangers/'));
 		directories.push(Paths.mods(Mods.currentModDirectory + '/gamechangers/'));
 		for(mod in Mods.getGlobalMods())

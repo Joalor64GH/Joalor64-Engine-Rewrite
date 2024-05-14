@@ -8,7 +8,7 @@ import meta.*;
 import meta.data.*;
 import meta.state.*;
 import objects.background.*;
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
 #end
@@ -99,7 +99,7 @@ class Character extends FlxSprite
 				// NOTE TO HARDCODER OF A MOD: this json should be in assets/characters. NOT images/characters. so dont get it confused :)
 				var characterPath:String = 'characters/' + curCharacter + '.json';
 
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				var path:String = Paths.modFolders(characterPath);
 				if (!FileSystem.exists(path))
 					path = Paths.getPreloadPath(characterPath);
@@ -111,7 +111,7 @@ class Character extends FlxSprite
 				#end
 					path = Paths.getPreloadPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
 
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				var rawJson = File.getContent(path);
 				#else
 				var rawJson = Assets.getText(path);
@@ -123,7 +123,7 @@ class Character extends FlxSprite
 				//packer
 				//texture
 				//I8
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				var modTxtToFind:String = Paths.modsTxt(json.image);
 				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
 				
@@ -133,7 +133,7 @@ class Character extends FlxSprite
 				#end
 					spriteType = "packer";
 				
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '/Animation.json');
 				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
 				
@@ -143,7 +143,7 @@ class Character extends FlxSprite
 				#end
 					spriteType = "texture";
 
-				#if (MODS_ALLOWED && FUTURE_POLYMOD)
+				#if MODS_ALLOWED
 				var modI8ToFind:String = Paths.modFolders('images/' + json.image + '.json');
 				var I8ToFind:String = Paths.getPath('images/' + json.image + '.json', TEXT);
 

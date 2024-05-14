@@ -9,7 +9,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
 #end
@@ -179,7 +179,7 @@ class Achievements {
 	}
 
 	public static function loadAchievements():Void {
-		#if (MODS_ALLOWED && FUTURE_POLYMOD && ACHIEVEMENTS_ALLOWED)
+		#if (MODS_ALLOWED && ACHIEVEMENTS_ALLOWED)
 		loadModAchievements();
 		#end
 
@@ -193,7 +193,7 @@ class Achievements {
 		}
 	}
 
-	#if (MODS_ALLOWED && FUTURE_POLYMOD && ACHIEVEMENTS_ALLOWED)
+	#if (MODS_ALLOWED && ACHIEVEMENTS_ALLOWED)
 	public static function loadModAchievements() {
 		achievementsStuff = copyAchievements.copy();
 		var oldPath:Array<String> = Mods.globalMods.copy();

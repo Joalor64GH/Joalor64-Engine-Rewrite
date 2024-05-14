@@ -8,7 +8,7 @@ import flixel.addons.transition.TransitionData;
 import haxe.Json;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
-#if (MODS_ALLOWED && FUTURE_POLYMOD)
+#if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -141,7 +141,7 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
+		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/logoBumpin.png";
 		if (!FileSystem.exists(path))
 		{
@@ -164,7 +164,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 
-		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
+		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/GF_assets.png";
 		if (!FileSystem.exists(path))
 		{
@@ -198,7 +198,7 @@ class TitleState extends MusicBeatState
 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
-		#if (desktop && MODS_ALLOWED && FUTURE_POLYMOD)
+		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Mods.currentModDirectory + "/images/titlescreen/titleEnter.png";
 		if (!FileSystem.exists(path)){
 			path = "mods/images/titlescreen/titleEnter.png";
@@ -348,7 +348,7 @@ class TitleState extends MusicBeatState
 	{
 		var moddedFullText:String = '';
 
-		#if (MODS_ALLOWED && FUTURE_POLYMOD)
+		#if MODS_ALLOWED
 		var path = "mods/" + Mods.currentModDirectory + "/introText.txt";
 		if (!FileSystem.exists(path)){
 			path = "mods/introText.txt";
@@ -368,7 +368,7 @@ class TitleState extends MusicBeatState
 		final dateShit = Paths.txt((leDate.getDay() == 5 && leDate.getHours() >= 18) ? 'fridayText' : 'introText');
 
 		if (Assets.exists(dateShit))
-			fullText = Assets.getText(dateShit #if (MODS_ALLOWED && FUTURE_POLYMOD) + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
+			fullText = Assets.getText(dateShit #if MODS_ALLOWED + (moddedFullText != '' ? '\n' + moddedFullText : '') #end);
 		else {
 			trace('IntroText could not be found');
 			fullText = Assets.exists(Paths.txt('introText')) ? Assets.getText(Paths.txt('introText')) : '';

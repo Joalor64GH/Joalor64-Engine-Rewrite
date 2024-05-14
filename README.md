@@ -26,11 +26,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 
 ----------------------------------------------
 
-### If you get an issue with polymod like this `Error: Could not find haxelib "polymod-joalor64", does it need to be installed?` do the following
-`haxelib git polymod-joalor64 https://github.com/Joalor64GH/polymod-joalor64`
-
-----------------------------------------------
-
 # Features
 * Minigames
 * RGB Note Coloring
@@ -41,7 +36,6 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * In-Game Crash Handler
 * Custom Options
 * SWF Support (Actionscript 3.0 Only)
-* Polymod Support (ft. My polymod fork)
 * HX and Hscript Support
 * Replay System
 * Reorganized Source/Assets
