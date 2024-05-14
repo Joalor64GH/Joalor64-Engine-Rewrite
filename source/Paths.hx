@@ -464,7 +464,7 @@ class Paths
 		return path;
 	}
 
-	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false = null)
+	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false)
 	{
 		#if (MODS_ALLOWED && FUTURE_POLYMOD)
 		if (!ignoreMods)
