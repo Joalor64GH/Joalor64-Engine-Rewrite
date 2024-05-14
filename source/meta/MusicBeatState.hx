@@ -161,15 +161,8 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 			beatHit();
 	}
 
-	public function beatHit():Void
-	{
-		//trace('Beat: ' + curBeat);
-	}
-
-	public function sectionHit():Void
-	{
-		//trace('Section: ' + curSection + ', Beat: ' + curBeat + ', Step: ' + curStep);
-	}
+	public function beatHit():Void {}
+	public function sectionHit():Void {}
 
 	function getBeatsOnSection()
 	{

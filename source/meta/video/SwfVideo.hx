@@ -8,7 +8,7 @@ import openfl.display.Sprite;
 import openfl.display.MovieClip;
 import openfl.events.Event;
 
-class SWF extends Sprite {
+class SwfVideo extends Sprite {
 	public var clip:MovieClip;
 
 	private var barLeft:Sprite;

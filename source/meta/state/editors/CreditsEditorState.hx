@@ -3,23 +3,11 @@ package meta.state.editors;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
-import lime.utils.Assets;
 
-import flixel.FlxCamera;
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.addons.transition.FlxTransitionableState;
@@ -34,7 +22,6 @@ import flash.net.FileFilter;
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
 
 import meta.*;

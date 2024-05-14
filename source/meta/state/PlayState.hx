@@ -1227,11 +1227,11 @@ class PlayState extends MusicBeatState
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
-		if (OpenFlAssets.exists(file))
+		if (Assets.exists(file))
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
 
 		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
-		if (OpenFlAssets.exists(file))
+		if (Assets.exists(file))
 			dialogue = CoolUtil.coolTextFile(file);
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
@@ -1428,7 +1428,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var luaToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.lua');
-			if(OpenFlAssets.exists(luaToLoad))
+			if(Assets.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
 			}
@@ -1452,7 +1452,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var luaToLoad:String = Paths.getPreloadPath('events/' + event + '.lua');
-			if(OpenFlAssets.exists(luaToLoad))
+			if(Assets.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
 			}
@@ -1478,7 +1478,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var hscriptToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hscript');
-			if(OpenFlAssets.exists(hscriptToLoad))
+			if(Assets.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
 			}
@@ -1502,7 +1502,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var hscriptToLoad:String = Paths.getPreloadPath('events/' + event + '.hscript');
-			if(OpenFlAssets.exists(hscriptToLoad))
+			if(Assets.exists(hscriptToLoad))
 			{
 				addHscript(hscriptToLoad);
 			}
@@ -1528,7 +1528,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
-			if(OpenFlAssets.exists(hxToLoad))
+			if(Assets.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
@@ -1552,7 +1552,7 @@ class PlayState extends MusicBeatState
 			}
 			#elseif sys
 			var hxToLoad:String = Paths.getPreloadPath('events/' + event + '.hx');
-			if(OpenFlAssets.exists(hxToLoad))
+			if(Assets.exists(hxToLoad))
 			{
 				scriptArray.push(new FunkinSScript(hxToLoad));
 			}
@@ -1953,7 +1953,7 @@ class PlayState extends MusicBeatState
 				} else {
 				#end
 					cervix = Paths.getPreloadPath(cervix);
-					if (OpenFlAssets.exists(cervix)) {
+					if (Assets.exists(cervix)) {
 						doPush = true;
 					}
 				#if MODS_ALLOWED	
@@ -1982,7 +1982,7 @@ class PlayState extends MusicBeatState
 				} else {
 				#end
 					cervix = Paths.getPreloadPath(cervix);
-					if (OpenFlAssets.exists(cervix)) {
+					if (Assets.exists(cervix)) {
 						doPush = true;
 					}
 				#if MODS_ALLOWED	
@@ -2162,7 +2162,7 @@ class PlayState extends MusicBeatState
 		} else {
 		#end
 			hscriptFile = Paths.getPreloadPath(hscriptFile);
-			if (OpenFlAssets.exists(hscriptFile)) {
+			if (Assets.exists(hscriptFile)) {
 				doPush = true;
 			}
 		#if MODS_ALLOWED
@@ -2232,7 +2232,7 @@ class PlayState extends MusicBeatState
 		#if sys
 		if(!FileSystem.exists(filepath))
 		#else
-		if(!OpenFlAssets.exists(filepath))
+		if(!Assets.exists(filepath))
 		#end
 		{
 			FlxG.log.warn('Couldnt find video file: ' + name);
@@ -2278,7 +2278,7 @@ class PlayState extends MusicBeatState
 		#if sys
 		if(!FileSystem.exists(filepath))
 		#else
-		if(!OpenFlAssets.exists(filepath))
+		if(!Assets.exists(filepath))
 		#end
 		{
 			FlxG.log.warn('Couldnt find swf file: ' + name);
@@ -3199,7 +3199,7 @@ class PlayState extends MusicBeatState
 		#if MODS_ALLOWED
 		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
-		if (OpenFlAssets.exists(file)) {
+		if (Assets.exists(file)) {
 		#end
 			var eventsData:Array<Dynamic> = Song.loadFromJson('events', songName).events;
 			for (event in eventsData) //Event Notes

@@ -1,31 +1,17 @@
 package;
 
 import webm.WebmPlayer;
-import openfl.Assets;
-import openfl.Lib;
 import openfl.display.FPS;
-import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
-import meta.data.ClientPrefs;
 import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
 
-import meta.CoolUtil;
-
-//crash handler stuff
-#if CRASH_HANDLER
-import lime.app.Application;
-import openfl.events.UncaughtErrorEvent;
+// crash handler stuff
+import haxe.Exception;
 import haxe.CallStack;
 import haxe.io.Path;
-import meta.data.dependency.Discord.DiscordClient;
-import sys.FileSystem;
-import sys.io.File;
-#end
-
-using StringTools;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
@@ -44,21 +30,14 @@ class Main extends Sprite
 
 	public final config:Dynamic = {
 		gameDimensions: [GameDimensions.width, GameDimensions.height],
-		initialState: Init,
+		initialState: () -> Init,
 		defaultFPS: 60,
 		skipSplash: true,
 		startFullscreen: false
 	};
 
 	public static function main():Void
-	{
 		Lib.current.addChild(new Main());
-
-		#if CRASH_HANDLER
-		@:privateAccess
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, function(e) game.exceptionCaughtOpenFL(e));
-		#end
-	}
 
 	public function new()
 	{
@@ -129,6 +108,9 @@ class Main extends Sprite
 		GlobalVideo.setWebm(webmHandle);
 		#end
 
+		Application.current.window.onFocusOut.add(onWindowFocusOut);
+		Application.current.window.onFocusIn.add(onWindowFocusIn);
+
 		#if (linux || mac)
 		Lib.current.stage.window.setIcon(lime.graphics.Image.fromFile("icon.png"));
 		#end
@@ -180,123 +162,223 @@ class Main extends Sprite
 		fpsVar.textColor = color;
 
 	public static var webmHandler:WebmHandler;
+
+	var oldVol:Float = 1.0;
+	var newVol:Float = 0.3;
+
+	var focused:Bool = true;
+
+	var focusMusicTween:FlxTween;
+
+	function onWindowFocusOut()
+	{
+		focused = false;
+
+		if (Type.getClass(FlxG.state) != PlayState)
+		{
+			oldVol = FlxG.sound.volume;
+			newVol = (oldVol > 0.3) ? 0.3 : (oldVol > 0.1) ? 0.1 : 0;
+
+			trace("Game unfocused");
+
+			if (focusMusicTween != null)
+				focusMusicTween.cancel();
+			focusMusicTween = FlxTween.tween(FlxG.sound, {volume: newVol}, 0.5);
+
+			FlxG.drawFramerate = 30;
+		}
+	}
+
+	function onWindowFocusIn()
+	{
+		new FlxTimer().start(0.2, (timer) ->
+		{
+			focused = true;
+		});
+
+		if (Type.getClass(FlxG.state) != PlayState)
+		{
+			trace("Game focused");
+
+			if (focusMusicTween != null)
+				focusMusicTween.cancel();
+
+			focusMusicTween = FlxTween.tween(FlxG.sound, {volume: oldVol}, 0.5);
+
+			FlxG.drawFramerate = config.defaultFPS;
+		}
+	}
 }
 
-class Joalor64Game extends FlxGame {
+class Joalor64Game extends FlxGame
+{
+	var _viewingCrash:Bool = false;
+
+	public function new(gameWidth:Int = 0, gameHeight:Int = 0, initialState:Class<FlxState>, updateFramerate:Int = 60, drawFramerate:Int = 60, skipSplash:Bool = false, startFullscreen:Bool = false) 
+	{
+		super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
+		_customSoundTray = Joalor64SoundTray;
+	}
+
 	override function create(_):Void {
-		try super.create(_)
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		try {
+			super.create(_);
+			
+			removeChild(soundTray);
+			addChild(soundTray);
+		}
+		catch (e:Exception)
+			return exceptionCaught(e, 'create');
 	}
 
 	override function onFocus(_):Void {
-		try super.onFocus(_)
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		try super.onFocus(_) catch (e:Exception)
+			return exceptionCaught(e, 'onFocus');
 	}
 
 	override function onFocusLost(_):Void {
-		try super.onFocusLost(_)
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		try super.onFocusLost(_) catch (e:Exception)
+			return exceptionCaught(e, 'onFocusLost');
 	}
 
 	override function onEnterFrame(_):Void {
-		try super.onEnterFrame(_)
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		try super.onEnterFrame(_) catch (e:Exception)
+			return exceptionCaught(e, 'onEnterFrame');
 	}
 
 	override function update():Void {
-		try super.update()
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		if (_viewingCrash) return;
+		try super.update() catch (e:Exception)
+			return exceptionCaught(e, 'update');
 	}
 
 	override function draw():Void {
-		try super.draw()
-		catch (e:haxe.Exception)
-			return exceptionCaught(e);
+		try super.draw() catch (e:Exception)
+			return exceptionCaught(e, 'draw');
 	}
 
-	private function exceptionCaught(e:haxe.Exception) {
+	@:allow(flixel.FlxG)
+	override function onResize(_):Void {
+		if (_viewingCrash) return;
+		super.onResize(_);
+	}
+
+	private function exceptionCaught(e:Exception, ?func:String = null)
+	{
 		#if CRASH_HANDLER
-		var callStack:CallStack = CallStack.exceptionStack(true);
+		if (_viewingCrash) return;
 
-		final formattedMessage:String = getCallStack().join("\n");
+		var path:String;
+		var fileStack:Array<String> = [];
+		var dateNow:String = Date.now().toString();
+		var println = #if sys Sys.println #else trace #end;
 
-		FlxG.sound.music.volume = 0;
+		dateNow = StringTools.replace(dateNow, " ", "_");
+		dateNow = StringTools.replace(dateNow, ":", "'");
 
-		DiscordClient.shutdown();
-
-		goToExceptionState(e.message, formattedMessage, true, callStack);
-		#else
-		throw e;
-		#end
-	}
-
-	#if CRASH_HANDLER
-	private function exceptionCaughtOpenFL(e:UncaughtErrorEvent) {
-		var callStack:CallStack = CallStack.exceptionStack(true);
-
-		final formattedMessage:String = getCallStack().join("\n");
-
-		FlxG.sound.music.volume = 0;
-
-		DiscordClient.shutdown();
-
-		goToExceptionState(e.error, formattedMessage, true, callStack);
-	}
-
-	private function getCallStack():Array<String> {
-		var caughtErrors:Array<String> = [];
+		path = 'crash/J64E_${dateNow}.txt';
 
 		for (stackItem in CallStack.exceptionStack(true)) {
 			switch (stackItem) {
 				case CFunction:
-					caughtErrors.push('Non-Haxe (C) Function');
+					fileStack.push('Non-Haxe (C) Function');
 				case Module(moduleName):
-					caughtErrors.push('Module (${moduleName})');
-				case FilePos(s, file, line, column):
-					caughtErrors.push('${file} (line ${line})');
+					fileStack.push('Module (${moduleName})');
+				case FilePos(s, file, line, col):
+					fileStack.push('${file} (line ${line})');
 				case Method(className, method):
-					caughtErrors.push('${className} (method ${method})');
+					fileStack.push('${className} (method ${method})');
 				case LocalFunction(name):
-					caughtErrors.push('Local Function (${name})');
+					fileStack.push('Local Function (${name})');
 			}
 
-			Sys.println(stackItem);
+			println(stackItem);
 		}
 
-		return caughtErrors;
+		fileStack.insert(0, "Exception: " + e.message);
+
+		final msg:String = fileStack.join('\n');
+
+		try 
+		{
+			if (!FileSystem.exists("crash/")) 
+				FileSystem.createDirectory("crash/");
+			File.saveContent(path, '${msg}\n');
+		} 
+		catch (e:Exception)
+			trace('Couldn\'t save error message "${e.message}"');
+
+		final funcThrew:String = '${func != null ? ' thrown at "${func}" function' : ""}';
+
+		println(msg + funcThrew);
+		println(e.message);
+		println('Crash dump saved in ${Path.normalize(path)}');
+
+		FlxG.bitmap.dumpCache();
+		FlxG.bitmap.clearCache();
+
+		if (FlxG.sound.music != null)
+			FlxG.sound.music.stop();
+
+		Main.instance.addChild(new backend.CrashHandler(e.details()));
+		_viewingCrash = true;
+		#else
+		throw e;
+		#end
+	}
+}
+
+class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray 
+{
+	var _bar:Bitmap;
+
+	public function new()
+	{
+		super();
+		removeChildren();
+
+		final bg = new Bitmap(new BitmapData(80, 25, false, 0xff3f3f3f));
+		addChild(bg);
+
+		_bar = new Bitmap(new BitmapData(75, 25, false, 0xffffffff));
+		_bar.x = 2.5;
+		addChild(_bar);
+
+		final tmp:Bitmap = new Bitmap(Assets.getBitmapData("assets/images/soundtray.png", false), null, true);
+		addChild(tmp);
+
+		screenCenter();
+
+		tmp.scaleX = 0.5;
+		tmp.scaleY = 0.5;
+		tmp.x -= tmp.width * 0.2;
+		tmp.y -= 5;
+
+		y = -height;
+		visible = false;
 	}
 
-	private function goToExceptionState(exception:String, errorMsg:String, shouldGithubReport:Bool, ?callStack:CallStack) {
-		var arguments:Array<Dynamic> = [exception, errorMsg, shouldGithubReport];
-		if (callStack != null)
-			arguments.push(callStack);
-
-		_requestedState = Type.createInstance(meta.state.exception.ExceptionState, arguments);
-		switchState();
+	override function update(elapsed:Float) {
+		super.update(elapsed * 4);
 	}
 
-	private function writeLog(path:String, errMsg:String) {
-		if (!FileSystem.exists("crash/"))
-			FileSystem.createDirectory("crash/");
-		File.saveContent(path, '${errMsg}\n');
+	override function show(up:Bool = false) 
+	{
+		if (!silent)
+		{
+			final sound = flixel.system.FlxAssets.getSound("assets/sounds/scrollMenu");
+			if (sound != null) FlxG.sound.load(sound).play();
+		}
 
-		Sys.println(errMsg);
-		Sys.println('Crash dump saved in ${Path.normalize(path)}');
+		_timer = 4;
+		y = 0;
+		visible = active = true;
+		_bar.scaleX = FlxG.sound.muted ? 0 : FlxG.sound.volume;
 	}
-	#end
 
-	private function getLogPath():String
-		return "crash/" + "J64E_" + formatDate() + ".txt";
-
-	private function formatDate():String {
-		var dateNow:String = Date.now().toString();
-		dateNow = StringTools.replace(dateNow, " ", "_");
-		dateNow = StringTools.replace(dateNow, ":", "'");
-		return dateNow;
+	override function screenCenter()
+	{
+		_defaultScale = Math.min(FlxG.stage.stageWidth / FlxG.width, FlxG.stage.stageHeight / FlxG.height) * 2;
+		super.screenCenter();
 	}
 }

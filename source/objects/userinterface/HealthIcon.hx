@@ -1,12 +1,5 @@
 package objects.userinterface;
 
-import flixel.FlxSprite;
-import flixel.math.FlxMath;
-import openfl.utils.Assets as OpenFlAssets;
-import meta.data.ClientPrefs;
-
-using StringTools;
-
 class HealthIcon extends FlxSprite
 {
 	public var sprTracker:FlxSprite;
@@ -19,6 +12,7 @@ class HealthIcon extends FlxSprite
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
+		
 		isOldIcon = (char == 'bf-old');
 		this.isPlayer = isPlayer;
 		changeIcon(char);

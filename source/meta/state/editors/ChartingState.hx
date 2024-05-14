@@ -42,12 +42,10 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
-import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
 
-using StringTools;
 #if sys
-import flash.media.Sound;
+import openfl.media.Sound;
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -497,7 +495,7 @@ class ChartingState extends MusicBeatState
 			#if sys
 			if (#if MODS_ALLOWED FileSystem.exists(Paths.modsJson(songName + '/events')) || #end FileSystem.exists(file))
 			#else
-			if (OpenFlAssets.exists(file))
+			if (Assets.exists(file))
 			#end
 			{
 				clearEvents();
@@ -1397,7 +1395,7 @@ class ChartingState extends MusicBeatState
 		if (_song.needsVoices){
 			var file:Dynamic = Paths.voices(currentSongName);
 			vocals = new FlxSound();
-			if (Std.isOfType(file, Sound) || OpenFlAssets.exists(file)) {
+			if (Std.isOfType(file, Sound) || Assets.exists(file)) {
 				vocals.loadEmbedded(file);
 			}
 		}
@@ -2512,7 +2510,7 @@ class ChartingState extends MusicBeatState
 		if (!FileSystem.exists(path))
 		#else
 		var path:String = Paths.getPreloadPath(characterPath);
-		if (!OpenFlAssets.exists(path))
+		if (!Assets.exists(path))
 		#end
 		{
 			path = Paths.getPreloadPath('characters/' + Character.DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
@@ -2521,7 +2519,7 @@ class ChartingState extends MusicBeatState
 		#if MODS_ALLOWED
 		var rawJson = File.getContent(path);
 		#else
-		var rawJson = OpenFlAssets.getText(path);
+		var rawJson = Assets.getText(path);
 		#end
 
 		var json:Character.CharacterFile = cast Json.parse(rawJson);

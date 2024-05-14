@@ -4,15 +4,6 @@ package meta.data;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import lime.utils.Assets;
-import openfl.utils.Assets as OpenFlAssets;
-import haxe.Json;
-import haxe.format.JsonParser;
-
-import meta.*;
-import meta.state.PlayState;
-
-using StringTools;
 
 typedef WeekFile =
 {
@@ -178,7 +169,7 @@ class WeekData {
 			rawJson = File.getContent(path);
 		}
 		#else
-		if(OpenFlAssets.exists(path)) {
+		if(Assets.exists(path)) {
 			rawJson = Assets.getText(path);
 		}
 		#end

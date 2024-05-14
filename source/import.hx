@@ -33,6 +33,7 @@ import meta.data.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.*;
+
 import Paths;
 
 #if MODS_ALLOWED 
@@ -50,7 +51,15 @@ import sys.FileSystem;
 
 import haxe.Json;
 import lime.app.Application;
-import openfl.utils.Assets as OpenFlAssets;
+
+import openfl.Lib;
+import openfl.Assets; // i know this is the same thing, but still
+import openfl.utils.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.display.Sprite;
+import openfl.system.System;
+import openfl.geom.*;
 
 using Globals;
 using StringTools;
