@@ -23,6 +23,7 @@ import haxe.io.Path;
 class Main extends Sprite
 {
 	public static var fpsVar:FPS; // fps
+	public static var instance:Main;
 	public static var game:Joalor64Game; // the main game
 	public static var toast:ToastCore; // notification thing, credits go to MAJigsaw77
 	public static var gameWidth:Int; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
@@ -42,6 +43,8 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+
+		instance = this;
 
 		meta.data.windows.WindowsAPI.darkMode(true);
 
