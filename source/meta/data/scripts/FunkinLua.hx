@@ -282,6 +282,7 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "giveAchievement", function(name:String){
 			var me = this;
+			@:privateAccess
 			if (Achievements.isAchievementUnlocked(name) || !PlayState.instance.achievementsArray.contains(me))
 			{
 				if (!PlayState.instance.achievementsArray.contains(me)) {

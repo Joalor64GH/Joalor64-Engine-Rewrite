@@ -379,7 +379,7 @@ class PlayState extends MusicBeatState
 	var keysPressed:Array<Bool> = [];
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
-	public static var achievementsArray:Array<FunkinLua> = [];
+	var achievementsArray:Array<FunkinLua> = [];
 	public static var achievementWeeks:Array<String> = [];
 
 	// Lua shit
