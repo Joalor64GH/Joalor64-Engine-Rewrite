@@ -3,28 +3,9 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
+
 import flixel.input.keyboard.FlxKey;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.util.FlxTimer;
-import flixel.FlxCamera;
-import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
-import lime.app.Application;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-import meta.state.editors.*;
-import meta.state.*;
-import meta.data.Achievements;
-
-using StringTools;
 
 class SimpleMainMenuState extends MusicBeatState
 {
@@ -48,21 +29,21 @@ class SimpleMainMenuState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Story Mode':
-				MusicBeatState.switchState(new StoryMenuState());
+				FlxG.switchState(() -> new StoryMenuState());
 			case 'Freeplay':
-				MusicBeatState.switchState(new FreeplayState());
+				FlxG.switchState(() -> new FreeplayState());
 			case 'Minigames':
-				MusicBeatState.switchState(new MinigamesState());
+				FlxG.switchState(() -> new MinigamesState());
 			#if MODS_ALLOWED
 			case 'Mods':
-				MusicBeatState.switchState(new ModsMenuState());
+				FlxG.switchState(() -> new ModsMenuState());
 			#end
 			case 'Awards':
-				MusicBeatState.switchState(new AchievementsMenuState());
+				FlxG.switchState(() -> new AchievementsMenuState());
 			case 'Credits':
-				MusicBeatState.switchState(new CreditsState());
+				FlxG.switchState(() -> new CreditsState());
 			case 'Options':
-				MusicBeatState.switchState(new OptionsState());
+				FlxG.switchState(() -> new OptionsState());
 		}
 	}
 
@@ -114,7 +95,17 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		initOptions();
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
+			grpOptions.add(optionText);
+		}
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion #if nightly + MainMenuState.nightly #end, 12);
 		versionShit.scrollFactor.set();
@@ -163,20 +154,6 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 	#end
 
-	function initOptions() {
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
-
-		for (i in 0...options.length)
-		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			optionText.scrollFactor.set(0, Math.max(0.25 - (0.05 * (options.length - 4)), 0.1));
-			grpOptions.add(optionText);
-		}
-	}
-
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
@@ -189,7 +166,7 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.E)
-			MusicBeatState.switchState(new EpicState());
+			FlxG.switchState(() -> new EpicState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);
@@ -197,7 +174,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new TitleState());
+			FlxG.switchState(() -> new TitleState());
 		}
 
 		if (controls.ACCEPT)
@@ -222,7 +199,7 @@ class SimpleMainMenuState extends MusicBeatState
         	#if desktop
 		else if (FlxG.keys.anyJustPressed(debugKeys))
 		{
-			MusicBeatState.switchState(new MasterEditorMenu());
+			FlxG.switchState(() -> new MasterEditorMenu());
 		}
 		#end
 	}

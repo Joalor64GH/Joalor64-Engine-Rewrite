@@ -3,24 +3,12 @@ package meta.state.editors;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
+
 import objects.Character;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
-
-import meta.*;
-import meta.state.*;
-import meta.state.editors.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-
-using StringTools;
 
 class MasterEditorMenu extends MusicBeatState
 {
@@ -111,9 +99,9 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.BACK)
 		{
 			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
+				FlxG.switchState(() -> new SimpleMainMenuState());
 			else
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 		}
 
 		if (controls.ACCEPT)
@@ -121,30 +109,30 @@ class MasterEditorMenu extends MusicBeatState
 			switch(options[curSelected]) 
 			{
 				case 'Character Editor':
-					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
+					LoadingState.loadAndSwitchState(() -> new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Week Editor':
-					MusicBeatState.switchState(new WeekEditorState());
+					FlxG.switchState(() -> new WeekEditorState());
 				case 'Menu Character Editor':
-					MusicBeatState.switchState(new MenuCharacterEditorState());
+					FlxG.switchState(() -> new MenuCharacterEditorState());
 				case 'Dialogue Portrait Editor':
-					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
+					LoadingState.loadAndSwitchState(() -> new DialogueCharacterEditorState(), false);
 				case 'Dialogue Editor':
-					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
+					LoadingState.loadAndSwitchState(() -> new DialogueEditorState(), false);
 				case 'Credits Editor':
-					MusicBeatState.switchState(new CreditsEditorState());
+					FlxG.switchState(() -> new CreditsEditorState());
 				case 'Modchart Editor':
-					MusicBeatState.switchState(new modcharting.ModchartEditorState());
+					FlxG.switchState(() -> new modcharting.ModchartEditorState());
 				case 'Chart Editor'://felt it would be cool maybe
-					LoadingState.loadAndSwitchState(new ChartingState(), false);
+					LoadingState.loadAndSwitchState(() -> new ChartingState(), false);
 				case 'Mod Folder Setup':
-					MusicBeatState.switchState(new ModsSetupState());
+					FlxG.switchState(() -> new ModsSetupState());
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
 		}
 		
 		if (FlxG.keys.justPressed.T)
-			MusicBeatState.switchState(new TestState());
+			FlxG.switchState(() -> new TestState());
 
 		var bullShit:Int = 0;
 		for (item in grpTexts.members)

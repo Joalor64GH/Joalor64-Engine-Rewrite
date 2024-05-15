@@ -3,15 +3,8 @@ package meta.state.editors;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.sound.FlxSound;
+
+import flixel.input.keyboard.FlxKey;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
@@ -20,29 +13,19 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.ui.FlxButton;
+
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
-import haxe.Json;
-import flixel.FlxCamera;
-import flixel.group.FlxSpriteGroup;
 import lime.system.Clipboard;
-import flixel.input.keyboard.FlxKey;
+
 #if sys
 import sys.io.File;
 #end
 
-import meta.*;
-import meta.state.*;
-import meta.state.editors.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import objects.*;
 import objects.userinterface.*;
 import objects.userinterface.DialogueBoxPsych;
-
-using StringTools;
 
 class DialogueCharacterEditorState extends MusicBeatState
 {
@@ -534,9 +517,6 @@ class DialogueCharacterEditorState extends MusicBeatState
 		}
 
 		if(!blockInput && !animationDropDown.dropPanel.visible) {
-			// FlxG.sound.muteKeys = TitleState.muteKeys;
-			// FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			// FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			FlxG.sound.muteKeys = [FlxKey.ZERO];
 			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -684,7 +664,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 			}
 
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new MasterEditorMenu());
+				FlxG.switchState(() -> new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;
 			}

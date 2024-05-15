@@ -1,24 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxTimer;
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.math.FlxMath;
-import flixel.FlxCamera;
-import flixel.FlxObject;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-
-import meta.state.*;
-
-using StringTools;
-
 class GameExitState extends MusicBeatState
 {
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -146,7 +127,7 @@ class GameExitState extends MusicBeatState
 				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { Sys.exit(0); }, false);
 			case 'No':
 				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(() -> new PlayState());
 		}
 	}
 }

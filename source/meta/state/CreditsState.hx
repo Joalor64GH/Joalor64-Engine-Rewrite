@@ -3,14 +3,7 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -21,8 +14,6 @@ import meta.data.*;
 import meta.state.*;
 import meta.data.alphabet.*;
 import objects.*;
-
-using StringTools;
 
 class CreditsState extends MusicBeatState
 {
@@ -479,9 +470,9 @@ class CreditsState extends MusicBeatState
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				if (ClientPrefs.simpleMain)
-					MusicBeatState.switchState(new SimpleMainMenuState());
+					FlxG.switchState(() -> new SimpleMainMenuState());
 				else
-					MusicBeatState.switchState(new MainMenuState());
+					FlxG.switchState(() -> new MainMenuState());
 				quitting = true;
 			}
 		}

@@ -14,8 +14,6 @@ import meta.state.editors.*;
 import meta.data.alphabet.*;
 import objects.userinterface.*;
 
-using StringTools;
-
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
@@ -290,7 +288,7 @@ class FreeplayState extends MusicBeatState
 		else if (upP || downP) changeDiff();
 		#if sys 
 		else if (alt && ClientPrefs.saveReplay) 
-			MusicBeatState.switchState(new ReplaySelectState(songs[curSelected].songName)); 
+			FlxG.switchState(() -> new ReplaySelectState(songs[curSelected].songName)); 
 		#end
 
 		if (controls.BACK)
@@ -301,9 +299,9 @@ class FreeplayState extends MusicBeatState
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
+				FlxG.switchState(() -> new SimpleMainMenuState());
 			else
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 		}
 
 		if(ctrl)
@@ -357,9 +355,9 @@ class FreeplayState extends MusicBeatState
 			curPlaying = false;
 			
 			if (FlxG.keys.pressed.SHIFT)
-				LoadingState.loadAndSwitchState(new ChartingState());
+				LoadingState.loadAndSwitchState(() -> new ChartingState());
 			else
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(() -> new PlayState());
 
 			FlxG.sound.music.volume = 0;
 			FlxG.sound.play(Paths.sound('storySelect'));

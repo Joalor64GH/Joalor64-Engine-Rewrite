@@ -1,21 +1,6 @@
 package meta.substate;
 
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.text.FlxText;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import objects.Character;
-import meta.substate.*;
-import meta.state.*;
-import meta.data.*;
-import meta.*;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -129,9 +114,9 @@ class GameOverSubstate extends MusicBeatSubstate
 
 			Mods.loadTheFirstEnabledMod();
 			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+				FlxG.switchState(() -> new StoryMenuState());
 			else
-				MusicBeatState.switchState(new FreeplayState());
+				FlxG.switchState(() -> new FreeplayState());
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
@@ -196,7 +181,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
-					MusicBeatState.resetState();
+					FlxG.resetState();
 				});
 			});
 			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);

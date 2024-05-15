@@ -29,9 +29,11 @@ import meta.state.PlayState;
 import meta.Controls;
 
 import meta.data.options.*;
+import meta.data.alphabet.*;
 import meta.data.*;
 import meta.state.*;
 import meta.substate.*;
+import meta.state.editors.*;
 import meta.*;
 
 import Paths;
@@ -50,6 +52,7 @@ import sys.FileSystem;
 #end
 
 import haxe.Json;
+
 import lime.app.Application;
 
 import openfl.Lib;

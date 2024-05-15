@@ -375,7 +375,7 @@ class ModsMenuState extends MusicBeatState
 		#if sys
 		if (FlxG.keys.anyJustPressed(debugKeys))
 		{
-			MusicBeatState.switchState(new ModDownloadState());
+			FlxG.switchState(() -> new ModDownloadState());
 		}
 		#end
 
@@ -402,9 +402,9 @@ class ModsMenuState extends MusicBeatState
 			else
 			{
 				if (ClientPrefs.simpleMain)
-					MusicBeatState.switchState(new SimpleMainMenuState());
+					FlxG.switchState(() -> new SimpleMainMenuState());
 				else
-					MusicBeatState.switchState(new MainMenuState());
+					FlxG.switchState(() -> new MainMenuState());
 			}
 		}
 

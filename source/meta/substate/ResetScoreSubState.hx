@@ -1,20 +1,5 @@
 package meta.substate;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.util.FlxColor;
-
-import meta.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.data.alphabet.*;
-import meta.data.*;
-
-import objects.userinterface.*;
-
-using StringTools;
-
 class ResetScoreSubState extends MusicBeatSubstate
 {
 	var bg:FlxSprite;

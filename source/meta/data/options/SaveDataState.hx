@@ -70,7 +70,7 @@ class SaveDataState extends MusicBeatState
 
 		if (controls.BACK) 
 		{
-			MusicBeatState.switchState(new OptionsState());
+			FlxG.switchState(() -> new OptionsState());
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.mouse.visible = false;
 		}

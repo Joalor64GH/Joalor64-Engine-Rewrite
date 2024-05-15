@@ -226,7 +226,7 @@ class PauseSubState extends MusicBeatSubstate
 					var poop = Highscore.formatSong(name, curSelected);
 					PlayState.SONG = Song.loadFromJson(poop, name);
 					PlayState.storyDifficulty = curSelected;
-					MusicBeatState.resetState();
+					FlxG.resetState();
 					FlxG.sound.music.volume = 0;
 					PlayState.changedDifficulty = true;
 					PlayState.chartingMode = false;
@@ -247,7 +247,7 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.seenCutscene = false;
 
 							Mods.loadTheFirstEnabledMod();
-							MusicBeatState.switchState(new FreeplayState());
+							FlxG.switchState(() -> new FreeplayState());
 							PlayState.cancelMusicFadeTween();
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							PlayState.changedDifficulty = false;
@@ -259,21 +259,21 @@ class PauseSubState extends MusicBeatSubstate
 							Mods.loadTheFirstEnabledMod();
 							if (PlayState.inMini) {
 								PlayState.inMini = false;
-								MusicBeatState.switchState(new MinigamesState());
+								FlxG.switchState(() -> new MinigamesState());
 							} else if (PlayState.isStoryMode) {
-								MusicBeatState.switchState(new StoryMenuState());
+								FlxG.switchState(() -> new StoryMenuState());
 							} else {
 								if (ClientPrefs.simpleMain)
-									MusicBeatState.switchState(new SimpleMainMenuState());
+									FlxG.switchState(() -> new SimpleMainMenuState());
 								else
-									MusicBeatState.switchState(new MainMenuState());
+									FlxG.switchState(() -> new MainMenuState());
 							}
 							PlayState.cancelMusicFadeTween();
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
 						case "Exit Game":
-							MusicBeatState.switchState(new GameExitState());
+							FlxG.switchState(() -> new GameExitState());
 					}
 					return;
 				}
@@ -332,7 +332,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.seenCutscene = false;
 
 					Mods.loadTheFirstEnabledMod();
-					MusicBeatState.switchState(new OptionsState());
+					FlxG.switchState(() -> new OptionsState());
 					PlayState.cancelMusicFadeTween();
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
@@ -370,7 +370,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		else
 		{
-			MusicBeatState.resetState();
+			FlxG.resetState();
 		}
 	}
 

@@ -3,15 +3,7 @@ package meta.state.editors;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.sound.FlxSound;
+
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
@@ -24,23 +16,15 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
-import haxe.Json;
 import lime.system.Clipboard;
 import objects.userinterface.DialogueBoxPsych;
 import flixel.input.keyboard.FlxKey;
+
 #if sys
 import sys.io.File;
 #end
 
-import meta.*;
-import meta.state.*;
-import meta.state.editors.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import objects.*;
 import objects.userinterface.*;
-
-using StringTools;
 
 class DialogueEditorState extends MusicBeatState
 {
@@ -367,7 +351,7 @@ class DialogueEditorState extends MusicBeatState
 				reloadText(false);
 			}
 			if(FlxG.keys.justPressed.ESCAPE) {
-				MusicBeatState.switchState(new MasterEditorMenu());
+				FlxG.switchState(() -> new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;
 			}

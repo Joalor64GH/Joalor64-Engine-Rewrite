@@ -124,35 +124,22 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 
-	public static function switchState(nextState:FlxState) {
-		// Custom made Trans in
-		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
-		if(!FlxTransitionableState.skipNextTransIn) {
-			leState.openSubState(new CustomFadeTransition(0.6, false));
-			if(nextState == FlxG.state) {
-				CustomFadeTransition.finishCallback = function() {
-					FlxG.resetState();
-				};
-				//trace('resetted');
-			} else {
-				CustomFadeTransition.finishCallback = function() {
-					FlxG.switchState(nextState);
-				};
-				//trace('changed state');
-			}
+	override function startOutro(onOutroComplete:()->Void):Void
+	{
+		if (!FlxTransitionableState.skipNextTransIn)
+		{
+			FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
+			CustomFadeTransition.finishCallback = onOutroComplete;
 			return;
 		}
+
 		FlxTransitionableState.skipNextTransIn = false;
-		FlxG.switchState(nextState);
+
+		onOutroComplete();
 	}
 
-	public static function resetState() {
-		MusicBeatState.switchState(FlxG.state);
-	}
-
-	public static function getState():MusicBeatState {
-		return cast(FlxG.state, MusicBeatState);
+	public static function getState():MusicBeatState{
+		return cast (FlxG.state, MusicBeatState);
 	}
 
 	public function stepHit():Void

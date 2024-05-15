@@ -90,15 +90,15 @@ class MinigamesState extends MusicBeatState
 		if (controls.BACK) 
         	{
 			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
+				FlxG.switchState(() -> new SimpleMainMenuState());
 			else
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
         	}
             
 		if (controls.ACCEPT)
 		{
             		PlayState.inMini = true;
-			LoadingState.loadAndSwitchState(new PlayState());
+			LoadingState.loadAndSwitchState(() -> new PlayState());
 			switch (curSelected)
             		{
 				case 0:

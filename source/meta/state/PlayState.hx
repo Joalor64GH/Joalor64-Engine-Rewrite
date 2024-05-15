@@ -3948,7 +3948,7 @@ class PlayState extends MusicBeatState
 			persistentUpdate = false;
 			paused = true;
 			cancelMusicFadeTween();
-			MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+			FlxG.switchState(() -> new CharacterEditorState(SONG.player2));
 		}
 		
 		if (startedCountdown)
@@ -4188,7 +4188,7 @@ class PlayState extends MusicBeatState
 
 		persistentUpdate = false;
 		cancelMusicFadeTween();
-		MusicBeatState.switchState(new ChartingState());
+		FlxG.switchState(() -> new ChartingState());
 		chartingMode = paused = true;
 
 		#if desktop
@@ -4805,7 +4805,7 @@ class PlayState extends MusicBeatState
 
 			if (inReplay)
 			{
-				MusicBeatState.switchState(new FreeplayState());
+				FlxG.switchState(() -> new FreeplayState());
 				return;
 			}
 			else if (chartingMode)

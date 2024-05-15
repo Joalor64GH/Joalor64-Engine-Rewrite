@@ -1,17 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-
-import meta.*;
-import meta.state.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-
-using StringTools;
-
 // simple test state
 class TestState extends MusicBeatState
 {
@@ -51,9 +39,9 @@ class TestState extends MusicBeatState
         {
             FlxG.sound.play(Paths.sound('cancelMenu'));
             if (ClientPrefs.simpleMain)
-		MusicBeatState.switchState(new SimpleMainMenuState());
+		FlxG.switchState(() -> new SimpleMainMenuState());
 	    else
-		MusicBeatState.switchState(new MainMenuState());
+		FlxG.switchState(() -> new MainMenuState());
         }
     }
 

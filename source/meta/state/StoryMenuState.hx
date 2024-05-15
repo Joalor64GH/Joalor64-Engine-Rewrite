@@ -3,27 +3,9 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-import lime.app.Application;
 import flixel.graphics.FlxGraphic;
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import objects.userinterface.menu.*;
 
-using StringTools;
+import objects.userinterface.menu.*;
 
 class StoryMenuState extends MusicBeatState
 {
@@ -277,9 +259,9 @@ class StoryMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
 			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
+				FlxG.switchState(() -> new SimpleMainMenuState());
 			else
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 		}
 
 		super.update(elapsed);
@@ -337,7 +319,7 @@ class StoryMenuState extends MusicBeatState
 			PlayState.campaignMisses = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				LoadingState.loadAndSwitchState(() -> new PlayState(), true);
 				FreeplayState.destroyFreeplayVocals();
 			});
 		} else {

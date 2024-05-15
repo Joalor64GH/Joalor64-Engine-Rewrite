@@ -4,18 +4,8 @@ package meta.state.editors;
 import meta.data.dependency.Discord.DiscordClient;
 #end
 import animateatlas.AtlasFrameMaker;
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.FlxCamera;
 import flixel.input.keyboard.FlxKey;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.graphics.FlxGraphic;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.math.FlxPoint;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
@@ -29,7 +19,6 @@ import flixel.ui.FlxSpriteButton;
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-import haxe.Json;
 import objects.*;
 import objects.Character;
 import objects.userinterface.*;
@@ -38,16 +27,9 @@ import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import lime.system.Clipboard;
 import flixel.animation.FlxAnimation;
 
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.state.editors.*;
-
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
-
-using StringTools;
 
 /**
 	*DEBUG MODE
@@ -1131,9 +1113,9 @@ class CharacterEditorState extends MusicBeatState
 		if(!charDropDown.dropPanel.visible) {
 			if (FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
-					MusicBeatState.switchState(new PlayState());
+					FlxG.switchState(() -> new PlayState());
 				} else {
-					MusicBeatState.switchState(new MasterEditorMenu());
+					FlxG.switchState(() -> new MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				}
 				FlxG.mouse.visible = false;
@@ -1145,34 +1127,6 @@ class CharacterEditorState extends MusicBeatState
 				if (FlxG.keys.pressed.SHIFT)
 					camFollow.screenCenter();
 			}
-
-            		/*
-			if (FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
-				FlxG.camera.zoom += elapsed * FlxG.camera.zoom;
-				if(FlxG.camera.zoom > 3) FlxG.camera.zoom = 3;
-			}
-			if (FlxG.keys.pressed.Q && FlxG.camera.zoom > 0.1) {
-				FlxG.camera.zoom -= elapsed * FlxG.camera.zoom;
-				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
-			}
-
-			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
-			{
-				var addToCam:Float = 500 * elapsed;
-				if (FlxG.keys.pressed.SHIFT)
-					addToCam *= 4;
-
-				if (FlxG.keys.pressed.I)
-					camFollow.y -= addToCam;
-				else if (FlxG.keys.pressed.K)
-					camFollow.y += addToCam;
-
-				if (FlxG.keys.pressed.J)
-					camFollow.x -= addToCam;
-				else if (FlxG.keys.pressed.L)
-					camFollow.x += addToCam;
-			}
-			*/
 
 			if(char.animationsArray.length > 0) {
 				if (FlxG.keys.justPressed.W)
@@ -1207,8 +1161,6 @@ class CharacterEditorState extends MusicBeatState
 
 				var controlArray:Array<Bool> = [FlxG.keys.justPressed.LEFT, FlxG.keys.justPressed.RIGHT, FlxG.keys.justPressed.UP, FlxG.keys.justPressed.DOWN];
 
-
-
 				for (i in 0...controlArray.length) {
 					if(controlArray[i]) {
 						var holdShift = FlxG.keys.pressed.SHIFT;
@@ -1235,7 +1187,6 @@ class CharacterEditorState extends MusicBeatState
 				}
 			}
 		}
-		//camMenu.zoom = FlxG.camera.zoom;
 		ghostChar.setPosition(char.x, char.y);
 		super.update(elapsed);
 
@@ -1277,22 +1228,6 @@ class CharacterEditorState extends MusicBeatState
 	}
 
 	var _file:FileReference;
-	/*private function saveOffsets()
-	{
-		var data:String = '';
-		for (anim => offsets in char.animOffsets) {
-			data += anim + ' ' + offsets[0] + ' ' + offsets[1] + '\n';
-		}
-
-		if (data.length > 0)
-		{
-			_file = new FileReference();
-			_file.addEventListener(Event.COMPLETE, onSaveComplete);
-			_file.addEventListener(Event.CANCEL, onSaveCancel);
-			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data, daAnim + "Offsets.txt");
-		}
-	}*/
 
 	function onSaveComplete(_):Void
 	{

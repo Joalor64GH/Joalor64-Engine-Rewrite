@@ -1,20 +1,12 @@
 package meta.state;
 
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.addons.transition.TransitionData;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
-import lime.app.Application;
-import openfl.Assets;
 
-import meta.*;
-import meta.data.*;
-import meta.data.options.*;
-import meta.state.*;
-import meta.data.alphabet.*;
 import objects.shaders.*;
 
 typedef TitleData = 
@@ -441,12 +433,12 @@ class TitleState extends MusicBeatState
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					#if html5
-					MusicBeatState.switchState(new BruhState());
+					FlxG.switchState(() -> new BruhState());
 					#else
 					if (ClientPrefs.simpleMain)
-						MusicBeatState.switchState(new SimpleMainMenuState());
+						FlxG.switchState(() -> new SimpleMainMenuState());
 					else
-						MusicBeatState.switchState(new MainMenuState());
+						FlxG.switchState(() -> new MainMenuState());
 					#end
 					closedState = true;
 				});

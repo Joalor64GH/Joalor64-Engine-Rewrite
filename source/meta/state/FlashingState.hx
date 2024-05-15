@@ -1,22 +1,10 @@
 package meta.state;
 
-import flixel.FlxSprite;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import meta.state.*;
-import meta.data.*;
-import meta.*;
-
 class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
 	var bg:FlxSprite;
-
-	public function new() 
-	{
-		super();
-	}
 
 	override function create() 
 	{
@@ -39,7 +27,7 @@ class FlashingState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
-						MusicBeatState.switchState(new TitleState());
+						FlxG.switchState(() -> new TitleState());
 					}
 				});
 				leftState = true;
@@ -49,7 +37,7 @@ class FlashingState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
-						MusicBeatState.switchState(new TitleState());
+						FlxG.switchState(() -> new TitleState());
 					}
 				});
 				leftState = true;

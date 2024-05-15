@@ -1,18 +1,6 @@
 package meta.data.options;
 
-import flixel.util.FlxStringUtil;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.text.FlxText;
-import flixel.group.FlxSpriteGroup;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxColor;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
-import flixel.FlxG;
 import flixel.ui.FlxBar;
-import flixel.math.FlxPoint;
 
 import meta.*;
 import objects.*;
@@ -21,8 +9,6 @@ import objects.background.*;
 import meta.data.*;
 import meta.data.alphabet.*;
 import meta.data.options.*;
-
-using StringTools;
 
 class NoteOffsetState extends MusicBeatState
 {
@@ -196,8 +182,6 @@ class NoteOffsetState extends MusicBeatState
 		add(timeBarBG);
 		add(timeBar);
 		add(timeTxt);
-
-		///////////////////////
 
 		var blackBox:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 40, FlxColor.BLACK);
 		blackBox.scrollFactor.set();
@@ -401,7 +385,7 @@ class NoteOffsetState extends MusicBeatState
 
 			persistentUpdate = false;
 			CustomFadeTransition.nextCamera = camOther;
-			MusicBeatState.switchState(new OptionsState());
+			FlxG.switchState(() -> new OptionsState());
 			FlxG.sound.music.volume = 0;
 			FlxG.mouse.visible = false;
 		}

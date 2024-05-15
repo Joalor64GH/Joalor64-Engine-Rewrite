@@ -1,23 +1,6 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-
-import haxe.Json;
 import meta.state.ReplayState.ReplayFile;
-import sys.io.File;
-
-import meta.*;
-import meta.state.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-
-using meta.CoolUtil;
-using StringTools;
 
 class ReplaySelectState extends MusicBeatState
 {
@@ -146,11 +129,11 @@ class ReplaySelectState extends MusicBeatState
         {
             PlayState.SONG = Song.loadFromJson(song, songName);
             PlayState.storyDifficulty = difficulties[curSelected];
-            LoadingState.loadAndSwitchState(new ReplayState(Std.parseInt(menuItems[curSelected].split(" ")[1])), true);
+            LoadingState.loadAndSwitchState(() -> new ReplayState(Std.parseInt(menuItems[curSelected].split(" ")[1])), true);
         }
 
         else if (controls.BACK)
-            FlxG.switchState(new FreeplayState());
+            FlxG.switchState(() -> new FreeplayState());
 
         if (menuItems.length <= 0)
         {

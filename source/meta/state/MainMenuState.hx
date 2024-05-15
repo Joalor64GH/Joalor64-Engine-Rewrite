@@ -3,25 +3,9 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
-import flixel.addons.transition.FlxTransitionableState;
+
 import flixel.effects.FlxFlicker;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.math.FlxMath;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
-import openfl.Assets;
-import openfl.media.Video;
-import haxe.Json;
 
 import meta.*;
 import meta.data.*;
@@ -31,14 +15,10 @@ import meta.data.options.*;
 import meta.state.editors.*;
 import system.*;
 
-import meta.data.Achievements;
-
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
 #end
-
-using StringTools;
 
 typedef MenuData =
 {
@@ -360,7 +340,7 @@ class MainMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (FlxG.keys.justPressed.E)
-			MusicBeatState.switchState(new EpicState());
+			FlxG.switchState(() -> new EpicState());
 		
 		if (!selectedSomethin)
 		{
@@ -373,7 +353,7 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new TitleState());
+				FlxG.switchState(() -> new TitleState());
 			}
 
 			if (controls.ACCEPT)
@@ -419,44 +399,44 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'play':
-										MusicBeatState.switchState(new PlayMenuState());
+										FlxG.switchState(() -> new PlayMenuState());
 									#if MODS_ALLOWED
 									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());
+										FlxG.switchState(() -> new ModsMenuState());
 									#end
 									#if ACHIEVEMENTS_ALLOWED
 									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
+										FlxG.switchState(() -> new AchievementsMenuState());
 									#end
 									case 'credits':
-										MusicBeatState.switchState(new CreditsState());
+										FlxG.switchState(() -> new CreditsState());
 									case 'donate':
-										MusicBeatState.switchState(new DonateScreenState());
+										FlxG.switchState(() -> new DonateScreenState());
 									case 'options':
-										LoadingState.loadAndSwitchState(new OptionsState());
+										LoadingState.loadAndSwitchState(() -> new OptionsState());
 								}
 							});
 						}
 					});
 				}
 			}
-			#if (MODS_ALLOWED && FUTURE_POLYMOD)
+			#if MODS_ALLOWED
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
+				FlxG.switchState(() -> new MasterEditorMenu());
 			}
 			else if (FlxG.keys.anyJustPressed(modShortcutKeys))
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new ModsMenuState());
+				FlxG.switchState(() -> new ModsMenuState());
 			}
 			#end
 
             		#if debug
 			if (FlxG.keys.justPressed.FOUR)
 			{
-				MusicBeatState.switchState(new VideoState("assets/videos/cutscenetest/video.webm", new MainMenuState()));
+				FlxG.switchState(() -> new VideoState("assets/videos/cutscenetest/video.webm", () -> new MainMenuState()));
 			}
 			#end
 

@@ -1,25 +1,9 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.app.Application;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.tweens.FlxTween;
-
-import haxe.Json;
-import haxe.Http;
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-
 class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 	public static var mustUpdate:Bool = false;
-
 	public static var daJson:Dynamic;
 
 	var warnText:FlxText;
@@ -49,7 +33,7 @@ class OutdatedState extends MusicBeatState
 	public static function updateCheck()
 	{
 		trace('checking for updates...');
-		var http:Http = new Http('https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json');
+		var http = new haxe.Http('https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json');
 		http.onData = function(data:String)
 		{
 			var daRawJson:Dynamic = Json.parse(data);
@@ -84,9 +68,9 @@ class OutdatedState extends MusicBeatState
 				FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
 						if (FlxG.save.data.flashing == null && !FlashingState.leftState)
-							FlxG.switchState(new FlashingState());
+							FlxG.switchState(() -> new FlashingState());
 						else
-							FlxG.switchState(new TitleState());
+							FlxG.switchState(() -> new TitleState());
 					}
 				});
 			}

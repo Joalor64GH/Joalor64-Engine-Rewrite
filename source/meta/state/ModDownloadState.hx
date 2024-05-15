@@ -307,7 +307,7 @@ class ModDownloadState extends MusicBeatState
 
 		if (controls.BACK && canExit && !idInputText.hasFocus)
 		{
-			MusicBeatState.switchState(new ModsMenuState());
+			FlxG.switchState(() -> new ModsMenuState());
 		}
 
 		super.update(elapsed);

@@ -3,16 +3,6 @@ package meta.data.options;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.FlxCamera;
-import flixel.FlxObject;
-import flixel.util.FlxColor;
-import lime.app.Application;
 
 import core.ToastCore;
 
@@ -22,8 +12,6 @@ import meta.data.alphabet.*;
 import meta.data.options.*;
 import meta.state.*;
 import meta.substate.*;
-
-using StringTools;
 
 class OptionsState extends MusicBeatState
 {
@@ -46,7 +34,7 @@ class OptionsState extends MusicBeatState
 			case 'Controls':
 				openSubState(new OptionsSubState.ControlsSubState());
 			case 'Offsets':
-				MusicBeatState.switchState(new NoteOffsetState());
+				FlxG.switchState(() -> new NoteOffsetState());
 			case 'Visuals':
 				openSubState(new OptionsSubState.VisualsSubState());
 			case 'Gameplay':
@@ -100,9 +88,9 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Press D for save data settings.", 12);
+		var versionShit:FlxText = new FlxText(0, FlxG.height - 26, 0, "Press D for save data settings.", 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT);
 		add(versionShit);
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -166,7 +154,7 @@ class OptionsState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.D)
-			MusicBeatState.switchState(new SaveDataState());
+			FlxG.switchState(() -> new SaveDataState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
@@ -175,10 +163,10 @@ class OptionsState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (PauseSubState.fromPlayState) {
 				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(() -> new PlayState());
 			} else {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
+				FlxG.switchState((ClientPrefs.simpleMain) ? () -> new SimpleMainMenuState() : () -> new MainMenuState());
 			}
 		}
 

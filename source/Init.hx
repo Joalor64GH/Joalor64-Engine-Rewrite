@@ -186,14 +186,14 @@ class Init extends FlxState
         	{
 			if (OutdatedState.mustUpdate && !OutdatedState.leftState)
 			{
-				FlxG.switchState(new OutdatedState());
+				FlxG.switchState(() -> new OutdatedState());
 			} 
 			else 
 			{
 				if (FlxG.save.data.flashing == null && !FlashingState.leftState)
-					FlxG.switchState(new FlashingState());
+					FlxG.switchState(() -> new FlashingState());
 				else
-					FlxG.switchState(new TitleState());
+					FlxG.switchState(() -> new TitleState());
 			}
 	    	});
 	}

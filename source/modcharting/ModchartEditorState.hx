@@ -773,7 +773,7 @@ class ModchartEditorState extends MusicBeatState
                 #if PSYCH 
                 StageData.loadDirectory(PlayState.SONG);
                 #end
-                LoadingState.loadAndSwitchState(new PlayState());
+                LoadingState.loadAndSwitchState(() -> new PlayState());
             };
             if (hasUnsavedChanges)
             {
@@ -795,14 +795,6 @@ class ModchartEditorState extends MusicBeatState
             //trace('changed bpm to ' + curBpmChange.bpm);
             Conductor.changeBPM(curBpmChange.bpm);
         }
-
-
-            
-
-
-
-
-
 
         debugText.text = Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +
 		"\nBeat: " + Std.string(curDecBeat).substring(0,4) +
@@ -1025,16 +1017,12 @@ class ModchartEditorState extends MusicBeatState
                     gottaHitNote = !section.mustHitSection;
                 }
                 #end
-                
-
-
 
                 var oldNote:Note;
                 if (unspawnNotes.length > 0)
                     oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
                 else
                     oldNote = null;
-
 
                 #if PSYCH 
                 var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
@@ -1086,11 +1074,11 @@ class ModchartEditorState extends MusicBeatState
         loadedNotes = unspawnNotes.copy();
         generatedMusic = true;
     }
+
     function sortByTime(Obj1:Dynamic, Obj2:Dynamic):Int
     {
         return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
     }
-
 
     private function generateStaticArrows(player:Int):Void
     {
@@ -1168,8 +1156,6 @@ class ModchartEditorState extends MusicBeatState
         }
     }
     
-
-
     public static function createGrid(CellWidth:Int, CellHeight:Int, Width:Int, Height:Int):BitmapData
     {
         // How many cells can we fit into the width/height? (round it UP if not even, then trim back)
@@ -2078,7 +2064,6 @@ class ModchartEditorExitSubstate extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
         FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
-
 
         var warning:FlxText = new FlxText(0, 0, 0, 'You have unsaved changes!\nAre you sure you want to exit?', 48);
         warning.alignment = CENTER;

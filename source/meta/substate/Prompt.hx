@@ -1,10 +1,7 @@
 package meta.substate;
 
 import meta.*;
-import flixel.FlxSubState;
-import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.util.FlxColor;
 import openfl.geom.Rectangle;
 
 class Prompt extends MusicBeatSubstate

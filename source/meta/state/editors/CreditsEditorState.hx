@@ -24,16 +24,6 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.utils.ByteArray;
 
-import meta.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.state.editors.*;
-import meta.data.alphabet.*;
-import meta.data.*;
-import objects.*;
-
-using StringTools;
-
 class CreditsEditorState extends MusicBeatState
 {
 	var curSelected:Int = -1;
@@ -553,7 +543,7 @@ class CreditsEditorState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				MusicBeatState.switchState(new MasterEditorMenu());
+				FlxG.switchState(() -> new MasterEditorMenu());
 				quitting = true;
 			}
 		}

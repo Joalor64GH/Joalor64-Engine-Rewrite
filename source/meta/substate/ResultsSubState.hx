@@ -1,24 +1,10 @@
 package meta.substate;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-
-import meta.*;
-import meta.state.*;
-import meta.state.PlayState;
-import meta.data.*;
-
 class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
 	var resultsTxt:FlxText;
-
-    	var bg:FlxSprite;
+	var bg:FlxSprite;
 
 	var sicks:Int;
 	var goods:Int;
@@ -82,9 +68,7 @@ class ResultsSubState extends MusicBeatSubstate
 		add(resultsTxt);
 
 		if (ClientPrefs.scoreTxtType != 'Simple')
-		{
 			resultsTxt.text += '\nPercent Rating: ' + percent + '%' + '\nRating: ' + rating + ' (' + fc + ')';
-		}
 
 		versionShit.alpha = 0;
 		resultsTxt.alpha = 0;
@@ -108,14 +92,14 @@ class ResultsSubState extends MusicBeatSubstate
 	if (controls.ACCEPT) 
 	{
 	    if (PlayState.isStoryMode)
-		MusicBeatState.switchState(new StoryMenuState());
+		FlxG.switchState(() -> new StoryMenuState());
 	    else 
 	    {
 		if (PlayState.inMini) {
 		    PlayState.inMini = false;
-		    MusicBeatState.switchState(new MinigamesState());
+		    FlxG.switchState(() -> new MinigamesState());
 		} else {
-		    MusicBeatState.switchState(new FreeplayState());
+		    FlxG.switchState(() -> new FreeplayState());
 		}
             }
 	    FlxG.sound.playMusic(Paths.music('freakyMenu'));

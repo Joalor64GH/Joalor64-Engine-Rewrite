@@ -3,25 +3,8 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
-import flixel.addons.transition.FlxTransitionableState;
+
 import flixel.effects.FlxFlicker;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.math.FlxMath;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import lime.app.Application;
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-
-using StringTools;
 
 class PlayMenuState extends MusicBeatState
 {
@@ -115,7 +98,7 @@ class PlayMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 			}
 
 			if (controls.ACCEPT)
@@ -146,11 +129,11 @@ class PlayMenuState extends MusicBeatState
 							switch (daChoice)
 							{
 								case 'story_mode':
-									MusicBeatState.switchState(new StoryMenuState());
+									FlxG.switchState(() -> new StoryMenuState());
 								case 'freeplay':
-									MusicBeatState.switchState(new FreeplayState());
+									FlxG.switchState(() -> new FreeplayState());
 								case 'mini':
-									MusicBeatState.switchState(new MinigamesState());
+									FlxG.switchState(() -> new MinigamesState());
 							}
 						});
 					}

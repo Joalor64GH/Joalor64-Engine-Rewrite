@@ -83,7 +83,7 @@ class DonateScreenState extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
-			MusicBeatState.switchState(new MainMenuState());
+			FlxG.switchState(() -> new MainMenuState());
 		}
 
 		if (controls.ACCEPT)

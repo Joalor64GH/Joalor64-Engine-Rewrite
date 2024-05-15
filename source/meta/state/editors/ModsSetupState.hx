@@ -231,7 +231,7 @@ class ModsSetupState extends MusicBeatState
 
         if (controls.BACK) 
         {
-            MusicBeatState.switchState(new meta.state.editors.MasterEditorMenu());
+            FlxG.switchState(() -> new MasterEditorMenu());
             FlxG.sound.play(Paths.sound('cancelMenu'));
         }
     }

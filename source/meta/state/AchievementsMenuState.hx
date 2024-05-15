@@ -4,21 +4,12 @@ package meta.state;
 import meta.data.dependency.Discord.DiscordClient;
 #end
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-
 import meta.*;
 import meta.data.*;
 import meta.state.*;
 import meta.substate.*;
 import meta.data.alphabet.*;
 import meta.data.Achievements;
-
-using StringTools;
 
 class AchievementsMenuState extends MusicBeatState
 {
@@ -117,9 +108,9 @@ class AchievementsMenuState extends MusicBeatState
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (ClientPrefs.simpleMain)
-				MusicBeatState.switchState(new SimpleMainMenuState());
+				FlxG.switchState(() -> new SimpleMainMenuState());
 			else
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 		}
 	}
 
