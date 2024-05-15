@@ -45,18 +45,6 @@ class CoolSystemStuff
 		#end
 	}
 
-	public static function executableFileName():Null<String> // idk what type it was originally
-	{
-		#if windows
-		var programPath = Sys.programPath().split("\\");
-		#else
-		var programPath = Sys.programPath().split("/");
-
-		return programPath != null ? [programPath.length - 1] : null;
-		#end
-		return null;
-	}
-
 	public static function generateTextFile(fileContent:String, fileName:String):Void
 	{
 		#if desktop

@@ -47,7 +47,9 @@ class Main extends Sprite
 
 		instance = this;
 
+		#if windows
 		meta.data.windows.WindowsAPI.darkMode(true);
+		#end
 
 		ButtplugUtils.set_intensity(100);
 		ButtplugUtils.initialise();
