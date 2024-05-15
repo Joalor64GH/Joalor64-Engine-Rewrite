@@ -207,6 +207,9 @@ class CrashHandler extends Sprite
 		switch e.keyCode {
 			case Keyboard.R:
 				_stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyActions);
+				TitleState.initialized = false;
+				TitleState.closedState = false;
+				OutdatedState.leftState = false;
 				FlxG.switchState(new Init());
 				_active = false;
 				@:privateAccess

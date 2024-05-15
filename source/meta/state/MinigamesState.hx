@@ -24,6 +24,9 @@ class MinigamesState extends MusicBeatState
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico')
+		// soon...
+		// new Minigame("Joalor64's Tutorial", 'placeholder', 'mgicons/me')
+		// new Minigame('Kill BF', 'lmao', 'mgicons/bf')
 	];
 
 	var descTxt:FlxText;
