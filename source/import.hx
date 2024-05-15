@@ -1,8 +1,10 @@
 // This just contains global imports.
 #if !macro
 // FLIXEL
-import flixel.group.FlxSpriteGroup;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxSpriteGroup;
+import flixel.group.FlxGroup;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.text.FlxText;
@@ -43,6 +45,8 @@ import backend.Mods;
 #end
 
 import objects.*;
+import objects.userinterface.*;
+
 import hscript.*;
 
 // MISCELLANEOUS

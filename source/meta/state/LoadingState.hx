@@ -1,24 +1,18 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.util.FlxTimer;
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
+import flixel.util.typeLimit.NextState;
 
 class LoadingState extends MusicBeatState
 {
 	inline static var MIN_TIME = 1.0;
 	
-	var target:FlxState;
+	var target:NextState = null;
 	var stopMusic = false;
 
-	function new(target:FlxState, stopMusic:Bool)
+	function new(target:NextState, stopMusic:Bool)
 	{
 		super();
+		
 		this.target = target;
 		this.stopMusic = stopMusic;
 	}
@@ -43,6 +37,8 @@ class LoadingState extends MusicBeatState
 		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
 		loadBar.screenCenter(X);
 		add(loadBar);
+
+		super.create();
 	}
 
 	override function update(elapsed:Float)
@@ -50,7 +46,7 @@ class LoadingState extends MusicBeatState
 		funkay.setGraphicSize(Std.int(0.88 * FlxG.width + 0.9 * (funkay.width - 0.88 * FlxG.width)));
 		funkay.updateHitbox();
 
-		if(controls.ACCEPT)
+		if (controls.ACCEPT)
 		{
 			funkay.setGraphicSize(Std.int(funkay.width + 60));
 			funkay.updateHitbox();
@@ -65,7 +61,7 @@ class LoadingState extends MusicBeatState
 		
 		FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 
-		new FlxTimer().start(fadeTime + MIN_TIME, function(_){
+		new FlxTimer().start(fadeTime + MIN_TIME, (_) -> {
 			if (stopMusic)
 			{
 				if (FlxG.sound.music != null)
@@ -80,12 +76,12 @@ class LoadingState extends MusicBeatState
 		super.destroy();
 	}
 
-	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
+	inline static public function loadAndSwitchState(target:NextState, stopMusic = false)
 	{
 		FlxG.switchState(getNextState(target, stopMusic));
 	}
 	
-	static function getNextState(target:FlxState, stopMusic = false):FlxState
+	static function getNextState(target:NextState, stopMusic = false):NextState
 	{
 		if (stopMusic)
 		{
