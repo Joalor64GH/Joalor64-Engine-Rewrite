@@ -23,7 +23,7 @@ class Localization
     private static var data:Map<String, Dynamic>;
     private static var currentLanguage:String;
 
-    public static var DEFAULT_LANGUAGE:String = "en-us";
+    public static var DEFAULT_LANGUAGE:String = "en";
     private static final DEFAULT_DIR:String = "locales";
 
     public static var directory:String = DEFAULT_DIR;
@@ -41,7 +41,7 @@ class Localization
     public static function init(config:ApplicationConfig) 
     {
         directory = config.directory ?? "locales";
-        DEFAULT_LANGUAGE = config.default_language ?? "en-us";
+        DEFAULT_LANGUAGE = config.default_language ?? "en";
 
         loadLanguages(config.languages);
         switchLanguage(DEFAULT_LANGUAGE);
