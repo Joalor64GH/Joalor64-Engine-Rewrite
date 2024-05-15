@@ -7,13 +7,8 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.video.*;
-import meta.data.options.*;
-import meta.state.editors.*;
-import system.*;
+import system.CoolSystemStuff;
+import meta.data.Achievements;
 
 #if MODS_ALLOWED
 import sys.FileSystem;

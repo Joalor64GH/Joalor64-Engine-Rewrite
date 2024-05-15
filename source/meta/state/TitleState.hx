@@ -5,7 +5,6 @@ import openfl.display.BitmapData;
 
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
-import flixel.group.FlxGroup;
 
 import objects.shaders.*;
 
@@ -355,7 +354,6 @@ class TitleState extends MusicBeatState
 	function getName():Array<String>
 	{
 		var fullText:String = Assets.getText(Paths.txt('gameName'));
-
 		var firstArray:Array<String> = fullText.split('--');
 		return firstArray;
 	}

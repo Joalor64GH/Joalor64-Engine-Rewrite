@@ -3,7 +3,7 @@ package backend;
 #if openfl
 import openfl.system.Capabilities;
 #end
-import openfl.Assets;
+
 import haxe.io.Path;
 
 typedef ApplicationConfig = {

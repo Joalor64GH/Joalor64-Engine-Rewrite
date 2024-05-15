@@ -6,7 +6,6 @@ import sys.io.File;
 #else
 import openfl.utils.Assets;
 #end
-import haxe.Json;
 
 typedef ModsList = {
 	enabled:Array<String>,

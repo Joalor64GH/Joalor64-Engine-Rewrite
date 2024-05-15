@@ -1,24 +1,11 @@
 package meta.state;
 
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import openfl.Assets;
-
-import meta.*;
-import meta.state.*;
-
-import meta.data.*;
-import meta.data.alphabet.*;
-
 /*
  * old code from Chocolate Engine
  * @author Joalor64GH
  * @see https://github.com/Joalor64GH/Chocolate-Engine
  */
+
 class DonateScreenState extends MusicBeatState
 {
 	var blurb:Array<String> = [
@@ -57,6 +44,7 @@ class DonateScreenState extends MusicBeatState
 
 		var textGroup:FlxTypedGroup<Alphabet> = new FlxTypedGroup<Alphabet>();
 		add(textGroup);
+		
 		for (i in 0...blurb.length)
 		{
 			var money:Alphabet = new Alphabet(0, 0, blurb[i], true);

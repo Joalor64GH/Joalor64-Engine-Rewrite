@@ -7,6 +7,8 @@ import meta.data.dependency.Discord.DiscordClient;
 import flixel.input.keyboard.FlxKey;
 import flixel.effects.FlxFlicker;
 
+import meta.data.Achievements;
+
 class SimpleMainMenuState extends MusicBeatState
 {
 	var options:Array<String> = [

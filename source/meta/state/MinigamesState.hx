@@ -1,18 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.app.Application;
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.state.PlayState;
-import meta.data.alphabet.*;
-
 import objects.userinterface.HealthIcon;
 
 class MinigamesState extends MusicBeatState

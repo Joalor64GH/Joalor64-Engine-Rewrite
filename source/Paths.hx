@@ -1,24 +1,14 @@
 package;
 
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
-
 import openfl.media.Sound;
 import animateatlas.AtlasFrameMaker;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import openfl.system.System;
-import flixel.graphics.frames.FlxAtlasFrames;
-import openfl.utils.AssetType;
-import openfl.utils.Assets;
-import flixel.graphics.FlxGraphic;
-import openfl.display.BitmapData;
-import haxe.io.Bytes;
-import haxe.Json;
 
-using StringTools;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.FlxGraphic;
+
+import openfl.utils.AssetType;
+import openfl.display.BitmapData;
+
 using haxe.io.Path;
 
 // JSONI8 Format code by luckydog https://www.youtube.com/channel/UCeHXKGpDKo2eqYKVkqCUdaA
@@ -251,14 +241,13 @@ class Paths
 		if (FileSystem.exists(modsVideo(key))) return modsVideo(key);
 		#end
 		for (i in VIDEO_EXT) {
-			var path = 'assets/videos/$key.$i';
 			#if MODS_ALLOWED
-			if (FileSystem.exists(path))
+			if (FileSystem.exists('assets/videos/$key.$i'))
 			#else
-			if (Assets.exists(path))
+			if (Assets.exists('assets/videos/$key.$i'))
 			#end
 			{
-				return path;
+				return 'assets/videos/$key.$i';
 			}
 		}
 		return 'assets/videos/$key.mp4';
@@ -453,7 +442,6 @@ class Paths
 		return hideChars.split(path).join("").toLowerCase();
 	}
 
-	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	public static function getGraphic(path:String):FlxGraphic
 	{
@@ -547,13 +535,10 @@ class Paths
 		return modFolders('data/$key.json');
 
 	static public function modsVideo(key:String) {
-		for (i in VIDEO_EXT) {
-			var path = modFolders('videos/$key.$i');
-			if (FileSystem.exists(path))
-			{
-				return path;
-			}
-		}
+		for (i in VIDEO_EXT)
+			if (FileSystem.exists(modFolders('videos/$key.$i')))
+				return modFolders('videos/$key.$i');
+		
 		return modFolders('videos/$key.mp4');
 	}
 

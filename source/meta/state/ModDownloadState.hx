@@ -19,11 +19,6 @@ import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUIInputText;
 
-import meta.*;
-import meta.state.*;
-
-using StringTools;
-
 class ModDownloadState extends MusicBeatState
 {
 	private var camMain:FlxCamera;

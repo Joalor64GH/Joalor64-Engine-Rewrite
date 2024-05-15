@@ -1,27 +1,11 @@
 package meta.state;
 
-import haxe.Json;
 import openfl.events.KeyboardEvent;
 
-#if sys
-import sys.io.File;
-#end
-
-import objects.Character;
 import objects.userinterface.note.Note;
 import objects.userinterface.note.*;
 
-import meta.state.PlayState;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.*;
-
-import lime.app.Application;
-import openfl.utils.Assets;
-
 using DateTools;
-using StringTools;
 
 typedef ReplayFile = {
     public var hits:Array<Float>;

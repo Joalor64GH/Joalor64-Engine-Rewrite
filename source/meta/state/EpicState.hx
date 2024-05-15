@@ -1,16 +1,5 @@
 package meta.state;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-
-import meta.*;
-import meta.state.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-
 class EpicState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;

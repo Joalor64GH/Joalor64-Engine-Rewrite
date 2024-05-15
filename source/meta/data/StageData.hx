@@ -6,9 +6,8 @@ import sys.FileSystem;
 #else
 import openfl.utils.Assets;
 #end
-import meta.data.Song;
 
-using StringTools;
+import meta.data.Song;
 
 typedef StageFile = {
 	var directory:String;

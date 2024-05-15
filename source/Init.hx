@@ -3,12 +3,8 @@ package;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.input.keyboard.FlxKey;
-import lime.app.Application;
 
-import meta.*;
-import meta.state.*;
-import meta.data.*;
+import flixel.input.keyboard.FlxKey;
 
 // this loads everything in
 class Init extends FlxState

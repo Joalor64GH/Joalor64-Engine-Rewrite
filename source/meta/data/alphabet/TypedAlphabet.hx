@@ -11,7 +11,7 @@ import openfl.media.Sound;
 
 using StringTools;
 
-class TypedAlphabet extends meta.data.alphabet.Alphabet
+class TypedAlphabet extends Alphabet
 {
 	public var onFinish:Void->Void = null;
 	public var finishedText:Bool = false;

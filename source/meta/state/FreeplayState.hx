@@ -3,16 +3,8 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.sound.FlxSound;
 
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.state.editors.*;
-import meta.data.alphabet.*;
-import objects.userinterface.*;
+import flixel.sound.FlxSound;
 
 class FreeplayState extends MusicBeatState
 {

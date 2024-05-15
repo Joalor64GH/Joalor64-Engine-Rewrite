@@ -10,7 +10,6 @@ import openfl.filters.ShaderFilter;
 #end
 
 import flixel.addons.effects.FlxTrail;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.sound.FlxSound;
 import flixel.ui.FlxBar;
 import flixel.input.keyboard.FlxKey;
@@ -50,21 +49,16 @@ import meta.video.SwfVideo;
 import hscript.*;
 #end
 
-import meta.*;
-import objects.*;
-import meta.data.*;
 import meta.video.*;
-import meta.state.*;
-import meta.substate.*;
 import meta.data.scripts.*;
-import meta.data.options.*;
-import meta.state.editors.*;
+
+import objects.Character;
 import objects.shaders.*;
 import objects.background.*;
-import objects.userinterface.*;
 import objects.userinterface.note.*;
 import objects.userinterface.note.Note;
 import objects.userinterface.DialogueBoxPsych;
+
 import meta.state.ReplayState.ReplayPauseSubstate;
 import meta.data.scripts.FunkinLua;
 import meta.data.Achievements;
@@ -73,10 +67,6 @@ import meta.data.Song;
 import meta.data.Section;
 import meta.data.StageData;
 import meta.data.WeekData;
-import objects.Character;
-
-using meta.CoolUtil;
-using StringTools;
 
 class PlayState extends MusicBeatState
 {
@@ -3626,14 +3616,6 @@ class PlayState extends MusicBeatState
 
 	public var removedVideo = false;
 
-	function truncateFloat(number:Float, precision:Int):Float 
-	{
-		var num = number;
-		num = num * Math.pow(10, precision);
-		num = Math.round(num) / Math.pow(10, precision);
-		return num;
-	}
-
 	override public function update(elapsed:Float)
 	{
 		// SECRET KEYS!! SHHHHHHHH
@@ -6345,8 +6327,8 @@ class PlayState extends MusicBeatState
 	inline public static function randomString() 
 	{
 		var str = "";
-			for (e in [upperCase, lowerCase, numbers, symbols])
-				str += e.charAt(FlxG.random.int(0, e.length - 1));
+		for (e in [upperCase, lowerCase, numbers, symbols])
+			str += e.charAt(FlxG.random.int(0, e.length - 1));
 
 		return str;
 	}

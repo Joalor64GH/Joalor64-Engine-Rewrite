@@ -1,10 +1,5 @@
 package meta.data;
 
-import flixel.FlxG;
-import meta.CoolUtil;
-
-using StringTools;
-
 class Highscore
 {
 	public static var weekScores:Map<String, Int> = new Map();

@@ -3,31 +3,12 @@ package meta.state;
 #if desktop
 import meta.data.dependency.Discord.DiscordClient;
 #end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxTween;
-import sys.io.File;
-import sys.FileSystem;
-import haxe.Json;
-import haxe.format.JsonParser;
+
 import openfl.display.BitmapData;
-import flash.geom.Rectangle;
+import openfl.geom.Rectangle;
+
 import flixel.ui.FlxButton;
-import flixel.FlxBasic;
 import flixel.input.keyboard.FlxKey;
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.data.alphabet.*;
-import objects.*;
-
-using StringTools;
 
 class ModsMenuState extends MusicBeatState
 {
@@ -560,7 +541,7 @@ class ModMetadata
 	public var name:String;
 	public var description:String;
 	public var color:FlxColor;
-	public var restart:Bool;//trust me. this is very important
+	public var restart:Bool;
 	public var alphabet:Alphabet;
 	public var icon:AttachedSprite;
 
@@ -572,7 +553,6 @@ class ModMetadata
 		this.color = ModsMenuState.defaultColor;
 		this.restart = false;
 
-		//Try loading json
 		var pack:Dynamic = Mods.getPack(folder);
 		if(pack != null) {
 			//using reflects cuz for some odd reason my haxe hates the stuff.var shit

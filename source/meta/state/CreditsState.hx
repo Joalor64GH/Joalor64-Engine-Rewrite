@@ -9,12 +9,6 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.data.alphabet.*;
-import objects.*;
-
 class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;

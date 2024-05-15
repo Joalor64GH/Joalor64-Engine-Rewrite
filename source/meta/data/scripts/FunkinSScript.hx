@@ -1,18 +1,10 @@
 package meta.data.scripts;
 
-import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.sound.FlxSound;
 import flixel.ui.FlxBar;
-import openfl.Assets;
-import openfl.Lib;
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.data.alphabet.*;
+
 import objects.userinterface.note.*;
-import objects.*;
 
 final class FunkinSScript extends tea.SScript
 {
