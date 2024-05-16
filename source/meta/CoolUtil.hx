@@ -1,11 +1,5 @@
 package meta;
 
-import meta.state.PlayState;
-import openfl.utils.Assets;
-#if sys
-import sys.FileSystem;
-#end
-
 @:keep
 class CoolUtil
 {
@@ -155,7 +149,6 @@ class CoolUtil
 		return null;
 	}
 
-	//uhhhh does this even work at all? i'm starting to doubt
 	inline public static function precacheSound(sound:String):Void
 		Paths.sound(sound);
 

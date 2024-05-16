@@ -1,21 +1,6 @@
 package meta;
 
-import meta.data.Conductor.BPMChangeEvent;
-import meta.data.CustomFadeTransition;
-import meta.data.ClientPrefs;
-import flixel.FlxG;
 import flixel.addons.ui.FlxUIState;
-import flixel.math.FlxRect;
-import flixel.util.FlxTimer;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import flixel.util.FlxGradient;
-import flixel.FlxState;
-import flixel.FlxCamera;
-import flixel.FlxBasic;
 
 class MusicBeatState extends modcharting.ModchartMusicBeatState
 {
@@ -36,13 +21,16 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 
 	override function create() {
 		camBeat = FlxG.camera;
-		var skip:Bool = FlxTransitionableState.skipNextTransOut;
-		super.create();
 
-		if(!skip) {
-			openSubState(new CustomFadeTransition(0.7, true));
-		}
-		FlxTransitionableState.skipNextTransOut = false;
+		Paths.clearStoredMemory();
+		if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.editors.ChartingState)))
+			Paths.clearUnusedMemory();
+
+		if (!FlxTransitionableState.skipNextTransOut)
+			openSubState(new CustomFadeTransition(0.5, true));
+
+		if (transIn != null)
+			trace('reg ' + transIn.region);
 
 		#if MODS_ALLOWED 
 		Mods.updatedOnState = false; 
@@ -51,7 +39,6 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		//everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -128,7 +115,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	{
 		if (!FlxTransitionableState.skipNextTransIn)
 		{
-			FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
+			FlxG.state.openSubState(new CustomFadeTransition(0.35, false));
 			CustomFadeTransition.finishCallback = onOutroComplete;
 			return;
 		}
@@ -138,7 +125,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		onOutroComplete();
 	}
 
-	public static function getState():MusicBeatState{
+	public static function getState():MusicBeatState {
 		return cast (FlxG.state, MusicBeatState);
 	}
 

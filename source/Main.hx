@@ -326,6 +326,8 @@ class Joalor64Game extends FlxGame
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
+		DiscordClient.shutdown();
+
 		Main.instance.addChild(new backend.CrashHandler(e.details()));
 		_viewingCrash = true;
 		#else

@@ -1,78 +1,62 @@
 package meta.data;
 
-class CustomFadeTransition extends meta.MusicBeatSubstate {
+import flixel.addons.transition.Transition;
+import flixel.addons.transition.TransitionData;
+
+/**
+ * @author DiogoTVV
+ * @see https://github.com/DiogoTVV/funky-moonleap-source
+ */
+
+class CustomFadeTransition extends FlxSubState
+{
 	public static var finishCallback:Void->Void;
-	public static var nextCamera:FlxCamera;
 
-	private var leTween:FlxTween = null;
-
+	var rhombus:FlxSprite;
 	var isTransIn:Bool = false;
-	var transBlack:FlxSprite;
-	var transGradient:FlxSprite;
 
-	public function new(duration:Float, isTransIn:Bool) {
+	public function new(duration:Float, isTransIn:Bool)
+	{
 		super();
 
 		this.isTransIn = isTransIn;
-		var zoom:Float = CoolUtil.boundTo(FlxG.camera.zoom, 0.05, 1);
-		var width:Int = Std.int(FlxG.width / zoom);
-		var height:Int = Std.int(FlxG.height / zoom);
-		transGradient = FlxGradient.createGradientFlxSprite(width, height, (isTransIn ? [0x0, FlxColor.BLACK] : [FlxColor.BLACK, 0x0]));
-		transGradient.scrollFactor.set();
-		add(transGradient);
-
-		transBlack = new FlxSprite().makeGraphic(width, height + 400, FlxColor.BLACK);
-		transBlack.scrollFactor.set();
-		add(transBlack);
-
-		transGradient.x -= (width - FlxG.width) / 2;
-		transBlack.x = transGradient.x;
-
-		if(isTransIn) {
-			transGradient.y = transBlack.y - transBlack.height;
-			FlxTween.tween(transGradient, {y: transGradient.height + 50}, duration, {
-				onComplete: function(twn:FlxTween) {
-					close();
-				},
-			ease: FlxEase.linear});
-		} else {
-			transGradient.y = -transGradient.height;
-			transBlack.y = transGradient.y - transBlack.height + 50;
-			leTween = FlxTween.tween(transGradient, {y: transGradient.height + 50}, duration, {
-				onComplete: function(twn:FlxTween) {
-					if(finishCallback != null) {
-						finishCallback();
-					}
-				},
-			ease: FlxEase.linear});
-		}
-
-		if(nextCamera != null) {
-			transBlack.cameras = [nextCamera];
-			transGradient.cameras = [nextCamera];
-		}
-		nextCamera = null;
+		
+		var width:Int = Std.int(FlxG.width);
+		var height:Int = Std.int(FlxG.height);
+		
+		rhombus = new FlxSprite();
+		rhombus.frames = Paths.getSparrowAtlas('transition');
+		rhombus.animation.addByIndices('fadeIn', 'fade', [29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0], "", Std.int(20 / duration), false);
+		rhombus.animation.addByIndices('fadeOut','fade', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", Std.int(20 / duration), false);
+		rhombus.animation.play('fade' + (isTransIn ? 'In' : 'Out'));
+		rhombus.color = FlxColor.fromRGB(0, 0, 85);
+		rhombus.scrollFactor.set();
+		add(rhombus);
 	}
 
-	override function update(elapsed:Float) {
-		if(isTransIn) {
-			transBlack.y = transGradient.y + transGradient.height;
-		} else {
-			transBlack.y = transGradient.y - transBlack.height;
-		}
+	var stopNow:Bool = false;
+	
+	override function update(elapsed:Float)
+	{
+		var camList = FlxG.cameras.list;
+		camera = camList[camList.length - 1];
+		rhombus.cameras = [camera];
+
 		super.update(elapsed);
-		if(isTransIn) {
-			transBlack.y = transGradient.y + transGradient.height;
-		} else {
-			transBlack.y = transGradient.y - transBlack.height;
+		
+		if (rhombus.animation.curAnim.finished && !stopNow)
+		{
+			stopNow = true;
+		
+			if (isTransIn)
+				close();
+			else if (finishCallback != null)
+				finishCallback();
 		}
 	}
 
-	override function destroy() {
-		if(leTween != null) {
-			finishCallback();
-			leTween.cancel();
-		}
+	override function destroy()
+	{
 		super.destroy();
 	}
 }

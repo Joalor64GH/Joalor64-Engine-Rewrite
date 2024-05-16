@@ -1,13 +1,5 @@
 package meta;
 
-import meta.data.Conductor.BPMChangeEvent;
-import meta.data.CustomFadeTransition;
-import meta.data.ClientPrefs;
-import flixel.FlxG;
-import flixel.FlxSubState;
-import flixel.FlxBasic;
-import flixel.FlxSprite;
-
 class MusicBeatSubstate extends FlxSubState
 {
 	public function new()
@@ -63,8 +55,5 @@ class MusicBeatSubstate extends FlxSubState
 			beatHit();
 	}
 
-	public function beatHit():Void
-	{
-		//do literally nothing dumbass
-	}
+	public function beatHit():Void {}
 }
