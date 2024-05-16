@@ -1,24 +1,24 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
+import openfl.events.KeyboardEvent;
+
+import flixel.animation.FlxAnimationController;
 import flixel.addons.effects.FlxTrail;
+import flixel.input.keyboard.FlxKey;
 import flixel.sound.FlxSound;
 import flixel.ui.FlxBar;
-import flixel.input.keyboard.FlxKey;
-import openfl.events.KeyboardEvent;
-import flixel.animation.FlxAnimationController;
+
 import animateatlas.AtlasFrameMaker;
+
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
+
 import core.ScriptCore;
 
 #if LUA_ALLOWED
@@ -51,6 +51,11 @@ import hscript.*;
 
 import meta.video.*;
 import meta.data.scripts.*;
+import meta.state.ReplayState.ReplayPauseSubstate;
+import meta.data.scripts.FunkinLua;
+import meta.data.Achievements;
+import meta.data.StageData;
+import meta.data.WeekData;
 
 import objects.Character;
 import objects.shaders.*;
@@ -58,15 +63,6 @@ import objects.background.*;
 import objects.userinterface.note.*;
 import objects.userinterface.note.Note;
 import objects.userinterface.DialogueBoxPsych;
-
-import meta.state.ReplayState.ReplayPauseSubstate;
-import meta.data.scripts.FunkinLua;
-import meta.data.Achievements;
-import meta.data.Conductor;
-import meta.data.Song;
-import meta.data.Section;
-import meta.data.StageData;
-import meta.data.WeekData;
 
 class PlayState extends MusicBeatState
 {
@@ -1271,6 +1267,9 @@ class PlayState extends MusicBeatState
 		add(timeBar);
 		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
+
+		if (ClientPrefs.longBar)
+			timeBar.setGraphicSize(1170, timeBar.height);
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);

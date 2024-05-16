@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import flixel.sound.FlxSound;
 
 class FreeplayState extends MusicBeatState
@@ -84,6 +80,17 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		bg.screenCenter();
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
+
+			var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
+		slash.antialiasing = ClientPrefs.globalAntialiasing;
+		slash.screenCenter();
+		add(slash);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);

@@ -1,29 +1,10 @@
 package meta.data.options;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-
-import objects.*;
 import objects.shaders.*;
 import objects.userinterface.menu.*;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.math.FlxMath;
 import flixel.ui.FlxButton;
-
-using StringTools;
 
 class ControlsSubState extends MusicBeatSubstate {
 	private static var curSelected:Int = 1;
@@ -413,7 +394,7 @@ class GameplaySubState extends BaseOptionsMenu
 			['Default', 'Forever', 'Kade', 'Simplylove']);
 		addOption(option);
 
-		var option:Option = new Option('Long Health Bar',
+		var option:Option = new Option('Long Health/Time Bar',
 			'why would you want this anyways',
 			'longBar',
 			'bool',
@@ -564,6 +545,14 @@ class MiscSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		#end
+
+		var option:Option = new Option('Language:',
+			"What should the game language be?",
+			'language',
+			'string',
+			'en-US',
+			['en-US', 'es-ES', 'pt-BR']);
+		addOption(option);
 
 		var option:Option = new Option('Save Replays',
 			'If checked, the game will save a recording of your gameplay\nfor every song you complete.

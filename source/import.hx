@@ -1,6 +1,7 @@
-// This just contains global imports.
 #if !macro
-// FLIXEL
+// Default Imports
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
@@ -12,12 +13,34 @@ import flixel.util.*;
 import flixel.math.*;
 import flixel.*;
 
-// JOALOR64
-import animateatlas.AtlasFrameMaker;
-import meta.data.alphabet.Alphabet;
+import haxe.Json;
+
+import lime.app.Application;
+
+import openfl.Lib;
+import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.display.Sprite;
+import openfl.system.System;
+import openfl.geom.*;
+
+import hscript.*;
+
+#if (sys || desktop || MODS_ALLOWED)
+import sys.io.File;
+import sys.FileSystem;
+#elseif js
+import js.html.*;
+#end
+
+// Joalor64 Engine Imports
 #if desktop
 import meta.data.dependency.Discord;
 #end
+
+import animateatlas.AtlasFrameMaker;
+import meta.data.alphabet.Alphabet;
 import meta.data.Conductor;
 import meta.data.Conductor.BPMChangeEvent;
 import meta.data.Section;
@@ -38,35 +61,14 @@ import meta.substate.*;
 import meta.state.editors.*;
 import meta.*;
 
+import objects.*;
+import objects.userinterface.*;
+
 import Paths;
 
 #if MODS_ALLOWED 
 import backend.Mods; 
 #end
-
-import objects.*;
-import objects.userinterface.*;
-
-import hscript.*;
-
-// MISCELLANEOUS
-#if (sys || desktop || MODS_ALLOWED)
-import sys.io.File;
-import sys.FileSystem;
-#end
-
-import haxe.Json;
-
-import lime.app.Application;
-
-import openfl.Lib;
-import openfl.Assets; // i know this is the same thing, but still
-import openfl.utils.Assets;
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-import openfl.display.Sprite;
-import openfl.system.System;
-import openfl.geom.*;
 
 using Globals;
 using StringTools;
