@@ -19,6 +19,7 @@ class KillBF extends MusicBeatState
     override function create()
     {
         FlxG.mouse.visible = true;
+        FlxG.sound.playMusic(Paths.music('minigame'));
 
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('stages/stage/stageback'));
         bg.screenCenter();

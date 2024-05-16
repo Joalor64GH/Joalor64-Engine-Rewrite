@@ -10,10 +10,10 @@ class MinigamesState extends MusicBeatState
 
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
-		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico')
+		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
+		new Minigame('Kill BF', 'lmao', 'mgicons/killBf')
 		// soon...
 		// new Minigame("Joalor64's Tutorial", 'placeholder', 'mgicons/me')
-		// new Minigame('Kill BF', 'lmao', 'mgicons/bf')
 	];
 
 	var descTxt:FlxText;
@@ -84,14 +84,18 @@ class MinigamesState extends MusicBeatState
             
 		if (controls.ACCEPT)
 		{
-            		PlayState.inMini = true;
-			LoadingState.loadAndSwitchState(() -> new PlayState());
 			switch (curSelected)
             		{
 				case 0:
 					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
+					PlayState.inMini = true;
+					LoadingState.loadAndSwitchState(() -> new PlayState());
 				case 1:
 					PlayState.SONG = Song.loadFromJson('compression', 'compression');
+					PlayState.inMini = true;
+					LoadingState.loadAndSwitchState(() -> new PlayState());
+				case 2:
+					FlxG.switchState(() -> new minigames.KillBF());
 			}
 		}
 	}

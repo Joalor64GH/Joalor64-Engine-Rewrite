@@ -1,18 +1,10 @@
 package meta.data.alphabet;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.util.FlxTimer;
 import flixel.sound.FlxSound;
 import openfl.media.Sound;
-import objects.shaders.ColorSwap;
 
-using StringTools;
+import objects.shaders.ColorSwap;
 
 enum Alignment
 {
@@ -39,6 +31,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 	public var targetX:Float = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
+	public var disableX:Bool = false;
 	public var yMult:Float = 120;
 	public var xAdd:Float = 0;
 	public var yAdd:Float = 0;
@@ -57,6 +50,8 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 	public var colorEffect(default, set):Null<Float> = 0.1;
 
 	public static var alphabet:Alphabet = null;
+
+	public var xTo:Int = 100;
 
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'alphabet')
 	{
@@ -207,16 +202,15 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 						x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
 					if(changeY)
 						y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
+
+					x = (!disableX) ? FlxMath.lerp(x, (targetY * 20) + 90, elapsed * 6) : FlxMath.lerp(x, xTo, elapsed * 6);
 			}
 			
 			if (isMenuItemCentered)
 			{
 				var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
 				y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-				if(forceX != Math.NEGATIVE_INFINITY)
-					screenCenter(X);
-				else
-					screenCenter(X);
+				if (forceX != Math.NEGATIVE_INFINITY) screenCenter(X); else screenCenter(X);
 			}
 
 		        switch (itemType)
@@ -275,7 +269,6 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 		rows = 0;
 		for (character in newText.split(''))
 		{
-			
 			if(character != '\n')
 			{
 				var spaceChar:Bool = (character == " " || (bold && character == "_"));
@@ -361,16 +354,6 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 	}
 }
 
-///////////////////////////////////////////
-// ALPHABET LETTERS, SYMBOLS AND NUMBERS //
-///////////////////////////////////////////
-
-/*enum LetterType
-{
-	ALPHABET;
-	NUMBER_OR_SYMBOL;
-}*/
-
 typedef Letter = {
 	?anim:Null<String>,
 	?offsets:Array<Float>,
@@ -379,7 +362,6 @@ typedef Letter = {
 
 class AlphaCharacter extends FlxSprite
 {
-
 	public var image(default, set):String;
 
 	var colorSwap:ColorSwap;

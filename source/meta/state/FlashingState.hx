@@ -6,7 +6,7 @@ class FlashingState extends MusicBeatState
 
 	var bg:FlxSprite;
 
-	override function create() 
+	override function create()
 	{
 		super.create();
 
@@ -16,31 +16,23 @@ class FlashingState extends MusicBeatState
 		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 	}
 
-	override function update(elapsed:Float) 
+	override function update(elapsed:Float)
 	{
-		if (!leftState)	
-		{
-			if (FlxG.keys.justPressed.ESCAPE) 
-			{
-				ClientPrefs.flashing = false;
-				ClientPrefs.saveSettings();
+		if(!leftState) {
+			var back:Bool = controls.BACK;
+			if (controls.ACCEPT || back) {
+				leftState = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
-					onComplete: function (twn:FlxTween) {
+					onComplete: function(twn:FlxTween) {
 						FlxG.switchState(() -> new TitleState());
 					}
 				});
-				leftState = true;
-			} 
-			else if (FlxG.keys.justPressed.ENTER) 
-			{
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-				FlxTween.tween(bg, {alpha: 0}, 1, {
-					onComplete: function (twn:FlxTween) {
-						FlxG.switchState(() -> new TitleState());
-					}
-				});
-				leftState = true;
+
+				if (!back) {
+					ClientPrefs.flashing = false;
+					ClientPrefs.saveSettings();
+				}
 			}
 		}
 		super.update(elapsed);
