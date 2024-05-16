@@ -203,7 +203,7 @@ class TitleState extends MusicBeatState
 		titleText.updateHitbox();
 		add(titleText);
 		
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.4.0b (PE 0.6.3)", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Joalor64 Engine Rewritten v1.4.0-rc1 (PE 0.6.3)", 12);
 		#if debug versionShit.text += " DEBUG BUILD"; #elseif nightly versionShit.text += " NIGHTLY BUILD"; #end
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

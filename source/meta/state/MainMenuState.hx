@@ -43,7 +43,7 @@ typedef MenuData =
 class MainMenuState extends MusicBeatState
 {
 	public static var nightly:String = #if nightly '-nightly' #else '' #end;
-	public static var joalor64EngineVersion:String = '1.4.0b'; // Used for Discord RPC
+	public static var joalor64EngineVersion:String = '1.4.0-rc1'; // Used for Discord RPC
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
 
