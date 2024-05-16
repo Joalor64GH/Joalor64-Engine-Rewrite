@@ -34,7 +34,7 @@ class FPS extends openfl.text.TextField
 				'FPS: ${times.length}' + '\nMemory: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}' 
 					#if debug + '\nBuild Number: ${Main.buildNum}' #end : '';
 
-			textColor = (currentFPS < FlxG.drawFramerate * 0.5) ? 0xFFFF0000 : 0xFFFFFFFF;
+			textColor = (times.length < FlxG.drawFramerate * 0.5) ? 0xFFFF0000 : 0xFFFFFFFF;
 		});
 	}
 }
