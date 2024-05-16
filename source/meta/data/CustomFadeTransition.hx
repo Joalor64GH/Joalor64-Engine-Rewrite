@@ -11,6 +11,7 @@ import flixel.addons.transition.TransitionData;
 class CustomFadeTransition extends FlxSubState
 {
 	public static var finishCallback:Void->Void;
+	public static var nextCamera:FlxCamera;
 
 	var rhombus:FlxSprite;
 	var isTransIn:Bool = false;
@@ -35,11 +36,12 @@ class CustomFadeTransition extends FlxSubState
 	}
 
 	var stopNow:Bool = false;
-	
+
 	override function update(elapsed:Float)
 	{
 		var camList = FlxG.cameras.list;
 		camera = camList[camList.length - 1];
+		
 		rhombus.cameras = [camera];
 
 		super.update(elapsed);

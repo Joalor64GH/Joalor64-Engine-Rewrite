@@ -1,0 +1,34 @@
+package minigames;
+
+class FallingIcon extends FlxSprite
+{
+    public function new(x:Float, y:Float)
+    {
+        super(x, y);
+
+        loadGraphic(Paths.image('icons/bf'), true, 150, 150);
+
+        animation.add('normal', [0], 1);
+        animation.add('oof', [1], 1);
+
+        animation.play('normal');
+    }
+
+    override function update(elapsed:Float)
+    {
+        super.update(elapsed);
+
+        if (FlxG.mouse.overlaps(this) && FlxG.mouse.justPressed)
+            kill();
+    }
+
+    override function kill()
+    {
+        alive = false;
+        FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.22, {
+            ease: FlxEase.circOut, onComplete: (_) -> {
+                exists = false;
+            }
+        });
+    }
+}

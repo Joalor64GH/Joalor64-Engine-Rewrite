@@ -96,22 +96,22 @@ class CreditsState extends MusicBeatState
 			['Special Thanks'],
 			[
 				'crowplexus',
-				'beastly',
-				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"',
+				'crowplexus',
+				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\nNew Crash Handler\n"just happy to be here!"',
 				'https://github.com/crowplexus',
-				'8CC4FF',
+				'a1a1a1',
 				'Ghost'
 			],
 			[
-				'TheWorldMachinima',
-				'machinima',
-				'SScript\nFunkin Cocoa Code\nSoftcoded Achievements\n"Banger PR"',
-				'nolink',
-				'638F5B',
-				'nyaw'
+				'TahirKarabekiroglu',
+				'tahir',
+				'SScript\nFunkin Cocoa Code\nSoftcoded Achievements, Replay System\n"Banger PR"',
+				'https://github.com/TahirKarabekiroglu',
+				'A04397',
+				''
 			],
 			[
-				'Magnumsrt',
+				'steve-studios',
 				'mag',
 				'In-Game Mod Downloader\n"why bro keep changing his user"',
 				'https://github.com/steve-studios',
@@ -223,7 +223,7 @@ class CreditsState extends MusicBeatState
 			[
 				'gedehari',
 				'sqirra',
-				'Crash Handler and Base code for\nChart Editor\'s Waveform',
+				'Old Crash Handler and Base code for\nChart Editor\'s Waveform',
 				'https://twitter.com/gedehari',
 				'E1843A',
 				''

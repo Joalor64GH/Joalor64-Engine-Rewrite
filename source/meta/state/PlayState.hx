@@ -209,7 +209,7 @@ class PlayState extends MusicBeatState
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
 
-	public var ratingsArray:Array<Array<Dynamic>> = [
+	public var ratingsArray:Array<Dynamic> = [
 		// name, hit window, score, notesplash
 		["sick", 1, 350, true],
 		["good", 0.75, 200, false],
