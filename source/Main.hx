@@ -1,9 +1,5 @@
 package;
 
-import webm.WebmPlayer;
-import openfl.display.FPS;
-import openfl.events.Event;
-import openfl.display.StageScaleMode;
 import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
@@ -12,6 +8,8 @@ import meta.video.*;
 import haxe.Exception;
 import haxe.CallStack;
 import haxe.io.Path;
+
+iomport macros.MacroUtil;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
@@ -37,6 +35,9 @@ class Main extends Sprite
 		skipSplash: true,
 		startFullscreen: false
 	};
+
+	public static var buildNum(default, never):Int = MacroUtil.get_build_num();
+	public static var commitId(default, never):String = MacroUtil.get_commit_id();
 
 	public static function main():Void
 		Lib.current.addChild(new Main());
@@ -88,8 +89,6 @@ class Main extends Sprite
 
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null)
 			fpsVar.visible = ClientPrefs.showFPS;
 

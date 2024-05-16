@@ -70,6 +70,8 @@ import Paths;
 import backend.Mods; 
 #end
 
+import backend.Localization;
+
 using Globals;
 using StringTools;
 using meta.CoolUtil;

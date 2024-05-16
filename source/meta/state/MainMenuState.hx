@@ -270,7 +270,7 @@ class MainMenuState extends MusicBeatState
 
 		// Watermarks
 		var versionShitArray:Array<String> = [
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion' + nightly,
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion $nightly [${Main.commitId}]',
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
 			"Friday Night Funkin' v" + Application.current.meta.get('version')
 		];

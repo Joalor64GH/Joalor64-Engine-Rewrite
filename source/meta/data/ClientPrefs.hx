@@ -39,7 +39,7 @@ class ClientPrefs {
 	public static var longBar:Bool = false;
 	public static var floatyLetters:Bool = false;
 	public static var songDisplay:String = 'Classic';
-	public static var language:String = 'en-US';
+	public static var language:String = 'en';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 

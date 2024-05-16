@@ -17,7 +17,6 @@ class FPS extends openfl.text.TextField
 		height = 720;
 		selectable = false;
 		defaultTextFormat = new openfl.text.TextFormat(Paths.font((font != null) ? font : 'vcr.ttf'), 18, 0xFFFFFF);
-
 		alpha = 0.8; // to see things from the back better
 
 		addEventListener(openfl.events.Event.ENTER_FRAME, (_) ->
@@ -26,13 +25,16 @@ class FPS extends openfl.text.TextField
 			times.push(now);
 			while (times[0] < now - 1000) times.shift();
 
-			var mem:Float = openfl.system.System.totalMemory;
+			var mem:Float = System.totalMemory;
 			var memPeak:Float = 0;
 
 			if (mem > memPeak) memPeak = mem;
 			
 			text = (visible) ? 
-				'FPS: ${times.length}' + '\nMemory: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}' : '';
+				'FPS: ${times.length}' + '\nMemory: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}' 
+					#if debug + '\nBuild Number: ${Main.buildNum}' #end : '';
+
+			textColor = (currentFPS < FlxG.drawFramerate * 0.5) ? 0xFFFF0000 : 0xFFFFFFFF;
 		});
 	}
 }

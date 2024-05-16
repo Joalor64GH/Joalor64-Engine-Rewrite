@@ -550,8 +550,8 @@ class MiscSubState extends BaseOptionsMenu
 			"What should the game language be?",
 			'language',
 			'string',
-			'en-US',
-			['en-US', 'es-ES', 'pt-BR']);
+			'en',
+			['en', 'es', 'pt-br']);
 		addOption(option);
 
 		var option:Option = new Option('Save Replays',

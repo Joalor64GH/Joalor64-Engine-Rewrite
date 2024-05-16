@@ -90,6 +90,12 @@ class Init extends FlxState
 
 	function loadEverything()	
 	{
+		Localization.init({
+			languages: ['en', 'es', 'pt-br'],
+			directory: "locales",
+			default_language: "en"
+		});
+		
 		#if html5
 		Paths.initPaths();
 		#end
