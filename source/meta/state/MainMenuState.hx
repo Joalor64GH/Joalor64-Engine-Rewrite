@@ -43,28 +43,24 @@ typedef MenuData =
 class MainMenuState extends MusicBeatState
 {
 	public static var nightly:String = #if nightly '-nightly' #else '' #end;
-	
 	public static var joalor64EngineVersion:String = '1.4.0b'; // Used for Discord RPC
-	
 	public static var psychEngineVersion:String = '0.6.3';
 	public static var psychGitBuild:String = 'eb79a80';  
 
 	public static var curSelected:Int = 0;
+	public static var firstStart:Bool = true;
+	public static var finishedFunnyMove:Bool = false;
+	public static var curColumn:MainMenuColumn = CENTER;
 
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-
-	public static var firstStart:Bool = true;
-	public static var finishedFunnyMove:Bool = false;
 	
 	var menuItems:FlxTypedGroup<FlxSprite>;
-
 	var optionShit:Array<String> = [];
 	var linkArray:Array<Array<String>> = [];
 
 	var leftItem:FlxSprite;
 	var rightItem:FlxSprite;
-
 	var leftOption:String = #if ACHIEVEMENTS_ALLOWED 'achievements' #else null #end;
 	var rightOption:String = 'options';
 
@@ -83,7 +79,6 @@ class MainMenuState extends MusicBeatState
 	var tipText:FlxText;
 
 	var invalidPosition:Null<Int> = null;
-
 	var menuJSON:MenuData;
 
 	override function create()
@@ -346,6 +341,7 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	var selectedSomethin:Bool = false;
+	var timeNotMoving:Float = 0;
 
 	override function update(elapsed:Float)
 	{
@@ -607,7 +603,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-	function changeItem(huh:Int = 0)
+	function changeItem(change:Int = 0)
 	{
 		if (finishedFunnyMove) 
 		{
