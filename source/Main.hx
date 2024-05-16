@@ -31,7 +31,7 @@ class Main extends Sprite
 
 	public final config:Dynamic = {
 		gameDimensions: [GameDimensions.width, GameDimensions.height],
-		initialState: () -> new Init(),
+		initialState: Init,
 		defaultFPS: 60,
 		skipSplash: true,
 		startFullscreen: false
