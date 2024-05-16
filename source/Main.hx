@@ -9,7 +9,7 @@ import haxe.Exception;
 import haxe.CallStack;
 import haxe.io.Path;
 
-iomport macros.MacroUtil;
+import macros.MacroUtil;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
