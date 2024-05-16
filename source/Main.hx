@@ -3,6 +3,7 @@ package;
 import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
+import debug.FPS;
 
 // crash handler stuff
 import haxe.Exception;

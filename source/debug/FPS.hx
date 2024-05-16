@@ -1,4 +1,4 @@
-package openfl.display;
+package debug;
 
 import flixel.util.FlxStringUtil;
 
