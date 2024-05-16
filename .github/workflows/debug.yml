@@ -43,12 +43,14 @@ jobs:
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build Project.xml linux -debug --app-version="4.0.0-${{ github.run_id}}"
+        run: haxelib run lime build linux -debug
+      - name: Tar files
+        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/linux/bin
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
           name: linuxBuild
-          path: 'export/debug/linux/bin'
+          path: Joalor64EngineRE.tar.gz
       - name: Uploading new cache
         uses: actions/cache@main
         with:
@@ -87,7 +89,7 @@ jobs:
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build windows -debug --app-version="4.0.0-${{ github.run_id}}"
+        run: haxelib run lime build windows -debug
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
@@ -131,12 +133,14 @@ jobs:
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build mac -debug --app-version="4.0.0-${{ github.run_id}}"
+        run: haxelib run lime build mac -debug
+      - name: Tar files
+        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/macos/bin
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
           name: macOSBuild
-          path: export/debug/macos/bin
+          path: Joalor64EngineRE.tar.gz
       - name: Uploading new cache
         uses: actions/cache@main
         with:
