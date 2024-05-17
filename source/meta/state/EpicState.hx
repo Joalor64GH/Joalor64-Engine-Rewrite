@@ -4,24 +4,6 @@ class EpicState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 
-    	public static var coolColors:Array<FlxColor> = [
-		0x00000000, // Transparent
-		0xFFFFFFFF, // White
-		0xFF808080, // Gray
-		0xFF000000, // Black
-		0xFF008000, // Green
-		0xFF00FF00, // Lime
-		0xFFFFFF00, // Yellow
-		0xFFFFA500, // Orange
-		0xFFFF0000, // Red
-		0xFF800080, // Purple
-		0xFF0000FF, // Blue
-		0xFF8B4513, // Brown
-		0xFFFFC0CB, // Pink
-		0xFFFF00FF, // Magenta
-		0xFF00FFFF // Cyan
-	];
-
 	var theCool:Array<String> = [
 		"VS Joalor64",
 		"Joalor64 Engine",
@@ -36,7 +18,7 @@ class EpicState extends MusicBeatState
 	override function create()
 	{
 		menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        	menuBG.color = randomizeColor();
+        	menuBG.color = FlxColor.fromRGB(FlxG.random.int(0, 255), FlxG.random.int(0, 255), FlxG.random.int(0, 255));
 		add(menuBG);
 
         	var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Check out my other projects!", 12);
@@ -119,11 +101,4 @@ class EpicState extends MusicBeatState
 			}
 		}
 	}
-
-    	public static function randomizeColor()
-    	{
-		var chance:Int = FlxG.random.int(0, coolColors.length - 1);
-		var color:FlxColor = coolColors[chance];
-		return color;
-   	}
 }

@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import flixel.graphics.FlxGraphic;
 import objects.userinterface.menu.*;
 

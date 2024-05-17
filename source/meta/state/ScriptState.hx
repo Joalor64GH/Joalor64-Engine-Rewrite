@@ -1,7 +1,7 @@
 package meta.state;
 
 import core.ScriptCore;
-import flixel.FlxBasic;
+
 import flixel.addons.ui.FlxUITooltip;
 import flixel.addons.ui.interfaces.IFlxUIWidget;
 

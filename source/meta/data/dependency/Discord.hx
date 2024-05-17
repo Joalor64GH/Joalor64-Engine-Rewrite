@@ -9,10 +9,6 @@ import llua.Lua;
 import llua.State;
 #end
 
-import meta.state.MainMenuState;
-
-using StringTools;
-
 class DiscordClient
 {
 	public static var isInitialized:Bool = false;

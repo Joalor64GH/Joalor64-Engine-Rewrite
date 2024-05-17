@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import flixel.input.keyboard.FlxKey;
 import flixel.effects.FlxFlicker;
 
@@ -148,7 +144,6 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
-	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
 		add(new AchievementObject('friday_night_play', camAchievement));
 		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
