@@ -124,13 +124,14 @@ class MainMenuState extends MusicBeatState
 		{
 			optionShit = 
 			[
-				'play',
+				'story_mode',
+				'freeplay',
+				'mini',
 				#if MODS_ALLOWED 'mods',
 				#end
 				'credits',
 				#if !switch 
-				'manual',
-				'donate'
+				'manual'
 				#end
 			];
 		}
@@ -535,8 +536,12 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'play':
-										FlxG.switchState(() -> new PlayMenuState());
+									case 'story_mode':
+										FlxG.switchState(() -> new StoryMenuState());
+									case 'freeplay':
+										FlxG.switchState(() -> new FreeplayState());
+									case 'mini':
+										FlxG.switchState(() -> new MinigamesState());
 									#if MODS_ALLOWED
 									case 'mods':
 										FlxG.switchState(() -> new ModsMenuState());
@@ -547,8 +552,6 @@ class MainMenuState extends MusicBeatState
 									#end
 									case 'credits':
 										FlxG.switchState(() -> new CreditsState());
-									case 'donate':
-										FlxG.switchState(() -> new DonateScreenState());
 									case 'options':
 										LoadingState.loadAndSwitchState(() -> new OptionsState());
 								}
