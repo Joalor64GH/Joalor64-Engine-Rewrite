@@ -48,6 +48,7 @@ class KillBF extends MusicBeatState
             {
                 score++;
                 bf.kill();
+                FlxG.sound.play(Paths.sound('bfkill'));
             }
             else if (bf.y > FlxG.height)
             {
@@ -66,7 +67,7 @@ class KillBF extends MusicBeatState
 
     private function spawnSprite()
     {
-        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -20);
+        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -40);
         sprite.velocity.y = FlxG.random.int(50, 100);
         beef.push(sprite);
         add(sprite);
