@@ -486,18 +486,8 @@ class TitleState extends MusicBeatState
 
 	function deleteCoolText()
 	{
-		while (textGroup.members.length > 0) // idk if it was this code, but the game keeps freezing after a few seconds
+		while (textGroup.members.length > 0)
 		{
-			/*
-			FlxTween.tween(credGroup, {alpha: 0}, 0.5, {
-				ease: FlxEase.quadOut, onComplete: function(twn:FlxTween) {
-					credGroup.remove(textGroup.members[0], true);
-				}});
-			FlxTween.tween(textGroup, {alpha: 0}, 0.5, {
-				ease: FlxEase.quadOut, onComplete: function(twn:FlxTween) {
-					textGroup.remove(textGroup.members[0], true);
-				}});
-			*/
 			credGroup.remove(textGroup.members[0], true);
 			textGroup.remove(textGroup.members[0], true);
 		}

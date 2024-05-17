@@ -10,6 +10,8 @@ import flixel.input.keyboard.FlxKey;
 import system.CoolSystemStuff;
 import meta.data.Achievements;
 
+import meta.video.VideoState;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
