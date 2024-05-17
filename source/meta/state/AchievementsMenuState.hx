@@ -1,14 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.data.alphabet.*;
 import meta.data.Achievements;
 
 class AchievementsMenuState extends MusicBeatState

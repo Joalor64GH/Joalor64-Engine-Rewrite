@@ -50,11 +50,13 @@ class KillBF extends MusicBeatState
                 bf.kill();
                 FlxG.sound.play(Paths.sound('bfkill'));
             }
-            else if (bf.y > FlxG.height)
+
+            if (bf.y > FlxG.height)
             {
                 score--;
                 misses++;
                 bf.kill();
+                FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
             }
         }
 
@@ -67,8 +69,8 @@ class KillBF extends MusicBeatState
 
     private function spawnSprite()
     {
-        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -40);
-        sprite.velocity.y = FlxG.random.int(50, 100);
+        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -60);
+        sprite.velocity.y = FlxG.random.int(60, 140);
         beef.push(sprite);
         add(sprite);
     }

@@ -1,23 +1,5 @@
 package meta.data.options;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxColor;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-import meta.substate.*;
-import meta.state.*;
-
-using StringTools;
-
 class SaveDataState extends MusicBeatState
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;

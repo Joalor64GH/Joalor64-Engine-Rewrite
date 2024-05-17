@@ -99,6 +99,8 @@ class DeleteSavesSubState extends MusicBeatSubstate
             }
         }
         loadOptions();
+
+        cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
     }
 
     private function loadOptions(mod:Array<Dynamic> = null)

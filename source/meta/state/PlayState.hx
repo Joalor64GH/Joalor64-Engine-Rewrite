@@ -51,11 +51,12 @@ import hscript.*;
 
 import meta.video.*;
 import meta.data.scripts.*;
-import meta.state.ReplayState.ReplayPauseSubstate;
 import meta.data.scripts.FunkinLua;
 import meta.data.Achievements;
 import meta.data.StageData;
 import meta.data.WeekData;
+
+import meta.state.ReplayState.ReplayPauseSubstate;
 
 import objects.Character;
 import objects.shaders.*;
@@ -5887,6 +5888,8 @@ class PlayState extends MusicBeatState
 		}
 		hscriptMap.clear();
 		#end
+
+		instance = null;
 
 		#if hscript
 		if (FunkinLua.hscript != null) FunkinLua.hscript = null;

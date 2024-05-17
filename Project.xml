@@ -80,9 +80,6 @@
 	<assets path="assets" exclude="*.ogg" if="web"/> 
 	<assets path="assets" exclude="*.mp3|*.mp4" unless="web"/>
 
-	<!-- EMBEDDED BY DEFAULT -->
-	<assets path='header.lua' embed='true'/>
-
 	<!-- SWF EXAMPLE -->
 	<!--<library path="assets/videos/movie.swf" preload="true" id="id"/>-->
 

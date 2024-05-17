@@ -90,7 +90,7 @@ class OptionsState extends MusicBeatState
 
 		var versionShit:FlxText = new FlxText(0, FlxG.height - 26, 0, "Press D for save data settings.", 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT);
+		versionShit.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
 		add(versionShit);
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -115,6 +115,7 @@ class OptionsState extends MusicBeatState
 		#if MODS_ALLOWED
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
+		textBG.scrollFactor.set();
 		add(textBG);
 
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, "Press RESET to access the Modpacks Options saves Reset menu.", 18);
