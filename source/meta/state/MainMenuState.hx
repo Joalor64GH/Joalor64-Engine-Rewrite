@@ -570,11 +570,6 @@ class MainMenuState extends MusicBeatState
 			}
 			#end
 
-			#if debug
-			if (FlxG.keys.justPressed.FOUR)
-				FlxG.switchState(() -> new VideoState("assets/videos/cutscenetest/video.webm", () -> new MainMenuState()));
-			#end
-
 			if (controls.RESET && menuJSON.enableReloadKey)
 				FlxG.resetState();
 		}
