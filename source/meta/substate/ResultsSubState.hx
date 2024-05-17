@@ -89,6 +89,8 @@ class ResultsSubState extends MusicBeatSubstate
     {
 	super.update(elapsed);
 
+		resultsTxt.screenCenter(XY);
+
 	if (controls.ACCEPT) 
 	{
 	    if (PlayState.isStoryMode)

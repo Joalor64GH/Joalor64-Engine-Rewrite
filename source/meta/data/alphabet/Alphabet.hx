@@ -203,7 +203,8 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 					if(changeY)
 						y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
 
-					x = (!disableX) ? FlxMath.lerp(x, (targetY * 20) + 90, elapsed * 6) : FlxMath.lerp(x, xTo, elapsed * 6);
+					// this code broke CreditsState
+					// x = (!disableX) ? FlxMath.lerp(x, (targetY * 20) + 90, elapsed * 6) : FlxMath.lerp(x, xTo, elapsed * 6);
 			}
 			
 			if (isMenuItemCentered)

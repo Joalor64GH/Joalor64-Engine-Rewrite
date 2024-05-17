@@ -5888,19 +5888,16 @@ class PlayState extends MusicBeatState
 		hscriptMap.clear();
 		#end
 
-		#if cpp
-		cpp.vm.Gc.enable(false);
-		#end
-
 		#if hscript
-		if(FunkinLua.hscript != null) FunkinLua.hscript = null;
+		if (FunkinLua.hscript != null) FunkinLua.hscript = null;
 		#end
 
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		FlxAnimationController.globalSpeed = 1;
-		FlxG.sound.music.pitch = 1;
+		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
+		
 		super.destroy();
 	}
 
