@@ -22,10 +22,6 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	override function create() {
 		camBeat = FlxG.camera;
 
-		Paths.clearStoredMemory();
-		if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.editors.ChartingState)))
-			Paths.clearUnusedMemory();
-
 		if (!FlxTransitionableState.skipNextTransOut)
 			openSubState(new CustomFadeTransition(0.5, true));
 
