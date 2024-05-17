@@ -117,9 +117,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		if (menuJSON.options != null && menuJSON.options.length > 0 && menuJSON.options.length < 13)
-		{
 			optionShit = menuJSON.options;
-		}
 		else
 		{
 			optionShit = 
@@ -270,7 +268,7 @@ class MainMenuState extends MusicBeatState
 
 		// Watermarks
 		var versionShitArray:Array<String> = [
-			'Joalor64 Engine Rewritten v$joalor64EngineVersion $nightly [${Main.commitId}]',
+			'Joalor64 Engine Rewritten v$joalor64EngineVersion' + '$nightly' + ' [${Main.commitId}]',
 			'Psych Engine v$psychEngineVersion [$psychGitBuild]',
 			"Friday Night Funkin' v" + Application.current.meta.get('version')
 		];

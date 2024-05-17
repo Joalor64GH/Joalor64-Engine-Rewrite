@@ -1,6 +1,5 @@
 package minigames;
 
-import flixel.ui.FlxBar;
 import minigames.FallingIcon;
 
 class KillBF extends MusicBeatState
@@ -11,10 +10,6 @@ class KillBF extends MusicBeatState
 
     var beef:Array<FallingIcon> = [];
     var scoreText:FlxText;
-
-    var healthBarBG:AttachedSprite;
-	var healthBar:FlxBar;
-    var health:Float = 1;
 
     override function create()
     {
@@ -30,17 +25,6 @@ class KillBF extends MusicBeatState
         scoreText.screenCenter(X);
         add(scoreText);
 
-        healthBarBG = new AttachedSprite('healthBar');
-        healthBarBG.x = scoreText.x;
-		healthBarBG.y = scoreText.y - 20;
-		healthBarBG.screenCenter(X);
-		add(healthBarBG);
-
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
-		add(healthBar);
-		healthBarBG.sprTracker = healthBar;
-
         super.create();
     }
 
@@ -49,9 +33,6 @@ class KillBF extends MusicBeatState
         super.update(elapsed);
 
         scoreText.text = 'Score: ${score} // Misses: ${misses}';
-
-        if (health > 2)
-            health = 2;
 
         spawnTimer += elapsed;
 
@@ -66,14 +47,12 @@ class KillBF extends MusicBeatState
             if (FlxG.mouse.overlaps(bf) && FlxG.mouse.justPressed)
             {
                 score++;
-                health += 0.023;
                 bf.kill();
             }
             else if (bf.y > FlxG.height)
             {
                 score--;
                 misses++;
-                health -= 0.05;
                 bf.kill();
             }
         }

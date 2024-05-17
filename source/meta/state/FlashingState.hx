@@ -19,8 +19,8 @@ class FlashingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if (!leftState) {
-			var back:Bool = FlxG.keys.justPressed.ESCAPE;
-			if (FlxG.keys.justPressed.ENTER || back) {
+			var accept:Bool = FlxG.keys.justPressed.ENTER;
+			if (FlxG.keys.justPressed.ESCAPE || accept) {
 				leftState = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
@@ -29,7 +29,7 @@ class FlashingState extends MusicBeatState
 					}
 				});
 
-				if (!FlxG.keys.justPressed.ENTER) {
+				if (!accept) {
 					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();
 				}
