@@ -5,7 +5,6 @@ import core.ToastCore;
 import meta.video.*;
 import debug.FPS;
 
-// crash handler stuff
 import haxe.Exception;
 import haxe.CallStack;
 import haxe.io.Path;
@@ -37,7 +36,6 @@ class Main extends Sprite
 		startFullscreen: false
 	};
 
-	public static var buildNum(default, never):Int = MacroUtil.get_build_num();
 	public static var commitId(default, never):String = MacroUtil.get_commit_id();
 
 	public static function main():Void
