@@ -339,6 +339,47 @@ class MainMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 
+			if (FlxG.mouse.wheel == 1 || FlxG.mouse.wheel == -1) {
+				changeItem(FlxG.mouse.wheel == 1 ? -1 : 1);
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+			}
+
+			if (FlxG.mouse.deltaScreenX != 0 && FlxG.mouse.deltaScreenY != 0)
+			{
+				FlxG.mouse.visible = true;
+				timeNotMoving = 0;
+
+				var selectedItem:FlxSprite;
+				selectedItem = menuItems.members[curSelected];
+
+				var dist:Float = -1;
+				var distItem:Int = -1;
+				for (i in 0...optionShit.length)
+				{
+					var memb:FlxSprite = menuItems.members[i];
+					if (FlxG.mouse.overlaps(memb))
+					{
+						var distance:Float = Math.sqrt(Math.pow(memb.getGraphicMidpoint().x - FlxG.mouse.screenX, 2) + Math.pow(memb.getGraphicMidpoint().y - FlxG.mouse.screenY, 2));
+						if (dist < 0 || distance < dist)
+						{
+							dist = distance;
+							distItem = i;
+						}
+					}
+				}
+
+				if (distItem != -1 && curSelected != distItem)
+				{
+					curSelected = distItem;
+					changeItem();
+				}
+			}
+			else
+			{
+				timeNotMoving += elapsed;
+				if (timeNotMoving > 1) FlxG.mouse.visible = false;
+			}
+
 			if (controls.BACK)
 			{
 				selectedSomethin = true;
@@ -418,11 +459,13 @@ class MainMenuState extends MusicBeatState
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;
+				FlxG.mouse.visible = false;
 				FlxG.switchState(() -> new MasterEditorMenu());
 			}
 			else if (FlxG.keys.anyJustPressed(modShortcutKeys))
 			{
 				selectedSomethin = true;
+				FlxG.mouse.visible = false;
 				FlxG.switchState(() -> new ModsMenuState());
 			}
 			#end
@@ -460,21 +503,16 @@ class MainMenuState extends MusicBeatState
 		if (finishedFunnyMove) 
 			curSelected = FlxMath.wrap(curSelected + change, 0, optionShit.length - 1);
 
-		menuItems.forEach((spr:FlxSprite) ->
-		{
-			spr.animation.play('idle');
-			spr.updateHitbox();
+		menuItems.members[curSelected].animation.play('idle');
+		menuItems.members[curSelected].updateHitbox();
+		menuItems.members[curSelected].screenCenter(X);
 
-			if (spr.ID == curSelected)
-			{
-				spr.animation.play('selected');
-				var add:Float = 0;
-				if(menuItems.length > 4) 
-					add = menuItems.length * 8;
-				
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-				spr.centerOffsets();
-			}
-		});
+		menuItems.members[curSelected].animation.play('selected');
+		menuItems.members[curSelected].centerOffsets();
+		menuItems.members[curSelected].screenCenter(X);
+
+		camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x,
+			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
+
 	}
 }

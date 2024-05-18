@@ -161,6 +161,11 @@ class ModsSetupState extends MusicBeatState
         Paths.clearStoredMemory();
         Paths.clearUnusedMemory();
 
+        FlxG.mouse.visible = true;
+
+        FlxG.sound.music.fadeIn(4, 0, 0.7);
+		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
+
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
         bg.scrollFactor.set();
         bg.color = 0xFF353535;
@@ -232,7 +237,9 @@ class ModsSetupState extends MusicBeatState
         if (controls.BACK) 
         {
             FlxG.switchState(() -> new MasterEditorMenu());
+            FlxG.sound.playMusic(Paths.music('freakyMenu'));
             FlxG.sound.play(Paths.sound('cancelMenu'));
+            FlxG.mouse.visible = false;
         }
     }
 }

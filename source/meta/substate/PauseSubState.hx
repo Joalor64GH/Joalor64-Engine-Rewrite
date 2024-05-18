@@ -1,22 +1,6 @@
 package meta.substate;
 
-import meta.*;
-import meta.data.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
-import flixel.sound.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
 
 class PauseSubState extends MusicBeatSubstate
@@ -45,21 +29,22 @@ class PauseSubState extends MusicBeatSubstate
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
 	var curTime:Float = Math.max(0, Conductor.songPosition);
-	//var botplayText:FlxText;
 
 	public static var songName:String = '';
 
 	public static var fromPlayState:Bool = false;
 
+	var stickers:Array<FlxSprite> = [];
+    var stickerArray:Array<String> = [];
+
 	public function new(x:Float, y:Float)
 	{
 		super();
-		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+
+		if (CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty');
 
 		if (PlayState.storyPlaylist.length > 1 && PlayState.isStoryMode)
-		{
 			menuItemsOG.insert(2, "Skip Song");
-		}
 
 		if(PlayState.chartingMode)
 		{
@@ -84,11 +69,12 @@ class PauseSubState extends MusicBeatSubstate
 		difficultyChoices.push('BACK');
 
 		pauseMusic = new FlxSound();
-		if(songName != null) {
+
+		if (songName != null)
 			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
-		} else if (songName != 'None') {
+		else if (songName != 'None')
 			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), true, true);
-		}
+		
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 

@@ -210,8 +210,9 @@ class CrashHandler extends Sprite
 				TitleState.initialized = false;
 				TitleState.closedState = false;
 				OutdatedState.leftState = false;
-				FlxG.switchState(new Init());
+				FlxG.switchState(() -> new Init());
 				_active = false;
+				
 				@:privateAccess
 				Main.instance.game._viewingCrash = false;
 				if (Main.instance != null && Main.instance.contains(this))

@@ -1,12 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
-import openfl.display.BitmapData;
-import openfl.geom.Rectangle;
-
 import flixel.ui.FlxButton;
 import flixel.input.keyboard.FlxKey;
 
@@ -59,19 +52,20 @@ class ModsMenuState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD\nOR PRESS 7 TO OPEN THE MOD DOWNLOADER", 48);
+		noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD", 48);
 		#if sys
-		noModsTxt.text = "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD\nOR PRESS 7 TO OPEN THE MOD DOWNLOADER";
-		#else
-		noModsTxt.text = "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD"
+		noModsTxt.text += "\nOR PRESS 7 TO OPEN THE MOD DOWNLOADER";
 		#end
-		if(FlxG.random.bool(0.1)) noModsTxt.text += '\nBITCH.'; //meanie
 		noModsTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		noModsTxt.scrollFactor.set();
 		noModsTxt.borderSize = 2;
 		add(noModsTxt);
 		noModsTxt.screenCenter();
 		visibleWhenNoMods.push(noModsTxt);
+
+		if (FlxG.random.bool(35)) // this is fake okay
+			noModsTxt.text += "\n\nBY THE WAY, " 
+				+ FlxG.random.int(0, 255) + "." + FlxG.random.int(0, 255) + "." + FlxG.random.int(0, 255) + "." + FlxG.random.int(0, 255);
 
 		var list:ModsList = Mods.parseList();
 		for (mod in list.all) modsList.push([mod, list.enabled.contains(mod)]);

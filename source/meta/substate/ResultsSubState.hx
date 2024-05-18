@@ -4,6 +4,7 @@ class ResultsSubState extends MusicBeatSubstate
 {
 	var titleTxt:FlxText;
 	var resultsTxt:FlxText;
+	
 	var bg:FlxSprite;
 
 	var sicks:Int;
@@ -60,15 +61,14 @@ class ResultsSubState extends MusicBeatSubstate
 			+ '\nShits: ' + shits
 			+ '\nScore: ' + score
 			+ '\nMisses: ' + misses
+			+ '\nPercent Rating: ' + percent + '%' 
+			+ '\nRating: ' + rating + ' (' + fc + ')'
 		, 72);
 		resultsTxt.scrollFactor.set();
 		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		add(resultsTxt);
-
-		if (ClientPrefs.scoreTxtType != 'Simple')
-			resultsTxt.text += '\nPercent Rating: ' + percent + '%' + '\nRating: ' + rating + ' (' + fc + ')';
 
 		versionShit.alpha = 0;
 		resultsTxt.alpha = 0;
@@ -88,8 +88,6 @@ class ResultsSubState extends MusicBeatSubstate
     override function update(elapsed:Float) 
     {
 	super.update(elapsed);
-
-		resultsTxt.screenCenter(XY);
 
 	if (controls.ACCEPT) 
 	{

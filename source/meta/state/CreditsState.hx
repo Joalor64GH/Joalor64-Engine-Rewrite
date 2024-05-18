@@ -69,18 +69,18 @@ class CreditsState extends MusicBeatState
 				'noweyyy'
 			],
 			[
-				'MemeHovy',
+				'Moxie',
 				'meme',
 				'Additional Programmer\n"love denpa engine"',
-				'https://github.com/MemeHovy',
+				'https://github.com/moxie-coder',
 				'FFEDD9',
 				'omori' // funni sound goes here if you want
 			],
 			[
-				'ThatOneFox',
+				'FoxLOID',
 				'fox',
 				'Epic New Logo\n"this is a quote"',
-				'https://github.com/ThatOneFoxHX',
+				'https://github.com/FoxLOID',
 				'00A7D4',
 				'' // if you want, a funny sound effect can go here
 			],

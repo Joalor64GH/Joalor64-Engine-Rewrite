@@ -56,7 +56,7 @@ You can check planned/upcoming features [here](/TODO).
 ## Joalor64 Engine
 * [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
 * [Moxie](https://github.com/moxie-coder) - Additional Programmer
-* [ThatOneFox](https://github.com/ThatOneFoxHX) - Made the Epic New Logo
+* [FoxLOID](https://github.com/FoxLOID) - Made the Epic New Logo
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks

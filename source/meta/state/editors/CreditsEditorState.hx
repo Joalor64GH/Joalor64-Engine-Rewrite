@@ -1,8 +1,5 @@
 package meta.state.editors;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;

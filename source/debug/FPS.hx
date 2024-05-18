@@ -27,12 +27,10 @@ class FPS extends openfl.text.TextField
 
 			var mem:Float = System.totalMemory;
 			var memPeak:Float = 0;
-
 			if (mem > memPeak) memPeak = mem;
 			
 			text = (visible) ? 
-				'FPS: ${times.length}' + '\nMemory: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}' 
-					#if debug + '\nBuild Number: ${Main.buildNum}' #end : '';
+				'FPS: ${times.length}\nMemory: ${FlxStringUtil.formatBytes(mem)} / ${FlxStringUtil.formatBytes(memPeak)}' : '';
 
 			textColor = (times.length < FlxG.drawFramerate * 0.5) ? 0xFFFF0000 : 0xFFFFFFFF;
 		});

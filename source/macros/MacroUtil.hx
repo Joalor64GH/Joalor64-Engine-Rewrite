@@ -29,16 +29,6 @@ class MacroUtil
         return macro $v{"-"};
     }
 
-    public static macro function get_build_num()
-    {
-        try {
-            var proc = new Process('git', ['rev-list', 'HEAD', '--count'], false);
-            proc.exitCode(true);
-            return macro $v{Std.parseInt(proc.stdout.readLine())};
-        } catch(e) {}
-        return macro $v{0};
-    }
-
     /**
      * @author khuonghoanghuy
      * @see https://github.com/Cool-Team-Development/Simple-Clicker-Game/
