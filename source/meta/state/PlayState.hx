@@ -1269,9 +1269,6 @@ class PlayState extends MusicBeatState
 		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
 
-		if (ClientPrefs.longBar)
-			timeBar.setGraphicSize(1170, timeBar.height);
-
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 
@@ -3093,8 +3090,8 @@ class PlayState extends MusicBeatState
 		previousFrameTime = FlxG.game.ticks;
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.onComplete = () -> finishSong();
+		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		FlxG.sound.music.onComplete = () -> finishSong.bind();
 		vocals.play();
 		vocals.onComplete = () -> vocalsFinished = true;
 
@@ -5887,6 +5884,10 @@ class PlayState extends MusicBeatState
 			hscript = null;
 		}
 		hscriptMap.clear();
+		#end
+
+		#if cpp
+		cpp.vm.Gc.enable(false);
 		#end
 
 		instance = null;

@@ -394,7 +394,7 @@ class GameplaySubState extends BaseOptionsMenu
 			['Default', 'Forever', 'Kade', 'Simplylove']);
 		addOption(option);
 
-		var option:Option = new Option('Long Health/Time Bar',
+		var option:Option = new Option('Long Health Bar',
 			'why would you want this anyways',
 			'longBar',
 			'bool',

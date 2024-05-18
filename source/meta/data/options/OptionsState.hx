@@ -87,11 +87,6 @@ class OptionsState extends MusicBeatState
 		bg.scrollFactor.set(0, yScroll / 3);
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
-
-		var versionShit:FlxText = new FlxText(0, FlxG.height - 26, 0, "Press D for save data settings.", 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
-		add(versionShit);
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -112,12 +107,17 @@ class OptionsState extends MusicBeatState
 		selectorRight.scrollFactor.set(0, yScroll);
 		add(selectorRight);
 
-		#if MODS_ALLOWED
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		textBG.scrollFactor.set();
 		add(textBG);
 
+		var versionShit:FlxText = new FlxText(textBG.x, textBG.y + 4, 0, "Press D for save data settings.", 12);
+		versionShit.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
+		versionShit.scrollFactor.set();
+		add(versionShit);
+
+		#if MODS_ALLOWED
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, "Press RESET to access the Modpacks Options saves Reset menu.", 18);
 		text.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();

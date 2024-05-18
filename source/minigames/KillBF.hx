@@ -46,17 +46,17 @@ class KillBF extends MusicBeatState
         {
             if (FlxG.mouse.overlaps(bf) && FlxG.mouse.justPressed)
             {
-                score++;
-                bf.kill();
                 FlxG.sound.play(Paths.sound('bfkill'));
+                bf.kill();
+                score++;
             }
 
             if (bf.y > FlxG.height)
             {
+                FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+                bf.kill();
                 score--;
                 misses++;
-                bf.kill();
-                FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
             }
         }
 
@@ -69,8 +69,8 @@ class KillBF extends MusicBeatState
 
     private function spawnSprite()
     {
-        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -60);
-        sprite.velocity.y = FlxG.random.int(60, 140);
+        var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -80);
+        sprite.velocity.y = FlxG.random.int(60, 150);
         beef.push(sprite);
         add(sprite);
     }
