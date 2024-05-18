@@ -2,6 +2,7 @@ package meta.substate;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxStringUtil;
+import flixel.sound.FlxSound;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -40,6 +41,9 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
+
+		for (sticker in FileSystem.readDirectory('assets/images/stickers/'))
+			stickerArray.push(sticker);
 
 		if (CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty');
 
@@ -84,6 +88,27 @@ class PauseSubState extends MusicBeatSubstate
 		bg.alpha = 0;
 		bg.scrollFactor.set();
 		add(bg);
+
+		for (i in 0...stickerArray.length)
+        {
+            var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image('stickers/' + stickerArray[i]));
+            icon.screenCenter();
+            icon.x += ((FlxG.width * 0.4) * (i % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
+            icon.y = FlxG.height + 120;
+            icon.alpha = 0.6;
+            icon.velocity.y = FlxG.random.int(-40, -110);
+            icon.visible = false;
+            icon.scale.set(0.75, 0.75);
+            icon.ID = i;
+            stickers.push(icon);
+            add(icon);
+        }
+
+        for (icon in stickers)
+        {
+            icon.y = FlxG.height + 120;
+            icon.visible = true;
+        }
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -157,20 +182,26 @@ class PauseSubState extends MusicBeatSubstate
 		super.update(elapsed);
 		updateSkipTextStuff();
 
+		for (icon in stickers)
+        {
+            icon.angle += elapsed * 12;
+            if (icon.y > -160) continue;
+            icon.screenCenter();
+            icon.x += ((FlxG.width * 0.4) * (icon.ID % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
+            icon.y = FlxG.height + FlxG.random.int(60, 120);
+            icon.velocity.y = FlxG.random.int(-40, -110);
+            icon.angle = FlxG.random.float(0, 360);
+            icon.loadGraphic(stickerArray[FlxG.random.int(0, stickerArray.length - 1)]);
+        }
+
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
 
 		var control = FlxG.keys.justPressed.CONTROL;
 
-		if (upP)
-		{
-			changeSelection(-1);
-		}
-		if (downP)
-		{
-			changeSelection(1);
-		}
+		if (upP || downP)
+			changeSelection(upP ? -1 : 1);
 
 		var daSelected:String = menuItems[curSelected];
 		switch (daSelected)
