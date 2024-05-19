@@ -150,8 +150,6 @@
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
-	<haxeflag name="-dce no" if="HSCRIPT_ALLOWED" />
-	<haxeflag name="-dce full" unless="HSCRIPT_ALLOWED" />
 
 	<!-- [ Icons ] -->
 
