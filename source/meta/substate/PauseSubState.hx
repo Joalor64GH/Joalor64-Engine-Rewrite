@@ -102,7 +102,7 @@ class PauseSubState extends MusicBeatSubstate
             icon.alpha = 0.6;
             icon.velocity.y = FlxG.random.int(-40, -110);
             icon.visible = false;
-            icon.scale.set(0.75, 0.75);
+            icon.scale.set(0.45, 0.45);
             icon.ID = i;
             stickers.push(icon);
             add(icon);

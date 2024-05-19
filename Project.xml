@@ -1,54 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<!-- _________________________ Application Settings _________________________ -->
 
-	<!-- Application Window Title and Executable File Name -->
+	<!-- [ Application Settings ] -->
+
 	<app title="Friday Night Funkin': Joalor64 Engine Rewritten" />
 	
 	<app file="J64EngineRE_WIN" if="windows" />
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
 
-	<!-- For debug builds -->
 	<section if="debug">
 		<app file="J64EngineRE_WIN DEBUG" if="windows" />
 		<app file="J64EngineRE_APP DEBUG" if="linux" />
 		<app file="J64EngineRE_MAC DEBUG" if="mac" />
 	</section>
 
-	<!-- For nightly builds -->
 	<section if="nightly">
 		<app file="J64EngineRE_WIN NIGHTLY" if="windows" />
 		<app file="J64EngineRE_APP NIGHTLY" if="linux" />
 		<app file="J64EngineRE_MAC NIGHTLY" if="mac" />
 	</section>
 
-	<!-- Package Name (Mac) -->
-	<app package="com.joalor64gh.j64enginere" />
+	<app main="Main" version="0.2.8" company="Joalor64GH" package="com.joalor64gh.j64enginere" />
 
-	<!-- Main Class State, Game Version, Company (save data) Name -->
-	<app main="Main" version="0.2.8" company="Joalor64GH" />
+	<!-- [ Window Settings ] -->
+	
+	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" /> <!-- All targets -->
+	<window if="html5" resizable="true" /> <!-- HTML5 -->
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/> <!-- Desktop -->
+	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" /> <!-- macOS -->
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/> <!-- Mobile -->
 
-	<!-- ____________________________ Window Settings ___________________________ -->
+	<!-- [ Custom Defines ] -->
 
-	<!--All targets-->
-	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
-
-	<!--HTML5-->
-	<window if="html5" resizable="true" />
-
-	<!--Desktop-->
-	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
-
-	<!--macOS-->
-	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" />
-
-	<!--Mobile-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
-
-	<!-- _______________________________ Custom Defines ______________________________ -->
-
-	<!-- COMMENT THESE TO DISABLE THEM -->
 	<section if="desktop">
 		<define name="MODS_ALLOWED" />
 		<define name="LUA_ALLOWED" />
@@ -65,68 +49,49 @@
 	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
 
-	<!-- _____________________________ Export Folder ____________________________ -->
+	<!-- [ Path Settings ] -->
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/nightly" if="nightly" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
-	<!-- _____________________________ Path Settings ____________________________ -->
-
-	<!--LOCATION OF SOURCE FILES-->
 	<source path="source" />
-	
 	<assets path="assets" exclude="*.ogg" if="web"/> 
 	<assets path="assets" exclude="*.mp3|*.mp4" unless="web"/>
+	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
+	<assets path="modsList.txt" if="MODS_ALLOWED" />
 
-	<!-- SWF EXAMPLE -->
-	<!--<library path="assets/videos/movie.swf" preload="true" id="id"/>-->
-
-    	<!-- PATH DEFINITIONS -->
-	<section if="MODS_ALLOWED">
-		<assets path='example_mods' rename='mods' embed='false'/>
-		<assets path='modsList.txt'/>
-	</section>
-
-	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
-	<section if="VIDEOS_ALLOWED">
-		<assets path="plugins/plugins"        	        rename="plugins/"       if="windows"/>
-		<assets path="plugins/plugins (but for mac)"	rename="plugins/"       if="mac"/>
-	</section>
+	<assets path="assets/videos"                    library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
+	<assets path="plugins/plugins"        	        rename="plugins/"       if="VIDEOS_ALLOWED windows"/>
+	<assets path="plugins/plugins (but for mac)"	rename="plugins/"       if="VIDEOS_ALLOWED mac"/>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	
-	<!-- _______________________________ Libraries ______________________________ -->
+	<!-- [ Libraries ] -->
 
 	<haxedev set='webgl' />
 
-	<!-- Flixel -->
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
 
-	<!-- Scripting/Modcharting Extensions -->
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="hscript-ex" />
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION"/>
 
-	<!-- Video Support -->
 	<haxelib name="actuate"/> <!-- Used for extension-webm -->
 	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="swf" if="FLASH_MOVIE"/>
 
-	<!-- Discord Rich Prescence-->
 	<haxelib name="linc_discord-rpc" if="desktop"/>
-
-	<!-- Miscellaneous -->
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 
-	<!-- ______________________________ Haxedefines _____________________________ -->
+	<!-- [ Defines ] -->
 
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
 
@@ -148,17 +113,17 @@
 	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
 	<haxedef name="message.reporting" value="pretty" />
 
-	<!-- _______________________________ Errors ______________________________ -->
+	<!-- [ Errors ] -->
 
 	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
-	<error value="You're using Haxe 4.1.5. Please update to 4.2.5 or greater." if="${haxe == 4.1.5}" unless="linux" />
+	<error value="You're using Haxe 4.1.5. Please update to 4.3.3 or greater." if="${haxe == 4.1.5}" unless="linux" />
 
-	<!-- _______________________________ Macros Fixes ______________________________ -->
+	<!-- [ Flags ] -->
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
 
-	<!-- _________________________________ Icons _______________________________ -->
+	<!-- [ Icons ] -->
 
 	<assets path='art/iconOG.png' rename='icon.png' if="linux || mac" /> <!-- icon workaround for linux/mac -->
 	<icon path="art/icon16.png" size='16'/>
@@ -166,12 +131,12 @@
 	<icon path="art/icon64.png" size='64'/>
 	<icon path="art/iconOG.png" />
 
-	<!-- _________________________________ Miscellaneous _______________________________ -->
+	<!-- [ Miscellaneous ] -->
 
 	<target id="haxe" tool="linker" if="linux">
-		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" /> <!--linux support-->
+		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" /> <!-- linux support -->
 	</target> 
 	<target id="haxe" tool="linker" if="macos">
-		<lib name="/lib64/libX11.a" if="HXCPP_M64" /> <!--Macos support-->
+		<lib name="/lib64/libX11.a" if="HXCPP_M64" /> <!-- mac support -->
 	</target>
 </project>
