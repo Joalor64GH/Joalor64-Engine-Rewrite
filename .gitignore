@@ -4,7 +4,7 @@ NGio.hx
 /io/
 
 art/mod.url
-!example_mods/introMod/
+!mods/introMod/
 * - Copy*
 
 export/

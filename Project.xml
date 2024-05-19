@@ -42,11 +42,11 @@
 		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
-	<define name="PSYCH"/> <!-- For the fnf-modcharting-tools library -->
+	<define name="PSYCH" /> <!-- For the fnf-modcharting-tools library -->
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
-	<define name="JOALOR64_WATERMARKS"/>
-	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS"/>
+	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits" />
+	<define name="JOALOR64_WATERMARKS" />
+	<define name="PSYCH_WATERMARKS" unless="JOALOR64_WATERMARKS" />
 	<define name="CRASH_HANDLER" if="desktop release" />
 
 	<!-- [ Path Settings ] -->
@@ -57,14 +57,11 @@
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<source path="source" />
-	<assets path="assets" exclude="*.ogg" if="web"/> 
-	<assets path="assets" exclude="*.mp3|*.mp4" unless="web"/>
+	<assets path="assets" exclude="*.ogg" if="web" /> 
+	<assets path="assets" exclude="*.mp3|*.mp4" unless="web" />
+	<assets path="assets/videos" library="videos" if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
 	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
 	<assets path="modsList.txt" if="MODS_ALLOWED" />
-
-	<assets path="assets/videos"                    library="videos"        if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
-	<assets path="plugins/plugins"        	        rename="plugins/"       if="VIDEOS_ALLOWED windows"/>
-	<assets path="plugins/plugins (but for mac)"	rename="plugins/"       if="VIDEOS_ALLOWED mac"/>
 
 	<assets path='art/readme.txt' rename='about.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
@@ -77,51 +74,84 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
 
-	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
+	<haxelib name="hscript" />
 	<haxelib name="hscript-ex" />
 	<haxelib name="fnf-modcharting-tools" />
-	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
-	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION"/>
+	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
+	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION" />
 
-	<haxelib name="actuate"/> <!-- Used for extension-webm -->
-	<haxelib name="extension-webm" if="WEBM_ALLOWED"/> 
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
-	<haxelib name="swf" if="FLASH_MOVIE"/>
+	<haxelib name="actuate" /> <!-- Used for extension-webm -->
+	<haxelib name="extension-webm" if="WEBM_ALLOWED" /> 
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<haxelib name="swf" if="FLASH_MOVIE" />
 
-	<haxelib name="linc_discord-rpc" if="desktop"/>
-	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
+	<haxelib name="linc_discord-rpc" if="desktop" />
+	<haxelib name="hxcpp-debug-server" if="desktop debug" />
 
 	<!-- [ Defines ] -->
 
-	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" />
 
-	<haxedef name="hscriptPos"/>
-	<haxedef name="openflPos"/>
+	<haxedef name="hscriptPos" />
+	<haxedef name="openflPos" />
+
 	<haxedef name="FLX_RECORD" />
+	<haxedef name="FLX_NO_TOUCH" if="desktop" unless="mac" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
 	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
-	<section unless="debug">
-		<haxedef name="FLX_NO_DEBUG" />
-		<haxedef name="NAPE_RELEASE_BUILD" />
-	</section>
-	<haxedef name="no-deprecation-warnings"/>
-	<section if="CRASH_HANDLER">
-		<haxedef name="HXCPP_CHECK_POINTER" />
-		<haxedef name="HXCPP_STACK_LINE" />
-	</section>
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
+	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
+
+	<haxedef name="no-deprecation-warnings" />
 	<haxedef name="message.reporting" value="pretty" />
 
 	<!-- [ Errors ] -->
 
-	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." if="${linc_luajit == 0.0.4}" />
-	<error value="You're using Haxe 4.1.5. Please update to 4.3.3 or greater." if="${haxe == 4.1.5}" unless="linux" />
+	<error value="You're not using NebulaZorua's fork of luajit. Use that instead." 
+		if="${linc_luajit == 0.0.1} ||
+		${linc_luajit == 0.0.2} ||
+		${linc_luajit == 0.0.3} ||
+		${linc_luajit == 0.0.4}" />
+	
+	<error value="You're using an outdated version of Haxe. Please update to 4.3.3 or greater." 
+		if="${haxe == 4.1.0} ||
+		${haxe == 4.1.1} ||
+		${haxe == 4.1.2} ||
+		${haxe == 4.1.3} ||
+		${haxe == 4.1.4} ||
+		${haxe == 4.1.5}" />
+	
+	<error value="You're using an outdated version of Flixel. Please update to the latest version." 
+		if="${flixel == 4.11.0} ||
+		${flixel == 5.0.0} ||
+		${flixel == 5.0.1} ||
+		${flixel == 5.0.2} ||
+		${flixel == 5.1.0} ||
+		${flixel == 5.2.0} ||
+		${flixel == 5.2.1}" />
+
+	<error value="You're using an outdated version of flixel-addons. Please update to the latest version." 
+		if="${flixel-addons == 2.11.0} ||
+		${flixel-addons == 3.0.0} ||
+		${flixel-addons == 3.0.1}" />
+
+	<error value="You're using an outdated version of flixel-ui. Please update to the latest version."
+		if="${flixel-ui == 2.4.0} ||
+		${flixel-ui == 2.3.0} ||
+		${flixel-ui == 2.3.1} ||
+		${flixel-ui == 2.3.2} ||
+		${flixel-ui == 2.3.3}" />
 
 	<!-- [ Flags ] -->
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
+	<haxeflag name="-dce no" if="HSCRIPT_ALLOWED" />
+	<haxeflag name="-dce full" unless="HSCRIPT_ALLOWED" />
 
 	<!-- [ Icons ] -->
 
