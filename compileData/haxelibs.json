@@ -56,13 +56,11 @@
       },
       {
         "name": "hxCodec",
-        "type": "haxelib",
-        "version": "2.5.1"
+        "type": "haxelib"
       },
       {
         "name": "swf",
-        "type": "haxelib",
-        "version": "3.2.0"
+        "type": "haxelib"
       },
       {
         "name": "fnf-modcharting-tools",
