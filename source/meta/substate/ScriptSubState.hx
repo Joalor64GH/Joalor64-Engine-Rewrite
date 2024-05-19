@@ -1,11 +1,11 @@
 package meta.substate;
 
 import core.ScriptCore;
-import flixel.FlxBasic;
+
 import flixel.addons.ui.FlxUITooltip;
 import flixel.addons.ui.interfaces.IFlxUIWidget;
 
-class ScriptSubState extends meta.MusicBeatSubstate
+class ScriptSubState extends MusicBeatSubstate
 {
 	var daScript:ScriptCore;
 

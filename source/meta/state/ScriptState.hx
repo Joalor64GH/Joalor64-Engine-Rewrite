@@ -5,7 +5,7 @@ import core.ScriptCore;
 import flixel.addons.ui.FlxUITooltip;
 import flixel.addons.ui.interfaces.IFlxUIWidget;
 
-class ScriptState extends meta.MusicBeatState
+class ScriptState extends MusicBeatState
 {
 	var daScript:ScriptCore;
 

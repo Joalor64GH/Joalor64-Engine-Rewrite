@@ -13,7 +13,7 @@ class MinigamesState extends MusicBeatState
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
 		new Minigame('Kill BF', 'lmao', 'mgicons/killBf')
 		// soon...
-		// new Minigame("Joalor64's Tutorial", 'placeholder', 'mgicons/me')
+		// new Minigame("Joalor64's Special", 'It\'s me!\n(Melodic Circuit)', 'mgicons/me')
 	];
 
 	var descTxt:FlxText;
@@ -104,33 +104,19 @@ class MinigamesState extends MusicBeatState
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = grpControls.length - 1;
-		if (curSelected >= grpControls.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, grpControls.length - 1);
 
 		descTxt.text = controlStrings[curSelected].description;
-
-		var bullShit:Int = 0;
 
 		for (i in 0...iconArray.length)
 			iconArray[i].alpha = 0.6;
 
 		iconArray[curSelected].alpha = 1;
 
-		for (item in grpControls.members)
+		for (num => item in grpControls.members)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
+			item.targetY = num - curSelected;
+			item.alpha =(item.targetY == 0) ? 1 : 0.6;
 		}
 	}
 }

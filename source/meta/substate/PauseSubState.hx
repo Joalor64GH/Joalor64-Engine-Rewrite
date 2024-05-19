@@ -9,19 +9,8 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = [
-		'Resume', 
-		'Restart Song', 
-		'Change Difficulty',
-		'Options', 
-		'Exit'
-	];
-	var exitChoices = [
-		'Exit to Freeplay', 
-		'Exit to Menu', 
-		'Exit Game', 
-		'Back'
-	];
+	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Options', 'Exit'];
+	var exitChoices = ['Exit to Freeplay', 'Exit to Menu', 'Exit Game', 'Back'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -32,18 +21,33 @@ class PauseSubState extends MusicBeatSubstate
 	var curTime:Float = Math.max(0, Conductor.songPosition);
 
 	public static var songName:String = '';
-
 	public static var fromPlayState:Bool = false;
 
 	var stickers:Array<FlxSprite> = [];
-    var stickerArray:Array<String> = [];
+	// yes i typed all of this out
+	// because honestly, i'd rather not use FileSystem.readDirectory()
+    var stickerArray:Array<String> = [
+		// objects
+		'arrowSticker1', 'arrowSticker2', 'arrowSticker3', 'arrowSticker4',
+		'faceSticker', 'micSticker', 'speakerSticker', 'uziSticker',
+		// characters
+		'bfDeadSticker', 'bfMeanSticker', 'bfOldSticker', 'bfSticker1', 'bfSticker2', 'bfSticker3',
+		'dadSticker1', 'dadSticker2', 'dadSticker3',
+		'darnellSticker1', 'darnellSticker2', 'darnellSticker3',
+		'gfDeadSticker', 'gfSticker1', 'gfSticker2', 'gfSticker3',
+		'momSticker1', 'momSticker2', 'momSticker3',
+		'monsterSticker1', 'monsterSticker2', 'monsterSticker3',
+		'neneSticker1', 'neneSticker2', 'neneSticker3',
+		'picoSticker1', 'picoSticker2', 'picoSticker3',
+		'senpaiSticker1', 'senpaiSticker2', 'senpaiSticker3',
+		'spiritSticker1', 'spiritSticker2', 'spiritSticker3',
+		'spookySticker1', 'spookySticker2', 'spookySticker3',
+		'tankmanSticker1', 'tankmanSticker2', 'tankmanSticker3'
+	];
 
 	public function new(x:Float, y:Float)
 	{
 		super();
-
-		for (sticker in FileSystem.readDirectory('assets/images/stickers/'))
-			stickerArray.push(sticker);
 
 		if (CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty');
 
