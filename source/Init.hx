@@ -1,9 +1,5 @@
 package;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import flixel.input.keyboard.FlxKey;
 
 // this loads everything in

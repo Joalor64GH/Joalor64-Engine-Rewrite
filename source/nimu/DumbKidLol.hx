@@ -17,7 +17,7 @@ class DumbKidLol extends RealDumbass
 		switch(stupidKid){
 			case 'NimuDevUwU':
 				return 9999;
-			case 'Moxie':
+			case 'Moxie' | 'Joalor64': // don't mind me, im just here
 				return 0;
 			default:
 				return ratio = r;
