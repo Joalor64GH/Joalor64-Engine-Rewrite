@@ -4722,13 +4722,13 @@ class PlayState extends MusicBeatState
 		seenCutscene = false;
 
 		#if ACHIEVEMENTS_ALLOWED
-		if (achievementObj != null) {
+		if (achievementObj != null)
 			return;
-		} else {
+		else {
 			var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';
-			checkForAchievement([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
-
+			var achieve:String = checkForAchievement([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
 			var customAchieve:String = checkForAchievement(achievementWeeks);
+			
 			if(achieve != null || customAchieve != null) {
 				startAchievement(customAchieve != null ? customAchieve : achieve);
 				return;
