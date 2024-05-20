@@ -63,6 +63,7 @@ import objects.userinterface.menu.*;
 import objects.background.*;
 import objects.shaders.*;
 
+import objects.shaders.PhillyGlow;
 import objects.Character;
 
 class FunkinHscript extends InterpEx {
