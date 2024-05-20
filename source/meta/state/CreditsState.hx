@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -27,7 +23,7 @@ class CreditsState extends MusicBeatState
 
 	var noLink:Bool;
 
-	var keoikiStr:String = "";
+	var keoikiStr:String = ""; // funny
 
 	override function create()
 	{
@@ -277,7 +273,7 @@ class CreditsState extends MusicBeatState
 				''
 			],
 			[''],
-			["Funkin' Crew"],
+			["The Funkin' Crew Inc"],
 			[
 				'ninjamuffin99',
 				'ninjamuffin99',
@@ -313,9 +309,7 @@ class CreditsState extends MusicBeatState
 		];
 
 		for (i in pisspoop)
-		{
 			creditsStuff.push(i);
-		}
 
 		for (i in 0...creditsStuff.length)
 		{
@@ -330,9 +324,7 @@ class CreditsState extends MusicBeatState
 			if (isSelectable)
 			{
 				if (creditsStuff[i][5] != null)
-				{
 					Mods.currentModDirectory = creditsStuff[i][5];
-				}
 
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				icon.xAdd = optionText.width + 10;
@@ -361,7 +353,6 @@ class CreditsState extends MusicBeatState
 		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 		descText.scrollFactor.set();
-		// descText.borderSize = 2.4;
 		descBox.sprTracker = descText;
 		add(descText);
 
@@ -426,27 +417,14 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (creditsStuff[curSelected][3] == 'nolink')
+			noLink = (creditsStuff[curSelected][3] == 'nolink') ? true : false;
+
+			if (FlxG.keys.justPressed.ENTER)
 			{
-				noLink = true;
-			}
-			else
-			{
-				noLink = false;
-			}
-			if (noLink)
-			{
-				if (FlxG.keys.justPressed.ENTER)
-				{
+				if (noLink)
 					FlxG.sound.play(Paths.sound('cancelMenu'));
-				}
-			}
-			else
-			{
-				if (FlxG.keys.justPressed.ENTER)
-				{
+				else
 					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-				}
 			}
 			if (FlxG.keys.justPressed.SPACE)
 			{

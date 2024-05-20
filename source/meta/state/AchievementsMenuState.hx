@@ -74,7 +74,7 @@ class AchievementsMenuState extends MusicBeatState
 		if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1: 1);
 		
-		if(controls.RESET) {
+		if (controls.RESET) {
 			if(FlxG.keys.pressed.ALT) {
 				openSubState(new Prompt('This action will reset ALL of the achievements.\nProceed?', 0, function() {
 					FlxG.sound.play(Paths.sound('confirmMenu'));
@@ -103,33 +103,19 @@ class AchievementsMenuState extends MusicBeatState
 			else
 				FlxG.switchState(() -> new MainMenuState());
 		}
+
+		for (num => item in grpOptions.members) {
+			item.targetY = num - curSelected;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
+		}
 	}
 
 	function changeSelection(change:Int = 0) {
-		curSelected += change;
-		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, options.length - 1);
 
-		var bullShit:Int = 0;
-
-		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-			if (item.targetY == 0) {
-				item.alpha = 1;
-			}
-		}
-
-		for (i in 0...achievementArray.length) {
-			achievementArray[i].alpha = 0.6;
-			if(i == curSelected) {
-				achievementArray[i].alpha = 1;
-			}
-		}
+		for (i in 0...achievementArray.length)
+			achievementArray[i].alpha = (i == curSelected) ? 1 : 0.6;
+		
 		descText.text = Achievements.achievementsStuff[achievementIndex[curSelected]][1];
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 	}
