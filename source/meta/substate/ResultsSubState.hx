@@ -54,6 +54,8 @@ class ResultsSubState extends MusicBeatSubstate
 		titleTxt.updateHitbox();
 		add(titleTxt);
 
+		if (PlayState.isStoryMode) titleTxt += ' (STORY MODE)';
+
 		resultsTxt = new FlxText(titleTxt.x, 0, 0, 
 			'Sicks: ' + sicks
 			+ '\nGoods: ' + goods
