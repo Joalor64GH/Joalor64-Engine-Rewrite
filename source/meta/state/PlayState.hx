@@ -469,7 +469,6 @@ class PlayState extends MusicBeatState
 		}
 
 		// i think this works, i just haven't tested it
-		/*
 		for (i in ratingsArray) {
 			var rating:Rating = new Rating(i[0]);
 			rating.ratingMod = i[1];
@@ -477,8 +476,8 @@ class PlayState extends MusicBeatState
 			rating.noteSplash = i[3];
 			ratingsData.push(rating);
 		}
-		*/
 
+		/*
 		//Ratings
 		var rating:Rating = new Rating('sick');
 		rating.ratingMod = 1;
@@ -503,6 +502,7 @@ class PlayState extends MusicBeatState
 		rating.score = 50;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
+		*/
 
 		// For the "Just the Two of Us" achievement
 		for (i in 0...keysArray.length)
