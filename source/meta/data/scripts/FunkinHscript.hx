@@ -5,29 +5,20 @@ package meta.data.scripts;
 import meta.data.scripts.FunkinLua;
 #end
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "3.0.0") 
-import hxcodec.flixel.FlxVideo as MP4Handler;
-#elseif (hxCodec >= "2.6.1") 
-import hxcodec.VideoHandler as MP4Handler;
-#elseif (hxCodec == "2.6.0") 
-import VideoHandler as MP4Handler;
-#else 
-import vlc.MP4Handler;
-#end
+#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as MP4Handler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
+#elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
+#else import vlc.MP4Handler; #end
 #end
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
 import flixel.system.macros.FlxMacroUtil;
-import flixel.math.FlxAngle;
 import flixel.addons.display.FlxBackdrop;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxDestroyUtil;
-import openfl.Lib;
 import openfl.text.TextFormat;
-import flixel.FlxBasic;
 import flixel.effects.FlxFlicker;
-import flixel.util.FlxGradient;
 import flixel.system.FlxAssets.FlxShader;
 import flixel.addons.text.FlxTypeText;
 import openfl.media.Sound;
@@ -46,8 +37,6 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUI;
-import openfl.display.BitmapData;
-import haxe.Json;
 import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
 import lime.media.openal.AL;
@@ -57,46 +46,15 @@ import sys.io.File;
 #end
 import lime.utils.Assets as LimeAssets;
 import openfl.Assets as OpenFlAssets;
-import lime.app.Application;
-import flixel.util.FlxTimer;
-import flixel.util.FlxStringUtil;
-import flixel.util.FlxSort;
-import flixel.util.FlxSave;
-import flixel.util.FlxColor;
 import flixel.ui.FlxBar;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
 import flixel.sound.FlxSound;
-import flixel.math.FlxRect;
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
 import animateatlas.*;
-import flixel.math.FlxMath;
 import flixel.input.keyboard.FlxKey;
-import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxGroup;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.effects.FlxTrail;
-import flixel.FlxSubState;
-import flixel.FlxState;
-import flixel.FlxCamera;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.text.FlxText;
 import hscript.InterpEx;
-import objects.Character;
-import objects.shaders.PhillyGlow;
 import meta.data.Achievements;
 
-import meta.*;
-import meta.state.*;
-import meta.state.editors.*;
-import meta.data.options.*;
-import meta.substate.*;
-import meta.data.*;
 import meta.video.*;
 import meta.data.alphabet.*;
 import objects.userinterface.*;
@@ -104,9 +62,8 @@ import objects.userinterface.note.*;
 import objects.userinterface.menu.*;
 import objects.background.*;
 import objects.shaders.*;
-import objects.*;
 
-using StringTools;
+import objects.Character;
 
 class FunkinHscript extends InterpEx {
     public var scriptName:String = '';

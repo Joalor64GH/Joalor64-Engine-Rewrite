@@ -7,25 +7,7 @@ import sys.io.File;
 import haxe.Json;
 #end
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-
-import objects.*;
 import objects.userinterface.menu.*;
-
-using StringTools;
 
 class BaseOptionsMenu extends MusicBeatSubstate
 {

@@ -9,28 +9,11 @@ import llua.Convert;
 #end
 
 import animateatlas.AtlasFrameMaker;
-import flixel.FlxG;
 import flixel.addons.effects.FlxTrail;
 import flixel.input.keyboard.FlxKey;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.text.FlxText;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxPoint;
 import flixel.sound.FlxSound;
-import flixel.util.FlxTimer;
-import flixel.FlxSprite;
-import flixel.FlxCamera;
-import flixel.util.FlxColor;
-import flixel.FlxBasic;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import openfl.Lib;
 import openfl.display.BlendMode;
 import openfl.filters.BitmapFilter;
-import openfl.utils.Assets;
-import flixel.math.FlxMath;
-import flixel.util.FlxSave;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.system.FlxAssets.FlxShader;
 
@@ -44,15 +27,10 @@ import sys.io.File;
 #end
 
 import Type.ValueType;
-import meta.*;
-import meta.state.*;
-import meta.substate.*;
-import meta.data.*;
+
 import meta.video.*;
 import objects.userinterface.*;
 import objects.userinterface.note.*;
-import objects.*;
-
 import objects.userinterface.DialogueBoxPsych;
 
 #if hscript
@@ -61,15 +39,9 @@ import hscript.Interp;
 import hscript.Expr;
 #end
 
-#if desktop
-import meta.data.dependency.Discord;
-#end
-
 #if MODS_ALLOWED
 import haxe.Json;
 #end
-
-using StringTools;
 
 class FunkinLua {
 	public static var Function_Stop:Dynamic = 1;

@@ -1,14 +1,7 @@
 package meta.video;
 
-import meta.*;
 import meta.video.*;
-import lime.app.Application;
 import flixel.sound.FlxSound;
-import openfl.utils.Assets;
-import openfl.utils.AssetType;
-import openfl.Lib;
-
-using StringTools;
 
 class VideoState extends MusicBeatState
 {

@@ -1,7 +1,5 @@
 package meta.substate;
 
-import meta.*;
-import flixel.*;
 import flixel.addons.ui.FlxUIInputText;
 
 /**

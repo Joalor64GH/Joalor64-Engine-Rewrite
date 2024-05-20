@@ -1,18 +1,5 @@
 package meta.data.options;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
-import core.ToastCore;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-import meta.state.*;
-import meta.substate.*;
-
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [

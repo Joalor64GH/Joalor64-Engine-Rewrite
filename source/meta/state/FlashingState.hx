@@ -12,8 +12,6 @@ class FlashingState extends MusicBeatState
 
 		bg = new FlxSprite().loadGraphic(Paths.image('warning'));
 		add(bg);
-
-		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 	}
 
 	override function update(elapsed:Float)

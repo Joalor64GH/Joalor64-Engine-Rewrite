@@ -1,14 +1,5 @@
 package meta.data.options;
 
-import flixel.FlxG;
-
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
-
-using StringTools;
-
 class Option
 {
 	private var child:Alphabet;

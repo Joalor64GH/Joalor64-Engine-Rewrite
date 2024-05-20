@@ -1,7 +1,6 @@
 package meta.video;
 
 import meta.video.*;
-import openfl.Lib;
 
 class GlobalVideo
 {

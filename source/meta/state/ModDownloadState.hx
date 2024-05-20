@@ -10,8 +10,6 @@ import openfl.utils.ByteArray;
 import sys.io.Process;
 import sys.io.FileOutput;
 
-import haxe.Json;
-
 import haxe.zip.Writer;
 import haxe.io.Bytes;
 

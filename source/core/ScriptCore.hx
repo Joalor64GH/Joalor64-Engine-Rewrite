@@ -2,13 +2,9 @@ package core;
 
 import hscript.Interp;
 import hscript.Parser;
-import openfl.Lib;
-import openfl.utils.Assets;
-import flixel.FlxBasic;
+
 import meta.state.ScriptState;
 import meta.substate.ScriptSubState;
-
-using StringTools;
 
 /**
  * Class based originally from Wednesdays-Infidelty Mod.

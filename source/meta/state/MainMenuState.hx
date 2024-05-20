@@ -1,9 +1,5 @@
 package meta.state;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 

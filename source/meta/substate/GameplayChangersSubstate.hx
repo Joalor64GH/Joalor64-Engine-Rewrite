@@ -1,28 +1,6 @@
 package meta.substate;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-import flixel.FlxG;
-import flixel.FlxSprite;
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
-import meta.*;
-import meta.data.*;
-import meta.data.alphabet.*;
 import objects.userinterface.menu.*;
-import objects.*;
-
-using StringTools;
 
 class GameplayChangersSubstate extends MusicBeatSubstate
 {

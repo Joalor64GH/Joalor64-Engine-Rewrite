@@ -12,11 +12,8 @@ class OutdatedState extends MusicBeatState
 	{
 		super.create();
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		add(bg);
-
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Oh teh noes! You're running an outdated version of Joalor64 Engine Rewritten!\n
+			"Hey! You're running an outdated version of Joalor64 Engine Rewritten!\n
 			Your current version is v" + MainMenuState.joalor64EngineVersion + ", while the most recent version is v" + daJson.version + "!\n
 			What's New:\n"
 			+ daJson.description +
@@ -26,8 +23,6 @@ class OutdatedState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(XY);
 		add(warnText);
-
-		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 	}
 
 	public static function updateCheck()

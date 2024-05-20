@@ -2,13 +2,8 @@ package meta.data.options;
 
 import flixel.ui.FlxBar;
 
-import meta.*;
-import objects.*;
 import objects.userinterface.menu.*;
 import objects.background.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import meta.data.options.*;
 
 class NoteOffsetState extends MusicBeatState
 {

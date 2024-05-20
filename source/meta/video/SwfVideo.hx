@@ -2,9 +2,6 @@ package meta.video;
 
 import flixel.sound.FlxSound;
 
-import openfl.Lib;
-import openfl.Assets;
-import openfl.display.Sprite;
 import openfl.display.MovieClip;
 import openfl.events.Event;
 
