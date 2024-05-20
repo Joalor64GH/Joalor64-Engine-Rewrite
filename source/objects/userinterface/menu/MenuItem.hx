@@ -1,13 +1,5 @@
 package objects.userinterface.menu;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-
-import meta.data.*;
-import meta.*;
-
 class MenuItem extends FlxSprite
 {
 	public var targetY:Float = 0;
@@ -17,7 +9,6 @@ class MenuItem extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(Paths.image('storymenu/' + weekName));
-		//trace('Test added: ' + WeekData.getWeekNumber(weekNum) + ' (' + weekNum + ')');
 		antialiasing = ClientPrefs.globalAntialiasing;
 	}
 
@@ -37,14 +28,11 @@ class MenuItem extends FlxSprite
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		y = FlxMath.lerp(y, (targetY * 120) + 480, CoolUtil.boundTo(elapsed * 10.2, 0, 1));
+		y = FlxMath.lerp((targetY * 120) + 480, y, Math.exp(-elapsed * 10.2));
 
 		if (isFlashing)
 			flashingInt += 1;
 
-		if (flashingInt % fakeFramerate >= Math.floor(fakeFramerate / 2))
-			color = 0xFF33ffff;
-		else
-			color = FlxColor.WHITE;
+		color = (flashingInt % fakeFramerate >= Math.floor(fakeFramerate / 2)) ? 0xFF33ffff : FlxColor.WHITE;
 	}
 }

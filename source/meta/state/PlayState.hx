@@ -3091,7 +3091,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
-		FlxG.sound.music.onComplete = () -> finishSong.bind();
+		FlxG.sound.music.onComplete = () -> finishSong();
 		vocals.play();
 		vocals.onComplete = () -> vocalsFinished = true;
 

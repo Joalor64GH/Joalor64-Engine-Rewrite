@@ -1,9 +1,5 @@
 package objects.background;
 
-import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
-import meta.data.ClientPrefs;
-
 class BGSprite extends FlxSprite
 {
 	private var idleAnim:String;

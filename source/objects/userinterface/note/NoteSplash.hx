@@ -1,12 +1,6 @@
 package objects.userinterface.note;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
 import flixel.graphics.frames.FlxAtlasFrames;
-import meta.*;
-import meta.data.*;
-import meta.state.*;
 import objects.shaders.*;
 import objects.userinterface.note.*;
 

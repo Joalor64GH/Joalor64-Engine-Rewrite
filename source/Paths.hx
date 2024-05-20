@@ -1,13 +1,12 @@
 package;
 
-import openfl.media.Sound;
 import animateatlas.AtlasFrameMaker;
 
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.FlxGraphic;
 
 import openfl.utils.AssetType;
-import openfl.display.BitmapData;
+import openfl.media.Sound;
 
 using haxe.io.Path;
 
