@@ -106,14 +106,14 @@ jobs:
           restore-keys: |
             cache-build-windows
   buildMacOS:
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - uses: actions/checkout@main
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.3.4
+          haxe-version: 4.3.3
       - name: Restore Cache
         uses: actions/cache@main
         with:
