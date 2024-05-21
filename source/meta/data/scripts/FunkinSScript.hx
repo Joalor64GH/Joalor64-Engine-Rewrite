@@ -91,9 +91,9 @@ final class FunkinSScript extends tea.SScript
 			return Reflect.setProperty(PlayState.instance, id, value);
 		});
 
-		set('getColorFromRGB', function(r:Int, g:Int, b:Int)
+		set('getColorFromRGB', function(r:Int, g:Int, b:Int, ?a:Int = 255)
 		{
-			return FlxColor.fromRGB(r, b, g);
+			return FlxColor.fromRGB(r, b, g, a);
 		});
 
 		set('FlxWhite', FlxColor.WHITE);

@@ -1831,173 +1831,12 @@ class PlayState extends MusicBeatState
 		}
 	}
 	#if HSCRIPT_ALLOWED
-	var hscriptMap:Map<String, FunkinHscript> = new Map();
+	public var hscriptMap:Map<String, FunkinHscript> = new Map();
 	public function addHscript(path:String) {
 		var parser = new ParserEx();
 		try {
 			var program = parser.parseString(Paths.getContent(path));
 			var interp = new FunkinHscript(path);
-
-			//FUNCTIONS
-			interp.variables.set('add', PlayState.instance.add);
-			interp.variables.set('insert', PlayState.instance.insert);
-			interp.variables.set('remove', remove);
-			interp.variables.set('addBehindChars', function(obj:FlxBasic) {
-				var index = members.indexOf(gfGroup);
-				if (members.indexOf(dadGroup) < index) {
-					index = members.indexOf(dadGroup);
-				}
-				if (members.indexOf(boyfriendGroup) < index) {
-					index = members.indexOf(boyfriendGroup);
-				}
-				insert(index, obj);
-			});
-			interp.variables.set('addOverChars', function(obj:FlxBasic) {
-				var index = members.indexOf(boyfriendGroup);
-				if (members.indexOf(dadGroup) > index) {
-					index = members.indexOf(dadGroup);
-				}
-				if (members.indexOf(gfGroup) > index) {
-					index = members.indexOf(gfGroup);
-				}
-				insert(index + 1, obj);
-			});
-			interp.variables.set('getObjectOrder', function(obj:Dynamic) {
-				if ((obj is String)) {
-					var basic:FlxBasic = Reflect.getProperty(this, obj);
-					if (basic != null) {
-						return members.indexOf(basic);
-					}
-					return -1;
-				} else {
-					return members.indexOf(obj);
-				}
-			});
-			interp.variables.set('setObjectOrder', function(obj:Dynamic, pos:Int = 0) {
-				if ((obj is String)) {
-					var basic:FlxBasic = Reflect.getProperty(this, obj);
-					if (basic != null) {
-						if (members.indexOf(basic) > -1) {
-							remove(basic);
-						}
-						insert(pos, basic);
-					}
-				} else {
-					if (members.indexOf(obj) > -1) {
-						remove(obj);
-					}
-					insert(pos, obj);
-				}
-			});
-			interp.variables.set('openSubState', openSubState);
-			interp.variables.set('closeSubState', closeSubState);
-			interp.variables.set('getProperty', function(variable:String) {
-				return Reflect.getProperty(this, variable);
-			});
-			interp.variables.set('setProperty', function(variable:String, value:Dynamic) {
-				Reflect.setProperty(this, variable, value);
-			});
-			interp.variables.set('getPropertyFromClass', function(classVar:String, variable:String) {
-				return Reflect.getProperty(Type.resolveClass(classVar), variable);
-			});
-			interp.variables.set('setPropertyFromClass', function(classVar:String, variable:String, value:Dynamic) {
-				Reflect.setProperty(Type.resolveClass(classVar), variable, value);
-			});
-			interp.variables.set('addScript', function(name:String, ?ignoreAlreadyRunning:Bool = false) {
-				var cervix = '$name.hscript';
-				var doPush = false;
-				#if MODS_ALLOWED
-				if (FileSystem.exists(Paths.modFolders(cervix))) {
-					cervix = Paths.modFolders(cervix);
-					doPush = true;
-				} else {
-				#end
-					cervix = Paths.getPreloadPath(cervix);
-					if (Assets.exists(cervix)) {
-						doPush = true;
-					}
-				#if MODS_ALLOWED	
-				}
-				#end
-
-				if (doPush)
-				{
-					if (!ignoreAlreadyRunning && hscriptMap.exists(cervix))
-					{
-						addTextToDebug('The script "$cervix" is already running!');
-						return;
-					}
-					addHscript(cervix);
-					return;
-				}
-				addTextToDebug("Script doesn't exist!");
-			});
-			interp.variables.set('removeScript', function(name:String) {
-				var cervix = '$name.hscript';
-				var doPush = false;
-				#if MODS_ALLOWED
-				if (FileSystem.exists(Paths.modFolders(cervix))) {
-					cervix = Paths.modFolders(cervix);
-					doPush = true;
-				} else {
-				#end
-					cervix = Paths.getPreloadPath(cervix);
-					if (Assets.exists(cervix)) {
-						doPush = true;
-					}
-				#if MODS_ALLOWED	
-				}
-				#end
-
-				if (doPush)
-				{
-					if (hscriptMap.exists(cervix))
-					{
-						var hscript = hscriptMap.get(cervix);
-						hscriptMap.remove(cervix);
-						hscript = null;
-						return;
-					}
-					return;
-				}
-				addTextToDebug("Script doesn't exist!");
-			});
-			interp.variables.set('debugPrint', function(text:Dynamic) {
-				addTextToDebug('$text');
-				trace(text);
-			});
-
-			//EVENTS
-			var funcs = [
-				'onStepHit',
-				'onBeatHit',
-				'onStartCountdown',
-				'onSongStart',
-				'onEndSong',
-				'onSkipCutscene',
-				'onBPMChange',
-				'onOpenChartEditor',
-				'onOpenCharacterEditor',
-				'onPause',
-				'onResume',
-				'onGameOver',
-				'onRecalculateRating'
-			];
-			for (i in funcs)
-				interp.variables.set(i, function() {});
-			interp.variables.set('onCountdownTick', function(counter) {});
-			interp.variables.set('onNextDialogue', function(line) {});
-			interp.variables.set('onSkipDialogue', function(line) {});
-			interp.variables.set('goodNoteHit', function(id, direction, noteType, isSustainNote) {});
-			interp.variables.set('opponentNoteHit', function(id, direction, noteType, isSustainNote) {});
-			interp.variables.set('noteMissPress', function(direction) {});
-			interp.variables.set('noteMiss', function(id, direction, noteType, isSustainNote) {});
-			interp.variables.set('onMoveCamera', function(focus) {});
-			interp.variables.set('onEvent', function(name, value1, value2) {});
-			interp.variables.set('eventPushed', function(name, strumTime, value1, value2) {});
-			interp.variables.set('eventEarlyTrigger', function(name) {});
-			interp.variables.set('onTweenCompleted', function(tag) {});
-			interp.variables.set('onTimerCompleted', function(tag, loops, loopsLeft) {});
 
 			interp.execute(program);
 			hscriptMap.set(path, interp);
@@ -2023,29 +1862,36 @@ class PlayState extends MusicBeatState
 	}
 
 	function postSetHscript() {
-		setOnHscripts('boyfriend', boyfriend);
-		setOnHscripts('dad', dad);
-		setOnHscripts('gf', gf);
-		setOnHscripts('strumLineNotes', strumLineNotes);
-		setOnHscripts('playerStrums', playerStrums);
-		setOnHscripts('opponentStrums', opponentStrums);
-		setOnHscripts('iconP1', iconP1);
-		setOnHscripts('iconP2', iconP2);
-		setOnHscripts('grpNoteSplashes', grpNoteSplashes);
-		setOnHscripts('scoreTxt', scoreTxt);
-		setOnHscripts('healthBar', healthBar);
-		setOnHscripts('botplayTxt', botplayTxt);
-		setOnHscripts('timeBar', timeBar);
-		setOnHscripts('timeTxt', timeTxt);
-		setOnHscripts('boyfriendGroup', boyfriendGroup);
-		setOnHscripts('dadGroup', dadGroup);
-		setOnHscripts('gfGroup', gfGroup);
-		setOnHscripts('camGame', camGame);
-		setOnHscripts('camHUD', camHUD);
-		setOnHscripts('camOther', camOther);
-		setOnHscripts('camFollow', camFollow);
-		setOnHscripts('camFollowPos', camFollowPos);
-		setOnHscripts('strumLine', strumLine);
+		if (!inEditor) {
+			setOnHscripts('boyfriend', boyfriend);
+			setOnHscripts('dad', dad);
+			setOnHscripts('gf', gf);
+			setOnHscripts('strumLineNotes', strumLineNotes);
+			setOnHscripts('playerStrums', playerStrums);
+			setOnHscripts('opponentStrums', opponentStrums);
+			setOnHscripts('iconP1', iconP1);
+			setOnHscripts('iconP2', iconP2);
+			setOnHscripts('grpNoteSplashes', grpNoteSplashes);
+			setOnHscripts('scoreTxt', scoreTxt);
+			setOnHscripts('healthBar', healthBar);
+			setOnHscripts('healthBarBG', healthBarBG);
+			setOnHscripts('botplayTxt', botplayTxt);
+			setOnHscripts('timeBar', timeBar);
+			setOnHscripts('timeBarBG', timeBarBG);
+			setOnHscripts('timeTxt', timeTxt);
+			setOnHscripts('boyfriendGroup', boyfriendGroup);
+			setOnHscripts('dadGroup', dadGroup);
+			setOnHscripts('gfGroup', gfGroup);
+			setOnHscripts('camGame', camGame);
+			setOnHscripts('camHUD', camHUD);
+			setOnHscripts('camOther', camOther);
+			setOnHscripts('camFollow', camFollow);
+			setOnHscripts('camFollowPos', camFollowPos);
+			setOnHscripts('strumLine', strumLine);
+			setOnHscripts('unspawnNotes', unspawnNotes);
+			setOnHscripts('eventNotes', eventNotes);
+			setOnHscripts('vocals', vocals);
+		}
 	}
 	#end
 
@@ -5770,7 +5616,7 @@ class PlayState extends MusicBeatState
 
 	function killHenchmen():Void
 	{
-		if(!ClientPrefs.lowQuality && ClientPrefs.violence && curStage == 'limo') {
+		if(!ClientPrefs.lowQuality && curStage == 'limo') {
 			if(limoKillingState < 1) {
 				limoMetalPole.x = -400;
 				limoMetalPole.visible = true;
@@ -5829,6 +5675,7 @@ class PlayState extends MusicBeatState
 			lua.stop();
 		}
 		luaArray = [];
+
 		#if HSCRIPT_ALLOWED
 		for (i in hscriptMap.keys()) {
 			callHscript(i, 'onDestroy', []);
@@ -5843,8 +5690,6 @@ class PlayState extends MusicBeatState
 		cpp.vm.Gc.enable(false);
 		#end
 
-		instance = null;
-
 		#if hscript
 		if (FunkinLua.hscript != null) FunkinLua.hscript = null;
 		#end
@@ -5856,6 +5701,8 @@ class PlayState extends MusicBeatState
 		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
 		
 		super.destroy();
+
+		instance = null;
 	}
 
 	public static function cancelMusicFadeTween() {

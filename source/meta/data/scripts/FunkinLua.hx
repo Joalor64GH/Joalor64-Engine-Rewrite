@@ -1,6 +1,5 @@
 package meta.data.scripts;
 
-import openfl.display.BitmapData;
 #if LUA_ALLOWED
 import llua.Lua;
 import llua.LuaL;
@@ -9,17 +8,18 @@ import llua.Convert;
 #end
 
 import animateatlas.AtlasFrameMaker;
-import flixel.addons.effects.FlxTrail;
-import flixel.input.keyboard.FlxKey;
-import flixel.sound.FlxSound;
+
 import openfl.display.BlendMode;
 import openfl.filters.BitmapFilter;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.system.FlxAssets.FlxShader;
 
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
 #end
+
+import flixel.system.FlxAssets.FlxShader;
+import flixel.addons.effects.FlxTrail;
+import flixel.input.keyboard.FlxKey;
+import flixel.sound.FlxSound;
 
 #if sys
 import sys.FileSystem;

@@ -1,50 +1,33 @@
 package modcharting;
 
-import flixel.input.keyboard.FlxKey;
-import lime.utils.Assets;
-import flixel.graphics.frames.FlxFramesCollection;
-import flixel.util.FlxAxes;
-import flixel.math.FlxPoint;
-import flixel.addons.ui.FlxUITooltipManager;
-import flixel.addons.ui.FlxUITooltipManager.FlxUITooltipData;
-import flixel.addons.ui.FlxUIButton;
-import flixel.FlxObject;
-import flixel.addons.ui.Anchor;
-import flixel.addons.ui.interfaces.IFlxUIWidget;
-import flixel.tweens.FlxEase;
-import haxe.Json;
-import openfl.net.FileReference;
-import openfl.events.Event;
-import openfl.events.IOErrorEvent;
-import flixel.graphics.FlxGraphic;
-import flixel.addons.display.FlxBackdrop;
-import flixel.tweens.FlxTween;
 import flixel.tweens.FlxTween.FlxTweenManager;
-import flixel.addons.ui.FlxSlider;
-import flixel.text.FlxText;
-import openfl.geom.Rectangle;
-import openfl.display.BitmapData;
-import flixel.util.FlxColor;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.util.FlxSort;
+import flixel.input.keyboard.FlxKey;
 import flixel.sound.FlxSound;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxCamera;
-import flixel.FlxG;
+
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
+
+import flixel.graphics.FlxGraphic;
+import flixel.graphics.frames.FlxFramesCollection;
+
 import flixel.addons.ui.FlxInputText;
-import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
+import flixel.addons.ui.FlxUITooltipManager;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
+import flixel.addons.ui.FlxUITooltipManager.FlxUITooltipData;
+import flixel.addons.ui.FlxUIButton;
+import flixel.addons.ui.Anchor;
 
+import flixel.addons.ui.interfaces.IFlxUIWidget;
+
+import openfl.events.Event;
+import openfl.events.IOErrorEvent;
+import openfl.net.FileReference;
 
 #if LEATHER
 import states.PlayState;
@@ -71,12 +54,10 @@ import meta.data.*;
 import meta.*;
 #end
 
-
 import modcharting.*;
 import modcharting.PlayfieldRenderer.StrumNoteType;
 import modcharting.Modifier;
 import modcharting.ModchartFile;
-using StringTools;
 
 class ModchartEditorEvent extends FlxSprite
 {

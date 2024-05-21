@@ -316,6 +316,7 @@ class CreditsState extends MusicBeatState
 			var id = realIndex++;
 			var isSelectable:Bool = !unselectableCheck(i);
 			var optionText:Alphabet = new Alphabet(0, 240 * id, creditsStuff[i][0], !isSelectable);
+			optionText.isMenuItem = true;
 			optionText.ID = i;
 			optionText.x = 120;
 			optionText.targetX = 90;
@@ -340,7 +341,7 @@ class CreditsState extends MusicBeatState
 					curSelected = i;
 			}
 			else
-				optionText.alignment = CENTERED;
+				optionText.screenCenter(X);
 		}
 
 		descBox = new AttachedSprite();

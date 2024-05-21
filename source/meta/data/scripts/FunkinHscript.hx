@@ -139,6 +139,7 @@ class FunkinHscript extends InterpEx {
         variables.set('TextField', TextField);
         variables.set('TextFormat', TextFormat);
         #if sys
+		variables.set('Sys', SysCustom);
         variables.set('File', File);
         variables.set('FileSystem', FileSystem);
         #end
@@ -167,6 +168,8 @@ class FunkinHscript extends InterpEx {
         variables.set('FreeplayState', FreeplayState);
         variables.set('FunkinHscript', FunkinHscript);
         variables.set('FunkinLua', FunkinLua);
+		variables.set('FunkinSScript', FunkinSScript);
+		variables.set('Game', PlayState.instance);
         variables.set('GameOverSubstate', GameOverSubstate);
         variables.set('HealthIcon', HealthIcon);
         variables.set('Highscore', Highscore);
@@ -316,17 +319,278 @@ class FunkinHscript extends InterpEx {
         variables.set('instance', PlayState.instance);
         variables.set('window', Application.current.window);
 
-        //EVENTS
+        variables.set("addHaxeLibrary", function(libName:String, ?libFolder:String = '') {
+			try {
+				var str:String = '';
+				if(libFolder.length > 0)
+					str = libFolder + '.';
+
+				variables.set(libName, Type.resolveClass(str + libName));
+			}
+			catch (e:Dynamic) {
+				PlayState.instance.addTextToDebug(scriptName + ":" + lastCalledFunction + " - " + e, FlxColor.RED);
+			}
+		});
+		variables.set('addBehindChars', function(obj:FlxBasic) {
+			var index = PlayState.instance.members.indexOf(PlayState.instance.gfGroup);
+			if (PlayState.instance.members.indexOf(PlayState.instance.dadGroup) < index) {
+				index = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
+			}
+			if (PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup) < index) {
+				index = PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup);
+			}
+			PlayState.instance.insert(index, obj);
+		});
+		variables.set('addOverChars', function(obj:FlxBasic) {
+			var index = PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup);
+			if (PlayState.instance.members.indexOf(PlayState.instance.dadGroup) > index) {
+				index = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
+			}
+			if (PlayState.instance.members.indexOf(PlayState.instance.gfGroup) > index) {
+				index = PlayState.instance.members.indexOf(PlayState.instance.gfGroup);
+			}
+			PlayState.instance.insert(index + 1, obj);
+		});
+		variables.set('getObjectOrder', function(obj:Dynamic) {
+			if ((obj is String)) {
+				var basic:FlxBasic = Reflect.getProperty(PlayState.instance, obj);
+				if (basic != null) {
+					return PlayState.instance.members.indexOf(basic);
+				}
+				return -1;
+			} else {
+				return PlayState.instance.members.indexOf(obj);
+			}
+		});
+		variables.set('setObjectOrder', function(obj:Dynamic, pos:Int = 0) {
+			if ((obj is String)) {
+				var basic:FlxBasic = Reflect.getProperty(PlayState.instance, obj);
+				if (basic != null) {
+					if (PlayState.instance.members.indexOf(basic) > -1) {
+						PlayState.instance.remove(basic);
+					}
+					PlayState.instance.insert(pos, basic);
+				}
+			} else {
+				if (PlayState.instance.members.indexOf(obj) > -1) {
+					PlayState.instance.remove(obj);
+				}
+				PlayState.instance.insert(pos, obj);
+			}
+		});
+		variables.set('getProperty', function(variable:String) {
+			return Reflect.getProperty(PlayState.instance, variable);
+		});
+		variables.set('setProperty', function(variable:String, value:Dynamic) {
+			Reflect.setProperty(PlayState.instance, variable, value);
+		});
+		variables.set('getPropertyFromClass', function(classVar:String, variable:String) {
+			return Reflect.getProperty(Type.resolveClass(classVar), variable);
+		});
+		variables.set('setPropertyFromClass', function(classVar:String, variable:String, value:Dynamic) {
+			Reflect.setProperty(Type.resolveClass(classVar), variable, value);
+		});
+		variables.set('loadSong', function(name:String = null, ?difficultyNum:Int = -1, ?skipTransition:Bool = false) {
+			if (name == null) name = PlayState.SONG.song;
+			if (difficultyNum < 0) difficultyNum = PlayState.storyDifficulty;
+			FlxG.timeScale = 1;
+
+			if (skipTransition)
+			{
+				FlxTransitionableState.skipNextTransIn = true;
+				FlxTransitionableState.skipNextTransOut = true;
+			}
+
+			if (PlayState.isStoryMode && !PlayState.instance.transitioning) {
+				PlayState.campaignScore += PlayState.instance.songScore;
+				PlayState.campaignMisses += PlayState.instance.songMisses;
+				PlayState.storyPlaylist.remove(PlayState.storyPlaylist[0]);
+				PlayState.storyPlaylist.insert(0, name);
+			}
+
+			if (difficultyNum >= CoolUtil.difficulties.length) {
+				difficultyNum = CoolUtil.difficulties.length - 1;
+			}
+			var poop = Highscore.formatSong(name, difficultyNum);
+			PlayState.SONG = Song.loadFromJson(poop, name);
+			PlayState.storyDifficulty = difficultyNum;
+			PlayState.instance.persistentUpdate = false;
+			PlayState.cancelMusicFadeTween();
+			PlayState.deathCounter = 0;
+			FlxG.sound.music.pause();
+			FlxG.sound.music.volume = 0;
+			if(PlayState.instance.vocals != null)
+			{
+				PlayState.instance.vocals.pause();
+				PlayState.instance.vocals.volume = 0;
+			}
+			LoadingState.loadAndResetState();
+		});
+		variables.set("endSong", function() {
+			PlayState.instance.killNotes();
+			PlayState.instance.finishSong(true);
+		});
+		variables.set("restartSong", function(skipTransition:Bool = false) {
+			PlayState.instance.persistentUpdate = false;
+			PauseSubState.restartSong(skipTransition);
+		});
+		variables.set("exitSong", function(skipTransition:Bool = false) {
+			if (skipTransition)
+			{
+				FlxTransitionableState.skipNextTransIn = true;
+				FlxTransitionableState.skipNextTransOut = true;
+			}
+			FlxG.timeScale = 1;
+
+			PlayState.cancelMusicFadeTween();
+			CustomFadeTransition.nextCamera = PlayState.instance.camOther;
+			if (FlxTransitionableState.skipNextTransIn)
+				CustomFadeTransition.nextCamera = null;
+
+			if (PlayState.isStoryMode)
+				FlxG.switchState(() -> new StoryMenuState());
+			else
+				FlxG.switchState(() -> new FreeplayState());
+
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			PlayState.changedDifficulty = false;
+			PlayState.chartingMode = false;
+			PlayState.instance.transitioning = true;
+			PlayState.deathCounter = 0;
+		});
+		variables.set('openCredits', function() {
+			FlxG.timeScale = 1;
+			PlayState.cancelMusicFadeTween();
+			CustomFadeTransition.nextCamera = PlayState.instance.camOther;
+			if (FlxTransitionableState.skipNextTransIn)
+				CustomFadeTransition.nextCamera = null;
+
+			FlxG.switchState(() -> new CreditsState());
+
+			FlxG.sound.music.stop();
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			PlayState.changedDifficulty = false;
+			PlayState.chartingMode = false;
+			PlayState.instance.transitioning = true;
+			PlayState.deathCounter = 0;
+		});
+		variables.set("startDialogue", function(dialogueFile:String, music:String = null) {
+			var path:String = Paths.json('${Paths.formatToSongPath(PlayState.SONG.song)}/$dialogueFile');
+			PlayState.instance.addTextToDebug('Trying to load dialogue: $path');
+
+			if (Paths.exists(path, TEXT)) {
+				var shit:DialogueFile = DialogueBoxPsych.parseDialogue(path);
+				if (shit.dialogue.length > 0) {
+					PlayState.instance.startDialogue(shit, music);
+					PlayState.instance.addTextToDebug('Successfully loaded dialogue');
+				} else {
+					PlayState.instance.addTextToDebug('Your dialogue file is badly formatted!');
+				}
+			} else {
+				PlayState.instance.addTextToDebug('Dialogue file not found');
+				PlayState.instance.startAndEnd();
+			}
+		});
+		variables.set("setWeekCompleted", function(name:String = '') {
+			if(name.length > 0)
+			{
+				StoryMenuState.weekCompleted.set(name, true);
+				FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+				FlxG.save.flush(); 
+			}
+		});
+		variables.set("close", function() {
+			closed = true;
+			return closed;
+		});
+		variables.set('addScript', function(name:String, ?ignoreAlreadyRunning:Bool = false) {
+			var cervix = '$name.hscript';
+			var doPush = false;
+			cervix = Paths.getPath(cervix);
+			if (Paths.exists(cervix, TEXT)) {
+				doPush = true;
+			}
+
+			if (doPush)
+			{
+				if (!ignoreAlreadyRunning && PlayState.instance.hscriptMap.exists(cervix))
+				{
+					PlayState.instance.addTextToDebug('The script "$cervix" is already running!');
+					return;
+				}
+				PlayState.instance.addHscript(cervix);
+				return;
+			}
+			PlayState.instance.addTextToDebug("Script doesn't exist!");
+		});
+		variables.set('removeScript', function(name:String) {
+			var cervix = '$name.hscript';
+			var doPush = false;
+			cervix = Paths.getPath(cervix);
+			if (Paths.exists(cervix, TEXT)) {
+				doPush = true;
+			}
+
+			if (doPush)
+			{
+				if (PlayState.instance.hscriptMap.exists(cervix))
+				{
+					var hscript = PlayState.instance.hscriptMap.get(cervix);
+					PlayState.instance.hscriptMap.remove(cervix);
+					hscript = null;
+					return;
+				}
+				return;
+			}
+			PlayState.instance.addTextToDebug("Script doesn't exist!");
+		});
+		variables.set('debugPrint', function(text:Dynamic) {
+			PlayState.instance.addTextToDebug('$text');
+			trace(text);
+		});
+
+		//EVENTS
 		var funcs = [
 			'onCreate',
 			'onCreatePost',
-			'onDestroy'
+			'onDestroy',
+			'onStepHit',
+			'onBeatHit',
+			'onStartCountdown',
+			'onSongStart',
+			'onEndSong',
+			'onSkipCutscene',
+			'onBPMChange',
+			'onSignatureChange',
+			'onOpenChartEditor',
+			'onOpenCharacterEditor',
+			'onPause',
+			'onResume',
+			'onGameOver',
+			'onRecalculateRating'
 		];
 		for (i in funcs)
 			variables.set(i, function() {});
-				variables.set('onUpdate', function(elapsed) {});
-			variables.set('onUpdatePost', function(elapsed) {});
-		}
+		variables.set('onUpdate', function(elapsed) {});
+		variables.set('onUpdatePost', function(elapsed) {});
+		variables.set('onCountdownTick', function(counter) {});
+		variables.set('onGameOverConfirm', function(retry) {});
+		variables.set('onNextDialogue', function(line) {});
+		variables.set('onSkipDialogue', function(line) {});
+		variables.set('onNoteHit', function(index, direction, noteType, isSustainNote, characters, strumID, isPlayer) {});
+		variables.set('noteMissPress', function(direction) {});
+		variables.set('noteMiss', function(index, direction, noteType, isSustainNote, characters) {});
+		variables.set('onMoveCamera', function(focus) {});
+		variables.set('onEvent', function(name, value1, value2) {});
+		variables.set('eventPushed', function(name, strumTime, value1, value2) {});
+		variables.set('eventEarlyTrigger', function(name) {});
+		variables.set('onTweenCompleted', function(tag) {});
+		variables.set('onTimerCompleted', function(tag, loops, loopsLeft) {});
+		variables.set('onSpawnNote', function(index, direction, noteType, isSustainNote, characters) {});
+		variables.set('onGhostTap', function(direction) {});
+		variables.set('onKeyChange', function(strumID, keyAmount) {});
+
+		trace('hscript file loaded succesfully: $path');
 
 		inline function getInstance()
 			return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
@@ -591,4 +855,58 @@ class FlxKeyCustom
 		return fromStringMap.exists(s) ? fromStringMap.get(s) : NONE;
 	}
 }
+
+#if sys
+class SysCustom
+{
+	public static function print(v:Dynamic) {
+		Sys.print(v);
+	}
+	public static function println(v:Dynamic) {
+		Sys.println(v);
+	}
+	public static function args() {
+		return Sys.args();
+	}
+	public static function getEnv(s:String) {
+		return Sys.getEnv(s);
+	}
+	public static function environment() {
+		return Sys.environment();
+	}
+	public static function sleep(seconds:Float) {
+		Sys.sleep(seconds);
+	}
+	public static function getCwd() {
+		return Sys.getCwd();
+	}
+	public static function systemName() {
+		return Sys.systemName();
+	}
+	public static function exit(code:Int) {
+		Sys.exit(code);
+	}
+	public static function time() {
+		return Sys.time();
+	}
+	public static function cpuTime() {
+		return Sys.cpuTime();
+	}
+	public static function programPath() {
+		return Sys.programPath();
+	}
+	public static function getChar(echo:Bool) {
+		return Sys.getChar(echo);
+	}
+	public static function stdin() {
+		return Sys.stdin();
+	}
+	public static function stdout() {
+		return Sys.stdout();
+	}
+	public static function stderr() {
+		return Sys.stderr();
+	}
+}
+#end
 #end
