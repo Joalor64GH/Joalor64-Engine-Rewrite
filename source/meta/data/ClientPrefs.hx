@@ -1,8 +1,6 @@
 package meta.data;
 
 import flixel.input.keyboard.FlxKey;
-import meta.state.TitleState;
-import meta.Controls;
 
 class ClientPrefs {
 	public static var downScroll:Bool = false;
@@ -16,8 +14,6 @@ class ClientPrefs {
 	public static var lowQuality:Bool = false;
 	public static var shaders:Bool = true;
 	public static var framerate:Int = 60;
-	public static var cursing:Bool = true;
-	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
@@ -40,6 +36,7 @@ class ClientPrefs {
 	public static var floatyLetters:Bool = false;
 	public static var songDisplay:String = 'Classic';
 	public static var language:String = 'en';
+	public static var displayMilliseconds:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -148,6 +145,7 @@ class ClientPrefs {
 		FlxG.save.data.floatyLetters = floatyLetters;
 		FlxG.save.data.songDisplay = songDisplay;
 		FlxG.save.data.language = language;
+		FlxG.save.data.displayMilliseconds = displayMilliseconds;
 	
 		FlxG.save.flush();
 
@@ -299,6 +297,8 @@ class ClientPrefs {
 			songDisplay = FlxG.save.data.songDisplay;
 		if(FlxG.save.data.language != null)
 			language = FlxG.save.data.language;
+		if(FlxG.save.data.displayMilliseconds != null)
+			displayMilliseconds = FlxG.save.data.displayMilliseconds;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');
