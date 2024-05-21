@@ -36,7 +36,7 @@ class ModSetupTabs extends FlxUITabMenu
     var focusList:Array<FlxUIInputText> = [];
 
     var DEFAULT_MOD:ModFolder = {
-        id: "name"
+        id: "name",
         name: "Name",
         description: "Description",
         restart: false,
