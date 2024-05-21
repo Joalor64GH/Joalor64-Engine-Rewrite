@@ -106,7 +106,7 @@ jobs:
           restore-keys: |
             cache-build-windows
   buildMacOS:
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - uses: actions/checkout@main

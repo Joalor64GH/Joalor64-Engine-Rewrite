@@ -468,7 +468,6 @@ class PlayState extends MusicBeatState
 			}		
 		}
 
-		// i think this works, i just haven't tested it
 		for (i in ratingsArray) {
 			var rating:Rating = new Rating(i[0]);
 			rating.ratingMod = i[1];
@@ -476,33 +475,6 @@ class PlayState extends MusicBeatState
 			rating.noteSplash = i[3];
 			ratingsData.push(rating);
 		}
-
-		/*
-		//Ratings
-		var rating:Rating = new Rating('sick');
-		rating.ratingMod = 1;
-		rating.score = 350;
-		rating.noteSplash = true;
-		ratingsData.push(rating);
-
-		var rating:Rating = new Rating('good');
-		rating.ratingMod = 0.75;
-		rating.score = 200;
-		rating.noteSplash = false;
-		ratingsData.push(rating);
-
-		var rating:Rating = new Rating('bad');
-		rating.ratingMod = 0.5;
-		rating.score = 100;
-		rating.noteSplash = false;
-		ratingsData.push(rating);
-
-		var rating:Rating = new Rating('shit');
-		rating.ratingMod = 0;
-		rating.score = 50;
-		rating.noteSplash = false;
-		ratingsData.push(rating);
-		*/
 
 		// For the "Just the Two of Us" achievement
 		for (i in 0...keysArray.length)
@@ -5877,15 +5849,20 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
-			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)))
+
+		if (SONG.needsVoices && FlxG.sound.music.time >= -ClientPrefs.noteOffset)
 		{
-			resyncVocals();
+			var timeSub:Float = Conductor.songPosition - Conductor.offset;
+			var syncTime:Float = 20 * playbackRate;
+			if (Math.abs(FlxG.sound.music.time - timeSub) > syncTime ||
+				(vocals.length > 0 && Math.abs(vocals.time - timeSub) > syncTime)))
+			{
+				resyncVocals();
+			}
 		}
 
-		if(curStep == lastStepHit) {
+		if (curStep == lastStepHit)
 			return;
-		}
 
 		lastStepHit = curStep;
 
@@ -5901,7 +5878,7 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if(lastBeatHit >= curBeat)
+		if (lastBeatHit >= curBeat)
 			return;
 
 		if (generatedMusic)
