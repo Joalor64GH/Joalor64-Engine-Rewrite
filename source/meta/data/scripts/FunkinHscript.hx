@@ -591,6 +591,7 @@ class FunkinHscript extends InterpEx {
 		variables.set('onKeyChange', function(strumID, keyAmount) {});
 
 		trace('hscript file loaded succesfully: $path');
+	}
 
 		inline function getInstance()
 			return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
