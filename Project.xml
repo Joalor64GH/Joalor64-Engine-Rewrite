@@ -59,7 +59,8 @@
 	<source path="source" />
 	<assets path="assets" exclude="*.ogg" if="web" /> 
 	<assets path="assets" exclude="*.mp3|*.mp4" unless="web" />
-	<assets path="assets/videos" library="videos" if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
+	<assets path="assets/artemis" library="artemis" if="windows"/>
+	<assets path="assets/videos"  library="videos"  if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
 	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
 	<assets path="modsList.txt" if="MODS_ALLOWED" />
 

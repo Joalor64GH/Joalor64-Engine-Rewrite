@@ -7,6 +7,7 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUITabMenu;
 
 typedef ModFolder = {
+    var id:String;
     var name:String;
     var description:String;
     var restart:Bool;
@@ -19,6 +20,7 @@ class ModSetupTabs extends FlxUITabMenu
     var tabGroup:FlxUI;
 
     var modFolderInput:FlxUIInputText;
+    var modIdInput:FlxUIInputText;
     var modNameInput:FlxUIInputText;
     var modDescInput:FlxUIInputText;
 
@@ -34,6 +36,7 @@ class ModSetupTabs extends FlxUITabMenu
     var focusList:Array<FlxUIInputText> = [];
 
     var DEFAULT_MOD:ModFolder = {
+        id: "name"
         name: "Name",
         description: "Description",
         restart: false,
@@ -66,23 +69,26 @@ class ModSetupTabs extends FlxUITabMenu
 
         final _sep:Int = 35;
 
-        modFolderInput = new FlxUIInputText(25, 25, 350, "folder");
+        modFolderInput = new FlxUIInputText(25, 25, 350, "Folder");
         addToGroup(modFolderInput, "Mod Folder:", true);
 
-        modNameInput = new FlxUIInputText(25, 25 + _sep, 350, "Name");
+        modIdInput = new FlxUIInputText(25, 25 + _sep, 350, "Name");
+        addToGroup(modIdInput, "Mod ID:", true);
+
+        modNameInput = new FlxUIInputText(25, 25 + _sep * 2, 350, "Name");
         addToGroup(modNameInput, "Mod Name:", true);
 
-        modDescInput = new FlxUIInputText(25, 25 + _sep * 2, 350, "Description");
+        modDescInput = new FlxUIInputText(25, 25 + _sep * 3, 350, "Description");
         modDescInput.lines = 999;
         addToGroup(modDescInput, "Mod Description:", true);
 
-        modColorInputR = new FlxUIInputText(25, 25 + _sep * 3, 350, "0-255");
+        modColorInputR = new FlxUIInputText(25, 25 + _sep * 4, 350, "0-255");
         addToGroup(modColorInputR, "Mod Color (Red):", true);
 
-        modColorInputG = new FlxUIInputText(25, 25 + _sep * 4, 350, "0-255");
+        modColorInputG = new FlxUIInputText(25, 25 + _sep * 5, 350, "0-255");
         addToGroup(modColorInputG, "Mod Color (Green):", true);
 
-        modColorInputB = new FlxUIInputText(25, 25 + _sep * 5, 350, "0-255");
+        modColorInputB = new FlxUIInputText(25, 25 + _sep * 6, 350, "0-255");
         addToGroup(modColorInputB, "Mod Color (Blue):", true);
 
         createButton = new FlxUIButton(310, 350, "Create Folder", () -> {
@@ -107,6 +113,7 @@ class ModSetupTabs extends FlxUITabMenu
                 ModsSetupState.setupModFolder(modFolder);
 
                 var _jsonData = copyJson(DEFAULT_MOD);
+                _jsonData.id = modIdInput.text;
                 _jsonData.name = modNameInput.text;
                 _jsonData.description = modDescInput.text;
                 _jsonData.restart = restartCheck.checked;
@@ -132,11 +139,11 @@ class ModSetupTabs extends FlxUITabMenu
         });
         tabGroup.add(createButton);
 
-        restartCheck = new FlxUICheckBox(25, 275, null, null, "Restart");
+        restartCheck = new FlxUICheckBox(25, 300, null, null, "Restart");
         restartCheck.checked = false;
         tabGroup.add(restartCheck);
 
-        globalCheck = new FlxUICheckBox(25, 300, null, null, "Global Mod");
+        globalCheck = new FlxUICheckBox(25, 325, null, null, "Global Mod");
         globalCheck.checked = false;
         tabGroup.add(globalCheck);
     }
@@ -158,9 +165,6 @@ class ModsSetupState extends MusicBeatState
 
     override function create()
     {
-        Paths.clearStoredMemory();
-        Paths.clearUnusedMemory();
-
         FlxG.mouse.visible = true;
 
         FlxG.sound.music.fadeIn(4, 0, 0.7);
@@ -168,7 +172,6 @@ class ModsSetupState extends MusicBeatState
 
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
         bg.scrollFactor.set();
-        bg.color = 0xFF353535;
         add(bg);
 
         modTab = new ModSetupTabs();

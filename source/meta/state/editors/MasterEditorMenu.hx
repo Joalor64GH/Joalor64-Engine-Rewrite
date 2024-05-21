@@ -1,9 +1,5 @@
 package meta.state.editors;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-
 import objects.Character;
 
 #if MODS_ALLOWED
@@ -44,7 +40,21 @@ class MasterEditorMenu extends MusicBeatState
 		bg.color = 0xFF353535;
 		add(bg);
 
-		initOptions();
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (bg.color);
+		#end
+
+		grpTexts = new FlxTypedGroup<Alphabet>();
+		add(grpTexts);
+
+		for (i in 0...options.length)
+		{
+			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
+			leText.isMenuItem = true;
+			leText.targetY = i;
+			grpTexts.add(leText);
+			leText.snapToPosition();
+		}
 		
 		#if MODS_ALLOWED
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 42).makeGraphic(FlxG.width, 42, 0xFF000000);
@@ -69,21 +79,6 @@ class MasterEditorMenu extends MusicBeatState
 
 		FlxG.mouse.visible = false;
 		super.create();
-	}
-
-	function initOptions() 
-	{
-		grpTexts = new FlxTypedGroup<Alphabet>();
-		add(grpTexts);
-
-		for (i in 0...options.length)
-		{
-			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
-			leText.isMenuItem = true;
-			leText.targetY = i;
-			grpTexts.add(leText);
-			leText.snapToPosition();
-		}
 	}
 
 	override function update(elapsed:Float)
@@ -134,18 +129,10 @@ class MasterEditorMenu extends MusicBeatState
 		if (FlxG.keys.justPressed.T)
 			FlxG.switchState(() -> new TestState());
 
-		var bullShit:Int = 0;
-		for (item in grpTexts.members)
+		for (num => item in grpTexts.members)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
+			item.targetY = num - curSelected;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
 		}
 		super.update(elapsed);
 	}
@@ -153,13 +140,7 @@ class MasterEditorMenu extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, options.length - 1);
 	}
 
 	#if MODS_ALLOWED
@@ -167,12 +148,7 @@ class MasterEditorMenu extends MusicBeatState
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-		curDirectory += change;
-
-		if(curDirectory < 0)
-			curDirectory = directories.length - 1;
-		if(curDirectory >= directories.length)
-			curDirectory = 0;
+		curDirectory = FlxMath.wrap(curDirectory + change, 0, directories.length - 1);
 	
 		WeekData.setDirectoryFromWeek();
 		if(directories[curDirectory] == null || directories[curDirectory].length < 1)

@@ -1,18 +1,6 @@
 package meta.state.editors;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
 import flixel.sound.FlxSound;
-import openfl.utils.Assets;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;
@@ -26,7 +14,6 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
 import lime.system.Clipboard;
-import haxe.Json;
 import meta.data.WeekData;
 import flixel.input.keyboard.FlxKey;
 #if sys
@@ -34,16 +21,8 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
-import meta.*;
-import meta.state.*;
-import meta.state.editors.*;
-import meta.data.*;
-import meta.data.alphabet.*;
-import objects.*;
 import objects.userinterface.*;
 import objects.userinterface.menu.*;
-
-using StringTools;
 
 class WeekEditorState extends MusicBeatState
 {
@@ -612,6 +591,10 @@ class WeekEditorFreeplayState extends MusicBeatState
 
 		bg.color = FlxColor.WHITE;
 		add(bg);
+
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (bg.color);
+		#end
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);

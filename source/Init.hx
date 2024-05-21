@@ -130,6 +130,21 @@ class Init extends FlxState
 		}
 		#end
 
+		#if sys
+			ArtemisIntegration.initialize();
+			ArtemisIntegration.setGameState ("title");
+			ArtemisIntegration.resetModName ();
+			ArtemisIntegration.setFadeColor ("#FF000000");
+			ArtemisIntegration.sendProfileRelativePath ("assets/artemis/fnf-vanilla.json");
+			ArtemisIntegration.resetAllFlags ();
+			ArtemisIntegration.autoUpdateControls ();
+			Application.current.onExit.add (function (exitCode) {
+				ArtemisIntegration.setBackgroundColor ("#00000000");
+				ArtemisIntegration.setGameState ("closed");
+				ArtemisIntegration.resetModName ();
+			});
+			#end
+
 		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
 
 		ClientPrefs.loadPrefs();

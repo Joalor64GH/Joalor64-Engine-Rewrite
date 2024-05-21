@@ -111,8 +111,16 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	{
 		if (!FlxTransitionableState.skipNextTransIn)
 		{
+			#if sys
+			ArtemisIntegration.toggleFade (true);
+			#end
 			FlxG.state.openSubState(new CustomFadeTransition(0.35, false));
-			CustomFadeTransition.finishCallback = onOutroComplete;
+			CustomFadeTransition.finishCallback = () -> { 
+				#if sys
+				ArtemisIntegration.toggleFade (false);
+				#end
+				onOutroComplete();
+			};
 			return;
 		}
 

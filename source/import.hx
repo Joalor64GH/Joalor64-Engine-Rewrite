@@ -51,6 +51,7 @@ import meta.data.PlayerSettings;
 import meta.MusicBeatState;
 import meta.MusicBeatSubstate;
 import meta.state.PlayState;
+import meta.ArtemisIntegration;
 import meta.Controls;
 
 import meta.data.options.*;
@@ -69,7 +70,6 @@ import Paths;
 #if MODS_ALLOWED 
 import backend.Mods; 
 #end
-
 import backend.Localization;
 
 using Globals;

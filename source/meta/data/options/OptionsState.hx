@@ -74,6 +74,10 @@ class OptionsState extends MusicBeatState
 		bg.scrollFactor.set(0, yScroll / 3);
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (bg.color);
+		#end
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);

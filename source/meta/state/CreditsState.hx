@@ -8,7 +8,6 @@ import sys.io.File;
 class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;
-	var realIndex:Int = 0;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var iconArray:Array<AttachedSprite> = [];
@@ -19,6 +18,7 @@ class CreditsState extends MusicBeatState
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
+
 	var offsetThing:Float = -75;
 
 	var noLink:Bool;
@@ -30,6 +30,11 @@ class CreditsState extends MusicBeatState
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
+		#end
+
+		#if sys
+		ArtemisIntegration.setGameState ("menu");
+		ArtemisIntegration.resetModName ();
 		#end
 
 		persistentUpdate = true;
@@ -313,13 +318,12 @@ class CreditsState extends MusicBeatState
 
 		for (i in 0...creditsStuff.length)
 		{
-			var id = realIndex++;
 			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(0, 240 * id, creditsStuff[i][0], !isSelectable);
+			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
-			optionText.ID = i;
-			optionText.x = 120;
-			optionText.targetX = 90;
+			optionText.targetY = i;
+			optionText.changeX = false;
+			optionText.snapToPosition();
 			grpOptions.add(optionText);
 
 			if (isSelectable)
@@ -328,8 +332,7 @@ class CreditsState extends MusicBeatState
 					Mods.currentModDirectory = creditsStuff[i][5];
 
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
-				icon.xAdd = optionText.width + 15;
-				icon.yAdd = 15;
+				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
 
 				// using a FlxGroup is too much fuss!
@@ -341,7 +344,7 @@ class CreditsState extends MusicBeatState
 					curSelected = i;
 			}
 			else
-				optionText.screenCenter(X);
+				optionText.alignment = CENTERED;
 		}
 
 		descBox = new AttachedSprite();
@@ -370,6 +373,9 @@ class CreditsState extends MusicBeatState
 
 		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (intendedColor);
+		#end
 		changeSelection();
 		super.create();
 	}
@@ -494,6 +500,9 @@ class CreditsState extends MusicBeatState
 				colorTween.cancel();
 			
 			intendedColor = newColor;
+			#if sys
+			ArtemisIntegration.setBackgroundFlxColor (intendedColor);
+			#end
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween)
 				{

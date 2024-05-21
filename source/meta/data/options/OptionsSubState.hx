@@ -56,6 +56,10 @@ class ControlsSubState extends MusicBeatSubstate {
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (bg.color);
+		#end
+
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -281,12 +285,15 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		trace('Reloaded keys: ' + ClientPrefs.keyBinds);
 
+		#if sys
+		ArtemisIntegration.autoUpdateControls ();
+		#end
+
 		for (i in 0...grpOptions.length) {
 			if(!unselectableCheck(i, true)) {
 				addBindTexts(grpOptions.members[i], i);
 			}
 		}
-
 
 		var bullShit:Int = 0;
 		for (i in 0...grpInputs.length) {
@@ -624,6 +631,10 @@ class NotesSubState extends MusicBeatSubstate
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (bg.color);
+		#end
 
 		blackBG = new FlxSprite(posX - 25).makeGraphic(1140, 200, FlxColor.BLACK);
 		blackBG.alpha = 0.4;
@@ -1147,6 +1158,46 @@ class VisualsSubState extends BaseOptionsMenu
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
+
+		var option:Option = new Option('Screen Resolution',
+			"Size of the window [Press ACCEPT to apply, CANCEL to cancel]",
+			'screenResTemp',
+			'string',
+			'1280 x 720', ['1280 x 720',
+			'1280 x 960',
+			'FULLSCREEN'
+			]);
+		addOption(option);
+		//option.onChange = onChangeRes;
+
+		if (ClientPrefs.screenRes == "FULLSCREEN") {
+			var option:Option = new Option('Scale Mode',
+				"How you'd like the screen to scale [Press ACCEPT to apply, CANCEL to cancel] (Adaptive is not compatible with fullscreen.)",
+				'screenScaleModeTemp',
+				'string',
+				'LETTERBOX', ['LETTERBOX',
+				'PAN',
+				'STRETCH'
+				]);
+			addOption(option);
+		} else {
+			var option:Option = new Option('Scale Mode',
+				"Scale Mode [Press ACCEPT to apply, CANCEL to cancel] (Adaptive is unstable and may cause visual issues and doesn't work with fullscreen!)",//summerized < 333
+				'screenScaleModeTemp',
+				'string',
+				'LETTERBOX', ['LETTERBOX',
+				'PAN',
+				'STRETCH',
+				'ADAPTIVE'
+				]);
+			addOption(option);
+		}
+		// before you tell me "why add adaptive in" i didn't add it in. someone changed the default behavior to be like adaptive which was way too buggy so i'm making it optional
+		//thx, niko
+		//      -bbpanzu
+
+		ClientPrefs.screenScaleModeTemp = ClientPrefs.screenScaleMode;
+		ClientPrefs.screenResTemp = ClientPrefs.screenRes;
 		#end
 
 		var option:Option = new Option('Flashing Lights',
@@ -1187,8 +1238,40 @@ class VisualsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		#if sys
+		var option:Option = new Option('Enable Artemis',
+			'Cool colors for your RGB stuff. Requires Artemis and its FNF plugin to work. https://github.com/skedgyedgy/Artemis.Plugins.FNF/releases/tag/1.1',
+			'enableArtemis',
+			'bool',
+			true);
+		addOption(option);
+		option.onChange = onToggleArtemis;
+		#end
+
 		super();
 	}
+
+	#if sys
+	function onToggleArtemis()
+	{
+		if (ClientPrefs.enableArtemis) {
+			ArtemisIntegration.initialize();
+			ArtemisIntegration.setBackgroundColor ("#FFEA71FD");
+			ArtemisIntegration.setFadeColor ("#FF000000");
+			ArtemisIntegration.setGameState ("menu");
+			ArtemisIntegration.setFadeColor ("#FF000000");
+			ArtemisIntegration.sendProfileRelativePath ("assets/artemis/fnf-vanilla.json");
+			ArtemisIntegration.autoUpdateControls ();
+			ArtemisIntegration.resetAllFlags ();
+			ArtemisIntegration.resetModName ();
+		} else {
+			ArtemisIntegration.setBackgroundColor ("#00000000");
+			ArtemisIntegration.setGameState ("closed");
+			ArtemisIntegration.resetModName ();
+			ArtemisIntegration.artemisAvailable = false;
+		}
+	}
+	#end
 
 	#if !mobile
 	function onChangeFPSCounter()

@@ -24,6 +24,11 @@ class ClientPrefs {
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
+	public static var enableArtemis:Bool = true;
+	public static var screenRes:String = "1280 x 720";
+	public static var screenResTemp:String = "1280 x 720"; // dummy value that isn't saved, used so that if the player cancels instead of hitting space the resolution isn't applied
+	public static var screenScaleMode:String = "Letterbox";
+	public static var screenScaleModeTemp:String = "Letterbox";
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var saveReplay:Bool = true;
@@ -132,6 +137,7 @@ class ClientPrefs {
 		FlxG.save.data.goodWindow = goodWindow;
 		FlxG.save.data.badWindow = badWindow;
 		FlxG.save.data.safeFrames = safeFrames;
+		FlxG.save.data.enableArtemis = enableArtemis;
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
@@ -257,6 +263,15 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.saveReplay != null) {
 			saveReplay = FlxG.save.data.saveReplay;
+		}
+		if (FlxG.save.data.enableArtemis != null) {
+			enableArtemis = FlxG.save.data.enableArtemis;
+		}
+		if(FlxG.save.data.screenRes != null) {
+			screenRes = FlxG.save.data.screenRes;
+		}
+		if(FlxG.save.data.screenScaleMode != null) {
+			screenScaleMode = FlxG.save.data.screenScaleMode;
 		}
 		if(FlxG.save.data.gameplaySettings != null)
 		{

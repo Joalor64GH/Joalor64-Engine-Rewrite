@@ -47,6 +47,11 @@ class ModsMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
+		#if sys
+		ArtemisIntegration.setGameState ("menu");
+		ArtemisIntegration.resetModName ();
+		#end
+
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
@@ -266,6 +271,9 @@ class ModsMenuState extends MusicBeatState
 			bg.color = mods[curSelected].color;
 
 		intendedColor = bg.color;
+		#if sys
+		ArtemisIntegration.setBackgroundFlxColor (intendedColor);
+		#end
 		changeSelection();
 		updatePosition();
 		FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -428,6 +436,9 @@ class ModsMenuState extends MusicBeatState
 				colorTween.cancel();
 			}
 			intendedColor = newColor;
+			#if sys
+			ArtemisIntegration.setBackgroundFlxColor (intendedColor);
+			#end
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween) {
 					colorTween = null;
@@ -532,6 +543,7 @@ class ModsMenuState extends MusicBeatState
 class ModMetadata
 {
 	public var folder:String;
+	public var id:String; // not 100% necissary so it's optional, but because folders can get renamed pretty easily, this is useful for identifying the mod better
 	public var name:String;
 	public var description:String;
 	public var color:FlxColor;
@@ -541,6 +553,7 @@ class ModMetadata
 
 	public function new(folder:String)
 	{
+		this.id = folder;
 		this.folder = folder;
 		this.name = folder;
 		this.description = "No description provided.";
@@ -550,6 +563,14 @@ class ModMetadata
 		var pack:Dynamic = Mods.getPack(folder);
 		if(pack != null) {
 			//using reflects cuz for some odd reason my haxe hates the stuff.var shit
+			if(pack.id != null && pack.id.length > 0)
+			{
+				if(pack.id != 'Name')
+					this.id = pack.id;
+				else
+					this.id = pack.folder;
+			}
+
 			if(pack.name != null && pack.name.length > 0)
 			{
 				if(pack.name != 'Name')

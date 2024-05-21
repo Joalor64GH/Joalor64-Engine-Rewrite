@@ -1,8 +1,5 @@
 package meta.state;
 
-import openfl.display.Bitmap;
-import openfl.display.BitmapData;
-
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 
@@ -428,6 +425,11 @@ class TitleState extends MusicBeatState
 
 				gfDance.animation.play('Hey');
 				candance = false;
+
+				#if sys
+				ArtemisIntegration.triggerFlash ("#3FFFFFFF");
+				#end
+
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					#if html5
@@ -633,6 +635,10 @@ class TitleState extends MusicBeatState
 			credIconPhantom.destroy();
 			credIconKawai.destroy();
 			credIconEvil.destroy();
+			#end
+
+			#if sys
+			ArtemisIntegration.triggerFlash ("#FFFFFFFF");
 			#end
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
