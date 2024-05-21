@@ -4742,7 +4742,7 @@ class PlayState extends MusicBeatState
 
 					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 						persistentUpdate = true;
-						openSubState(new ResultsSubState(sicks, goods, bads, shits, Std.int(campaignScore), Std.int(campaignMisses), 
+						openSubState(new ResultsSubState(sicks, goods, bads, shits, campaignScore, campaignMisses, 
 							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
 					});
 
@@ -5855,7 +5855,7 @@ class PlayState extends MusicBeatState
 			var timeSub:Float = Conductor.songPosition - Conductor.offset;
 			var syncTime:Float = 20 * playbackRate;
 			if (Math.abs(FlxG.sound.music.time - timeSub) > syncTime ||
-				(vocals.length > 0 && Math.abs(vocals.time - timeSub) > syncTime)))
+				(vocals.length > 0 && Math.abs(vocals.time - timeSub) > syncTime))
 			{
 				resyncVocals();
 			}
