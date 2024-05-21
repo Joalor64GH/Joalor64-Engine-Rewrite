@@ -1852,7 +1852,9 @@ class PlayState extends MusicBeatState
 		if (!hscriptMap.exists(name) || !hscriptMap.get(name).variables.exists(func)) {
 			return FunkinLua.Function_Continue;
 		}
-		var method = hscriptMap.get(name).variables.get(func);
+		var hscript = hscriptMap.get(name);
+		hscript.lastCalledFunction = func;
+		var method = hscript.variables.get(func);
 		var ret:Dynamic = Reflect.callMethod(null, method, args); // allows for infinite args
 
 		if (ret != null && ret != FunkinLua.Function_Continue) {
@@ -2077,7 +2079,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	public static inline function startAndEnd(){
+	inline function startAndEnd(){
 		(endingSong) ? endSong() : startCountdown();
 	}
 

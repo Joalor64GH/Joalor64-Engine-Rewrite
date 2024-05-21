@@ -72,6 +72,7 @@ import objects.userinterface.DialogueBoxPsych.DialogueFile;
 class FunkinHscript extends InterpEx {
     public var scriptName:String = '';
     public var closed:Bool = false;
+	public var lastCalledFunction:String = '';
 
     public function new(path:String) {
         super();
@@ -489,7 +490,10 @@ class FunkinHscript extends InterpEx {
 				} else {
 					PlayState.instance.addTextToDebug('Your dialogue file is badly formatted!');
 				}
-			} else {
+			} 
+			else
+			@:privateAccess 
+			{
 				PlayState.instance.addTextToDebug('Dialogue file not found');
 				PlayState.instance.startAndEnd();
 			}
