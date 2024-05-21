@@ -66,6 +66,9 @@ import objects.shaders.*;
 import objects.shaders.PhillyGlow;
 import objects.Character;
 
+import objects.userinterface.DialogueBoxPsych;
+import objects.userinterface.DialogueBoxPsych.DialogueFile;
+
 class FunkinHscript extends InterpEx {
     public var scriptName:String = '';
     public var closed:Bool = false;
@@ -427,7 +430,7 @@ class FunkinHscript extends InterpEx {
 			LoadingState.loadAndResetState();
 		});
 		variables.set("endSong", function() {
-			PlayState.instance.killNotes();
+			PlayState.instance.KillNotes();
 			PlayState.instance.finishSong(true);
 		});
 		variables.set("restartSong", function(skipTransition:Bool = false) {

@@ -80,6 +80,11 @@ class LoadingState extends MusicBeatState
 	{
 		FlxG.switchState(getNextState(target, stopMusic));
 	}
+
+	inline static public function loadAndResetState(stopMusic = false)
+	{
+		loadAndSwitchState(FlxG.state, stopMusic);
+	}
 	
 	static function getNextState(target:NextState, stopMusic = false):NextState
 	{

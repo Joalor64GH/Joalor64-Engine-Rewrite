@@ -1862,36 +1862,34 @@ class PlayState extends MusicBeatState
 	}
 
 	function postSetHscript() {
-		if (!inEditor) {
-			setOnHscripts('boyfriend', boyfriend);
-			setOnHscripts('dad', dad);
-			setOnHscripts('gf', gf);
-			setOnHscripts('strumLineNotes', strumLineNotes);
-			setOnHscripts('playerStrums', playerStrums);
-			setOnHscripts('opponentStrums', opponentStrums);
-			setOnHscripts('iconP1', iconP1);
-			setOnHscripts('iconP2', iconP2);
-			setOnHscripts('grpNoteSplashes', grpNoteSplashes);
-			setOnHscripts('scoreTxt', scoreTxt);
-			setOnHscripts('healthBar', healthBar);
-			setOnHscripts('healthBarBG', healthBarBG);
-			setOnHscripts('botplayTxt', botplayTxt);
-			setOnHscripts('timeBar', timeBar);
-			setOnHscripts('timeBarBG', timeBarBG);
-			setOnHscripts('timeTxt', timeTxt);
-			setOnHscripts('boyfriendGroup', boyfriendGroup);
-			setOnHscripts('dadGroup', dadGroup);
-			setOnHscripts('gfGroup', gfGroup);
-			setOnHscripts('camGame', camGame);
-			setOnHscripts('camHUD', camHUD);
-			setOnHscripts('camOther', camOther);
-			setOnHscripts('camFollow', camFollow);
-			setOnHscripts('camFollowPos', camFollowPos);
-			setOnHscripts('strumLine', strumLine);
-			setOnHscripts('unspawnNotes', unspawnNotes);
-			setOnHscripts('eventNotes', eventNotes);
-			setOnHscripts('vocals', vocals);
-		}
+		setOnHscripts('boyfriend', boyfriend);
+		setOnHscripts('dad', dad);
+		setOnHscripts('gf', gf);
+		setOnHscripts('strumLineNotes', strumLineNotes);
+		setOnHscripts('playerStrums', playerStrums);
+		setOnHscripts('opponentStrums', opponentStrums);
+		setOnHscripts('iconP1', iconP1);
+		setOnHscripts('iconP2', iconP2);
+		setOnHscripts('grpNoteSplashes', grpNoteSplashes);
+		setOnHscripts('scoreTxt', scoreTxt);
+		setOnHscripts('healthBar', healthBar);
+		setOnHscripts('healthBarBG', healthBarBG);
+		setOnHscripts('botplayTxt', botplayTxt);
+		setOnHscripts('timeBar', timeBar);
+		setOnHscripts('timeBarBG', timeBarBG);
+		setOnHscripts('timeTxt', timeTxt);
+		setOnHscripts('boyfriendGroup', boyfriendGroup);
+		setOnHscripts('dadGroup', dadGroup);
+		setOnHscripts('gfGroup', gfGroup);
+		setOnHscripts('camGame', camGame);
+		setOnHscripts('camHUD', camHUD);
+		setOnHscripts('camOther', camOther);
+		setOnHscripts('camFollow', camFollow);
+		setOnHscripts('camFollowPos', camFollowPos);
+		setOnHscripts('strumLine', strumLine);
+		setOnHscripts('unspawnNotes', unspawnNotes);
+		setOnHscripts('eventNotes', eventNotes);
+		setOnHscripts('vocals', vocals);
 	}
 	#end
 
@@ -2079,7 +2077,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	inline function startAndEnd(){
+	public static inline function startAndEnd(){
 		(endingSong) ? endSong() : startCountdown();
 	}
 
