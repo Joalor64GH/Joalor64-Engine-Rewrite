@@ -1654,7 +1654,7 @@ class PlayState extends MusicBeatState
 		RecalculateRating();
 
 		#if sys
-		if (daSong == "monster") ArtemisIntegration.setCustomFlag (1, true);
+		if (SONG.song.toLowerCase() == "monster") ArtemisIntegration.setCustomFlag (1, true);
 		#end
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
