@@ -8,6 +8,7 @@ class OptionsState extends MusicBeatState
 		'Offsets',
 		'Visuals',
 		'Gameplay', 
+		'Language',
 		'Miscellaneous'
 	];
 
