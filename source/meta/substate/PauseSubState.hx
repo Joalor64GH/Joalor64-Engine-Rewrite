@@ -23,28 +23,6 @@ class PauseSubState extends MusicBeatSubstate
 	public static var songName:String = '';
 	public static var fromPlayState:Bool = false;
 
-	var stickers:Array<FlxSprite> = [];
-	// yes i typed all of this out
-	// because honestly, i'd rather not use FileSystem.readDirectory()
-    var stickerArray:Array<String> = [
-		// objects
-		'arrowSticker1', 'arrowSticker2', 'arrowSticker3', 'arrowSticker4',
-		'faceSticker', 'micSticker', 'speakerSticker', 'uziSticker',
-		// characters
-		'bfDeadSticker', 'bfMeanSticker', 'bfOldSticker', 'bfSticker1', 'bfSticker2', 'bfSticker3',
-		'dadSticker1', 'dadSticker2', 'dadSticker3',
-		'darnellSticker1', 'darnellSticker2', 'darnellSticker3',
-		'gfDeadSticker', 'gfSticker1', 'gfSticker2', 'gfSticker3',
-		'momSticker1', 'momSticker2', 'momSticker3',
-		'monsterSticker1', 'monsterSticker2', 'monsterSticker3',
-		'neneSticker1', 'neneSticker2', 'neneSticker3',
-		'picoSticker1', 'picoSticker2', 'picoSticker3',
-		'senpaiSticker1', 'senpaiSticker2', 'senpaiSticker3',
-		'spiritSticker1', 'spiritSticker2', 'spiritSticker3',
-		'spookySticker1', 'spookySticker2', 'spookySticker3',
-		'tankmanSticker1', 'tankmanSticker2', 'tankmanSticker3'
-	];
-
 	public function new(x:Float, y:Float)
 	{
 		super();
@@ -88,31 +66,10 @@ class PauseSubState extends MusicBeatSubstate
 
 		FlxG.sound.list.add(pauseMusic);
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		var bg = new FlxSprite().loadGraphic(Paths.image('menuBGSubstate'));
 		bg.alpha = 0;
 		bg.scrollFactor.set();
 		add(bg);
-
-		for (i in 0...stickerArray.length)
-        {
-            var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image('stickers/' + stickerArray[i]));
-            icon.screenCenter();
-            icon.x += ((FlxG.width * 0.4) * (i % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
-            icon.y = FlxG.height + 120;
-            icon.alpha = 0.6;
-            icon.velocity.y = FlxG.random.int(-40, -110);
-            icon.visible = false;
-            icon.scale.set(0.45, 0.45);
-            icon.ID = i;
-            stickers.push(icon);
-            add(icon);
-        }
-
-        for (icon in stickers)
-        {
-            icon.y = FlxG.height + 120;
-            icon.visible = true;
-        }
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -185,18 +142,6 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 		updateSkipTextStuff();
-
-		for (icon in stickers)
-        {
-            icon.angle += elapsed * 12;
-            if (icon.y > -160) continue;
-            icon.screenCenter();
-            icon.x += ((FlxG.width * 0.4) * (icon.ID % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
-            icon.y = FlxG.height + FlxG.random.int(60, 120);
-            icon.velocity.y = FlxG.random.int(-40, -110);
-            icon.angle = FlxG.random.float(0, 360);
-            icon.loadGraphic(stickerArray[FlxG.random.int(0, stickerArray.length - 1)]);
-        }
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -390,15 +335,12 @@ class PauseSubState extends MusicBeatSubstate
 			FlxG.resetState();
 		}
 		else
-		{
 			FlxG.resetState();
-		}
 	}
 
 	override function destroy()
 	{
 		pauseMusic.destroy();
-
 		super.destroy();
 	}
 

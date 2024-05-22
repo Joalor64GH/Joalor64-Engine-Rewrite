@@ -39,8 +39,10 @@ class ResultsSubState extends MusicBeatSubstate
 		FlxG.sound.music.fadeIn(4, 0, 0.7);
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
-        	bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-        	add(bg);
+        bg = new FlxSprite().loadGraphic(Paths.image('menuBGSubstate'));
+		bg.alpha = 0;
+		bg.scrollFactor.set();
+		add(bg);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, 'Press ACCEPT to continue.', 12);
 		versionShit.scrollFactor.set();
@@ -77,7 +79,7 @@ class ResultsSubState extends MusicBeatSubstate
 		titleTxt.alpha = 0;
 		bg.alpha = 0;
 
-		FlxTween.tween(bg, {alpha: 0.5}, 0.75, {ease: FlxEase.quadOut});
+		FlxTween.tween(bg, {alpha: 0.55}, 0.75, {ease: FlxEase.quadOut});
 		FlxTween.tween(titleTxt, {alpha: 1}, 1, {ease: FlxEase.quadOut});
 		FlxTween.tween(resultsTxt, {alpha: 1}, 2, {ease: FlxEase.quadOut});
 		FlxTween.tween(versionShit, {alpha: 1}, 3, {ease: FlxEase.quadOut});

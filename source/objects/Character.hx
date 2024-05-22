@@ -1,21 +1,12 @@
 package objects;
 
 import animateatlas.AtlasFrameMaker;
-import flixel.FlxSprite;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSort;
-import meta.*;
-import meta.data.*;
-import meta.state.*;
 import objects.background.*;
+
 #if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
 #end
-import openfl.utils.Assets;
-import haxe.Json;
-
-using StringTools;
 
 typedef CharacterFile = {
 	var animations:Array<AnimArray>;

@@ -1,7 +1,5 @@
 package debug;
 
-import flixel.util.FlxStringUtil;
-
 class FPS extends openfl.text.TextField
 {
 	var times:Array<Float> = [];

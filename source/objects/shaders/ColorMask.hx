@@ -1,7 +1,6 @@
 package objects.shaders;
 
 import flixel.system.FlxAssets.FlxShader;
-import flixel.util.FlxColor;
 
 class ColorMask
 {

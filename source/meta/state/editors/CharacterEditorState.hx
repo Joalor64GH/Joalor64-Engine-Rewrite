@@ -1,9 +1,11 @@
 package meta.state.editors;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
+import openfl.net.FileReference;
+import openfl.events.Event;
+import openfl.events.IOErrorEvent;
+
 import animateatlas.AtlasFrameMaker;
+
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import flixel.addons.ui.FlxInputText;
@@ -14,18 +16,16 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
+import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
+import flixel.animation.FlxAnimation;
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
-import openfl.net.FileReference;
-import openfl.events.Event;
-import openfl.events.IOErrorEvent;
-import objects.*;
+
 import objects.Character;
 import objects.userinterface.*;
 import objects.background.*;
-import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
+
 import lime.system.Clipboard;
-import flixel.animation.FlxAnimation;
 
 #if MODS_ALLOWED
 import sys.FileSystem;

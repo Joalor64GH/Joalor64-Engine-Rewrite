@@ -1,8 +1,5 @@
 package meta.state.editors;
 
-#if desktop
-import meta.data.dependency.Discord.DiscordClient;
-#end
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUI;

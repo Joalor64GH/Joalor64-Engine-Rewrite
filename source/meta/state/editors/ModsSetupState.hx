@@ -163,6 +163,28 @@ class ModsSetupState extends MusicBeatState
 {
     var modTab:ModSetupTabs;
 
+    var stickers:Array<FlxSprite> = [];
+	// yes i typed all of this out
+	// because honestly, i'd rather not use FileSystem.readDirectory()
+    var stickerArray:Array<String> = [
+		// objects
+		'arrowSticker1', 'arrowSticker2', 'arrowSticker3', 'arrowSticker4',
+		'faceSticker', 'micSticker', 'speakerSticker', 'uziSticker',
+		// characters
+		'bfDeadSticker', 'bfMeanSticker', 'bfOldSticker', 'bfSticker1', 'bfSticker2', 'bfSticker3',
+		'dadSticker1', 'dadSticker2', 'dadSticker3',
+		'darnellSticker1', 'darnellSticker2', 'darnellSticker3',
+		'gfDeadSticker', 'gfSticker1', 'gfSticker2', 'gfSticker3',
+		'momSticker1', 'momSticker2', 'momSticker3',
+		'monsterSticker1', 'monsterSticker2', 'monsterSticker3',
+		'neneSticker1', 'neneSticker2', 'neneSticker3',
+		'picoSticker1', 'picoSticker2', 'picoSticker3',
+		'senpaiSticker1', 'senpaiSticker2', 'senpaiSticker3',
+		'spiritSticker1', 'spiritSticker2', 'spiritSticker3',
+		'spookySticker1', 'spookySticker2', 'spookySticker3',
+		'tankmanSticker1', 'tankmanSticker2', 'tankmanSticker3'
+	];
+
     override function create()
     {
         FlxG.mouse.visible = true;
@@ -173,7 +195,29 @@ class ModsSetupState extends MusicBeatState
         bg.scrollFactor.set();
         add(bg);
 
+        for (i in 0...stickerArray.length)
+        {
+            var icon:FlxSprite = new FlxSprite().loadGraphic(Paths.image('stickers/' + stickerArray[i]));
+            icon.screenCenter();
+            icon.x += ((FlxG.width * 0.4) * (i % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
+            icon.y = FlxG.height + 120;
+            icon.alpha = 0.6;
+            icon.velocity.y = FlxG.random.int(-40, -110);
+            icon.visible = false;
+            icon.scale.set(0.45, 0.45);
+            icon.ID = i;
+            stickers.push(icon);
+            add(icon);
+        }
+
+        for (icon in stickers)
+        {
+            icon.y = FlxG.height + 120;
+            icon.visible = true;
+        }
+
         modTab = new ModSetupTabs();
+        modTab.screenCenter();
         add(modTab);
 
         super.create();
@@ -234,6 +278,18 @@ class ModsSetupState extends MusicBeatState
     override function update(elapsed:Float)
     {
         super.update(elapsed);
+
+        for (icon in stickers)
+        {
+            icon.angle += elapsed * 12;
+            if (icon.y > -160) continue;
+            icon.screenCenter();
+            icon.x += ((FlxG.width * 0.4) * (icon.ID % 2 == 0 ? -1 : 1)) + FlxG.random.float(-100, 100);
+            icon.y = FlxG.height + FlxG.random.int(60, 120);
+            icon.velocity.y = FlxG.random.int(-40, -110);
+            icon.angle = FlxG.random.float(0, 360);
+            icon.loadGraphic(stickerArray[FlxG.random.int(0, stickerArray.length - 1)]);
+        }
 
         if (modTab.getFocus()) return;
 

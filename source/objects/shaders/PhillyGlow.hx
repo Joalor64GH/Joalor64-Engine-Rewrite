@@ -1,10 +1,5 @@
 package objects.shaders;
 
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import meta.data.ClientPrefs;
-import flixel.FlxG;
-
 class PhillyGlowParticle extends FlxSprite
 {
 	var lifeTime:Float = 0;
