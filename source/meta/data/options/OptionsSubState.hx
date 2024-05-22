@@ -1,5 +1,7 @@
 package meta.data.options;
 
+import backend.Localization.Locale;
+
 import objects.shaders.*;
 import objects.userinterface.menu.*;
 
@@ -528,15 +530,58 @@ class GameplaySubState extends BaseOptionsMenu
 	}
 }
 
-class LanguageSubState extends MusicBeatSubstate
-{
-    	private var grpControls:FlxTypedGroup<Alphabet>;
-	var controlsStrings:Array<String> = ["English", "Español", "Português"];
+class LanguageSubState extends MusicBeatSubstate {
+    	private var coolGrp:FlxTypedGroup<Alphabet>;
+		var iconArray:Array<AttachedSprite>;
+	var langStrings:Array<Locale> = [];
     	var curSelected:Int = 0;
 
 	public function new()
 	{
 		super();
+
+		var initLangString = CoolUtil.getText(Paths.getPath('languagesData'));
+
+        if (Assets.exists(Paths.getPath('locales/languagesData.txt')))
+        {
+            initLangString = Assets.getText(Paths.getPath('locales/languagesData.txt')).trim().split('\n');
+
+            for (i in 0...initLangString.length)
+                initLangString[i] = initLangString[i].trim();
+        }
+
+        for (i in 0...initLangString.length)
+        {
+            var data:Array<String> = initLangString[i].split(':');
+            langStrings.push(new Locale(data[0], data[1]));
+        }
+        
+        // load and push mod languages
+        #if MODS_ALLOWED
+        var filesPushed:Array<String> = [];
+        var foldersToCheck:Array<String> = [Paths.mods('locales/')];
+
+        if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+            foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/locales/'));
+
+        for (mod in Mods.getGlobalMods())
+            foldersToCheck.insert(0, Paths.mods(mod + '/locales/'));
+        
+        for (folder in foldersToCheck) {
+            if (FileSystem.exists(folder) && FileSystem.isDirectory(folder)) {
+                var path:String = folder + "/languagesData.txt";
+                if (FileSystem.exists(path)) {
+                    var modLangData:String = File.getContent(path).trim();
+                    var modLangDataSplit:Array<String> = modLangData.split(':');
+
+                    if (modLangDataSplit.length == 2)
+                        langStrings.push(new Locale(modLangDataSplit[0], modLangDataSplit[1]));
+
+                    filesPushed.push(path);
+                }
+            }
+        }
+        #end
 
 		#if desktop
 		DiscordClient.changePresence("Languages Menu", null);
@@ -548,16 +593,25 @@ class LanguageSubState extends MusicBeatSubstate
         	bg.color = 0xFFea71fd;
 		add(bg);
 
-		grpControls = new FlxTypedGroup<Alphabet>();
-		add(grpControls);
+		coolGrp = new FlxTypedGroup<Alphabet>();
+		add(coolGrp);
 
-		for (i in 0...controlsStrings.length)
+		for (i in 0...langStrings.length)
 		{
-			var controlLabel:Alphabet = new Alphabet(90, 320, controlsStrings[i], true);
-			controlLabel.isMenuItem = true;
-			controlLabel.targetY = i;
-			controlLabel.snapToPosition();
-			grpControls.add(controlLabel);
+			var label:Alphabet = new Alphabet(200, 320, langStrings[i].lang, true);
+            label.isMenuItem = true;
+            label.targetY = i;
+            coolGrp.add(label);
+
+            var icon:AttachedSprite = new AttachedSprite();
+            icon.frames = Paths.getSparrowAtlas('flags/' + langStrings[i].code);
+            icon.animation.addByPrefix('idle', langStrings[i].code, 24);
+            icon.animation.play('idle');
+            icon.xAdd = -icon.width - 10;
+            icon.sprTracker = label;
+
+            iconArray.push(icon);
+            add(icon);
 		}
 
         	changeSelection();
@@ -573,25 +627,21 @@ class LanguageSubState extends MusicBeatSubstate
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) 
+		{
 			close();
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+		}
             
 		if (controls.ACCEPT)
 		{
 			close();
 			FlxG.resetState();
-			switch (curSelected)
-			{
-				case 1:
-					ClientPrefs.language = 'en';
-				case 2:
-					ClientPrefs.language = 'es';
-				case 3:
-					ClientPrefs.language = 'pt-br';
-			}
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			ClientPrefs.language = langStrings[curSelected].code;
 			Localization.switchLanguage(ClientPrefs.language);
 		}
 
-		for (num => item in grpControls.members)
+		for (num => item in coolGrp.members)
 		{
 			item.targetY = num - curSelected;
 			item.alpha = (item.targetY == 0) ? 1 : 0.6;
@@ -601,7 +651,7 @@ class LanguageSubState extends MusicBeatSubstate
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-		curSelected = FlxMath.wrap(curSelected + change, 0, controlsStrings.length - 1);
+		curSelected = FlxMath.wrap(curSelected + change, 0, langStrings.length - 1);
 	}
 }
 
@@ -985,12 +1035,14 @@ class NotesSubState extends MusicBeatSubstate
 				changeType(1);
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
+			/*
 			if(controls.RESET) {
 				for (i in 0...grpNotes.members.length) {
 					resetValue(grpNotes.members.length, i);
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
+			*/
 			if (controls.ACCEPT && nextAccept <= 0) {
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changingNote = true;

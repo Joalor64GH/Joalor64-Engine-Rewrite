@@ -126,7 +126,7 @@ class ModSetupTabs extends FlxUITabMenu
             }
 
             if (FileSystem.exists('mods/$modFolder')) {
-                FlxG.state.openSubState(new meta.substate.Prompt("Mod folder $modFolder already exists!\nAre you sure you want tooverwrite this folder?", 
+                FlxG.state.openSubState(new Prompt("Mod folder $modFolder already exists!\nAre you sure you want tooverwrite this folder?", 
                     0, () -> {
                         createFunc();
                         FlxG.state.closeSubState();
@@ -166,7 +166,6 @@ class ModsSetupState extends MusicBeatState
     override function create()
     {
         FlxG.mouse.visible = true;
-
         FlxG.sound.music.fadeIn(4, 0, 0.7);
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
@@ -198,6 +197,7 @@ class ModsSetupState extends MusicBeatState
         "characters" => [],
         "notetypes" => [],
         "events" => [],
+        "locales" => [],
         "_append" => ["data"]
     ];
 

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="null.png">
+	<!-- Created with Adobe Animate version 22.0.6.202 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="flag_base0000" x="0" y="0" width="90" height="65"/>
+	<SubTexture name="flag_base0001" x="0" y="0" width="90" height="65"/>
+	<SubTexture name="flag_base0002" x="95" y="0" width="90" height="65"/>
+	<SubTexture name="flag_base0003" x="95" y="0" width="90" height="65"/>
+</TextureAtlas>

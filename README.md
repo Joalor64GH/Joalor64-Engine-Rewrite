@@ -29,6 +29,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 # Features
 * Minigames
 * RGB Note Coloring
+* Localization Support
 * Latin Alphabet Support
 * JSONI8 Sprite Support
 * Dark Mode Application Bar
