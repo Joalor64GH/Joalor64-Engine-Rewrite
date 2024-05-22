@@ -26,6 +26,8 @@ class OptionsState extends MusicBeatState
 				openSubState(new OptionsSubState.VisualsSubState());
 			case 'Gameplay':
 				openSubState(new OptionsSubState.GameplaySubState());
+			case 'Language':
+				openSubState(new OptionsSubState.LanguageSubState());
 			case 'Miscellaneous':
 				openSubState(new OptionsSubState.MiscSubState());
 		}

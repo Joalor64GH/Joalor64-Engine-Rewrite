@@ -73,7 +73,8 @@ class HealthIcon extends FlxSprite
 					iconOffsets[2] = (width - 150) / 3;
 					updateHitbox();
 			
-					animation.add(char, [1, 0, 2], 0, false, isPlayer);
+					// normal, losing, winning
+					animation.add(char, [0, 1, 2], 0, false, isPlayer);
 					animation.play(char);
 				// 5 icons
 				case 750:
@@ -84,7 +85,8 @@ class HealthIcon extends FlxSprite
 					iconOffsets[3] = (width - 150) / 5;
 					iconOffsets[4] = (width - 150) / 5;
 					updateHitbox();
-			
+
+					// DANGER, losing, normal, winning, VICTORIOUS
 					animation.add(char, [2, 1, 0, 3, 4], 0, false, isPlayer);
 					animation.play(char);
 			}

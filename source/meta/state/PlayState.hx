@@ -387,6 +387,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		PauseSubState.fromPlayState = false;
+
 		if (curStage != 'schoolEvil')
 			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
 
@@ -445,6 +447,9 @@ class PlayState extends MusicBeatState
 					}
 					else if (songMisses < 10){
 						ratingFC = "SDCB";
+					}
+					else if (songMisses < 100){
+						ratingFC = "WTF??";
 					}
 					else if (cpuControlled){
 						ratingFC = "Cheater!";
@@ -3722,11 +3727,11 @@ class PlayState extends MusicBeatState
 					iconP1.animation.curAnim.curFrame = 0;
 			case 450:
 				if (healthBar.percent < 20)
-					iconP1.animation.curAnim.curFrame = 1; //Losing
-				else if (healthBar.percent > 20 && healthBar.percent < 80)
-					iconP1.animation.curAnim.curFrame = 0; //Neutral
+					iconP1.animation.curAnim.curFrame = 1; // Losing
 				else if (healthBar.percent > 80)
-					iconP1.animation.curAnim.curFrame = 2; //Winning
+					iconP1.animation.curAnim.curFrame = 2; // Winning
+				else
+					iconP1.animation.curAnim.curFrame = 0; // Neutral
 			case 750:
 				if (healthBar.percent < 20 && healthBar.percent > 0)
 					iconP1.animation.curAnim.curFrame = 2; // Danger
@@ -3742,6 +3747,7 @@ class PlayState extends MusicBeatState
 
 		// Does this work??
 		// the 2 icons do, but idk about 3 nor the 5 icons
+		// okay 3 should work fine now, but idk about 5 icons
 		switch (iconP2.widthThing) 
 		{
 			case 150:
@@ -3752,12 +3758,12 @@ class PlayState extends MusicBeatState
 				else
 					iconP2.animation.curAnim.curFrame = 0;
 			case 450:
-				if (healthBar.percent < 80)
-					iconP2.animation.curAnim.curFrame = 2; //Winning
-				else if (healthBar.percent > 20 && healthBar.percent < 80)
-					iconP2.animation.curAnim.curFrame = 0; //Neutral
-				else if (healthBar.percent > 20)
-					iconP2.animation.curAnim.curFrame = 1; //Losing
+				if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 2; // Winning
+				else
+					iconP2.animation.curAnim.curFrame = 0; // Neutral
 			case 750:
 				if (healthBar.percent < 80)
 					iconP2.animation.curAnim.curFrame = 4; // Victorious

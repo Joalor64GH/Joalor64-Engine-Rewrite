@@ -528,6 +528,83 @@ class GameplaySubState extends BaseOptionsMenu
 	}
 }
 
+class LanguageSubState extends MusicBeatSubState
+{
+    	private var grpControls:FlxTypedGroup<Alphabet>;
+	var controlsStrings:Array<String> = ["English", "Español", "Português"];
+    	var curSelected:Int = 0;
+
+	public function new()
+	{
+		super();
+
+		#if desktop
+		DiscordClient.changePresence("Languages Menu", null);
+		#end
+
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.screenCenter();
+        	bg.color = 0xFFea71fd;
+		add(bg);
+
+		grpControls = new FlxTypedGroup<Alphabet>();
+		add(grpControls);
+
+		for (i in 0...controlsStrings.length)
+		{
+			var controlLabel:Alphabet = new Alphabet(90, 320, controlsStrings[i], true);
+			controlLabel.isMenuItem = true;
+			controlLabel.targetY = i;
+			controlLabel.snapToPosition();
+			grpControls.add(controlLabel);
+		}
+
+        	changeSelection();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+        	if (controls.UI_UP_P || controls.UI_DOWN_P)
+			changeSelection(controls.UI_UP_P ? -1 : 1);
+
+		if (controls.BACK) 
+			close();
+            
+		if (controls.ACCEPT)
+		{
+			close();
+			FlxG.resetState();
+			switch (curSelected)
+			{
+				case 1:
+					ClientPrefs.language = 'en';
+				case 2:
+					ClientPrefs.language = 'es';
+				case 3:
+					ClientPrefs.language = 'pt-br';
+			}
+			Localization.switchLanguage(ClientPrefs.language);
+		}
+
+		for (num => item in grpControls.members)
+		{
+			item.targetY = num - curSelected;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
+		}
+	}
+
+	function changeSelection(change:Int = 0)
+	{
+		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		curSelected = FlxMath.wrap(curSelected + change, 0, controlsStrings.length - 1);
+	}
+}
+
 class MiscSubState extends BaseOptionsMenu
 {
 	public function new()
@@ -552,14 +629,6 @@ class MiscSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		#end
-
-		var option:Option = new Option('Language:',
-			"What should the game language be?",
-			'language',
-			'string',
-			'en',
-			['en', 'es', 'pt-br']);
-		addOption(option);
 
 		var option:Option = new Option('Save Replays',
 			'If checked, the game will save a recording of your gameplay\nfor every song you complete.
