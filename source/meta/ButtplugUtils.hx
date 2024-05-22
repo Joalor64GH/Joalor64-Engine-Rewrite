@@ -3,9 +3,6 @@ package meta;
 #if sys
 import sys.io.Process;
 #end
-import flixel.util.FlxTimer;
-
-using StringTools;
 
 class ButtplugUtils
 {

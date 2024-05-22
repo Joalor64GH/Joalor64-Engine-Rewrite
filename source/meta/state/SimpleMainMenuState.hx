@@ -36,8 +36,10 @@ class SimpleMainMenuState extends MusicBeatState
 			case 'Mods':
 				FlxG.switchState(() -> new ModsMenuState());
 			#end
+			#if ACHIEVEMENTS_ALLOWED
 			case 'Awards':
 				FlxG.switchState(() -> new AchievementsMenuState());
+			#end
 			case 'Credits':
 				FlxG.switchState(() -> new CreditsState());
 			case 'Options':

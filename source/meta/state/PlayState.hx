@@ -3,7 +3,6 @@ package meta.state;
 #if MODS_ALLOWED
 import meta.state.ModsMenuState.ModMetadata;
 #end
-import haxe.macro.Expr.Case;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -4780,6 +4779,10 @@ class PlayState extends MusicBeatState
 				pixelShitPart1 = (isPixelStage) ? 'pixelUI/' : '';
 				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
 
+			case 'Vanilla':
+				pixelShitPart1 = 'skins/vanillaUI/';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
 			case 'Forever':
 				pixelShitPart1 = 'skins/foreverUI/';
 				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
@@ -4851,6 +4854,10 @@ class PlayState extends MusicBeatState
 		{
 			case 'Default':
 				pixelShitPart1 = (isPixelStage) ? 'pixelUI/' : '';
+				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
+
+			case 'Vanilla':
+				pixelShitPart1 = 'skins/vanillaUI/';
 				pixelShitPart2 = (isPixelStage) ? '-pixel' : '';
 
 			case 'Forever':

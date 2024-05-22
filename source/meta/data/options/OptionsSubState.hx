@@ -400,7 +400,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'uiSkin',
 			'string',
 			'Default',
-			['Default', 'Forever', 'Kade', 'Simplylove']);
+			['Default', 'Vanilla', 'Forever', 'Kade', 'Simplylove']);
 		addOption(option);
 
 		var option:Option = new Option('Long Health Bar',

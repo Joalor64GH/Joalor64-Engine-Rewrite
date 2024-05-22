@@ -89,9 +89,8 @@ class ModsMenuState extends MusicBeatState
 		buttonToggle = new FlxButton(startX, 0, "ON", function()
 		{
 			if(mods[curSelected].restart)
-			{
 				needaReset = true;
-			}
+			
 			modsList[curSelected][1] = !modsList[curSelected][1];
 			updateButtonToggle();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
@@ -135,15 +134,12 @@ class ModsMenuState extends MusicBeatState
 		startX -= 100;
 		buttonTop = new FlxButton(startX, 0, "TOP", function() {
 			var doRestart:Bool = (mods[0].restart || mods[curSelected].restart);
-			for (i in 0...curSelected) //so it shifts to the top instead of replacing the top one
-			{
+			for (i in 0...curSelected)
 				moveMod(-1, true);
-			}
 
 			if(doRestart)
-			{
 				needaReset = true;
-			}
+			
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 		});
 		buttonTop.setGraphicSize(80, 50);
@@ -157,9 +153,8 @@ class ModsMenuState extends MusicBeatState
 		startX -= 190;
 		buttonDisableAll = new FlxButton(startX, 0, "DISABLE ALL", function() {
 			for (i in modsList)
-			{
 				i[1] = false;
-			}
+			
 			for (mod in mods)
 			{
 				if (mod.restart)
@@ -183,9 +178,8 @@ class ModsMenuState extends MusicBeatState
 		startX -= 190;
 		buttonEnableAll = new FlxButton(startX, 0, "ENABLE ALL", function() {
 			for (i in modsList)
-			{
 				i[1] = true;
-			}
+			
 			for (mod in mods)
 			{
 				if (mod.restart)
@@ -240,9 +234,7 @@ class ModsMenuState extends MusicBeatState
 			var loadedIcon:BitmapData = null;
 			var iconToUse:String = Paths.mods(values[0] + '/pack.png');
 			if(FileSystem.exists(iconToUse))
-			{
 				loadedIcon = BitmapData.fromFile(iconToUse);
-			}
 
 			newMod.icon = new AttachedSprite();
 			if(loadedIcon != null)
@@ -253,9 +245,8 @@ class ModsMenuState extends MusicBeatState
 				newMod.icon.animation.play("icon");
 			}
 			else
-			{
 				newMod.icon.loadGraphic(Paths.image('unknownMod'));
-			}
+			
 			newMod.icon.sprTracker = newMod.alphabet;
 			newMod.icon.xAdd = -newMod.icon.width - 30;
 			newMod.icon.yAdd = -45;
@@ -265,11 +256,7 @@ class ModsMenuState extends MusicBeatState
 
 		if(curSelected >= mods.length) curSelected = 0;
 
-		if(mods.length < 1)
-			bg.color = defaultColor;
-		else
-			bg.color = mods[curSelected].color;
-
+		bg.color = (mods.length < 1) ? defaultColor : mods[curSelected].color;
 		intendedColor = bg.color;
 		#if sys
 		ArtemisIntegration.setBackgroundFlxColor (intendedColor);
@@ -285,16 +272,8 @@ class ModsMenuState extends MusicBeatState
 
 	function updateButtonToggle()
 	{
-		if (modsList[curSelected][1])
-		{
-			buttonToggle.label.text = 'ON';
-			buttonToggle.color = FlxColor.GREEN;
-		}
-		else
-		{
-			buttonToggle.label.text = 'OFF';
-			buttonToggle.color = FlxColor.RED;
-		}
+		buttonToggle.label.text = (modsList[curSelected][1]) ? 'ON' : 'OFF';
+		buttonToggle.color = (modsList[curSelected][1]) ? FlxColor.GREEN : FlxColor.RED;
 	}
 
 	function moveMod(change:Int, skipResetCheck:Bool = false)
@@ -357,9 +336,7 @@ class ModsMenuState extends MusicBeatState
 
 		#if sys
 		if (FlxG.keys.anyJustPressed(debugKeys))
-		{
 			FlxG.switchState(() -> new ModDownloadState());
-		}
 		#end
 
 		if(canExit && controls.BACK)
@@ -414,21 +391,15 @@ class ModsMenuState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		var noMods:Bool = (mods.length < 1);
+		
 		for (obj in visibleWhenHasMods)
-		{
 			obj.visible = !noMods;
-		}
 		for (obj in visibleWhenNoMods)
-		{
 			obj.visible = noMods;
-		}
-		if(noMods) return;
 
-		curSelected += change;
-		if(curSelected < 0)
-			curSelected = mods.length - 1;
-		else if(curSelected >= mods.length)
-			curSelected = 0;
+		if (noMods) return;
+
+		curSelected = FlxMath.wrap(curSelected + change, 0, mods.length - 1);
 
 		var newColor:Int = mods[curSelected].color;
 		if(newColor != intendedColor) {
@@ -455,9 +426,8 @@ class ModsMenuState extends MusicBeatState
 				mod.alphabet.alpha = 1;
 				selector.sprTracker = mod.alphabet;
 				descriptionTxt.text = mod.description;
-				if (mod.restart){//finna make it to where if nothing changed then it won't reset
+				if (mod.restart)
 					descriptionTxt.text += " (This Mod will restart the game!)";
-				}
 
 				// correct layering
 				var stuffArray:Array<FlxSprite> = [selector, descriptionTxt, mod.alphabet, mod.icon];
@@ -484,22 +454,13 @@ class ModsMenuState extends MusicBeatState
 		{
 			var intendedPos:Float = (i - curSelected) * 225 + 200;
 			if(i > curSelected) intendedPos += 225;
-			if(elapsed == -1)
-			{
-				mod.alphabet.y = intendedPos;
-			}
-			else
-			{
-				mod.alphabet.y = FlxMath.lerp(mod.alphabet.y, intendedPos, CoolUtil.boundTo(elapsed * 12, 0, 1));
-			}
+			mod.alphabet.y = (elapsed == -1) ? intendedPos : FlxMath.lerp(mod.alphabet.y, intendedPos, CoolUtil.boundTo(elapsed * 12, 0, 1));
 
 			if(i == curSelected)
 			{
 				descriptionTxt.y = mod.alphabet.y + 160;
 				for (button in buttonsArray)
-				{
 					button.y = mod.alphabet.y + 320;
-				}
 			}
 			i++;
 		}
@@ -510,9 +471,6 @@ class ModsMenuState extends MusicBeatState
 	{
 		selector.makeGraphic(1100, 450, FlxColor.BLACK);
 		selector.pixels.fillRect(new Rectangle(0, 190, selector.width, 5), 0x0);
-
-		// Why did i do this? Because i'm a lmao stupid, of course
-		// also i wanted to understand better how fillRect works so i did this shit lol???
 		selector.pixels.fillRect(new Rectangle(0, 0, cornerSize, cornerSize), 0x0);														 //top left
 		drawCircleCornerOnSelector(false, false);
 		selector.pixels.fillRect(new Rectangle(selector.width - cornerSize, 0, cornerSize, cornerSize), 0x0);							 //top right
