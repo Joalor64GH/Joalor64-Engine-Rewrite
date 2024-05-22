@@ -528,7 +528,7 @@ class GameplaySubState extends BaseOptionsMenu
 	}
 }
 
-class LanguageSubState extends MusicBeatSubState
+class LanguageSubState extends MusicBeatSubstate
 {
     	private var grpControls:FlxTypedGroup<Alphabet>;
 	var controlsStrings:Array<String> = ["English", "Español", "Português"];
