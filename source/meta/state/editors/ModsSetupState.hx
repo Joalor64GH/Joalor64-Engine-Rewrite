@@ -197,7 +197,7 @@ class ModsSetupState extends MusicBeatState
         "characters" => [],
         "notetypes" => [],
         "events" => [],
-        "locales" => [],
+        "locales" => ["images", "sounds"],
         "_append" => ["data"]
     ];
 

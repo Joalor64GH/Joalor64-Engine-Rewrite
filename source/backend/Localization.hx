@@ -92,7 +92,7 @@ class Localization
         #end
         else {
             trace("oops! file not found for: " + language + "!");
-            jsonContent = File.getContent(Paths.getPath(DEFAULT_DIR + "/" + DEFAULT_LANGUAGE "/" + "languageData.json"));
+            jsonContent = File.getContent(Paths.getPath(DEFAULT_DIR + "/" + DEFAULT_LANGUAGE + "/" + "languageData.json"));
             currentLanguage = DEFAULT_LANGUAGE;
         }
 
@@ -137,7 +137,7 @@ class Localization
     public static function getLocalizedSound(path:String, ?lang:String):String
     {
         var target:String = lang ?? currentLanguage;
-        return Paths.getPath('locales/$target/sounds/$path.$Paths.SOUND_EXT');
+        return Paths.getPath('locales/$target/sounds/$path.${Paths.SOUND_EXT}');
     }
 }
 
