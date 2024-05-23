@@ -169,7 +169,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-			closeState();
+			close();
+			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
 		if(nextAccept <= 0)
@@ -382,9 +383,4 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			checkbox.daValue = (optionsArray[checkbox.ID].getValue() == true);
 		}
 	}
-
-	function closeState() {
-		close();
-		FlxG.sound.play(Paths.sound('cancelMenu'));
-	};
 }
