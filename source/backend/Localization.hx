@@ -4,11 +4,6 @@ package backend;
 import openfl.system.Capabilities;
 #end
 
-typedef ApplicationConfig = {
-    @:optional var directory:String;
-    @:optional var default_language:String;
-}
-
 /**
  * A simple localization system.
  * Please credit me if you use it!
@@ -36,17 +31,10 @@ class Localization
         #end
     }
 
-    public static function init(config:ApplicationConfig) 
+    public static function loadLanguages():Bool
     {
-        directory = config.directory ?? "locales";
-        DEFAULT_LANGUAGE = config.default_language ?? "en";
+        var allLoaded:Bool = true;
 
-        loadLanguages();
-        switchLanguage(DEFAULT_LANGUAGE);
-    }
-
-    public static function loadLanguages()
-    {
         data = new Map<String, Dynamic>();
 
         var foldersToCheck:Array<String> = [Paths.getPath('locales/')];
@@ -68,10 +56,18 @@ class Localization
 
                 for (language in languages) {
                     var languageData:Dynamic = loadLanguageData(language.trim());
-                    data.set(language, languageData);
+                    if (languageData != null) {
+                        trace("successfully loaded language: " + language + "!");
+                        data.set(language, languageData);
+                    } else {
+                        trace("oh no! failed to load language: " + language + "!");
+                        allLoaded = false;
+                    }
                 }
             }
         }
+
+        return allLoaded;
     }
 
     private static function loadLanguageData(language:String):Dynamic
@@ -82,13 +78,18 @@ class Localization
         #if MODS_ALLOWED
         var modPath:String = Paths.modFolders('$directory/$language/languageData.json');
         
-        if (FileSystem.exists(modPath))
+        if (FileSystem.exists(modPath)) {
             jsonContent = File.getContent(modPath);
-        else if (FileSystem.exists(path))
+            currentLanguage = language;
+        } else if (FileSystem.exists(path)) {
             jsonContent = File.getContent(path);
+            currentLanguage = language;
+        }
         #else
-        if (FileSystem.exists(path))
+        if (FileSystem.exists(path)) {
             jsonContent = File.getContent(path);
+            currentLanguage = language;
+        }
         #end
         else {
             trace("oops! file not found for: " + language + "!");
@@ -99,33 +100,36 @@ class Localization
         return Json.parse(jsonContent);
     }
 
-    public static function switchLanguage(newLanguage:String)
+    public static function switchLanguage(newLanguage:String):Bool
     {
-        if (newLanguage == currentLanguage)
-            return;
+        if (newLanguage == currentLanguage) {
+            trace("hey! you're already using the language: " + newLanguage);
+            return true;
+        }
 
-        var languageData:Dynamic = loadLanguageData(newLanguage);
+         if (languageData != null) {
+            trace("yay! successfully loaded data for: " + newLanguage);
+            currentLanguage = newLanguage;
+            data.set(newLanguage, languageData);
+            return true;
+        } else {
+            trace("whoops! failed to load data for: " + newLanguage);
+            return false;
+        }
 
-        currentLanguage = newLanguage;
-        data.set(newLanguage, languageData);
-        trace('Language changed to $currentLanguage');
+        return false;
     }
 
     public static function get(key:String, ?language:String):String
     {
         var targetLanguage:String = language ?? currentLanguage;
         var languageData = data.get(targetLanguage);
-        
-        if (data == null) {
-            trace("You haven't initialized the class!");
-            return null;
-        }
 
-        if (data.exists(targetLanguage))
-            if (Reflect.hasField(languageData, key))
+        if (data != null && data.exists(targetLanguage))
+            if (languageData != null && Reflect.hasField(languageData, key))
                 return Reflect.field(languageData, key);
 
-        return null;
+        return Reflect.field(languageData, key) ?? 'missing key: $key';
     }
 
     public static function getLocalizedImage(path:String, ?lang:String):String

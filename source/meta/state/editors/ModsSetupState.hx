@@ -56,9 +56,7 @@ class ModSetupTabs extends FlxUITabMenu
     {
         super(null, [{name: "Setup Mod Folder", label: "Setup Mod Folder"}], true);
 
-        screenCenter();
-        setPosition(300, 250);
-
+        setPosition(50, 50);
         resize(400, 400);
 
         selected_tab = 0;
@@ -192,7 +190,6 @@ class ModsSetupState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-        bg.scrollFactor.set();
         add(bg);
 
         for (i in 0...stickerArray.length)
@@ -217,7 +214,6 @@ class ModsSetupState extends MusicBeatState
         }
 
         modTab = new ModSetupTabs();
-        modTab.screenCenter();
         add(modTab);
 
         super.create();

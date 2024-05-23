@@ -2,10 +2,8 @@ package;
 
 import flixel.input.keyboard.FlxKey;
 
-// this loads everything in
 class Init extends FlxState
 {
-	var loadingSpeen:FlxSprite;
 	var epicLogo:FlxSprite;
 
 	var coolText:FlxText;
@@ -46,7 +44,7 @@ class Init extends FlxState
 		coolText.setFormat("VCR OSD Mono", 26, 0xFFffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(coolText);
 
-		loadingSpeen = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
+		var loadingSpeen:FlxSprite = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
 		loadingSpeen.angularVelocity = 180;
 		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadingSpeen);
@@ -86,10 +84,8 @@ class Init extends FlxState
 
 	function loadEverything()	
 	{
-		Localization.init({
-			directory: "locales",
-			default_language: "en"
-		});
+		Localization.loadLanguages();
+		Localization.switchLanguage(ClientPrefs.language);
 		
 		#if html5
 		Paths.initPaths();
@@ -197,9 +193,7 @@ class Init extends FlxState
         	FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
         	{
 			if (OutdatedState.mustUpdate && !OutdatedState.leftState)
-			{
 				FlxG.switchState(() -> new OutdatedState());
-			} 
 			else 
 			{
 				if (FlxG.save.data.flashing == null && !FlashingState.leftState)

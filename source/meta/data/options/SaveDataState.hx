@@ -93,33 +93,18 @@ class SaveDataState extends MusicBeatState
 				    	}, false));
 			}
 		}
+
+		for (num => item in grpControls.members)
+		{
+			item.targetY = num - curSelected;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
+		}
 	}
 
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = grpControls.length - 1;
-		if (curSelected >= grpControls.length)
-			curSelected = 0;
-
-		var bullShit:Int = 0;
-
-		for (item in grpControls.members)
-		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
-		}
+		curSelected = FlxMath.wrap(curSelected + change, 0, controlsStrings.length - 1);
 	}
 
     function clearScores() 
