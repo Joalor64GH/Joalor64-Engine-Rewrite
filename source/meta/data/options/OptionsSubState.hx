@@ -804,7 +804,7 @@ class LanguageSubState extends MusicBeatSubstate {
         
         for (folder in foldersToCheck) {
             if (FileSystem.exists(folder) && FileSystem.isDirectory(folder)) {
-                var path:String = folder + "/languagesData.txt";
+                var path:String = folder + "languagesData.txt";
                 if (FileSystem.exists(path)) {
                     var modLangData:String = File.getContent(path).trim();
                     var modLangDataSplit:Array<String> = modLangData.split(':');
