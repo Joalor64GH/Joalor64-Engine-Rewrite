@@ -2,13 +2,14 @@ package meta.data.options;
 
 import backend.Localization.Locale;
 
-class LanguageState extends MusicBeatState {
+class LanguageState extends MusicBeatState 
+{
     	var coolGrp:FlxTypedGroup<Alphabet>;
 		var iconArray:Array<AttachedSprite> = [];
 	var langStrings:Array<Locale> = [];
     	var curSelected:Int = 0;
 
-	override public function create()
+	override function create()
 	{
 		super.create();
 
@@ -72,6 +73,7 @@ class LanguageState extends MusicBeatState {
 			var label:Alphabet = new Alphabet(200, 320, langStrings[i].lang, true);
             label.isMenuItem = true;
             label.targetY = i;
+            label.snapToPosition();
             coolGrp.add(label);
 
             var icon:AttachedSprite = new AttachedSprite();
@@ -80,7 +82,6 @@ class LanguageState extends MusicBeatState {
             icon.animation.play('idle');
             icon.xAdd = -icon.width - 10;
             icon.sprTracker = label;
-
             iconArray.push(icon);
             add(icon);
 		}

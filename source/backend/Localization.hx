@@ -6,6 +6,7 @@ import openfl.system.Capabilities;
 
 /**
  * A simple localization system.
+ * Modified for Joalor64 Engine.
  * Please credit me if you use it!
  * @author Joalor64GH
  */
@@ -137,13 +138,26 @@ class Localization
     public static function getLocalizedImage(path:String, ?lang:String):String
     {
         var target:String = lang ?? currentLanguage;
-        return Paths.getPath('locales/$target/images/$path.png');
+
+        var modFile:String = Paths.modFolders('locales/$target/images/$path.png');
+        var defaultFile:String = Paths.getPath('locales/$target/images/$path.png');
+
+        #if MODS_ALLOWED
+        if (FileSystem.exists(modPath)) return modPath;
+        else if (FileSystem.exists(defaultPath)) return defaultPath;
+        #else
+        if (FileSystem.exists(defaultPath)) return defaultPath;
+        #end
+        else return defaultPath;
+
+        trace('oops! $path returned null!');
+        return null;
     }
 
     public static function getLocalizedSound(path:String, ?lang:String):String
     {
         var target:String = lang ?? currentLanguage;
-        return Paths.getPath('locales/$target/sounds/$path.${Paths.SOUND_EXT}');
+        return Paths.returnSoundPath('locales/$target/sounds', path);
     }
 }
 
