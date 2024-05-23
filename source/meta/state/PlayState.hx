@@ -5766,7 +5766,11 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	override function destroy() {
+	override public function destroy() {
+		#if cpp
+		cpp.vm.Gc.enable(true);
+		#end
+
 		for (lua in luaArray) {
 			lua.call('onDestroy', []);
 			lua.stop();
@@ -5783,10 +5787,6 @@ class PlayState extends MusicBeatState
 		hscriptMap.clear();
 		#end
 
-		#if cpp
-		cpp.vm.Gc.enable(false);
-		#end
-
 		#if hscript
 		if (FunkinLua.hscript != null) FunkinLua.hscript = null;
 		#end
@@ -5798,8 +5798,8 @@ class PlayState extends MusicBeatState
 		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
 		
 		super.destroy();
-
 		instance = null;
+		Paths.clearStoredMemory();
 	}
 
 	public static function cancelMusicFadeTween() {
