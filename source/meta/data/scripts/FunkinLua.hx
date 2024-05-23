@@ -899,6 +899,26 @@ class FunkinLua {
 			}
 		});
 
+		Lua_helper.add_callback(lua, "switchLang", function(lang:String) {
+			var target:String = lang;
+			return Localization.switchLanguage(target);
+		});
+
+		Lua_helper.add_callback(lua, "translateText", function(key:String, lang:String) {
+			var target:String = lang;
+			return Localization.get(key, target);
+		});
+
+		Lua_helper.add_callback(lua, "translateImage", function(path:String, lang:String) {
+			var target:String = lang;
+			return Localization.getLocalizedImage(path, target);
+		});
+
+		Lua_helper.add_callback(lua, "translateSound", function(path:String, lang:String) {
+			var target:String = lang;
+			return Localization.getLocalizedSound(path, target);
+		});
+
 		Lua_helper.add_callback(lua, "getProperty", function(variable:String) {
 			var result:Dynamic = null;
 			var killMe:Array<String> = variable.split('.');
