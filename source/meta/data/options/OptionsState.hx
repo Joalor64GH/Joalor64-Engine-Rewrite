@@ -28,7 +28,7 @@ class OptionsState extends MusicBeatState
 			case 'Gameplay':
 				openSubState(new OptionsSubState.GameplaySubState());
 			case 'Language':
-				openSubState(new OptionsSubState.LanguageSubState());
+				FlxG.switchState(() -> new LanguageState());
 			case 'Miscellaneous':
 				openSubState(new OptionsSubState.MiscSubState());
 		}
