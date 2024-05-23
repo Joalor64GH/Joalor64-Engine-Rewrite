@@ -107,6 +107,8 @@ class Localization
             return true;
         }
 
+        var languageData:Dynamic = loadLanguageData(newLanguage);
+
          if (languageData != null) {
             trace("yay! successfully loaded data for: " + newLanguage);
             currentLanguage = newLanguage;
