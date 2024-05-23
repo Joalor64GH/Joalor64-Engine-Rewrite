@@ -143,7 +143,7 @@ class Localization
         var defaultFile:String = Paths.getPath('locales/$target/images/$path.png');
 
         #if MODS_ALLOWED
-        if (FileSystem.exists(modPath)) return modPath;
+        if (FileSystem.exists(modFile)) return modFile;
         else if (FileSystem.exists(defaultPath)) return defaultPath;
         #else
         if (FileSystem.exists(defaultPath)) return defaultPath;
