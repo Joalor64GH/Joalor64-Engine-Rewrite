@@ -308,7 +308,7 @@ class ModchartEditorState extends MusicBeatState
 		persistentDraw = true;
 
 		if (PlayState.SONG == null)
-			PlayState.SONG = Song.loadFromJson('tutorial');
+			PlayState.SONG = Song.loadFromJson('tutorial', 'tutorial');
 
 		Conductor.mapBPMChanges(PlayState.SONG);
 		Conductor.bpm = PlayState.SONG.bpm;
