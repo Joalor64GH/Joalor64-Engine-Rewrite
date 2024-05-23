@@ -768,7 +768,7 @@ class GameplaySubState extends BaseOptionsMenu
 
 class LanguageSubState extends MusicBeatSubstate {
     	private var coolGrp:FlxTypedGroup<Alphabet>;
-		var iconArray:Array<AttachedSprite>;
+		var iconArray:Array<AttachedSprite> = [];
 	var langStrings:Array<Locale> = [];
     	var curSelected:Int = 0;
 
