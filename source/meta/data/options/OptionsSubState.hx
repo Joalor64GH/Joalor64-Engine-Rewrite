@@ -776,7 +776,7 @@ class LanguageSubState extends MusicBeatSubstate {
 	{
 		super();
 
-		var initLangString = CoolUtil.coolTextFile(Paths.getPath('languagesData'));
+		var initLangString = CoolUtil.coolTextFile(Paths.getPath('locales/languagesData.txt'));
 
         if (Assets.exists(Paths.getPath('locales/languagesData.txt')))
         {
