@@ -1,8 +1,5 @@
 package meta.data;
 
-import flixel.addons.transition.Transition;
-import flixel.addons.transition.TransitionData;
-
 /**
  * @author DiogoTVV
  * @see https://github.com/DiogoTVV/funky-moonleap-source

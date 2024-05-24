@@ -190,7 +190,7 @@ class CreditsState extends MusicBeatState
 				'riveren',
 				'Main Artist/Animator of Psych Engine',
 				'https://twitter.com/riverennn',
-				'B42F71',
+				'14967B',
 				'JingleRiver'
 			],
 			[''],
@@ -205,8 +205,8 @@ class CreditsState extends MusicBeatState
 			],
 			[
 				'Yoshubs',
-				'face',
-				'Additional Ex-Programmer of Psych Engine',
+				'none',
+				'Ex-Programmer of Psych Engine',
 				'https://gamebanana.com/members/1908070',
 				'888888',
 				''

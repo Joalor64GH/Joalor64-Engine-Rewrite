@@ -2,7 +2,7 @@ package meta.data.options;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = [
+	public static final options:Array<String> = [
 		'Note Colors', 
 		'Controls', 
 		'Offsets',

@@ -104,7 +104,7 @@ class CoolUtil
 	inline public static function listFromString(string:String):Array<String>
 		return string.trim().split('\n').map(str -> str.trim());
 
-	public static function dominantColor(sprite:flixel.FlxSprite):Int {
+	public static function dominantColor(sprite:FlxSprite):Int {
 		var countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth){
 			for(row in 0...sprite.frameHeight){
@@ -120,7 +120,7 @@ class CoolUtil
 		 }
 		var maxCount = 0;
 		var maxKey:Int = 0;//after the loop this will store the max color
-		countByColor[flixel.util.FlxColor.BLACK] = 0;
+		countByColor[FlxColor.BLACK] = 0;
 			for(key in countByColor.keys()){
 			if(countByColor[key] >= maxCount){
 				maxCount = countByColor[key];

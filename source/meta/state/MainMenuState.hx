@@ -118,12 +118,14 @@ class MainMenuState extends MusicBeatState
 				#if MODS_ALLOWED 'mods',
 				#end
 				'credits',
-				#if !switch 
 				'manual',
-				#end
 				'options'
 			];
 		}
+
+		#if !desktop
+		optionShit.remove("manual");
+		#end
 
 		for (i in menuJSON.links)
 			linkArray.push(i);

@@ -70,7 +70,7 @@ class KillBF extends MusicBeatState
     private function spawnSprite()
     {
         var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -100);
-        sprite.velocity.y = FlxG.random.int(60, 150);
+        sprite.velocity.y = FlxG.random.int(80, 160);
         beef.push(sprite);
         add(sprite);
     }

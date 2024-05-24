@@ -432,7 +432,7 @@ class ModchartEditorState extends MusicBeatState
         add(debugText);
 
         super.create(); //do here because tooltips be dumb
-        // _ui.load(null);
+        _ui.load(null);
         setupEditorUI();
         setupModifierUI();
         setupEventUI();
