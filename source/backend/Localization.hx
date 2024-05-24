@@ -144,11 +144,11 @@ class Localization
 
         #if MODS_ALLOWED
         if (FileSystem.exists(modFile)) return modFile;
-        else if (FileSystem.exists(defaultPath)) return defaultPath;
+        else if (FileSystem.exists(defaultFile)) return defaultFile;
         #else
-        if (FileSystem.exists(defaultPath)) return defaultPath;
+        if (FileSystem.exists(defaultFile)) return defaultFile;
         #end
-        else return defaultPath;
+        else return defaultFile;
 
         trace('oops! $path returned null!');
         return null;
