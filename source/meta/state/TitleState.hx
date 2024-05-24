@@ -28,7 +28,6 @@ class TitleState extends MusicBeatState
 	var blackScreen:FlxSprite;
 
 	var credTextShit:Alphabet;
-
 	var textGroup:FlxGroup;
 	var credGroup:FlxGroup;
 	
@@ -40,8 +39,6 @@ class TitleState extends MusicBeatState
 	#elseif PSYCH_WATERMARKS
 	var credIconShadow:FlxSprite;
 	var credIconRiver:FlxSprite;
-	var credIconShubs:FlxSprite;
-	var credIconBB:FlxSprite;
 	#else
 	var credIconMuff:FlxSprite;
 	var credIconPhantom:FlxSprite;
@@ -261,22 +258,11 @@ class TitleState extends MusicBeatState
 		credIconShadow.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconShadow.visible = false;
 
-		credIconRiver = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/river'));
+		credIconRiver = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/riveren'));
 		add(credIconRiver);
 		credIconRiver.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconRiver.visible = false;
 		credIconRiver.flipX = true;
-
-		credIconShubs = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/shubs'));
-		add(credIconShubs);
-		credIconShubs.antialiasing = ClientPrefs.globalAntialiasing;
-		credIconShubs.visible = false;
-
-		credIconBB = new FlxSprite(FlxG.width-300,FlxG.height-300).loadGraphic(Paths.image('credits/bb'));
-		add(credIconBB);
-		credIconBB.antialiasing = ClientPrefs.globalAntialiasing;
-		credIconBB.visible = false;
-		credIconBB.flipX = true;
 		#else
 		credIconMuff = new FlxSprite(150,150).loadGraphic(Paths.image('credits/ninjamuffin99'));
 		add(credIconMuff);
@@ -543,9 +529,7 @@ class TitleState extends MusicBeatState
 					#elseif PSYCH_WATERMARKS
 					addMoreText('ShadowMario', 15);
 					addMoreText('Riveren', 15);
-					addMoreText('Yoshubs', 15);
-					addMoreText('BBPanzu', 15);
-					credIconShadow.visible = credIconRiver.visible = credIconShubs.visible = credIconBB.visible = true;
+					credIconShadow.visible = credIconRiver.visible = true;
 					#else
 					addMoreText('present');
 					#end
@@ -558,8 +542,6 @@ class TitleState extends MusicBeatState
 					#elseif PSYCH_WATERMARKS
 					credIconShadow.destroy();
 					credIconRiver.destroy();
-					credIconShubs.destroy();
-					credIconBB.destroy();
 					#else
 					credIconMuff.destroy();
 					credIconPhantom.destroy();
@@ -628,8 +610,6 @@ class TitleState extends MusicBeatState
 			#elseif PSYCH_WATERMARKS
 			credIconShadow.destroy();
 			credIconRiver.destroy();
-			credIconShubs.destroy();
-			credIconBB.destroy();
 			#else
 			credIconMuff.destroy();
 			credIconPhantom.destroy();

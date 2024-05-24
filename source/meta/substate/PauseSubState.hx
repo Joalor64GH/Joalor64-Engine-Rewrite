@@ -274,7 +274,7 @@ class PauseSubState extends MusicBeatSubstate
 						fromPlayState = true;
 						FlxG.switchState(() -> new NoteOffsetState());
 					case 'Visuals':
-						openSubState(newOptionsSubState.VisualsSubState());
+						openSubState(new OptionsSubState.VisualsSubState());
 					case 'Gameplay':
 						openSubState(new OptionsSubState.GameplaySubState());
 					case 'Language':
