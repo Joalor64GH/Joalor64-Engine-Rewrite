@@ -391,7 +391,7 @@ class PlayState extends MusicBeatState
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
-			Application.current.window.title = 'Friday Night Funkin\': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}' + (inMini) ? ' (Minigame Mode)' : '';
+			Application.current.window.title = 'Friday Night Funkin\': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}';
 
 		#if cpp
 		cpp.vm.Gc.enable(true);
@@ -1389,9 +1389,9 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 
 		if (inMini)
-			texty.text = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+			texty = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
 		else
-			texty.text = '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+			texty = '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
 
 		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, texty, 12);
 		versionTxt.scrollFactor.set();
