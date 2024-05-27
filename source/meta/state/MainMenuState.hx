@@ -3,7 +3,6 @@ package meta.state;
 import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 
-import system.CoolSystemStuff;
 import meta.data.Achievements;
 
 #if MODS_ALLOWED
@@ -186,7 +185,7 @@ class MainMenuState extends MusicBeatState
 			if (menuJSON.angle != invalidPosition)
 				menuItem.angle = menuJSON.angle;
 			menuItem.scale.x = (menuJSON.scaleX != invalidPosition) ? menuJSON.scaleX : scale;
-			menuItem.scale.y = (menuJSON.scaleY != invalidPosition) menuJSON.scaleY : scale;
+			menuItem.scale.y = (menuJSON.scaleY != invalidPosition) ? menuJSON.scaleY : scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -218,7 +217,7 @@ class MainMenuState extends MusicBeatState
 
 		// The system says hi :)
 		#if debug
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, 'Hello ${CoolSystemStuff.getUsername()} having a good day? im proud of you! :)', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, 'Hello ${system.CoolSystemStuff.getUsername()} having a good day? im proud of you! :)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -396,10 +395,7 @@ class MainMenuState extends MusicBeatState
 							FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
+								onComplete: (twn:FlxTween) -> spr.kill();
 							});
 						}
 						else
