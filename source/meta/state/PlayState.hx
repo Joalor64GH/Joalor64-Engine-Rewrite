@@ -384,12 +384,14 @@ class PlayState extends MusicBeatState
 
 	public static var inMini:Bool = false;
 
+	var texty:String = '';
+
 	override public function create()
 	{
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
-			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+			Application.current.window.title = 'Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}' + (inMini) ? ' (Minigame Mode)' : '';
 
 		#if cpp
 		cpp.vm.Gc.enable(true);
@@ -447,7 +449,7 @@ class PlayState extends MusicBeatState
 					else if (songMisses < 10){
 						ratingFC = "SDCB";
 					}
-					else if (songMisses < 100){
+					else if (songMisses > 100){
 						ratingFC = "WTF??";
 					}
 					else if (cpuControlled){
@@ -534,10 +536,7 @@ class PlayState extends MusicBeatState
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
-		else
-			detailsText = "Freeplay";
+		detailsText = (isStoryMode) ? "Story Mode: " + WeekData.getCurrentWeek().weekName : "Freeplay";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -1389,7 +1388,12 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll)
 			botplayTxt.y = timeBarBG.y - 78;
 
-		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}', 12);
+		if (inMini)
+			texty.text = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+		else
+			texty.text = '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+
+		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, texty, 12);
 		versionTxt.scrollFactor.set();
 		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionTxt);
