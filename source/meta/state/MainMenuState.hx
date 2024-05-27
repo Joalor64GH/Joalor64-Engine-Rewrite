@@ -274,7 +274,6 @@ class MainMenuState extends MusicBeatState
 	function giveAchievement() {
 		add(new AchievementObject('friday_night_play', camAchievement));
 		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-		trace('Giving achievement "friday_night_play"');
 	}
 	#end
 
@@ -395,7 +394,10 @@ class MainMenuState extends MusicBeatState
 							FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
-								onComplete: (twn:FlxTween) -> spr.kill();
+								onComplete: function(twn:FlxTween) 
+								{ 
+									spr.kill(); 
+								}
 							});
 						}
 						else
