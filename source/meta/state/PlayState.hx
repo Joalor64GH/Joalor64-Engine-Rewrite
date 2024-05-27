@@ -391,12 +391,12 @@ class PlayState extends MusicBeatState
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
-			Application.current.window.title = 'Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}' + (inMini) ? ' (Minigame Mode)' : '';
+			Application.current.window.title = 'Friday Night Funkin\': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}' + (inMini) ? ' (Minigame Mode)' : '';
 
 		#if cpp
 		cpp.vm.Gc.enable(true);
 		#end
-		openfl.system.System.gc();
+		System.gc();
 
 		Paths.clearStoredMemory();
 
@@ -4563,7 +4563,7 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
-		openfl.system.System.gc();
+		System.gc();
 
 		ButtplugUtils.stop();
 
