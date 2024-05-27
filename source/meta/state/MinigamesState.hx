@@ -4,10 +4,8 @@ import objects.userinterface.HealthIcon;
 
 class MinigamesState extends MusicBeatState
 {
-    	private var grpControls:FlxTypedGroup<Alphabet>;
-
-        private var iconArray:Array<HealthIcon> = [];
-
+    	var grpControls:FlxTypedGroup<Alphabet>;
+        var iconArray:Array<HealthIcon> = [];
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
@@ -17,7 +15,6 @@ class MinigamesState extends MusicBeatState
 	];
 
 	var descTxt:FlxText;
-
     	var curSelected:Int = 0;
 
 	override function create()
@@ -75,17 +72,12 @@ class MinigamesState extends MusicBeatState
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) 
-        	{
-			if (ClientPrefs.simpleMain)
-				FlxG.switchState(() -> new SimpleMainMenuState());
-			else
-				FlxG.switchState(() -> new MainMenuState());
-        	}
+			FlxG.switchState((ClientPrefs.simpleMain) ? () -> new SimpleMainMenuState() : () -> new MainMenuState());
             
 		if (controls.ACCEPT)
 		{
 			switch (curSelected)
-            		{
+			{
 				case 0:
 					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
 					PlayState.inMini = true;
@@ -116,7 +108,7 @@ class MinigamesState extends MusicBeatState
 		for (num => item in grpControls.members)
 		{
 			item.targetY = num - curSelected;
-			item.alpha =(item.targetY == 0) ? 1 : 0.6;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
 		}
 	}
 }
@@ -127,10 +119,10 @@ class Minigame
 	public var description:String;
 	public var icon:String;
 
-	public function new(Name:String, dsc:String, img:String)
+	public function new(name:String, description:String, icon:String)
 	{
-		name = Name;
-        	description = dsc;
-        	icon = img;
+		this.name = name;
+		this.description = description;
+		this.icon = icon;
 	}
 }
