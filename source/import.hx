@@ -10,8 +10,9 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxSpriteGroup;
+import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.sound.FlxSound;
 import flixel.ui.FlxBar;
@@ -33,6 +34,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 import haxe.Json;
+import haxe.Http;
 
 import hscript.*;
 
