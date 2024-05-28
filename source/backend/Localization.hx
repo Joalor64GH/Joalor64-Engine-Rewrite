@@ -125,19 +125,20 @@ class Localization
 
     public static function get(key:String, ?language:String):String
     {
-        var targetLanguage:String = language ?? currentLanguage;
+        var targetLanguage:String = language != null ? language : currentLanguage;
         var languageData = data.get(targetLanguage);
+        final field:String = Reflect.field(languageData, key);
 
         if (data != null && data.exists(targetLanguage))
             if (languageData != null && Reflect.hasField(languageData, key))
-                return Reflect.field(languageData, key);
+                return field;
 
-        return Reflect.field(languageData, key) ?? 'missing key: $key';
+        return field != null ? field : 'missing key: $key';
     }
 
     public static function getLocalizedImage(path:String, ?lang:String):String
     {
-        var target:String = lang ?? currentLanguage;
+        var target:String = lang != null ? lang : currentLanguage;
 
         var modFile:String = Paths.modFolders('locales/$target/images/$path.png');
         var defaultFile:String = Paths.getPath('locales/$target/images/$path.png');
@@ -156,7 +157,7 @@ class Localization
 
     public static function getLocalizedSound(path:String, ?lang:String):String
     {
-        var target:String = lang ?? currentLanguage;
+        var target:String = lang != null ? lang : currentLanguage;
         return Paths.returnSoundPath('locales/$target/sounds', path);
     }
 }
