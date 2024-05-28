@@ -40,7 +40,6 @@ class ResultsSubState extends MusicBeatSubstate
 		FlxG.sound.playMusic(Paths.music('breakfast'), 1);
 
         bg = new FlxSprite().loadGraphic(Paths.image('menuBGSubstate'));
-		bg.alpha = 0;
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -55,7 +54,6 @@ class ResultsSubState extends MusicBeatSubstate
 		titleTxt.screenCenter(X);
 		titleTxt.updateHitbox();
 		add(titleTxt);
-
 		if (PlayState.isStoryMode) titleTxt.text += ' (STORY MODE)';
 
 		resultsTxt = new FlxText(titleTxt.x, 0, 0, 
