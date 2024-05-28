@@ -374,13 +374,15 @@ class PlayState extends MusicBeatState
 	public var bpPayload:String = ""; // why was this added again??
 
 	public var comboFunction:Void->Void = null;
-
 	public static var inMini:Bool = false;
 
 	var texty:String = '';
+	var dialogueLangSuffix:String = '';
 
 	override public function create()
 	{
+		dialogueLangSuffix = (!ClientPrefs.lang == 'en') ? '-' + Localization.currentLanguage : '';
+
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
@@ -1220,11 +1222,11 @@ class PlayState extends MusicBeatState
 				addBehindDad(evilTrail);
 		}
 
-		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
+		var file:String = Paths.json(songName + '/dialogue' + dialogueLangSuffix); //Checks for json/Psych Engine dialogue
 		if (Assets.exists(file))
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
 
-		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
+		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue' + dialogueLangSuffix); //Checks for vanilla/Senpai dialogue
 		if (Assets.exists(file))
 			dialogue = CoolUtil.coolTextFile(file);
 
