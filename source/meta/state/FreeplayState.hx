@@ -36,6 +36,9 @@ class FreeplayState extends MusicBeatState
 
 	var repText:FlxText;
 
+	var missingText:FlxText;
+	var missingBG:FlxSprite;
+
 	override function create()
 	{
 		Application.current.window.title = Application.current.meta.get('name');
@@ -94,11 +97,9 @@ class FreeplayState extends MusicBeatState
 
 			var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
 		slash.antialiasing = ClientPrefs.globalAntialiasing;
+		slash.flipX = (ClientPrefs.songDisplay == 'C-Shape') ? true : false;
 		slash.screenCenter();
 		add(slash);
-
-		if (ClientPrefs.songDisplay == 'C-Shape')
-			slash.flipX = true;
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -156,22 +157,20 @@ class FreeplayState extends MusicBeatState
 		add(repText);
 
 		if(curSelected >= songs.length) curSelected = 0;
-			bg.color = songs[curSelected].color;
+		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
 
 		#if sys
 		ArtemisIntegration.setBackgroundFlxColor (intendedColor);
 		#end
 
-		if(lastDifficultyName == '')
+		if (lastDifficultyName == '')
 			lastDifficultyName = CoolUtil.defaultDifficulty;
 
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 
-		if(curPlaying)
-		{
+		if (curPlaying)
 			iconArray[instPlaying].canBounce = true;
-		}
 		
 		changeSelection();
 		changeDiff();
@@ -180,12 +179,22 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press R to Reset your Score and Accuracy.";
-		var size:Int = 16;
-		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
+		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press R to Reset your Score and Accuracy.", 16);
+		text.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+
+		missingBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		missingBG.alpha = 0;
+		add(missingBG);
+
+		missingText = new FlxText(0, 0, 0, '', 72);
+		missingText.scrollFactor.set();
+		missingText.setFormat("VCR OSD Mono", 60, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		missingText.screenCenter(XY);
+		missingText.alpha = 0;
+		add(missingText);
+
 		super.create();
 	}
 
@@ -350,29 +359,61 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (accepted)
 		{
-			persistentUpdate = false;
-			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
-			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-			trace(poop);
+			try 
+			{
+				persistentUpdate = false;
+				var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
+				var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+				trace(poop);
 
-			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
-			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
+				PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+				PlayState.isStoryMode = false;
+				PlayState.storyDifficulty = curDifficulty;
 
-			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
-			if(colorTween != null)
-				colorTween.cancel();
+				trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+				if(colorTween != null)
+					colorTween.cancel();
 
-			curPlaying = false;
+				curPlaying = false;
 			
-			if (FlxG.keys.pressed.SHIFT)
-				LoadingState.loadAndSwitchState(() -> new ChartingState());
-			else
-				LoadingState.loadAndSwitchState(() -> new PlayState());
+				if (FlxG.keys.pressed.SHIFT)
+					LoadingState.loadAndSwitchState(() -> new ChartingState());
+				else
+					LoadingState.loadAndSwitchState(() -> new PlayState());
 
-			FlxG.sound.music.volume = 0;
-			FlxG.sound.play(Paths.sound('storySelect'));
-			destroyFreeplayVocals();
+				FlxG.sound.music.volume = 0;
+				FlxG.sound.play(Paths.sound('storySelect'));
+				destroyFreeplayVocals();
+				return;
+			}
+			catch(e:Dynamic)
+			{
+				var errorStr:String = e.toString();
+				if(errorStr.startsWith('[file_contents,assets/data/')) 
+					errorStr = 'Missing file: ' + errorStr.substring(34, errorStr.length-1); //Missing chart
+				
+				missingText.text = 'ERROR LOADING CHART:\n$errorStr';
+
+				FlxTween.tween(missingBG, {alpha: 0.5}, 0.75, {ease: FlxEase.quadOut});
+				FlxTween.tween(missingText, {alpha: 1}, 1, {ease: FlxEase.quadOut});
+
+				// please ignore this god awful code :skull:
+				new FlxTimer().start(3, function(tmr:FlxTimer)
+				{
+					FlxTween.tween(missingBG, {alpha: 0}, 1, {ease: FlxEase.quadOut});
+					FlxTween.tween(missingText, {alpha: 0}, 1, {ease: FlxEase.quadOut});
+
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						missingText.text = '';
+					});
+				});
+
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+
+				super.update(elapsed);
+				return;
+			}
 		}
 		else if(controls.RESET)
 		{
@@ -432,12 +473,7 @@ class FreeplayState extends MusicBeatState
 	{
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, songs.length - 1);
 			
 		var newColor:Int = songs[curSelected].color;
 		if(newColor != intendedColor) {
@@ -458,23 +494,16 @@ class FreeplayState extends MusicBeatState
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
 
-		var bullShit:Int = 0;
-
 		// TO-DO: Not make 5 icons look weird in Freeplay
 		for (i in 0...iconArray.length)
 			iconArray[i].alpha = 0.6;
 
 		iconArray[curSelected].alpha = 1;
 
-		for (item in grpSongs.members)
+		for (num => item in grpSongs.members)
 		{
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
-
-			if (item.targetY == 0)
-				item.alpha = 1;
+			item.targetY = num - curSelected;
+			item.alpha = (item.targetY == 0) ? 1 : 0.6;
 		}
 		
 		Mods.currentModDirectory = songs[curSelected].folder;
