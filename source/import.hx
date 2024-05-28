@@ -51,6 +51,7 @@ import meta.data.dependency.Discord;
 #end
 
 import animateatlas.AtlasFrameMaker;
+
 import meta.data.alphabet.Alphabet;
 import meta.data.Conductor;
 import meta.data.Conductor.BPMChangeEvent;
@@ -64,7 +65,6 @@ import meta.MusicBeatSubstate;
 import meta.state.PlayState;
 import meta.ArtemisIntegration;
 import meta.Controls;
-
 import meta.data.options.*;
 import meta.data.alphabet.*;
 import meta.data.*;
@@ -72,7 +72,6 @@ import meta.state.*;
 import meta.substate.*;
 import meta.state.editors.*;
 import meta.*;
-
 import objects.*;
 import objects.userinterface.*;
 
@@ -82,6 +81,7 @@ import Paths;
 import backend.Mods; 
 #end
 import backend.Localization;
+import backend.animation.PsychAnimationController;
 
 #if LUA_ALLOWED
 import llua.*;

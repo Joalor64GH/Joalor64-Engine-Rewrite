@@ -25,6 +25,8 @@ class StrumNote extends FlxSprite
 	}
 
 	public function new(x:Float, y:Float, leData:Int, player:Int) {
+		animation = new PsychAnimationController(this);
+		
 		colorMask = new ColorMask();
 		noteData = leData;
 		this.player = player;

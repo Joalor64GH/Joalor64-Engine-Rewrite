@@ -167,6 +167,8 @@ class Note extends FlxSprite
 	{
 		super();
 
+		animation = new PsychAnimationController(this);
+
 		if (prevNote == null)
 			prevNote = this;
 

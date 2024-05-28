@@ -77,6 +77,8 @@ class Character extends FlxSprite
 	{
 		super(x, y);
 
+		animation = new PsychAnimationController(this);
+
 		animOffsets = new Map();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
