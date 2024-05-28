@@ -15,7 +15,7 @@ class Localization
 {
     private static var data:Map<String, Dynamic>;
 
-    private static var currentLanguage:String;
+    public static var currentLanguage:String;
     public static var DEFAULT_LANGUAGE:String = "en";
 
     private static final DEFAULT_DIR:String = "locales";

@@ -381,7 +381,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		dialogueLangSuffix = (!ClientPrefs.lang == 'en') ? '-' + Localization.currentLanguage : '';
+		dialogueLangSuffix = (ClientPrefs.language != 'en') ? '-' + Localization.currentLanguage : '';
 
 		PauseSubState.fromPlayState = false;
 
