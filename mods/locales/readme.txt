@@ -2,9 +2,9 @@ okay okay
 so basically, you just need two main text files
 
 'languagesList' - simply your list of languages (de, en, es, fr, it, and so on...)
-'languagesData' - this is so the languages can be pushed into LanguageSubState 
+'languagesData' - this is so the languages can be pushed into LanguageState 
 
-formatting example:
+languagesData formatting example:
 Deustch:de
 English:en
 etc...

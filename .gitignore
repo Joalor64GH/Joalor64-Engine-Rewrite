@@ -1,7 +1,7 @@
 APIStuff.hx
 .DS_STORE
 NGio.hx
-/io/
+io/
 
 art/mod.url
 !mods/introMod/

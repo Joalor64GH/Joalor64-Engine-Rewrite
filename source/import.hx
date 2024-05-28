@@ -1,29 +1,40 @@
 #if !macro
 // Default Imports
+import flixel.*;
+import flixel.util.*;
+import flixel.math.*;
+import flixel.addons.effects.FlxTrail;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.effects.FlxFlicker;
+import flixel.graphics.FlxGraphic;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
-import flixel.group.FlxGroup;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
+import flixel.input.keyboard.FlxKey;
+import flixel.sound.FlxSound;
+import flixel.ui.FlxBar;
 import flixel.text.FlxText;
-import flixel.util.*;
-import flixel.math.*;
-import flixel.*;
-
-import haxe.Json;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 import lime.app.Application;
 
 import openfl.Lib;
+import openfl.geom.*;
 import openfl.Assets;
+import openfl.system.System;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import openfl.filters.BitmapFilter;
 import openfl.display.Sprite;
-import openfl.system.System;
-import openfl.geom.*;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+
+import haxe.Json;
+import haxe.Http;
 
 import hscript.*;
 
@@ -71,6 +82,11 @@ import Paths;
 import backend.Mods; 
 #end
 import backend.Localization;
+
+#if LUA_ALLOWED
+import llua.*;
+import llua.Lua;
+#end
 
 using Globals;
 using StringTools;

@@ -57,14 +57,16 @@
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<source path="source" />
-	<assets path="assets" exclude="*.ogg" if="web" /> 
-	<assets path="assets" exclude="*.mp3|*.mp4" unless="web" />
+
+	<assets path="assets" exclude="*.fla|*.ogg|*.wav" if="web" /> 
+	<assets path="assets" exclude="*.fla|*.mp3|*.mp4|*.wav" unless="web" />
 	<assets path="assets/artemis" library="artemis" if="windows"/>
 	<assets path="assets/videos"  library="videos"  if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
+
 	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
 	<assets path="modsList.txt" if="MODS_ALLOWED" />
 
-	<assets path='art/readme.txt' rename='about.txt' />
+	<assets path='art/readme.txt' rename='about.txt' libary="art"/>
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	
 	<!-- [ Libraries ] -->
@@ -84,7 +86,6 @@
 	<haxelib name="actuate" /> <!-- Used for extension-webm -->
 	<haxelib name="extension-webm" if="WEBM_ALLOWED" /> 
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
-	<haxelib name="swf" if="FLASH_MOVIE" />
 
 	<haxelib name="linc_discord-rpc" if="desktop" />
 	<haxelib name="hxcpp-debug-server" if="desktop debug" />
@@ -104,6 +105,7 @@
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
+	<haxedef name="HXCPP_STACK_TRACE" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
 
 	<haxedef name="no-deprecation-warnings" />

@@ -23,13 +23,6 @@ import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
 
-#if LUA_ALLOWED
-import llua.Lua;
-import llua.LuaL;
-import llua.State;
-import llua.Convert;
-#end
-
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as MP4Handler;
 #elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
@@ -384,17 +377,19 @@ class PlayState extends MusicBeatState
 
 	public static var inMini:Bool = false;
 
+	var texty:String = '';
+
 	override public function create()
 	{
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
-			Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten - NOW PLAYING: " + '${SONG.song}';
+			Application.current.window.title = 'Friday Night Funkin\': Joalor64 Engine Rewritten - NOW PLAYING: ${SONG.song}';
 
 		#if cpp
 		cpp.vm.Gc.enable(true);
 		#end
-		openfl.system.System.gc();
+		System.gc();
 
 		Paths.clearStoredMemory();
 
@@ -447,7 +442,7 @@ class PlayState extends MusicBeatState
 					else if (songMisses < 10){
 						ratingFC = "SDCB";
 					}
-					else if (songMisses < 100){
+					else if (songMisses > 100){
 						ratingFC = "WTF??";
 					}
 					else if (cpuControlled){
@@ -534,10 +529,7 @@ class PlayState extends MusicBeatState
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
-		else
-			detailsText = "Freeplay";
+		detailsText = (isStoryMode) ? "Story Mode: " + WeekData.getCurrentWeek().weekName : "Freeplay";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -1389,7 +1381,12 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll)
 			botplayTxt.y = timeBarBG.y - 78;
 
-		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}', 12);
+		if (inMini)
+			texty = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+		else
+			texty = '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
+
+		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, texty, 12);
 		versionTxt.scrollFactor.set();
 		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionTxt);
@@ -4559,7 +4556,7 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
-		openfl.system.System.gc();
+		System.gc();
 
 		ButtplugUtils.stop();
 
@@ -5795,7 +5792,7 @@ class PlayState extends MusicBeatState
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		FlxAnimationController.globalSpeed = 1;
-		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
+		#if FLX_PITCH if (FlxG.sound.music != null) FlxG.sound.music.pitch = 1; #end
 		
 		super.destroy();
 		instance = null;
