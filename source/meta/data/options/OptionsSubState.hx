@@ -711,6 +711,20 @@ class GameplaySubState extends BaseOptionsMenu
 		option.maxValue = 30;
 		addOption(option);
 
+		var option:Option = new Option('Display Milliseconds',
+			'If checked, displays your note hit offset in milliseconds.',
+			'displayMilliseconds',
+			'bool',
+			true);
+		addOption(option);
+
+		var option:Option = new Option('New Score System',
+			'If checked, uses the new scoring system from FNF v0.3.X.',
+			'weekendScore',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',

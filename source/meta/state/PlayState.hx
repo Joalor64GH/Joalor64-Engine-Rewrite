@@ -293,6 +293,7 @@ class PlayState extends MusicBeatState
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
+	public var smoothScore:Float = 0;
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -378,6 +379,14 @@ class PlayState extends MusicBeatState
 
 	var texty:String = '';
 	var dialogueLangSuffix:String = '';
+
+	public static function truncateFloat(number:Float, precision:Int):Float
+	{
+		var num = number;
+		num = num * Math.pow(10, precision);
+		num = Math.round(num) / Math.pow(10, precision);
+		return num;
+	}
 
 	override public function create()
 	{
@@ -465,15 +474,15 @@ class PlayState extends MusicBeatState
 						ratingFC = "BotPlay";
 
 					else if (songMisses == 0 && sicks >= 0 && goods == 0 && bads == 0 && shits == 0)
-						ratingFC = "(MFC) ";
+						ratingFC = "MFC";
 					else if (songMisses == 0 && goods >= 0 && bads == 0 && shits == 0)
-						ratingFC = "(GFC) ";
+						ratingFC = "GFC";
 					else if (songMisses == 0)
-						ratingFC = "(FC) ";
+						ratingFC = "FC";
 					else if (songMisses <= 10)
-						ratingFC = "(SDCB) ";
+						ratingFC = "SDCB";
 					else
-						ratingFC = "(Clear) ";
+						ratingFC = "Clear";
 			}		
 		}
 
@@ -1363,7 +1372,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		// thanks, kade
+		// thanks kade
 		judgementCounter = new FlxText(20, 0, 0, "", 20);
 		judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter.borderSize = 2;
@@ -2838,38 +2847,39 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
+		var scoreThing = (ClientPrefs.weekendScore) ? truncateFloat(smoothScore, 0) : songScore;
 		switch (ClientPrefs.scoreTxtType)
 		{
 			case 'Default':
 				if(ratingName == '?') {
 					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
-					+ ' // Score: ' + songScore 
+					+ ' // Score: ' + scoreThing 
 					+ ' // Combo Breaks: ' + songMisses 
 					+ ' // Accuracy: ' + ratingName 
 					+ ' // Rank: N/A';
 				} else {
 					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
-					+ ' // Score: ' + songScore 
+					+ ' // Score: ' + scoreThing 
 					+ ' // Combo Breaks: ' + songMisses
 					+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
 					+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 				}
 
 			case 'Psych':
-				scoreTxt.text = 'Score: ' + songScore
+				scoreTxt.text = 'Score: ' + scoreThing
 				+ ' | Misses: ' + songMisses
 				+ ' | Rating: ' + ratingName
 				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
 			case 'Kade':
 				scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')' 
-				+ ' | Score: ' + songScore 
+				+ ' | Score: ' + scoreThing 
 				+ ' | Combo Breaks: ' + songMisses
 				+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
-				+ ' | ' + ratingFC + ratingName;
+				+ ' | ' + '(' + ratingFC + ') ' + ratingName;
 
 			case 'Simple':
-				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses;
+				scoreTxt.text = 'Score: ' + scoreThing + ' | Misses: ' + songMisses;
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -3668,6 +3678,9 @@ class PlayState extends MusicBeatState
 				boyfriendIdleTime = 0;
 			}
 		}
+
+		var scoreMult:Float = FlxMath.lerp(smoothScore, songScore, 0.108);
+		smoothScore = scoreMult;
 
 		super.update(elapsed);
 
