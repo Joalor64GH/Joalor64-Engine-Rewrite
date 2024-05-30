@@ -59,6 +59,32 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		super.update(elapsed);
 	}
 
+	var trackedBPMChanges:Int = 0;
+	inline function stepsToSecs(targetStep:Int, isFixedStep:Bool = false):Float {
+		final playbackRate:Single = PlayState.instance != null ? PlayState.instance.playbackRate : 1;
+		function calc(stepVal:Single, crochetBPM:Int = -1) {
+			return ((crochetBPM == -1 ? Conductor.getCrochet(Conductor.bpm) / 4 : Conductor.getCrochet(crochetBPM) / 4) * (stepVal - curStep)) / 1000;
+		}
+
+		final realStep:Single = isFixedStep ? targetStep : targetStep + curStep;
+		var secRet:Float = calc(realStep);
+
+		for (i in 0...Conductor.bpmChangeMap.length - trackedBPMChanges) {
+			var nextChange = Conductor.bpmChangeMap[trackedBPMChanges+i];
+			if(realStep < nextChange.stepTime) break;
+
+			final diff = realStep - nextChange.stepTime;
+			if (i == 0) secRet -= calc(diff);
+			else secRet -= calc(diff, Std.int(Conductor.bpmChangeMap[(trackedBPMChanges + i) - 1].bpm));
+
+			secRet += calc(diff, Std.int(nextChange.bpm));
+		}
+		return secRet / playbackRate;
+	}
+
+	inline function beatsToSecs(targetBeat:Int, isFixedBeat:Bool = false):Float
+		return stepsToSecs(targetBeat * 4, isFixedBeat);
+
 	private function updateSection():Void
 	{
 		if(stepsToDo < 1) stepsToDo = Math.round(getBeatsOnSection() * 4);

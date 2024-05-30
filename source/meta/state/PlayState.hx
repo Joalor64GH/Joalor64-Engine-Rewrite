@@ -131,6 +131,7 @@ class PlayState extends MusicBeatState
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
+	public var elapsedtime:Float = 0;
 
 	public var BF_X:Float = 770;
 	public var BF_Y:Float = 100;
@@ -5935,7 +5936,7 @@ class PlayState extends MusicBeatState
 						boyfriend.colorSwap = new ColorSwap();
 						boyfriend.shader = boyfriend.colorSwap.shader;
 						iconP1.shader = boyfriend.colorSwap.shader;
-						hud.healthBar.shader = boyfriend.colorSwap.shader;
+						healthBar.shader = boyfriend.colorSwap.shader;
 						FlxTween.tween(camGame, {zoom: defaultCamZoom + 0.5}, stepsToSecs(128), {ease: FlxEase.quadInOut});
 						FlxTween.tween(boyfriend.colorSwap, {hue: 0.9}, stepsToSecs(128), {ease: FlxEase.quadInOut});
 					case 1152:
