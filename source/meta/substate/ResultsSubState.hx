@@ -58,7 +58,7 @@ class ResultsSubState extends MusicBeatSubstate
 			case 'FC':
 				hint.text = 'Good job, but try getting bads at minimum for GFC.';
 			case 'GFC':
-				hint.text = 'You\'re getting there. Try getting goods at minimum for MFC.'
+				hint.text = 'You\'re getting there. Try getting goods at minimum for MFC.';
 			case 'MFC':
 				hint.text = 'Almost there! Try getting only sicks for SFC!';
 			case 'SFC':
