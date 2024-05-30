@@ -336,7 +336,7 @@ class ModsMenuState extends MusicBeatState
 
 		#if sys
 		if (FlxG.keys.anyJustPressed(debugKeys))
-			MusicBeatState.switchState(ModDownloadState());
+			MusicBeatState.switchState(new ModDownloadState());
 		#end
 
 		if(canExit && controls.BACK)
