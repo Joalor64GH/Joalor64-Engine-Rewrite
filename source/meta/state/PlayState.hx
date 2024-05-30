@@ -306,6 +306,11 @@ class PlayState extends MusicBeatState
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
+	public static var campaignSicks:Int = 0;
+	public static var campaignGoods:Int = 0;
+	public static var campaignBads:Int = 0;
+	public static var campaignShits:Int = 0;
+
 	public static var seenCutscene:Bool = false;
 	public static var deathCounter:Int = 0;
 
@@ -457,7 +462,7 @@ class PlayState extends MusicBeatState
 						ratingFC = "WTF";
 					}
 					else if (cpuControlled){
-						ratingFC = "Cheater!";
+						ratingFC = "Botplay";
 					}
 				
 				case 'Psych':
@@ -4661,6 +4666,10 @@ class PlayState extends MusicBeatState
 			{
 				campaignScore += songScore;
 				campaignMisses += songMisses;
+				campaignSicks += sicks;
+				campaignGoods += goods;
+				campaignBads += bads;
+				campaignShits += shits;
 
 				storyPlaylist.remove(storyPlaylist[0]);
 				if (storyPlaylist.length <= 0)
@@ -4674,7 +4683,7 @@ class PlayState extends MusicBeatState
 
 					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 						persistentUpdate = true;
-						openSubState(new ResultsSubState(sicks, goods, bads, shits, campaignScore, campaignMisses, 
+						openSubState(new ResultsSubState(campaignSicks, campaignGoods, campaignBads, campaignShits, campaignScore, campaignMisses, 
 							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
 					});
 
