@@ -4545,7 +4545,7 @@ class PlayState extends MusicBeatState
 					FunkinLua.setVarInArray(this, value1, value2);
 
 			case 'Move Window':
-				Lib.application.window.move(value1, value2);
+				Lib.application.window.move(Std.int(value1), Std.int(value2));
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -4770,11 +4770,11 @@ class PlayState extends MusicBeatState
 					if(winterHorrorlandNext) {
 						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
-							LoadingState.loadAndSwitchState(() -> new PlayState());
+							LoadingState.loadAndSwitchState(new PlayState());
 						});
 					} else {
 						cancelMusicFadeTween();
-						LoadingState.loadAndSwitchState(() -> new PlayState());
+						LoadingState.loadAndSwitchState(new PlayState());
 					}
 				}
 			}
