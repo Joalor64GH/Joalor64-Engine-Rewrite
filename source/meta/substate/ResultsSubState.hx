@@ -63,14 +63,11 @@ class ResultsSubState extends MusicBeatSubstate
 				hint.text = 'Almost there! Try getting only sicks for SFC!';
 			case 'SFC':
 				hint.text = 'You did it! You\'re perfect!';
-			case 'WTF??':
+			case 'WTF':
 				hint.text = '...You suck.';
 			case 'Cheater!' | 'BotPlay':
-				hint.text = 'If you want something, disable Botplay.';
+				hint.text = 'If you want that rank, disable Botplay.';
 		}
-
-		if (PlayState.practiceMode)
-			hint.text = 'You did good, but you used practice mode. So you don\'t really get anything.';
 
         	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);
 		titleTxt.scrollFactor.set();

@@ -454,7 +454,7 @@ class PlayState extends MusicBeatState
 						ratingFC = "SDCB";
 					}
 					else if (songMisses > 100){
-						ratingFC = "WTF??";
+						ratingFC = "WTF";
 					}
 					else if (cpuControlled){
 						ratingFC = "Cheater!";
