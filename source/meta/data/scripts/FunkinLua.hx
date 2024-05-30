@@ -1,12 +1,5 @@
 package meta.data.scripts;
 
-#if LUA_ALLOWED
-import llua.Lua;
-import llua.LuaL;
-import llua.State;
-import llua.Convert;
-#end
-
 import animateatlas.AtlasFrameMaker;
 
 import openfl.display.BlendMode;

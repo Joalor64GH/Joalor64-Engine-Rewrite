@@ -124,10 +124,6 @@ class ChartingState extends MusicBeatState
 		[
 			'Set Property', 
 			"Value 1: Variable name\nValue 2: New value"
-		],
-		[
-			'Move Window', 
-			"Value 1: X value\nValue 2: Y value"
 		]
 	];
 
