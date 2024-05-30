@@ -4,20 +4,12 @@ Just wanted to say thanks for downloading!
 If you don't know already, this is just a remake of Joalor64 Engine.
 I started working on this because I sort of became bored one day.
 -------------------------------------------------------------
-I also got inspiration from the following:
+Little Update Status:
 
-Forever Engine - Yoshubs
-Funkin Cocoa - TheWorldMachinima
-Kade Engine - KadeDev
-Chain Saw Engine - MAJigsaw77
-Denpa Engine - AT
-TopoConnection and Forever Engine Underscore - BeastlyGhost/Gabi
-Mic'd Up - Verwex
-Gamer Engine - Mealthy/Betopia
-Psych Forever Engine - ClassicBoost
-Mag Engine - magnumsrt
-Troll Engine - nebulazorua
-Pull Requests - Psych Engine GitHub Contributors
+I decided to finally get back to this project after finishing up another
+important project. Now, the engine is coming back with new features, some
+bug fixes, and a whole lot more! Maybe soon, I'll even make a version of the engine 
+that runs on the latest Psych version! But for now, enjoy the pre-release!
 -------------------------------------------------------------
 So, yeah. That's pretty much it!
 I hope you enjoy!

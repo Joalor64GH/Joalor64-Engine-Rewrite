@@ -2,6 +2,7 @@ package objects;
 
 import animateatlas.AtlasFrameMaker;
 import objects.background.*;
+import objects.shaders.*;
 
 #if MODS_ALLOWED
 import sys.io.File;
@@ -55,6 +56,8 @@ class Character extends FlxSprite
 	public var idleSuffix:String = '';
 	public var danceIdle:Bool = false; //Character use "danceLeft" and "danceRight" instead of "idle"
 	public var skipDance:Bool = false;
+
+	public var colorSwap:ColorSwap = null;
 
 	public var healthIcon:String = 'face';
 	public var animationsArray:Array<AnimArray> = [];
@@ -237,6 +240,12 @@ class Character extends FlxSprite
 				loadMappedAnims();
 				playAnim("shoot1");
 		}
+	}
+
+	override function destroy()
+	{
+		colorSwap = null;
+		super.destroy();
 	}
 
 	override function update(elapsed:Float)

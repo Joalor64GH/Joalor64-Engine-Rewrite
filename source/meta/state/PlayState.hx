@@ -293,6 +293,12 @@ class PlayState extends MusicBeatState
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
+	public var tankmanRainbow:Bool = false;
+	final gunsColors:Array<FlxColor> = [0xBFFF0000, 0xBFFF5E00, 0xBFFFFB00, 0xBF00FF0D, 0xBF0011FF, 0xBFD400FF]; //WTF BOYFRIEND REFERENCE?!?!??!#11/1/1??!Q
+	var gunsTween:FlxTween = null;
+	var stageGraphicArray:Array<FlxSprite> = []; //just for the guns thingamabob
+	var gunsNoteTweens:Array<FlxTween> = [];
+
 	public var smoothScore:Float = 0;
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -925,8 +931,28 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'tank': //Week 7 - Ugh, Guns, Stress
+				tankmanRainbow = false;
+
+				var layerArray:Array<FlxBasic> = [];
 				var sky:BGSprite = new BGSprite('stages/tank/tankSky', -400, -400, 0, 0);
 				add(sky);
+
+				var ruins:BGSprite = new BGSprite('stages/tank/tankRuins',-200,0,.35,.35);
+				ruins.setGraphicSize(Std.int(1.1 * ruins.width));
+				ruins.updateHitbox();
+				add(ruins);
+
+				tankGround = new BGSprite('stages/tank/tankRolling', 300, 300, 0.5, 0.5,['BG tank w lighting'], true);
+				add(tankGround);
+
+				tankmanRun = new FlxTypedGroup<TankmenBG>();
+				add(tankmanRun);
+
+				var ground:BGSprite = new BGSprite('stages/tank/tankGround', -420, -150);
+				ground.setGraphicSize(Std.int(1.15 * ground.width));
+				ground.updateHitbox();
+				add(ground);
+				moveTank();
 
 				if(!ClientPrefs.lowQuality)
 				{
@@ -944,15 +970,7 @@ class PlayState extends MusicBeatState
 					buildings.setGraphicSize(Std.int(1.1 * buildings.width));
 					buildings.updateHitbox();
 					add(buildings);
-				}
 
-				var ruins:BGSprite = new BGSprite('stages/tank/tankRuins',-200,0,.35,.35);
-				ruins.setGraphicSize(Std.int(1.1 * ruins.width));
-				ruins.updateHitbox();
-				add(ruins);
-
-				if(!ClientPrefs.lowQuality)
-				{
 					var smokeLeft:BGSprite = new BGSprite('stages/tank/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
 					add(smokeLeft);
 					var smokeRight:BGSprite = new BGSprite('stages/tank/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
@@ -960,19 +978,33 @@ class PlayState extends MusicBeatState
 
 					tankWatchtower = new BGSprite('stages/tank/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
 					add(tankWatchtower);
+
+					layerArray = [sky, clouds, mountains, buildings, ruins, smokeLeft, smokeRight, tankWatchtower, tankGround, tankmanRun, ground];
 				}
+				else
+					layerArray = [sky, ruins, tankGround, tankmanRun, ground];
 
-				tankGround = new BGSprite('stages/tank/tankRolling', 300, 300, 0.5, 0.5,['BG tank w lighting'], true);
-				add(tankGround);
+				autoLayer(layerArray);
 
-				tankmanRun = new FlxTypedGroup<TankmenBG>();
-				add(tankmanRun);
+				layerArray.remove(sky);
+				layerArray.remove(tankmanRun);
+				stageGraphicArray = cast layerArray;
 
-				var ground:BGSprite = new BGSprite('stages/tank/tankGround', -420, -150);
-				ground.setGraphicSize(Std.int(1.15 * ground.width));
-				ground.updateHitbox();
-				add(ground);
-				moveTank();
+				if (SONG.song.toLowerCase() == 'guns') {
+					gunsThing = new FlxSprite(-100, -100).makeGraphic(Std.int(FlxG.width * 1.5),Std.int(FlxG.height * 1.5), FlxColor.WHITE);
+					gunsThing.color = 0xBFFF0000;
+					gunsThing.alpha = 0.001;
+					gunsThing.visible = false;
+					gunsThing.scrollFactor.set();
+					gunsThing.screenCenter();
+
+					gunsExtraClouds = new FlxBackdrop(Paths.image('stages/tank/tankClouds'), XY, 64, 128);
+					gunsExtraClouds.velocity.set(12, 168);
+					gunsExtraClouds.alpha = 0.001;
+					gunsExtraClouds.visible = false;
+					gunsExtraClouds.scrollFactor.set(0.1, 0.2);
+					add(gunsExtraClouds);
+				}
 
 				foregroundSprites = new FlxTypedGroup<BGSprite>();
 				foregroundSprites.add(new BGSprite('stages/tank/tank0', -500, 650, 1.7, 1.5, ['fg']));
@@ -3476,6 +3508,9 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (SONG.song.toLowerCase() == 'guns' && tankmanRainbow)
+			dad.y += (Math.sin(elapsedtime) * 0.2) * FlxG.elapsed * 244;
+
 		// SECRET KEYS!! SHHHHHHHH
 		#if debug
 		final keyPressed:FlxKey = FlxG.keys.firstJustPressed();
@@ -5848,6 +5883,105 @@ class PlayState extends MusicBeatState
 
 		if (curStep == lastStepHit)
 			return;
+		
+		switch (SONG.song.toLowerCase()) {
+			case 'guns':
+				switch (curStep) {
+					case 896:
+						var moveVals:Array<Float> = [40];
+						for (i in 0...(mania * 2) + 1) moveVals.push(40);
+						function tweenNote(note:StrumNote, delay:Float, id:Int) {
+							gunsNoteTweens[id] = FlxTween.tween(note, {y: strumLine.y + moveVals[id]}, 2 / playbackRate, {
+								ease: FlxEase.sineInOut,
+								startDelay: delay,
+								onComplete: _ -> {
+									moveVals[id] /= -1;
+									tweenNote(note, 0, id);
+								}
+							});
+						}
+						var i = 0;
+						opponentStrums.forEach(note -> {
+							gunsNoteTweens.push(null);
+							tweenNote(note, (0.12*i) / playbackRate, i);
+							i++;
+						});
+						playerStrums.forEach(note -> {
+							gunsNoteTweens.push(null);
+							tweenNote(note, (0.12*i) / playbackRate, i);
+							i++;
+						});
+						gunsThing.visible = true;
+						gunsExtraClouds.visible = true;
+						FlxTween.tween(dad, {y: dad.y - 50}, 1.35 / playbackRate, {
+							ease: FlxEase.quadInOut,
+							onComplete: _ -> tankmanRainbow = true
+						});
+						cameraSpeed = 2;
+						FlxTween.tween(camGame, {zoom: 1.05}, 1.35 / playbackRate, {
+							ease: FlxEase.circInOut,
+							onComplete: _ -> defaultCamZoom = 1.05
+						});
+						FlxTween.tween(gunsThing, {alpha: 0.75}, 1.2 / playbackRate, {ease: FlxEase.quadInOut});
+						FlxTween.tween(gunsExtraClouds, {alpha: 1}, 1.35 / playbackRate, {ease: FlxEase.quadInOut});
+						foregroundSprites.forEach(spr -> FlxTween.tween(spr, {alpha: 0}, 1.35 / playbackRate, {ease: FlxEase.quadInOut}));
+						for (object in stageGraphicArray) if (object != null) FlxTween.tween(object, {y: object.y + 820}, 1.35 / playbackRate, {ease: FlxEase.expoInOut});
+						if (gf != null) FlxTween.tween(gf, {y: gf.y + 840}, 1.35 / playbackRate, {ease: FlxEase.expoInOut});
+						FlxTween.tween(tankGround, {alpha: 0}, 1.35 / playbackRate, {ease: FlxEase.quadInOut});
+					case 1024:
+						boyfriend.colorSwap = new ColorSwap();
+						boyfriend.shader = boyfriend.colorSwap.shader;
+						iconP1.shader = boyfriend.colorSwap.shader;
+						hud.healthBar.shader = boyfriend.colorSwap.shader;
+						FlxTween.tween(camGame, {zoom: defaultStageZoom + 0.5}, stepsToSecs(128), {ease: FlxEase.quadInOut});
+						FlxTween.tween(boyfriend.colorSwap, {hue: 0.9}, stepsToSecs(128), {ease: FlxEase.quadInOut});
+					case 1152:
+						for (tween in gunsNoteTweens) {
+							if (tween != null) {
+								tween.cancel();
+								tween = null;
+							}
+						}
+						FlxTween.tween(boyfriend.colorSwap, {hue: 1}, 0.4 / playbackRate, {
+							ease: FlxEase.quadInOut,
+							onComplete: _ -> {
+								healthBar.shader = null;
+								iconP1.shader = null;
+								boyfriend.shader = null;
+								boyfriend.colorSwap = null;
+							}
+						});
+						opponentStrums.forEach(note -> FlxTween.tween(note, {y: strumLine.y}, 0.4 / playbackRate, {ease: FlxEase.sineInOut}));
+						playerStrums.forEach(note -> FlxTween.tween(note, {y: strumLine.y}, 0.4 / playbackRate, {ease: FlxEase.sineInOut}));
+						tankmanRainbow = false;
+						cameraSpeed = 1;
+						if (gunsTween != null) gunsTween.cancel();
+						gunsTween = null;
+						FlxTween.tween(camGame, {zoom: 0.9}, 1.35 / playbackRate, {
+							ease: FlxEase.circInOut,
+							onComplete: _ -> defaultCamZoom = 0.9
+						});
+						FlxTween.tween(gunsThing, {alpha: 0}, 1.2 / playbackRate, {
+							ease: FlxEase.quadInOut,
+							onComplete: _ -> {
+								remove(gunsThing, true);
+								gunsThing.destroy();
+							}
+						});
+						FlxTween.tween(gunsExtraClouds, {alpha: 0}, 1.35 / playbackRate, {
+							ease: FlxEase.quadInOut,
+							onComplete: _ -> {
+								remove(gunsExtraClouds, true);
+								gunsExtraClouds.destroy();
+							}
+						});
+						foregroundSprites.forEach(spr -> FlxTween.tween(spr, {alpha: 1}, 1.35 / playbackRate, {ease: FlxEase.quadInOut}));
+						FlxTween.tween(dad, {y: 340}, 1.3 / playbackRate, {ease: FlxEase.circInOut});
+						for (object in stageGraphicArray) if (object != null) FlxTween.tween(object, {y: object.y - 820}, 1.35 / playbackRate, {ease: FlxEase.expoInOut});
+						if (gf != null) FlxTween.tween(gf, {y: gf.y - 840}, 1.35 / playbackRate, {ease: FlxEase.expoInOut});
+						FlxTween.tween(tankGround, {alpha: 1}, 1.35 / playbackRate, {ease: FlxEase.quadInOut});
+				}
+		}
 
 		lastStepHit = curStep;
 
@@ -5857,6 +5991,7 @@ class PlayState extends MusicBeatState
 
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
+	var gunsColorIncrementor:Int = 0;
 
 	var lastBeatHit:Int = -1;
 	override function beatHit()
@@ -5905,6 +6040,16 @@ class PlayState extends MusicBeatState
 				{
 					spr.dance();
 				});
+				switch (SONG.song.toLowerCase()) {
+					case 'guns':
+						if (curBeat % 4 == 0 && tankmanRainbow && gunsThing != null) {
+							if (gunsTween != null) gunsTween.cancel();
+							gunsTween = null;
+							gunsTween = FlxTween.color(gunsThing, 1, gunsThing.color, gunsColors[gunsColorIncrementor]);
+							gunsColorIncrementor++;
+							if (gunsColorIncrementor > 5) gunsColorIncrementor = 0;
+						}
+				}
 
 			case 'school':
 				if(!ClientPrefs.lowQuality) {
@@ -6277,5 +6422,16 @@ class PlayState extends MusicBeatState
 			str += e.charAt(FlxG.random.int(0, e.length - 1));
 
 		return str;
+	}
+
+	// thanks denpa team
+	public function autoLayer(array:Array<FlxBasic>, ?group:FlxTypedGroup<FlxBasic>):Void {
+		try {
+			if (group != null) for (object in array) group.add(object);
+			else for (object in array) add(object);
+		} catch (e) {
+			trace('exception: ' + e);
+			return;
+		}
 	}
 }
