@@ -1,7 +1,6 @@
 package meta;
 
 import flixel.addons.ui.FlxUIState;
-import flixel.util.typeLimit.NextState;
 
 class MusicBeatState extends modcharting.ModchartMusicBeatState
 {
@@ -134,7 +133,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 
-	public static function switchState(nextState:NextState) {
+	public static function switchState(nextState:FlxState) {
 		var curState:Dynamic = FlxG.state;
 		var leState:MusicBeatState = curState;
 		if (!FlxTransitionableState.skipNextTransIn) {

@@ -4543,6 +4543,9 @@ class PlayState extends MusicBeatState
 					FunkinLua.setVarInArray(FunkinLua.getPropertyLoopThingWhatever(killMe, true, true), killMe[killMe.length-1], value2);
 				else
 					FunkinLua.setVarInArray(this, value1, value2);
+
+			case 'Move Window':
+				Lib.application.window.move(value1, value2);
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}

@@ -1,15 +1,13 @@
 package meta.state;
 
-import flixel.util.typeLimit.NextState;
-
 class LoadingState extends MusicBeatState
 {
 	inline static var MIN_TIME = 1.0;
 	
-	var target:NextState = null;
+	var target:FlxState = null;
 	var stopMusic = false;
 
-	function new(target:NextState, stopMusic:Bool)
+	function new(target:FlxState, stopMusic:Bool)
 	{
 		super();
 		
@@ -67,7 +65,7 @@ class LoadingState extends MusicBeatState
 				if (FlxG.sound.music != null)
 					FlxG.sound.music.stop();
 			}
-			FlxG.switchState(target);
+			MusicBeatState.switchState(target);
 		});
 	}
 
@@ -76,9 +74,9 @@ class LoadingState extends MusicBeatState
 		super.destroy();
 	}
 
-	inline static public function loadAndSwitchState(target:NextState, stopMusic = false)
+	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
 	{
-		FlxG.switchState(getNextState(target, stopMusic));
+		MusicBeatState.switchState(getNextState(target, stopMusic));
 	}
 
 	inline static public function loadAndResetState(stopMusic = false)
