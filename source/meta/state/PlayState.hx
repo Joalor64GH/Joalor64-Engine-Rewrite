@@ -292,12 +292,15 @@ class PlayState extends MusicBeatState
 	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
+	var gunsThing:FlxSprite;
+	var gunsExtraClouds:FlxBackdrop;
 
 	public var tankmanRainbow:Bool = false;
-	final gunsColors:Array<FlxColor> = [0xBFFF0000, 0xBFFF5E00, 0xBFFFFB00, 0xBF00FF0D, 0xBF0011FF, 0xBFD400FF]; //WTF BOYFRIEND REFERENCE?!?!??!#11/1/1??!Q
+	final gunsColors:Array<FlxColor> = [0xBFFF0000, 0xBFFF5E00, 0xBFFFFB00, 0xBF00FF0D, 0xBF0011FF, 0xBFD400FF];
 	var gunsTween:FlxTween = null;
-	var stageGraphicArray:Array<FlxSprite> = []; //just for the guns thingamabob
+	var stageGraphicArray:Array<FlxSprite> = [];
 	var gunsNoteTweens:Array<FlxTween> = [];
+	public static var mania:Int = 3; // this actualy does nothing but is needed for the guns thing
 
 	public var smoothScore:Float = 0;
 	public var songScore:Int = 0;
@@ -5933,7 +5936,7 @@ class PlayState extends MusicBeatState
 						boyfriend.shader = boyfriend.colorSwap.shader;
 						iconP1.shader = boyfriend.colorSwap.shader;
 						hud.healthBar.shader = boyfriend.colorSwap.shader;
-						FlxTween.tween(camGame, {zoom: defaultStageZoom + 0.5}, stepsToSecs(128), {ease: FlxEase.quadInOut});
+						FlxTween.tween(camGame, {zoom: defaultCamZoom + 0.5}, stepsToSecs(128), {ease: FlxEase.quadInOut});
 						FlxTween.tween(boyfriend.colorSwap, {hue: 0.9}, stepsToSecs(128), {ease: FlxEase.quadInOut});
 					case 1152:
 						for (tween in gunsNoteTweens) {
