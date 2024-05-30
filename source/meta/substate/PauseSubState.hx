@@ -260,7 +260,7 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.seenCutscene = false;
 
 							Mods.loadTheFirstEnabledMod();
-							FlxG.switchState(() -> new FreeplayState());
+							MusicBeatState.switchState(new FreeplayState());
 							PlayState.cancelMusicFadeTween();
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							PlayState.changedDifficulty = false;
@@ -272,21 +272,21 @@ class PauseSubState extends MusicBeatSubstate
 							Mods.loadTheFirstEnabledMod();
 							if (PlayState.inMini) {
 								PlayState.inMini = false;
-								FlxG.switchState(() -> new MinigamesState());
+								MusicBeatState.switchState(new MinigamesState());
 							} else if (PlayState.isStoryMode) {
-								FlxG.switchState(() -> new StoryMenuState());
+								MusicBeatState.switchState(new StoryMenuState());
 							} else {
 								if (ClientPrefs.simpleMain)
-									FlxG.switchState(() -> new SimpleMainMenuState());
+									MusicBeatState.switchState(new SimpleMainMenuState());
 								else
-									FlxG.switchState(() -> new MainMenuState());
+									MusicBeatState.switchState(new MainMenuState());
 							}
 							PlayState.cancelMusicFadeTween();
 							FlxG.sound.playMusic(Paths.music('freakyMenu'));
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
 						case "Exit Game":
-							FlxG.switchState(() -> new GameExitState());
+							MusicBeatState.switchState(new GameExitState());
 					}
 					return;
 				}
@@ -304,14 +304,14 @@ class PauseSubState extends MusicBeatSubstate
 						openSubState(new OptionsSubState.ControlsSubState());
 					case 'Offsets':
 						fromPlayState = true;
-						FlxG.switchState(() -> new NoteOffsetState());
+						MusicBeatState.switchState(new NoteOffsetState());
 					case 'Visuals':
 						openSubState(new OptionsSubState.VisualsSubState());
 					case 'Gameplay':
 						openSubState(new OptionsSubState.GameplaySubState());
 					case 'Language':
 						fromPlayState = true;
-						FlxG.switchState(() -> new LanguageState());
+						MusicBeatState.switchState(new LanguageState());
 					case 'Miscellaneous':
 						openSubState(new OptionsSubState.MiscSubState());
 					default:

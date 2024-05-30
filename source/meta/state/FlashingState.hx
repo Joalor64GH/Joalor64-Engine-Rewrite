@@ -23,7 +23,7 @@ class FlashingState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxTween.tween(bg, {alpha: 0}, 1, {
 					onComplete: function(twn:FlxTween) {
-						FlxG.switchState(() -> new TitleState());
+						MusicBeatState.switchState(new TitleState());
 					}
 				});
 

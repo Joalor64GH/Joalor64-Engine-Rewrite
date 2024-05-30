@@ -1,6 +1,7 @@
 package meta;
 
 import flixel.addons.ui.FlxUIState;
+import flixel.util.typeLimit.NextState;
 
 class MusicBeatState extends modcharting.ModchartMusicBeatState
 {
@@ -63,7 +64,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 	inline function stepsToSecs(targetStep:Int, isFixedStep:Bool = false):Float {
 		final playbackRate:Single = PlayState.instance != null ? PlayState.instance.playbackRate : 1;
 		function calc(stepVal:Single, crochetBPM:Int = -1) {
-			return ((crochetBPM == -1 ? Conductor.getCrochet(Conductor.bpm) / 4 : Conductor.getCrochet(crochetBPM) / 4) * (stepVal - curStep)) / 1000;
+			return ((crochetBPM == -1 ? Conductor.calculateCrochet(Conductor.bpm) / 4 : Conductor.calculateCrochet(crochetBPM) / 4) * (stepVal - curStep)) / 1000;
 		}
 
 		final realStep:Single = isFixedStep ? targetStep : targetStep + curStep;
@@ -133,30 +134,43 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 
-	override function startOutro(onOutroComplete:()->Void):Void
-	{
-		if (!FlxTransitionableState.skipNextTransIn)
-		{
+	public static function switchState(nextState:NextState) {
+		var curState:Dynamic = FlxG.state;
+		var leState:MusicBeatState = curState;
+		if (!FlxTransitionableState.skipNextTransIn) {
 			#if sys
 			ArtemisIntegration.toggleFade (true);
 			#end
-			FlxG.state.openSubState(new CustomFadeTransition(0.35, false));
-			CustomFadeTransition.finishCallback = () -> { 
-				#if sys
-				ArtemisIntegration.toggleFade (false);
-				#end
-				onOutroComplete();
-			};
+			leState.openSubState(new CustomFadeTransition(0.35, false));
+			if(nextState == FlxG.state) {
+				CustomFadeTransition.finishCallback = function() {
+					#if sys
+					ArtemisIntegration.toggleFade (false);
+					#end
+					FlxG.resetState();
+				};
+			} else {
+				CustomFadeTransition.finishCallback = function() {
+					#if sys
+					ArtemisIntegration.toggleFade (false);
+					#end
+					FlxG.switchState(nextState);
+				};
+			}
 			return;
 		}
-
 		FlxTransitionableState.skipNextTransIn = false;
+		FlxG.switchState(nextState);
+	}
 
-		onOutroComplete();
+	public static function resetState() {
+		MusicBeatState.switchState(FlxG.state);
 	}
 
 	public static function getState():MusicBeatState {
-		return cast (FlxG.state, MusicBeatState);
+		var curState:Dynamic = FlxG.state;
+		var leState:MusicBeatState = curState;
+		return leState;
 	}
 
 	public function stepHit():Void

@@ -133,7 +133,7 @@ class WeekEditorState extends MusicBeatState
 		add(loadWeekButton);
 		
 		var freeplayButton:FlxButton = new FlxButton(0, 650, "Freeplay", function() {
-			FlxG.switchState(() -> new WeekEditorFreeplayState(weekFile));
+			MusicBeatState.switchState(new WeekEditorFreeplayState(weekFile));
 		});
 		freeplayButton.screenCenter(X);
 		add(freeplayButton);
@@ -437,7 +437,7 @@ class WeekEditorState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 			if(FlxG.keys.justPressed.ESCAPE) {
-				FlxG.switchState(() -> new MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		}
@@ -666,8 +666,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 		add(loadWeekButton);
 		
 		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", function() {
-			FlxG.switchState(() -> new WeekEditorState(weekFile));
-			
+			MusicBeatState.switchState(new WeekEditorState(weekFile));
 		});
 		storyModeButton.screenCenter(X);
 		add(storyModeButton);
@@ -801,7 +800,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 			super.update(elapsed);
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.switchState(() -> new WeekEditorFreeplayState(WeekEditorState.loadedWeek));
+			MusicBeatState.switchState(new WeekEditorFreeplayState(WeekEditorState.loadedWeek));
 			WeekEditorState.loadedWeek = null;
 			return;
 		}
@@ -821,7 +820,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 			FlxG.sound.volumeDownKeys = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 			FlxG.sound.volumeUpKeys = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 			if(FlxG.keys.justPressed.ESCAPE) {
-				FlxG.switchState(() -> new MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 

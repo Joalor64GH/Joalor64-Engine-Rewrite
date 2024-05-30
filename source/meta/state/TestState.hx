@@ -39,9 +39,9 @@ class TestState extends MusicBeatState
         {
             FlxG.sound.play(Paths.sound('cancelMenu'));
             if (ClientPrefs.simpleMain)
-		FlxG.switchState(() -> new SimpleMainMenuState());
+		MusicBeatState.switchState(new SimpleMainMenuState());
 	    else
-		FlxG.switchState(() -> new MainMenuState());
+		MusicBeatState.switchState(new MainMenuState());
         }
     }
 

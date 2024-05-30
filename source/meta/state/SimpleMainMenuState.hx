@@ -27,23 +27,23 @@ class SimpleMainMenuState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Story Mode':
-				FlxG.switchState(() -> new StoryMenuState());
+				MusicBeatState.switchState(new StoryMenuState());
 			case 'Freeplay':
-				FlxG.switchState(() -> new FreeplayState());
+				MusicBeatState.switchState(new FreeplayState());
 			case 'Minigames':
-				FlxG.switchState(() -> new MinigamesState());
+				MusicBeatState.switchState(new MinigamesState());
 			#if MODS_ALLOWED
 			case 'Mods':
-				FlxG.switchState(() -> new ModsMenuState());
+				MusicBeatState.switchState(new ModsMenuState());
 			#end
 			#if ACHIEVEMENTS_ALLOWED
 			case 'Awards':
-				FlxG.switchState(() -> new AchievementsMenuState());
+				MusicBeatState.switchState(new AchievementsMenuState());
 			#end
 			case 'Credits':
-				FlxG.switchState(() -> new CreditsState());
+				MusicBeatState.switchState(new CreditsState());
 			case 'Options':
-				FlxG.switchState(() -> new OptionsState());
+				MusicBeatState.switchState(new OptionsState());
 		}
 	}
 
@@ -165,7 +165,7 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.E)
-			FlxG.switchState(() -> new EpicState());
+			MusicBeatState.switchState(new EpicState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P) {
 			changeSelection(controls.UI_UP_P ? -1 : 1);
@@ -173,7 +173,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			FlxG.switchState(() -> new TitleState());
+			MusicBeatState.switchState(new TitleState());
 		}
 
 		if (controls.ACCEPT)
@@ -198,7 +198,7 @@ class SimpleMainMenuState extends MusicBeatState
         	#if desktop
 		else if (FlxG.keys.anyJustPressed(debugKeys))
 		{
-			FlxG.switchState(() -> new MasterEditorMenu());
+			MusicBeatState.switchState(new MasterEditorMenu());
 		}
 		#end
 	}

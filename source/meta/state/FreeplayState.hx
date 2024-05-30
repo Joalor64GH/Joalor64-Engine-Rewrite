@@ -308,7 +308,7 @@ class FreeplayState extends MusicBeatState
 		else if (upP || downP) changeDiff();
 		#if sys 
 		else if (alt && ClientPrefs.saveReplay) 
-			FlxG.switchState(() -> new ReplaySelectState(songs[curSelected].songName)); 
+			MusicBeatState.switchState(new ReplaySelectState(songs[curSelected].songName)); 
 		#end
 
 		if (controls.BACK)
@@ -319,9 +319,9 @@ class FreeplayState extends MusicBeatState
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (ClientPrefs.simpleMain)
-				FlxG.switchState(() -> new SimpleMainMenuState());
+				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
-				FlxG.switchState(() -> new MainMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if(ctrl)

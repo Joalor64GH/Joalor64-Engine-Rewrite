@@ -452,9 +452,9 @@ class FunkinHscript extends InterpEx {
 				CustomFadeTransition.nextCamera = null;
 
 			if (PlayState.isStoryMode)
-				FlxG.switchState(() -> new StoryMenuState());
+				MusicBeatState.switchState(new StoryMenuState());
 			else
-				FlxG.switchState(() -> new FreeplayState());
+				MusicBeatState.switchState(new FreeplayState());
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.changedDifficulty = false;
@@ -469,7 +469,7 @@ class FunkinHscript extends InterpEx {
 			if (FlxTransitionableState.skipNextTransIn)
 				CustomFadeTransition.nextCamera = null;
 
-			FlxG.switchState(() -> new CreditsState());
+			MusicBeatState.switchState(new CreditsState());
 
 			FlxG.sound.music.stop();
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));

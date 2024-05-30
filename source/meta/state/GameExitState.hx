@@ -127,7 +127,7 @@ class GameExitState extends MusicBeatState
 				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { Sys.exit(0); }, false);
 			case 'No':
 				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(() -> new PlayState());
+				LoadingState.loadAndSwitchState(new PlayState());
 		}
 	}
 }

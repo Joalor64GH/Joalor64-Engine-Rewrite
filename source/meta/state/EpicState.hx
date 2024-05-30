@@ -52,9 +52,9 @@ class EpicState extends MusicBeatState
 		if (controls.BACK) 
 		{
 			if (ClientPrefs.simpleMain)
-				FlxG.switchState(() -> new SimpleMainMenuState());
+				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
-				FlxG.switchState(() -> new MainMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 		}
             
 		if (controls.ACCEPT)

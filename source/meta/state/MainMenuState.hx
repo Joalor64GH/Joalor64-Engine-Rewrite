@@ -302,7 +302,7 @@ class MainMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (FlxG.keys.justPressed.E)
-			FlxG.switchState(() -> new EpicState());
+			MusicBeatState.switchState(new EpicState());
 		
 		if (!selectedSomethin)
 		{
@@ -358,7 +358,7 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				FlxG.switchState(() -> new TitleState());
+				MusicBeatState.switchState(new TitleState());
 			}
 
 			if (controls.ACCEPT || FlxG.mouse.justPressed)
@@ -409,23 +409,23 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
-										FlxG.switchState(() -> new StoryMenuState());
+										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										FlxG.switchState(() -> new FreeplayState());
+										MusicBeatState.switchState(new FreeplayState());
 									case 'mini':
-										FlxG.switchState(() -> new MinigamesState());
+										MusicBeatState.switchState(new MinigamesState());
 									#if MODS_ALLOWED
 									case 'mods':
-										FlxG.switchState(() -> new ModsMenuState());
+										MusicBeatState.switchState(new ModsMenuState());
 									#end
 									#if ACHIEVEMENTS_ALLOWED
 									case 'awards':
-										FlxG.switchState(() -> new AchievementsMenuState());
+										MusicBeatState.switchState(new AchievementsMenuState());
 									#end
 									case 'credits':
-										FlxG.switchState(() -> new CreditsState());
+										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										LoadingState.loadAndSwitchState(() -> new OptionsState());
+										LoadingState.loadAndSwitchState(new OptionsState());
 								}
 							});
 						}
@@ -437,13 +437,13 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
-				FlxG.switchState(() -> new MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			else if (FlxG.keys.anyJustPressed(modShortcutKeys))
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
-				FlxG.switchState(() -> new ModsMenuState());
+				MusicBeatState.switchState(new ModsMenuState());
 			}
 			#end
 

@@ -129,11 +129,11 @@ class ReplaySelectState extends MusicBeatState
         {
             PlayState.SONG = Song.loadFromJson(song, songName);
             PlayState.storyDifficulty = difficulties[curSelected];
-            LoadingState.loadAndSwitchState(() -> new ReplayState(Std.parseInt(menuItems[curSelected].split(" ")[1])), true);
+            LoadingState.loadAndSwitchState(new ReplayState(Std.parseInt(menuItems[curSelected].split(" ")[1])), true);
         }
 
         else if (controls.BACK)
-            FlxG.switchState(() -> new FreeplayState());
+            MusicBeatState.switchState(new FreeplayState());
 
         if (menuItems.length <= 0)
         {

@@ -419,12 +419,12 @@ class TitleState extends MusicBeatState
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					#if html5
-					FlxG.switchState(() -> new BruhState());
+					MusicBeatState.switchState(new BruhState());
 					#else
 					if (ClientPrefs.simpleMain)
-						FlxG.switchState(() -> new SimpleMainMenuState());
+						MusicBeatState.switchState(new SimpleMainMenuState());
 					else
-						FlxG.switchState(() -> new MainMenuState());
+						MusicBeatState.switchState(new MainMenuState());
 					#end
 					closedState = true;
 				});

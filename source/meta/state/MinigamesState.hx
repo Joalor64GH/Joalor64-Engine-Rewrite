@@ -72,7 +72,7 @@ class MinigamesState extends MusicBeatState
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) 
-			FlxG.switchState((ClientPrefs.simpleMain) ? () -> new SimpleMainMenuState() : () -> new MainMenuState());
+			MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
             
 		if (controls.ACCEPT)
 		{
@@ -81,13 +81,13 @@ class MinigamesState extends MusicBeatState
 				case 0:
 					PlayState.SONG = Song.loadFromJson('amogus', 'amogus');
 					PlayState.inMini = true;
-					LoadingState.loadAndSwitchState(() -> new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 				case 1:
 					PlayState.SONG = Song.loadFromJson('compression', 'compression');
 					PlayState.inMini = true;
-					LoadingState.loadAndSwitchState(() -> new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 				case 2:
-					FlxG.switchState(() -> new minigames.KillBF());
+					MusicBeatState.switchState(new minigames.KillBF());
 			}
 		}
 	}

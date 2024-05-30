@@ -63,9 +63,9 @@ class OutdatedState extends MusicBeatState
 				FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
 						if (FlxG.save.data.flashing == null && !FlashingState.leftState)
-							FlxG.switchState(() -> new FlashingState());
+							MusicBeatState.switchState(new FlashingState());
 						else
-							FlxG.switchState(() -> new TitleState());
+							MusicBeatState.switchState(new TitleState());
 					}
 				});
 			}

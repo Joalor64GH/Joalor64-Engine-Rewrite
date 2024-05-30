@@ -291,7 +291,7 @@ class ModsSetupState extends MusicBeatState
 
         if (controls.BACK) 
         {
-            FlxG.switchState(() -> new MasterEditorMenu());
+            MusicBeatState.switchState(new MasterEditorMenu());
             FlxG.sound.playMusic(Paths.music('freakyMenu'));
             FlxG.sound.play(Paths.sound('cancelMenu'));
             FlxG.mouse.visible = false;

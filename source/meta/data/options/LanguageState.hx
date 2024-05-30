@@ -98,7 +98,7 @@ class LanguageState extends MusicBeatState
 
 		if (controls.BACK) 
 		{
-			FlxG.switchState(() -> new OptionsState());
+			MusicBeatState.switchState(new OptionsState());
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
             
@@ -108,7 +108,7 @@ class LanguageState extends MusicBeatState
 			Localization.switchLanguage(ClientPrefs.language);
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 			ClientPrefs.saveSettings();
-            FlxG.switchState(() -> new OptionsState());
+            MusicBeatState.switchState(new OptionsState());
 		}
 
 		for (num => item in coolGrp.members)

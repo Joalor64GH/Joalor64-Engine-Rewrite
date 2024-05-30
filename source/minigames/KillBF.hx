@@ -62,7 +62,7 @@ class KillBF extends MusicBeatState
 
         if (controls.BACK)
         {
-            FlxG.switchState(() -> new MinigamesState());
+            MusicBeatState.switchState(new MinigamesState());
             FlxG.sound.playMusic(Paths.music('freakyMenu'));
         }
     }

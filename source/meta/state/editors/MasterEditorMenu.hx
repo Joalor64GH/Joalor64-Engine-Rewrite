@@ -94,9 +94,9 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.BACK)
 		{
 			if (ClientPrefs.simpleMain)
-				FlxG.switchState(() -> new SimpleMainMenuState());
+				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
-				FlxG.switchState(() -> new MainMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if (controls.ACCEPT)
@@ -104,30 +104,30 @@ class MasterEditorMenu extends MusicBeatState
 			switch(options[curSelected]) 
 			{
 				case 'Character Editor':
-					LoadingState.loadAndSwitchState(() -> new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
+					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Week Editor':
-					FlxG.switchState(() -> new WeekEditorState());
+					MusicBeatState.switchState(new WeekEditorState());
 				case 'Menu Character Editor':
-					FlxG.switchState(() -> new MenuCharacterEditorState());
+					MusicBeatState.switchState(new MenuCharacterEditorState());
 				case 'Dialogue Portrait Editor':
-					LoadingState.loadAndSwitchState(() -> new DialogueCharacterEditorState(), false);
+					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 				case 'Dialogue Editor':
-					LoadingState.loadAndSwitchState(() -> new DialogueEditorState(), false);
+					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Credits Editor':
-					FlxG.switchState(() -> new CreditsEditorState());
+					MusicBeatState.switchState(new CreditsEditorState());
 				case 'Modchart Editor':
-					FlxG.switchState(() -> new modcharting.ModchartEditorState());
+					MusicBeatState.switchState(new modcharting.ModchartEditorState());
 				case 'Chart Editor'://felt it would be cool maybe
-					LoadingState.loadAndSwitchState(() -> new ChartingState(), false);
+					LoadingState.loadAndSwitchState(new ChartingState(), false);
 				case 'Mod Folder Setup':
-					FlxG.switchState(() -> new ModsSetupState());
+					MusicBeatState.switchState(new ModsSetupState());
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
 		}
 		
 		if (FlxG.keys.justPressed.T)
-			FlxG.switchState(() -> new TestState());
+			MusicBeatState.switchState(new TestState());
 
 		for (num => item in grpTexts.members)
 		{

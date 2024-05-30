@@ -22,13 +22,13 @@ class OptionsState extends MusicBeatState
 			case 'Controls':
 				openSubState(new OptionsSubState.ControlsSubState());
 			case 'Offsets':
-				FlxG.switchState(() -> new NoteOffsetState());
+				MusicBeatState.switchState(new NoteOffsetState());
 			case 'Visuals':
 				openSubState(new OptionsSubState.VisualsSubState());
 			case 'Gameplay':
 				openSubState(new OptionsSubState.GameplaySubState());
 			case 'Language':
-				FlxG.switchState(() -> new LanguageState());
+				MusicBeatState.switchState(new LanguageState());
 			case 'Miscellaneous':
 				openSubState(new OptionsSubState.MiscSubState());
 		}
@@ -149,7 +149,7 @@ class OptionsState extends MusicBeatState
 		bg.offset.set();
 
 		if (FlxG.keys.justPressed.D)
-			FlxG.switchState(() -> new SaveDataState());
+			MusicBeatState.switchState(new SaveDataState());
 
 		if (controls.UI_UP_P || controls.UI_DOWN_P)
 			changeSelection(controls.UI_UP_P ? -1 : 1);
@@ -158,10 +158,10 @@ class OptionsState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (PauseSubState.fromPlayState) {
 				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(() -> new PlayState());
+				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				FlxG.switchState((ClientPrefs.simpleMain) ? () -> new SimpleMainMenuState() : () -> new MainMenuState());
+				MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
 			}
 		}
 
