@@ -48,7 +48,7 @@ class ModchartUtil
     public static function getMiddlescroll(instance:ModchartMusicBeatState)
     {
         #if PSYCH 
-        return ClientPrefs.middleScroll;
+        return ClientPrefs.data.middleScroll;
         #elseif LEATHER
         return utilities.Options.getData("middlescroll");
         #else 
