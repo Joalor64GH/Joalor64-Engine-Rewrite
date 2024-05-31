@@ -541,7 +541,6 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>(8);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camOther;
 
 		persistentUpdate = persistentDraw = true;
 
@@ -935,59 +934,50 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'tank': //Week 7 - Ugh, Guns, Stress
+				final path = 'stages/tank';
 				tankmanRainbow = false;
-
 				var layerArray:Array<FlxBasic> = [];
-				var sky:BGSprite = new BGSprite('stages/tank/tankSky', -400, -400, 0, 0);
-				add(sky);
-
-				var ruins:BGSprite = new BGSprite('stages/tank/tankRuins',-200,0,.35,.35);
+					
+				var sky:BGSprite = new BGSprite('$path/tankSky', -400, -400, 0, 0);
+				sky.scale.set(1.5,1.5);
+				sky.updateHitbox();
+	
+				var ruins:BGSprite = new BGSprite('$path/tankRuins',-200,0,.35,.35);
 				ruins.setGraphicSize(Std.int(1.1 * ruins.width));
 				ruins.updateHitbox();
-				add(ruins);
-
-				tankGround = new BGSprite('stages/tank/tankRolling', 300, 300, 0.5, 0.5,['BG tank w lighting'], true);
-				add(tankGround);
-
+	
+				tankGround = new BGSprite('$path/tankRolling', 300, 300, 0.5, 0.5,['BG tank w lighting'], true);
 				tankmanRun = new FlxTypedGroup<TankmenBG>();
-				add(tankmanRun);
-
-				var ground:BGSprite = new BGSprite('stages/tank/tankGround', -420, -150);
+	
+				var ground:BGSprite = new BGSprite('$path/tankGround', -420, -150);
 				ground.setGraphicSize(Std.int(1.15 * ground.width));
 				ground.updateHitbox();
-				add(ground);
 				moveTank();
-
+	
 				if(!ClientPrefs.lowQuality)
 				{
-					var clouds:BGSprite = new BGSprite('stages/tank/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
+					var clouds:BGSprite = new BGSprite('$path/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
 					clouds.active = true;
 					clouds.velocity.x = FlxG.random.float(5, 15);
-					add(clouds);
-
-					var mountains:BGSprite = new BGSprite('stages/tank/tankMountains', -300, -20, 0.2, 0.2);
+	
+					var mountains:BGSprite = new BGSprite('$path/tankMountains', -300, -20, 0.2, 0.2);
 					mountains.setGraphicSize(Std.int(1.2 * mountains.width));
 					mountains.updateHitbox();
-					add(mountains);
-
-					var buildings:BGSprite = new BGSprite('stages/tank/tankBuildings', -200, 0, 0.3, 0.3);
+	
+					var buildings:BGSprite = new BGSprite('$path/tankBuildings', -200, 0, 0.3, 0.3);
 					buildings.setGraphicSize(Std.int(1.1 * buildings.width));
 					buildings.updateHitbox();
-					add(buildings);
-
-					var smokeLeft:BGSprite = new BGSprite('stages/tank/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
-					add(smokeLeft);
-					var smokeRight:BGSprite = new BGSprite('stages/tank/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
-					add(smokeRight);
-
-					tankWatchtower = new BGSprite('stages/tank/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
-					add(tankWatchtower);
-
+	
+					var smokeLeft:BGSprite = new BGSprite('$path/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft'], true);
+					var smokeRight:BGSprite = new BGSprite('$path/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight'], true);
+	
+					tankWatchtower = new BGSprite('$path/tankWatchtower', 100, 50, 0.5, 0.5, ['watchtower gradient color']);
+	
 					layerArray = [sky, clouds, mountains, buildings, ruins, smokeLeft, smokeRight, tankWatchtower, tankGround, tankmanRun, ground];
-				}
+				} 
 				else
 					layerArray = [sky, ruins, tankGround, tankmanRun, ground];
-
+	
 				autoLayer(layerArray);
 
 				layerArray.remove(sky);
@@ -995,14 +985,14 @@ class PlayState extends MusicBeatState
 				stageGraphicArray = cast layerArray;
 
 				if (SONG.song.toLowerCase() == 'guns') {
-					gunsThing = new FlxSprite(-100, -100).makeGraphic(Std.int(FlxG.width * 1.5),Std.int(FlxG.height * 1.5), FlxColor.WHITE);
+					gunsThing = new FlxSprite(-100,-100).makeGraphic(Std.int(FlxG.width * 1.5), Std.int(FlxG.height * 1.5),FlxColor.WHITE);
 					gunsThing.color = 0xBFFF0000;
 					gunsThing.alpha = 0.001;
 					gunsThing.visible = false;
 					gunsThing.scrollFactor.set();
 					gunsThing.screenCenter();
 
-					gunsExtraClouds = new FlxBackdrop(Paths.image('stages/tank/tankClouds'), XY, 64, 128);
+					gunsExtraClouds = new FlxBackdrop(Paths.image('$path/tankClouds'), XY, 64, 128);
 					gunsExtraClouds.velocity.set(12, 168);
 					gunsExtraClouds.alpha = 0.001;
 					gunsExtraClouds.visible = false;
@@ -1011,12 +1001,12 @@ class PlayState extends MusicBeatState
 				}
 
 				foregroundSprites = new FlxTypedGroup<BGSprite>();
-				foregroundSprites.add(new BGSprite('stages/tank/tank0', -500, 650, 1.7, 1.5, ['fg']));
-				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('stages/tank/tank1', -300, 750, 2, 0.2, ['fg']));
-				foregroundSprites.add(new BGSprite('stages/tank/tank2', 450, 940, 1.5, 1.5, ['foreground']));
-				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('stages/tank/tank4', 1300, 900, 1.5, 1.5, ['fg']));
-				foregroundSprites.add(new BGSprite('stages/tank/tank5', 1620, 700, 1.5, 1.5, ['fg']));
-				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('stages/tank/tank3', 1300, 1200, 3.5, 2.5, ['fg']));
+				foregroundSprites.add(new BGSprite('$path/tank0', -500, 650, 1.7, 1.5, ['fg']));
+				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('$path/tank1', -300, 750, 2, 0.2, ['fg']));
+				foregroundSprites.add(new BGSprite('$path/tank2', 450, 940, 1.5, 1.5, ['foreground']));
+				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('$path/tank4', 1250, 900, 1.5, 1.5, ['fg']));
+				foregroundSprites.add(new BGSprite('$path/tank5', 1620, 700, 1.5, 1.5, ['fg']));
+				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('$path/tank3', 1300, 1200, 3.5, 2.5, ['fg']));
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))
@@ -1032,18 +1022,17 @@ class PlayState extends MusicBeatState
 		add(gfGroup); //Needed for blammed lights
 
 		// Shitty layering but whatev it works LOL
-		if (curStage == 'limo')
-			add(limo);
+		switch (curStage) {
+			case 'limo': add(limo);
+			case 'tank': if (SONG.song.toLowerCase() == 'guns') add(gunsThing);
+		}
 
 		add(dadGroup);
 		add(boyfriendGroup);
 
-		switch(curStage)
-		{
-			case 'spooky':
-				add(halloweenWhite);
-			case 'tank':
-				add(foregroundSprites);
+		switch(curStage) {
+			case 'spooky': add(halloweenWhite);
+			case 'tank': add(foregroundSprites);
 		}
 
 		#if LUA_ALLOWED
@@ -1766,8 +1755,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 		Paths.clearUnusedMemory();
-		
-		CustomFadeTransition.nextCamera = camOther;
 	}
 
 	#if (!flash && sys)
@@ -2786,7 +2773,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage && (curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo')) {
+						if (!PlayState.isPixelStage && (curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo' || SONG.song.toLowerCase() != 'stress')) {
 							boyfriend.playAnim('pre-attack', true);
 							boyfriend.specialAnim = true;
 						}
@@ -2812,7 +2799,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage || curStage != 'limo') {
+						if (!PlayState.isPixelStage || curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
 							if(boyfriend.animOffsets.exists('hey')) {
 								boyfriend.playAnim('hey', true);
 								boyfriend.specialAnim = true;
@@ -4716,9 +4703,6 @@ class PlayState extends MusicBeatState
 					Mods.loadTheFirstEnabledMod();
 
 					cancelMusicFadeTween();
-					if(FlxTransitionableState.skipNextTransIn) {
-						CustomFadeTransition.nextCamera = null;
-					}
 
 					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 						persistentUpdate = true;
@@ -4778,10 +4762,8 @@ class PlayState extends MusicBeatState
 			else
 			{
 				Mods.loadTheFirstEnabledMod();
+
 				cancelMusicFadeTween();
-				if(FlxTransitionableState.skipNextTransIn) {
-					CustomFadeTransition.nextCamera = null;
-				}
 				
 				new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 					persistentUpdate = true;
@@ -5827,11 +5809,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	override public function destroy() {
-		#if cpp
-		cpp.vm.Gc.enable(true);
-		#end
-
+	override function destroy() {
 		for (lua in luaArray) {
 			lua.call('onDestroy', []);
 			lua.stop();
@@ -5856,10 +5834,11 @@ class PlayState extends MusicBeatState
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		FlxG.animationTimeScale = 1;
-
-		instance = null;
+		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
 		
 		super.destroy();
+
+		instance = null;
 	}
 
 	public static function cancelMusicFadeTween() {
@@ -5907,12 +5886,12 @@ class PlayState extends MusicBeatState
 						var i = 0;
 						opponentStrums.forEach(note -> {
 							gunsNoteTweens.push(null);
-							tweenNote(note, (0.12*i) / playbackRate, i);
+							tweenNote(note, (0.12 * i) / playbackRate, i);
 							i++;
 						});
 						playerStrums.forEach(note -> {
 							gunsNoteTweens.push(null);
-							tweenNote(note, (0.12*i) / playbackRate, i);
+							tweenNote(note, (0.12 * i) / playbackRate, i);
 							i++;
 						});
 						gunsThing.visible = true;

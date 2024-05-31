@@ -57,6 +57,16 @@ class FreeplayState extends MusicBeatState
 		ArtemisIntegration.resetModName ();
 		#end
 
+		if (WeekData.weeksList.length < 1)
+		{
+			FlxTransitionableState.skipNextTransIn = true;
+			persistentUpdate = false;
+			MusicBeatState.switchState(new ErrorState("NO WEEKS ADDED FOR FREEPLAY\n\nPress ACCEPT to go to the Week Editor Menu.\nPress BACK to return to Main Menu.",
+				function() MusicBeatState.switchState(new WeekEditorState()),
+				function() MusicBeatState.switchState(new MainMenuState())));
+			return;
+		}
+
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
 

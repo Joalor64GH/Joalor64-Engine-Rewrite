@@ -24,6 +24,7 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 
 		if (!FlxTransitionableState.skipNextTransOut)
 			openSubState(new CustomFadeTransition(0.5, true));
+		FlxTransitionableState.skipNextTransOut = false;
 
 		if (transIn != null)
 			trace('reg ' + transIn.region);
@@ -133,43 +134,50 @@ class MusicBeatState extends modcharting.ModchartMusicBeatState
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 
-	public static function switchState(nextState:FlxState) {
-		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
-		if (!FlxTransitionableState.skipNextTransIn) {
-			#if sys
-			ArtemisIntegration.toggleFade (true);
-			#end
-			leState.openSubState(new CustomFadeTransition(0.35, false));
-			if(nextState == FlxG.state) {
-				CustomFadeTransition.finishCallback = function() {
-					#if sys
-					ArtemisIntegration.toggleFade (false);
-					#end
-					FlxG.resetState();
-				};
-			} else {
-				CustomFadeTransition.finishCallback = function() {
-					#if sys
-					ArtemisIntegration.toggleFade (false);
-					#end
-					FlxG.switchState(nextState);
-				};
-			}
+	public static function switchState(nextState:FlxState = null) {
+		if (nextState == null) nextState = FlxG.state;
+		if (nextState == FlxG.state)
+		{
+			resetState();
 			return;
 		}
+
+		if (FlxTransitionableState.skipNextTransIn) FlxG.switchState(nextState);
+		else startTransition(nextState);
 		FlxTransitionableState.skipNextTransIn = false;
-		FlxG.switchState(nextState);
 	}
 
 	public static function resetState() {
-		MusicBeatState.switchState(FlxG.state);
+		if (FlxTransitionableState.skipNextTransIn) FlxG.resetState();
+		else startTransition();
+		FlxTransitionableState.skipNextTransIn = false;
+	}
+
+	public static function startTransition(nextState:FlxState = null)
+	{
+		if (nextState == null)
+			nextState = FlxG.state;
+
+		FlxG.state.openSubState(new CustomFadeTransition(0.35, false));
+		if (nextState == FlxG.state) {
+			CustomFadeTransition.finishCallback = function() {
+				#if sys
+				ArtemisIntegration.toggleFade (false);
+				#end
+				FlxG.resetState();
+			};
+		} else {
+			CustomFadeTransition.finishCallback = function() {
+				#if sys
+				ArtemisIntegration.toggleFade (false);
+				#end
+				FlxG.switchState(nextState);
+			};
+		}
 	}
 
 	public static function getState():MusicBeatState {
-		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
-		return leState;
+		return cast(FlxG.state, MusicBeatState);
 	}
 
 	public function stepHit():Void

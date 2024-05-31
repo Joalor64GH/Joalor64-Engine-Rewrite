@@ -54,13 +54,6 @@ class Main extends Sprite
 		ButtplugUtils.set_intensity(100);
 		ButtplugUtils.initialise();
 
-		var timer = new haxe.Timer(1);
-		timer.run = function() {
-			coloring();
-			if (fpsVar.textColor == 0) 
-				fpsVar.textColor = -4775566; // needs to be done because textcolor becomes black for a frame
-		}
-
 		FlxG.signals.preStateSwitch.add(() ->{
 			#if cpp
 			cpp.NativeGc.run(true);
@@ -127,51 +120,12 @@ class Main extends Sprite
 		addChild(toast);
 	}
 
-	// Chroma Effect (12 Colors)
-	var array:Array<FlxColor> = [
-		FlxColor.fromRGB(216, 34, 83),
-		FlxColor.fromRGB(255, 38, 0),
-		FlxColor.fromRGB(255, 80, 0),
-		FlxColor.fromRGB(255, 147, 0),
-		FlxColor.fromRGB(255, 199, 0),
-		FlxColor.fromRGB(255, 255, 0),
-		FlxColor.fromRGB(202, 255, 0),
-		FlxColor.fromRGB(0, 255, 0),
-		FlxColor.fromRGB(0, 146, 146),
-		FlxColor.fromRGB(0, 0, 255),
-		FlxColor.fromRGB(82, 40, 204),
-		FlxColor.fromRGB(150, 33, 146)
-	];
-	var skippedFrames = 0;
-	var currentColor = 0;
-
-	// Event Handlers
-	public function coloring():Void
-	{
-		// Hippity, Hoppity, your code is now my property (from KadeEngine)
-		if (ClientPrefs.fpsRainbow) {
-			if (currentColor >= array.length)
-				currentColor = 0;
-			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.framerate));
-			(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
-			currentColor++;
-			skippedFrames++;
-			if (skippedFrames > ClientPrefs.framerate)
-				skippedFrames = 0;
-		}
-		else 
-			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
-	}
-	inline public function changeFPSColor(color:FlxColor)
-		fpsVar.textColor = color;
-
 	public static var webmHandler:WebmHandler;
 
 	var oldVol:Float = 1.0;
 	var newVol:Float = 0.3;
 
 	var focused:Bool = true;
-
 	var focusMusicTween:FlxTween;
 
 	function onWindowFocusOut()
