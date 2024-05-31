@@ -1,4 +1,4 @@
-package states;
+package meta.state;
 
 class ErrorState extends MusicBeatState
 {
@@ -17,13 +17,13 @@ class ErrorState extends MusicBeatState
 
 	public var errorSine:Float = 0;
 	public var errorText:FlxText;
+
 	override function create()
 	{
 		var bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = FlxColor.GRAY;
-		bg.antialiasing = ClientPrefs.data.antialiasing;
-		add(bg);
+		bg.antialiasing = ClientPrefs.antialiasing;
 		bg.screenCenter();
+		add(bg);
 
 		errorText = new FlxText(0, 0, FlxG.width - 300, errorMsg, 32);
 		errorText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -31,6 +31,7 @@ class ErrorState extends MusicBeatState
 		errorText.borderSize = 2;
 		errorText.screenCenter();
 		add(errorText);
+
 		super.create();
 	}
 
