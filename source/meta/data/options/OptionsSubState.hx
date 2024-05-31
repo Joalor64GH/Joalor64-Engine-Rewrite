@@ -53,7 +53,7 @@ class ControlsSubState extends MusicBeatSubstate {
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 
 		#if sys
@@ -352,7 +352,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 
         noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODPACK OPTIONS SAVES FOUND\nPRESS BACK TO EXIT", 48);
@@ -398,7 +398,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
 		add(text);
 
         var active:Array<String> = Mods.getActiveModsDir();
-        for (save in ClientPrefs.modsOptsSaves.keys())
+        for (save in ClientPrefs.data.modsOptsSaves.keys())
         {
             var toCheck:Array<Dynamic> = [save, null, false];
             if (save != '') {
@@ -432,7 +432,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
     private function loadOptions(mod:Array<Dynamic> = null)
     {
         if (mod != null) {
-            ClientPrefs.modsOptsSaves.remove(mod[0]);
+            ClientPrefs.data.modsOptsSaves.remove(mod[0]);
             grpName.remove(grpName.members[daList.indexOf(mod)], true);
             daList.remove(mod);
         }
@@ -471,7 +471,7 @@ class DeleteSavesSubState extends MusicBeatSubstate
         if (daList.length > 0 && nextAccept <= 0)
         {
             if (controls.RESET) {
-                ClientPrefs.modsOptsSaves = [];
+                ClientPrefs.data.modsOptsSaves = [];
                 daList = [];
                 while (grpName.members.length > 0) {
                     grpName.remove(grpName.members[0], true);
@@ -774,7 +774,7 @@ class GameplaySubState extends BaseOptionsMenu
 
 	function onChangeHitsoundVolume()
 	{
-		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
+		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.data.hitsoundVolume);
 	}
 }
 
@@ -817,10 +817,10 @@ class MiscSubState extends BaseOptionsMenu
 	var changedMusic:Bool = false;
 	function onChangePauseMusic()
 	{
-		if(ClientPrefs.pauseMusic == 'None')
+		if(ClientPrefs.data.pauseMusic == 'None')
 			FlxG.sound.music.volume = 0;
 		else
-			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
+			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)));
 
 		changedMusic = true;
 	}
@@ -871,7 +871,7 @@ class NotesSubState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 
 		#if sys
@@ -887,10 +887,10 @@ class NotesSubState extends MusicBeatSubstate
 		grpNumbers = new FlxTypedGroup<Alphabet>();
 		add(grpNumbers);
 
-		for (i in 0...ClientPrefs.arrowRGB.length) {
+		for (i in 0...ClientPrefs.data.arrowRGB.length) {
 			var yPos:Float = (80 * i) - 40;
 			for (j in 0...3) {
-				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.arrowRGB[i][j]), true);
+				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.data.arrowRGB[i][j]), true);
 				optionText.x = posX + (225 * j) + 250;
 				optionText.ID = i;
 				grpNumbers.add(optionText);
@@ -901,20 +901,20 @@ class NotesSubState extends MusicBeatSubstate
 			var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 			note.animation.addByPrefix('idle', animations[i]);
 			note.animation.play('idle');
-			note.antialiasing = ClientPrefs.globalAntialiasing;
+			note.antialiasing = ClientPrefs.data.globalAntialiasing;
 			note.ID = i;
 			grpNotes.add(note);
 
 			var newShader:ColorMask = new ColorMask();
 			note.shader = newShader.shader;
-			newShader.rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[i][0], ClientPrefs.arrowRGB[i][1], ClientPrefs.arrowRGB[i][2]);
+			newShader.rCol = FlxColor.fromRGB(ClientPrefs.data.arrowRGB[i][0], ClientPrefs.data.arrowRGB[i][1], ClientPrefs.data.arrowRGB[i][2]);
 			newShader.gCol = newShader.rCol.getDarkened(0.6);
 			shaderArray.push(newShader);
 		}
 
 		btn1 = new FlxButton(15, 40, "Joalor64", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[89, 0, 153], 
 				[0, 255, 255], 
 				[18, 255, 175], 
@@ -933,7 +933,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn2 = new FlxButton(15, btn1.y + 50, "Vibrant", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[250, 52, 15], 
 				[255, 255, 3], 
 				[30, 252, 42], 
@@ -952,7 +952,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn3 = new FlxButton(15, btn2.y + 50, "Warm", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[135, 0, 9], 
 				[179, 0, 65], 
 				[215, 0, 138], 
@@ -971,7 +971,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn4 = new FlxButton(15, btn3.y + 50, "Cold", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[0, 229, 75], 
 				[0, 212, 176], 
 				[0, 183, 216], 
@@ -990,7 +990,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn5 = new FlxButton(15, btn4.y + 50, "Cum", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[255, 255, 255], 
 				[255, 255, 255], 
 				[255, 255, 255], 
@@ -1009,7 +1009,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn6 = new FlxButton(15, btn5.y + 50, "Void", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[0, 0, 0], 
 				[0, 0, 0], 
 				[0, 0, 0], 
@@ -1028,7 +1028,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn7 = new FlxButton(15, btn6.y + 50, "DDR", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[255, 124, 232], 
 				[0, 255, 255], 
 				[0, 255, 255], 
@@ -1047,7 +1047,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		btn8 = new FlxButton(15, btn7.y + 50, "Pastel", () ->
 		{
-			ClientPrefs.arrowRGB = [
+			ClientPrefs.data.arrowRGB = [
 				[186, 144, 198], 
 				[192, 219, 234], 
 				[221, 255, 187], 
@@ -1209,11 +1209,11 @@ class NotesSubState extends MusicBeatSubstate
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = ClientPrefs.arrowRGB.length - 1;
-		if (curSelected >= ClientPrefs.arrowRGB.length)
+			curSelected = ClientPrefs.data.arrowRGB.length - 1;
+		if (curSelected >= ClientPrefs.data.arrowRGB.length)
 			curSelected = 0;
 
-		curValue = ClientPrefs.arrowRGB[curSelected][typeSelected];
+		curValue = ClientPrefs.data.arrowRGB[curSelected][typeSelected];
 		updateValue();
 
 		var bullshit = 0;
@@ -1255,7 +1255,7 @@ class NotesSubState extends MusicBeatSubstate
 		if (typeSelected > 2)
 			typeSelected = 0;
 
-		curValue = ClientPrefs.arrowRGB[curSelected][typeSelected];
+		curValue = ClientPrefs.data.arrowRGB[curSelected][typeSelected];
 		updateValue();
 
 		for (i in 0...grpNumbers.length) {
@@ -1269,13 +1269,13 @@ class NotesSubState extends MusicBeatSubstate
 
 	function resetValue(selected:Int, type:Int) {
 		curValue = 0;
-		ClientPrefs.arrowRGB[selected][type] = defaultColors[selected][type];
+		ClientPrefs.data.arrowRGB[selected][type] = defaultColors[selected][type];
 
-		shaderArray[selected].rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[selected][0], ClientPrefs.arrowRGB[selected][1], ClientPrefs.arrowRGB[selected][2]);
+		shaderArray[selected].rCol = FlxColor.fromRGB(ClientPrefs.data.arrowRGB[selected][0], ClientPrefs.data.arrowRGB[selected][1], ClientPrefs.data.arrowRGB[selected][2]);
 		shaderArray[selected].gCol = shaderArray[selected].rCol.getDarkened(0.6);
 
 		var item = grpNumbers.members[(selected * 3) + type];
-		item.text = Std.string(ClientPrefs.arrowRGB[selected][type]);
+		item.text = Std.string(ClientPrefs.data.arrowRGB[selected][type]);
 
 		var add = (40 * (item.letters.length - 1)) / 2;
 		for (letter in item.letters)
@@ -1293,9 +1293,9 @@ class NotesSubState extends MusicBeatSubstate
 			curValue = 255;
 		}
 		roundedValue = Math.round(curValue);
-		ClientPrefs.arrowRGB[curSelected][typeSelected] = roundedValue;
+		ClientPrefs.data.arrowRGB[curSelected][typeSelected] = roundedValue;
 
-		shaderArray[curSelected].rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[curSelected][0], ClientPrefs.arrowRGB[curSelected][1], ClientPrefs.arrowRGB[curSelected][2]);
+		shaderArray[curSelected].rCol = FlxColor.fromRGB(ClientPrefs.data.arrowRGB[curSelected][0], ClientPrefs.data.arrowRGB[curSelected][1], ClientPrefs.data.arrowRGB[curSelected][2]);
 		shaderArray[curSelected].gCol = shaderArray[curSelected].rCol.getDarkened(0.6);
 
 		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
@@ -1317,10 +1317,10 @@ class NotesSubState extends MusicBeatSubstate
 			curValue = 255;
 		}
 		roundedValue = Math.round(curValue);
-		ClientPrefs.arrowRGB[curSelected][typeSelected] = roundedValue;
+		ClientPrefs.data.arrowRGB[curSelected][typeSelected] = roundedValue;
 
 		for (i in 0...grpNotes.members.length){
-			shaderArray[i].rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[curSelected][0], ClientPrefs.arrowRGB[curSelected][1], ClientPrefs.arrowRGB[curSelected][2]);
+			shaderArray[i].rCol = FlxColor.fromRGB(ClientPrefs.data.arrowRGB[curSelected][0], ClientPrefs.data.arrowRGB[curSelected][1], ClientPrefs.data.arrowRGB[curSelected][2]);
 			shaderArray[i].gCol = shaderArray[i].rCol.getDarkened(0.6);
 		}
 		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
@@ -1403,7 +1403,7 @@ class VisualsSubState extends BaseOptionsMenu
 			]);
 		addOption(option);
 
-		if (ClientPrefs.screenRes == "FULLSCREEN") {
+		if (ClientPrefs.data.screenRes == "FULLSCREEN") {
 			var option:Option = new Option('Scale Mode',
 				"How you'd like the screen to scale [Press ACCEPT to apply, CANCEL to cancel] (Adaptive is not compatible with fullscreen.)",
 				'screenScaleModeTemp',
@@ -1426,8 +1426,8 @@ class VisualsSubState extends BaseOptionsMenu
 			addOption(option);
 		}
 
-		ClientPrefs.screenScaleModeTemp = ClientPrefs.screenScaleMode;
-		ClientPrefs.screenResTemp = ClientPrefs.screenRes;
+		ClientPrefs.data.screenScaleModeTemp = ClientPrefs.data.screenScaleMode;
+		ClientPrefs.data.screenResTemp = ClientPrefs.data.screenRes;
 		#end
 
 		var option:Option = new Option('Flashing Lights',
@@ -1477,7 +1477,7 @@ class VisualsSubState extends BaseOptionsMenu
 	#if sys
 	function onToggleArtemis()
 	{
-		if (ClientPrefs.enableArtemis) {
+		if (ClientPrefs.data.enableArtemis) {
 			ArtemisIntegration.initialize();
 			ArtemisIntegration.setBackgroundColor ("#FFEA71FD");
 			ArtemisIntegration.setFadeColor ("#FF000000");
@@ -1500,7 +1500,7 @@ class VisualsSubState extends BaseOptionsMenu
 	function onChangeFPSCounter()
 	{
 		if(Main.fpsVar != null)
-			Main.fpsVar.visible = ClientPrefs.showFPS;
+			Main.fpsVar.visible = ClientPrefs.data.showFPS;
 	}
 	#end
 
@@ -1511,22 +1511,22 @@ class VisualsSubState extends BaseOptionsMenu
 			var sprite:Dynamic = sprite; //Make it check for FlxSprite instead of FlxBasic
 			var sprite:FlxSprite = sprite; //Don't judge me ok
 			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
-				sprite.antialiasing = ClientPrefs.globalAntialiasing;
+				sprite.antialiasing = ClientPrefs.data.globalAntialiasing;
 			}
 		}
 	}
 
 	function onChangeFramerate()
 	{
-		if(ClientPrefs.framerate > FlxG.drawFramerate)
+		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
 		{
-			FlxG.updateFramerate = ClientPrefs.framerate;
-			FlxG.drawFramerate = ClientPrefs.framerate;
+			FlxG.updateFramerate = ClientPrefs.data.framerate;
+			FlxG.drawFramerate = ClientPrefs.data.framerate;
 		}
 		else
 		{
-			FlxG.drawFramerate = ClientPrefs.framerate;
-			FlxG.updateFramerate = ClientPrefs.framerate;
+			FlxG.drawFramerate = ClientPrefs.data.framerate;
+			FlxG.updateFramerate = ClientPrefs.data.framerate;
 		}
 	}
 }

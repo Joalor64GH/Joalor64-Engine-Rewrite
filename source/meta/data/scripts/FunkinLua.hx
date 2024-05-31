@@ -185,20 +185,20 @@ class FunkinLua {
 		set('gfName', PlayState.SONG.gfVersion);
 
 		// Some settings, no jokes
-		set('downscroll', ClientPrefs.downScroll);
-		set('middlescroll', ClientPrefs.middleScroll);
-		set('framerate', ClientPrefs.framerate);
-		set('ghostTapping', ClientPrefs.ghostTapping);
-		set('hideHud', ClientPrefs.hideHud);
-		set('timeBarType', ClientPrefs.timeBarType);
-		set('scoreZoom', ClientPrefs.scoreZoom);
-		set('cameraZoomOnBeat', ClientPrefs.camZooms);
-		set('flashingLights', ClientPrefs.flashing);
-		set('noteOffset', ClientPrefs.noteOffset);
-		set('healthBarAlpha', ClientPrefs.healthBarAlpha);
-		set('noResetButton', ClientPrefs.noReset);
-		set('lowQuality', ClientPrefs.lowQuality);
-		set('shadersEnabled', ClientPrefs.shaders);
+		set('downscroll', ClientPrefs.data.downScroll);
+		set('middlescroll', ClientPrefs.data.middleScroll);
+		set('framerate', ClientPrefs.data.framerate);
+		set('ghostTapping', ClientPrefs.data.ghostTapping);
+		set('hideHud', ClientPrefs.data.hideHud);
+		set('timeBarType', ClientPrefs.data.timeBarType);
+		set('scoreZoom', ClientPrefs.data.scoreZoom);
+		set('cameraZoomOnBeat', ClientPrefs.data.camZooms);
+		set('flashingLights', ClientPrefs.data.flashing);
+		set('noteOffset', ClientPrefs.data.noteOffset);
+		set('healthBarAlpha', ClientPrefs.data.healthBarAlpha);
+		set('noResetButton', ClientPrefs.data.noReset);
+		set('lowQuality', ClientPrefs.data.lowQuality);
+		set('shadersEnabled', ClientPrefs.data.shaders);
 		set('scriptName', scriptName);
 		set('currentModDirectory', Mods.currentModDirectory);
 
@@ -264,7 +264,7 @@ class FunkinLua {
 
 		// shader shit
 		Lua_helper.add_callback(lua, "initLuaShader", function(name:String, glslVersion:Int = 120) {
-			if(!ClientPrefs.shaders) return false;
+			if(!ClientPrefs.data.shaders) return false;
 
 			#if (!flash && MODS_ALLOWED && sys)
 			return initLuaShader(name, glslVersion);
@@ -275,7 +275,7 @@ class FunkinLua {
 		});
 		
 		Lua_helper.add_callback(lua, "setSpriteShader", function(obj:String, shader:String) {
-			if(!ClientPrefs.shaders) return false;
+			if(!ClientPrefs.data.shaders) return false;
 
 			#if (!flash && MODS_ALLOWED && sys)
 			if(!PlayState.instance.runtimeShaders.exists(shader) && !initLuaShader(shader))
@@ -1693,7 +1693,7 @@ class FunkinLua {
 			{
 				leSprite.loadGraphic(Paths.image(image));
 			}
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = ClientPrefs.data.globalAntialiasing;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 			leSprite.active = true;
 		});
@@ -1703,7 +1703,7 @@ class FunkinLua {
 			var leSprite:ModchartSprite = new ModchartSprite(x, y);
 
 			loadFrames(leSprite, image, spriteType);
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = ClientPrefs.data.globalAntialiasing;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 		});
 
@@ -1713,7 +1713,7 @@ class FunkinLua {
 			// 	var leSprite:ModchartSprite = new ModchartSprite(x, y);
 
 			// 	loadFrames(leSprite, image, spriteType);
-			// 	leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			// 	leSprite.antialiasing = ClientPrefs.data.globalAntialiasing;
 			// 	PlayState.instance.modchartSprites.set(tag, leSprite);
 			// });
 
@@ -2634,22 +2634,22 @@ class FunkinLua {
 						var rawJson = File.getContent(folder + '/' + rawFile);
 						if (rawJson != null && rawJson.length > 0) {
 							var json = Json.parse(rawJson);
-							if (!ClientPrefs.modsOptsSaves.exists(mod)) ClientPrefs.modsOptsSaves.set(mod, []);
-							if (!ClientPrefs.modsOptsSaves[mod].exists(json.variable)) {
+							if (!ClientPrefs.data.modsOptsSaves.exists(mod)) ClientPrefs.data.modsOptsSaves.set(mod, []);
+							if (!ClientPrefs.data.modsOptsSaves[mod].exists(json.variable)) {
 								if (!Reflect.hasField(json, 'defaultValue')) {
 									var type:String = 'bool';
 									if (Reflect.hasField(json, 'type')) type = json.type;
-									ClientPrefs.modsOptsSaves[mod][json.variable] =
+									ClientPrefs.data.modsOptsSaves[mod][json.variable] =
 										CoolUtil.getOptionDefVal(type, Reflect.field(json, 'options'));
 								} else {
-									ClientPrefs.modsOptsSaves[mod][json.variable] = json.defaultValue;
+									ClientPrefs.data.modsOptsSaves[mod][json.variable] = json.defaultValue;
 								}
 							}
 						}
 					}
 				}
 			}
-			return ClientPrefs.modsOptsSaves.toString();
+			return ClientPrefs.data.modsOptsSaves.toString();
 			#else
 			funk.luaTrace('loadJsonOptions: Platform unsupported for Json Options!', false, false, FlxColor.RED);
 			return false;
@@ -2661,8 +2661,8 @@ class FunkinLua {
 			} else if (isJson) {
 				#if MODS_ALLOWED
 				if (modName == null) modName = Mods.currentModDirectory;
-				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
-					return ClientPrefs.modsOptsSaves[modName][variable];
+				if (ClientPrefs.data.modsOptsSaves.exists(modName) && ClientPrefs.data.modsOptsSaves[modName].exists(variable)) {
+					return ClientPrefs.data.modsOptsSaves[modName][variable];
 				}
 				#else
 				funk.luaTrace('getOptionSave: Platform unsupported for Json Options!', false, false, FlxColor.RED);
@@ -2677,8 +2677,8 @@ class FunkinLua {
 			} else if (isJson) {
 				#if MODS_ALLOWED
 				if (modName == null) modName = Mods.currentModDirectory;
-				if (ClientPrefs.modsOptsSaves.exists(modName) && ClientPrefs.modsOptsSaves[modName].exists(variable)) {
-					ClientPrefs.modsOptsSaves[modName][variable] = value;
+				if (ClientPrefs.data.modsOptsSaves.exists(modName) && ClientPrefs.data.modsOptsSaves[modName].exists(variable)) {
+					ClientPrefs.data.modsOptsSaves[modName][variable] = value;
 					return true;
 				}
 				#else
@@ -3056,7 +3056,7 @@ class FunkinLua {
 	
 	function initLuaShader(name:String, ?glslVersion:Int = 120)
 	{
-		if(!ClientPrefs.shaders) return false;
+		if(!ClientPrefs.data.shaders) return false;
 
 		#if (!flash && sys)
 		if(PlayState.instance.runtimeShaders.exists(name))
@@ -3483,7 +3483,7 @@ class ModchartSprite extends FlxSprite
 	public function new(?x:Float = 0, ?y:Float = 0)
 	{
 		super(x, y);
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = ClientPrefs.data.globalAntialiasing;
 	}
 }
 

@@ -14,16 +14,16 @@ class TestState extends MusicBeatState
         
         var musplayer:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/musplayer'));
         musplayer.screenCenter();
-        musplayer.antialiasing = ClientPrefs.globalAntialiasing;
+        musplayer.antialiasing = ClientPrefs.data.globalAntialiasing;
         add(musplayer);
         var disc:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/disc'));
         disc.setPosition(musplayer.x + 268, musplayer.y + 13);
-        disc.antialiasing = ClientPrefs.globalAntialiasing;
+        disc.antialiasing = ClientPrefs.data.globalAntialiasing;
         disc.angularVelocity = 30;
         add(disc);
         var playerneedle:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/playerneedle'));
         playerneedle.screenCenter();
-        playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
+        playerneedle.antialiasing = ClientPrefs.data.globalAntialiasing;
         add(playerneedle);
 
         var testTxt:Alphabet = new Alphabet(0, 0, 'This is a test.', true);

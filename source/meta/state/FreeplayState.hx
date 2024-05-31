@@ -95,7 +95,7 @@ class FreeplayState extends MusicBeatState
 		if (!curPlaying) Conductor.bpm = TitleState.titleJSON.bpm;
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 		bg.screenCenter();
 
@@ -106,8 +106,8 @@ class FreeplayState extends MusicBeatState
 		add(grid);
 
 			var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
-		slash.antialiasing = ClientPrefs.globalAntialiasing;
-		slash.flipX = (ClientPrefs.songDisplay == 'C-Shape') ? true : false;
+		slash.antialiasing = ClientPrefs.data.globalAntialiasing;
+		slash.flipX = (ClientPrefs.data.songDisplay == 'C-Shape') ? true : false;
 		slash.screenCenter();
 		add(slash);
 
@@ -118,19 +118,12 @@ class FreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
-			switch (ClientPrefs.songDisplay)
+			switch (ClientPrefs.data.songDisplay)
 			{
-				case 'Classic':
-					songText.itemType = 'Classic';
-
-				case 'Vertical':
-					songText.itemType = 'Vertical';
-
-				case 'C-Shape':
-					songText.itemType = 'C-Shape';
-
-				case 'D-Shape':
-					songText.itemType = 'D-Shape';
+				case 'Classic': songText.itemType = 'Classic';
+				case 'Vertical': songText.itemType = 'Vertical';
+				case 'C-Shape': songText.itemType = 'C-Shape';
+				case 'D-Shape': songText.itemType = 'D-Shape';
 			}
 			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
@@ -317,7 +310,7 @@ class FreeplayState extends MusicBeatState
 			changeDiff(1);
 		else if (upP || downP) changeDiff();
 		#if sys 
-		else if (alt && ClientPrefs.saveReplay) 
+		else if (alt && ClientPrefs.data.saveReplay) 
 			MusicBeatState.switchState(new ReplaySelectState(songs[curSelected].songName)); 
 		#end
 
@@ -328,7 +321,7 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (ClientPrefs.simpleMain)
+			if (ClientPrefs.data.simpleMain)
 				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
 				MusicBeatState.switchState(new MainMenuState());

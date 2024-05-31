@@ -140,7 +140,7 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.2));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 
 		#if sys
@@ -163,7 +163,7 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
+		magenta.antialiasing = ClientPrefs.data.globalAntialiasing;
 		magenta.color = (menuJSON.colorOnConfirm != null && menuJSON.colorOnConfirm.length > 0) 
 			? FlxColor.fromRGB(menuJSON.colorOnConfirm[0], menuJSON.colorOnConfirm[1], menuJSON.colorOnConfirm[2]) : 0xFFfd719b;
 		add(magenta);
@@ -195,7 +195,7 @@ class MainMenuState extends MusicBeatState
 				menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.antialiasing = ClientPrefs.data.globalAntialiasing;
 			menuItem.updateHitbox();
 			if (optionShit[i] == '') menuItem.visible = false;
 			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
@@ -376,7 +376,7 @@ class MainMenuState extends MusicBeatState
 					FlxG.mouse.visible = false;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					if (ClientPrefs.flashing) {
+					if (ClientPrefs.data.flashing) {
 						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 						#if sys
 						ArtemisIntegration.triggerFlash (StringTools.hex (magenta.color));

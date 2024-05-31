@@ -92,7 +92,7 @@ class SimpleMainMenuState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.scrollFactor.set(0, yScroll / 3);
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -179,7 +179,7 @@ class SimpleMainMenuState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			FlxG.sound.play(Paths.sound('confirmMenu'));
-			if (ClientPrefs.flashing) {
+			if (ClientPrefs.data.flashing) {
 				grpOptions.forEach(function(grpOptions:Alphabet)
 				{
 					FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)

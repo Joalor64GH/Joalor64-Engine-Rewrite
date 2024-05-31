@@ -88,7 +88,7 @@ class StrumNote extends FlxSprite
 			animation.addByPrefix('purple', 'arrowLEFT');
 			animation.addByPrefix('red', 'arrowRIGHT');
 
-			antialiasing = ClientPrefs.globalAntialiasing;
+			antialiasing = ClientPrefs.data.globalAntialiasing;
 			setGraphicSize(Std.int(width * 0.7));
 
 			switch (Math.abs(noteData) % 4)
@@ -151,9 +151,9 @@ class StrumNote extends FlxSprite
 			colorMask.rCol = 0xFF87A3AD;
 			colorMask.gCol = FlxColor.BLACK;
 		} else {
-			if (noteData > -1 && noteData < ClientPrefs.arrowRGB.length)
+			if (noteData > -1 && noteData < ClientPrefs.data.arrowRGB.length)
 			{
-				colorMask.rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
+				colorMask.rCol = FlxColor.fromRGB(ClientPrefs.data.arrowRGB[noteData][0], ClientPrefs.data.arrowRGB[noteData][1], ClientPrefs.data.arrowRGB[noteData][2]);
 				colorMask.gCol = colorMask.rCol.getDarkened(0.6);
 
 				if (animation.curAnim.name == 'pressed')

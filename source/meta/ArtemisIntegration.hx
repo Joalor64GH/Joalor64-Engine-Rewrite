@@ -25,7 +25,7 @@ class ArtemisIntegration {
 
     public static function initialize ():Void {
         #if sys
-        if (ClientPrefs.enableArtemis) {
+        if (ClientPrefs.data.enableArtemis) {
             trace ("attempting to initialize artemis integration...");
             // get the file that says what the local artemis webserver's url is.
             // the file not being there is a pretty good indication that the user doesn't have artemis so if it isn't there just don't enable this integration

@@ -60,7 +60,7 @@ class LanguageState extends MusicBeatState
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
 		bg.screenCenter();
         	bg.color = 0xFFea71fd;
 		add(bg);
@@ -104,8 +104,8 @@ class LanguageState extends MusicBeatState
             
 		if (controls.ACCEPT)
 		{
-			ClientPrefs.language = langStrings[curSelected].code;
-			Localization.switchLanguage(ClientPrefs.language);
+			ClientPrefs.data.language = langStrings[curSelected].code;
+			Localization.switchLanguage(ClientPrefs.data.language);
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 			ClientPrefs.saveSettings();
             MusicBeatState.switchState(new OptionsState());

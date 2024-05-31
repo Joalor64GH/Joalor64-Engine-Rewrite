@@ -81,8 +81,6 @@ class Main extends Sprite
 
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
-		if(fpsVar != null)
-			fpsVar.visible = ClientPrefs.showFPS;
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
 
