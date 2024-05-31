@@ -1436,13 +1436,6 @@ class VisualsSubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
-
-		var option:Option = new Option('Rainbow FPS',
-		'If checked, makes the FPS have a chroma effect.',
-		'fpsRainbow',
-		'bool',
-		false);
-		addOption(option);
 		
 		var option:Option = new Option('FPS Counter',
 			'If unchecked, hides FPS Counter.',
@@ -1459,7 +1452,7 @@ class VisualsSubState extends BaseOptionsMenu
 			'None',
 			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
 		addOption(option);
-		option.onChange = () -> meta.Colorblind.updateFilter();
+		option.onChange = () -> Colorblind.updateFilter();
 
 		var option:Option = new Option('Simple Main Menu',
 			'Just a simple version of the Main Menu for low-end users.',

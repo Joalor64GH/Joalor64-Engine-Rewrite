@@ -11,8 +11,7 @@
       },
       {
         "name": "flixel",
-        "type": "haxelib",
-        "version": "5.5.0"
+        "type": "haxelib"
       },
       {
         "name": "flixel-addons",
