@@ -26,7 +26,7 @@ class ModchartUtil
         //need to test each engine
         //not expecting all to work
         #if PSYCH 
-        return ClientPrefs.downScroll;
+        return ClientPrefs.data.downScroll;
         #elseif LEATHER
         return utilities.Options.getData("downscroll");
         #elseif ANDROMEDA //dunno why youd use this on andromeda but whatever, already got its own cool modchart system
