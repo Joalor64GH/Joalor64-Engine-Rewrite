@@ -4908,34 +4908,34 @@ class PlayState extends MusicBeatState
 			if (rating != null){
 				rating.isSimply = true;
 				rating.revive();
-			}
 
-			if (rating.tween != null)
-			{
-				rating.tween.cancel();
-				rating.tween.destroy();
-			}
-
-			rating.scale.set(0.7 * 1.1, 0.7 * 1.1);
-
-			rating.tween = FlxTween.tween(rating.scale, {x: 0.7, y: 0.7}, 0.1, {
-				ease: FlxEase.quadOut,
-				onComplete: function(tween:FlxTween)
+				if (rating.tween != null)
 				{
-					if (!rating.alive)
-						return;
-
-					final time:Float = (Conductor.stepCrochet * 0.001);
-					rating.tween = FlxTween.tween(rating.scale, {x: 0, y: 0}, time, {
-						startDelay: time * 8,
-						ease: FlxEase.quadIn,
-						onComplete: function(tween:FlxTween)
-						{
-							rating.kill();
-						}
-					});
+					rating.tween.cancel();
+					rating.tween.destroy();
 				}
-			});
+
+				rating.scale.set(0.7 * 1.1, 0.7 * 1.1);
+
+				rating.tween = FlxTween.tween(rating.scale, {x: 0.7, y: 0.7}, 0.1, {
+					ease: FlxEase.quadOut,
+					onComplete: function(tween:FlxTween)
+					{
+						if (!rating.alive)
+							return;
+
+						final time:Float = (Conductor.stepCrochet * 0.001);
+						rating.tween = FlxTween.tween(rating.scale, {x: 0, y: 0}, time, {
+							startDelay: time * 8,
+							ease: FlxEase.quadIn,
+							onComplete: function(tween:FlxTween)
+							{
+								rating.kill();
+							}
+						});
+					}
+				});
+			}
 		}
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
@@ -4983,17 +4983,20 @@ class PlayState extends MusicBeatState
 				rating.setGraphicSize(Std.int(rating.width * 0.7));
 				comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
 			}
-			rating.antialiasing = ClientPrefs.globalAntialiasing;
+			if (rating != null)
+				rating.antialiasing = ClientPrefs.globalAntialiasing;
 			comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
+			if (rating != null)
+				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
 		}
 
 		comboSpr.updateHitbox();
-		rating.updateHitbox();
+		if (rating != null)
+			rating.updateHitbox();
 
 		// forever engine combo
 		var seperatedScore:Array<String> = (combo + "").split("");
@@ -5092,12 +5095,14 @@ class PlayState extends MusicBeatState
 			daLoop++;
 		}
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
-				rating.kill();
-				rating.alpha = 1;
-			},
-			startDelay: Conductor.crochet * 0.001 / playbackRate
-		});
+		if (!isSimplyLove){
+			FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
+					rating.kill();
+					rating.alpha = 1;
+				},
+				startDelay: Conductor.crochet * 0.001 / playbackRate
+			});
+		}
 
 		if (ClientPrefs.displayMilliseconds) {
 			FlxTween.tween(precision, {alpha: 0}, 0.2 / playbackRate, {
