@@ -1,5 +1,6 @@
 package meta.substate;
 
+import flixel.util.FlxDestroyUtil;
 class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
@@ -18,7 +19,9 @@ class ResultsSubState extends MusicBeatSubstate
 	var fc:String;
 	var fcSprite:FlxSprite;
 
-    	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String, fc:String) 
+	var tweens:Array<FlxTween> = [];
+
+	public function new(sicks:Int, goods:Int, bads:Int, shits:Int, score:Int, misses:Int, percent:Float, rating:String, fc:String) 
 	{
         	super();
 
@@ -54,9 +57,9 @@ class ResultsSubState extends MusicBeatSubstate
 		new FlxTimer().start(0.01, function(tmr:FlxTimer)
 		{
 			if (fcSprite.angle == -4)
-				FlxTween.angle(fcSprite, fcSprite.angle, 4, 4, {ease: FlxEase.quartInOut});
+				tweens.push(FlxTween.angle(fcSprite, fcSprite.angle, 4, 4, {ease: FlxEase.quartInOut}));
 			if (fcSprite.angle == 4)
-				FlxTween.angle(fcSprite, fcSprite.angle, -4, 4, {ease: FlxEase.quartInOut});
+				tweens.push(FlxTween.angle(fcSprite, fcSprite.angle, -4, 4, {ease: FlxEase.quartInOut}));
 		}, 0);
 
 		var hint:FlxText = new FlxText(12, FlxG.height - 24, 0, 'You passed, but try getting under 10 misses for SDCB.', 12);
@@ -112,10 +115,10 @@ class ResultsSubState extends MusicBeatSubstate
 		titleTxt.alpha = 0;
 		bg.alpha = 0;
 
-		FlxTween.tween(bg, {alpha: 0.55}, 0.75, {ease: FlxEase.quadOut});
-		FlxTween.tween(titleTxt, {alpha: 1}, 1, {ease: FlxEase.quadOut});
-		FlxTween.tween(fcSprite, {alpha: 1}, 2, {ease: FlxEase.quadOut});
-		FlxTween.tween(resultsTxt, {alpha: 1}, 2.5, {ease: FlxEase.quadOut});
+		tweens.push(FlxTween.tween(bg, {alpha: 0.55}, 0.75, {ease: FlxEase.quadOut}));
+		tweens.push(FlxTween.tween(titleTxt, {alpha: 1}, 1, {ease: FlxEase.quadOut}));
+		tweens.push(FlxTween.tween(fcSprite, {alpha: 1}, 2, {ease: FlxEase.quadOut}));
+		tweens.push(FlxTween.tween(resultsTxt, {alpha: 1}, 2.5, {ease: FlxEase.quadOut}));
 		FlxTween.tween(hint, {alpha: 1}, 3, {ease: FlxEase.quadOut});
 
 		super.create();
@@ -126,6 +129,10 @@ class ResultsSubState extends MusicBeatSubstate
     override function update(elapsed:Float) 
     {
 	super.update(elapsed);
+
+	for (i in tweens)
+		if (i != null)
+			i.active = true;
 
 	if (FlxG.keys.justPressed.ANY) 
 	{
@@ -143,4 +150,16 @@ class ResultsSubState extends MusicBeatSubstate
 	    FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}
     }
+
+	override function destroy(){
+		for (i in tweens){
+			if (i != null){
+				i.cancel();
+				i.destroy();
+				i = null;
+			}
+		}
+		tweens = FlxDestroyUtil.destroyArray(tweens);
+		super.destroy();
+	}
 }
