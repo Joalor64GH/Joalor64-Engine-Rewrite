@@ -4,9 +4,17 @@ import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
 import debug.FPS;
+import openfl.Lib;
+import lime.system.System as LimeSystem;
+import lime.utils.Log as LimeLogger;
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
 
 import haxe.Exception;
 import haxe.CallStack;
+import openfl.events.UncaughtErrorEvent;
 import haxe.io.Path;
 
 import macros.MacroUtil;
@@ -79,6 +87,10 @@ class Main extends Sprite
 			config.defaultFPS, config.defaultFPS, config.skipSplash, config.startFullscreen);
 		addChild(game);
 
+		// joalor64game crash handlers don't quite work
+		@:privateAccess
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onError);
+
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
 
@@ -118,12 +130,65 @@ class Main extends Sprite
 		addChild(toast);
 	}
 
+	private static function onError(e:UncaughtErrorEvent):Void
+	{
+		var stack:Array<String> = [];
+		stack.push(e.error);
+
+		for (stackItem in CallStack.exceptionStack(true))
+		{
+			switch (stackItem)
+			{
+				case CFunction:
+					stack.push('C Function');
+				case Module(m):
+					stack.push('Module ($m)');
+				case FilePos(s, file, line, column):
+					stack.push('$file (line $line)');
+				case Method(classname, method):
+					stack.push('$classname (method $method)');
+				case LocalFunction(name):
+					stack.push('Local Function ($name)');
+			}
+		}
+
+		e.preventDefault();
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+
+		final msg:String = stack.join('\n');
+
+		#if sys
+		try
+		{
+			if (!FileSystem.exists('logs'))
+				FileSystem.createDirectory('logs');
+
+			File.saveContent('logs/'
+				+ Lib.application.meta.get('file')
+				+ '-'
+				+ Date.now().toString().replace(' ', '-').replace(':', "'")
+				+ '.txt', msg
+				+ '\n');
+		}
+		catch (e:Dynamic)
+		{
+			LimeLogger.println("Error!\nClouldn't save the crash dump because:\n" + e);
+		}
+		#end
+
+		LimeLogger.println(msg);
+		Lib.application.window.alert(msg, 'Error!');
+		LimeSystem.exit(1);
+	}
+
 	public static var webmHandler:WebmHandler;
 
 	var oldVol:Float = 1.0;
 	var newVol:Float = 0.3;
 
 	var focused:Bool = true;
+
 	var focusMusicTween:FlxTween;
 
 	function onWindowFocusOut()
