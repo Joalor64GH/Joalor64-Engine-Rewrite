@@ -290,18 +290,18 @@ class FunkinHscript extends InterpEx {
 		variables.set('gfName', PlayState.SONG.gfVersion);
 
 			// Some settings, no jokes
-		variables.set('downscroll', ClientPrefs.data.downScroll);
-		variables.set('middlescroll', ClientPrefs.data.middleScroll);
-		variables.set('framerate', ClientPrefs.data.framerate);
-		variables.set('ghostTapping', ClientPrefs.data.ghostTapping);
-		variables.set('hideHud', ClientPrefs.data.hideHud);
-		variables.set('timeBarType', ClientPrefs.data.timeBarType);
-		variables.set('scoreZoom', ClientPrefs.data.scoreZoom);
-		variables.set('cameraZoomOnBeat', ClientPrefs.data.camZooms);
-		variables.set('flashingLights', ClientPrefs.data.flashing);
-		variables.set('noteOffset', ClientPrefs.data.noteOffset);
-		variables.set('noResetButton', ClientPrefs.data.noReset);
-		variables.set('lowQuality', ClientPrefs.data.lowQuality);
+		variables.set('downscroll', ClientPrefs.downScroll);
+		variables.set('middlescroll', ClientPrefs.middleScroll);
+		variables.set('framerate', ClientPrefs.framerate);
+		variables.set('ghostTapping', ClientPrefs.ghostTapping);
+		variables.set('hideHud', ClientPrefs.hideHud);
+		variables.set('timeBarType', ClientPrefs.timeBarType);
+		variables.set('scoreZoom', ClientPrefs.scoreZoom);
+		variables.set('cameraZoomOnBeat', ClientPrefs.camZooms);
+		variables.set('flashingLights', ClientPrefs.flashing);
+		variables.set('noteOffset', ClientPrefs.noteOffset);
+		variables.set('noResetButton', ClientPrefs.noReset);
+		variables.set('lowQuality', ClientPrefs.lowQuality);
 
 		variables.set("scriptName", scriptName);
 

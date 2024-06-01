@@ -22,11 +22,11 @@ class MinigamesState extends MusicBeatState
 		Application.current.window.title = Application.current.meta.get('name');
 		
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
-        	menuBG.antialiasing = ClientPrefs.data.globalAntialiasing;
+        	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);
 
         	var slash:FlxSprite = new FlxSprite().loadGraphic(Paths.image('minigames/slash'));
-		slash.antialiasing = ClientPrefs.data.globalAntialiasing;
+		slash.antialiasing = ClientPrefs.globalAntialiasing;
 		slash.screenCenter();
 		add(slash);
 
@@ -72,7 +72,7 @@ class MinigamesState extends MusicBeatState
 			changeSelection(controls.UI_UP_P ? -1 : 1);
 
 		if (controls.BACK) 
-			MusicBeatState.switchState((ClientPrefs.data.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
+			MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
             
 		if (controls.ACCEPT)
 		{

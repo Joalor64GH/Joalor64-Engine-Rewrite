@@ -75,7 +75,7 @@ class OptionsState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.scrollFactor.set(0, yScroll / 3);
-		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
 		#if sys
@@ -161,7 +161,7 @@ class OptionsState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				MusicBeatState.switchState((ClientPrefs.data.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
+				MusicBeatState.switchState((ClientPrefs.simpleMain) ? new SimpleMainMenuState() : new MainMenuState());
 			}
 		}
 

@@ -28,7 +28,7 @@ class FlashingState extends MusicBeatState
 				});
 
 				if (!accept) {
-					ClientPrefs.data.flashing = false;
+					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();
 				}
 			}

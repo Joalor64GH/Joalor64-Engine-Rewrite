@@ -21,7 +21,7 @@ class Init extends FlxState
         	add(bg);
         
         	epicLogo = new FlxSprite().loadGraphic(Paths.image('loader/startupLogo'));
-        	epicLogo.antialiasing = ClientPrefs.data.globalAntialiasing;
+        	epicLogo.antialiasing = ClientPrefs.globalAntialiasing;
 		epicLogo.screenCenter();
         	add(epicLogo);
 
@@ -46,7 +46,7 @@ class Init extends FlxState
 
 		var loadingSpeen:FlxSprite = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));
 		loadingSpeen.angularVelocity = 180;
-		loadingSpeen.antialiasing = ClientPrefs.data.globalAntialiasing;
+		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadingSpeen);
 
 		FlxG.sound.play(Paths.sound('startup'));
@@ -85,7 +85,7 @@ class Init extends FlxState
 	function loadEverything()	
 	{
 		Localization.loadLanguages();
-		Localization.switchLanguage(ClientPrefs.data.language);
+		Localization.switchLanguage(ClientPrefs.language);
 		
 		#if html5
 		Paths.initPaths();
@@ -145,7 +145,7 @@ class Init extends FlxState
 		ClientPrefs.loadPrefs();
         
 		#if CHECK_FOR_UPDATES
-		if (ClientPrefs.data.checkForUpdates && !OutdatedState.leftState)
+		if (ClientPrefs.checkForUpdates && !OutdatedState.leftState)
 			OutdatedState.updateCheck();
 		#end
 

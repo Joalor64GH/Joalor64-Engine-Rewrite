@@ -26,7 +26,7 @@ class ModchartUtil
         //need to test each engine
         //not expecting all to work
         #if PSYCH 
-        return ClientPrefs.data.downScroll;
+        return ClientPrefs.downScroll;
         #elseif LEATHER
         return utilities.Options.getData("downscroll");
         #elseif ANDROMEDA //dunno why youd use this on andromeda but whatever, already got its own cool modchart system
@@ -48,7 +48,7 @@ class ModchartUtil
     public static function getMiddlescroll(instance:ModchartMusicBeatState)
     {
         #if PSYCH 
-        return ClientPrefs.data.middleScroll;
+        return ClientPrefs.middleScroll;
         #elseif LEATHER
         return utilities.Options.getData("middlescroll");
         #else 

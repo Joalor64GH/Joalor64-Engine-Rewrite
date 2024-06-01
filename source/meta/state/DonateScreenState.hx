@@ -39,7 +39,7 @@ class DonateScreenState extends MusicBeatState
 		menuItem.animation.play('selected');
 		menuItem.updateHitbox();
 		menuItem.screenCenter(X);
-		menuItem.antialiasing = ClientPrefs.data.globalAntialiasing;
+		menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuItem);
 
 		var textGroup:FlxTypedGroup<Alphabet> = new FlxTypedGroup<Alphabet>();

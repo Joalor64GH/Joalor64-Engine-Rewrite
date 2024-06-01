@@ -51,7 +51,7 @@ class EpicState extends MusicBeatState
 
 		if (controls.BACK) 
 		{
-			if (ClientPrefs.data.simpleMain)
+			if (ClientPrefs.simpleMain)
 				MusicBeatState.switchState(new SimpleMainMenuState());
 			else
 				MusicBeatState.switchState(new MainMenuState());

@@ -88,8 +88,11 @@ class Main extends Sprite
 		addChild(game);
 
 		// joalor64game crash handlers don't quite work
+		// yeah
+		#if CRASH_HANDLER
 		@:privateAccess
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onError);
+		#end
 
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
@@ -233,7 +236,7 @@ class Main extends Sprite
 
 class Joalor64Game extends FlxGame
 {
-	var _viewingCrash:Bool = false;
+	// var _viewingCrash:Bool = false;
 
 	public function new(gameWidth:Int = 0, gameHeight:Int = 0, initialState:Class<FlxState>, updateFramerate:Int = 60, drawFramerate:Int = 60, skipSplash:Bool = false, startFullscreen:Bool = false) 
 	{
@@ -241,6 +244,7 @@ class Joalor64Game extends FlxGame
 		_customSoundTray = Joalor64SoundTray;
 	}
 
+	/*
 	override function create(_):Void {
 		try {
 			super.create(_);
@@ -349,6 +353,7 @@ class Joalor64Game extends FlxGame
 		throw e;
 		#end
 	}
+	*/
 }
 
 class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray 

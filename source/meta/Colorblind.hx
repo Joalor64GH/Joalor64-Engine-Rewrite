@@ -2,8 +2,6 @@ package meta;
 
 import openfl.filters.BitmapFilter;
 import openfl.filters.ColorMatrixFilter;
-import flixel.FlxG;
-import meta.data.ClientPrefs;
 
 // some code from Forever Engine, some from Flixel Demos
 class Colorblind {
@@ -48,7 +46,7 @@ class Colorblind {
     ];
 
     public static function updateFilter(){
-        if (!ClientPrefs.data.shaders){
+        if (!ClientPrefs.shaders){
             if (filters.length > 0)
                 filters = [];
             return;
@@ -57,7 +55,7 @@ class Colorblind {
         filters = [];
         FlxG.game.setFilters(filters);
 
-        var curFilter = ClientPrefs.data.colorBlindFilter;
+        var curFilter = ClientPrefs.colorBlindFilter;
         if (colorBlindFilters.get(curFilter) != null){
             var daFilter = colorBlindFilters.get(curFilter).filter;
 

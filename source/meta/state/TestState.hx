@@ -14,16 +14,16 @@ class TestState extends MusicBeatState
         
         var musplayer:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/musplayer'));
         musplayer.screenCenter();
-        musplayer.antialiasing = ClientPrefs.data.globalAntialiasing;
+        musplayer.antialiasing = ClientPrefs.globalAntialiasing;
         add(musplayer);
         var disc:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/disc'));
         disc.setPosition(musplayer.x + 268, musplayer.y + 13);
-        disc.antialiasing = ClientPrefs.data.globalAntialiasing;
+        disc.antialiasing = ClientPrefs.globalAntialiasing;
         disc.angularVelocity = 30;
         add(disc);
         var playerneedle:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('radio/playerneedle'));
         playerneedle.screenCenter();
-        playerneedle.antialiasing = ClientPrefs.data.globalAntialiasing;
+        playerneedle.antialiasing = ClientPrefs.globalAntialiasing;
         add(playerneedle);
 
         var testTxt:Alphabet = new Alphabet(0, 0, 'This is a test.', true);
@@ -38,7 +38,7 @@ class TestState extends MusicBeatState
         if (controls.BACK)
         {
             FlxG.sound.play(Paths.sound('cancelMenu'));
-            if (ClientPrefs.data.simpleMain)
+            if (ClientPrefs.simpleMain)
 		MusicBeatState.switchState(new SimpleMainMenuState());
 	    else
 		MusicBeatState.switchState(new MainMenuState());

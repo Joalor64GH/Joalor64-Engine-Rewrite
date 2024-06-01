@@ -80,8 +80,8 @@ class Option
 	{
 		#if MODS_ALLOWED
 		if (fromJson != null) {
-			if (ClientPrefs.data.modsOptsSaves.exists(fromJson[0]) && ClientPrefs.data.modsOptsSaves[fromJson[0]].exists(variable)) {
-				return ClientPrefs.data.modsOptsSaves[fromJson[0]][variable];
+			if (ClientPrefs.modsOptsSaves.exists(fromJson[0]) && ClientPrefs.modsOptsSaves[fromJson[0]].exists(variable)) {
+				return ClientPrefs.modsOptsSaves[fromJson[0]][variable];
 			} else return null;
 		}
 		#end
@@ -91,8 +91,8 @@ class Option
 	{
 		#if MODS_ALLOWED
 		if (fromJson != null) {
-			if (!ClientPrefs.data.modsOptsSaves.exists(fromJson[0])) ClientPrefs.data.modsOptsSaves.set(fromJson[0], []);
-			ClientPrefs.data.modsOptsSaves[fromJson[0]][variable] = value;
+			if (!ClientPrefs.modsOptsSaves.exists(fromJson[0])) ClientPrefs.modsOptsSaves.set(fromJson[0], []);
+			ClientPrefs.modsOptsSaves[fromJson[0]][variable] = value;
 		} else #end
 		Reflect.setProperty(ClientPrefs, variable, value);
 	}

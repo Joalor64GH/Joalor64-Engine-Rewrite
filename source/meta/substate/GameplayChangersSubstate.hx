@@ -517,11 +517,11 @@ class GameplayOption
 
 	public function getValue():Dynamic
 	{
-		return ClientPrefs.data.gameplaySettings.get(variable);
+		return ClientPrefs.gameplaySettings.get(variable);
 	}
 	public function setValue(value:Dynamic)
 	{
-		ClientPrefs.data.gameplaySettings.set(variable, value);
+		ClientPrefs.gameplaySettings.set(variable, value);
 	}
 
 	public function setChild(child:Alphabet)

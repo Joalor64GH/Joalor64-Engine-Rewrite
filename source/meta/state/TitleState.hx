@@ -119,7 +119,7 @@ class TitleState extends MusicBeatState
 		logoBl.frames = Paths.getSparrowAtlas('titlescreen/logoBumpin');
 		#end
 
-		logoBl.antialiasing = ClientPrefs.data.globalAntialiasing;
+		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
@@ -144,10 +144,10 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.animation.addByPrefix('Hey', 'GF Cheer', 24, false);
-		gfDance.antialiasing = ClientPrefs.data.globalAntialiasing;
+		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 
 		bg = new FlxSprite().loadGraphic(Paths.image('titlescreen/titleBG'));
-		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.screenCenter();
 
 		add(bg);
@@ -184,7 +184,7 @@ class TitleState extends MusicBeatState
 			newTitle = true;
 			
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
 		} else {
 			newTitle = false;
 			
@@ -192,7 +192,7 @@ class TitleState extends MusicBeatState
 			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		}
 		
-		titleText.antialiasing = ClientPrefs.data.globalAntialiasing;
+		titleText.antialiasing = ClientPrefs.globalAntialiasing;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		add(titleText);
@@ -220,7 +220,7 @@ class TitleState extends MusicBeatState
 		psychSpr.setGraphicSize(Std.int(psychSpr.width * 0.8));
 		psychSpr.updateHitbox();
 		psychSpr.screenCenter(X);
-		psychSpr.antialiasing = ClientPrefs.data.globalAntialiasing;
+		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('titlescreen/newgrounds_logo'));
 		add(ngSpr);
@@ -228,23 +228,23 @@ class TitleState extends MusicBeatState
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
-		ngSpr.antialiasing = ClientPrefs.data.globalAntialiasing;
+		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		#if JOALOR64_WATERMARKS
 		credIcon1 = new FlxSprite(150,150).loadGraphic(Paths.image('credits/joalor'));
 		add(credIcon1);
-		credIcon1.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIcon1.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon1.visible = false;
 
 		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/meme'));
 		add(credIcon2);
-		credIcon2.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon2.visible = false;
 		credIcon2.flipX = true;
 
 		credIcon3 = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/bot'));
 		add(credIcon3);
-		credIcon3.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIcon3.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon3.visible = false;
 
 		credIcon4 = new FlxSprite(FlxG.width-300, FlxG.height-300).loadGraphic(Paths.image('credits/fox'));
@@ -255,34 +255,34 @@ class TitleState extends MusicBeatState
 		#elseif PSYCH_WATERMARKS
 		credIconShadow = new FlxSprite(150,150).loadGraphic(Paths.image('credits/shadowmario'));
 		add(credIconShadow);
-		credIconShadow.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconShadow.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconShadow.visible = false;
 
 		credIconRiver = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/riveren'));
 		add(credIconRiver);
-		credIconRiver.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconRiver.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconRiver.visible = false;
 		credIconRiver.flipX = true;
 		#else
 		credIconMuff = new FlxSprite(150,150).loadGraphic(Paths.image('credits/ninjamuffin99'));
 		add(credIconMuff);
-		credIconMuff.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconMuff.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconMuff.visible = false;
 
 		credIconPhantom = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/phantomarcade'));
 		add(credIconPhantom);
-		credIconPhantom.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconPhantom.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconPhantom.visible = false;
 		credIconPhantom.flipX = true;
 
 		credIconKawai = new FlxSprite(150,FlxG.height-300).loadGraphic(Paths.image('credits/kawaisprite'));
 		add(credIconKawai);
-		credIconKawai.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconKawai.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconKawai.visible = false;
 
 		credIconEvil = new FlxSprite(FlxG.width-300,FlxG.height-300).loadGraphic(Paths.image('credits/evilsk8r'));
 		add(credIconEvil);
-		credIconEvil.antialiasing = ClientPrefs.data.globalAntialiasing;
+		credIconEvil.antialiasing = ClientPrefs.globalAntialiasing;
 		credIconEvil.visible = false;
 		credIconEvil.flipX = true;
 		#end
@@ -398,7 +398,7 @@ class TitleState extends MusicBeatState
 				
 				if(titleText != null) titleText.animation.play('press');
 
-				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				FlxTween.tween(logoBl, {x: -1500, angle: 10, alpha: 0}, 2, {ease: FlxEase.expoInOut});
@@ -421,7 +421,7 @@ class TitleState extends MusicBeatState
 					#if html5
 					MusicBeatState.switchState(new BruhState());
 					#else
-					if (ClientPrefs.data.simpleMain)
+					if (ClientPrefs.simpleMain)
 						MusicBeatState.switchState(new SimpleMainMenuState());
 					else
 						MusicBeatState.switchState(new MainMenuState());

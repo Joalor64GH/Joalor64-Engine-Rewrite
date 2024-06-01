@@ -70,7 +70,7 @@ class PauseSubState extends MusicBeatSubstate
 		if (songName != null)
 			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
 		else if (songName != 'None')
-			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), true, true);
+			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), true, true);
 		
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
@@ -276,7 +276,7 @@ class PauseSubState extends MusicBeatSubstate
 							} else if (PlayState.isStoryMode) {
 								MusicBeatState.switchState(new StoryMenuState());
 							} else {
-								if (ClientPrefs.data.simpleMain)
+								if (ClientPrefs.simpleMain)
 									MusicBeatState.switchState(new SimpleMainMenuState());
 								else
 									MusicBeatState.switchState(new MainMenuState());

@@ -345,7 +345,7 @@ class ModchartEditorState extends MusicBeatState
 
 
         #if PSYCH
-		strumLine = new FlxSprite(ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, 50).makeGraphic(FlxG.width, 10);
+		strumLine = new FlxSprite(ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, 50).makeGraphic(FlxG.width, 10);
         if(ModchartUtil.getDownscroll(this)) strumLine.y = FlxG.height - 150;
         #else
         strumLine = new FlxSprite(0, 100).makeGraphic(FlxG.width, 10);
@@ -1076,8 +1076,8 @@ class ModchartEditorState extends MusicBeatState
             if (player < 1)
             {
                 #if PSYCH
-                if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
-                else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
+                if(!ClientPrefs.opponentStrums) targetAlpha = 0;
+                else if(ClientPrefs.middleScroll) targetAlpha = 0.35;
                 #end
             }
 
@@ -1105,8 +1105,8 @@ class ModchartEditorState extends MusicBeatState
 			babyArrow.x += 100 - ((usedKeyCount - 4) * 16) + (usedKeyCount >= 10 ? 30 : 0);
 			babyArrow.x += ((FlxG.width / 2) * player);
             #elseif PSYCH 
-            var babyArrow:StrumNote = new StrumNote(ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, strumLine.y, i, player);
-            babyArrow.downScroll = ClientPrefs.data.downScroll;
+            var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, strumLine.y, i, player);
+            babyArrow.downScroll = ClientPrefs.downScroll;
             babyArrow.alpha = targetAlpha;
             #end
 
@@ -1118,7 +1118,7 @@ class ModchartEditorState extends MusicBeatState
             else
             {
                 #if PSYCH 
-                if(ClientPrefs.data.middleScroll)
+                if(ClientPrefs.middleScroll)
                 {
                     babyArrow.x += 310;
                     if(i > 1) { //Up and Right
