@@ -179,7 +179,7 @@ class SimpleMainMenuState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			FlxG.sound.play(Paths.sound('confirmMenu'));
-			if (ClientPrefs.data.flashing) {
+			if (ClientPrefs.flashing) {
 				grpOptions.forEach(function(grpOptions:Alphabet)
 				{
 					FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)
