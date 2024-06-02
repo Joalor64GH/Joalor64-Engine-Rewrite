@@ -193,7 +193,7 @@ class FreeplayState extends MusicBeatState
 
 		missingText = new FlxText(0, 0, 0, '', 72);
 		missingText.scrollFactor.set();
-		missingText.setFormat("VCR OSD Mono", 60, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		missingText.setFormat(Paths.font('vcr.ttf'), 60, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		missingText.screenCenter(XY);
 		missingText.alpha = 0;
 		add(missingText);

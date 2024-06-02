@@ -38,7 +38,6 @@ class CustomFadeTransition extends FlxSubState
 	{
 		var camList = FlxG.cameras.list;
 		camera = camList[camList.length - 1];
-		
 		rhombus.cameras = [camera];
 
 		super.update(elapsed);

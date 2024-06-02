@@ -107,7 +107,7 @@ class OptionsState extends MusicBeatState
 		add(textBG);
 
 		var versionShit:FlxText = new FlxText(textBG.x, textBG.y + 4, 0, "Press D for save data settings.", 12);
-		versionShit.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, LEFT);
+		versionShit.setFormat(Paths.font('vcr.ttf'), 18, FlxColor.WHITE, LEFT);
 		versionShit.scrollFactor.set();
 		add(versionShit);
 

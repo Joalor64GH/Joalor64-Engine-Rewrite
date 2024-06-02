@@ -1,7 +1,5 @@
 package meta.data;
 
-import flixel.input.keyboard.FlxKey;
-
 class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
@@ -42,6 +40,7 @@ class ClientPrefs {
 	public static var language:String = 'en';
 	public static var displayMilliseconds:Bool = true;
 	public static var weekendScore:Bool = false;
+	public static var inputSystem:String = 'Default';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -152,6 +151,7 @@ class ClientPrefs {
 		FlxG.save.data.language = language;
 		FlxG.save.data.displayMilliseconds = displayMilliseconds;
 		FlxG.save.data.weekendScore = weekendScore;
+		FlxG.save.data.inputSystem = inputSystem;
 	
 		FlxG.save.flush();
 
@@ -236,7 +236,6 @@ class ClientPrefs {
 		if(FlxG.save.data.comboOffset != null) {
 			comboOffset = FlxG.save.data.comboOffset;
 		}
-		
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
 		}
@@ -270,6 +269,7 @@ class ClientPrefs {
 		if(FlxG.save.data.screenScaleMode != null) {
 			screenScaleMode = FlxG.save.data.screenScaleMode;
 		}
+
 		if(FlxG.save.data.gameplaySettings != null)
 		{
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
@@ -288,6 +288,7 @@ class ClientPrefs {
 		{
 			FlxG.sound.muted = FlxG.save.data.mute;
 		}
+		
 		if (FlxG.save.data.checkForUpdates != null)
 		{
 			checkForUpdates = FlxG.save.data.checkForUpdates;
@@ -313,6 +314,8 @@ class ClientPrefs {
 			displayMilliseconds = FlxG.save.data.displayMilliseconds;
 		if(FlxG.save.data.weekendScore != null)
 			weekendScore = FlxG.save.data.weekendScore;
+		if(FlxG.save.data.inputSystem != null)
+			inputSystem = FlxG.save.data.inputSystem;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

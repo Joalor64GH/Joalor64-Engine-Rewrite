@@ -50,7 +50,7 @@ class VideoState extends MusicBeatState
 		txt = new FlxText(0, 0, FlxG.width,
 			defaultText,
 			32);
-		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		txt.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
 		add(txt);
 

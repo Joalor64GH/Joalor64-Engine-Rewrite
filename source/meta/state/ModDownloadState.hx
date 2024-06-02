@@ -124,7 +124,7 @@ class ModDownloadState extends MusicBeatState
 		coolButton.setGraphicSize(150, 70);
 		coolButton.updateHitbox();
 		coolButton.color = FlxColor.GREEN;
-		coolButton.label.setFormat(Paths.font("pixel.otf"), 12, FlxColor.WHITE);
+		coolButton.label.setFormat(Paths.font('pixel.ttf'), 12, FlxColor.WHITE);
 		coolButton.label.fieldWidth = 135;
 		setLabelOffset(coolButton, 5, 22);
 		coolButton.screenCenter(X);

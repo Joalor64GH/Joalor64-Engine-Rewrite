@@ -604,6 +604,14 @@ class GameplaySubState extends BaseOptionsMenu
 			['Default', 'Psych', 'Kade', 'Simple']);
 		addOption(option);
 
+		var option:Option = new Option('Input System:',
+			"What input system do you like?",
+			'inputSystem',
+			'string',
+			'Default',
+			['Default', 'Kade', 'Vanilla']);
+		addOption(option);
+
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
 			'camZooms',
@@ -926,7 +934,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn1.scale.set(1.5, 1.5);
 		btn1.color = 0x7b2977;
-		btn1.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn1.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn1.label.screenCenter(XY);
 		btn1.updateHitbox();
 		add(btn1);
@@ -945,7 +953,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn2.scale.set(1.5, 1.5);
 		btn2.color = 0xfff700;
-		btn2.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn2.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn2.label.screenCenter(XY);
 		btn2.updateHitbox();
 		add(btn2);
@@ -964,7 +972,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn3.scale.set(1.5, 1.5);
 		btn3.color = 0xac415e;
-		btn3.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn3.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn3.label.screenCenter(XY);
 		btn3.updateHitbox();
 		add(btn3);
@@ -983,7 +991,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn4.scale.set(1.5, 1.5);
 		btn4.color = 0x417ea3;
-		btn4.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn4.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn4.label.screenCenter(XY);
 		btn4.updateHitbox();
 		add(btn4);
@@ -1002,7 +1010,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn5.scale.set(1.5, 1.5);
 		btn5.color = 0xffffff;
-		btn5.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn5.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn5.label.screenCenter(XY);
 		btn5.updateHitbox();
 		add(btn5);
@@ -1021,7 +1029,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn6.scale.set(1.5, 1.5);
 		btn6.color = 0x000000;
-		btn6.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn6.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn6.label.screenCenter(XY);
 		btn6.updateHitbox();
 		add(btn6);
@@ -1040,7 +1048,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn7.scale.set(1.5, 1.5);
 		btn7.color = 0xea00ff;
-		btn7.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn7.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn7.label.screenCenter(XY);
 		btn7.updateHitbox();
 		add(btn7);
@@ -1059,7 +1067,7 @@ class NotesSubState extends MusicBeatSubstate
         	});
 		btn8.scale.set(1.5, 1.5);
 		btn8.color = 0xa26dad;
-		btn8.label.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		btn8.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		btn8.label.screenCenter(XY);
 		btn8.updateHitbox();
 		add(btn8);

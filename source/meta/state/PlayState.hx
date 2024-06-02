@@ -226,6 +226,9 @@ class PlayState extends MusicBeatState
 	public static var changedDifficulty:Bool = false;
 	public static var chartingMode:Bool = false;
 
+	//Input System
+	public var inputSystem:InputSystem;
+
 	//Gameplay settings
 	public var healthGain:Float = 1;
 	public var healthLoss:Float = 1;
@@ -5889,7 +5892,7 @@ class PlayState extends MusicBeatState
 
 		instance = null;
 		
-		super.destroy();
+		super.destroy(); // how am i getting an error here??
 	}
 
 	public static function cancelMusicFadeTween() {

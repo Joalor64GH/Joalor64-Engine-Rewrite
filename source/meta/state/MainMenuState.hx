@@ -219,7 +219,7 @@ class MainMenuState extends MusicBeatState
 		#if debug
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 104, 0, 'Hello ${system.CoolSystemStuff.getUsername()} having a good day? im proud of you! :)', 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		#end
 
@@ -233,7 +233,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...versionShitArray.length) {
 			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, versionShitArray[i], 12);
 			versionShit.scrollFactor.set();
-			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			versionShit.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
 		}
 
@@ -245,7 +245,7 @@ class MainMenuState extends MusicBeatState
 		tipText = new FlxText(0, 0, 0,
 			"Welcome to Joalor64 Engine Rewritten! This is a complete remake of the original that changes a lot of stuff, but still retains the \"vibe\" of the original. Credits go to ShadowMario for Psych Engine. Thanks for playing!");
 		tipText.scrollFactor.set();
-		tipText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT);
+		tipText.setFormat(Paths.font('vcr.ttf'), 24, FlxColor.WHITE, LEFT);
 		tipText.updateHitbox();
 		add(tipText);
 

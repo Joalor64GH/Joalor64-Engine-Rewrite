@@ -46,12 +46,11 @@ import js.html.*;
 #end
 
 // Joalor64 Engine Imports
+import animateatlas.AtlasFrameMaker;
+
 #if desktop
 import meta.data.dependency.Discord;
 #end
-
-import animateatlas.AtlasFrameMaker;
-
 import meta.data.alphabet.Alphabet;
 import meta.data.Conductor;
 import meta.data.Conductor.BPMChangeEvent;
@@ -67,6 +66,7 @@ import meta.ArtemisIntegration;
 import meta.Controls;
 import meta.data.options.*;
 import meta.data.alphabet.*;
+import meta.data.input.*;
 import meta.data.*;
 import meta.state.*;
 import meta.substate.*;

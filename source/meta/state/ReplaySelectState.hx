@@ -93,21 +93,21 @@ class ReplaySelectState extends MusicBeatState
 	dateText.scrollFactor.set();
         dateText.borderSize = 2;
 	dateText.borderQuality = 2;
-        dateText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        dateText.setFormat(Paths.font('vcr.ttf'), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(dateText);
 
         diffText = new FlxText(10, 64, 0, "Used difficulty:", 30);
         diffText.scrollFactor.set();
         diffText.borderSize = 2;
 	diffText.borderQuality = 2;
-        diffText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        diffText.setFormat(Paths.font('vcr.ttf'), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(diffText);
 
         songText = new FlxText(10, 96, 0, 'Song Name: ${songName.toUpperCase()}', 30);
         songText.scrollFactor.set();
         songText.borderSize = 2;
 	songText.borderQuality = 2;
-        songText.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        songText.setFormat(Paths.font('vcr.ttf'), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(songText);
 
         super.create();

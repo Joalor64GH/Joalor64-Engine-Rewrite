@@ -4,7 +4,6 @@ import meta.ButtplugUtils;
 import core.ToastCore;
 import meta.video.*;
 import debug.FPS;
-import openfl.Lib;
 import lime.system.System as LimeSystem;
 import lime.utils.Log as LimeLogger;
 #if sys
@@ -181,7 +180,16 @@ class Main extends Sprite
 		#end
 
 		LimeLogger.println(msg);
-		Lib.application.window.alert(msg + '\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/', 'Error!');
+
+		FlxG.bitmap.dumpCache();
+		FlxG.bitmap.clearCache();
+
+		if (FlxG.sound.music != null)
+			FlxG.sound.music.stop();
+
+		DiscordClient.shutdown();
+
+		Lib.application.window.alert(msg + '\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues', 'Error!');
 		LimeSystem.exit(1);
 	}
 
@@ -191,7 +199,6 @@ class Main extends Sprite
 	var newVol:Float = 0.3;
 
 	var focused:Bool = true;
-
 	var focusMusicTween:FlxTween;
 
 	function onWindowFocusOut()
@@ -236,124 +243,11 @@ class Main extends Sprite
 
 class Joalor64Game extends FlxGame
 {
-	// var _viewingCrash:Bool = false;
-
 	public function new(gameWidth:Int = 0, gameHeight:Int = 0, initialState:Class<FlxState>, updateFramerate:Int = 60, drawFramerate:Int = 60, skipSplash:Bool = false, startFullscreen:Bool = false) 
 	{
 		super(gameWidth, gameHeight, initialState, updateFramerate, drawFramerate, skipSplash, startFullscreen);
 		_customSoundTray = Joalor64SoundTray;
 	}
-
-	/*
-	override function create(_):Void {
-		try {
-			super.create(_);
-			
-			removeChild(soundTray);
-			addChild(soundTray);
-		}
-		catch (e:Exception)
-			return exceptionCaught(e, 'create');
-	}
-
-	override function onFocus(_):Void {
-		try super.onFocus(_) catch (e:Exception)
-			return exceptionCaught(e, 'onFocus');
-	}
-
-	override function onFocusLost(_):Void {
-		try super.onFocusLost(_) catch (e:Exception)
-			return exceptionCaught(e, 'onFocusLost');
-	}
-
-	override function onEnterFrame(_):Void {
-		try super.onEnterFrame(_) catch (e:Exception)
-			return exceptionCaught(e, 'onEnterFrame');
-	}
-
-	override function update():Void {
-		if (_viewingCrash) return;
-		try super.update() catch (e:Exception)
-			return exceptionCaught(e, 'update');
-	}
-
-	override function draw():Void {
-		try super.draw() catch (e:Exception)
-			return exceptionCaught(e, 'draw');
-	}
-
-	@:allow(flixel.FlxG)
-	override function onResize(_):Void {
-		if (_viewingCrash) return;
-		super.onResize(_);
-	}
-
-	private function exceptionCaught(e:Exception, ?func:String = null)
-	{
-		#if CRASH_HANDLER
-		if (_viewingCrash) return;
-
-		var path:String;
-		var fileStack:Array<String> = [];
-		var dateNow:String = Date.now().toString();
-		var println = #if sys Sys.println #else trace #end;
-
-		dateNow = StringTools.replace(dateNow, " ", "_");
-		dateNow = StringTools.replace(dateNow, ":", "'");
-
-		path = 'crash/J64E_${dateNow}.txt';
-
-		for (stackItem in CallStack.exceptionStack(true)) {
-			switch (stackItem) {
-				case CFunction:
-					fileStack.push('Non-Haxe (C) Function');
-				case Module(moduleName):
-					fileStack.push('Module (${moduleName})');
-				case FilePos(s, file, line, col):
-					fileStack.push('${file} (line ${line})');
-				case Method(className, method):
-					fileStack.push('${className} (method ${method})');
-				case LocalFunction(name):
-					fileStack.push('Local Function (${name})');
-			}
-
-			println(stackItem);
-		}
-
-		fileStack.insert(0, "Exception: " + e.message);
-
-		final msg:String = fileStack.join('\n');
-
-		try 
-		{
-			if (!FileSystem.exists("crash/")) 
-				FileSystem.createDirectory("crash/");
-			File.saveContent(path, '${msg}\n');
-		} 
-		catch (e:Exception)
-			trace('Couldn\'t save error message "${e.message}"');
-
-		final funcThrew:String = '${func != null ? ' thrown at "${func}" function' : ""}';
-
-		println(msg + funcThrew);
-		println(e.message);
-		println('Crash dump saved in ${Path.normalize(path)}');
-
-		FlxG.bitmap.dumpCache();
-		FlxG.bitmap.clearCache();
-
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.stop();
-
-		DiscordClient.shutdown();
-
-		Main.instance.addChild(new backend.CrashHandler(e.details()));
-		_viewingCrash = true;
-		#else
-		throw e;
-		#end
-	}
-	*/
 }
 
 class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray 

@@ -56,7 +56,7 @@ class MinigamesState extends MusicBeatState
         	descTxt = new FlxText(20, FlxG.height - 80, 1000, "", 22);
         	descTxt.screenCenter(X);
 		descTxt.scrollFactor.set();
-		descTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(descTxt);
 
         	changeSelection();

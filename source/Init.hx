@@ -41,7 +41,7 @@ class Init extends FlxState
 
 		coolText = new FlxText(20, FlxG.height - 80, 1000, "", 22);
 		coolText.scrollFactor.set();
-		coolText.setFormat("VCR OSD Mono", 26, 0xFFffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		coolText.setFormat(Paths.font('vcr.ttf'), 26, 0xFFffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(coolText);
 
 		var loadingSpeen:FlxSprite = new FlxSprite(FlxG.width - 91, FlxG.height - 91).loadGraphic(Paths.image("loader/loader"));

@@ -23,7 +23,7 @@ class EpicState extends MusicBeatState
 
         	var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Check out my other projects!", 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		grpControls = new FlxTypedGroup<Alphabet>();

@@ -58,7 +58,7 @@ class DonateScreenState extends MusicBeatState
 		#else
 		var someText:FlxText = new FlxText(0, 684, 0, "(opens the itch.io page in a browser window)");
 		#end
-		someText.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		someText.setFormat(Paths.font('vcr.ttf'), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		someText.updateHitbox();
 		someText.screenCenter(X);
 		add(someText);

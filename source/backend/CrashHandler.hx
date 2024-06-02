@@ -13,6 +13,7 @@ import openfl.ui.Keyboard;
  * @see https://github.com/crowplexus/Forever-Engine/
  */
 
+// old code, keeping for archival purposes
 class CrashHandler extends Sprite 
 {
 	var errorTitle:RotatableTextField;
