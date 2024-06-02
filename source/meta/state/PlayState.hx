@@ -5063,7 +5063,7 @@ class PlayState extends MusicBeatState
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + i + pixelShitPart2));
 			final numScoreX:Float = FlxG.width * 0.35 + (43 * daLoop) - 90;
-			final numScoreY:Float = 80;=
+			final numScoreY:Float = 80;
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = numScoreX;
