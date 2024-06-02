@@ -63,7 +63,7 @@ class ResultsSubState extends MusicBeatSubstate
 
 		var hint:FlxText = new FlxText(12, FlxG.height - 24, 0, 'You passed, but try getting under 10 misses for SDCB.', 12);
 		hint.scrollFactor.set();
-		hint.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		hint.setFormat(Paths.font("vcr.ttf"), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(hint);
 
 		switch (ClientPrefs.scoreTxtType) 
@@ -116,7 +116,7 @@ class ResultsSubState extends MusicBeatSubstate
 
         	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);
 		titleTxt.scrollFactor.set();
-		titleTxt.setFormat("VCR OSD Mono", 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleTxt.setFormat(Paths.font("vcr.ttf"), 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleTxt.screenCenter(X);
 		titleTxt.updateHitbox();
 		add(titleTxt);
@@ -133,7 +133,7 @@ class ResultsSubState extends MusicBeatSubstate
 			+ '\nRating: ' + rating + ' (' + fc + ')'
 		, 72);
 		resultsTxt.scrollFactor.set();
-		resultsTxt.setFormat("VCR OSD Mono", 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsTxt.setFormat(Paths.font("vcr.ttf"), 45, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsTxt.screenCenter(XY);
 		resultsTxt.updateHitbox();
 		add(resultsTxt);

@@ -102,7 +102,7 @@ class CreditsState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !(creditsStuff[i].length <= 1);
-			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable);
+			var optionText:Alphabet = new Alphabet(90, 320, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
 			optionText.screenCenter(X);
 			optionText.snapToPosition();
@@ -232,9 +232,9 @@ class CreditsState extends MusicBeatState
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				if (ClientPrefs.simpleMain)
-					FlxG.switchState(new SimpleMainMenuState());
+					MusicBeatState.switchState(new SimpleMainMenuState());
 				else
-					FlxG.switchState(new MainMenuState());
+					MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
 		}
