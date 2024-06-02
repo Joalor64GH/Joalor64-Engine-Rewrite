@@ -1,6 +1,5 @@
 package meta.substate;
 
-import flixel.util.FlxDestroyUtil;
 class ResultsSubState extends MusicBeatSubstate 
 {
 	var titleTxt:FlxText;
@@ -47,7 +46,7 @@ class ResultsSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
-		fcSprite = new FlxSprite().loadGraphic(Paths.image('rankings/${fc.toLowerCase()}'));
+		fcSprite = new FlxSprite().loadGraphic(Paths.image((fc != '') ? 'rankings/${fc.toLowerCase()}' : 'rankings/na'));
 		fcSprite.screenCenter(XY);
 		fcSprite.scrollFactor.set();
 		add(fcSprite);
@@ -67,22 +66,52 @@ class ResultsSubState extends MusicBeatSubstate
 		hint.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(hint);
 
-		switch (fc)
+		switch (ClientPrefs.scoreTxtType) 
 		{
-			case 'SDCB':
-				hint.text = 'Nice, but try not to miss at all for FC.';
-			case 'FC':
-				hint.text = 'Good job, but try getting bads at minimum for GFC.';
-			case 'GFC':
-				hint.text = 'You\'re getting there. Try getting goods at minimum for MFC.';
-			case 'MFC':
-				hint.text = 'Almost there! Try getting only sicks for SFC!';
-			case 'SFC':
-				hint.text = 'You did it! You\'re perfect!';
-			case 'WTF':
-				hint.text = '...You suck.';
-			case 'Botplay' | 'BotPlay':
-				hint.text = 'If you want that rank, disable Botplay.';
+			case 'Default':
+				switch (fc)
+				{
+					case 'SDCB':
+						hint.text = 'Nice, but try not to miss at all for FC.';
+					case 'FC':
+						hint.text = 'Good job, but try getting bads at minimum for GFC.';
+					case 'GFC':
+						hint.text = 'You\'re getting there. Try getting goods at minimum for MFC.';
+					case 'MFC':
+						hint.text = 'Almost there! Try getting only sicks for SFC!';
+					case 'SFC':
+						hint.text = 'You did it! You\'re perfect!';
+					case 'WTF':
+						hint.text = '...You suck.';
+					case 'Botplay':
+						hint.text = 'If you want that rank, disable Botplay.';
+				}
+			case 'Psych':
+				switch (fc)
+				{
+					case 'SDCB':
+						hint.text = 'Nice, but try not to miss at all for FC.';
+					case 'FC':
+						hint.text = 'You\'re getting there. Try getting goods at minimum for MFC.';
+					case 'GFC':
+						hint.text = 'Almost there! Try getting only sicks for SFC!';
+					case 'SFC':
+						hint.text = 'You did it! You\'re perfect!';
+				}
+			case 'Kade':
+				switch (fc)
+				{
+					case 'SDCB':
+						hint.text = 'Nice, but try not to miss at all for FC.';
+					case 'FC':
+						hint.text = 'Good job, but try getting goods at minimum for GFC.';
+					case 'GFC':
+						hint.text = 'Almost there! Try getting only sicks for MFC!';
+					case 'MFC':
+						hint.text = 'You did it! You\'re perfect!';
+					case 'BotPlay':
+						hint.text = 'If you want that rank, disable Botplay.';
+				}
 		}
 
         	titleTxt = new FlxText(0, 0, 0, 'RESULTS', 72);

@@ -28,29 +28,29 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var resultsTxt:FlxText;
 
-	var points = 0;
-	var miss = 0;
-	var percentage = 0.0;
-	var rate = '';
-	var combo = '';
+	var score:Int = 0;
+	var misses:Int = 0;
+	var percent:Float = 0.0;
+	var rating:String = '';
+	var fc:String = '';
 
 	override function create()
 	{
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 
-		resultsTxt = new FlxText(12, FlxG.height - 44, 0,  
-			'Score: ' + points
-			+ ' // Misses: ' + miss
-			+ ' // Rating: ' + percentage + '%'
-			+ ' // ' + rate + ' (' + combo + ')'
+		resultsTxt = new FlxText(0, FlxG.height - 44, 0,  
+			'Score: ' + score
+			+ ' // Misses: ' + misses
+			+ ' // Rating: ' + percent + '%'
+			+ ' // ' + rating + ' (' + fc + ')'
 		, 12);
 		resultsTxt.scrollFactor.set();
 		resultsTxt.setFormat(Paths.font('vcr.ttf'), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsTxt.screenCenter(X);
 		resultsTxt.updateHitbox();
-		add(resultsTxt);
-
 		resultsTxt.alpha = 0;
+		add(resultsTxt);
 
 		FlxTween.tween(resultsTxt, {alpha: 1}, 4.5, {ease: FlxEase.quadOut});
 
@@ -61,11 +61,11 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super();
 
-		points = score;
-		miss = misses;
-		percentage = percent;
-		rate = rating;
-		combo = fc;
+		this.score = score;
+		this.misses = misses;
+		this.percent = percent;
+		this.rating = rating;
+		this.fc = fc;
 
 		PlayState.instance.setOnLuas('inGameOver', true);
 
