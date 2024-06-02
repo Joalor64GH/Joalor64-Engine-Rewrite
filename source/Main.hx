@@ -181,7 +181,7 @@ class Main extends Sprite
 		#end
 
 		LimeLogger.println(msg);
-		Lib.application.window.alert(msg, 'Error!');
+		Lib.application.window.alert(msg + '\nIf you think this shouldn't have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/', 'Error!');
 		LimeSystem.exit(1);
 	}
 

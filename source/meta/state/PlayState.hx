@@ -376,7 +376,7 @@ class PlayState extends MusicBeatState
 	var precacheList:Map<String, String> = new Map<String, String>();
 	
 	// stores the last judgement object
-	public static var lastRating:FlxSprite;
+	public static var lastRating:RatingSprite;
 	// stores the last combo sprite object
 	public static var lastCombo:FlxSprite;
 	// stores the last combo score objects in an array
@@ -4841,6 +4841,11 @@ class PlayState extends MusicBeatState
 				pixelShitPart2 = ''; 
 		}
 
+		if (isPixelStage && ClientPrefs.uiSkin == 'Simplylove'){
+			pixelShitPart1 = 'pixelUI/';
+			pixelShitPart2 = '-pixel';
+		}
+
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
 		Paths.image(pixelShitPart1 + "good" + pixelShitPart2);
 		Paths.image(pixelShitPart1 + "bad" + pixelShitPart2);
@@ -4856,8 +4861,10 @@ class PlayState extends MusicBeatState
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
 		vocals.volume = vocalsFinished ? 0 : 1;
 
-		var rating:FlxSprite = new FlxSprite();
+		var rating:RatingSprite = new RatingSprite();
 		var score:Int = 350;
+
+		var isSimplyLove:Bool = false;
 
 		if (!inReplay)
 		{
@@ -4914,21 +4921,22 @@ class PlayState extends MusicBeatState
 			case 'Simplylove':
 				pixelShitPart1 = 'skins/simplylove/';
 				pixelShitPart2 = '';
+				isSimplyLove = true;
 		}
-		var ratingsGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+		// just simply don't use the skin
+		if (isSimplyLove && isPixelStage){
+			pixelShitPart1 = 'pixelUI/';
+			pixelShitPart2 = '-pixel';
+		}
+		
 		final ratingsX:Float = FlxG.width * 0.35 - 40;
 		final ratingsY:Float = 60;
 
-		if (ratingsGroup.countDead() > 0) {
-			rating = ratingsGroup.getFirstDead();
-			rating.reset(ratingsX, ratingsY);
-		} else {
-			rating = new FlxSprite();
-			ratingsGroup.add(rating);
-		}
+		rating = new RatingSprite();
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
+		rating.isSimply = isSimplyLove;
 		rating.x = ratingsX;
 		rating.y -= ratingsY;
 		rating.acceleration.y = 550 * playbackRate * playbackRate;
@@ -4938,23 +4946,59 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		var comboGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
-		var comboSpr:FlxSprite;
+		if (isSimplyLove)
+		{
+			rating = lastRating;
+			if (rating != null){
+				rating.isSimply = true;
+				rating.revive();
+
+				if (rating.tween != null)
+				{
+					rating.tween.cancel();
+					rating.tween.destroy();
+				}
+
+				rating.scale.set(0.7 * 1.1, 0.7 * 1.1);
+
+				rating.tween = FlxTween.tween(rating.scale, {x: 0.7, y: 0.7}, 0.1, {
+					ease: FlxEase.quadOut,
+					onComplete: function(tween:FlxTween)
+					{
+						if (!rating.alive)
+							return;
+
+						final time:Float = (Conductor.stepCrochet * 0.001);
+						rating.tween = FlxTween.tween(rating.scale, {x: 0, y: 0}, time, {
+							startDelay: time * 8,
+							ease: FlxEase.quadIn,
+							onComplete: function(tween:FlxTween)
+							{
+								rating.kill();
+							}
+						});
+					}
+				});
+			}
+		}
+
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		final comboX:Float = FlxG.width * 0.35;
 		final comboY:Float = 60;
-		if (comboGroup.countDead() > 0) {
-			comboSpr = comboGroup.getFirstDead();
-			comboSpr.reset(comboX, comboY);
-		} else {
-			comboSpr = new FlxSprite();
-			comboGroup.add(comboSpr);
-		}
-		comboSpr.loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));	
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = comboX;
-		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
-		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
+		if (!isSimplyLove){
+			comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
+			comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
+		}
+		else{
+			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7) * 1.5, Std.int(comboSpr.height * 0.7) * 1.5);
+			var scaleTween:FlxTween = null;
+			if (scaleTween != null)
+				scaleTween.cancel();
+			scaleTween = FlxTween.tween(comboSpr, {'scale.x': comboSpr.width - 100, 'scale.y': comboSpr.height - 100}, {onComplete: _ -> scaleTween = null});
+		}
 		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[4];
 		comboSpr.y -= ClientPrefs.comboOffset[5];
@@ -4970,7 +5014,7 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(precision, {y: (ClientPrefs.downScroll ? precision.y + 3 : precision.y - 3)}, 0.01, {ease: FlxEase.bounceOut});
 		precisions.push(precision);
 		
-		if (!ClientPrefs.comboStacking)
+		if (!ClientPrefs.comboStacking || isSimplyLove)
 		{
 			if (lastRating != null) 
 				lastRating.kill();
@@ -4979,25 +5023,30 @@ class PlayState extends MusicBeatState
 
 		if (!PlayState.isPixelStage)
 		{
-			rating.setGraphicSize(Std.int(rating.width * 0.7));
-			rating.antialiasing = ClientPrefs.globalAntialiasing;
-			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
+			if (!isSimplyLove){
+				rating.setGraphicSize(Std.int(rating.width * 0.7));
+				comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
+			}
+			if (rating != null)
+				rating.antialiasing = ClientPrefs.globalAntialiasing;
 			comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
+			if (rating != null)
+				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
 		}
 
 		comboSpr.updateHitbox();
-		rating.updateHitbox();
+		if (rating != null)
+			rating.updateHitbox();
 
 		// forever engine combo
 		var seperatedScore:Array<String> = (combo + "").split("");
 		var daLoop:Int = 0;
 
-		if (!ClientPrefs.comboStacking)
+		if (!ClientPrefs.comboStacking || isSimplyLove)
 		{
 			if (lastCombo != null) lastCombo.kill();
 			lastCombo = comboSpr;
@@ -5012,19 +5061,9 @@ class PlayState extends MusicBeatState
 		}
 		for (i in seperatedScore)
 		{
-			var numScoreGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
-			var numScore:FlxSprite;
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + i + pixelShitPart2));
 			final numScoreX:Float = FlxG.width * 0.35 + (43 * daLoop) - 90;
-			final numScoreY:Float = 80;
-			if (numScoreGroup.countDead() > 0){
-				numScore = numScoreGroup.getFirstDead();
-				numScore.reset(numScoreX, numScoreY);
-			}
-			else{
-				numScore = new FlxSprite();
-				numScoreGroup.add(numScore);
-			}
-			numScore.loadGraphic(Paths.image(pixelShitPart1 + 'num' + i + pixelShitPart2));
+			final numScoreY:Float = 80;=
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = numScoreX;
@@ -5033,25 +5072,35 @@ class PlayState extends MusicBeatState
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
 			
-			if (!ClientPrefs.comboStacking)
+			if (!ClientPrefs.comboStacking || isSimplyLove)
 				lastScore.push(numScore);
 
 			if (!PlayState.isPixelStage)
 			{
 				numScore.antialiasing = ClientPrefs.globalAntialiasing;
-				numScore.setGraphicSize(Std.int(numScore.width * 0.5));
+				if (!isSimplyLove)
+					numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			}
 			else
 				numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 
 			numScore.updateHitbox();
 
-			numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
-			numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
+			if (!isSimplyLove){
+				numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
+				numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
+				numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
+			}
+			else{
+				numScore.setGraphicSize(Std.int(numScore.width * 0.7) * 1.5, Std.int(numScore.height * 0.7) * 1.5);
+				var scaleTween:FlxTween = null;
+				if (scaleTween != null)
+					scaleTween.cancel();
+				scaleTween = FlxTween.tween(numScore, {'scale.x': numScore.width - 100, 'scale.y': numScore.height - 100}, {onComplete: _ -> scaleTween = null});
+			}
 			numScore.visible = (!ClientPrefs.hideHud && showComboNum);
 
-			if (curStage == 'limo') 
+			if (curStage == 'limo' && !isSimplyLove) 
 			{
 				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
 				{
@@ -5061,7 +5110,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 
-			if (curStage == 'philly' && trainMoving && !trainFinishing) 
+			if (curStage == 'philly' && trainMoving && !trainFinishing && !isSimplyLove) 
 			{
 				new FlxTimer().start(0.3, (tmr:FlxTimer) -> 
 				{
@@ -5090,12 +5139,14 @@ class PlayState extends MusicBeatState
 			daLoop++;
 		}
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
-				rating.kill();
-				rating.alpha = 1;
-			},
-			startDelay: Conductor.crochet * 0.001 / playbackRate
-		});
+		if (!isSimplyLove){
+			FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {onComplete: _ -> {
+					rating.kill();
+					rating.alpha = 1;
+				},
+				startDelay: Conductor.crochet * 0.001 / playbackRate
+			});
+		}
 
 		if (ClientPrefs.displayMilliseconds) {
 			FlxTween.tween(precision, {alpha: 0}, 0.2 / playbackRate, {
@@ -5810,8 +5861,6 @@ class PlayState extends MusicBeatState
 	}
 
 	override function destroy() {
-		instance = null;
-
 		for (lua in luaArray) {
 			lua.call('onDestroy', []);
 			lua.stop();
@@ -5837,6 +5886,8 @@ class PlayState extends MusicBeatState
 
 		FlxG.timeScale = 1;
 		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
+
+		instance = null;
 		
 		super.destroy();
 	}
@@ -6416,5 +6467,31 @@ class PlayState extends MusicBeatState
 			trace('exception: ' + e);
 			return;
 		}
+	}
+}
+
+class RatingSprite extends FlxSprite
+{
+	public var tween:FlxTween;
+
+	public var isSimply:Bool;
+
+	public function new() {
+		super();
+		moves = !isSimply;
+
+		//antialiasing = ClientPrefs.globalAntialiasing;
+		//cameras = [ClientPrefs.simpleJudge ? PlayState.instance.camHUD : PlayState.instance.camGame];
+		cameras = [PlayState.instance.camHUD];
+
+		scrollFactor.set();
+	}
+
+	override public function kill() {
+		if (tween != null) {
+			tween.cancel();
+			tween.destroy();
+		}
+		super.kill();
 	}
 }
