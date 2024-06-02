@@ -76,13 +76,9 @@ class LanguageState extends MusicBeatState
             label.snapToPosition();
             coolGrp.add(label);
 
-			var assetPath:String = Paths.getSparrowAtlas('flags/langStrings[i].code');
-			var animString:String = Assets.exists(assetPath) ? langStrings[i].code : 'flag_base';
-
-			var icon:AttachedSprite = new AttachedSprite();
-			icon.frames = Assets.exists(assetPath) ? 
-				assetPath : Paths.getSparrowAtlas('flags/null'); // fallback attempt idk??
-            icon.animation.addByPrefix('idle', animString, 24);
+            var icon:AttachedSprite = new AttachedSprite();
+            icon.frames = Paths.getSparrowAtlas('flags/' + langStrings[i].code);
+            icon.animation.addByPrefix('idle', langStrings[i].code, 24);
             icon.animation.play('idle');
             icon.xAdd = -icon.width - 10;
             icon.sprTracker = label;

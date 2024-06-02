@@ -40,7 +40,6 @@ class ClientPrefs {
 	public static var language:String = 'en';
 	public static var displayMilliseconds:Bool = true;
 	public static var weekendScore:Bool = false;
-	public static var inputSystem:String = 'Default';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -151,7 +150,6 @@ class ClientPrefs {
 		FlxG.save.data.language = language;
 		FlxG.save.data.displayMilliseconds = displayMilliseconds;
 		FlxG.save.data.weekendScore = weekendScore;
-		FlxG.save.data.inputSystem = inputSystem;
 	
 		FlxG.save.flush();
 
@@ -314,8 +312,6 @@ class ClientPrefs {
 			displayMilliseconds = FlxG.save.data.displayMilliseconds;
 		if(FlxG.save.data.weekendScore != null)
 			weekendScore = FlxG.save.data.weekendScore;
-		if(FlxG.save.data.inputSystem != null)
-			inputSystem = FlxG.save.data.inputSystem;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

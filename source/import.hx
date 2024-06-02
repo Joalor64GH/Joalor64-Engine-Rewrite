@@ -35,7 +35,6 @@ import openfl.text.TextFormat;
 
 import haxe.Json;
 import haxe.Http;
-
 import hscript.*;
 
 #if (sys || desktop || MODS_ALLOWED)
@@ -66,7 +65,6 @@ import meta.ArtemisIntegration;
 import meta.Controls;
 import meta.data.options.*;
 import meta.data.alphabet.*;
-import meta.data.input.*;
 import meta.data.*;
 import meta.state.*;
 import meta.substate.*;

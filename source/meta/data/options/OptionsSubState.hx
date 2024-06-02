@@ -604,14 +604,6 @@ class GameplaySubState extends BaseOptionsMenu
 			['Default', 'Psych', 'Kade', 'Simple']);
 		addOption(option);
 
-		var option:Option = new Option('Input System:',
-			"What input system do you like?",
-			'inputSystem',
-			'string',
-			'Default',
-			['Default', 'Kade', 'Vanilla']);
-		addOption(option);
-
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
 			'camZooms',
