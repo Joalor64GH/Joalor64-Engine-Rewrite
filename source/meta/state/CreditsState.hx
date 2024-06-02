@@ -52,265 +52,48 @@ class CreditsState extends MusicBeatState
 		keoikiStr = (FlxG.random.bool(30)) ? 'keoiki2' : 'keoiki';
 
 		var pisspoop:Array<Array<String>> = [
-			/**
-			 * Name
-			 * Icon name
-			 * Description
-			 * Link
-			 * BG Color
-			 * Sound
-			**/
+			// name, icon, description, link, color, sound
 			['Joalor64 Engine Creators'],
-			[
-				'Joalor64 YT',
-				'joalor',
-				'Project Leader\nMain Programmer\n"I do things"',
-				'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',
-				'00FFF6',
-				'noweyyy'
-			],
-			[
-				'Moxie',
-				'meme',
-				'Additional Programmer\n"love denpa engine"',
-				'https://github.com/moxie-coder',
-				'FFEDD9',
-				'omori' // funni sound goes here if you want
-			],
-			[
-				'FoxLOID',
-				'fox',
-				'Epic New Logo\n"this is a quote"',
-				'https://github.com/FoxLOID',
-				'00A7D4',
-				'' // if you want, a funny sound effect can go here
-			],
-			[
-				'Bot 404',
-				'bot',
-				'Tiny little helper, Drew his own icon\n"expected more"',
-				'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg',
-				'FF0040',
-				'slipperyahhfloor'
-			],
+			['Joalor64', 'joalor', 'Project Leader\nMain Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
+			['Moxie', 'meme', 'Additional Programmer\n"love denpa engine"', 'https://github.com/moxie-coder', 'FFEDD9', 'omori'],
+			['FoxLOID', fox', 'Epic New Logo\n"this is a quote"', 'https://github.com/FoxLOID', '00A7D4', ''],
+			['Bot 404', 'bot', 'Tiny little helper, Drew his own icon\n"expected more"', 'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg', 'FF0040', 'slipperyahhfloor'],
 			[''],
 			['Special Thanks'],
-			[
-				'crowplexus',
-				'crowplexus',
-				'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\nNew Crash Handler\n"just happy to be here!"',
-				'https://github.com/crowplexus',
-				'a1a1a1',
-				'Ghost'
-			],
-			[
-				'TahirKarabekiroglu',
-				'tahir',
-				'SScript\nFunkin Cocoa Code\nSoftcoded Achievements, Replay System\n"Banger PR"',
-				'https://github.com/TahirKarabekiroglu',
-				'A04397',
-				''
-			],
-			[
-				'steve-studios',
-				'mag',
-				'In-Game Mod Downloader\n"why bro keep changing his user"',
-				'https://github.com/steve-studios',
-				'0000FF',
-				'squeak'
-			],
-			[
-				'TheZoroForce240',
-				'zoro',
-				'Modcharting Tools Haxelib\n"Not alot to say about this guy"',
-				'https://github.com/TheZoroForce240',
-				'FFD900',
-				'goofyahhphone'
-			],
-			[
-				'MAJigsaw77',
-				'jigsaw',
-				'ToastCore\n"Just a guy"',
-				'https://github.com/MAJigsaw77',
-				'444444',
-				''
-			],
-			[
-				'KookerFoxYT',
-				'kooker',
-				'Custom Options\n"fox"',
-				'https://twitter.com/kookerfoxyt',
-				'00B0B4', // it spelled bob lmao
-				''
-			],
-			[
-				'Endergreen12',
-				'none',
-				'Custom Gameplay Changers\n"He did a thing"',
-				'https://github.com/Endergreen12',
-				'00C834',
-				''
-			],
-			[
-				'Verwex',
-				'verwex',
-				'Micd Up Paths System\n"hell"',
-				'https://github.com/Verwex',
-				'8FFFFF',
-				''
-			],
-			[
-				'ActualMandM',
-				'none',
-				'RGB Note Coloring System\n"this is a quote"',
-				'https://linktr.ee/ActualMandM',
-				'9C5D88',
-				''
-			],
-			[
-				'You',
-				'face',
-				'For playing :)\n"No problem! -You"',
-				'https://joalor64.itch.io/',
-				'7E00FF',
-				'stolethisfromGamerEnginelol'
-			],
+			['crowplexus', 'crowplexus', 'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\nNew Crash Handler\n"just happy to be here!"', 'https://github.com/crowplexus', 'a1a1a1', 'Ghost'],
+			['TahirKarabekiroglu', 'tahir', 'SScript\nFunkin Cocoa Code\nSoftcoded Achievements, Replay System', 'https://github.com/TahirKarabekiroglu', 'A04397', ''],
+			['steve-studios', 'mag', 'In-Game Mod Downloader', 'https://github.com/steve-studios', '0000FF', 'squeak'],
+			['TheZoroForce240', 'zoro', 'Modcharting Tools Haxelib', 'https://github.com/TheZoroForce240', 'FFD900', 'goofyahhphone'],
+			['MAJigsaw77', 'jigsaw', 'ToastCore\n"Just a guy"', 'https://github.com/MAJigsaw77', '444444', ''],
+			['KookerFoxYT', 'kooker', 'Custom Options\n"fox"', 'https://twitter.com/kookerfoxyt', '00B0B4', ''],
+			['Endergreen12', 'none', 'Custom Gameplay Changers', 'https://github.com/Endergreen12', '00C834', ''],
+			['Verwex', 'verwex', 'Micd Up Paths System\n"hell"', 'https://github.com/Verwex', '8FFFFF', ''],
+			['ActualMandM', 'none', 'RGB Note Coloring System', 'https://linktr.ee/ActualMandM', '9C5D88', ''],
+			['You', 'face', 'For playing :)', 'https://joalor64.itch.io/', '7E00FF', 'stolethisfromGamerEnginelol'],
 			[''],
 			['Psych Engine Team'],
-			[
-				'ShadowMario',
-				'shadowmario',
-				'Main Programmer of Psych Engine',
-				'https://twitter.com/Shadow_Mario_',
-				'444444',
-				'JingleShadow'
-			],
-			[
-				'Riveren',
-				'riveren',
-				'Main Artist/Animator of Psych Engine',
-				'https://twitter.com/riverennn',
-				'14967B',
-				'JingleRiver'
-			],
+			['ShadowMario', 'shadowmario', 'Main Programmer of Psych Engine', 'https://twitter.com/Shadow_Mario_', '444444', 'JingleShadow'],
+			['Riveren', 'riveren', 'Main Artist/Animator of Psych Engine', 'https://twitter.com/riverennn', '14967B', 'JingleRiver'],
 			[''],
 			['Former Engine Members'],
-			[
-				'bbpanzu',
-				'bb',
-				'Ex-Programmer of Psych Engine',
-				'https://twitter.com/bbsub3',
-				'3E813A',
-				'JingleBB'
-			],
-			[
-				'Yoshubs',
-				'none',
-				'Ex-Programmer of Psych Engine',
-				'https://gamebanana.com/members/1908070',
-				'888888',
-				''
-			],
+			['bbpanzu', 'bb', 'Ex-Programmer of Psych Engine', 'https://twitter.com/bbsub3', '3E813A', 'JingleBB'],
+			['Yoshubs', 'none', 'Ex-Programmer of Psych Engine', 'https://gamebanana.com/members/1908070', '888888', ''],
 			[''],
 			['Engine Contributors'],
-			[
-				'iFlicky',
-				'flicky',
-				'Composer of Psync and Tea Time\nMade the Dialogue Sounds',
-				'https://twitter.com/flicky_i',
-				'9E29CF',
-				''
-			],
-			[
-				'gedehari',
-				'sqirra',
-				'Old Crash Handler and Base code for\nChart Editor\'s Waveform',
-				'https://twitter.com/gedehari',
-				'E1843A',
-				''
-			],
-			[
-				'EliteMasterEric',
-				'mastereric',
-				'Runtime Shaders support',
-				'https://twitter.com/EliteMasterEric',
-				'FFBD40',
-				''
-			],
-			[
-				'PolybiusProxy',
-				'proxy',
-				'Creator of hxCodec',
-				'https://twitter.com/polybiusproxy',
-				'DCD294',
-				''
-			],
-			[
-				'KadeDev',
-				'kade',
-				'Fixed Chart Editor and other PRs\nExtension WebM Fork',
-				'https://twitter.com/kade0912',
-				'64A250',
-				''
-			],
-			[
-				'Keoiki',
-				keoikiStr,
-				'Note Splash Animations\nNew Latin Support',
-				'https://twitter.com/Keoiki_',
-				'D2D2D2',
-				''
-			],
-			[
-				'Nebula the Zorua',
-				'nebula',
-				'LUA JIT Fork and some Lua reworks',
-				'https://twitter.com/Nebula_Zorua',
-				'7D40B2',
-				''
-			],
-			[
-				'Smokey',
-				'smokey',
-				'Sprite Atlas Support',
-				'https://twitter.com/Smokey_5_',
-				'483D92',
-				''
-			],
+			['iFlicky', 'flicky', 'Composer of Psync and Tea Time\nMade the Dialogue Sounds', 'https://twitter.com/flicky_i', '9E29CF', ''],
+			['gedehari', 'sqirra', 'Old Crash Handler and Base code for\nChart Editor\'s Waveform', 'https://twitter.com/gedehari', 'E1843A', ''],
+			['EliteMasterEric', 'mastereric', 'Runtime Shaders support', 'https://twitter.com/EliteMasterEric', 'FFBD40', ''],
+			['PolybiusProxy', 'proxy', 'Creator of hxCodec', 'https://twitter.com/polybiusproxy', 'DCD294', ''],
+			['KadeDev', 'kade', 'Fixed Chart Editor and other PRs\nExtension WebM Fork', 'https://twitter.com/kade0912', '64A250', ''],
+			['Keoiki', keoikiStr, 'Note Splash Animations\nNew Latin Support', 'https://twitter.com/Keoiki_', 'D2D2D2', ''],
+			['Nebula the Zorua', 'nebula', 'LUA JIT Fork and some Lua reworks', 'https://twitter.com/Nebula_Zorua', '7D40B2', ''],
+			['Smokey', 'smokey', 'Sprite Atlas Support', 'https://twitter.com/Smokey_5_', '483D92', ''],
 			[''],
 			["The Funkin' Crew Inc"],
-			[
-				'ninjamuffin99',
-				'ninjamuffin99',
-				"Programmer/Creator of Friday Night Funkin'",
-				'https://twitter.com/ninja_muffin99',
-				'CF2D2D',
-				''
-			],
-			[
-				'PhantomArcade',
-				'phantomarcade',
-				"Animator of Friday Night Funkin'",
-				'https://twitter.com/PhantomArcade3K',
-				'FADC45',
-				''
-			],
-			[
-				'evilsk8r',
-				'evilsk8r',
-				"Artist of Friday Night Funkin'",
-				'https://twitter.com/evilsk8r',
-				'5ABD4B',
-				''
-			],
-			[
-				'kawaisprite',
-				'kawaisprite',
-				"Composer of Friday Night Funkin'",
-				'https://twitter.com/kawaisprite',
-				'378FC7',
-				''
-			]
+			['ninjamuffin99', 'ninjamuffin99', "Programmer/Creator of Friday Night Funkin'", 'https://twitter.com/ninja_muffin99', 'CF2D2D', ''],
+			['PhantomArcade', 'phantomarcade', "Animator of Friday Night Funkin'", 'https://twitter.com/PhantomArcade3K', 'FADC45', ''],
+			['evilsk8r', 'evilsk8r', "Artist of Friday Night Funkin'", 'https://twitter.com/evilsk8r', '5ABD4B', ''],
+			['kawaisprite', 'kawaisprite', "Composer of Friday Night Funkin'", 'https://twitter.com/kawaisprite', '378FC7', '']
 		];
 
 		for (i in pisspoop)
@@ -318,12 +101,13 @@ class CreditsState extends MusicBeatState
 
 		for (i in 0...creditsStuff.length)
 		{
-			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
+			var isSelectable:Bool = !(creditsStuff[i].length <= 1);
+			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
-			optionText.targetY = i;
-			optionText.changeX = false;
+			optionText.screenCenter(X);
 			optionText.snapToPosition();
+			if (isSelectable)
+				optionText.x -= 70;
 			grpOptions.add(optionText);
 
 			if (isSelectable)
@@ -343,8 +127,6 @@ class CreditsState extends MusicBeatState
 				if (curSelected == -1)
 					curSelected = i;
 			}
-			else
-				optionText.alignment = CENTERED;
 		}
 
 		descBox = new AttachedSprite();
@@ -457,23 +239,6 @@ class CreditsState extends MusicBeatState
 			}
 		}
 
-		for (item in grpOptions.members)
-		{
-			if (!item.bold)
-			{
-				var lerpVal:Float = CoolUtil.boundTo(elapsed * 12, 0, 1);
-				if (item.targetY == 0)
-				{
-					var lastX:Float = item.x;
-					item.screenCenter(X);
-					item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
-				}
-				else
-				{
-					item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
-				}
-			}
-		}
 		super.update(elapsed);
 	}
 
@@ -490,7 +255,7 @@ class CreditsState extends MusicBeatState
 			if (curSelected >= creditsStuff.length)
 				curSelected = 0;
 		}
-		while (unselectableCheck(curSelected));
+		while (creditsStuff[curSelected].length <= 1);
 
 		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		trace('The BG color is: $newColor');
@@ -518,7 +283,7 @@ class CreditsState extends MusicBeatState
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 
-			if (!unselectableCheck(bullShit - 1))
+			if (!(creditsStuff[bullShit - 1].length <= 1))
 			{
 				item.alpha = 0.6;
 				if (item.targetY == 0)
@@ -562,9 +327,4 @@ class CreditsState extends MusicBeatState
 		}
 	}
 	#end
-
-	private function unselectableCheck(num:Int):Bool
-	{
-		return creditsStuff[num].length <= 1;
-	}
 }
