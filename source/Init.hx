@@ -1,7 +1,5 @@
 package;
 
-import flixel.input.keyboard.FlxKey;
-
 class Init extends FlxState
 {
 	var epicLogo:FlxSprite;

@@ -12,10 +12,6 @@ import openfl.filters.ShaderFilter;
 import openfl.events.KeyboardEvent;
 
 import flixel.animation.FlxAnimationController;
-import flixel.addons.effects.FlxTrail;
-import flixel.input.keyboard.FlxKey;
-import flixel.sound.FlxSound;
-import flixel.ui.FlxBar;
 
 import animateatlas.AtlasFrameMaker;
 
@@ -308,7 +304,6 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
-
 	public var judgementCounter:FlxText;
 
 	var timeTxt:FlxText;
