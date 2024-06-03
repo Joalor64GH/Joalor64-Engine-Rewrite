@@ -725,6 +725,13 @@ class GameplaySubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		var option:Option = new Option('Results Screen',
+			'If checked, displays your stats after finishing a song/week.',
+			'resultsScreen',
+			'bool',
+			true);
+		addOption(option);
+
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',

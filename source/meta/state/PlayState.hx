@@ -4703,11 +4703,15 @@ class PlayState extends MusicBeatState
 
 					cancelMusicFadeTween();
 
-					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-						persistentUpdate = true;
-						openSubState(new ResultsSubState(campaignSicks, campaignGoods, campaignBads, campaignShits, campaignScore, campaignMisses, 
-							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
-					});
+					if (ClientPrefs.resultsScreen) {
+						new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+							persistentUpdate = true;
+							openSubState(new ResultsSubState(campaignSicks, campaignGoods, campaignBads, campaignShits, campaignScore, campaignMisses, 
+								Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
+						});
+					}
+					else
+						MusicBeatState.switchState(new StoryMenuState());
 
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
@@ -4763,12 +4767,16 @@ class PlayState extends MusicBeatState
 				Mods.loadTheFirstEnabledMod();
 
 				cancelMusicFadeTween();
-				
-				new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-					persistentUpdate = true;
-					openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
-				 		Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
-				});
+
+				if (ClientPrefs.resultsScreen) {
+					new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+						persistentUpdate = true;
+						openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
+				 			Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
+					});
+				}
+				else
+					MusicBeatState.switchState(new FreeplayState());
 				
 				changedDifficulty = false;
 			}
@@ -5860,11 +5868,13 @@ class PlayState extends MusicBeatState
 	}
 
 	override function destroy() {
+		#if LUA_ALLOWED
 		for (lua in luaArray) {
 			lua.call('onDestroy', []);
 			lua.stop();
 		}
 		luaArray = [];
+		#end
 
 		#if HSCRIPT_ALLOWED
 		for (i in hscriptMap.keys()) {
