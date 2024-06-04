@@ -15,6 +15,7 @@ typedef WeekFile =
 	var storyName:String;
 	var weekName:String;
 	var freeplayColor:Array<Int>;
+	// var storyColor:Array<Int>; // wip
 	var startUnlocked:Bool;
 	var hiddenUntilUnlocked:Bool;
 	var hideStoryMode:Bool;

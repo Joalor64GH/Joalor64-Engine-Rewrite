@@ -31,6 +31,11 @@ class StoryMenuState extends MusicBeatState
 
 	var loadedWeeks:Array<WeekData> = [];
 
+	var bgColTween:FlxTween;
+	var bfColTween:FlxTween;
+	var gfColTween:FlxTween;
+	var dadColTween:FlxTween;
+
 	override function create()
 	{
 		Application.current.window.title = Application.current.meta.get('name');
