@@ -3,6 +3,7 @@
 
 [HIGH PRIORITY]
 - Localization Support
+- Fix the goddamn playstate crash
 - Backport stuff from FNF 0.3.X
 
 [LOW PRIORITY]

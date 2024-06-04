@@ -60,59 +60,7 @@ class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 48.5;
 	public static var STRUM_X_MIDDLESCROLL = -278;
-
-	public static var ratingStuff:Array<Dynamic> = [
-		['F-', 0.2],
-		['F', 0.5],
-		['D', 0.6],
-		['C', 0.7],
-		['B', 0.8],
-		['A-', 0.89],
-		['A', 0.90],
-		['A+', 0.93],
-		['S-', 0.96],
-		['S', 0.99],
-		['S+', 0.997],
-		['SS-', 0.998],
-		['SS', 0.999],
-		['SS+', 0.9995],
-		['X-', 0.9997],
-		['X', 0.9998],
-		['X+', 0.999935],
-		['P', 1.0]
-	];
-
-	public static var psychRatings:Array<Dynamic> = [
-		['You Suck!', 0.2],
-		['Shit', 0.4],
-		['Bad', 0.5],
-		['Bruh', 0.6],
-		['Meh', 0.69],
-		['Nice', 0.7],
-		['Good', 0.8],
-		['Great', 0.9],
-		['Sick!', 1],
-		['Perfect!!', 1]
-	];
-
-	public static var kadeRatings:Array<Dynamic> = [
-		['D', 0.59],
-		['C', 0.6],
-		['B', 0.7],
-		['A', 0.8],
-		['A.', 0.85],
-		['A:', 0.90],
-		['AA', 0.93],
-		['AA.', 0.965],
-		['AA:', 0.99],
-		['AAA', 0.997],
-		['AAA.', 0.998],
-		['AAA:', 0.999],
-		['AAAA', 0.99955],
-		['AAAA.', 0.9997],
-		['AAAA:', 0.9998],
-		['AAAAA', 0.999935]
-	];
+	public static var ratingStuff:Array<Dynamic> = []; 
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
@@ -441,6 +389,74 @@ class PlayState extends MusicBeatState
 
 		keysArray = [];
 
+		ratingStuff = switch (ClientPrefs.scoreTxtType) {
+			case 'Default': [
+				['F-', 0.2],
+				['F', 0.5],
+				['D', 0.6],
+				['C', 0.7],
+				['B', 0.8],
+				['A-', 0.89],
+				['A', 0.90],
+				['A+', 0.93],
+				['S-', 0.96],
+				['S', 0.99],
+				['S+', 0.997],
+				['SS-', 0.998],
+				['SS', 0.999],
+				['SS+', 0.9995],
+				['X-', 0.9997],
+				['X', 0.9998],
+				['X+', 0.999935],
+				['P', 1.0]
+			];
+
+			case 'Psych': [
+				['You Suck!', 0.2],
+				['Shit', 0.4],
+				['Bad', 0.5],
+				['Bruh', 0.6],
+				['Meh', 0.69],
+				['Nice', 0.7],
+				['Good', 0.8],
+				['Great', 0.9],
+				['Sick!', 1],
+				['Perfect!!', 1]
+			];
+
+			case 'Kade': [
+				['D', 0.59],
+				['C', 0.6],
+				['B', 0.7],
+				['A', 0.8],
+				['A.', 0.85],
+				['A:', 0.90],
+				['AA', 0.93],
+				['AA.', 0.965],
+				['AA:', 0.99],
+				['AAA', 0.997],
+				['AAA.', 0.998],
+				['AAA:', 0.999],
+				['AAAA', 0.99955],
+				['AAAA.', 0.9997],
+				['AAAA:', 0.9998],
+				['AAAAA', 0.999935]
+			];
+
+			default: [
+				['?', 0.2],
+				['??', 0.4],
+				['???', 0.5],
+				['????', 0.6],
+				['?????', 0.69],
+				['??????', 0.7], 
+				['???????', 0.8], 
+				['????????', 0.9],
+				['?????????', 1], 
+				['??????????', 1] 
+			];	
+		}
+
 		for (ass in controlArray)
 			keysArray.push(ClientPrefs.copyKey(ClientPrefs.keyBinds.get(ass.toLowerCase())));
 
@@ -562,24 +578,15 @@ class PlayState extends MusicBeatState
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{
-				case 'spookeez' | 'south' | 'monster':
-					curStage = 'spooky';
-				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
-					curStage = 'philly';
-				case 'milf' | 'satin-panties' | 'high':
-					curStage = 'limo';
-				case 'cocoa' | 'eggnog':
-					curStage = 'mall';
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-				case 'senpai' | 'roses':
-					curStage = 'school';
-				case 'thorns':
-					curStage = 'schoolEvil';
-				case 'ugh' | 'guns' | 'stress':
-					curStage = 'tank';
-				default:
-					curStage = 'stage';
+				case 'spookeez' | 'south' | 'monster': curStage = 'spooky';
+				case 'pico' | 'blammed' | 'philly' | 'philly-nice': curStage = 'philly';
+				case 'milf' | 'satin-panties' | 'high': curStage = 'limo';
+				case 'cocoa' | 'eggnog': curStage = 'mall';
+				case 'winter-horrorland': curStage = 'mallEvil';
+				case 'senpai' | 'roses': curStage = 'school';
+				case 'thorns': curStage = 'schoolEvil';
+				case 'ugh' | 'guns' | 'stress': curStage = 'tank';
+				default: curStage = 'stage';
 			}
 		}
 		SONG.stage = curStage;
@@ -1172,16 +1179,11 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStage)
 			{
-				case 'limo':
-					gfVersion = 'gf-car';
-				case 'mall' | 'mallEvil':
-					gfVersion = 'gf-christmas';
-				case 'school' | 'schoolEvil':
-					gfVersion = 'gf-pixel';
-				case 'tank':
-					gfVersion = 'gf-tankmen';
-				default:
-					gfVersion = 'gf';
+				case 'limo': gfVersion = 'gf-car';
+				case 'mall' | 'mallEvil': gfVersion = 'gf-christmas';
+				case 'school' | 'schoolEvil': gfVersion = 'gf-pixel';
+				case 'tank': gfVersion = 'gf-tankmen';
+				default: gfVersion = 'gf';
 			}
 
 			switch(Paths.formatToSongPath(SONG.song))
@@ -5915,7 +5917,7 @@ class PlayState extends MusicBeatState
 			Called from flixel.FlxGame::step flixel/FlxGame.hx line 680
 			Called from flixel.FlxGame::update flixel/FlxGame.hx line 727
 			Called from flixel.FlxGame::switchState flixel/FlxGame.hx line 625
-			Called from meta.state.PlayState::destroy meta/state/PlayState.hx line 5928
+			Called from meta.state.PlayState::destroy meta/state/PlayState.hx line 5930
 			Called from flixel.addons.ui.FlxUIState::destroy flixel/addons/ui/FlxUIState.hx line 331
 			Called from flixel.addons.transition.FlxTransitionableState::destroy flixel/addons/transition/FlxTransitionableState.hx line 75
 			Called from flixel.FlxState::destroy flixel/FlxState.hx line 186
@@ -6336,66 +6338,24 @@ class PlayState extends MusicBeatState
 		var ret:Dynamic = callOnLuas('onRecalculateRating', [], false);
 		if(ret != FunkinLua.Function_Stop)
 		{
-			if(totalPlayed < 1) //Prevent divide by 0
+			if (totalPlayed < 1) //Prevent divide by 0
 				ratingName = '?';
 			else
 			{
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
-
-				// Rating Name
-				switch (ClientPrefs.scoreTxtType)
+				if(ratingPercent >= 1)
+					ratingName = ratingStuff[ratingStuff.length - 1][0];
+				else
 				{
-					case 'Default':
-						if(ratingPercent >= 1)
+					for (i in 0...ratingStuff.length - 1)
+					{
+						if(ratingPercent < ratingStuff[i][1])
 						{
-							ratingName = ratingStuff[ratingStuff.length - 1][0]; //Uses last string
+							ratingName = ratingStuff[i][0];
+							break;
 						}
-						else
-						{
-							for (i in 0...ratingStuff.length - 1)
-							{
-								if(ratingPercent < ratingStuff[i][1])
-								{
-									ratingName = ratingStuff[i][0];
-									break;
-								}
-							}
-						}
-
-					case 'Psych':
-						if(ratingPercent >= 1)
-						{
-							ratingName = psychRatings[psychRatings.length - 1][0]; //Uses last string
-						}
-						else
-						{
-							for (i in 0...psychRatings.length - 1)
-							{
-								if(ratingPercent < psychRatings[i][1])
-								{
-									ratingName = psychRatings[i][0];
-									break;
-								}
-							}
-						}
-
-					case 'Kade':
-						if(ratingPercent >= 1)
-						{
-							ratingName = kadeRatings[kadeRatings.length - 1][0]; //Uses last string
-						}
-						else
-						{
-							for (i in 0...kadeRatings.length - 1)
-							{
-								if(ratingPercent < kadeRatings[i][1])
-								{
-									ratingName = kadeRatings[i][0];
-									break;
-								}
-							}
-						}
+					}
 				}
 			}
 			comboFunction();
