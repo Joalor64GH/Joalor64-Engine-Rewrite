@@ -686,7 +686,7 @@ class GameplaySubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
-		option.onchange = onChangeAutoPause
+		option.onchange = onChangeAutoPause;
 
 		var option:Option = new Option('Disable Reset Button',
 			"If checked, pressing Reset won't do anything.",
