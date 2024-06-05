@@ -176,10 +176,10 @@ class MusicPlayer extends FlxGroup
 
 		if (playing)
 		{
-			if(FreeplayState.vocals != null)
+			if (FreeplayState.vocals != null)
 				FreeplayState.vocals.volume = (FreeplayState.vocals.length > FlxG.sound.music.time) ? 0.8 : 0;
 
-			if(FreeplayState.vocals != null && FreeplayState.vocals.length > FlxG.sound.music.time && Math.abs(FlxG.sound.music.time - FreeplayState.vocals.time))
+			if (FreeplayState.vocals != null && FreeplayState.vocals.length > FlxG.sound.music.time && Math.abs(FlxG.sound.music.time - FreeplayState.vocals.time) >= 25)
 			{
 				pauseOrResume();
 				setVocalsTime(FlxG.sound.music.time);
@@ -219,7 +219,7 @@ class MusicPlayer extends FlxGroup
 
 	public function switchPlayMusic()
 	{
-		FlxG.autoPause = (!playingMusic && ClientPrefs.data.autoPause);
+		FlxG.autoPause = (!playingMusic && ClientPrefs.autoPause);
 		active = visible = playingMusic;
 
 		instance.scoreBG.visible = instance.diffText.visible = instance.scoreText.visible = instance.repText.visible = !playingMusic; //Hide Freeplay texts and boxes if playingMusic is true

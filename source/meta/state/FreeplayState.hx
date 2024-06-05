@@ -7,6 +7,7 @@ class FreeplayState extends MusicBeatState
 	var songs:Array<SongMetadata> = [];
 
 	private static var curSelected:Int = 0;
+	var lerpSelected:Float = 0;
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = '';
 
@@ -35,7 +36,7 @@ class FreeplayState extends MusicBeatState
 	var repText:FlxText;
 
 	var missingText:FlxText;
-	var missingBG:FlxSprite;
+	var missingTextBG:FlxSprite;
 
 	var bottomString:String;
 	var bottomText:FlxText;
@@ -176,6 +177,7 @@ class FreeplayState extends MusicBeatState
 		if(curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
+		lerpSelected = curSelected;
 
 		#if sys
 		ArtemisIntegration.setBackgroundFlxColor (intendedColor);
@@ -400,7 +402,7 @@ class FreeplayState extends MusicBeatState
 			}
 			else if (instPlaying == curSelected && player.playingMusic)
 			{
-				player.pauseOrResume(player.paused);
+				player.pauseOrResume(!player.playingMusic);
 			}
 		}
 		else if (accepted && !player.playingMusic)

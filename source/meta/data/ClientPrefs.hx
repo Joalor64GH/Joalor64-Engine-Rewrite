@@ -41,6 +41,7 @@ class ClientPrefs {
 	public static var displayMilliseconds:Bool = true;
 	public static var weekendScore:Bool = false;
 	public static var resultsScreen:Bool = true;
+	public static var autoPause:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -152,6 +153,7 @@ class ClientPrefs {
 		FlxG.save.data.displayMilliseconds = displayMilliseconds;
 		FlxG.save.data.weekendScore = weekendScore;
 		FlxG.save.data.resultsScreen = resultsScreen;
+		FlxG.save.data.autoPause = autoPause;
 	
 		FlxG.save.flush();
 
@@ -193,6 +195,20 @@ class ClientPrefs {
 		if(FlxG.save.data.shaders != null) {
 			shaders = FlxG.save.data.shaders;
 		}
+
+		if(FlxG.save.data.autoPause != null) {
+			autoPause = FlxG.save.data.autoPause;
+		}
+
+		#if (!html5 && !switch)
+		FlxG.autoPause = autoPause;
+
+		if (FlxG.save.data.framerate == null) {
+			final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
+			framerate = Std.int(FlxMath.bound(refreshRate, 60, 240));
+		}
+		#end
+
 		if(FlxG.save.data.framerate != null) {
 			framerate = FlxG.save.data.framerate;
 			if(framerate > FlxG.drawFramerate) {
