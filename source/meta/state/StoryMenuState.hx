@@ -31,11 +31,6 @@ class StoryMenuState extends MusicBeatState
 
 	var loadedWeeks:Array<WeekData> = [];
 
-	var bgColTween:FlxTween;
-	var bfColTween:FlxTween;
-	var gfColTween:FlxTween;
-	var dadColTween:FlxTween;
-
 	override function create()
 	{
 		Application.current.window.title = Application.current.meta.get('name');
@@ -193,10 +188,8 @@ class StoryMenuState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press R to Reset your Score.";
-		var size:Int = 16;
-		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
+		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, "Press CTRL to open the Gameplay Changers Menu / Press R to Reset your Score.", 16);
+		text.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
 
@@ -323,18 +316,27 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			// Nevermind that's stupid lmao
-			PlayState.storyPlaylist = songArray;
-			PlayState.isStoryMode = true;
-			selectedWeek = true;
+			try 
+			{
+				PlayState.storyPlaylist = songArray;
+				PlayState.isStoryMode = true;
+				selectedWeek = true;
 
-			var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
-			if(diffic == null) diffic = '';
+				var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
+				if(diffic == null) diffic = '';
 
-			PlayState.storyDifficulty = curDifficulty;
+				PlayState.storyDifficulty = curDifficulty;
 
-			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-			PlayState.campaignScore = 0;
-			PlayState.campaignMisses = 0;
+				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+				PlayState.campaignScore = 0;
+				PlayState.campaignMisses = 0;
+			}
+			catch(e:Dynamic)
+			{
+				trace('ERROR: $e');
+				return;
+			}
+
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				LoadingState.loadAndSwitchState(new PlayState(), true);
@@ -395,6 +397,13 @@ class StoryMenuState extends MusicBeatState
 
 		var leWeek:WeekData = loadedWeeks[curWeek];
 		WeekData.setDirectoryFromWeek(leWeek);
+
+		// i have no idea if this will work
+		/*
+		FlxTween.color(bgSprite, 0.65, bgSprite.color, leWeek.storyColor);
+		for (char in grpWeekCharacters.members)
+			FlxTween.color(char, 0.65, char.color, leWeek.storyColor);
+		*/
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();

@@ -13,6 +13,7 @@ class FreeplayState extends MusicBeatState
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
+	var repText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
 	var lerpRating:Float = 0;
@@ -24,7 +25,6 @@ class FreeplayState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var intendedColor:Int;
-	var colorTween:FlxTween;
 
 	var colorArray:Array<FlxColor> = [
 		FlxColor.fromRGB(0, 255, 0), // green
@@ -32,8 +32,6 @@ class FreeplayState extends MusicBeatState
 		FlxColor.fromRGB(255, 0, 0), // red
 	];
 	var diffTween:FlxTween;
-
-	var repText:FlxText;
 
 	var missingText:FlxText;
 	var missingTextBG:FlxSprite;
@@ -245,6 +243,8 @@ class FreeplayState extends MusicBeatState
 	public static var instPlaying:Int = -1;
 	public static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
+
+	var stopMusicPlay:Bool = false;
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music != null)
@@ -344,9 +344,6 @@ class FreeplayState extends MusicBeatState
 			else 
 			{
 				persistentUpdate = false;
-				if(colorTween != null) {
-					colorTween.cancel();
-				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				if (ClientPrefs.simpleMain)
 					MusicBeatState.switchState(new SimpleMainMenuState());
@@ -417,25 +414,13 @@ class FreeplayState extends MusicBeatState
 				PlayState.storyDifficulty = curDifficulty;
 
 				trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
-				if(colorTween != null)
-					colorTween.cancel();
-			
-				if (FlxG.keys.pressed.SHIFT)
-					LoadingState.loadAndSwitchState(new ChartingState());
-				else
-					LoadingState.loadAndSwitchState(new PlayState());
-
-				FlxG.sound.music.volume = 0;
-				FlxG.sound.play(Paths.sound('storySelect'));
-				destroyFreeplayVocals();
-				return;
 			}
 			catch(e:Dynamic)
 			{
 				trace('ERROR! $e');
 
 				var errorStr:String = e.toString();
-				if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(34, errorStr.length - 1);
+				if (errorStr.startsWith('[lime.utils.Assets] ERROR:')) errorStr = 'Missing file: ' + errorStr.substring(errorStr.indexOf(songLowercase), errorStr.length - 1);
 				missingText.text = 'ERROR WHILE LOADING CHART:\n$errorStr';
 				missingText.screenCenter(Y);
 				missingText.visible = true;
@@ -446,6 +431,12 @@ class FreeplayState extends MusicBeatState
 				super.update(elapsed);
 				return;
 			}
+
+			LoadingState.loadAndSwitchState(new PlayState());
+			stopMusicPlay = true;
+
+			FlxG.sound.play(Paths.sound('storySelect'));
+			destroyFreeplayVocals();
 		}
 		else if(controls.RESET && !player.playingMusic)
 		{
@@ -506,21 +497,16 @@ class FreeplayState extends MusicBeatState
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected = FlxMath.wrap(curSelected + change, 0, songs.length - 1);
-			
+
 		var newColor:Int = songs[curSelected].color;
-		if(newColor != intendedColor) {
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
+		if(newColor != intendedColor)
+		{
 			intendedColor = newColor;
 			#if sys
 			ArtemisIntegration.setBackgroundFlxColor (intendedColor);
 			#end
-			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
-				onComplete: function(twn:FlxTween) {
-					colorTween = null;
-				}
-			});
+			FlxTween.cancelTweensOf(bg);
+			FlxTween.color(bg, 1, bg.color, intendedColor);
 		}
 
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
@@ -613,7 +599,8 @@ class FreeplayState extends MusicBeatState
 	{
 		super.destroy();
 		
-		if (!FlxG.sound.music.playing)
+		FlxG.autoPause = ClientPrefs.autoPause;
+		if (!FlxG.sound.music.playing && !stopMusicPlay)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}	
 }

@@ -164,5 +164,9 @@ class CoolUtil
 	}
 }
 
+class MapUtil {
+	public static function hasKey<K, V>(map:Map<K,V>, key:K):Bool return map[key] != null;
+}
+
 // there's a big difference between the two
 typedef FileAssets = #if sys FileSystem; #else openfl.utils.Assets; #end
