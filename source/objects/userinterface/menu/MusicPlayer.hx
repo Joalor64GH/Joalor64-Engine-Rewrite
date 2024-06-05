@@ -179,7 +179,7 @@ class MusicPlayer extends FlxGroup
 			if(FreeplayState.vocals != null)
 				FreeplayState.vocals.volume = (FreeplayState.vocals.length > FlxG.sound.music.time) ? 0.8 : 0;
 
-			if((FreeplayState.vocals != null && FreeplayState.vocals.length > FlxG.sound.music.time && Math.abs(FlxG.sound.music.time - FreeplayState.vocals.time))
+			if(FreeplayState.vocals != null && FreeplayState.vocals.length > FlxG.sound.music.time && Math.abs(FlxG.sound.music.time - FreeplayState.vocals.time))
 			{
 				pauseOrResume();
 				setVocalsTime(FlxG.sound.music.time);
