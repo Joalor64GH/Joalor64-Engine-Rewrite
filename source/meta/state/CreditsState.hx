@@ -14,7 +14,6 @@ class CreditsState extends MusicBeatState
 	private var creditsStuff:Array<Array<String>> = [];
 
 	var bg:FlxSprite;
-	var mainSide:FlxSprite;
 	var descText:FlxText;
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
@@ -42,17 +41,6 @@ class CreditsState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 		bg.screenCenter();
-
-		mainSide = new FlxSprite(0, 0).loadGraphic(Paths.image('mainSide'));
-		mainSide.scrollFactor.x = 0;
-		mainSide.scrollFactor.y = 0;
-		mainSide.setGraphicSize(Std.int(mainSide.width * 0.75));
-		mainSide.updateHitbox();
-		mainSide.screenCenter();
-		mainSide.antialiasing = ClientPrefs.globalAntialiasing;
-		mainSide.x = -500;
-		mainSide.y = -90;
-		add(mainSide);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -118,7 +106,6 @@ class CreditsState extends MusicBeatState
 			optionText.isMenuItem = true;
 			optionText.screenCenter(X);
 			optionText.snapToPosition();
-			FlxTween.tween(optionText, {x: 90}, 0.9, {ease: FlxEase.quartInOut});
 			if (isSelectable)
 				optionText.x -= 70;
 			grpOptions.add(optionText);
@@ -141,8 +128,6 @@ class CreditsState extends MusicBeatState
 					curSelected = i;
 			}
 		}
-
-		FlxTween.tween(mainSide, {x: -80}, 0.9, {ease: FlxEase.quartInOut});
 
 		descBox = new AttachedSprite();
 		descBox.makeGraphic(1, 1, FlxColor.BLACK);
