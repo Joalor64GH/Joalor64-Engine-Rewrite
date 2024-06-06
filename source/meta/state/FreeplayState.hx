@@ -41,6 +41,8 @@ class FreeplayState extends MusicBeatState
 	var bottomBG:FlxSprite;
 	var player:MusicPlayer;
 
+	private var curPlaying:Bool = false;
+
 	override function create()
 	{
 		Application.current.window.title = Application.current.meta.get('name');
@@ -199,6 +201,7 @@ class FreeplayState extends MusicBeatState
 		add(player);
 
 		changeSelection();
+		updateTexts();
 		changeDiff();
 
 		super.create();
@@ -239,7 +242,6 @@ class FreeplayState extends MusicBeatState
 	public static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
 
-	var stopMusicPlay:Bool = false;
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music != null)
@@ -384,7 +386,7 @@ class FreeplayState extends MusicBeatState
 				}
 
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.8);
-				if(vocals != null)
+				if (vocals != null) //Sync vocals to Inst
 				{
 					vocals.play();
 					vocals.volume = 0.8;
@@ -397,7 +399,7 @@ class FreeplayState extends MusicBeatState
 			}
 			else if (instPlaying == curSelected && player.playingMusic)
 			{
-				player.pauseOrResume(!player.playingMusic);
+				player.pauseOrResume(player.paused);
 			}
 		}
 		else if (accepted && !player.playingMusic)
@@ -418,7 +420,7 @@ class FreeplayState extends MusicBeatState
 				trace('ERROR! $e');
 
 				var errorStr:String = e.toString();
-				if (errorStr.startsWith('[lime.utils.Assets] ERROR:')) errorStr = 'Missing file: ' + errorStr.substring(errorStr.indexOf(songLowercase), errorStr.length - 1);
+				if (errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(34, errorStr.length - 1);
 				missingText.text = 'ERROR WHILE LOADING CHART:\n$errorStr';
 				missingText.screenCenter(Y);
 				missingText.visible = true;
@@ -430,10 +432,12 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 
-			LoadingState.loadAndSwitchState(new PlayState());
-			stopMusicPlay = true;
-
+			if (FlxG.keys.justPressed.SHIFT)
+				LoadingState.loadAndSwitchState(new ChartingState());
+			else
+				LoadingState.loadAndSwitchState(new PlayState());
 			FlxG.sound.play(Paths.sound('storySelect'));
+			FlxG.sound.music.volume = 0;
 			destroyFreeplayVocals();
 		}
 		else if(controls.RESET && !player.playingMusic)
@@ -442,6 +446,8 @@ class FreeplayState extends MusicBeatState
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
+
+		updateTexts(elapsed);
 		super.update(elapsed);
 
 		for (icon in iconArray) icon.y = icon.sprTracker.y - 36;
@@ -457,6 +463,9 @@ class FreeplayState extends MusicBeatState
 
 	function changeDiff(change:Int = 0)
 	{
+		if (player.playingMusic)
+			return;
+		
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
@@ -485,6 +494,9 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
+		if (player.playingMusic)
+			return;
+
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected = FlxMath.wrap(curSelected + change, 0, songs.length - 1);
@@ -591,7 +603,7 @@ class FreeplayState extends MusicBeatState
 		super.destroy();
 		
 		FlxG.autoPause = ClientPrefs.autoPause;
-		if (!FlxG.sound.music.playing && !stopMusicPlay)
+		if (!FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 	}	
 }
