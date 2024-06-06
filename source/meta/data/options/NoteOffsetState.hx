@@ -1,6 +1,7 @@
 package meta.data.options;
 
 import objects.userinterface.menu.*;
+import objects.userinterface.Bar;
 import objects.background.*;
 
 class NoteOffsetState extends MusicBeatState
