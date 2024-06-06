@@ -184,9 +184,6 @@ class FreeplayState extends MusicBeatState
 
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 
-		if (player.playingMusic)
-			iconArray[instPlaying].canBounce = true;
-
 		bottomBG = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		bottomBG.alpha = 0.6;
 		add(bottomBG);
@@ -448,13 +445,6 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 
 		for (icon in iconArray) icon.y = icon.sprTracker.y - 36;
-	}
-
-	override function beatHit() {
-		super.beatHit();
-
-		if (player.playingMusic)
-			iconArray[instPlaying].bounce();
 	}
 
 	public static function destroyFreeplayVocals() {

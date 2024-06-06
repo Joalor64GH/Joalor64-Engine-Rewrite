@@ -23,16 +23,16 @@ class Bar extends FlxSpriteGroup
 		setBounds(boundX, boundY);
 		
 		bg = new FlxSprite().loadGraphic(Paths.image(image));
-		bg.antialiasing = ClientPrefs.antialiasing;
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		barWidth = Std.int(bg.width - 6);
 		barHeight = Std.int(bg.height - 6);
 
 		leftBar = new FlxSprite().makeGraphic(Std.int(bg.width), Std.int(bg.height), FlxColor.WHITE);
-		leftBar.antialiasing = antialiasing = ClientPrefs.antialiasing;
+		leftBar.antialiasing = antialiasing = ClientPrefs.globalAntialiasing;
 
 		rightBar = new FlxSprite().makeGraphic(Std.int(bg.width), Std.int(bg.height), FlxColor.WHITE);
 		rightBar.color = FlxColor.BLACK;
-		rightBar.antialiasing = ClientPrefs.antialiasing;
+		rightBar.antialiasing = ClientPrefs.globalAntialiasing;
 
 		add(leftBar);
 		add(rightBar);
