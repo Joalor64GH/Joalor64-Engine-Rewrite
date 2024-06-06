@@ -138,16 +138,13 @@ class PlayState extends MusicBeatState
 	public var camZoomingDecay:Float = 1;
 
 	public var gfSpeed:Int = 1;
-	public var health:Float = 1;
+	public var health(default, set):Float = 1;
 	public var combo:Int = 0;
 
-	private var healthBarBG:AttachedSprite;
-	public var healthBar:FlxBar;
+	public var healthBar:Bar;
+	public var timeBar:Bar;
 
 	var songPercent:Float = 0;
-
-	private var timeBarBG:AttachedSprite;
-	public var timeBar:FlxBar;
 
 	public var ratingsArray:Array<Dynamic> = [
 		// name, hit window, score, notesplash
@@ -245,7 +242,9 @@ class PlayState extends MusicBeatState
 	var gunsTween:FlxTween = null;
 	var stageGraphicArray:Array<FlxSprite> = [];
 	var gunsNoteTweens:Array<FlxTween> = [];
-	public static var mania:Int = 3; // this actualy does nothing but is needed for the guns thing
+	// the funny thing is, i am considering adding extra notes in the future
+	// but idk if that's possible with the fact that hsv note coloring was removed
+	public static var mania:Int = 3;
 
 	public var smoothScore:Float = 0;
 	public var songScore:Int = 0;
@@ -1284,35 +1283,17 @@ class PlayState extends MusicBeatState
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
-		timeTxt.visible = showTime;
+		timeTxt.visible = updateTime = showTime;
 		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+		if(ClientPrefs.timeBarType == 'Song Name') timeTxt.text = SONG.song;
 
-		if(ClientPrefs.timeBarType == 'Song Name')
-			timeTxt.text = SONG.song;
-
-		updateTime = showTime;
-
-		timeBarBG = new AttachedSprite('timeBar');
-		timeBarBG.x = timeTxt.x;
-		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
-		timeBarBG.scrollFactor.set();
-		timeBarBG.alpha = 0;
-		timeBarBG.visible = showTime;
-		timeBarBG.color = FlxColor.BLACK;
-		timeBarBG.xAdd = -4;
-		timeBarBG.yAdd = -4;
-		add(timeBarBG);
-
-		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
-			'songPercent', 0, 1);
+		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
-		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
 		add(timeBar);
 		add(timeTxt);
-		timeBarBG.sprTracker = timeBar;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -1356,43 +1337,31 @@ class PlayState extends MusicBeatState
 		FlxG.camera.focusOn(camFollow);
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
-
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite((ClientPrefs.longBar) ? 'healthBarLong' : 'healthBar');
-		healthBarBG.y = FlxG.height * 0.89;
-		healthBarBG.screenCenter(X);
-		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
-		healthBarBG.xAdd = -4;
-		healthBarBG.yAdd = -4;
-		add(healthBarBG);
-		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
-
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+		var healthBarStr:String = (ClientPrefs.longBar) ? 'healthBarLong' : 'healthBar';
+		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.downScroll ? 0.89 : 0.11), healthBarStr, function() return health, 0, 2);
+		healthBar.screenCenter(X);
+		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+		reloadHealthBarColors();
 		add(healthBar);
-		healthBarBG.sprTracker = healthBar;
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
-		iconP1.canBounce = true;
 		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
-		iconP2.canBounce = true;
 		add(iconP2);
-		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
@@ -1410,15 +1379,15 @@ class PlayState extends MusicBeatState
 		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 		add(judgementCounter);
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
-		if(ClientPrefs.downScroll)
-			botplayTxt.y = timeBarBG.y - 78;
-
+		if (ClientPrefs.downScroll)
+			botplayTxt.y = timeBar.y - 78;
+		
 		if (inMini)
 			texty = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
 		else
@@ -1433,13 +1402,11 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
-		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
-		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		versionTxt.cameras = [camHUD];
@@ -1875,13 +1842,11 @@ class PlayState extends MusicBeatState
 	public function reloadHealthBarColors() {
 		var dadColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 		var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
-		healthBar.createFilledBar(dadColor, bfColor);
+		healthBar.setColors(dadColor, bfColor);
 
 		#if sys
 		ArtemisIntegration.setHealthbarFlxColors (dadColor, bfColor);
 		#end
-
-		healthBar.updateBar();
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -1963,10 +1928,8 @@ class PlayState extends MusicBeatState
 		setOnHscripts('grpNoteSplashes', grpNoteSplashes);
 		setOnHscripts('scoreTxt', scoreTxt);
 		setOnHscripts('healthBar', healthBar);
-		setOnHscripts('healthBarBG', healthBarBG);
 		setOnHscripts('botplayTxt', botplayTxt);
 		setOnHscripts('timeBar', timeBar);
-		setOnHscripts('timeBarBG', timeBarBG);
 		setOnHscripts('timeTxt', timeTxt);
 		setOnHscripts('boyfriendGroup', boyfriendGroup);
 		setOnHscripts('dadGroup', dadGroup);
@@ -3748,77 +3711,11 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 			openChartEditor();
 
-		iconP1.alpha = healthBar.alpha;
-		iconP2.alpha = healthBar.alpha;
+		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
+			health = healthBar.bounds.max;
 
-		final iconOffset:Int = 26;
-
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
-
-		if (health > 2) 
-			health = 2;
-
-		switch (iconP1.widthThing) 
-		{
-			case 150:
-				iconP1.animation.curAnim.curFrame = 0;
-			case 300:
-				if (healthBar.percent < 20)
-					iconP1.animation.curAnim.curFrame = 1;
-				else
-					iconP1.animation.curAnim.curFrame = 0;
-			case 450:
-				if (healthBar.percent < 20)
-					iconP1.animation.curAnim.curFrame = 1; // Losing
-				else if (healthBar.percent > 80)
-					iconP1.animation.curAnim.curFrame = 2; // Winning
-				else
-					iconP1.animation.curAnim.curFrame = 0; // Neutral
-			case 750:
-				if (healthBar.percent < 20 && healthBar.percent > 0)
-					iconP1.animation.curAnim.curFrame = 2; // Danger
-				else if (healthBar.percent < 40 && healthBar.percent > 20)
-					iconP1.animation.curAnim.curFrame = 1; // Losing
-				else if (healthBar.percent > 40 && healthBar.percent < 60)
-					iconP1.animation.curAnim.curFrame = 0; // Neutral
-				else if (healthBar.percent > 60 && healthBar.percent < 80)
-					iconP1.animation.curAnim.curFrame = 3; // Winning
-				else if (healthBar.percent > 80)
-					iconP1.animation.curAnim.curFrame = 4; // Victorious
-		}
-
-		// Does this work??
-		// the 2 icons do, but idk about 3 nor the 5 icons
-		// okay 3 should work fine now, but idk about 5 icons
-		switch (iconP2.widthThing) 
-		{
-			case 150:
-				iconP2.animation.curAnim.curFrame = 0;
-			case 300:
-				if (healthBar.percent > 80)
-					iconP2.animation.curAnim.curFrame = 1;
-				else
-					iconP2.animation.curAnim.curFrame = 0;
-			case 450:
-				if (healthBar.percent > 80)
-					iconP2.animation.curAnim.curFrame = 1; // Losing
-				else if (healthBar.percent < 20)
-					iconP2.animation.curAnim.curFrame = 2; // Winning
-				else
-					iconP2.animation.curAnim.curFrame = 0; // Neutral
-			case 750:
-				if (healthBar.percent < 80)
-					iconP2.animation.curAnim.curFrame = 4; // Victorious
-				else if (healthBar.percent < 60 && healthBar.percent > 80)
-					iconP2.animation.curAnim.curFrame = 3; // Winning
-				else if (healthBar.percent > 40 && healthBar.percent < 60)
-					iconP2.animation.curAnim.curFrame = 0; // Neutral
-				else if (healthBar.percent > 40 && healthBar.percent < 20)
-					iconP2.animation.curAnim.curFrame = 1; // Losing
-				else if (healthBar.percent < 20 && healthBar.percent > 0)
-					iconP2.animation.curAnim.curFrame = 2; // Danger
-		}
+		updateIconsScale(elapsed);
+		updateIconsPosition();
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -3837,35 +3734,19 @@ class PlayState extends MusicBeatState
 			else if(!startedCountdown)
 				Conductor.songPosition = -Conductor.crochet * 5;
 		}
-		else
+		else if (!paused && updateTime)
 		{
-			if (!paused)
-			{
-				songTime += FlxG.game.ticks - previousFrameTime;
-				previousFrameTime = FlxG.game.ticks;
+			var curTime:Float = Math.max(0, Conductor.songPosition - ClientPrefs.noteOffset);
+			songPercent = (curTime / songLength);
 
-				// Interpolation type beat
-				if (Conductor.lastSongPos != Conductor.songPosition)
-				{
-					songTime = (songTime + Conductor.songPosition) / 2;
-					Conductor.lastSongPos = Conductor.songPosition;
-				}
+			var songCalc:Float = (songLength - curTime);
+			if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
 
-				if(updateTime) {
-					var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
-					if(curTime < 0) curTime = 0;
-					songPercent = (curTime / songLength);
+			var secondsTotal:Int = Math.floor(songCalc / 1000);
+			if(secondsTotal < 0) secondsTotal = 0;
 
-					var songCalc:Float = (songLength - curTime);
-					if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
-
-					var secondsTotal:Int = Math.floor(songCalc / 1000);
-					if(secondsTotal < 0) secondsTotal = 0;
-
-					if(ClientPrefs.timeBarType != 'Song Name')
-						timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
-				}
-			}
+			if(ClientPrefs.timeBarType != 'Song Name')
+				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
 		}
 
 		FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
@@ -4035,6 +3916,99 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 		callOnLuas('onUpdatePost', [elapsed]);
+	}
+
+	public dynamic function updateIconsScale(elapsed:Float)
+	{
+		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, Math.exp(-elapsed * 9 * playbackRate));
+		iconP1.scale.set(mult, mult);
+		iconP1.updateHitbox();
+
+		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, Math.exp(-elapsed * 9 * playbackRate));
+		iconP2.scale.set(mult, mult);
+		iconP2.updateHitbox();
+	}
+
+	public dynamic function updateIconsPosition()
+	{
+		final iconOffset:Int = 26;
+		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+	}
+
+	function set_health(value:Float):Float
+	{
+		if (healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
+		{
+			health = value;
+			return health;
+		}
+
+		health = value;
+		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
+		healthBar.percent = (newPercent != null ? newPercent : 0);
+
+		switch (iconP1.widthThing) 
+		{
+			case 150:
+				iconP1.animation.curAnim.curFrame = 0;
+			case 300:
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1;
+				else
+					iconP1.animation.curAnim.curFrame = 0;
+			case 450:
+				if (healthBar.percent < 20)
+					iconP1.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent > 80)
+					iconP1.animation.curAnim.curFrame = 2; // Winning
+				else
+					iconP1.animation.curAnim.curFrame = 0; // Neutral
+			case 750:
+				if (healthBar.percent < 20 && healthBar.percent > 0)
+					iconP1.animation.curAnim.curFrame = 2; // Danger
+				else if (healthBar.percent < 40 && healthBar.percent > 20)
+					iconP1.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent > 40 && healthBar.percent < 60)
+					iconP1.animation.curAnim.curFrame = 0; // Neutral
+				else if (healthBar.percent > 60 && healthBar.percent < 80)
+					iconP1.animation.curAnim.curFrame = 3; // Winning
+				else if (healthBar.percent > 80)
+					iconP1.animation.curAnim.curFrame = 4; // Victorious
+		}
+
+		// Does this work??
+		// the 2 icons do, but idk about 3 nor the 5 icons
+		// okay 3 should work fine now, but idk about 5 icons
+		switch (iconP2.widthThing) 
+		{
+			case 150:
+				iconP2.animation.curAnim.curFrame = 0;
+			case 300:
+				if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 1;
+				else
+					iconP2.animation.curAnim.curFrame = 0;
+			case 450:
+				if (healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 2; // Winning
+				else
+					iconP2.animation.curAnim.curFrame = 0; // Neutral
+			case 750:
+				if (healthBar.percent < 80)
+					iconP2.animation.curAnim.curFrame = 4; // Victorious
+				else if (healthBar.percent < 60 && healthBar.percent > 80)
+					iconP2.animation.curAnim.curFrame = 3; // Winning
+				else if (healthBar.percent > 40 && healthBar.percent < 60)
+					iconP2.animation.curAnim.curFrame = 0; // Neutral
+				else if (healthBar.percent > 40 && healthBar.percent < 20)
+					iconP2.animation.curAnim.curFrame = 1; // Losing
+				else if (healthBar.percent < 20 && healthBar.percent > 0)
+					iconP2.animation.curAnim.curFrame = 2; // Danger
+		}
+		return health;
 	}
 
 	function openPauseMenu()
@@ -4646,7 +4620,6 @@ class PlayState extends MusicBeatState
 				return;
 		}
 
-		timeBarBG.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
 		canPause = false;
@@ -6079,9 +6052,6 @@ class PlayState extends MusicBeatState
 
 		if (generatedMusic)
 			notes.sort(FlxSort.byY, ClientPrefs.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
-
-		iconP1.bounce();
-		iconP2.bounce();
 
 		if (curBeat % 2 == 0) {
 			FlxTween.angle(iconP1, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});

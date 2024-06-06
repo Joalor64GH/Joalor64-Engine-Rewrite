@@ -94,8 +94,6 @@ class FreeplayState extends MusicBeatState
 		}
 		Mods.loadTheFirstEnabledMod();
 
-		if (!player.playingMusic) Conductor.bpm = TitleState.titleJSON.bpm;
-
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
@@ -381,6 +379,13 @@ class FreeplayState extends MusicBeatState
 					vocals = null;
 				}
 
+				var iconLerp:Float = 1;
+				for (i in 0...iconArray.length)
+				{
+					iconLerp = FlxMath.lerp(0.4, iconArray[i].scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
+					iconArray[i].scale.set(iconLerp, iconLerp);
+				}
+
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.8);
 				if(vocals != null)
 				{
@@ -388,10 +393,6 @@ class FreeplayState extends MusicBeatState
 					vocals.volume = 0.8;
 				}
 				instPlaying = curSelected;
-				Conductor.bpm = PlayState.SONG.bpm;
-				for (i in 0...iconArray.length)
-					iconArray[i].canBounce = false;
-				iconArray[instPlaying].canBounce = true;
 
 				player.playingMusic = true;
 				player.curTime = 0;

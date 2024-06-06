@@ -102,7 +102,7 @@ class CreditsState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !(creditsStuff[i].length <= 1);
-			var optionText:Alphabet = new Alphabet(0, 320, creditsStuff[i][0], !isSelectable);
+			var optionText:Alphabet = new Alphabet(90, 320, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
 			optionText.screenCenter(X);
 			optionText.snapToPosition();
