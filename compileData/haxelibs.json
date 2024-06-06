@@ -11,11 +11,15 @@
       },
       {
         "name": "flixel",
-        "type": "haxelib"
+        "type": "haxelib",
+        "version": "5.5.0"
       },
       {
         "name": "flixel-addons",
-        "type": "haxelib"
+        "type": "git",
+        "dir": null,
+        "ref": "dev",
+        "url": "https://github.com/HaxeFlixel/flixel-addons"
       },
       {
         "name": "flixel-ui",
@@ -53,7 +57,10 @@
       },
       {
         "name": "hxCodec",
-        "type": "haxelib"
+        "type": "git",
+        "dir": null,
+        "ref": "main",
+        "url": "https://github.com/polybiusproxy/hxCodec"
       },
       {
         "name": "fnf-modcharting-tools",

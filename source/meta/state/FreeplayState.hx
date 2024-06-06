@@ -41,8 +41,6 @@ class FreeplayState extends MusicBeatState
 	var bottomBG:FlxSprite;
 	var player:MusicPlayer;
 
-	private var curPlaying:Bool = false;
-
 	override function create()
 	{
 		Application.current.window.title = Application.current.meta.get('name');
