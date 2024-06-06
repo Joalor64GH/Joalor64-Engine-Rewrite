@@ -179,6 +179,9 @@ class FreeplayState extends MusicBeatState
 			lastDifficultyName = CoolUtil.defaultDifficulty;
 
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
+
+		if (curPlaying)
+			iconArray[instPlaying].canBounce = true;
 		
 		changeSelection();
 		changeDiff();
@@ -345,7 +348,9 @@ class FreeplayState extends MusicBeatState
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
 				Conductor.bpm = PlayState.SONG.bpm;
-				FlxTween.tween(iconArray[instPlaying], {zoom:1.03}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+				for (i in 0...iconArray.length)
+					iconArray[i].canBounce = false;
+				iconArray[instPlaying].canBounce = true;
 				curPlaying = true;
 			}
 		}
@@ -405,7 +410,7 @@ class FreeplayState extends MusicBeatState
 		super.beatHit();
 
 		if (curPlaying)
-			FlxTween.tween(iconArray[instPlaying], {zoom:1.03}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+			iconArray[instPlaying].bounce();
 	}
 
 	public static function destroyFreeplayVocals() {
