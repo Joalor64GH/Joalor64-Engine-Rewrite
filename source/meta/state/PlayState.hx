@@ -13,8 +13,6 @@ import openfl.events.KeyboardEvent;
 
 import flixel.animation.FlxAnimationController;
 
-import animateatlas.AtlasFrameMaker;
-
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
 import modcharting.PlayfieldRenderer;
@@ -106,7 +104,6 @@ class PlayState extends MusicBeatState
 	public var spawnTime:Float = 2000;
 
 	public var vocals:FlxSound;
-
 	var vocalsFinished:Bool = false;
 
 	public var dad:Character = null;
@@ -393,6 +390,7 @@ class PlayState extends MusicBeatState
 
 		keysArray = [];
 
+		// real question, how do switch statements make everything so easy??
 		ratingStuff = switch (ClientPrefs.scoreTxtType) {
 			case 'Default': [
 				['F-', 0.2],
@@ -1371,6 +1369,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
+		updateScore(false);
 		add(scoreTxt);
 
 		// thanks kade
@@ -2842,7 +2841,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function updateScore(miss:Bool = false)
+	public dynamic function updateScore(miss:Bool = false)
 	{
 		var scoreThing = (ClientPrefs.weekendScore) ? truncateFloat(smoothScore, 0) : songScore;
 		switch (ClientPrefs.scoreTxtType)
@@ -5877,33 +5876,6 @@ class PlayState extends MusicBeatState
 		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
 
 		instance = null;
-		// debug logs, leaving here as a reminder until a solution is found
-		/** 
-			Called from hxcpp::__hxcpp_main
-			Called from ApplicationMain::main ApplicationMain.hx line 26
-			Called from ApplicationMain::create ApplicationMain.hx line 137
-			Called from openfl.display.Application::exec openfl/display/Application.hx line 130
-			Called from lime.app.Application::exec lime/app/Application.hx line 150
-			Called from lime._internal.backend.native.NativeApplication::exec lime/_internal/backend/native/NativeApplication.hx line 146
-			Called from lime._internal.backend.native.NativeApplication::handleRenderEvent lime/_internal/backend/native/NativeApplication.hx line 375
-			Called from lime.app._Event_lime_graphics_RenderContext_Void::dispatch lime/_internal/macros/EventMacro.hx line 91
-			Called from openfl.display.Stage::__onLimeRender openfl/display/Stage.hx line 2177
-			Called from openfl.display.Stage::__broadcastEvent openfl/display/Stage.hx line 1187
-			Called from openfl.display.DisplayObject::__dispatch openfl/display/DisplayObject.hx line 1398
-			Called from openfl.events.EventDispatcher::__dispatchEvent openfl/events/EventDispatcher.hx line 426
-			Called from flixel.FlxGame::onEnterFrame flixel/FlxGame.hx line 553
-			Called from flixel.FlxGame::step flixel/FlxGame.hx line 680
-			Called from flixel.FlxGame::update flixel/FlxGame.hx line 727
-			Called from flixel.FlxGame::switchState flixel/FlxGame.hx line 625
-			Called from meta.state.PlayState::destroy meta/state/PlayState.hx line 5930
-			Called from flixel.addons.ui.FlxUIState::destroy flixel/addons/ui/FlxUIState.hx line 331
-			Called from flixel.addons.transition.FlxTransitionableState::destroy flixel/addons/transition/FlxTransitionableState.hx line 75
-			Called from flixel.FlxState::destroy flixel/FlxState.hx line 186
-			Called from flixel.group.FlxTypedGroup::destroy flixel/group/FlxGroup.hx line 145
-			Called from flixel.ui.FlxBar::destroy flixel/ui/FlxBar.hx line 203
-			Called from flixel.ui.FlxBar::set_frontFrames flixel/ui/FlxBar.hx line 990
-			Critical Error: Uncatchable Throw: Null Object Reference
-		**/
 		
 		super.destroy();
 	}

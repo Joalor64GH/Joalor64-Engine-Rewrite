@@ -5,7 +5,7 @@ class Bar extends FlxSpriteGroup
 	public var leftBar:FlxSprite;
 	public var rightBar:FlxSprite;
 	public var bg:FlxSprite;
-	public var valueFunction:Void->Float = null;
+	public var valueFunction:Void->Float = function() return 0;
 	public var percent(default, set):Float = 0;
 	public var bounds:Dynamic = {min: 0, max: 1};
 	public var leftToRight(default, set):Bool = true;
@@ -19,7 +19,7 @@ class Bar extends FlxSpriteGroup
 	{
 		super(x, y);
 		
-		this.valueFunction = valueFunction;
+		if (valueFunction != null) this.valueFunction = valueFunction;
 		setBounds(boundX, boundY);
 		
 		bg = new FlxSprite().loadGraphic(Paths.image(image));
@@ -42,19 +42,13 @@ class Bar extends FlxSpriteGroup
 
 	public var enabled:Bool = true;
 	override function update(elapsed:Float) {
-		if(!enabled)
+		var value:Null<Float> = FlxMath.remapToRange(FlxMath.bound(valueFunction(), bounds.min, bounds.max), bounds.min, bounds.max, 0, 100);
+		percent = (value != null ? value : 0);
+		if (!enabled)
 		{
 			super.update(elapsed);
 			return;
 		}
-
-		if(valueFunction != null)
-		{
-			var value:Null<Float> = FlxMath.remapToRange(FlxMath.bound(valueFunction(), bounds.min, bounds.max), bounds.min, bounds.max, 0, 100);
-			percent = (value != null ? value : 0);
-		}
-		else percent = 0;
-		super.update(elapsed);
 	}
 	
 	public function setBounds(min:Float, max:Float)
@@ -63,12 +57,10 @@ class Bar extends FlxSpriteGroup
 		bounds.max = max;
 	}
 
-	public function setColors(left:FlxColor = null, right:FlxColor = null)
+	public function setColors(left:FlxColor, right:FlxColor)
 	{
-		if (left != null)
-			leftBar.color = left;
-		if (right != null)
-			rightBar.color = right;
+		leftBar.color = left;
+		rightBar.color = right;
 	}
 
 	public function updateBar()

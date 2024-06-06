@@ -2,8 +2,7 @@
 - Main Menu Addons
 
 [HIGH PRIORITY]
-- Localization Support
-- Fix the goddamn playstate crash
+- Localization Support (basically done, but need to add data for languages)
 - Backport stuff from FNF 0.3.X
 
 [LOW PRIORITY]
