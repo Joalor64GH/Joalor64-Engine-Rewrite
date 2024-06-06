@@ -1,7 +1,5 @@
 package meta.state;
 
-import flixel.sound.FlxSound;
-
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];

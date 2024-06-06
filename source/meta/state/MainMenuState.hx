@@ -219,7 +219,7 @@ class MainMenuState extends MusicBeatState
 				{
 					curSelected = i;
 					changeItem();
-					FlxG.sound.play(backend.utils.Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('scrollMenu'));
 				}
 			});
 			#end
@@ -292,7 +292,6 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	var selectedSomethin:Bool = false;
-	var timeNotMoving:Float = 0;
 
 	override function update(elapsed:Float)
 	{
