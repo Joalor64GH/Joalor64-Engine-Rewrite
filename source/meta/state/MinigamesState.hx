@@ -9,7 +9,7 @@ class MinigamesState extends MusicBeatState
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
-		new Minigame('Kill BF', 'lmao', 'mgicons/killBf')
+		new Minigame('Kill BF', 'lmao\n(Point & Click)', 'mgicons/killBf')
 		// soon...
 		// new Minigame("Joalor64's Special", 'It\'s me!\n(Melodic Circuit)', 'mgicons/me')
 	];
