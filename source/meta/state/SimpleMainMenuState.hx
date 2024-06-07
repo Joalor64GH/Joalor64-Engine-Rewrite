@@ -68,8 +68,6 @@ class SimpleMainMenuState extends MusicBeatState
 
 		Mods.loadTheFirstEnabledMod();
 
-		Application.current.window.title = "Friday Night Funkin': Joalor64 Engine Rewritten";
-
 		camMain = new FlxCamera();
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;

@@ -19,8 +19,6 @@ class MinigamesState extends MusicBeatState
 
 	override function create()
 	{
-		Application.current.window.title = Application.current.meta.get('name');
-		
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
         	menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);

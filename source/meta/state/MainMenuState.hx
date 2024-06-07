@@ -77,8 +77,6 @@ class MainMenuState extends MusicBeatState
 
 		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menu_preferences.json'));
 
-		Application.current.window.title = Application.current.meta.get('name');
-
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);

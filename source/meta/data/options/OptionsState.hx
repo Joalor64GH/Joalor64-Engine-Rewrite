@@ -48,9 +48,7 @@ class OptionsState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
-
-		Application.current.window.title = Application.current.meta.get('name');
-
+		
 		FlxG.sound.playMusic(Paths.music('configurator'));
 
 		camMain = new FlxCamera();

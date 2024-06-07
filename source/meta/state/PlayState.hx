@@ -230,7 +230,7 @@ class PlayState extends MusicBeatState
 	var santa:BGSprite;
 	var heyTimer:Float;
 
-	var bgGirls:BackgroundGirls;
+	var bgGirls:FlxTypedGroup<BackgroundGirls>;
 	var rosesLightningGrp:FlxTypedGroup<BGSprite>;
 	var schoolCloudsGrp:FlxTypedGroup<BGSprite>;
 	var schoolRain:FlxSprite;
@@ -895,13 +895,13 @@ class PlayState extends MusicBeatState
 				bgTrees.scrollFactor.set(0.85, 0.85);
 
 				halloweenWhite = new BGSprite(null, 0, 0, 0, 0);
-				halloweenWhite.makeGraphic(Std.int(FlxG.width*2), Std.int(FlxG.height * 2), FlxColor.WHITE);
+				halloweenWhite.makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
 				halloweenWhite.alpha = 0.001;
 				halloweenWhite.blend = ADD;
 				halloweenWhite.screenCenter();
 				halloweenWhite.visible = false;
 	
-				if(!ClientPrefs.lowQuality) {
+				if (!ClientPrefs.lowQuality) {
 					var howMany:Int = (isRoses ? 3 : 1);
 					schoolCloudsGrp = new FlxTypedGroup<BGSprite>();
 					for (i in 0...howMany) {
@@ -942,12 +942,15 @@ class PlayState extends MusicBeatState
 					treeLeaves.updateHitbox();
 					treeLeaves.antialiasing = false;
 	
-					bgGirls = new BackgroundGirls(-100, 190);
-					bgGirls.scrollFactor.set(0.9, 0.9);
-
-					bgGirls.setGraphicSize(Std.int(bgGirls.width * daPixelZoom));
-					bgGirls.updateHitbox();
-					add(bgGirls);
+					bgGirls = new FlxTypedGroup<BackgroundGirls>(3);
+						for (i in 0...3) {
+							var bgGirl = new BackgroundGirls(-114 + (498 * i) + 48, 192);
+							bgGirl.scrollFactor.set(1, 1);
+		
+							bgGirl.setGraphicSize(Std.int(bgGirl.width * daPixelZoom));
+							bgGirl.updateHitbox();
+							bgGirls.add(bgGirl);
+						}
 	
 					if (isRoses)
 						layerArray = [bgSky, rosesLightningGrp, schoolCloudsGrp, bgSchool, bgStreet, fgTrees, bgTrees, treeLeaves, bgGirls];
@@ -2827,7 +2830,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage && (curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo' || SONG.song.toLowerCase() != 'stress')) {
+						if (!PlayState.isPixelStage || curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
 							boyfriend.playAnim('pre-attack', true);
 							boyfriend.specialAnim = true;
 						}
@@ -4125,6 +4128,7 @@ class PlayState extends MusicBeatState
 
 		persistentUpdate = false;
 		cancelMusicFadeTween();
+		Application.current.window.title = Application.current.meta.get('name');
 		MusicBeatState.switchState(new ChartingState());
 		chartingMode = paused = true;
 
@@ -4555,7 +4559,7 @@ class PlayState extends MusicBeatState
 				reloadHealthBarColors();
 
 			case 'BG Freaks Expression':
-				if(bgGirls != null) bgGirls.swapDanceType();
+				if(bgGirls != null) bgGirls.forEach(bgGirl -> bgGirl.swapDanceType());
 
 			case 'Change Scroll Speed':
 				if (songSpeedType == "constant")
@@ -4768,9 +4772,10 @@ class PlayState extends MusicBeatState
 							openSubState(new ResultsSubState(campaignSicks, campaignGoods, campaignBads, campaignShits, campaignScore, campaignMisses, 
 								Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
 						});
-					}
-					else
+					} else {
+						Application.current.window.title = Application.current.meta.get('name');
 						MusicBeatState.switchState(new StoryMenuState());
+					}
 
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
@@ -4833,9 +4838,10 @@ class PlayState extends MusicBeatState
 						openSubState(new ResultsSubState(sicks, goods, bads, shits, songScore, songMisses,
 				 			Highscore.floorDecimal(ratingPercent * 100, 2), ratingName, ratingFC)); 
 					});
-				}
-				else
+				} else {
+					Application.current.window.title = Application.current.meta.get('name');
 					MusicBeatState.switchState(new FreeplayState());
+				}
 				
 				changedDifficulty = false;
 			}
@@ -6267,9 +6273,7 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'school':
-				if(!ClientPrefs.lowQuality) {
-					bgGirls.dance();
-				}
+				if(!ClientPrefs.lowQuality) bgGirls.forEach(bgGirl -> bgGirl.dance());
 
 			case 'mall':
 				if(!ClientPrefs.lowQuality) {

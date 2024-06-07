@@ -1,6 +1,5 @@
 package meta.state;
 
-import flixel.graphics.FlxGraphic;
 import objects.userinterface.menu.*;
 
 class StoryMenuState extends MusicBeatState
@@ -33,8 +32,6 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		Application.current.window.title = Application.current.meta.get('name');
-
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 

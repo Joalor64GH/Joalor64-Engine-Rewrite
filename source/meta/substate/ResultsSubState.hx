@@ -177,12 +177,13 @@ class ResultsSubState extends MusicBeatSubstate
 		}
             }
 	    FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		Application.current.window.title = Application.current.meta.get('name');
 	}
     }
 
-	override function destroy(){
-		for (i in tweens){
-			if (i != null){
+	override function destroy() {
+		for (i in tweens) {
+			if (i != null) {
 				i.cancel();
 				i.destroy();
 				i = null;

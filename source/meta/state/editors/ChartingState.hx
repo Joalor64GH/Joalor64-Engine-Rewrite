@@ -234,8 +234,6 @@ class ChartingState extends MusicBeatState
 	public var mouseQuant:Bool = false;
 	override function create()
 	{
-		Application.current.window.title = Application.current.meta.get('name');
-		
 		if (PlayState.SONG != null)
 			_song = PlayState.SONG;
 		else
