@@ -57,10 +57,10 @@ class Bar extends FlxSpriteGroup
 		bounds.max = max;
 	}
 
-	public function setColors(left:FlxColor, right:FlxColor)
+	public function setColors(left:FlxColor = null, right:FlxColor = null)
 	{
-		leftBar.color = left;
-		rightBar.color = right;
+		if (left != null) leftBar.color = left;
+		if (right != null) rightBar.color = right;
 	}
 
 	public function updateBar()

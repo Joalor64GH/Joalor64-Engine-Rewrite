@@ -1,10 +1,5 @@
 package;
 
-import animateatlas.AtlasFrameMaker;
-
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.FlxGraphic;
-
 import openfl.utils.AssetType;
 import openfl.media.Sound;
 
@@ -479,7 +474,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no!!' + ' $key ' + 'returned null!');
+		trace('oh no!! $key returned null!');
 		return null;
 	}
 

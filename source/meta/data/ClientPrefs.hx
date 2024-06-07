@@ -165,6 +165,10 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		#if ACHIEVEMENTS_ALLOWED
+		Achievements.loadAchievements();
+		#end
+		
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}

@@ -60,8 +60,6 @@ class CoolUtil
 			for (e in 0...splitCoolSong.length)
 				coolSong += Std.string(splitCoolSong[e+1]).toLowerCase();
 
-			coolSong = coolReplace(coolSong, 'null', '');
-
 			for (l in 0...splitSong.length)
 			{
 				var stringSong:String = Std.string(splitSong[l+1]);
@@ -73,12 +71,9 @@ class CoolUtil
 				for (l in 0...splitStringSong.length)
 					stringSong += Std.string(splitStringSong[l+1]).toLowerCase();
 
-				stringSong = coolReplace(stringSong, 'null', '');
-
 				coolSong += '$stringSong';
 			}
 
-			song = coolSong.replace(' Null', '');
 			return song;
 		}
 

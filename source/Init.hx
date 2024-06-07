@@ -141,6 +141,10 @@ class Init extends FlxState
 		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
 
 		ClientPrefs.loadPrefs();
+
+		#if ACHIEVEMENTS_ALLOWED
+		Achievements.loadAchievements();
+		#end
         
 		#if CHECK_FOR_UPDATES
 		if (ClientPrefs.checkForUpdates && !OutdatedState.leftState)

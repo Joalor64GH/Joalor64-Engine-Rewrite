@@ -253,6 +253,7 @@ class Joalor64Game extends FlxGame
 class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray 
 {
 	var _bar:Bitmap;
+	var volumeMaxSound:String;
 
 	public function new()
 	{
@@ -266,7 +267,7 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 		_bar.x = 2.5;
 		addChild(_bar);
 
-		final tmp:Bitmap = new Bitmap(Assets.getBitmapData("assets/images/soundtray.png", false), null, true);
+		final tmp:Bitmap = new Bitmap(Assets.getBitmapData(Paths.image("soundtray"), false), null, true);
 		addChild(tmp);
 
 		screenCenter();
@@ -278,6 +279,10 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 
 		y = -height;
 		visible = false;
+
+		volumeUpSound = Paths.sound("soundtray/Volup");
+    	volumeDownSound = Paths.sound("soundtray/Voldown");
+    	volumeMaxSound = Paths.sound("soundtray/VolMAX");
 	}
 
 	override function update(elapsed:Float) {
@@ -288,8 +293,9 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 	{
 		if (!silent)
 		{
-			final sound = flixel.system.FlxAssets.getSound("assets/sounds/scrollMenu");
-			if (sound != null) FlxG.sound.load(sound).play();
+			var sound = up ? volumeUpSound : volumeDownSound;
+      		if (globalVolume == 10) sound = volumeMaxSound;
+      		if (sound != null) FlxG.sound.load(sound).play();
 		}
 
 		_timer = 4;

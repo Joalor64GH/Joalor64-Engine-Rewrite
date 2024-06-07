@@ -107,7 +107,7 @@ class SimpleMainMenuState extends MusicBeatState
 			grpOptions.add(optionText);
 		}
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion #if nightly + MainMenuState.nightly #end, 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Joalor64 Engine Rewritten v" + MainMenuState.joalor64EngineVersion #if nightly + MainMenuState.nightly #end + " [" + Main.commitId + "]", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -130,7 +130,6 @@ class SimpleMainMenuState extends MusicBeatState
 		changeSelection();
 
 		#if ACHIEVEMENTS_ALLOWED
-		Achievements.loadAchievements();
 		var leDate = Date.now();
 		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
 			var achieveID:Int = Achievements.getAchievementIndex('friday_night_play');
@@ -149,7 +148,6 @@ class SimpleMainMenuState extends MusicBeatState
 	function giveAchievement() {
 		add(new AchievementObject('friday_night_play', camAchievement));
 		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-		trace('Giving achievement "friday_night_play"');
 	}
 	#end
 
@@ -204,17 +202,10 @@ class SimpleMainMenuState extends MusicBeatState
 	}
 	
 	function changeSelection(change:Int = 0) {
-		curSelected += change;
-		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
-			curSelected = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, options.length - 1);
 
-		var bullShit:Int = 0;
-
-		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
-			bullShit++;
+		for (num => item in grpOptions.members) {
+			item.targetY = num - curSelected;
 
 			item.alpha = 0.6;
 			if (item.targetY == 0) {
