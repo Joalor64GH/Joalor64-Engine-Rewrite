@@ -10,6 +10,7 @@ import openfl.filters.ShaderFilter;
 #end
 
 import openfl.events.KeyboardEvent;
+import openfl.display.BlendMode;
 
 import flixel.animation.FlxAnimationController;
 import flixel.util.FlxTimer.FlxTimerManager;
@@ -189,6 +190,7 @@ class PlayState extends MusicBeatState
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
+	public var camTint:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
 	var dialogue:Array<String> = null;
@@ -555,10 +557,13 @@ class PlayState extends MusicBeatState
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
+		camTint = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
+		camTint.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camTint, false);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>(8);
@@ -937,15 +942,12 @@ class PlayState extends MusicBeatState
 					treeLeaves.updateHitbox();
 					treeLeaves.antialiasing = false;
 	
-					bgGirls = new FlxTypedGroup<BackgroundGirls>(3);
-					for (i in 0...3) {
-						var bgGirl = new BackgroundGirls(-114 + (498 * i) + 48, 192);
-						bgGirl.scrollFactor.set(1, 1);
-		
-						bgGirl.setGraphicSize(Std.int(bgGirl.width * daPixelZoom));
-						bgGirl.updateHitbox();
-						bgGirls.add(bgGirl);
-					}
+					bgGirls = new BackgroundGirls(-100, 190);
+					bgGirls.scrollFactor.set(0.9, 0.9);
+
+					bgGirls.setGraphicSize(Std.int(bgGirls.width * daPixelZoom));
+					bgGirls.updateHitbox();
+					add(bgGirls);
 	
 					if (isRoses)
 						layerArray = [bgSky, rosesLightningGrp, schoolCloudsGrp, bgSchool, bgStreet, fgTrees, bgTrees, treeLeaves, bgGirls];
