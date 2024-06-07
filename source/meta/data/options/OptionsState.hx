@@ -2,7 +2,7 @@ package meta.data.options;
 
 class OptionsState extends MusicBeatState
 {
-	public static final options:Array<String> = [
+	final options:Array<String> = [
 		'Note Colors', 
 		'Controls', 
 		'Offsets',
@@ -155,6 +155,7 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (PauseSubState.fromPlayState) {
+				FlxG.sound.music.volume = 0;
 				StageData.loadDirectory(PlayState.SONG);
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
