@@ -256,6 +256,8 @@ class PauseSubState extends MusicBeatSubstate
 					switch (daSelected)
 					{
 						case "Exit to Freeplay":
+							Application.current.window.title = Application.current.meta.get('name');
+							
 							PlayState.deathCounter = 0;
 							PlayState.seenCutscene = false;
 
@@ -266,6 +268,8 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
 						case "Exit to Menu":
+							Application.current.window.title = Application.current.meta.get('name');
+							
 							PlayState.deathCounter = 0;
 							PlayState.seenCutscene = false;
 
@@ -286,6 +290,7 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.changedDifficulty = false;
 							PlayState.chartingMode = false;
 						case "Exit Game":
+							Application.current.window.title = Application.current.meta.get('name');
 							MusicBeatState.switchState(new GameExitState());
 					}
 					return;
