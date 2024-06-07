@@ -12,6 +12,7 @@ import openfl.filters.ShaderFilter;
 import openfl.events.KeyboardEvent;
 
 import flixel.animation.FlxAnimationController;
+import flixel.util.FlxTimer.FlxTimerManager;
 
 import modcharting.ModchartFuncs;
 import modcharting.NoteMovement;
