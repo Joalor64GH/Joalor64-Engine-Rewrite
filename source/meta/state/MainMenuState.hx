@@ -207,19 +207,20 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 60 + (i * 160);
 			#if (flixel >= "5.0.0") // update your fucking flixel
-			FlxMouseEvent.add(menuItem, null, function(e) switchTheStatePlease(), function(e)
-			{
-				new FlxTimer().start(0.01, function (tmr:FlxTimer) {
-					selectedSomethinAnal = true;
-				});
-
-				if (!selectedSomethin && selectedSomethinAnal)
+			if (finishedFunnyMove)
+				FlxMouseEvent.add(menuItem, null, function(e) switchTheStatePlease(), function(e)
 				{
-					curSelected = i;
-					changeItem();
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-				}
-			});
+					new FlxTimer().start(0.01, function (tmr:FlxTimer) {
+						selectedSomethinAnal = true;
+					});
+
+					if (!selectedSomethin && selectedSomethinAnal)
+					{
+						curSelected = i;
+						changeItem();
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					}
+				});
 			#end
 		}
 
@@ -334,9 +335,7 @@ class MainMenuState extends MusicBeatState
 			}
 
 			if (controls.ACCEPT)
-			{
 				switchTheStatePlease();
-			}
 			#if MODS_ALLOWED
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{

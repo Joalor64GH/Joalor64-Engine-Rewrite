@@ -253,6 +253,7 @@ class PlayState extends MusicBeatState
 	var gunsNoteTweens:Array<FlxTween> = [];
 	// the funny thing is, i am considering adding extra notes in the future
 	// but idk if that's possible with the fact that hsv note coloring was removed
+	// edit: we're gonna cook next update
 	public static var mania(default, set):Int = 3;
 	public static function set_mania(newMania:Int) {
 		mania = newMania;
@@ -3607,6 +3608,25 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+
+		if (FlxG.keys.justPressed.SPACE)
+		{
+			if (curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
+				if (boyfriend != null && boyfriend.animOffsets.exists('hey')) {
+					boyfriend.playAnim('hey', true);
+					boyfriend.specialAnim = true;
+					boyfriend.heyTimer = 0.6;
+				}
+			}
+
+			if (curStage != 'tank' || curStage != 'limo') {
+				if (gf != null && gf.animOffsets.exists('cheer')) {
+					gf.playAnim('cheer', true);
+					gf.specialAnim = true;
+					gf.heyTimer = 0.6;
+				}
+			}
+		}
 
 		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 
