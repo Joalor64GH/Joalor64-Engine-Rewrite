@@ -127,7 +127,6 @@ class ReplaySelectState extends MusicBeatState
 
         else if (controls.ACCEPT && menuItems.length > 0)
         {
-            FreeplayState.curPlaying = false;
             FreeplayState.destroyFreeplayVocals();
             PlayState.SONG = Song.loadFromJson(song, songName);
             PlayState.storyDifficulty = difficulties[curSelected];

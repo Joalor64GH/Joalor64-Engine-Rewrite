@@ -85,6 +85,11 @@ class CoolUtil
 		return FileSystem.readDirectory(FileSystem.absolutePath(path));
 	#end
 
+	inline public static function colorFromArray(colors:Array<Int>, ?defColors:Array<Int>):FlxColor {
+		colors = fixRGBColorArray(colors, defColors);
+		return FlxColor.fromRGB(colors[0], colors[1], colors[2], colors[3]);
+	}
+
 	inline public static function colorFromString(color:String):FlxColor
 	{
 		var hideChars = ~/[\t\n\r]/;
@@ -95,6 +100,14 @@ class CoolUtil
 		if(colorNum == null) colorNum = FlxColor.fromString('#$color');
 		return colorNum != null ? colorNum : FlxColor.WHITE;
 	}
+
+	public static function getColor(value:Dynamic, ?defValue:Array<Int>):FlxColor {
+        if (value == null) return FlxColor.WHITE;
+        if (value is Int) return value;
+        if (value is String) return colorFromString(value);
+        if (value is Array) return colorFromArray(value, defValue);
+        return FlxColor.WHITE;
+    }
 	
 	inline public static function listFromString(string:String):Array<String>
 		return string.trim().split('\n').map(str -> str.trim());

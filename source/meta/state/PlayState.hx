@@ -1372,7 +1372,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
 		if(ClientPrefs.timeBarType == 'Song Name') timeTxt.text = SONG.song;
 
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
+		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', () -> return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
@@ -1425,7 +1425,7 @@ class PlayState extends MusicBeatState
 		moveCameraSection();
 
 		var healthBarStr:String = (ClientPrefs.longBar) ? 'healthBarLong' : 'healthBar';
-		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.downScroll ? 0.89 : 0.11), healthBarStr, function() return health, 0, 2);
+		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.downScroll ? 0.89 : 0.11), healthBarStr, () -> return health, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
@@ -1933,13 +1933,14 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadHealthBarColors() {
-		var dadColor:FlxColor = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
-		var bfColor:FlxColor = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
+		var dadColor:FlxColor = CoolUtil.getColor(dad.healthColorArray);
+		var bfColor:FlxColor = CoolUtil.getColor(boyfriend.healthColorArray);
 		healthBar.setColors(dadColor, bfColor);
-
 		#if sys
 		ArtemisIntegration.setHealthbarFlxColors (dadColor, bfColor);
 		#end
+
+		timeBar.setColors(CoolUtil.getColor(dad.healthColorArray), FlxColor.WHITE);
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -3806,12 +3807,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 			openChartEditor();
 
-		if (healthBar.bounds.max != null) {
-			if (health > healthBar.bounds.max) health = healthBar.bounds.max;
-		} else {
-			// Old system for safety?? idk
-			if (health > 2) health = 2;
-		}
+		if (healthBar.bounds != null && health > healthBar.bounds.max) health = healthBar.bounds.max;
 
 		updateIconsPosition();
 
@@ -4034,7 +4030,7 @@ class PlayState extends MusicBeatState
 		}
 
 		health = value;
-		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
+		var newPercent:Null<Float> = FlxMath.remapToRange(healthBar.bounded, healthBar.bounds.min, healthBar.bounds.max, 0, 100);
 		healthBar.percent = (newPercent != null ? newPercent : 0);
 
 		switch (iconP1.widthThing) 
@@ -4141,7 +4137,7 @@ class PlayState extends MusicBeatState
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
-		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
+		if (((skipHealthCheck && instakillOnMiss) || health <= (healthBar.bounds != null ? healthBar.bounds.min : 0)) && !practiceMode && !isDead)
 		{
 			var ret:Dynamic = callOnLuas('onGameOver', [], false);
 			if(ret != FunkinLua.Function_Stop) {
@@ -4710,8 +4706,7 @@ class PlayState extends MusicBeatState
 				return;
 		}
 
-		timeBar.visible = false;
-		timeTxt.visible = false;
+		timeBar.visible = timeTxt.visible = false;
 		canPause = false;
 		endingSong = true;
 		camZooming = false;
