@@ -2830,7 +2830,7 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-						if (!PlayState.isPixelStage || curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
+						if (boyfriend != null && !PlayState.isPixelStage || curStage != 'mall' || curStage != 'mallEvil' || curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
 							boyfriend.playAnim('pre-attack', true);
 							boyfriend.specialAnim = true;
 						}
@@ -2857,16 +2857,18 @@ class PlayState extends MusicBeatState
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
 						if (curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
-							if(boyfriend.animOffsets.exists('hey')) {
+							if (boyfriend != null && boyfriend.animOffsets.exists('hey')) {
 								boyfriend.playAnim('hey', true);
 								boyfriend.specialAnim = true;
 								boyfriend.heyTimer = 0.6;
 							}
 
-							if(gf != null && gf.animOffsets.exists('cheer')) {
-								gf.playAnim('cheer', true);
-								gf.specialAnim = true;
-								gf.heyTimer = 0.6;
+							if (curStage != 'tank' || curStage != 'limo') {
+								if (gf != null && gf.animOffsets.exists('cheer')) {
+									gf.playAnim('cheer', true);
+									gf.specialAnim = true;
+									gf.heyTimer = 0.6;
+								}
 							}
 						}
 				}
