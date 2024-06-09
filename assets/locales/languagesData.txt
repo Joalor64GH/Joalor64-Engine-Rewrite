@@ -1,3 +1,3 @@
-English:en
-Español:es
-Português:pt
+English (US):en
+Español (España):es
+Português (Portugal):pt

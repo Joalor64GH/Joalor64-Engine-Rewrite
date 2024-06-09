@@ -252,8 +252,7 @@ class PlayState extends MusicBeatState
 	var stageGraphicArray:Array<FlxSprite> = [];
 	var gunsNoteTweens:Array<FlxTween> = [];
 	// the funny thing is, i am considering adding extra notes in the future
-	// but idk if that's possible with the fact that hsv note coloring was removed
-	// edit: we're gonna cook next update
+	// we're gonna cook next update
 	public static var mania(default, set):Int = 3;
 	public static function set_mania(newMania:Int) {
 		mania = newMania;
