@@ -2865,7 +2865,7 @@ class PlayState extends MusicBeatState
 								boyfriend.heyTimer = 0.6;
 							}
 
-							if (curStage != 'tank' || curStage != 'limo') {
+							if (curStage != 'tank') {
 								if (gf != null && gf.animOffsets.exists('cheer')) {
 									gf.playAnim('cheer', true);
 									gf.specialAnim = true;
@@ -3617,13 +3617,13 @@ class PlayState extends MusicBeatState
 					boyfriend.specialAnim = true;
 					boyfriend.heyTimer = 0.6;
 				}
-			}
 
-			if (curStage != 'tank' || curStage != 'limo') {
-				if (gf != null && gf.animOffsets.exists('cheer')) {
-					gf.playAnim('cheer', true);
-					gf.specialAnim = true;
-					gf.heyTimer = 0.6;
+				if (curStage != 'tank') {
+					if (gf != null && gf.animOffsets.exists('cheer')) {
+						gf.playAnim('cheer', true);
+						gf.specialAnim = true;
+						gf.heyTimer = 0.6;
+					}
 				}
 			}
 		}

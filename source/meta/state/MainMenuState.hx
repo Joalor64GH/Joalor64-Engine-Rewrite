@@ -165,6 +165,20 @@ class MainMenuState extends MusicBeatState
 			? FlxColor.fromRGB(menuJSON.colorOnConfirm[0], menuJSON.colorOnConfirm[1], menuJSON.colorOnConfirm[2]) : 0xFFfd719b;
 		add(magenta);
 
+		var menuCover:FlxSprite = new FlxSprite().makeGraphic(FlxG.width - 500, Std.int(FlxG.height));
+		menuCover.alpha = .5;
+		menuCover.color = FlxColor.WHITE;
+		menuCover.scrollFactor.set();
+		menuCover.screenCenter(X);
+		add(menuCover);
+
+		var menuCoverAlt:FlxSprite = new FlxSprite().makeGraphic(Std.int(menuCover.width - 20), Std.int(menuCover.height));
+		menuCoverAlt.setPosition(menuCover.x + 10, menuCover.y);
+		menuCoverAlt.alpha = .7;
+		menuCoverAlt.color = FlxColor.BLACK;
+		menuCoverAlt.scrollFactor.set();
+		add(menuCoverAlt);
+
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -207,20 +221,19 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 60 + (i * 160);
 			#if (flixel >= "5.0.0") // update your fucking flixel
-			if (finishedFunnyMove)
-				FlxMouseEvent.add(menuItem, null, function(e) switchTheStatePlease(), function(e)
-				{
-					new FlxTimer().start(0.01, function (tmr:FlxTimer) {
-						selectedSomethinAnal = true;
-					});
-
-					if (!selectedSomethin && selectedSomethinAnal)
-					{
-						curSelected = i;
-						changeItem();
-						FlxG.sound.play(Paths.sound('scrollMenu'));
-					}
+			FlxMouseEvent.add(menuItem, null, function(e) switchTheStatePlease(), function(e)
+			{
+				new FlxTimer().start(0.01, function (tmr:FlxTimer) {
+					selectedSomethinAnal = true;
 				});
+
+				if (!selectedSomethin && selectedSomethinAnal)
+				{
+					curSelected = i;
+					changeItem();
+					FlxG.sound.play(Paths.sound('scrollMenu'));
+				}
+			});
 			#end
 		}
 
