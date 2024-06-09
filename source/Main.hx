@@ -1,11 +1,15 @@
 package;
 
+import system.GameDimensions;
 import meta.ButtplugUtils;
+import macros.MacroUtil;
 import core.ToastCore;
-import meta.video.*;
 import debug.FPS;
+
+import openfl.events.UncaughtErrorEvent;
 import lime.system.System as LimeSystem;
 import lime.utils.Log as LimeLogger;
+
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -13,10 +17,7 @@ import sys.io.File;
 
 import haxe.Exception;
 import haxe.CallStack;
-import openfl.events.UncaughtErrorEvent;
 import haxe.io.Path;
-
-import macros.MacroUtil;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
@@ -37,7 +38,7 @@ class Main extends Sprite
 
 	public final config:Dynamic = {
 		gameDimensions: [GameDimensions.width, GameDimensions.height],
-		initialState: Init,
+		initialState: InitialState,
 		defaultFPS: 60,
 		skipSplash: true,
 		startFullscreen: false
@@ -69,7 +70,7 @@ class Main extends Sprite
 			FlxG.bitmap.dumpCache();
 			FlxG.bitmap.clearUnused();
 			Paths.clearStoredMemory();
-			openfl.system.System.gc();
+			System.gc();
 		});
 
 		FlxG.signals.postStateSwitch.add(() ->{
@@ -78,7 +79,7 @@ class Main extends Sprite
 			cpp.NativeGc.enable(false);
 			#end
 			Paths.clearUnusedMemory();
-			openfl.system.System.gc();
+			System.gc();
 		});
 
 		ClientPrefs.loadDefaultKeys();
@@ -95,27 +96,6 @@ class Main extends Sprite
 
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
-
-		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
-
-		#if web
-		var str1:String = "HTML CRAP";
-		var vHandler = new VideoHandler();
-		vHandler.init1();
-		vHandler.video.name = str1;
-		addChild(vHandler.video);
-		vHandler.init2();
-		GlobalVideo.setVid(vHandler);
-		vHandler.source(ourSource);
-		#elseif WEBM_ALLOWED
-		var str1:String = "WEBM SHIT";
-		var webmHandle = new WebmHandler();
-		webmHandle.source(ourSource);
-		webmHandle.makePlayer();
-		webmHandle.webm.name = str1;
-		addChild(webmHandle.webm);
-		GlobalVideo.setWebm(webmHandle);
-		#end
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
@@ -192,8 +172,6 @@ class Main extends Sprite
 		Lib.application.window.alert(msg + '\n\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues', 'Error!');
 		LimeSystem.exit(1);
 	}
-
-	public static var webmHandler:WebmHandler;
 
 	var oldVol:Float = 1.0;
 	var newVol:Float = 0.3;
@@ -280,9 +258,10 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 		y = -height;
 		visible = false;
 
-		volumeUpSound = "assets/sounds/soundtray/Volup.ogg";
-    	volumeDownSound = "assets/sounds/soundtray/Voldown.ogg";
-    	volumeMaxSound = "assets/sounds/soundtray/VolMAX.ogg";
+		var soundExt:String = #if !web "ogg" #else "mp3";
+		volumeUpSound = "assets/sounds/soundtray/Volup.$soundExt";
+    	volumeDownSound = "assets/sounds/soundtray/Voldown.$soundExt";
+    	volumeMaxSound = "assets/sounds/soundtray/VolMAX.$soundExt";
 	}
 
 	override function update(elapsed:Float) {

@@ -12,7 +12,6 @@ import openfl.filters.ShaderFilter;
 import openfl.events.KeyboardEvent;
 import openfl.display.BlendMode;
 
-import flixel.animation.FlxAnimationController;
 import flixel.util.FlxTimer.FlxTimerManager;
 
 import modcharting.ModchartFuncs;
@@ -27,9 +26,9 @@ import modcharting.PlayfieldRenderer;
 #end
 
 #if WEBM_ALLOWED
-import webm.WebmPlayer;
 import meta.video.BackgroundVideo;
 import meta.video.VideoSubState;
+import meta.video.WebmHandler;
 #end
 
 #if FLASH_MOVIE
@@ -2151,51 +2150,54 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String)
+	public function startVideo(name:String, type:String = 'mp4'):Void
 	{
-		#if (VIDEOS_ALLOWED || WEBM_ALLOWED)
 		inCutscene = true;
 
-		var filepath:String = Paths.video(name);
-		#if sys
-		if(!FileSystem.exists(filepath))
-		#else
-		if(!Assets.exists(filepath))
-		#end
+		switch (type)
 		{
-			FlxG.log.warn('Couldnt find video file: ' + name);
-			startAndEnd();
-			return;
+			case 'webm':
+				#if WEBM_ALLOWED
+				if (Paths.fileExists(Paths.webm(name))) {
+					openSubState(new VideoSubState(name, null, () -> startAndEnd()));
+					return;
+				}
+
+				FlxG.log.warn('Couldnt find video file: ' + name);
+				#else
+				FlxG.log.warn('Platform not supported!');
+				#end
+			default:
+				#if VIDEOS_ALLOWED
+				if (Paths.fileExists(Paths.video(name))) 
+				{
+					var video:MP4Handler = new MP4Handler();
+					#if (hxCodec >= "3.0.0")
+					// Recent versions
+					video.play(Paths.video(name));
+					video.onEndReached.add(function()
+					{
+						video.dispose();
+						startAndEnd();
+						return;
+					}, true);
+					#else
+					// Older versions
+					video.playVideo(Paths.video(name));
+					video.finishCallback = function()
+					{
+						startAndEnd();
+						return;
+					}
+					#end
+				}
+				FlxG.log.warn('Couldnt find video file: ' + name);
+				#else
+				FlxG.log.warn('Platform not supported!');
+				#end
 		}
-		#if WEBM_ALLOWED
-		openSubState(new VideoSubState(name, null, () -> startAndEnd()));
-		return;
-		#else
-		var video:MP4Handler = new MP4Handler();
-		#if (hxCodec >= "3.0.0")
-		// Recent versions
-		video.play(filepath);
-		video.onEndReached.add(function()
-		{
-			video.dispose();
-			startAndEnd();
-			return;
-		}, true);
-		#else
-		// Older versions
-		video.playVideo(filepath);
-		video.finishCallback = function()
-		{
-			startAndEnd();
-			return;
-		}
-		#end
-		#end
-		#else
-		FlxG.log.warn('Platform not supported!');
+
 		startAndEnd();
-		return;
-		#end
 	}
 	public function startMovie(name:String, sound:String) // I fixed it joalor
 	{
@@ -3028,6 +3030,13 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
+		#if WEBM_ALLOWED
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
+		if (useVideo && ourVideo != null)
+			ourVideo.resume();
+		#end
+
 		startingSong = false;
 		songStarted = true;
 
@@ -3038,9 +3047,6 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.onComplete = () -> finishSong();
 		vocals.play();
 		vocals.onComplete = () -> vocalsFinished = true;
-
-		if (useVideo)
-			GlobalVideo.get().resume();
 
 		if(startOnTime > 0)
 			setSongTime(startOnTime - 500);
@@ -3629,15 +3635,6 @@ class PlayState extends MusicBeatState
 
 		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 
-		if (useVideo && GlobalVideo.get() != null)
-		{
-			if (GlobalVideo.get().ended && !removedVideo)
-			{
-				remove(videoSprite);
-				removedVideo = true;
-			}
-		}
-
 		callOnLuas('onUpdate', [elapsed]);
 
 		switch (curStage)
@@ -3791,6 +3788,21 @@ class PlayState extends MusicBeatState
 
 		var scoreMult:Float = FlxMath.lerp(smoothScore, songScore, 0.108);
 		smoothScore = scoreMult;
+
+		#if WEBM_ALLOWED
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
+		if (useVideo && ourVideo != null && !stopUpdate)
+		{
+			if (ourVideo.ended && !removedVideo)
+			{
+				remove(videoSprite);
+
+				removedVideo = true;
+				useVideo = false;
+			}
+		}
+		#end
 
 		super.update(elapsed);
 
@@ -4666,6 +4678,10 @@ class PlayState extends MusicBeatState
 	{
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
 
+		#if WEBM_ALLOWED
+		endBGVideo();
+		#end
+
 		updateTime = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
@@ -4687,13 +4703,6 @@ class PlayState extends MusicBeatState
 
 		ButtplugUtils.stop();
 
-		if (useVideo)
-		{
-			GlobalVideo.get().stop();
-			PlayState.instance.remove(PlayState.instance.videoSprite);
-		}
-		endBGVideo();
-
 		#if sys
 		if (!inReplay)
 		{
@@ -4707,23 +4716,6 @@ class PlayState extends MusicBeatState
 				File.saveContent(Paths.getPreloadPath('replays/$song ${length}.json'), ReplayState.stringify());
 		}
 		#end
-
-		//Should kill you if you tried to cheat
-		if(!startingSong) {
-			notes.forEach(function(daNote:Note) {
-				if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
-					health -= 0.05 * healthLoss;
-				}
-			});
-			for (daNote in unspawnNotes) {
-				if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
-					health -= 0.05 * healthLoss;
-				}
-			}
-
-			if(doDeathCheck())
-				return;
-		}
 
 		timeBar.visible = timeTxt.visible = false;
 		canPause = false;
@@ -5421,54 +5413,102 @@ class PlayState extends MusicBeatState
 		return [for (i in 0...controlArray.length) Reflect.getProperty(controls, controlArray[i] + suffix)];
 	}
 
-	public var useVideo = false;
+	public var useVideo:Bool = false;
+	public var stopUpdate:Bool = false;
+	public var removedVideo:Bool = false;
+
+	#if WEBM_ALLOWED
 	public static var webmHandler:WebmHandler;
+	#end
 	public var videoSprite:FlxSprite;
 
-	public function backgroundVideo(source:String) // for background videos
+	public function backgroundVideo(source:String):Void // for background videos
 	{
 		#if WEBM_ALLOWED
 		useVideo = true;
 
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
-		var str1:String = "WEBM SHIT";
+
 		webmHandler = new WebmHandler();
 		webmHandler.source(ourSource);
 		webmHandler.makePlayer();
-		webmHandler.webm.name = str1;
+		webmHandler.webm.name = "WEBM SHIT";
 
-		GlobalVideo.setWebm(webmHandler);
+		BackgroundVideo.setWebm(webmHandler);
+		var ourVideo:Dynamic = BackgroundVideo.get();
 
-		GlobalVideo.get().source(source);
-		GlobalVideo.get().clearPause();
-		if (GlobalVideo.isWebm)
-		{
-			GlobalVideo.get().updatePlayer();
-		}
-		GlobalVideo.get().show();
+		ourVideo.source(Paths.video(source));
+		ourVideo.clearPause();
 
-		if (GlobalVideo.isWebm)
-			GlobalVideo.get().restart();
-		else
-			GlobalVideo.get().play();
+		if (BackgroundVideo.isWebm)
+			ourVideo.updatePlayer();
+
+		ourVideo.show();
+
+		if (BackgroundVideo.isWebm) ourVideo.restart();
+		else ourVideo.play();
 
 		var data = webmHandler.webm.bitmapData;
 
-		videoSprite = new FlxSprite(-470, -30).loadGraphic(data);
-
-		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
-
-		remove(gf);
-		remove(boyfriend);
-		remove(dad);
+		videoSprite = new FlxSprite(0, 0);
+		videoSprite.loadGraphic(data);
+		videoSprite.scrollFactor.set();
+		videoSprite.cameras = [camHUD];
 		add(videoSprite);
-		add(gf);
-		add(boyfriend);
-		add(dad);
 
-		trace('poggers');
+		if (startingSong)
+			webmHandler.pause();
+		else
+			webmHandler.resume();
+		#end
+	}
 
-		if (!songStarted)
+	public function makeBackgroundTheVideo(source:String, with:Dynamic):Void // for background videos
+	{
+		#if WEBM_ALLOWED
+		useVideo = true;
+
+		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+
+		webmHandler = new WebmHandler();
+		webmHandler.source(ourSource);
+		webmHandler.makePlayer();
+		webmHandler.webm.name = "WEBM SHIT";
+
+		BackgroundVideo.setWebm(webmHandler);
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
+		ourVideo.source(Paths.video(source));
+		ourVideo.clearPause();
+
+		if (BackgroundVideo.isWebm)
+			ourVideo.updatePlayer();
+
+		ourVideo.show();
+
+		if (BackgroundVideo.isWebm) ourVideo.restart();
+		else ourVideo.play();
+
+		var data = webmHandler.webm.bitmapData;
+
+		videoSprite = new FlxSprite(0, 0);
+		videoSprite.loadGraphic(data);
+		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.4));
+		videoSprite.scrollFactor.set();
+
+		switch (with)
+		{
+			case 'before' | 'in front of' | 'afore' | 'ere' | 'front' | 'head' | true | 'true':
+				add(videoSprite);
+			case 'dad' | 'opponent':
+				addBehindDad(videoSprite);
+			case 'bf' | 'boyfriend':
+				addBehindBF(videoSprite);
+			default:
+				addBehindGF(videoSprite);
+		}
+
+		if (startingSong)
 			webmHandler.pause();
 		else
 			webmHandler.resume();
@@ -5477,6 +5517,7 @@ class PlayState extends MusicBeatState
 
 	public function endBGVideo():Void
 	{
+		#if WEBM_ALLOWED
 		var video:Dynamic = BackgroundVideo.get();
 
 		if (useVideo && video != null)
@@ -5484,6 +5525,7 @@ class PlayState extends MusicBeatState
 			video.stop();
 			remove(videoSprite);
 		}
+		#end
 	}
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes

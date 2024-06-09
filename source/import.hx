@@ -7,6 +7,7 @@ import flixel.addons.effects.FlxTrail;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.animation.FlxAnimationController;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -35,6 +36,8 @@ import openfl.text.TextFormat;
 
 import haxe.Json;
 import haxe.Http;
+import haxe.io.Path;
+
 import hscript.*;
 
 #if (sys || desktop || MODS_ALLOWED)
@@ -73,11 +76,10 @@ import meta.*;
 import objects.*;
 import objects.userinterface.*;
 
-import Paths;
-
 #if MODS_ALLOWED 
 import backend.Mods; 
 #end
+import backend.Paths;
 import backend.Localization;
 import backend.animation.PsychAnimationController;
 

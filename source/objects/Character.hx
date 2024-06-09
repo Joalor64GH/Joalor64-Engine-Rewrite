@@ -121,31 +121,31 @@ class Character extends FlxSprite
 				//I8
 				#if MODS_ALLOWED
 				var modTxtToFind:String = Paths.modsTxt(json.image);
-				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
+				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt');
 				
 				if (FileSystem.exists(modTxtToFind) || FileSystem.exists(txtToFind) || Assets.exists(txtToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt')))
 				#end
 					spriteType = "packer";
 				
 				#if MODS_ALLOWED
 				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '/Animation.json');
-				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
+				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json');
 				
 				if (FileSystem.exists(modAnimToFind) || FileSystem.exists(animToFind) || Assets.exists(animToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json')))
 				#end
 					spriteType = "texture";
 
 				#if MODS_ALLOWED
 				var modI8ToFind:String = Paths.modFolders('images/' + json.image + '.json');
-				var I8ToFind:String = Paths.getPath('images/' + json.image + '.json', TEXT);
+				var I8ToFind:String = Paths.getPath('images/' + json.image + '.json');
 
 				if (FileSystem.exists(modI8ToFind) || FileSystem.exists(I8ToFind) || Assets.exists(I8ToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '.json', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.json')))
 				#end
 					spriteType = "I8";
 

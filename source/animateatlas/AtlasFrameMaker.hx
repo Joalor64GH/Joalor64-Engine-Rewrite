@@ -42,7 +42,7 @@ class AtlasFrameMaker extends FlxFramesCollection
 			return null;
 		}
 
-		var daPath = Paths.getPath('images/$key/spritemap.png', IMAGE);
+		var daPath = Paths.getPath('images/$key/spritemap.png');
 
 		if (framesLoaded.exists(daPath))
 			return framesLoaded.get(daPath);

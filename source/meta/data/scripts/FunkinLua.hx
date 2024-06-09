@@ -2152,24 +2152,37 @@ class FunkinLua {
 			}
 			return false;
 		});
-		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
-			#if (VIDEOS_ALLOWED || WEBM_ALLOWED)
-			if(FileSystem.exists(Paths.video(videoFile))) {
-				PlayState.instance.startVideo(videoFile);
-				return true;
-			} else {
-				luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
-			}
-			return false;
 
-			#else
-			if(PlayState.instance.endingSong) {
-				PlayState.instance.endSong();
-			} else {
-				PlayState.instance.startCountdown();
+		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, type:String = 'mp4') {
+			switch (type)
+			{
+				case 'webm':
+					#if WEBM_ALLOWED
+					if (Paths.fileExists(Paths.webm(videoFile)))
+					{
+						PlayState.instance.startVideo(videoFile, type);
+						return;
+					}
+
+					luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
+					#else
+					luaTrace('startVideo: Platform not supported!', false, false, FlxColor.RED);
+					PlayState.instance.startAndEnd();
+					#end
+				default:
+					#if VIDEOS_ALLOWED
+					if (Paths.fileExists(Paths.webm(videoFile)))
+					{
+						PlayState.instance.startVideo(videoFile, type);
+						return;
+					}
+
+					luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
+					#else
+					luaTrace('startVideo: Platform not supported!', false, false, FlxColor.RED);
+					PlayState.instance.startAndEnd();
+					#end
 			}
-			return true;
-			#end
 		});
 
 		Lua_helper.add_callback(lua, "startMovie", function(flashFile:String, sound:String) {
@@ -2193,7 +2206,7 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
 		{
-			PlayState.instance.backgroundVideo(Paths.modsVideo(video));
+			PlayState.instance.backgroundVideo(video);
 		});
 
 		Lua_helper.add_callback(lua, "endBGVideo", function():Void
@@ -2319,8 +2332,8 @@ class FunkinLua {
 		});
 		#end
 
-		Lua_helper.add_callback(lua, "debugPrint", function(text1:Dynamic = '', text2:Dynamic = '', text3:Dynamic = '', text4:Dynamic = '', text5:Dynamic = '') {
-			for (i in [text1, text2, text3, text4, text5])
+		Lua_helper.add_callback(lua, "debugPrint", function(text1:Dynamic = ''2:Dynamic = ''3:Dynamic = ''4:Dynamic = ''5:Dynamic = '') {
+			for (i in [text12345])
 				if (i == null)
 					i = '';
 
@@ -2340,14 +2353,14 @@ class FunkinLua {
 
 
 		// LUA TEXTS
-		Lua_helper.add_callback(lua, "makeLuaText", function(tag:String, text:String, width:Int, x:Float, y:Float) {
+		Lua_helper.add_callback(lua, "makeLuaText", function(tag:String:String, width:Int, x:Float, y:Float) {
 			tag = tag.replace('.', '');
 			resetTextTag(tag);
-			var leText:ModchartText = new ModchartText(x, y, text, width);
+			var leText:ModchartText = new ModchartText(x, y, width);
 			PlayState.instance.modchartTexts.set(tag, leText);
 		});
 
-		Lua_helper.add_callback(lua, "setTextString", function(tag:String, text:String) {
+		Lua_helper.add_callback(lua, "setTextString", function(tag:String:String) {
 			var obj:FlxText = getTextObject(tag);
 			if(obj != null)
 			{
@@ -2706,13 +2719,13 @@ class FunkinLua {
 			{
 				return true;
 			}
-			return FileSystem.exists(Paths.getPath('assets/$filename', TEXT));
+			return FileSystem.exists(Paths.getPath('assets/$filename'));
 			#else
 			if(absolute)
 			{
 				return Assets.exists(filename);
 			}
-			return Assets.exists(Paths.getPath('assets/$filename', TEXT));
+			return Assets.exists(Paths.getPath('assets/$filename'));
 			#end
 		});
 		Lua_helper.add_callback(lua, "saveFile", function(path:String, content:String, ?absolute:Bool = false)
@@ -2744,7 +2757,7 @@ class FunkinLua {
 				}
 				#end
 
-				var lePath:String = Paths.getPath(path, TEXT);
+				var lePath:String = Paths.getPath(path);
 				if(Assets.exists(lePath))
 				{
 					FileSystem.deleteFile(lePath);
@@ -3492,9 +3505,9 @@ class ModchartSprite extends FlxSprite
 class ModchartText extends FlxText
 {
 	public var wasAdded:Bool = false;
-	public function new(x:Float, y:Float, text:String, width:Float)
+	public function new(x:Float, y:Float:String, width:Float)
 	{
-		super(x, y, width, text, 16);
+		super(x, y, width, 16);
 		setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		cameras = [PlayState.instance.camHUD];
 		scrollFactor.set();
@@ -3508,7 +3521,7 @@ class DebugLuaText extends FlxText
 	public var parentGroup:FlxTypedGroup<DebugLuaText>;
 	public function new(text:String, parentGroup:FlxTypedGroup<DebugLuaText>, color:FlxColor) {
 		this.parentGroup = parentGroup;
-		super(10, 10, 0, text, 16);
+		super(10, 10, 0, 16);
 		setFormat(Paths.font("vcr.ttf"), 20, color, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scrollFactor.set();
 		borderSize = 1;

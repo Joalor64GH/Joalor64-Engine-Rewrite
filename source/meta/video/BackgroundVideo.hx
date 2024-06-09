@@ -45,8 +45,8 @@ class BackgroundVideo
 
 	public static function calc(ind:Int):Dynamic
 	{
-		var stageWidth:Int = openfl.Lib.current.stage.stageWidth;
-		var stageHeight:Int = openfl.Lib.current.stage.stageHeight;
+		var stageWidth:Int = Lib.current.stage.stageWidth;
+		var stageHeight:Int = Lib.current.stage.stageHeight;
 
 		var width:Float = 1280;
 		var height:Float = 720;

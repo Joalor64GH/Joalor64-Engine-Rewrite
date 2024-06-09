@@ -1,7 +1,5 @@
 package meta.video;
 
-import flixel.sound.FlxSound;
-
 import openfl.display.MovieClip;
 import openfl.events.Event;
 

@@ -1,6 +1,6 @@
-package;
+package meta.state;
 
-class Init extends FlxState
+class InitialState extends FlxState
 {
 	var epicLogo:FlxSprite;
 

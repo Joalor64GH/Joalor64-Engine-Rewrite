@@ -1,4 +1,4 @@
-package;
+package system;
 
 class GameDimensions
 {

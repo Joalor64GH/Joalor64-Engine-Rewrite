@@ -1,6 +1,7 @@
 package meta.video;
 
 import meta.video.*;
+import system.GameDimensions;
 
 class GlobalVideo
 {
