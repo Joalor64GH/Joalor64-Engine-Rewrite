@@ -258,10 +258,10 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 		y = -height;
 		visible = false;
 
-		var soundExt:String = #if !web "ogg" #else "mp3";
-		volumeUpSound = "assets/sounds/soundtray/Volup.$soundExt";
-    	volumeDownSound = "assets/sounds/soundtray/Voldown.$soundExt";
-    	volumeMaxSound = "assets/sounds/soundtray/VolMAX.$soundExt";
+		var soundExt:String = #if !web "ogg" #else "mp3" #end;
+		volumeUpSound = 'assets/sounds/soundtray/Volup.$soundExt';
+		volumeDownSound = 'assets/sounds/soundtray/Voldown.$soundExt';
+		volumeMaxSound = 'assets/sounds/soundtray/VolMAX.$soundExt';
 	}
 
 	override function update(elapsed:Float) {
