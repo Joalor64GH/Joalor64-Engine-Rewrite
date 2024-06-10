@@ -1,6 +1,5 @@
 package backend;
 
-import openfl.utils.AssetType;
 import openfl.media.Sound;
 
 using haxe.io.Path;

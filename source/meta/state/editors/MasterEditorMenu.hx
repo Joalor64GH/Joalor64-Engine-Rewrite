@@ -125,9 +125,6 @@ class MasterEditorMenu extends MusicBeatState
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
 		}
-		
-		if (FlxG.keys.justPressed.T)
-			MusicBeatState.switchState(new TestState());
 
 		for (num => item in grpTexts.members)
 		{

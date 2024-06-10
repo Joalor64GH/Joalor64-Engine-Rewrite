@@ -1,7 +1,6 @@
 package meta.state;
 
 import flixel.ui.FlxButton;
-import flixel.input.keyboard.FlxKey;
 
 class ModsMenuState extends MusicBeatState
 {

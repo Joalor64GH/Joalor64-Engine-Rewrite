@@ -1201,10 +1201,14 @@ class PlayState extends MusicBeatState
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
 					luaArray.push(new FunkinLua(folder + file));
-				#elseif HSCRIPT_ALLOWED
+				#end
+
+				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hscript'))
 					addHscript(folder + file);
-				#elseif SCRIPT_EXTENSION
+				#end
+
+				#if SCRIPT_EXTENSION
 				if(file.toLowerCase().endsWith('.hx'))
 					scriptArray.push(new FunkinSScript(folder + file));
 				#end
@@ -1228,7 +1232,9 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			luaArray.push(new FunkinLua(luaFile));
-		#elseif HSCRIPT_ALLOWED
+		#end
+
+		#if HSCRIPT_ALLOWED
 		var hscriptFile:String = 'stages/' + curStage + '.hscript';
 		if(FileSystem.exists(Paths.modFolders(hscriptFile))) {
 			hscriptFile = Paths.modFolders(hscriptFile);
@@ -1242,7 +1248,9 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			addHscript(hscriptFile);
-		#elseif SCRIPT_EXTENSION
+		#end
+
+		#if SCRIPT_EXTENSION
 		var scriptFile:String = 'stages/' + curStage + '.hx';
 		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
 			scriptFile = Paths.modFolders(scriptFile);
@@ -1560,6 +1568,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if HSCRIPT_ALLOWED
 		for (notetype in noteTypes)
 		{
@@ -1610,6 +1619,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		#end
+
 		#if SCRIPT_EXTENSION
 		for (notetype in noteTypes)
 		{
@@ -1672,10 +1682,14 @@ class PlayState extends MusicBeatState
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
 					luaArray.push(new FunkinLua(folder + file));
-				#elseif HSCRIPT_ALLOWED
+				#end
+
+				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hscript'))
 					addHscript(folder + file);
-				#elseif SCRIPT_EXTENSION
+				#end
+				
+				#if SCRIPT_EXTENSION
 				if(file.toLowerCase().endsWith('.hx'))
 					scriptArray.push(new FunkinSScript(folder + file));
 				#end

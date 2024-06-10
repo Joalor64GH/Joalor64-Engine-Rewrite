@@ -303,7 +303,6 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	var selectedSomethin:Bool = false;
-
 	override function update(elapsed:Float)
 	{
 		if (tipTextScrolling)
@@ -366,6 +365,14 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.RESET && menuJSON.enableReloadKey)
 				FlxG.resetState();
+
+			#if debug
+			if (FlxG.keys.justPressed.FOUR) {
+				openSubState(new meta.video.VideoSubState('video', () -> {
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					FlxG.resetState();
+				}));
+			}
 		}
 
 		super.update(elapsed);
