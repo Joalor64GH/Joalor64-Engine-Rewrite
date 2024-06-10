@@ -2169,11 +2169,11 @@ class PlayState extends MusicBeatState
 			case 'webm':
 				#if WEBM_ALLOWED
 				if (Paths.fileExists(Paths.webm(name))) {
-					openSubState(new VideoSubState(name, null, () -> {
-						if(endingSong)
+					openSubState(new VideoSubState(name, () -> {
+						if (endingSong)
 							endSong();
-			else 
-				startCountdown();
+						else 
+							startCountdown();
 					}));
 					return;
 				}
