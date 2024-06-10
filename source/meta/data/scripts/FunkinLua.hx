@@ -2175,7 +2175,7 @@ class FunkinLua {
 					#end
 				default:
 					#if VIDEOS_ALLOWED
-					if (Paths.fileExists(Paths.webm(videoFile)))
+					if (Paths.fileExists(Paths.video(videoFile)))
 					{
 						PlayState.instance.startVideo(videoFile, type);
 						return;

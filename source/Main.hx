@@ -4,6 +4,7 @@ import system.GameDimensions;
 import meta.ButtplugUtils;
 import macros.MacroUtil;
 import core.ToastCore;
+import meta.video.*;
 import debug.FPS;
 
 import openfl.events.UncaughtErrorEvent;
@@ -96,6 +97,15 @@ class Main extends Sprite
 
 		fpsVar = new FPS(10, 10, 0xFFFFFF);
 		addChild(fpsVar);
+
+		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+		var str1:String = "WEBM SHIT"; 
+		var webmHandle = new WebmHandler();
+		webmHandle.source(ourSource);
+		webmHandle.makePlayer();
+		webmHandle.webm.name = str1;
+		addChild(webmHandle.webm);
+		GlobalVideo.setWebm(webmHandle);
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);

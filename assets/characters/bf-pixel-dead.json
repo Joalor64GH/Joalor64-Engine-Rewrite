@@ -3,7 +3,7 @@
 		{
 			"loop": false,
 			"offsets": [
-				-26,
+				-30,
 				-12
 			],
 			"fps": 24,
@@ -38,7 +38,7 @@
 	"image": "characters/bfPixelsDEAD",
 	"position": [
 		0,
-		350
+		354
 	],
 	"healthicon": "bf-pixel",
 	"flip_x": true,
@@ -48,7 +48,7 @@
 		246
 	],
 	"camera_position": [
-		50,
+		48,
 		-60
 	],
 	"sing_duration": 4,

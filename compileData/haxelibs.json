@@ -3,7 +3,7 @@
       {"name": "lime", "type": "haxelib"},
       {"name": "openfl", "type": "haxelib"},
       {"name": "flixel", "type": "haxelib"},
-      {"name": "flixel-addons", "type": "git",  "dir": null, "ref": "dev", "url": "https://github.com/HaxeFlixel/flixel-addons"},
+      {"name": "flixel-addons", "type": "git", "dir": null, "ref": "dev", "url": "https://github.com/HaxeFlixel/flixel-addons"},
       {"name": "flixel-ui", "type": "haxelib"},
       {"name": "hxcpp", "type": "haxelib"},
       {"name": "hxcpp-debug-server", "type": "haxelib"},

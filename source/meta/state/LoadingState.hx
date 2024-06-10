@@ -2,7 +2,7 @@ package meta.state;
 
 class LoadingState extends MusicBeatState
 {
-	inline static var MIN_TIME = 1.0;
+	inline static final MIN_TIME = 1.0;
 	
 	var target:FlxState = null;
 	var stopMusic = false;
