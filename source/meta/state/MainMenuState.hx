@@ -373,6 +373,7 @@ class MainMenuState extends MusicBeatState
 					FlxG.resetState();
 				}));
 			}
+			#end
 		}
 
 		super.update(elapsed);
