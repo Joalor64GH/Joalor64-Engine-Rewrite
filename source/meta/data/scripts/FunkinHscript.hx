@@ -482,7 +482,7 @@ class FunkinHscript extends InterpEx {
 			var path:String = Paths.json('${Paths.formatToSongPath(PlayState.SONG.song)}/$dialogueFile');
 			PlayState.instance.addTextToDebug('Trying to load dialogue: $path');
 
-			if (Paths.exists(path, TEXT)) {
+			if (Paths.exists(path)) {
 				var shit:DialogueFile = DialogueBoxPsych.parseDialogue(path);
 				if (shit.dialogue.length > 0) {
 					PlayState.instance.startDialogue(shit, music);
@@ -514,7 +514,7 @@ class FunkinHscript extends InterpEx {
 			var cervix = '$name.hscript';
 			var doPush = false;
 			cervix = Paths.getPath(cervix);
-			if (Paths.exists(cervix, TEXT)) {
+			if (Paths.exists(cervix)) {
 				doPush = true;
 			}
 
@@ -534,7 +534,7 @@ class FunkinHscript extends InterpEx {
 			var cervix = '$name.hscript';
 			var doPush = false;
 			cervix = Paths.getPath(cervix);
-			if (Paths.exists(cervix, TEXT)) {
+			if (Paths.exists(cervix)) {
 				doPush = true;
 			}
 

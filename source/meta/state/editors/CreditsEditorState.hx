@@ -189,7 +189,7 @@ class CreditsEditorState extends MusicBeatState
 			else icon = creditsStuff[curSelected][1];
 
 			var pathIcon:String;
-			if(Paths.fileExists('images/credits/' + icon + '.png', IMAGE)) pathIcon = 'credits/' + icon;
+			if(Paths.fileExists('images/credits/' + icon + '.png')) pathIcon = 'credits/' + icon;
 			else pathIcon = 'credits/none';
 
 			var iconSprite:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image(pathIcon));				
@@ -297,7 +297,7 @@ class CreditsEditorState extends MusicBeatState
 				}
 
 				var icon:AttachedSprite;
-				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE)) icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
+				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png')) icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				else {
 					icon = new AttachedSprite('credits/unknown'); // If the icon didnt load
 					if(creditsStuff[i][1] == null || creditsStuff[i][1] == '') icon = new AttachedSprite('credits/none');
@@ -647,7 +647,7 @@ class CreditsEditorState extends MusicBeatState
 		if(text.length == 0){
 			daColor = Std.parseInt('0xFFFFC31E'); // no input then
 		} else {
-			if(!Paths.fileExists('images/credits/' + text + '.png', IMAGE)) daColor = Std.parseInt('0xFFFF004C'); // icon not found
+			if(!Paths.fileExists('images/credits/' + text + '.png')) daColor = Std.parseInt('0xFFFF004C'); // icon not found
 			else daColor = Std.parseInt('0xFF00FF37'); // icon was found
 		}
 		iconExistCheck.color = daColor;
