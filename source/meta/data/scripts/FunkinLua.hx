@@ -2167,7 +2167,11 @@ class FunkinLua {
 					luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
 					#else
 					luaTrace('startVideo: Platform not supported!', false, false, FlxColor.RED);
-					PlayState.instance.startAndEnd();
+					if (PlayState.instance.endingSong) {
+						PlayState.instance.endSong();
+					} else {
+						PlayState.instance.startCountdown();
+					}
 					#end
 				default:
 					#if VIDEOS_ALLOWED
@@ -2180,7 +2184,11 @@ class FunkinLua {
 					luaTrace('startVideo: Video file not found: ' + videoFile, false, false, FlxColor.RED);
 					#else
 					luaTrace('startVideo: Platform not supported!', false, false, FlxColor.RED);
-					PlayState.instance.startAndEnd();
+					if (PlayState.instance.endingSong) {
+						PlayState.instance.endSong();
+					} else {
+						PlayState.instance.startCountdown();
+					}
 					#end
 			}
 		});
@@ -2195,7 +2203,7 @@ class FunkinLua {
 			}
 			return false;
 			#else
-			if(PlayState.instance.endingSong) {
+			if (PlayState.instance.endingSong) {
 				PlayState.instance.endSong();
 			} else {
 				PlayState.instance.startCountdown();
