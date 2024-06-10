@@ -3597,13 +3597,8 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.time = Conductor.songPosition;
 					vocals.time = Conductor.songPosition;
 				case F4: // Enable/Disable Botplay
-					if (!cpuControlled) {
-						cpuControlled = true;
-						botplayTxt.visible = true;
-					} else {
-						cpuControlled = false;
-						botplayTxt.visible = false;
-					}
+					cpuControlled = !cpuControlled;
+					botplayTxt.visible = cpuControlled;
 				case F5: // Camera Speeds Up
 					cameraSpeed += 0.5;
 				case F6: // Camera Slows Down
