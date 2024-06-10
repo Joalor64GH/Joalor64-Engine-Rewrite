@@ -385,7 +385,17 @@ class PlayState extends MusicBeatState
 			ReplayState.sustainHits = [];
 		}
 
-		removedVideo = false;
+		#if WEBM_ALLOWED
+		var ourVideo:Dynamic = BackgroundVideo.get();
+
+		if (useVideo && ourVideo != null)
+		{
+			ourVideo.stop();
+			remove(videoSprite);
+		}
+
+		removedVideo = true;
+		#end
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -3560,8 +3570,6 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
-
-	public var removedVideo = false;
 
 	override public function update(elapsed:Float)
 	{

@@ -1,6 +1,6 @@
 package meta.video;
 
-class VideoSubState extends MusicSubState
+class VideoSubState extends MusicBeatSubState
 {
 	var leSource:String = "";
 
