@@ -104,7 +104,22 @@ class FreeplayState extends MusicBeatState
 		slash.antialiasing = ClientPrefs.globalAntialiasing;
 		slash.flipX = (ClientPrefs.songDisplay == 'C-Shape') ? true : false;
 		slash.screenCenter();
-		add(slash);
+		if (ClientPrefs.songDisplay != 'Vertical') add(slash);
+
+		if (ClientPrefs.songDisplay == 'Vertical')
+		{
+			var menuCover:FlxSprite = new FlxSprite().makeGraphic(FlxG.width - 500, Std.int(FlxG.height));
+			menuCover.alpha = .5;
+			menuCover.color = FlxColor.WHITE;
+			menuCover.screenCenter(X);
+			add(menuCover);
+
+			var menuCoverAlt:FlxSprite = new FlxSprite().makeGraphic(Std.int(menuCover.width - 20), Std.int(menuCover.height));
+			menuCoverAlt.setPosition(menuCover.x + 10, menuCover.y);
+			menuCoverAlt.alpha = .7;
+			menuCoverAlt.color = FlxColor.BLACK;
+			add(menuCoverAlt);
+		}
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
