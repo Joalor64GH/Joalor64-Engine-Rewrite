@@ -4081,7 +4081,7 @@ class PlayState extends MusicBeatState
 		}
 
 		health = value;
-		var newPercent:Null<Float> = FlxMath.remapToRange(healthBar.bounded, healthBar.bounds.min, healthBar.bounds.max, 0, 100);
+		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
 		healthBar.percent = (newPercent != null ? newPercent : 0);
 
 		switch (iconP1.widthThing) 
@@ -4168,13 +4168,6 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
-		if (useVideo)
-		{
-			GlobalVideo.get().stop();
-			remove(videoSprite);
-			removedVideo = true;
-		}
-
 		persistentUpdate = false;
 		cancelMusicFadeTween();
 		Application.current.window.title = Application.current.meta.get('name');
@@ -4250,6 +4243,11 @@ class PlayState extends MusicBeatState
 	}
 
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
+		var flValue1:Null<Float> = Std.parseFloat(value1);
+		var flValue2:Null<Float> = Std.parseFloat(value2);
+		if (Math.isNaN(flValue1)) flValue1 = null;
+		if (Math.isNaN(flValue2)) flValue2 = null;
+
 		switch(eventName) {
 			case 'Dadbattle Spotlight':
 				if (curStage != 'stage')
@@ -4653,8 +4651,8 @@ class PlayState extends MusicBeatState
 					#end
 				}
 			case 'Play Sound':
-				if (value2 == null) value2 = 1;
-				FlxG.sound.play(Paths.sound(value1), value2);
+				if (flValue2 == null) flValue2 = 1;
+				FlxG.sound.play(Paths.sound(value1), flValue2);
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}

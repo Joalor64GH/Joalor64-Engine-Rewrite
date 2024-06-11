@@ -61,7 +61,7 @@ You can check planned/upcoming features [here](/TODO).
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
-* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support + New Crash Handler
+* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
 * [TahirKarabekiroglu](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + SScript + Replay System
 * [steve-studios](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
@@ -81,7 +81,7 @@ You can check planned/upcoming features [here](/TODO).
 * [Yoshubs](https://gamebanana.com/members/1908070) - Ex-Programmer
 
 ### Special Thanks
-* [gedehari](https://github.com/gedehari) - Old Crash Handler and Base code for Chart Editor's Waveform
+* [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
 * [KadeDev](https://github.com/Kade-github) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec

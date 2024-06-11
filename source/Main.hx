@@ -286,8 +286,8 @@ class Joalor64SoundTray extends flixel.system.ui.FlxSoundTray
 		if (!silent)
 		{
 			var sound = up ? volumeUpSound : volumeDownSound;
-      		if (globalVolume == 10) sound = volumeMaxSound;
-      		if (sound != null) FlxG.sound.load(sound).play();
+			if (globalVolume == 10) sound = volumeMaxSound;
+			if (sound != null) FlxG.sound.load(sound).play();
 		}
 
 		_timer = 4;
