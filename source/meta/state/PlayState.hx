@@ -23,7 +23,7 @@ import modcharting.PlayfieldRenderer;
 #elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
 #elseif (hxCodec) import vlc.MP4Handler; 
-#elseif (hxvlc) import hxvlc.flixel.FlxVideo as VideoHandler; 
+#elseif (hxvlc) import hxvlc.flixel.FlxVideo as MP4Handler; 
 #end
 #end
 
