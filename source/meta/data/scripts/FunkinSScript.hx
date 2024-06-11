@@ -1,9 +1,6 @@
 package meta.data.scripts;
 
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.sound.FlxSound;
-import flixel.ui.FlxBar;
-
 import objects.userinterface.note.*;
 
 final class FunkinSScript extends tea.SScript

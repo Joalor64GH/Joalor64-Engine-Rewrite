@@ -9,18 +9,6 @@
 	<app file="J64EngineRE_APP" if="linux" />
 	<app file="J64EngineRE_MAC" if="mac" />
 
-	<section if="debug">
-		<app file="J64EngineRE_WIN DEBUG" if="windows" />
-		<app file="J64EngineRE_APP DEBUG" if="linux" />
-		<app file="J64EngineRE_MAC DEBUG" if="mac" />
-	</section>
-
-	<section if="nightly">
-		<app file="J64EngineRE_WIN NIGHTLY" if="windows" />
-		<app file="J64EngineRE_APP NIGHTLY" if="linux" />
-		<app file="J64EngineRE_MAC NIGHTLY" if="mac" />
-	</section>
-
 	<app main="Main" version="0.2.8" company="Joalor64GH" package="com.joalor64gh.j64enginere" />
 
 	<!-- [ Window Settings ] -->

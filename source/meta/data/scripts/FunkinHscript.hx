@@ -8,17 +8,15 @@ import meta.data.scripts.FunkinLua;
 #if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as MP4Handler;
 #elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as MP4Handler;
 #elseif (hxCodec == "2.6.0") import VideoHandler as MP4Handler;
-#else import vlc.MP4Handler; #end
+#elseif (hxCodec) import vlc.MP4Handler; 
+#elseif (hxvlc) import hxvlc.flixel.FlxVideo as MP4Handler;
+#end
 #end
 #if FLASH_MOVIE
 import meta.video.SwfVideo;
 #end
 import flixel.system.macros.FlxMacroUtil;
-import flixel.addons.display.FlxBackdrop;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.util.FlxDestroyUtil;
 import openfl.text.TextFormat;
-import flixel.effects.FlxFlicker;
 import flixel.system.FlxAssets.FlxShader;
 import flixel.addons.text.FlxTypeText;
 import openfl.media.Sound;
@@ -29,7 +27,6 @@ import flixel.addons.display.FlxGridOverlay;
 import openfl.events.IOErrorEvent;
 import openfl.events.Event;
 import lime.system.Clipboard;
-import haxe.io.Path;
 import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUINumericStepper;
@@ -38,7 +35,6 @@ import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUI;
 import flixel.graphics.frames.FlxFrame;
-import flixel.graphics.FlxGraphic;
 import lime.media.openal.AL;
 #if sys
 import sys.FileSystem;
@@ -46,13 +42,9 @@ import sys.io.File;
 #end
 import lime.utils.Assets as LimeAssets;
 import openfl.Assets as OpenFlAssets;
-import flixel.ui.FlxBar;
-import flixel.sound.FlxSound;
 import animateatlas.*;
-import flixel.input.keyboard.FlxKey;
-import flixel.group.FlxGroup;
-import flixel.addons.effects.FlxTrail;
 import hscript.InterpEx;
+
 import meta.data.Achievements;
 
 import meta.video.*;

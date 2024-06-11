@@ -1,7 +1,5 @@
 package meta.data.scripts;
 
-import animateatlas.AtlasFrameMaker;
-
 import openfl.display.BlendMode;
 import openfl.filters.BitmapFilter;
 
@@ -10,9 +8,6 @@ import flixel.addons.display.FlxRuntimeShader;
 #end
 
 import flixel.system.FlxAssets.FlxShader;
-import flixel.addons.effects.FlxTrail;
-import flixel.input.keyboard.FlxKey;
-import flixel.sound.FlxSound;
 
 #if sys
 import sys.FileSystem;

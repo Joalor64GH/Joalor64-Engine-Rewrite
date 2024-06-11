@@ -2203,7 +2203,16 @@ class PlayState extends MusicBeatState
 				if (Paths.fileExists(Paths.video(name))) 
 				{
 					var video:MP4Handler = new MP4Handler();
-					#if (hxCodec >= "3.0.0")
+					#if (hxvlc)
+					video.load(Paths.video(name));
+					video.onEndReached.add(() -> {
+						video.dispose();
+						if (FlxG.game.contains(video))
+							FlxG.game.removeChild(video);
+						startAndEnd();
+					});
+					video.play();
+					#elseif (hxCodec >= "3.0.0")
 					// Recent versions
 					video.play(Paths.video(name));
 					video.onEndReached.add(function()
@@ -2972,35 +2981,20 @@ class PlayState extends MusicBeatState
 		switch (ClientPrefs.scoreTxtType)
 		{
 			case 'Default':
-				if(ratingName == '?') {
-					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
-					+ ' // Score: ' + scoreThing 
-					+ ' // Combo Breaks: ' + songMisses 
-					+ ' // Accuracy: ' + ratingName 
-					+ ' // Rank: N/A';
-				} else {
-					scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')'
-					+ ' // Score: ' + scoreThing 
-					+ ' // Combo Breaks: ' + songMisses
-					+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
-					+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
-				}
+				if (ratingName == '?')
+					scoreTxt.text = 'NPS: $nps/$maxNPS // Score: $scoreThing // Combo Breaks: $songMisses // Accuracy: $ratingName // Rank: N/A';
+				else
+					scoreTxt.text = 'NPS: $nps/$maxNPS // Score: $scoreThing // Combo Breaks: $songMisses // Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}% // Rank: $ratingName ($ratingFC)';
 
 			case 'Psych':
-				scoreTxt.text = 'Score: ' + scoreThing
-				+ ' | Misses: ' + songMisses
-				+ ' | Rating: ' + ratingName
+				scoreTxt.text = 'Score: $scoreThing | Misses: $songMisses | Rating: $ratingName'
 				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 
 			case 'Kade':
-				scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxNPS + ')' 
-				+ ' | Score: ' + scoreThing 
-				+ ' | Combo Breaks: ' + songMisses
-				+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%'
-				+ ' | ' + '(' + ratingFC + ') ' + ratingName;
+				scoreTxt.text = 'NPS: $nps (Max $maxNPS) | Score: $scoreThing | Combo Breaks: $songMisses | Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}% | ($ratingFC) $ratingName';
 
 			case 'Simple':
-				scoreTxt.text = 'Score: ' + scoreThing + ' | Misses: ' + songMisses;
+				scoreTxt.text = 'Score: $scoreThing | Misses: $songMisses';
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -3397,6 +3391,8 @@ class PlayState extends MusicBeatState
 				phillyGlowParticles = new FlxTypedGroup<PhillyGlow.PhillyGlowParticle>();
 				phillyGlowParticles.visible = false;
 				insert(members.indexOf(phillyGlowGradient) + 1, phillyGlowParticles);
+			case 'Play Sound':
+				Paths.sound(event.value1); // precache
 		}
 
 		if(!eventsPushed.contains(event.event)) {
@@ -4641,11 +4637,24 @@ class PlayState extends MusicBeatState
 				lime.app.Application.current.window.alert(value2, value1);
 
 			case 'Set Property':
-				var killMe:Array<String> = value1.split('.');
-				if(killMe.length > 1)
-					FunkinLua.setVarInArray(FunkinLua.getPropertyLoopThingWhatever(killMe, true, true), killMe[killMe.length-1], value2);
-				else
-					FunkinLua.setVarInArray(this, value1, value2);
+				try {
+					var killMe:Array<String> = value1.split('.');
+					if(killMe.length > 1)
+						FunkinLua.setVarInArray(FunkinLua.getPropertyLoopThingWhatever(killMe, true, true), killMe[killMe.length - 1], value2);
+					else
+						FunkinLua.setVarInArray(this, value1, value2);
+				} catch(e:Dynamic) {
+					var len:Int = e.message.indexOf('\n') + 1;
+					if (len <= 0) len = e.message.length;
+					#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+					addTextToDebug('ERROR ("Set Property" Event) - ' + e.message.substr(0, len), FlxColor.RED);
+					#else
+					FlxG.log.warn('ERROR ("Set Property" Event) - ' + e.message.substr(0, len));
+					#end
+				}
+			case 'Play Sound':
+				if (value2 == null) value2 = 1;
+				FlxG.sound.play(Paths.sound(value1), value2);
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
