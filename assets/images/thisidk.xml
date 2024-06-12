@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="thisidk.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="thingidk0000" x="0" y="0" width="749" height="720"/>
+	<SubTexture name="thingidk0001" x="0" y="0" width="749" height="720"/>
+	<SubTexture name="thingidk0002" x="749" y="0" width="749" height="720"/>
+	<SubTexture name="thingidk0003" x="749" y="0" width="749" height="720"/>
+</TextureAtlas>

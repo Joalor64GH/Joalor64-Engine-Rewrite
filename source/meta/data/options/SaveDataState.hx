@@ -26,6 +26,13 @@ class SaveDataState extends MusicBeatState
         	bg.color = 0xFFea71fd;
 		add(bg);
 
+		var mainSide:FlxSprite = new FlxSprite().loadGraphic(Paths.image('mainSide'));
+		mainSide.setGraphicSize(Std.int(mainSide.width * 0.75));
+		mainSide.updateHitbox();
+		mainSide.screenCenter();
+		mainSide.antialiasing = ClientPrefs.globalAntialiasing;
+		add(mainSide);
+
 		grpControls = new FlxTypedGroup<Alphabet>();
 		add(grpControls);
 

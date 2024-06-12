@@ -108,17 +108,13 @@ class FreeplayState extends MusicBeatState
 
 		if (ClientPrefs.songDisplay == 'Vertical')
 		{
-			var menuCover:FlxSprite = new FlxSprite().makeGraphic(FlxG.width - 500, Std.int(FlxG.height));
-			menuCover.alpha = .5;
-			menuCover.color = FlxColor.WHITE;
-			menuCover.screenCenter(X);
-			add(menuCover);
-
-			var menuCoverAlt:FlxSprite = new FlxSprite().makeGraphic(Std.int(menuCover.width - 20), Std.int(menuCover.height));
-			menuCoverAlt.setPosition(menuCover.x + 10, menuCover.y);
-			menuCoverAlt.alpha = .7;
-			menuCoverAlt.color = FlxColor.BLACK;
-			add(menuCoverAlt);
+			var thisThing:FlxSprite = new FlxSprite();
+			thisThing.frames = Paths.getSparrowAtlas('thisidk');
+			thisThing.antialiasing = ClientPrefs.globalAntialiasing;
+			thisThing.animation.addByPrefix('idle', 'thingidk', 24, false);
+			thisThing.animation.play('idle');
+			thisThing.updateHitbox();
+			add(thisThing);
 		}
 
 		grpSongs = new FlxTypedGroup<Alphabet>();

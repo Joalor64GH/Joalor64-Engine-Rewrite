@@ -56,7 +56,6 @@ class ModSetupTabs extends FlxUITabMenu
     {
         super(null, [{name: "Setup Mod Folder", label: "Setup Mod Folder"}], true);
 
-        setPosition(50, 50);
         resize(400, 400);
 
         selected_tab = 0;
@@ -214,6 +213,7 @@ class ModsSetupState extends MusicBeatState
         }
 
         modTab = new ModSetupTabs();
+        modTab.screenCenter();
         add(modTab);
 
         super.create();

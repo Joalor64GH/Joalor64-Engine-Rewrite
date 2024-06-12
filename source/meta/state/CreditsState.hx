@@ -53,8 +53,8 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [
 			// name, icon, description, link, color, sound
-			['Joalor64 Engine Creators'],
-			['Joalor64', 'joalor', 'Project Leader\nMain Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
+			['Joalor64 Engine Team'],
+			['Joalor64', 'joalor', 'Project Leader/Main Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
 			['Moxie', 'meme', 'Additional Programmer\n"love denpa engine"', 'https://github.com/moxie-coder', 'FFEDD9', 'omori'],
 			['FoxLOID', 'fox', 'Epic New Logo\n"this is a quote"', 'https://github.com/FoxLOID', '00A7D4', ''],
 			['Bot 404', 'bot', 'Tiny little helper, Drew his own icon\n"expected more"', 'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg', 'FF0040', 'slipperyahhfloor'],
