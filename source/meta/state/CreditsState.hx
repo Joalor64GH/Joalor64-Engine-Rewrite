@@ -54,8 +54,8 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [
 			// name, icon, description, link, color, sound
 			['Joalor64 Engine Team'],
-			['Joalor64', 'joalor', 'Project Leader/Main Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
-			['Moxie', 'meme', 'Additional Programmer\n"love denpa engine"', 'https://github.com/moxie-coder', 'FFEDD9', 'omori'],
+			['Joalor64', 'joalor64', 'Project Leader/Main Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
+			['Moxie', 'moxie', 'Additional Programmer\n"love denpa engine"', 'https://github.com/moxie-coder', 'FFEDD9', 'omori'],
 			['FoxLOID', 'fox', 'Epic New Logo\n"this is a quote"', 'https://github.com/FoxLOID', '00A7D4', ''],
 			['Bot 404', 'bot', 'Tiny little helper, Drew his own icon\n"expected more"', 'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg', 'FF0040', 'slipperyahhfloor'],
 			[''],
@@ -65,7 +65,7 @@ class CreditsState extends MusicBeatState
 			['steve-studios', 'mag', 'In-Game Mod Downloader', 'https://github.com/steve-studios', '0000FF', 'squeak'],
 			['TheZoroForce240', 'zoro', 'Modcharting Tools Haxelib', 'https://github.com/TheZoroForce240', 'FFD900', 'goofyahhphone'],
 			['MAJigsaw77', 'jigsaw', 'ToastCore\n"Just a guy"', 'https://github.com/MAJigsaw77', '444444', ''],
-			['KookerFoxYT', 'kooker', 'Custom Options\n"fox"', 'https://twitter.com/kookerfoxyt', '00B0B4', ''],
+			['CharlesCatYT', 'charles', 'Some code I borrowed\n"your local code steale- i mean fnf haxe coder"', 'https://github.com/CharlesCatYT', '00B0B4', ''],
 			['Endergreen12', 'none', 'Custom Gameplay Changers', 'https://github.com/Endergreen12', '00C834', ''],
 			['Verwex', 'verwex', 'Micd Up Paths System\n"hell"', 'https://github.com/Verwex', '8FFFFF', ''],
 			['ActualMandM', 'none', 'RGB Note Coloring System', 'https://linktr.ee/ActualMandM', '9C5D88', ''],
