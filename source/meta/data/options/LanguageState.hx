@@ -68,7 +68,6 @@ class LanguageState extends MusicBeatState
 		var mainSide:FlxSprite = new FlxSprite().loadGraphic(Paths.image('mainSide'));
 		mainSide.setGraphicSize(Std.int(mainSide.width * 0.75));
 		mainSide.updateHitbox();
-		mainSide.screenCenter();
 		mainSide.antialiasing = ClientPrefs.globalAntialiasing;
 		add(mainSide);
 
