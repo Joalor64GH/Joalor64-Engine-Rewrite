@@ -20,7 +20,7 @@ class KillBF extends MusicBeatState
         bg.screenCenter();
         add(bg);
 
-        scoreText = new FlxText(0, (FlxG.height * 0.89) + 36, FlxG.height, 'Score: ${score} // Misses: ${misses}', 20);
+        scoreText = new FlxText(0, (FlxG.height * 0.89) + 36, FlxG.height, 'Score: $score // Misses: $misses', 20);
         scoreText.setFormat(Paths.font('vcr.ttf'), 48, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.screenCenter(X);
         add(scoreText);
@@ -71,6 +71,7 @@ class KillBF extends MusicBeatState
     {
         var sprite:FallingIcon = new FallingIcon(FlxG.random.int(0, FlxG.width - 20), -100);
         sprite.velocity.y = FlxG.random.int(80, 160);
+        sprite.flipX = FlxG.random.bool(50);
         beef.push(sprite);
         add(sprite);
     }

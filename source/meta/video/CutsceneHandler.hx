@@ -1,10 +1,6 @@
 package meta.video;
 
 import flixel.graphics.atlas.FlxAtlas;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.sound.FlxSound;
-
-import animateatlas.AtlasFrameMaker;
 
 class CutsceneHandler extends FlxBasic
 {

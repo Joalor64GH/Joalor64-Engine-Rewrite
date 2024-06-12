@@ -66,8 +66,8 @@ You can check planned/upcoming features [here](/TODO).
 * [steve-studios](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
-* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Old Custom Options
-* [NexIsDumb](https://linktr.ee/just_nex) - New Custom Options
+* [KookerFoxYT](https://twitter.com/kookerfoxyt) - Some code I borrowed
+* [NexIsDumb](https://linktr.ee/just_nex) - Custom Options
 * [Endergreen12](https://github.com/Endergreen12) - Custom Gameplay Changers
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System

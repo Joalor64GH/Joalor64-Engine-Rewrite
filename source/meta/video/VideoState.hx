@@ -1,5 +1,6 @@
 package meta.video;
 
+// CAN BE USED ANYWHERE
 class VideoState extends MusicBeatState
 {
 	var leSource:String = "";

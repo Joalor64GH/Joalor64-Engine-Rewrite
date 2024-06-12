@@ -1,5 +1,6 @@
 package meta.video;
 
+// SHOULD ONLY BE USED IN PLAYSTATE
 class VideoSubState extends MusicBeatSubstate
 {
 	var leSource:String = "";
