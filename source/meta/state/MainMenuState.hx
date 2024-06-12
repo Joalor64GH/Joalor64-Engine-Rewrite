@@ -366,15 +366,13 @@ class MainMenuState extends MusicBeatState
 			if (controls.RESET && menuJSON.enableReloadKey)
 				FlxG.resetState();
 
-			#if debug
 			if (FlxG.keys.justPressed.FOUR) {
-				FlxG.sound.music.volume = 0;
+				FlxG.sound.music.stop();
 				openSubState(new meta.video.VideoSubState('video', () -> {
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					FlxG.resetState();
 				}));
 			}
-			#end
 		}
 
 		super.update(elapsed);

@@ -352,13 +352,17 @@ class TitleState extends MusicBeatState
 			Conductor.songPosition = FlxG.sound.music.time;
 
 		if (FlxG.keys.justPressed.ESCAPE)
-                {
-	            FlxG.sound.music.fadeOut(0.3);
-	            FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
-	            {
-		        Sys.exit(0);
-	            }, false);
-                }
+		{
+			FlxG.sound.music.fadeOut(0.3);
+			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+			{
+				#if (sys || desktop)
+				Sys.exit(0);
+				#else
+				System.exit(0);
+				#end
+			}, false);
+		}
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 

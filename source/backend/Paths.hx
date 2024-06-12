@@ -242,7 +242,7 @@ class Paths
 	}
 
 	static public function webmSound(key:String)
-		return returnSoundPath('videos', key);
+		return getPath('videos/$key.ogg');
 
 	static public function flashMovie(key:String)
 	{
@@ -531,7 +531,7 @@ class Paths
 	inline static public function modsWebm(key:String)
 		return modFolders('videos/$key.webm');
 	
-	inline static public function modsVideoSound(key:String)
+	inline static public function modsWebmSound(key:String)
 		return modFolders('videos/$key.ogg');
 
 	inline static public function modsFlashMovie(key:String)
