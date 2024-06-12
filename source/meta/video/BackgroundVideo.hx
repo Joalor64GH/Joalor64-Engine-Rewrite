@@ -12,8 +12,7 @@ class BackgroundVideo
 	
 	inline public static function setWebm(vid:WebmHandler):Void
 	{
-		if (vid != null)
-			webm = vid;
+		if (vid != null) webm = vid;
 		isWebm = true;
 	}
 	
@@ -24,10 +23,7 @@ class BackgroundVideo
 	
 	public static function get():Dynamic
 	{
-		if (isWebm)
-			return getWebm();
-
-		return getVid();
+		return getWebm();
 	}
 
 	public static function calc(ind:Int):Dynamic
