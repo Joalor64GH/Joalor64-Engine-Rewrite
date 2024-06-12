@@ -71,9 +71,9 @@
 	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
 	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION" />
 
-	<haxelib name="actuate" /> <!-- Used for extension-webm -->
 	<haxelib name="extension-webm" if="WEBM_ALLOWED" /> 
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<!--<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />--> <!-- if you want to use hxvlc instead -->
 
 	<haxelib name="linc_discord-rpc" if="desktop" />
 	<haxelib name="hxcpp-debug-server" if="desktop debug" />

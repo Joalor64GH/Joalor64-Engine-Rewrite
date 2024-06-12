@@ -4,24 +4,11 @@ import meta.video.*;
 
 class BackgroundVideo
 {
-	private static var video:VideoHandler;
 	private static var webm:WebmHandler;
 
 	public static var isWebm:Bool = false;
-	public static var isAndroid:Bool = false;
 	public static var daAlpha1:Float = 0.2;
 	public static var daAlpha2:Float = 1;
-
-	inline public static function setVid(vid:VideoHandler):Void
-	{
-		if (vid != null)
-			video = vid;
-	}
-	
-	inline public static function getVid():VideoHandler
-	{
-		return (video != null) ? video : null;
-	}
 	
 	inline public static function setWebm(vid:WebmHandler):Void
 	{

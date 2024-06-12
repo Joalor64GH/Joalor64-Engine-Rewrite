@@ -10,7 +10,6 @@
       {"name": "hscript", "type": "haxelib"},
       {"name": "hscript-ex", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/ianharrigan/hscript-ex"},
       {"name": "extension-webm", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/KadeDev/extension-webm"},
-      {"name": "actuate","type": "haxelib"},
       {"name": "hxCodec", "type": "git", "dir": null, "ref": "main", "url": "https://github.com/polybiusproxy/hxCodec"},
       {"name": "fnf-modcharting-tools", "type": "git", "dir": null, "ref": "main", "url": "https://github.com/TheZoroForce240/FNF-Modcharting-Tools"},
       {"name": "linc_luajit", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/nebulazorua/linc_luajit"},

@@ -2899,6 +2899,9 @@ class PlayState extends MusicBeatState
 							}
 						});
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						strumLineNotes.forEachAlive(function(strum:FlxSprite) {
+							FlxTween.tween(strum, {angle: 360}, Conductor.crochet / 1000 * 2, {ease: FlxEase.cubeInOut});
+						});
 						if (curStage != 'limo' || SONG.song.toLowerCase() != 'stress') {
 							if (boyfriend != null && boyfriend.animOffsets.exists('hey')) {
 								boyfriend.playAnim('hey', true);
@@ -2914,6 +2917,7 @@ class PlayState extends MusicBeatState
 								}
 							}
 						}
+					// case 4: trace('troll!');
 				}
 
 				notes.forEachAlive(function(note:Note) {
