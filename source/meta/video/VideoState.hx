@@ -1,6 +1,6 @@
 package meta.video;
 
-class VideoSubState extends MusicBeatSubstate
+class VideoState extends MusicBeatState
 {
 	var leSource:String = "";
 	var vidSound:FlxSound = null;
@@ -56,11 +56,6 @@ class VideoSubState extends MusicBeatSubstate
 			ourVideo.restart();
 		else
 			ourVideo.play();
-		
-		if (!PlayState.seenCutscene)
-			PlayState.seenCutscene = true;
-
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	override public function update(elapsed:Float):Void
