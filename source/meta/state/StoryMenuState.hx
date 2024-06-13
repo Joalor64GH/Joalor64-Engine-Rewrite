@@ -395,7 +395,7 @@ class StoryMenuState extends MusicBeatState
 		var leWeek:WeekData = loadedWeeks[curWeek];
 		WeekData.setDirectoryFromWeek(leWeek);
 
-		// i have no idea if this will work
+		// out of curiosity, can someone please test this?
 		/*
 		FlxTween.color(bgSprite, 0.65, bgSprite.color, leWeek.storyColor);
 		for (char in grpWeekCharacters.members)

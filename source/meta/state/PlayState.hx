@@ -3888,14 +3888,20 @@ class PlayState extends MusicBeatState
 			var curTime:Float = Math.max(0, Conductor.songPosition - ClientPrefs.noteOffset);
 			songPercent = (curTime / songLength);
 
-			var songCalc:Float = (songLength - curTime);
-			if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
+			var songCalc:Float = (songLength - curTime) / playbackRate; // time fix
+
+			if (ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime; // amount of time passed is ok
 
 			var secondsTotal:Int = Math.floor(songCalc / 1000);
 			if(secondsTotal < 0) secondsTotal = 0;
 
-			if(ClientPrefs.timeBarType != 'Song Name')
+			if (ClientPrefs.timeBarType != 'Song Name')
 				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+			else {
+				var secondsTotal:Int = Math.floor(songCalc / 1000);
+				if (secondsTotal < 0) secondsTotal = 0;
+				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+			}
 		}
 
 		FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
