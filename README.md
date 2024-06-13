@@ -12,6 +12,8 @@
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.4.0b)
 
+  ![](https://dabuttonfactory.com/button.png?t=Gamebanana&f=Komika&ts=26&tc=fff&hp=45&vp=20&c=round&bgt=gradient&bgc=eee&ebgc=999&be=1?raw=true)
+
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)](https://joalor64.itch.io/joalor64-engine-rewritten)
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
@@ -61,8 +63,6 @@ You can check planned/upcoming features [here](/TODO).
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
 ### Special Thanks
-* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
-* [TahirKarabekiroglu](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + SScript + Replay System
 * [steve-studios](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
@@ -84,6 +84,9 @@ You can check planned/upcoming features [here](/TODO).
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
 * [KadeDev](https://github.com/Kade-github) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
+* [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
+* [TahirKarabekiroglu](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + SScript + Replay System
+* [EliteMasterEric](https://twitter.com/EliteMasterEric) - Runtime Shaders Support
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations + New Latin Support
 * [Smokey](https://twitter.com/Smokey_5_) - Sprite Atlas Support
