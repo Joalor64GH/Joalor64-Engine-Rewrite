@@ -231,12 +231,12 @@ class TitleState extends MusicBeatState
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		#if JOALOR64_WATERMARKS
-		credIcon1 = new FlxSprite(150,150).loadGraphic(Paths.image('credits/joalor'));
+		credIcon1 = new FlxSprite(150,150).loadGraphic(Paths.image('credits/joalor64'));
 		add(credIcon1);
 		credIcon1.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon1.visible = false;
 
-		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/meme'));
+		credIcon2 = new FlxSprite(FlxG.width-300,150).loadGraphic(Paths.image('credits/moxie'));
 		add(credIcon2);
 		credIcon2.antialiasing = ClientPrefs.globalAntialiasing;
 		credIcon2.visible = false;

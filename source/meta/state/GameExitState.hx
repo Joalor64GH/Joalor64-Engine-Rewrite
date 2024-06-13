@@ -124,7 +124,14 @@ class GameExitState extends MusicBeatState
 	function selectOption(label:String) {
 		switch(label) {
 			case 'Yes':
-				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { Sys.exit(0); }, false);
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() 
+				{
+					#if (sys || cpp)
+					Sys.exit(0); 
+					#else
+					System.exit(0);
+					#end
+				}, false);
 			case 'No':
 				StageData.loadDirectory(PlayState.SONG);
 				LoadingState.loadAndSwitchState(new PlayState());

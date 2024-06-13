@@ -57,7 +57,7 @@ class CreditsState extends MusicBeatState
 			['Joalor64', 'joalor64', 'Project Leader/Main Programmer\n"I do things"', 'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg', '00FFF6', 'noweyyy'],
 			['Moxie', 'moxie', 'Additional Programmer\n"love denpa engine"', 'https://github.com/moxie-coder', 'FFEDD9', 'omori'],
 			['FoxLOID', 'fox', 'Epic New Logo\n"this is a quote"', 'https://github.com/FoxLOID', '00A7D4', ''],
-			['Bot 404', 'bot', 'Tiny little helper, Drew his own icon\n"expected more"', 'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg', 'FF0040', 'slipperyahhfloor'],
+			['Bot 404', 'bot', 'Little helper\n"expected more"', 'https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg', 'FF0040', 'slipperyahhfloor'],
 			[''],
 			['Special Thanks'],
 			['steve-studios', 'mag', 'In-Game Mod Downloader', 'https://github.com/steve-studios', '0000FF', 'squeak'],
