@@ -32,7 +32,7 @@ class KillBF extends MusicBeatState
     {
         super.update(elapsed);
 
-        scoreText.text = 'Score: ${score} // Misses: ${misses}';
+        scoreText.text = 'Score: $score // Misses: $misses';
 
         spawnTimer += elapsed;
 
