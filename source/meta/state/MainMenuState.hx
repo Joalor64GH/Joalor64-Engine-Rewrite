@@ -38,8 +38,6 @@ class MainMenuState extends MusicBeatState
 	public static var psychGitBuild:String = 'eb79a80';  
 
 	public static var curSelected:Int = 0;
-	public static var firstStart:Bool = true;
-	public static var finishedFunnyMove:Bool = false;
 
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
@@ -210,16 +208,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 			if (optionShit[i] == '') menuItem.visible = false;
 			FlxTween.tween(menuItem, {x: menuItem.width / 4 + (i * 60) - 55}, 1.3, {ease: FlxEase.expoInOut});
-			if (firstStart)
-				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {
-					ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{
-						finishedFunnyMove = true; 
-						changeItem();
-					}
-				});
-			else
-				menuItem.y = 60 + (i * 160);
 			#if (flixel >= "5.0.0") // update your fucking flixel
 			FlxMouseEvent.add(menuItem, null, function(e) switchTheStatePlease(), function(e)
 			{
@@ -236,8 +224,6 @@ class MainMenuState extends MusicBeatState
 			});
 			#end
 		}
-
-		firstStart = false;
 
 		// The system says hi :)
 		#if debug
@@ -405,8 +391,7 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(change:Int = 0)
 	{
-		if (finishedFunnyMove) 
-			curSelected = FlxMath.wrap(curSelected + change, 0, optionShit.length - 1);
+		curSelected = FlxMath.wrap(curSelected + change, 0, optionShit.length - 1);
 
 		menuItems.forEach((spr:FlxSprite) ->
 		{
@@ -452,11 +437,6 @@ class MainMenuState extends MusicBeatState
 			{
 				if (curSelected != spr.ID)
 				{
-					FlxTween.tween(FlxG.camera, {zoom: 5}, 0.8, {ease: FlxEase.expoIn});
-					FlxTween.tween(bg, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
-					FlxTween.tween(magenta, {angle: 45}, 0.8, {ease: FlxEase.expoIn});
-					FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
-					FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
 					FlxTween.tween(spr, {alpha: 0}, 0.4, {
 						ease: FlxEase.quadOut,
 						onComplete: function(twn:FlxTween) 

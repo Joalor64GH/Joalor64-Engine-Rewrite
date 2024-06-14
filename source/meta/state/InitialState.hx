@@ -9,19 +9,17 @@ class InitialState extends FlxState
 	var lastString:String = '';
 
 	override function create()
-    	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
-
+	{
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("loader/bgDesat"));
 		bg.color = FlxColor.fromRGB(FlxG.random.int(0, 255), FlxG.random.int(0, 255), FlxG.random.int(0, 255));
 		bg.screenCenter();
-        	add(bg);
-        
-        	epicLogo = new FlxSprite().loadGraphic(Paths.image('loader/startupLogo'));
-        	epicLogo.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bg);
+
+		epicLogo = new FlxSprite().loadGraphic(Paths.image('loader/startupLogoNew'));
+		epicLogo.antialiasing = ClientPrefs.globalAntialiasing;
+		epicLogo.scale.set(0.7, 0.7);
 		epicLogo.screenCenter();
-        	add(epicLogo);
+		add(epicLogo);
 
 		epicLogo.angle = -4;
 
@@ -47,6 +45,7 @@ class InitialState extends FlxState
 		loadingSpeen.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadingSpeen);
 
+		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 		FlxG.sound.play(Paths.sound('startup'));
 
 		loadEverything();
@@ -56,10 +55,9 @@ class InitialState extends FlxState
 			startGame();
 		});
 
-		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
+		super.create();
+	}
 
-        	super.create();
-    	}
 	var timer:Float = 0;
 
 	override function update(elapsed)
@@ -89,7 +87,7 @@ class InitialState extends FlxState
 		Paths.initPaths();
 		#end
 
-        	#if LUA_ALLOWED
+		#if LUA_ALLOWED
 		Mods.pushGlobalMods();
 		#end
 		Mods.loadTheFirstEnabledMod();
@@ -103,17 +101,13 @@ class InitialState extends FlxState
 		PlayerSettings.init();
 
 		if (FlxG.save.data != null && FlxG.save.data.fullscreen)
-		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
-		}
 
-        	if (FlxG.save.data.weekCompleted != null)
-		{
+		if (FlxG.save.data.weekCompleted != null)
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
 
 		FlxG.mouse.visible = false;
-        	#if desktop
+		#if desktop
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
@@ -124,19 +118,19 @@ class InitialState extends FlxState
 		#end
 
 		#if sys
-			ArtemisIntegration.initialize();
-			ArtemisIntegration.setGameState ("title");
+		ArtemisIntegration.initialize();
+		ArtemisIntegration.setGameState ("title");
+		ArtemisIntegration.resetModName ();
+		ArtemisIntegration.setFadeColor ("#FF000000");
+		ArtemisIntegration.sendProfileRelativePath ("assets/artemis/fnf-vanilla.json");
+		ArtemisIntegration.resetAllFlags ();
+		ArtemisIntegration.autoUpdateControls ();
+		Application.current.onExit.add (function (exitCode) {
+			ArtemisIntegration.setBackgroundColor ("#00000000");
+			ArtemisIntegration.setGameState ("closed");
 			ArtemisIntegration.resetModName ();
-			ArtemisIntegration.setFadeColor ("#FF000000");
-			ArtemisIntegration.sendProfileRelativePath ("assets/artemis/fnf-vanilla.json");
-			ArtemisIntegration.resetAllFlags ();
-			ArtemisIntegration.autoUpdateControls ();
-			Application.current.onExit.add (function (exitCode) {
-				ArtemisIntegration.setBackgroundColor ("#00000000");
-				ArtemisIntegration.setGameState ("closed");
-				ArtemisIntegration.resetModName ();
-			});
-			#end
+		});
+		#end
 
 		FlxG.save.bind('j64enginerewrite', 'joalor64gh');
 
