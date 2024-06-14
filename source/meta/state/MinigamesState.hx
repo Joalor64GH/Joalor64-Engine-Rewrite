@@ -8,7 +8,7 @@ class MinigamesState extends MusicBeatState
         var iconArray:Array<HealthIcon> = [];
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
-		new Minigame('Low quality .jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
+		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
 		new Minigame('Kill BF', 'lmao\n(Point & Click)', 'mgicons/killBf')
 		// soon...
 		// new Minigame("Joalor64's Special", 'It\'s me!\n(Melodic Circuit)', 'mgicons/me')
@@ -38,10 +38,6 @@ class MinigamesState extends MusicBeatState
 			controlLabel.targetY = i;
 			controlLabel.snapToPosition();
 			grpControls.add(controlLabel);
-
-			var maxWidth = 980;
-			if (controlLabel.width > maxWidth)
-				controlLabel.scaleX = maxWidth / controlLabel.width;
 
             		var icon:HealthIcon = new HealthIcon(controlStrings[i].icon);
 			icon.sprTracker = controlLabel;

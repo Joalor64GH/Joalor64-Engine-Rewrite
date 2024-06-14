@@ -12,7 +12,7 @@
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.4.0b)
 
-  ![](https://dabuttonfactory.com/button.png?t=Gamebanana&f=Komika&ts=26&tc=fff&hp=45&vp=20&c=round&bgt=gradient&bgc=eee&ebgc=999&be=1?raw=true)
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_gamebanana.png?raw=true)](https://gamebanana.com/tools/17185)
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)](https://joalor64.itch.io/joalor64-engine-rewritten)
 
