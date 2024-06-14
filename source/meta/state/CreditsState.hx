@@ -81,7 +81,7 @@ class CreditsState extends MusicBeatState
 			['Engine Contributors'],
 			['iFlicky', 'flicky', 'Composer of Psync and Tea Time\nMade the Dialogue Sounds', 'https://twitter.com/flicky_i', '9E29CF', ''],
 			['gedehari', 'sqirra', 'Crash Handler and Base code for\nChart Editor\'s Waveform', 'https://twitter.com/gedehari', 'E1843A', ''],
-			['crowplexus', 'crowplexus', 'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n"just happy to be here!"', 'https://github.com/crowplexus', 'a1a1a1', 'Ghost'],
+			['crowplexus', 'crowplexus', 'Customizable Main Menu with .JSON, Old Latin Support\nCredits Sounds\n', 'https://github.com/crowplexus', 'a1a1a1', ''],
 			['TahirKarabekiroglu', 'tahir', 'SScript\nFunkin Cocoa Code\nSoftcoded Achievements, Replay System', 'https://github.com/TahirKarabekiroglu', 'A04397', ''],
 			['EliteMasterEric', 'mastereric', 'Runtime Shaders support', 'https://twitter.com/EliteMasterEric', 'FFBD40', ''],
 			['PolybiusProxy', 'proxy', 'Creator of hxCodec', 'https://twitter.com/polybiusproxy', 'DCD294', ''],
