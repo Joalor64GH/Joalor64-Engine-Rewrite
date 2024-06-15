@@ -111,10 +111,10 @@ class MainMenuState extends MusicBeatState
 				'mini',
 				#if ACHIEVEMENTS_ALLOWED 'awards',
 				#end
+				'manual',
 				#if MODS_ALLOWED 'mods',
 				#end
 				'credits',
-				'manual',
 				'options'
 			];
 		}
