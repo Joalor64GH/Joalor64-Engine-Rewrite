@@ -10,7 +10,7 @@
   
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/latest)
 
-  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.4.0b)
+  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_download-latest-pre-release.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/releases/tag/v1.4.0-rc1)
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_gamebanana.png?raw=true)](https://gamebanana.com/tools/17185)
 
