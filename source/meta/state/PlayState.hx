@@ -352,6 +352,8 @@ class PlayState extends MusicBeatState
 	var texty:String = '';
 	var dialogueLangSuffix:String = '';
 
+	public static var gainedCredit:Int = 0;
+
 	public static function truncateFloat(number:Float, precision:Int):Float
 	{
 		var num = number;
@@ -4742,6 +4744,12 @@ class PlayState extends MusicBeatState
 		System.gc();
 
 		ButtplugUtils.stop();
+
+		gainedCredit = FlxG.random.int(1, 100);
+		FlxG.save.data.socialCredit = gainedCredit;
+		SocialCreditState.socialCredit += FlxG.save.data.socialCredit;
+
+		SocialCreditState.wentUp = true;
 
 		#if sys
 		if (!inReplay)

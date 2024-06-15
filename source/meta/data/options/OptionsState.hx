@@ -9,7 +9,8 @@ class OptionsState extends MusicBeatState
 		'Visuals',
 		'Gameplay', 
 		'Language',
-		'Miscellaneous'
+		'Miscellaneous',
+		'Social Credit Check'
 	];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -31,6 +32,8 @@ class OptionsState extends MusicBeatState
 				MusicBeatState.switchState(new LanguageState());
 			case 'Miscellaneous':
 				openSubState(new OptionsSubState.MiscSubState());
+			case 'Social Credit Check':
+				MusicBeatState.switchState(new SocialCreditState());
 		}
 	}
 

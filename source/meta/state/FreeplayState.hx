@@ -36,6 +36,8 @@ class FreeplayState extends MusicBeatState
 	var missingText:FlxText;
 	var missingTextBG:FlxSprite;
 
+	var uneccessarilyLongVariable:FlxText;
+
 	override function create()
 	{
 		persistentUpdate = true;
@@ -204,6 +206,17 @@ class FreeplayState extends MusicBeatState
 		text.scrollFactor.set();
 		text.screenCenter(X);
 		add(text);
+
+		uneccessarilyLongVariable = new FlxText(0, 0, 0, "+" + PlayState.gainedCredit + " SOCIAL CREDIT", 12);
+		uneccessarilyLongVariable.setFormat(Paths.font("vcr.ttf"), 48, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		uneccessarilyLongVariable.scrollFactor.set();
+		uneccessarilyLongVariable.alpha = 1;
+		add(uneccessarilyLongVariable);
+
+		new FlxTimer().start(3, function(timer) 
+		{
+			FlxTween.tween(uneccessarilyLongVariable, {alpha: 0}, 1);
+		});
 
 		super.create();
 	}

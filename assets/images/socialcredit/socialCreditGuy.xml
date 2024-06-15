@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="socialCreditGuy.png">
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="default0000" x="10" y="10" width="585" height="435" frameX="0" frameY="-62" frameWidth="736" frameHeight="499"/>
+	<SubTexture name="ohno0001" x="605" y="10" width="630" height="499" frameX="-106" frameY="0" frameWidth="736" frameHeight="499"/>
+	<SubTexture name="waaa0002" x="1245" y="10" width="642" height="435" frameX="-34" frameY="-62" frameWidth="736" frameHeight="499"/>
+</TextureAtlas>

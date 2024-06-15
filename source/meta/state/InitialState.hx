@@ -106,6 +106,9 @@ class InitialState extends FlxState
 		if (FlxG.save.data.weekCompleted != null)
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 
+		if (FlxG.save.data.socialCredit != null)
+			SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
+
 		FlxG.mouse.visible = false;
 		#if desktop
 		if (!DiscordClient.isInitialized)
