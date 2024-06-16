@@ -14,8 +14,6 @@ class SocialCreditState extends MusicBeatState
 	{
 		super.create();
 
-        underZero = (socialCredit <= 0);
-
 		#if desktop
 		DiscordClient.changePresence("Social Credit Menu", null);
 		#end
@@ -24,14 +22,14 @@ class SocialCreditState extends MusicBeatState
         	bg.color = 0xFFea71fd;
 		add(bg);
 
-        var titleTxt:Alphabet = new Alphabet(0, 40, "Your current social credit score:", false);
+        var titleTxt:Alphabet = new Alphabet(0, 35, "Your current social credit score:", false);
         titleTxt.screenCenter(X);
         add(titleTxt);
 
         var creditTxt:Alphabet = new Alphabet(5, FlxG.height - 444, Std.string(socialCredit), true);
         add(creditTxt);
 
-        var creditTxt2:Alphabet = new Alphabet(5, FlxG.height - 300, "Social Credit", false);
+        var creditTxt2:Alphabet = new Alphabet(5, FlxG.height - 400, "Social Credit", false);
         add(creditTxt2);
 
         guy = new FlxSprite(700, 0);
@@ -40,6 +38,7 @@ class SocialCreditState extends MusicBeatState
         guy.animation.addByPrefix('shocked', 'ohno', 12);
         guy.animation.addByPrefix('why', 'waaa', 12);
         guy.animation.play('default');
+        guy.scale.set(0.8, 0.8);
         guy.screenCenter(Y);
         add(guy);
 	}

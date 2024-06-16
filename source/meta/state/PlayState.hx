@@ -4745,19 +4745,10 @@ class PlayState extends MusicBeatState
 
 		ButtplugUtils.stop();
 
-		if (deathCounter >= 0 || songMisses >= 20)
-		{
-			FlxG.save.data.socialCredit -= 10;
-			SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
-			SocialCreditState.wentDown = true;
-		}
-		else
-		{
-			gainedCredit = FlxG.random.int(1, 100);
-			FlxG.save.data.socialCredit = gainedCredit;
-			SocialCreditState.socialCredit += FlxG.save.data.socialCredit;
-			SocialCreditState.wentUp = true;
-		}
+		gainedCredit = FlxG.random.int(1, 100);
+		FlxG.save.data.socialCredit += gainedCredit;
+		SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
+		SocialCreditState.wentUp = true;
 
 		#if sys
 		if (!inReplay)
