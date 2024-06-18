@@ -1,6 +1,5 @@
 package objects.userinterface.note;
 
-import flixel.graphics.frames.FlxAtlasFrames;
 import objects.shaders.*;
 import objects.userinterface.note.*;
 

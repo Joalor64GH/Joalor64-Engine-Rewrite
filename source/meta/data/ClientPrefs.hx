@@ -45,6 +45,7 @@ class ClientPrefs {
 	public static var ghostTapAnim:Bool = true;
 	public static var cameraPanning:Bool = true;
 	public static var panIntensity:Float = 1;
+	public static var noteSkin:String = 'Defualt';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -160,6 +161,7 @@ class ClientPrefs {
 		FlxG.save.data.ghostTapAnim = ghostTapAnim;
 		FlxG.save.data.cameraPanning = cameraPanning;
 		FlxG.save.data.panIntensity = panIntensity;
+		FlxG.save.data.noteSkin = noteSkin;
 	
 		FlxG.save.flush();
 
@@ -348,6 +350,8 @@ class ClientPrefs {
 			cameraPanning = FlxG.save.data.cameraPanning;
 		if(FlxG.save.data.panIntensity != null)
 			panIntensity = FlxG.save.data.panIntensity;
+		if(FlxG.save.data.noteSkin != null)
+			noteSkin = FlxG.save.data.noteSkin;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

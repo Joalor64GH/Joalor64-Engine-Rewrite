@@ -2,8 +2,8 @@ package meta.data.options;
 
 import objects.shaders.*;
 import objects.userinterface.menu.*;
+import.objects.userinterface.note.*;
 
-import flixel.input.keyboard.FlxKey;
 import flixel.ui.FlxButton;
 
 class ControlsSubState extends MusicBeatSubstate {
@@ -569,6 +569,11 @@ class DeleteSavesSubState extends MusicBeatSubstate
 
 class GameplaySubState extends BaseOptionsMenu
 {
+	var noteOptionID:Int = -1;
+	var notes:FlxTypedGroup<StrumNote>;
+	var notesTween:Array<FlxTween> = [];
+	var noteY:Float = 90;
+
 	public function new()
 	{
 		title = 'Gameplay Preferences';
@@ -636,6 +641,14 @@ class GameplaySubState extends BaseOptionsMenu
 			'string',
 			'Default',
 			['Default', 'Vanilla', 'Forever', 'Kade', 'Simplylove']);
+		addOption(option);
+
+		var option:Option = new Option('Noteskin:',
+			"What should your notes look like?",
+			'noteSkin',
+			'string',
+			'Default',
+			['Default', 'Future', 'Chip']);
 		addOption(option);
 
 		var option:Option = new Option('Long Health Bar',
