@@ -223,7 +223,7 @@ class FreeplayState extends MusicBeatState
 		});
 		buttonTop.setGraphicSize(Std.int(songSearchText.width), 50);
 		buttonTop.updateHitbox();
-		buttonTop.label.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.BLACK, RIGHT);
+		buttonTop.label.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.BLACK, CENTER);
 		buttonTop.x = FlxG.width - buttonTop.width;
 		add(buttonTop);
 

@@ -31,6 +31,8 @@ import hscript.Expr;
 import haxe.Json;
 #end
 
+import flixel_5_3_1.ParallaxSprite; // flixel 5 render pipeline
+
 class FunkinLua {
 	public static var Function_Stop:Dynamic = 1;
 	public static var Function_Continue:Dynamic = 0;
@@ -1712,6 +1714,19 @@ class FunkinLua {
 			// 	PlayState.instance.modchartSprites.set(tag, leSprite);
 			// });
 
+		Lua_helper.add_callback(lua, "makeParallaxSprite", function(tag:String, ?image:String = null, ?x:Float = 0, ?y:Float = 0) {
+			tag = tag.replace('.', '');
+			resetSpriteTag(tag, true);
+			var leSprite:ParallaxSprite = new ParallaxSprite(x, y, Paths.image(image));
+			PlayState.instance.modchartParallax.set(tag, leSprite);
+			leSprite.active = true;
+		});
+		Lua_helper.add_callback(lua, "fixateParallaxSprite", function(obj:String, anchorX:Int = 0, anchorY:Int = 0, scrollOneX:Float = 1, scrollOneY:Float = 1, scrollTwoX:Float = 1.1, scrollTwoY:Float = 1.1,
+			direct:String = 'horizontal') {
+			var spr:ParallaxSprite = getObjectDirectly(obj, false);
+			if(spr != null) spr.fixate(anchorX, anchorY, scrollOneX, scrollOneY, scrollTwoX, scrollTwoY, direct);
+		});
+
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int, height:Int, color:String) {
 			var colorNum:Int = Std.parseInt(color);
 			if(!color.startsWith('0x')) colorNum = Std.parseInt('0xff' + color);
@@ -1839,6 +1854,22 @@ class FunkinLua {
 				object.scrollFactor.set(scrollX, scrollY);
 			}
 		});
+
+		Lua_helper.add_callback(lua, "addParallaxSprite", function(tag:String, front:Bool = false) {
+			if(PlayState.instance.modchartParallax.exists(tag)) {
+				var spr:ParallaxSprite = PlayState.instance.modchartParallax.get(tag);
+				if(front)
+					getInstance().add(spr);
+				else
+				{
+					if(!PlayState.instance.isDead)
+						PlayState.instance.insert(PlayState.instance.members.indexOf(getLowestCharacterGroup()), spr);
+					else
+						GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), spr);
+				}
+			}
+		});
+
 		Lua_helper.add_callback(lua, "addLuaSprite", function(tag:String, front:Bool = false) {
 			if(PlayState.instance.modchartSprites.exists(tag)) {
 				var shit:ModchartSprite = PlayState.instance.modchartSprites.get(tag);
@@ -3195,8 +3226,17 @@ class FunkinLua {
 		PlayState.instance.modchartTexts.remove(tag);
 	}
 
-	function resetSpriteTag(tag:String) {
-		if(!PlayState.instance.modchartSprites.exists(tag)) {
+	function resetSpriteTag(tag:String, isParallax:Bool = false) {
+		if(!PlayState.instance.modchartSprites.exists(tag) || !PlayState.instance.modchartParallax.exists(tag)) {
+			return;
+		}
+		if (isParallax)
+		{
+			var target:ParallaxSprite = PlayState.instance.modchartParallax.get(tag);
+			target.kill();
+			PlayState.instance.remove(target, true);
+			target.destroy();
+			PlayState.instance.modchartParallax.remove(tag);
 			return;
 		}
 
@@ -3488,6 +3528,27 @@ class FunkinLua {
 	public static inline function getInstance()
 	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+	}
+
+	public static inline function getLowestCharacterGroup():FlxSpriteGroup
+	{
+		var group:FlxSpriteGroup = PlayState.instance.gfGroup;
+		var pos:Int = PlayState.instance.members.indexOf(group);
+
+		var newPos:Int = PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup);
+		if(newPos < pos)
+		{
+			group = PlayState.instance.boyfriendGroup;
+			pos = newPos;
+		}
+		
+		newPos = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
+		if(newPos < pos)
+		{
+			group = PlayState.instance.dadGroup;
+			pos = newPos;
+		}
+		return group;
 	}
 }
 

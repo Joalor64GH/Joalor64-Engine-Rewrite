@@ -59,6 +59,8 @@ import objects.userinterface.note.*;
 import objects.userinterface.note.Note;
 import objects.userinterface.DialogueBoxPsych;
 
+import flixel_5_3_1.ParallaxSprite;
+
 class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 48.5;
@@ -76,6 +78,7 @@ class PlayState extends MusicBeatState
 	public var variables:Map<String, Dynamic> = new Map();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
+	public var modchartParallax:Map<String, ParallaxSprite> = new Map<String, ParallaxSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
@@ -2167,6 +2170,7 @@ class PlayState extends MusicBeatState
 
 	public function getLuaObject(tag:String, text:Bool=true):FlxSprite {
 		if(modchartSprites.exists(tag)) return modchartSprites.get(tag);
+		if(modchartParallax.exists(tag)) return modchartParallax.get(tag);
 		if(text && modchartTexts.exists(tag)) return modchartTexts.get(tag);
 		if(variables.exists(tag)) return variables.get(tag);
 		return null;
