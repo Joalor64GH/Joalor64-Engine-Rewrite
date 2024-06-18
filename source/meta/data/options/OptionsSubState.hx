@@ -754,6 +754,18 @@ class GameplaySubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Camera Pan Intensity:', //Name
+			'Changes how much the camera pans when Camera Movement is turned on.',
+			'panIntensity',
+			'float',
+			1);
+		option.scrollSpeed = 2;
+		option.minValue = 0.01;
+		option.maxValue = 10;
+		option.changeValue = 0.1;
+		option.displayFormat = '%vX';
+		addOption(option);
+
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',

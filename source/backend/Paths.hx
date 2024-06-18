@@ -1,5 +1,13 @@
 package backend;
 
+#if cpp
+import cpp.vm.Gc;
+#elseif hl
+import hl.Gc;
+#elseif neko
+import neko.vm.Gc;
+#end
+
 import openfl.media.Sound;
 
 using haxe.io.Path;
@@ -49,7 +57,6 @@ class Paths
 	public inline static function gc(major:Bool = false, repeat:Int = 1) {
 		while(repeat-- > 0) _gc(major);
 	}
-
 
 	public static function clearUnusedMemory()
 	{

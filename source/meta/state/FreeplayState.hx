@@ -23,7 +23,7 @@ class FreeplayState extends MusicBeatState
 	public static var curPlaying:Bool = false;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
-	private var iconArray:Array<HealthIcon> = [];
+	private var grpIcons:FlxTypedGroup<HealthIcon>;
 
 	var bg:FlxSprite;
 	var intendedColor:Int;
@@ -128,6 +128,8 @@ class FreeplayState extends MusicBeatState
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
+		grpIcons = new FlxTypedGroup<HealthIcon>();
+		add(grpIcons);
 
 		for (i in 0...songs.length)
 		{
@@ -148,12 +150,11 @@ class FreeplayState extends MusicBeatState
 				songText.scaleX = maxWidth / songText.width;
 
 			Mods.currentModDirectory = songs[i].folder;
+			
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
-
-			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
+			icon.ID = i;
+			grpIcons.add(icon);
 		}
 		WeekData.setDirectoryFromWeek();
 
@@ -199,7 +200,7 @@ class FreeplayState extends MusicBeatState
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 
 		if (curPlaying)
-			iconArray[instPlaying].canBounce = true;
+			grpIcons.members[instPlaying].canBounce = true;
 		
 		changeSelection();
 		changeDiff();
@@ -281,7 +282,7 @@ class FreeplayState extends MusicBeatState
 	}
 
 	function regenerateSongs(?start:String = '') {
-		for (funnyIcon in iconArray.members)
+		for (funnyIcon in grpIcons.members)
 			funnyIcon.canBounce = false;
 		curPlaying = false;
 
@@ -321,19 +322,26 @@ class FreeplayState extends MusicBeatState
 				grpSongs.remove(song, true);
 				song.destroy();
 			});
-			iconArray.forEach(icon -> {
-				iconArray.remove(icon, true);
+			grpIcons.forEach(icon -> {
+				grpIcons.remove(icon, true);
 				icon.destroy();
 			});
 			
 			//we clear the remaining ones
 			grpSongs.clear();
-			iconArray.clear();
+			grpIcons.clear();
 
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
+			switch (ClientPrefs.songDisplay)
+			{
+				case 'Classic': songText.itemType = 'Classic';
+				case 'Vertical': songText.itemType = 'Vertical';
+				case 'C-Shape': songText.itemType = 'C-Shape';
+				case 'D-Shape': songText.itemType = 'D-Shape';
+			}
 			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
 
@@ -347,7 +355,7 @@ class FreeplayState extends MusicBeatState
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
 			icon.ID = i;
-			iconArray.add(icon);
+			grpIcons.add(icon);
 		}
 				
 		changeSelection();
@@ -509,9 +517,9 @@ class FreeplayState extends MusicBeatState
 					vocals.volume = 0.7;
 					instPlaying = curSelected;
 					Conductor.bpm = PlayState.SONG.bpm;
-					for (i in 0...iconArray.length)
-						iconArray[i].canBounce = false;
-					iconArray[instPlaying].canBounce = true;
+					for (funnyIcon in grpIcons.members)
+						funnyIcon.canBounce = false;
+					grpIcons.members[instPlaying].canBounce = true;
 					curPlaying = true;
 				}
 			}
@@ -566,14 +574,14 @@ class FreeplayState extends MusicBeatState
 		}
 		super.update(elapsed);
 
-		for (icon in iconArray) icon.y = icon.sprTracker.y - 36;
+		for (icon in grpIcons.members) icon.y = icon.sprTracker.y - 36;
 	}
 
 	override function beatHit() {
 		super.beatHit();
 
 		if (curPlaying)
-			iconArray[instPlaying].bounce();
+			if (grpIcons.members[instPlaying] != null && grpIcons.members[instPlaying].canBounce) grpIcons.members[instPlaying].bounce();
 	}
 
 	public static function destroyFreeplayVocals() {
@@ -633,10 +641,7 @@ class FreeplayState extends MusicBeatState
 		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
 
 		// TO-DO: Not make 5 icons look weird in Freeplay
-		for (i in 0...iconArray.length)
-			iconArray[i].alpha = 0.6;
-
-		iconArray[curSelected].alpha = 1;
+		for (i in grpIcons.members) i.alpha = (i.ID == curSelected ? 1 : 0.6);
 
 		for (num => item in grpSongs.members)
 		{

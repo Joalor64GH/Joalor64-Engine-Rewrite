@@ -1,6 +1,5 @@
 package meta.state;
 
-import flixel.input.keyboard.FlxKey;
 import flixel.effects.FlxFlicker;
 
 import meta.data.Achievements;
