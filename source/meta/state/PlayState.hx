@@ -4713,8 +4713,7 @@ class PlayState extends MusicBeatState
 						funnyColor = CoolUtil.getColor(gf.healthColorArray);
 						useIco = true;
 				}
-				var val3:Int = Std.parseInt(split[1]);
-				if (Math.isNaN(val3) || val3 <= 0) val3 = 1;
+				var val3:Null<Float> = Std.parseFloat(split[1]);
 				var sub:FlxText = new FlxText(0, ClientPrefs.downScroll ? healthBar.y + 90 : healthBar.y - 90, 0, value1, 32);
 				sub.scrollFactor.set();
 				sub.cameras = [camHUD];
@@ -4726,17 +4725,15 @@ class PlayState extends MusicBeatState
 				subBG.screenCenter(X);
 				sub.screenCenter(X);
 				sub.y += 5;
-				sub.active = false;
-				subBG.active = false;
 				add(subBG);
 				add(sub);
-				new FlxTimer(stateTimers).start(stepsToSecs(val3), function(timer:FlxTimer) {
-					FlxTween.tween(sub, {alpha: 0}, stepsToSecs(1), {ease: FlxEase.quadInOut, onComplete: _ -> {
-						remove(sub, true);
+				var tmr:FlxTimer = new FlxTimer().start(val3 / playbackRate, function(timer:FlxTimer) {
+					FlxTween.tween(sub, {alpha: 0}, 0.25 / playbackRate, {ease: FlxEase.quadInOut, onComplete: function(twn:FlxTween) {
+						sub.kill();
 						sub.destroy();
 					}});
-					FlxTween.tween(subBG, {alpha: 0}, stepsToSecs(1), {ease: FlxEase.quadInOut, onComplete: _ -> {
-						remove(subBG, true);
+					FlxTween.tween(subBG, {alpha: 0}, 0.25 / playbackRate, {ease: FlxEase.quadInOut, onComplete: function(twn:FlxTween) {
+						subBG.kill();
 						subBG.destroy();
 					}});
 				});

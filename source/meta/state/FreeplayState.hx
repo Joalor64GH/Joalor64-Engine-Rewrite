@@ -13,7 +13,6 @@ class FreeplayState extends MusicBeatState
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
-	var searchText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
 	var lerpRating:Float = 0;
@@ -219,7 +218,7 @@ class FreeplayState extends MusicBeatState
 		songSearchText.x = FlxG.width - songSearchText.width;
 		add(songSearchText);
 
-		var buttonTop:FlxButton = new FlxButton(0, songSearchText.y + songSearchText.height + 5, "", function() {
+		var buttonTop:FlxButton = new FlxButton(0, songSearchText.y + songSearchText.height + 5, "Search", function() {
 			checkForSongsThatMatch(songSearchText.text);
 		});
 		buttonTop.setGraphicSize(Std.int(songSearchText.width), 50);
@@ -227,10 +226,6 @@ class FreeplayState extends MusicBeatState
 		buttonTop.label.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.BLACK, RIGHT);
 		buttonTop.x = FlxG.width - buttonTop.width;
 		add(buttonTop);
-
-		searchText = new FlxText(975, 110, 100, "Search", 24);
-		searchText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.BLACK);
-		add(searchText);
 
 		uneccessarilyLongVariable = new FlxText(0, 0, 0, "+" + PlayState.gainedCredit + " SOCIAL CREDIT", 12);
 		uneccessarilyLongVariable.setFormat(Paths.font("vcr.ttf"), 48, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -426,7 +421,7 @@ class FreeplayState extends MusicBeatState
 
 		var upP = controls.UI_UP_P || FlxG.mouse.wheel == 1;
 		var downP = controls.UI_DOWN_P || FlxG.mouse.wheel == -1;
-		var accepted = controls.ACCEPT || FlxG.mouse.justPressed;
+		var accepted = controls.ACCEPT;
 		var space = FlxG.keys.justPressed.SPACE;
 		var ctrl = FlxG.keys.justPressed.CONTROL;
 		var alt =  FlxG.keys.justPressed.ALT;
