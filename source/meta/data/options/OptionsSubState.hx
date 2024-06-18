@@ -2,7 +2,6 @@ package meta.data.options;
 
 import objects.shaders.*;
 import objects.userinterface.menu.*;
-import.objects.userinterface.note.*;
 
 import flixel.ui.FlxButton;
 
@@ -569,11 +568,6 @@ class DeleteSavesSubState extends MusicBeatSubstate
 
 class GameplaySubState extends BaseOptionsMenu
 {
-	var noteOptionID:Int = -1;
-	var notes:FlxTypedGroup<StrumNote>;
-	var notesTween:Array<FlxTween> = [];
-	var noteY:Float = 90;
-
 	public function new()
 	{
 		title = 'Gameplay Preferences';
