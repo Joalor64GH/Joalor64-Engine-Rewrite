@@ -70,7 +70,8 @@ class ChartingState extends MusicBeatState
 		['Popup', "Value 1: Title\nValue 2: Message\nMakes a window popup with a message in it."],
 		['Popup (No Pause)', "Value 1: Title\nValue 2: Message\nSame as popup but without a pause."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
-		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"]
+		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
+		['Add Subtitle', "Adds a subtitle.\nValue 1: Text.\nValue 2: Color (write as 0xffffffff)\nValue 3: Duration before fadeout in STEPS.\n(Add to the end of value 2, with a comma to seperate.)"]
 	];
 
 	var _file:FileReference;

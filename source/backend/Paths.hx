@@ -28,6 +28,29 @@ class Paths
 
 	public static var dumpExclusions:Array<String> = ['assets/music/freakyMenu.$SOUND_EXT'];
 
+	@:noCompletion private inline static function _gc(major:Bool) {
+		#if (cpp || neko)
+		Gc.run(major);
+		#elseif hl
+		Gc.major();
+		#end
+	}
+
+	@:noCompletion public inline static function compress() {
+		#if cpp
+		Gc.compact();
+		#elseif hl
+		Gc.major();
+		#elseif neko
+		Gc.run(true);
+		#end
+	}
+
+	public inline static function gc(major:Bool = false, repeat:Int = 1) {
+		while(repeat-- > 0) _gc(major);
+	}
+
+
 	public static function clearUnusedMemory()
 	{
 		for (key in currentTrackedAssets.keys())
@@ -40,7 +63,8 @@ class Paths
 			}
 		}
 		// run the garbage collector for good measure lmfao
-		System.gc();
+		compress();
+		gc(true);
 	}
 
 	// fuckin around ._.
@@ -80,6 +104,8 @@ class Paths
 		// flags everything to be cleared out next unused memory clear
 		localTrackedAssets = [];
 		Assets.cache.clear("songs");
+		gc(true);
+		compress();
 	}
 
 	inline static function destroyGraphic(graphic:FlxGraphic)

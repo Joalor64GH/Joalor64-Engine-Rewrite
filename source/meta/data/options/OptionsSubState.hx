@@ -680,6 +680,13 @@ class GameplaySubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Ghost Tap Animation',
+			'If checked, plays player one\'s anim when ghost tapping is active.',
+			'ghostTapAnim',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",
 			'autoPause',
@@ -736,6 +743,13 @@ class GameplaySubState extends BaseOptionsMenu
 		var option:Option = new Option('Results Screen',
 			'If checked, displays your stats after finishing a song/week.',
 			'resultsScreen',
+			'bool',
+			true);
+		addOption(option);
+
+		var option:Option = new Option('Camera Movement',
+			'If checked, move the camera depending the note that was hit.',
+			'cameraPanning',
 			'bool',
 			true);
 		addOption(option);

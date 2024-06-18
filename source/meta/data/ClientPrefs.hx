@@ -42,6 +42,8 @@ class ClientPrefs {
 	public static var weekendScore:Bool = false;
 	public static var resultsScreen:Bool = true;
 	public static var autoPause:Bool = true;
+	public static var ghostTapAnim:Bool = true;
+	public static var cameraPanning:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -154,6 +156,8 @@ class ClientPrefs {
 		FlxG.save.data.weekendScore = weekendScore;
 		FlxG.save.data.resultsScreen = resultsScreen;
 		FlxG.save.data.autoPause = autoPause;
+		FlxG.save.data.ghostTapAnim = ghostTapAnim;
+		FlxG.save.data.cameraPanning = cameraPanning;
 	
 		FlxG.save.flush();
 
@@ -336,6 +340,10 @@ class ClientPrefs {
 			weekendScore = FlxG.save.data.weekendScore;
 		if(FlxG.save.data.resultsScreen != null)
 			resultsScreen = FlxG.save.data.resultsScreen;
+		if(FlxG.save.data.ghostTapAnim != null)
+			ghostTapAnim = FlxG.save.data.ghostTapAnim;
+		if(FlxG.save.data.cameraPanning != null)
+			cameraPanning = FlxG.save.data.cameraPanning;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

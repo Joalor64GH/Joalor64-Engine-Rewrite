@@ -14,6 +14,11 @@ class MacroUtil
             return macro $v{""};
     }
 
+    public static macro function getDate()
+    {
+        return macro $v{Date.now().toString()};
+    }
+
     /**
      * @author Leather128
      * @see https://github.com/Leather128/FabricEngine/

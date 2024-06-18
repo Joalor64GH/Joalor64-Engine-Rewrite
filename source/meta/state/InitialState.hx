@@ -100,23 +100,16 @@ class InitialState extends FlxState
 
 		PlayerSettings.init();
 
-		if (FlxG.save.data != null && FlxG.save.data.fullscreen)
-			FlxG.fullscreen = FlxG.save.data.fullscreen;
-
-		if (FlxG.save.data.weekCompleted != null)
-			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-
-		if (FlxG.save.data.socialCredit != null)
-			SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
+		if (FlxG.save.data != null && FlxG.save.data.fullscreen) FlxG.fullscreen = FlxG.save.data.fullscreen;
+		if (FlxG.save.data.weekCompleted != null) StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+		if (FlxG.save.data.socialCredit != null) SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
 
 		FlxG.mouse.visible = false;
 		#if desktop
 		if (!DiscordClient.isInitialized)
 		{
 			DiscordClient.initialize();
-			Application.current.onExit.add (function(exitCode) {
-				DiscordClient.shutdown();
-			});
+			Application.current.onExit.add((ec)->{DiscordClient.shutdown();});
 		}
 		#end
 
@@ -149,6 +142,14 @@ class InitialState extends FlxState
 		#end
 
 		Highscore.load();
+
+		#if (hxvlc)
+		#if (hxvlc < "1.4.1")
+		hxvlc.libvlc.Handle.init();
+		#else
+		hxvlc.util.Handle.init();
+		#end
+		#end
 	}
 
 	function changeText()
