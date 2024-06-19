@@ -258,9 +258,11 @@ class Note extends FlxSprite
 		if(texture.length < 1) {
 			skin = PlayState.SONG.arrowSkin;
 			if(skin == null || skin.length < 1) {
+				/*
 				skin = 'noteskins/NOTE_assets-${ClientPrefs.noteSkin.toLowerCase()}';
 			}
 			if(ClientPrefs.noteSkin == null) {
+				*/
 				skin = 'NOTE_assets';
 			}
 		}
@@ -279,11 +281,13 @@ class Note extends FlxSprite
 		defaultWidth = 157;
 		defaultHeight = 154;
 		if(PlayState.isPixelStage) {
+			/*
 			if (FileSystem.exists(Paths.modFolders('images/pixelUI/$blahblah.png')) && FileSystem.exists(Paths.modFolders('images/pixelUI/' + blahblah + 'ENDS.png'))) {
 				blahblah = 'noteskins/NOTE_assets-${ClientPrefs.noteSkin.toLowerCase()}';
 			} else {
 				blahblah = 'NOTE_assets';
 			}
+			*/
 			if(isSustainNote) {
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
 				width = width / 4;
