@@ -85,11 +85,6 @@ class LanguageState extends MusicBeatState
             add(icon);
 		}
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "NOTE: Language support does work, but the actual data for the languages hasn't been added yet.", 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-
         	changeSelection();
 	}
 

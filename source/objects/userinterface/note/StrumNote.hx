@@ -41,6 +41,11 @@ class StrumNote extends FlxSprite
 		}
 		*/
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
+		switch (ClientPrefs.noteSkin) {
+			case 'Chip': skin = 'noteskins/NOTE_assets-chip';
+			case 'Future' : skin = 'noteskins/NOTE_assets-future';
+			default: skin = 'NOTE_assets';
+		}
 		shader = colorMask.shader;
 		texture = skin; //Load texture and anims
 
