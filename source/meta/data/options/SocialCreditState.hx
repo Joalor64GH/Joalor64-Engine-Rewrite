@@ -2,8 +2,6 @@ package meta.data.options;
 
 class SocialCreditState extends MusicBeatState
 {
-    public static var socialCredit:Int = FlxG.save.data.socialCredit;
-
     public static var wentDown:Bool = false;
     public static var wentUp:Bool = false;
     public static var underZero:Bool = false;
@@ -26,7 +24,7 @@ class SocialCreditState extends MusicBeatState
         titleTxt.screenCenter(X);
         add(titleTxt);
 
-        var creditTxt:Alphabet = new Alphabet(5, FlxG.height - 444, Std.string(socialCredit), true);
+        var creditTxt:Alphabet = new Alphabet(5, FlxG.height - 444, Std.string(FlxG.save.data.socialCredit), true);
         add(creditTxt);
 
         var creditTxt2:Alphabet = new Alphabet(5, FlxG.height - 400, "Social Credit", false);

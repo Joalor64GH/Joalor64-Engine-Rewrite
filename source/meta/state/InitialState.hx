@@ -102,7 +102,7 @@ class InitialState extends FlxState
 
 		if (FlxG.save.data != null && FlxG.save.data.fullscreen) FlxG.fullscreen = FlxG.save.data.fullscreen;
 		if (FlxG.save.data.weekCompleted != null) StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		if (FlxG.save.data.socialCredit != null) SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
+		if (FlxG.save.data.socialCredit == null) FlxG.save.data.socialCredit = 0;
 
 		FlxG.mouse.visible = false;
 		#if desktop
