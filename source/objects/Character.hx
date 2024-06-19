@@ -1,6 +1,5 @@
 package objects;
 
-import animateatlas.AtlasFrameMaker;
 import objects.background.*;
 import objects.shaders.*;
 

@@ -2,7 +2,7 @@ package meta.data.options;
 
 class SocialCreditState extends MusicBeatState
 {
-    public static var socialCredit:Int = 0;
+    public static var socialCredit:Int = FlxG.save.data.socialCredit;
 
     public static var wentDown:Bool = false;
     public static var wentUp:Bool = false;

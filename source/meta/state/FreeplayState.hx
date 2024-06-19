@@ -218,7 +218,7 @@ class FreeplayState extends MusicBeatState
 		songSearchText.x = FlxG.width - songSearchText.width;
 		add(songSearchText);
 
-		var buttonTop:FlxButton = new FlxButton(0, songSearchText.y + songSearchText.height + 5, "Search", function() {
+		var buttonTop:FlxButton = new FlxButton(0, songSearchText.y + songSearchText.height + 5, "", function() {
 			checkForSongsThatMatch(songSearchText.text);
 		});
 		buttonTop.setGraphicSize(Std.int(songSearchText.width), 50);
@@ -226,6 +226,10 @@ class FreeplayState extends MusicBeatState
 		buttonTop.label.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.BLACK, CENTER);
 		buttonTop.x = FlxG.width - buttonTop.width;
 		add(buttonTop);
+
+		var searchTxt:FlxText = new FlxText(buttonTop.x, buttonTop.y, 0, "Search", 32);
+		searchTxt.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, CENTER);
+		add(searchTxt);
 
 		uneccessarilyLongVariable = new FlxText(0, 0, 0, "+" + PlayState.gainedCredit + " SOCIAL CREDIT", 12);
 		uneccessarilyLongVariable.setFormat(Paths.font("vcr.ttf"), 48, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

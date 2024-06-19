@@ -1974,7 +1974,7 @@ class PlayState extends MusicBeatState
 		ArtemisIntegration.setHealthbarFlxColors (dadColor, bfColor);
 		#end
 
-		timeBar.setColors(CoolUtil.getColor(dad.healthColorArray), FlxColor.WHITE);
+		timeBar.setColors(CoolUtil.getColor(dad.healthColorArray), 0xFF404040);
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -4824,7 +4824,6 @@ class PlayState extends MusicBeatState
 
 		gainedCredit = FlxG.random.int(1, 100);
 		FlxG.save.data.socialCredit += gainedCredit;
-		SocialCreditState.socialCredit = FlxG.save.data.socialCredit;
 		SocialCreditState.wentUp = true;
 
 		#if sys
