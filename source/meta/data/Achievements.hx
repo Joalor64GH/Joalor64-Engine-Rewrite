@@ -96,7 +96,7 @@ class Achievements {
 		],
 		[
 			"Roadkill Enthusiast",			
-			"Watch the Henchmen die over 100 times.\n" + FlxG.save.data.henchmenDeath + "/100",			
+			"Watch the Henchmen die over 100 times.",			
 			'roadkill_enthusiast',	
 			false
 		],
