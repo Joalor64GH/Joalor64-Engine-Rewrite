@@ -33,6 +33,7 @@ class StrumNote extends FlxSprite
 		super(x, y);
 
 		var skin:String = 'NOTE_assets';
+		/*
 		if (PlayState.SONG.arrowSkin == null || PlayState.SONG.arrowSkin.length <= 1) {
 			if (ClientPrefs.noteSkin == 'Default') {
 				skin = 'NOTE_assets';
@@ -44,6 +45,7 @@ class StrumNote extends FlxSprite
 				skin = 'NOTE_assets'; // to prevent crashes
 			}
 		}
+		*/
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		shader = colorMask.shader;
 		texture = skin; //Load texture and anims
