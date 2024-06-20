@@ -173,7 +173,7 @@ class StrumNote extends FlxSprite
 			if (noteData > -1 && noteData < ClientPrefs.arrowRGB.length)
 			{
 				rgbPalette.r = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
-				rgbPalette.g = rgbPalette.rCol.getDarkened(0.6);
+				rgbPalette.g = rgbPalette.r.getDarkened(0.6);
 
 				if (animation.curAnim.name == 'pressed')
 				{
