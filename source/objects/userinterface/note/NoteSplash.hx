@@ -5,7 +5,7 @@ import objects.userinterface.note.*;
 
 class NoteSplash extends FlxSprite
 {
-	public var rgbPalette:RGBPalette = null;
+	public var colorMask:ColorMask = null;
 	private var idleAnim:String;
 	private var textureLoaded:String = null;
 
@@ -19,7 +19,7 @@ class NoteSplash extends FlxSprite
 
 		loadAnims(skin);
 		
-		rgbPalette = new RGBPalette();
+		colorMask = new ColorMask();
 
 		setupNoteSplash(x, y, note);
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -33,18 +33,18 @@ class NoteSplash extends FlxSprite
 		if(texture == null) {
 			texture = 'noteSplashes';
 			if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
-			shader = rgbPalette.shader;
+			shader = colorMask.shader;
 		}
 
 		// fucking charting state defaults
 		if(texture == 'noteSplashes') {
-			shader = rgbPalette.shader;
+			shader = colorMask.shader;
 		}
 
 		if(textureLoaded != texture) {
 			loadAnims(texture);
 		}
-		rgbPalette.r = color;
+		colorMask.rCol = color;
 		offset.set(10, 10);
 
 		var animNum:Int = FlxG.random.int(1, 2);

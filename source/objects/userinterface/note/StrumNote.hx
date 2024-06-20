@@ -5,7 +5,7 @@ import objects.userinterface.note.*;
 
 class StrumNote extends FlxSprite
 {
-	private var rgbPalette:RGBPalette;
+	private var colorMask:ColorMask;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
 	public var direction:Float = 90;//plan on doing scroll directions soon -bb
@@ -26,7 +26,7 @@ class StrumNote extends FlxSprite
 	public function new(x:Float, y:Float, leData:Int, player:Int) {
 		animation = new PsychAnimationController(this);
 		
-		rgbPalette = new RGBPalette();
+		colorMask = new ColorMask();
 		noteData = leData;
 		this.player = player;
 		this.noteData = leData;
@@ -45,7 +45,7 @@ class StrumNote extends FlxSprite
 			}
 		}
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
-		shader = rgbPalette.shader;
+		shader = colorMask.shader;
 		texture = skin; //Load texture and anims
 
 		scrollFactor.set();
@@ -58,7 +58,6 @@ class StrumNote extends FlxSprite
 
 		if(PlayState.isPixelStage)
 		{
-			// old code, blehh!!
 			/*
 			var skin:String = 'NOTE_assets';
 			if (FileSystem.exists(Paths.modFolders('images/pixelUI/$texture.png')) && FileSystem.exists(Paths.modFolders('images/pixelUI/' + texture + 'ENDS.png'))) {
@@ -167,19 +166,19 @@ class StrumNote extends FlxSprite
 		centerOrigin();
 		if(animation.curAnim == null || animation.curAnim.name == 'static') {
 			// RGB
-			rgbPalette.r = 0xFF87A3AD;
-			rgbPalette.g = FlxColor.BLACK;
+			colorMask.rCol = 0xFF87A3AD;
+			colorMask.gCol = FlxColor.BLACK;
 		} else {
 			if (noteData > -1 && noteData < ClientPrefs.arrowRGB.length)
 			{
-				rgbPalette.r = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
-				rgbPalette.g = rgbPalette.r.getDarkened(0.6);
+				colorMask.rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
+				colorMask.gCol = colorMask.rCol.getDarkened(0.6);
 
 				if (animation.curAnim.name == 'pressed')
 				{
-					var color:FlxColor = rgbPalette.r;
-					rgbPalette.r = FlxColor.fromHSL(color.hue, color.saturation * 0.5, color.lightness * 1.2);
-					rgbPalette.g = 0xFF201E31;
+					var color:FlxColor = colorMask.rCol;
+					colorMask.rCol = FlxColor.fromHSL(color.hue, color.saturation * 0.5, color.lightness * 1.2);
+					colorMask.gCol = 0xFF201E31;
 				}
 			}
 
