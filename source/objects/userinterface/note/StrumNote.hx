@@ -5,7 +5,7 @@ import objects.userinterface.note.*;
 
 class StrumNote extends FlxSprite
 {
-	private var colorMask:ColorMask;
+	private var rgbPalette:RGBPalette;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
 	public var direction:Float = 90;//plan on doing scroll directions soon -bb
@@ -26,27 +26,26 @@ class StrumNote extends FlxSprite
 	public function new(x:Float, y:Float, leData:Int, player:Int) {
 		animation = new PsychAnimationController(this);
 		
-		colorMask = new ColorMask();
+		rgbPalette = new RGBPalette();
 		noteData = leData;
 		this.player = player;
 		this.noteData = leData;
 		super(x, y);
 
 		var skin:String = 'NOTE_assets';
-		/*
-		if(ClientPrefs.noteSkin != null) {	
-			skin = 'noteskins/NOTE_assets-${ClientPrefs.noteSkin.toLowerCase()}';
-		} else {
-			skin = "NOTE_assets";
+		if (PlayState.SONG.arrowSkin == null || PlayState.SONG.arrowSkin.length <= 1) {
+			if (ClientPrefs.noteSkin == 'Default') {
+				skin = 'NOTE_assets';
+			} else if (ClientPrefs.noteSkin == 'Chip') {
+				skin = 'noteskins/NOTE_assets-chip';
+			} else if (ClientPrefs.noteSkin == 'Future') {
+				skin = 'noteskins/NOTE_assets-future';
+			}else {
+				skin = 'NOTE_assets'; // to prevent crashes
+			}
 		}
-		*/
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
-		switch (ClientPrefs.noteSkin) {
-			case 'Chip': skin = 'noteskins/NOTE_assets-chip';
-			case 'Future' : skin = 'noteskins/NOTE_assets-future';
-			default: skin = 'NOTE_assets';
-		}
-		shader = colorMask.shader;
+		shader = rgbPalette.shader;
 		texture = skin; //Load texture and anims
 
 		scrollFactor.set();
@@ -59,6 +58,7 @@ class StrumNote extends FlxSprite
 
 		if(PlayState.isPixelStage)
 		{
+			// old code, blehh!!
 			/*
 			var skin:String = 'NOTE_assets';
 			if (FileSystem.exists(Paths.modFolders('images/pixelUI/$texture.png')) && FileSystem.exists(Paths.modFolders('images/pixelUI/' + texture + 'ENDS.png'))) {
@@ -167,19 +167,19 @@ class StrumNote extends FlxSprite
 		centerOrigin();
 		if(animation.curAnim == null || animation.curAnim.name == 'static') {
 			// RGB
-			colorMask.rCol = 0xFF87A3AD;
-			colorMask.gCol = FlxColor.BLACK;
+			rgbPalette.r = 0xFF87A3AD;
+			rgbPalette.g = FlxColor.BLACK;
 		} else {
 			if (noteData > -1 && noteData < ClientPrefs.arrowRGB.length)
 			{
-				colorMask.rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
-				colorMask.gCol = colorMask.rCol.getDarkened(0.6);
+				rgbPalette.r = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
+				rgbPalette.g = rgbPalette.rCol.getDarkened(0.6);
 
 				if (animation.curAnim.name == 'pressed')
 				{
-					var color:FlxColor = colorMask.rCol;
-					colorMask.rCol = FlxColor.fromHSL(color.hue, color.saturation * 0.5, color.lightness * 1.2);
-					colorMask.gCol = 0xFF201E31;
+					var color:FlxColor = rgbPalette.r;
+					rgbPalette.r = FlxColor.fromHSL(color.hue, color.saturation * 0.5, color.lightness * 1.2);
+					rgbPalette.g = 0xFF201E31;
 				}
 			}
 

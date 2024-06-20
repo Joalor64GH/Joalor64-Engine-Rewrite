@@ -1,6 +1,5 @@
 package objects.userinterface.note;
 
-import flixel.graphics.frames.FlxAtlasFrames;
 import objects.shaders.*;
 
 typedef EventNote = {
@@ -44,7 +43,7 @@ class Note extends FlxSprite
 	public var eventVal1:String = '';
 	public var eventVal2:String = '';
 
-	public var colorMask:ColorMask;
+	public var rgbPalette:RGBPalette;
 	public var inEditor:Bool = false;
 
 	public var animSuffix:String = '';
@@ -131,8 +130,8 @@ class Note extends FlxSprite
 		noteSplashTexture = PlayState.SONG.splashSkin;
 		if (noteData > -1 && noteData < ClientPrefs.arrowRGB.length)
 		{
-			colorMask.rCol = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
-			colorMask.gCol = colorMask.rCol.getDarkened(0.6);
+			rgbPalette.r = FlxColor.fromRGB(ClientPrefs.arrowRGB[noteData][0], ClientPrefs.arrowRGB[noteData][1], ClientPrefs.arrowRGB[noteData][2]);
+			rgbPalette.g = rgbPalette.r.getDarkened(0.6);
 		}
 
 		if(noteData > -1 && noteType != value) {
@@ -159,7 +158,7 @@ class Note extends FlxSprite
 			}
 			noteType = value;
 		}
-		noteSplashColor = colorMask.rCol;
+		noteSplashColor = rgbPalette.r;
 		return value;
 	}
 
@@ -186,8 +185,8 @@ class Note extends FlxSprite
 
 		if(noteData > -1) {
 			texture = '';
-			colorMask = new ColorMask();
-			shader = colorMask.shader;
+			rgbPalette = new RGBPalette();
+			shader = rgbPalette.shader;
 
 			x += swagWidth * (noteData);
 			if(!isSustainNote && noteData > -1 && noteData < 4) { //Doing this 'if' check to fix the warnings on Senpai songs

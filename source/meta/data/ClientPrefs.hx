@@ -45,7 +45,7 @@ class ClientPrefs {
 	public static var ghostTapAnim:Bool = true;
 	public static var cameraPanning:Bool = true;
 	public static var panIntensity:Float = 1;
-	public static var noteSkin:String = 'Defualt';
+	public static var noteSkin:String = 'Default'; // defualt :skull:
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
