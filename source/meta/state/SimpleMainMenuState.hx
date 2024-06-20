@@ -1,7 +1,5 @@
 package meta.state;
 
-import flixel.effects.FlxFlicker;
-
 import meta.data.Achievements;
 
 class SimpleMainMenuState extends MusicBeatState
@@ -23,7 +21,7 @@ class SimpleMainMenuState extends MusicBeatState
 
 	private var camAchievement:FlxCamera;
 
-	function openSelectedSubstate(label:String) {
+	function switchTheState(label:String) {
 		switch(label) {
 			case 'Story Mode':
 				MusicBeatState.switchState(new StoryMenuState());
@@ -179,13 +177,13 @@ class SimpleMainMenuState extends MusicBeatState
 				{
 					FlxFlicker.flicker(grpOptions, 1, 0.06, false, false, function(flick:FlxFlicker)
 					{
-						openSelectedSubstate(options[curSelected]);
+						switchTheState(options[curSelected]);
 					});
 				});
 			} else {
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					openSelectedSubstate(options[curSelected]);
+					switchTheState(options[curSelected]);
 				});
 			}
 		}

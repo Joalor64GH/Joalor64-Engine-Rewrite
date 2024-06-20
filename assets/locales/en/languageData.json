@@ -1,3 +1,20 @@
 {
-    "greeting": "Hello, world!"
+    "fpsTxt": "FPS: ",
+    "memoryTxt": "Memory: ",
+
+    "outdated1": "Hey! You're running an outdated version of Joalor64 Engine Rewritten!\n",
+    "outdated2": "Your current version is v",
+    "outdated3": ", while the most recent version is v",
+    "outdated4": "!\nWhat's New:\n",
+    "outdated5": "\nPress ENTER to go to GitHub. Otherwise, press ESCAPE to proceed anyways.\nThank you for using the Engine! :)",
+
+    "noMods1": "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD",
+    "noMods2": "\nOR PRESS 7 TO OPEN THE MOD DOWNLOADER",
+    "noMods3": "\n\nBY THE WAY, ",
+    "on": "ON",
+    "off": "OFF",
+    "top": "TOP",
+    "disableAll": "DISABLE ALL",
+    "enableAll": "ENABLE ALL",
+    "modRestart": " (This Mod will restart the game!)"
 }
