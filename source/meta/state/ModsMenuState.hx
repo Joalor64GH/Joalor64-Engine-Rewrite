@@ -1,7 +1,5 @@
 package meta.state;
 
-import flixel.ui.FlxButton;
-
 class ModsMenuState extends MusicBeatState
 {
 	var mods:Array<ModMetadata> = [];

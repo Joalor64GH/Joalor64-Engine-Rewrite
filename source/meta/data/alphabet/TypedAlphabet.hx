@@ -1,7 +1,5 @@
 package meta.data.alphabet;
 
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.system.FlxSound;
 import openfl.media.Sound;
 
 class TypedAlphabet extends Alphabet

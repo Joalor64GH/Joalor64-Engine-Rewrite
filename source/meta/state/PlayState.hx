@@ -257,8 +257,8 @@ class PlayState extends MusicBeatState
 	var gunsTween:FlxTween = null;
 	var stageGraphicArray:Array<FlxSprite> = [];
 	var gunsNoteTweens:Array<FlxTween> = [];
-	// the funny thing is, i am considering adding extra notes in the future
-	// we're gonna cook next update
+
+	// the funny thing is, i am considering adding extra notes
 	public static var mania(default, set):Int = 3;
 	public static function set_mania(newMania:Int) {
 		mania = newMania;

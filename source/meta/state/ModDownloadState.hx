@@ -13,7 +13,6 @@ import sys.io.FileOutput;
 import haxe.zip.Writer;
 import haxe.io.Bytes;
 
-import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUIInputText;
 
@@ -85,7 +84,6 @@ class ModDownloadState extends MusicBeatState
 
 		UI_box = new FlxUITabMenu(null, tabs, true);
 		UI_box.cameras = [camInput];
-
 		UI_box.resize(idInputText.width + 50, idInputText.height + 70);
 		UI_box.screenCenter();
 		UI_box.scrollFactor.set();

@@ -16,6 +16,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.sound.FlxSound;
+import flixel.ui.FlxButton;
 import flixel.ui.FlxBar;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -34,9 +35,9 @@ import openfl.display.Sprite;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 
-import haxe.Json;
-import haxe.Http;
+import haxe.*;
 import haxe.io.Path;
+import Type.ValueType;
 
 import hscript.*;
 
@@ -45,6 +46,8 @@ import sys.io.File;
 import sys.FileSystem;
 #elseif js
 import js.html.*;
+#else
+import openfl.utils.Assets;
 #end
 
 // Joalor64 Engine Imports
@@ -91,6 +94,7 @@ import llua.Lua;
 using Globals;
 using StringTools;
 using meta.CoolUtil;
+using meta.CoolUtil.MapUtil;
 
 #if !debug
 @:noDebug

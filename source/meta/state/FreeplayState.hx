@@ -1,6 +1,5 @@
 package meta.state;
 
-import flixel.ui.FlxButton;
 import flixel.addons.ui.FlxUIInputText;
 
 class FreeplayState extends MusicBeatState

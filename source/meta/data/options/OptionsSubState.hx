@@ -568,6 +568,12 @@ class DeleteSavesSubState extends MusicBeatSubstate
 
 class GameplaySubState extends BaseOptionsMenu
 {
+	var windowBar:FlxSprite;
+	var windowOptions:Array<Option> = [];
+	final windowDefaultMaxes:Array<Int> = [45, 90, 135, 205];
+	final windowDefaultMins:Array<Int> = [16, 46, 91, 136];
+	final windowColours = [0xbf00ff00, 0xbfffaa00, 0xbfff0000, 0xbfff00ff];
+	
 	public function new()
 	{
 		title = 'Gameplay Preferences';
@@ -780,9 +786,9 @@ class GameplaySubState extends BaseOptionsMenu
 			45);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 15;
-		option.minValue = 15;
-		option.maxValue = 45;
+		windowOptions.push(option);
 		addOption(option);
+		option.onChange = onChangeHitWindow;
 
 		var option:Option = new Option('Good Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Good" in milliseconds.',
@@ -791,9 +797,9 @@ class GameplaySubState extends BaseOptionsMenu
 			90);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 30;
-		option.minValue = 15;
-		option.maxValue = 90;
+		windowOptions.push(option);
 		addOption(option);
+		option.onChange = onChangeHitWindow;
 
 		var option:Option = new Option('Bad Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Bad" in milliseconds.',
@@ -802,9 +808,20 @@ class GameplaySubState extends BaseOptionsMenu
 			135);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 60;
-		option.minValue = 15;
-		option.maxValue = 135;
+		windowOptions.push(option);
 		addOption(option);
+		option.onChange = onChangeHitWindow;
+
+		var option:Option = new Option('Shit Hit Window',
+			'Changes the amount of time you have\nfor hitting a "Shit" in milliseconds.',
+			'shitWindow',
+			'int',
+			205);
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 60;
+		windowOptions.push(option);
+		addOption(option);
+		option.onChange = onChangeHitWindow;
 
 		var option:Option = new Option('Safe Frames',
 			'Changes how many frames you have for\nhitting a note earlier or late.',
@@ -818,6 +835,37 @@ class GameplaySubState extends BaseOptionsMenu
 		addOption(option);
 
 		super();
+	}
+
+	override function changeSelection(change:Int = 0) {
+		super.changeSelection(change);
+
+		if (windowBar != null) windowBar.visible = (optionsArray[curSelected].name.contains('Hit Window'));
+	}
+
+	function onChangeHitWindow()
+	{
+		var prevLine:Float = 0;
+		for (i => option in windowOptions) {
+			option.minValue = windowDefaultMins[i];
+			option.maxValue = windowDefaultMaxes[i];
+			if (windowOptions[i - 1] != null) {
+				if (windowOptions[i-1].maxValue > option.minValue) option.minValue = windowOptions[i - 1].maxValue;
+			}
+			if (windowOptions[i + 1] != null) {
+				if (windowOptions[i + 1].minValue < option.maxValue) option.maxValue = windowOptions[i + 1].minValue;
+			}
+			var pixels = windowBar.pixels;
+			for (y in 0...pixels.height) {
+				if (y / pixels.height <= option.getValue() / pixels.height && y / pixels.height > prevLine)
+					for (x in 0...pixels.width)
+						pixels.setPixel32(x, y, windowColours[i]);
+					else if (y / pixels.height > option.getValue() / pixels.height)
+						for (x in 0...pixels.width)
+							pixels.setPixel32(x, y, windowColours[windowColours.length - 1]);
+			}
+			prevLine = option.getValue() / pixels.height;
+		}
 	}
 
 	function onChangeHitsoundVolume()
@@ -946,11 +994,10 @@ class NotesSubState extends MusicBeatSubstate
 			}
 
 			var note:FlxSprite = new FlxSprite(posX, yPos);
-			if(ClientPrefs.noteSkin != null) {
+			/* if(ClientPrefs.noteSkin != null)
 				note.frames = Paths.getSparrowAtlas('noteskins/NOTE_assets-${ClientPrefs.noteSkin.toLowerCase()}');
-			} else {
-				note.frames = Paths.getSparrowAtlas('NOTE_assets');
-			}
+			else */
+			note.frames = Paths.getSparrowAtlas('NOTE_assets');
 			var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 			note.animation.addByPrefix('idle', animations[i]);
 			note.animation.play('idle');

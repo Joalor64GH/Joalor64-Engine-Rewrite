@@ -28,7 +28,7 @@ class OutdatedState extends MusicBeatState
 	public static function updateCheck()
 	{
 		trace('checking for updates...');
-		var http = new haxe.Http('https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json');
+		var http = new Http('https://raw.githubusercontent.com/Joalor64GH/Joalor64-Engine-Rewrite/main/gitVersion.json');
 		http.onData = function(data:String)
 		{
 			var daRawJson:Dynamic = Json.parse(data);

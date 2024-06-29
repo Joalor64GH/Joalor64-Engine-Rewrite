@@ -5,12 +5,13 @@ import objects.userinterface.HealthIcon;
 class MinigamesState extends MusicBeatState
 {
     	var grpControls:FlxTypedGroup<Alphabet>;
-        var iconArray:Array<HealthIcon> = [];
+        var grpIcons:FlxTypedGroup<HealthIcon>;
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
 		new Minigame('Kill BF', 'lmao\n(Point & Click)', 'mgicons/killBf')
 		// soon...
+		// new Minigame('Funky Memory', 'Do you remember?\n(Point & Click)', 'mgicons/card')
 		// new Minigame("Joalor64's Special", 'It\'s me!\n(Melodic Circuit)', 'mgicons/me')
 	];
 
@@ -30,6 +31,8 @@ class MinigamesState extends MusicBeatState
 
         	grpControls = new FlxTypedGroup<Alphabet>();
 		add(grpControls);
+		grpIcons = new FlxTypedGroup<HealthIcon>();
+		add(grpIcons);
 
 		for (i in 0...controlStrings.length)
 		{
@@ -43,8 +46,8 @@ class MinigamesState extends MusicBeatState
 			icon.sprTracker = controlLabel;
 			icon.scale.set(0.7, 0.7);
 			icon.updateHitbox();
-			iconArray.push(icon);
-			add(icon);
+			icon.ID = i;
+			grpIcons.add(icon);
 		}
         
         	var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
@@ -53,7 +56,6 @@ class MinigamesState extends MusicBeatState
 
         	descTxt = new FlxText(20, FlxG.height - 80, 1000, "", 22);
         	descTxt.screenCenter(X);
-		descTxt.scrollFactor.set();
 		descTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(descTxt);
 
@@ -86,6 +88,8 @@ class MinigamesState extends MusicBeatState
 					LoadingState.loadAndSwitchState(new PlayState());
 				case 2:
 					MusicBeatState.switchState(new minigames.KillBF());
+				/* case 3:
+					MusicBeatState.switchState(new minigames.CardGame()); */
 			}
 		}
 	}
@@ -97,11 +101,7 @@ class MinigamesState extends MusicBeatState
 		curSelected = FlxMath.wrap(curSelected + change, 0, grpControls.length - 1);
 
 		descTxt.text = controlStrings[curSelected].description;
-
-		for (i in 0...iconArray.length)
-			iconArray[i].alpha = 0.6;
-
-		iconArray[curSelected].alpha = 1;
+		for (i in grpIcons.members) i.alpha = (i.ID == curSelected ? 1 : 0.6);
 
 		for (num => item in grpControls.members)
 		{

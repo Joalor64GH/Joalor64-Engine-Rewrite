@@ -22,9 +22,7 @@ import haxe.io.Path;
 
 #if linux
 @:cppInclude('./external/gamemode_client.h')
-@:cppFileCode('
-	#define GAMEMODE_AUTO
-')
+@:cppFileCode('#define GAMEMODE_AUTO')
 #end
 
 class Main extends Sprite
@@ -176,6 +174,8 @@ class Main extends Sprite
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
+
+		FlxG.sound.play(Paths.sound('crash'));
 
 		DiscordClient.shutdown();
 

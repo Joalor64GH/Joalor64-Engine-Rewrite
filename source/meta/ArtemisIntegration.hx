@@ -3,13 +3,6 @@
 
 package meta;
 
-#if sys
-import haxe.Http;
-import haxe.io.Path;
-import sys.FileSystem;
-import sys.io.File;
-#end
-
 class ArtemisIntegration {
     private static inline var ArtemisAPIUrlDirectoryName:String = "Artemis";
     private static inline var ArtemisAPIUrlFile:String = "./webserver.txt";
