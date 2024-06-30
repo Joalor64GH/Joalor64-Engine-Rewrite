@@ -841,7 +841,7 @@ class GameplaySubState extends BaseOptionsMenu
 		windowBar.antialiasing = false;
 		insert(members.indexOf(descBox) - 1, windowBar);
 
-		changeOption('Sick Hit Window:');
+		onChangeHitWindow();
 	}
 
 	override function changeSelection(change:Int = 0) {
