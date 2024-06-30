@@ -1,8 +1,6 @@
 package meta.state;
 
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
-
 import objects.shaders.*;
 
 typedef TitleData = 

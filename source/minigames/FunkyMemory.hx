@@ -8,7 +8,7 @@ import flixel.input.mouse.FlxMouseEvent;
 
 class FunkyMemory extends MusicBeatState
 {
-	static inline final READY = "Ready to play";
+	static inline final READY = "Pick a card to start.";
 
 	private var NUMBER_OF_CARDS:Int = 24;
 	private var CARDS_PER_ROW:Int = 8;
@@ -24,13 +24,15 @@ class FunkyMemory extends MusicBeatState
 	{
 		super.create();
 
+		FlxG.mouse.visible = true;
         FlxG.sound.playMusic(Paths.music('breakfast'));
 
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('stages/stage/stageback'));
+        bg.screenCenter();
+        add(bg);
+
 		for (i in 0...NUMBER_OF_CARDS)
-		{
 			cards.push(Math.floor(i / 2) + 1);
-		}
-		trace("My cards: " + cards);
 
 		var i:Int = NUMBER_OF_CARDS;
 		var swap:Int, tmp:Int;
@@ -41,7 +43,6 @@ class FunkyMemory extends MusicBeatState
 			cards[i] = cards[swap];
 			cards[swap] = tmp;
 		}
-		trace("My shuffled cards: " + cards);
 
 		for (i in 0...NUMBER_OF_CARDS)
 		{
@@ -68,21 +69,22 @@ class FunkyMemory extends MusicBeatState
 	{
 		super.update(elapsed);
 
-		if (((FlxG.mouse.justPressed) && (canResetGame)) || (controls.RESET))
+		if ((FlxG.mouse.justPressed && canResetGame) || controls.RESET)
 		{
 			MusicBeatState.resetState();
 		}
 
         if (controls.BACK)
         {
+			FlxG.mouse.visible = false;
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
             MusicBeatState.switchState(new MinigamesState());
-            FlxG.sound.playMusic(Paths.music('freakyMenu'));
         }
 	}
 
 	private function onMouseDown(picked:Card)
 	{
-		statusText.text = "You picked a " + minigames.C.color[picked.index] + " card";
+		statusText.text = "You picked a " + minigames.C.color[picked.index] + " card.";
 
 		if (canPick)
 		{
@@ -97,7 +99,7 @@ class FunkyMemory extends MusicBeatState
 				canPick = false;
 				if (pickedCards[0].index == pickedCards[1].index)
 				{
-					statusText.text = "Cards match!!!!";
+					statusText.text = "Cards match!";
 					FlxMouseEvent.remove(pickedCards[0]);
 					FlxMouseEvent.remove(pickedCards[1]);
 					canPick = true;
@@ -116,7 +118,7 @@ class FunkyMemory extends MusicBeatState
 				else
 				{
                     FlxG.sound.play(Paths.sound('cancelMenu'));
-					statusText.text = "Cards do not match";
+					statusText.text = "Oops! Cards don't match!";
 
 					Timer.delay(function()
 					{

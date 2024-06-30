@@ -3,8 +3,6 @@ package meta.data.options;
 import objects.shaders.*;
 import objects.userinterface.menu.*;
 
-import flixel.ui.FlxButton;
-
 class ControlsSubState extends MusicBeatSubstate {
 	private static var curSelected:Int = 1;
 	private static var curAlt:Bool = false;
@@ -644,7 +642,7 @@ class GameplaySubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Noteskin:',
-			"What should your notes look like?",
+			"What should your notes look like?\n(NOT ACTUALLY IMPLEMENTED FOR SOME REASON!!)",
 			'noteSkin',
 			'string',
 			'Default',
@@ -835,6 +833,15 @@ class GameplaySubState extends BaseOptionsMenu
 		addOption(option);
 
 		super();
+
+		windowBar = new FlxSprite((FlxG.width / 4) * 3 - 40, FlxG.height / 4 - 100).makeGraphic(80, 220, 0x00ffffff);
+		windowBar.visible = false;
+		windowBar.setGraphicSize(80, 440);
+		windowBar.updateHitbox();
+		windowBar.antialiasing = false;
+		insert(members.indexOf(descBox) - 1, windowBar);
+
+		changeOption('Sick Hit Window:');
 	}
 
 	override function changeSelection(change:Int = 0) {

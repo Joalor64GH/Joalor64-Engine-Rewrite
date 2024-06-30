@@ -110,7 +110,7 @@ class Localization
 
         var languageData:Dynamic = loadLanguageData(newLanguage);
 
-         if (languageData != null) {
+        if (languageData != null) {
             trace("yay! successfully loaded data for: " + newLanguage);
             currentLanguage = newLanguage;
             data.set(newLanguage, languageData);

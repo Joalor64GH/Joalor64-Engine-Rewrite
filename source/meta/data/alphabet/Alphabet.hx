@@ -28,6 +28,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 	public var targetX:Float = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
+	public var disableX:Bool = false;
 	public var yMult:Float = 120;
 	public var xAdd:Float = 0;
 	public var yAdd:Float = 0;
@@ -46,6 +47,8 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 	public var colorEffect(default, set):Null<Float> = 0.1;
 
 	public static var alphabet:Alphabet = null;
+
+	public var xTo:Int = 100;
 
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true, image:String = 'alphabet')
 	{
@@ -196,6 +199,8 @@ class Alphabet extends FlxTypedSpriteGroup<AlphaCharacter>
 						x = FlxMath.lerp((targetY * distancePerItem.x) + startPosition.x, x, lerpVal);
 					if(changeY)
 						y = FlxMath.lerp((targetY * 1.3 * distancePerItem.y) + startPosition.y, y, lerpVal);
+
+					x = (!disableX) ? FlxMath.lerp(x, (targetY * 20) + 90, elapsed * 6) : FlxMath.lerp(x, xTo, elapsed * 6);
 			}
 			
 			if (isMenuItemCentered)

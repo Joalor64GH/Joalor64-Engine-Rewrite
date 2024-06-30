@@ -19,7 +19,7 @@ class FPS extends TextField
 
 		addEventListener(openfl.events.Event.ENTER_FRAME, (_) ->
 		{
-			final now:Float = haxe.Timer.stamp() * 1000;
+			final now:Float = Timer.stamp() * 1000;
 			times.push(now);
 			while (times[0] < now - 1000) times.shift();
 
