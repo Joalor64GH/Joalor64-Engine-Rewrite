@@ -1,7 +1,6 @@
 package minigames;
 
 import minigames.Card;
-import minigames.C;
 
 #if (flixel >= "5.0.0")
 import flixel.input.mouse.FlxMouseEvent;
@@ -83,7 +82,7 @@ class FunkyMemory extends MusicBeatState
 
 	private function onMouseDown(picked:Card)
 	{
-		statusText.text = "You picked a " + C.color[picked.index] + " card";
+		statusText.text = "You picked a " + minigames.C.color[picked.index] + " card";
 
 		if (canPick)
 		{
