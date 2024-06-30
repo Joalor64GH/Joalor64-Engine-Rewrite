@@ -3,20 +3,20 @@ package minigames;
 class C
 {
 	static inline final BLACK = "black";
-	static inline final TANK = "tank";
-	static inline final FACE = "face";
-	static inline final PIXBF = "pixbf";
-	static inline final MM = "mm";
-	static inline final SPOOKY = "spooky";
-	static inline final JPG = "jpg";
-	static inline final PICO = "pico";
-	static inline final DD = "dd";
-	static inline final LEMON = "lemon";
-	static inline final BF = "bf";
-	static inline final GF = "gf";
-	static inline final BEHIND = "behind";
+	static inline final GREY = "grey";
+	static inline final WHITE = "white";
+	static inline final OCEAN = "ocean";
+	static inline final PINK = "pink";
+	static inline final BROWN = "brown";
+	static inline final GREEN = "green";
+	static inline final ORANGE = "orange";
+	static inline final PURPLE = "purple";
+	static inline final YELLOW = "yellow";
+	static inline final BLUE = "blue";
+	static inline final RED = "red";
+	static inline final BACK = "back";
 
 	static public final color:Array<String> = [
-		BEHIND, GF, BF, LEMON, DD, PICO, JPG, SPOOKY, MM, PIXBF, FACE, TANK, BLACK
+		BACK, RED, BLUE, YELLOW, PURPLE, ORANGE, GREEN, BROWN, PINK, OCEAN, WHITE, GREY, BLACK
 	];
 }
