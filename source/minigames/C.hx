@@ -14,9 +14,9 @@ class C
 	static inline final LEMON = "lemon";
 	static inline final BF = "bf";
 	static inline final GF = "gf";
-	static inline final BACK = "back";
+	static inline final BEHIND = "behind";
 
 	static public final color:Array<String> = [
-		BACK, GF, BF, LEMON, DD, PICO, JPG, SPOOKY, MM, PIXBF, FACE, TANK, BLACK
+		BEHIND, GF, BF, LEMON, DD, PICO, JPG, SPOOKY, MM, PIXBF, FACE, TANK, BLACK
 	];
 }
