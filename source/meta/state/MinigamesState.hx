@@ -9,9 +9,9 @@ class MinigamesState extends MusicBeatState
 	var controlStrings:Array<Minigame> = [
 		new Minigame('GET OUT OF MY HEAD', 'the pain never stops\n(Amogus)', 'mgicons/sus'),
 		new Minigame('.jpegs are funny', "they are and you can't tell me otherwise\n(Compression)", 'mgicons/pico'),
-		new Minigame('Kill BF', 'lmao\n(Point & Click)', 'mgicons/killBf')
+		new Minigame('Kill BF', 'lmao\n(Point & Click)', 'mgicons/killBf'),
+		new Minigame('Funky Memory', 'Do you remember?\n(Point & Click)', 'mgicons/card')
 		// soon...
-		// new Minigame('Funky Memory', 'Do you remember?\n(Point & Click)', 'mgicons/card')
 		// new Minigame("Joalor64's Special", 'It\'s me!\n(Melodic Circuit)', 'mgicons/me')
 	];
 
@@ -88,8 +88,8 @@ class MinigamesState extends MusicBeatState
 					LoadingState.loadAndSwitchState(new PlayState());
 				case 2:
 					MusicBeatState.switchState(new minigames.KillBF());
-				/* case 3:
-					MusicBeatState.switchState(new minigames.CardGame()); */
+				case 3:
+					MusicBeatState.switchState(new minigames.FunkyMemory());
 			}
 		}
 	}
