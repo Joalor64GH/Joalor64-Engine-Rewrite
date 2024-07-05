@@ -23,8 +23,6 @@ class CreditsState extends MusicBeatState
 
 	var noLink:Bool;
 
-	var keoikiStr:String = ""; // funny
-
 	override function create()
 	{
 		#if desktop
@@ -49,8 +47,7 @@ class CreditsState extends MusicBeatState
 		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
 
-		keoikiStr = (FlxG.random.bool(30)) ? 'keoiki2' : 'keoiki';
-
+		var keoikiStr:String = (FlxG.random.bool(30)) ? 'keoiki2' : 'keoiki'; // funny
 		var pisspoop:Array<Array<String>> = [
 			// name, icon, description, link, color, sound
 			['Joalor64 Engine Team'],

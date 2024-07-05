@@ -78,7 +78,6 @@ You can check planned/upcoming features [here](/TODO).
 
 ### Former Members
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
-* [Yoshubs](https://gamebanana.com/members/1908070) - Ex-Programmer
 
 ### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform

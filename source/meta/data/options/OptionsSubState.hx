@@ -834,7 +834,7 @@ class GameplaySubState extends BaseOptionsMenu
 
 		super();
 
-		windowBar = new FlxSprite((FlxG.width / 4) * 3 - 40, FlxG.height / 4 - 100).makeGraphic(80, 220, 0x00ffffff);
+		windowBar = new FlxSprite((FlxG.width / 4) * 3 + 150, FlxG.height / 4 - 100).makeGraphic(80, 220, 0x00ffffff);
 		windowBar.visible = false;
 		windowBar.setGraphicSize(80, 440);
 		windowBar.updateHitbox();

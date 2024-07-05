@@ -76,10 +76,17 @@ class LanguageState extends MusicBeatState
             coolGrp.add(label);
 
             var icon:AttachedSprite = new AttachedSprite();
-            icon.frames = Paths.getSparrowAtlas('flags/' + langStrings[i].code);
-            icon.animation.addByPrefix('idle', langStrings[i].code, 24);
-            icon.animation.play('idle');
-            icon.xAdd = -icon.width - 10;
+			try {
+            	icon.frames = Paths.getSparrowAtlas('flags/' + langStrings[i].code);
+            	icon.animation.addByPrefix('idle', langStrings[i].code, 24);
+            	icon.animation.play('idle');
+			} catch (e) {
+				trace('oops! flag returned null!');
+				icon.frames = Paths.getSparrowAtlas('flags/null');
+            	icon.animation.addByPrefix('idle', 'flag_base', 24);
+            	icon.animation.play('idle');
+			}
+			icon.xAdd = -icon.width - 10;
             icon.sprTracker = label;
             iconArray.push(icon);
             add(icon);

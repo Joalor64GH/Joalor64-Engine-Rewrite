@@ -3,22 +3,26 @@ package meta.substate;
 import flixel.addons.ui.FlxUIInputText;
 
 /**
+ * A simple password prompt meant to be used in mods.
  * @author bbpanzu
  * @see https://github.com/bbpanzu/vswhitty-public
  */
 
-class PasswordPrompt extends meta.MusicBeatSubstate
+class PasswordPrompt extends FlxSubState
 {
+	var callback:Void->Void = null;
 	var input:FlxUIInputText;
 
-	public function new() 
+	public function new(callback:Void->Void = null) 
 	{
 		super();
+
+		this.callback = callback;
 
 		var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(1280, 400, FlxColor.BLACK);
 		black.screenCenter();
 
-		var txt:FlxText = new FlxText(0, 0, 0, "Enter Password", 32);
+		var txt:FlxText = new FlxText(0, 0, 0, 'Enter Password', 32);
 		txt.screenCenter();
 		input = new FlxUIInputText(10, 10, FlxG.width, '', 8);
 		input.setFormat(Paths.font("vcr.ttf"), 96, FlxColor.WHITE, FlxTextAlign.CENTER);
@@ -42,7 +46,8 @@ class PasswordPrompt extends meta.MusicBeatSubstate
 		super.update(elapsed);
 		input.hasFocus = true;
 
-		if (controls.ACCEPT) { // add custom functions here
+		if (controls.ACCEPT) {
+			if (callback != null) callback();
 			FlxG.mouse.visible = false;
 			FlxG.state.closeSubState();
 		}

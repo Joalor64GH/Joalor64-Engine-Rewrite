@@ -160,7 +160,6 @@ class PlayState extends MusicBeatState
 		["bad", 0.5, 100, false],
 		["shit", 0, 50, false]
 	];
-
 	public var ratingsData:Array<Rating> = [];
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
@@ -356,9 +355,6 @@ class PlayState extends MusicBeatState
 	public var comboFunction:Void->Void = null;
 	public static var inMini:Bool = false;
 
-	var texty:String = '';
-	var dialogueLangSuffix:String = '';
-
 	public static var gainedCredit:Int = 0;
 
 	public static function truncateFloat(number:Float, precision:Int):Float
@@ -371,8 +367,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		dialogueLangSuffix = (ClientPrefs.language != 'en') ? '-' + Localization.currentLanguage : '';
-
 		PauseSubState.fromPlayState = false;
 
 		if (curStage != 'schoolEvil')
@@ -1369,6 +1363,7 @@ class PlayState extends MusicBeatState
 				tintMap.set('roses', addATint(0.15, FlxColor.fromRGB(90, 20, 10))); 
 		}
 
+		var dialogueLangSuffix:String = (ClientPrefs.language != 'en') ? '-' + Localization.currentLanguage : '';
 		var file:String = Paths.json(songName + '/dialogue' + dialogueLangSuffix); //Checks for json/Psych Engine dialogue
 		if (Assets.exists(file))
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
@@ -1503,12 +1498,9 @@ class PlayState extends MusicBeatState
 		add(botplayTxt);
 		if (ClientPrefs.downScroll)
 			botplayTxt.y = timeBar.y - 78;
-		
-		if (inMini)
-			texty = '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
-		else
-			texty = '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
 
+		var texty:String = (inMini) ? '${SONG.song} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}'
+			: '${SONG.song} ${CoolUtil.difficultyString()} - Joalor64 Engine Rewrite v${MainMenuState.joalor64EngineVersion}';
 		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, texty, 12);
 		versionTxt.scrollFactor.set();
 		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -4818,8 +4810,9 @@ class PlayState extends MusicBeatState
 
 	public function endSong():Void
 	{
+		Application.current.window.title = Application.current.meta.get('name');
+		
 		System.gc();
-
 		ButtplugUtils.stop();
 
 		gainedCredit = FlxG.random.int(1, 100);
