@@ -179,7 +179,7 @@ class Main extends Sprite
 
 		DiscordClient.shutdown();
 
-		Lib.application.window.alert(msg + '\n\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues', 'Error!');
+		Lib.application.window.alert('Uncaught Error: \n' + msg + '\n\nIf you think this shouldn\'t have happened, report this error to GitHub repository! Please? Thanks :)\nhttps://github.com/Joalor64GH/Joalor64-Engine-Rewrite/issues', 'Error!');
 		LimeSystem.exit(1);
 	}
 
