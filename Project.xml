@@ -56,7 +56,7 @@
 	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
 	<assets path="modsList.txt" if="MODS_ALLOWED" />
 
-	<assets path='art/readme.txt' rename='please readme.txt' libary="art"/>
+	<assets path='art/readme.txt' rename='please readme.txt' library="art"/>
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	
 	<!-- [ Libraries ] -->
