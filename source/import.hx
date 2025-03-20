@@ -83,7 +83,6 @@ import objects.userinterface.*;
 import backend.Mods; 
 #end
 import backend.Paths;
-import backend.Localization;
 import backend.animation.PsychAnimationController;
 
 #if LUA_ALLOWED
