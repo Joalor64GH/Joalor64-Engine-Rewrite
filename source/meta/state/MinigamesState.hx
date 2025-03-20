@@ -85,8 +85,6 @@ class MinigamesState extends MusicBeatState
 					LoadingState.loadAndSwitchState(new PlayState());
 				case 2:
 					MusicBeatState.switchState(new minigames.KillBF());
-				case 3:
-					MusicBeatState.switchState(new minigames.FunkyMemory());
 			}
 		}
 	}

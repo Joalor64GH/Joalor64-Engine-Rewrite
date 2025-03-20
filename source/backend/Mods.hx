@@ -18,8 +18,6 @@ class Mods
 	static public var currentModDirectory:String = '';
 
 	public static final ignoreModFolders:Array<String> = [
-		'_append',
-		'locales',
 		'characters',
 		'data',
 		'songs',

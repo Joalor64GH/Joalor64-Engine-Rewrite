@@ -1,4 +1,4 @@
-name: Debug Build
+name: Build
 
 on:
   # push:
@@ -18,17 +18,18 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.3
-      - name: Restore Cache
-        uses: actions/cache@main
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
         with:
-          key: cache-build-linux
           path: |
             .haxelib/
             export/debug/linux/haxe/
             export/debug/linux/obj/
-          restore-keys: |
-            cache-build-linux
-      - name: Install Haxelib
+          key: cache-build-linux
+
+      - name: Installing Libraries
         run: |
           sudo apt-get update
           sudo apt-get install gcc-multilib g++-multilib haxe -y
@@ -36,22 +37,23 @@ jobs:
           sudo apt-get install libvlccore-dev
           sudo apt-get install vlc-bin
           sudo apt-get -y install libidn12
-          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+          haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+      
       - name: Rebuild extension-webm
         run: |
           haxelib run lime rebuild extension-webm linux
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
+
       - name: Compile
-        run: haxelib run lime build linux -debug
-      - name: Tar files
-        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/linux/bin
-      - name: Publish Artifact
-        uses: actions/upload-artifact@main
+        run: haxelib run lime build linux
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
         with:
-          name: linuxBuild
-          path: Joalor64EngineRE.tar.gz
-      - name: Uploading new cache
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-windows-debug');
+
+      - name: Save Current Cache
         uses: actions/cache@main
         with:
           key: cache-build-linux
@@ -61,7 +63,15 @@ jobs:
             export/debug/linux/obj/
           restore-keys: |
             cache-build-linux
-  buildWindows64:
+
+      - name: Tar files
+        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/linux/bin
+      - name: Publish Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: linuxBuild
+          path: Joalor64EngineRE.tar.gz
+  buildWindows:
     runs-on: windows-latest
 
     steps:
@@ -70,32 +80,40 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.3
-      - name: Restore Cache
-        uses: actions/cache@main
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
         with:
-          key: cache-build-windows
           path: |
             .haxelib/
             export/debug/windows/haxe/
             export/debug/windows/obj/
-          restore-keys: |
-            cache-build-windows
-      - name: Install Haxelib
-        run: |
-          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+          key: cache-build-windows
+
+      - name: Set Cache Status
+        id: cache-status
+        run: echo CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }} | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
+        shell: powershell
+
+      - name: Installing Libraries
+        run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
       - name: Rebuild extension-webm
         run: |
           haxelib run lime rebuild extension-webm windows
+
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
+
       - name: Compile
-        run: haxelib run lime build windows -debug
-      - name: Publish Artifact
-        uses: actions/upload-artifact@main
+        run: haxelib run lime build windows
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
         with:
-          name: windows64Build
-          path: export/debug/windows/bin
-      - name: Uploading new cache
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-build-windows');
+
+      - name: Save Current Cache
         uses: actions/cache@main
         with:
           key: cache-build-windows
@@ -105,8 +123,14 @@ jobs:
             export/debug/windows/obj/
           restore-keys: |
             cache-build-windows
-  buildMacOS:
-    runs-on: macos-12
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: windowsBuild
+          path: export/debug/windows/bin
+  buildMac:
+    runs-on: macos-13
 
     steps:
       - uses: actions/checkout@main
@@ -114,34 +138,35 @@ jobs:
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.3.3
-      - name: Restore Cache
-        uses: actions/cache@main
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
         with:
-          key: cache-build-mac
           path: |
             .haxelib/
             export/debug/macos/haxe/
             export/debug/macos/obj/
-          restore-keys: |
-            cache-build-mac
-      - name: Install Haxelib
-        run: |
-          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
+          key: cache-build-mac
+
+      - name: Installing Libraries
+        run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+
       - name: Rebuild extension-webm
         run: |
           haxelib run lime rebuild extension-webm mac
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
+
       - name: Compile
-        run: haxelib run lime build mac -debug
-      - name: Tar files
-        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/macos/bin
-      - name: Publish Artifact
-        uses: actions/upload-artifact@main
+        run: haxelib run lime build mac
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
         with:
-          name: macOSBuild
-          path: Joalor64EngineRE.tar.gz
-      - name: Uploading new cache
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-build-windows');
+
+      - name: Save Current Cache
         uses: actions/cache@main
         with:
           key: cache-build-mac
@@ -151,3 +176,11 @@ jobs:
             export/debug/macos/obj/
           restore-keys: |
             cache-build-mac
+
+      - name: Tar files
+        run: tar -zcvf Joalor64EngineRE.tar.gz export/debug/macos/bin
+      - name: Publish Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: macBuild
+          path: Joalor64EngineRE.tar.gz

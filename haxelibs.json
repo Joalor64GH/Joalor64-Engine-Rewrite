@@ -1,20 +1,94 @@
 {
-    "dependencies": [
-      {"name": "lime", "type": "haxelib"},
-      {"name": "openfl", "type": "haxelib"},
-      {"name": "flixel", "type": "haxelib"},
-      {"name": "flixel-addons", "type": "git", "dir": null, "ref": "dev", "url": "https://github.com/HaxeFlixel/flixel-addons"},
-      {"name": "flixel-ui", "type": "haxelib"},
-      {"name": "hxcpp", "type": "haxelib"},
-      {"name": "hxcpp-debug-server", "type": "haxelib"},
-      {"name": "hscript", "type": "haxelib"},
-      {"name": "hscript-ex", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/ianharrigan/hscript-ex"},
-      {"name": "extension-webm", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/KadeDev/extension-webm"},
-      {"name": "hxCodec", "type": "git", "dir": null, "ref": "main", "url": "https://github.com/polybiusproxy/hxCodec"},
-      {"name": "fnf-modcharting-tools", "type": "git", "dir": null, "ref": "main", "url": "https://github.com/TheZoroForce240/FNF-Modcharting-Tools"},
-      {"name": "linc_luajit", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/nebulazorua/linc_luajit"},
-      {"name": "SScript-Latest", "type": "git", "dir": null, "ref": "testing", "url": "https://github.com/Joalor64GH/SScript-Latest"},
-      {"name": "linc_discord-rpc", "type": "git", "dir": null, "ref": "master", "url": "https://github.com/Aidan63/linc_discord-rpc"},
-      {"name": "parallaxlt", "type": "haxelib", "version": "0.0.0"}
-    ]
-  }
+  "dependencies": [
+    {
+      "name": "lime",
+      "type": "haxelib"
+    },
+    {
+      "name": "openfl",
+      "type": "haxelib"
+    },
+    {
+      "name": "flixel",
+      "type": "haxelib"
+    },
+    {
+      "name": "flixel-addons",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/HaxeFlixel/flixel-addons"
+    },
+    {
+      "name": "flixel-ui",
+      "type": "haxelib"
+    },
+    {
+      "name": "hxcpp",
+      "type": "haxelib"
+    },
+    {
+      "name": "hxcpp-debug-server",
+      "type": "haxelib"
+    },
+    {
+      "name": "hscript",
+      "type": "haxelib",
+      "version": "2.5.0"
+    },
+    {
+      "name": "hscript-ex",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/ianharrigan/hscript-ex"
+    },
+    {
+      "name": "extension-webm",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/KadeDev/extension-webm"
+    },
+    {
+      "name": "hxCodec",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/polybiusproxy/hxCodec"
+    },
+    {
+      "name": "fnf-modcharting-tools",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/TheZoroForce240/FNF-Modcharting-Tools"
+    },
+    {
+      "name": "linc_luajit",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/nebulazorua/linc_luajit"
+    },
+    {
+      "name": "SScript-Latest",
+      "type": "git",
+      "dir": null,
+      "ref": "testing",
+      "url": "https://github.com/Joalor64GH/SScript-Latest"
+    },
+    {
+      "name": "linc_discord-rpc",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/Aidan63/linc_discord-rpc"
+    },
+    {
+      "name": "parallaxlt",
+      "type": "haxelib",
+      "version": "0.0.0"
+    }
+  ]
+}

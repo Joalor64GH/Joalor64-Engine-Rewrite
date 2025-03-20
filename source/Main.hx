@@ -70,7 +70,6 @@ class Main extends Sprite
 			cpp.NativeGc.run(true);
 			cpp.NativeGc.enable(true);
 			#end
-			FlxG.bitmap.dumpCache();
 			FlxG.bitmap.clearUnused();
 			Paths.clearStoredMemory();
 			System.gc();

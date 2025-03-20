@@ -227,7 +227,7 @@ class ModsSetupState extends MusicBeatState
         "shaders" => [],
         "videos" => [],
         "sounds" => [],
-        "images" => ["achievements", "characters", "credits", "dialogue", "flags", "icons", "mainmenu", "menubackgrounds", "menucharacters", "menudifficulties", "storymenu"],
+        "images" => ["achievements", "characters", "credits", "dialogue", "icons", "mainmenu", "menubackgrounds", "menucharacters", "menudifficulties", "storymenu"],
         "music" => [],
         "fonts" => [],
         "data" => [],
@@ -236,9 +236,7 @@ class ModsSetupState extends MusicBeatState
         "songs" => [],
         "characters" => [],
         "notetypes" => [],
-        "events" => [],
-        "locales" => ["images", "sounds"],
-        "_append" => ["data"]
+        "events" => []
     ];
 
     public static function setupModFolder(name:String)

@@ -10,7 +10,7 @@ class FlashingState extends MusicBeatState
 	{
 		super.create();
 
-		bg = new FlxSprite().loadGraphic(Localization.getLocalizedImage('warning', ClientPrefs.language));
+		bg = new FlxSprite().loadGraphic(Paths.image('warning'));
 		add(bg);
 	}
 
