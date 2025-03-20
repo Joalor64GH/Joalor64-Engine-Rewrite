@@ -27,7 +27,6 @@
 		<define name="HSCRIPT_ALLOWED" />
 		<define name="SCRIPT_EXTENSION" />
 		<define name="WEBM_ALLOWED" />
-		<define name="FLASH_MOVIE" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
 	<define name="PSYCH" /> <!-- For the fnf-modcharting-tools library -->
@@ -49,9 +48,12 @@
 	<assets path="assets" exclude="*.fla|*.ogg|*.wav" if="web" /> 
 	<assets path="assets" exclude="*.fla|*.mp3|*.mp4|*.wav" unless="web" />
 	<assets path="assets/artemis" library="artemis" if="windows"/>
-	<assets path="assets/videos"  library="videos"  if="VIDEOS_ALLOWED || WEBM_ALLOWED || FLASH_MOVIE"/>
+	<assets path="assets/videos"  library="videos"  if="VIDEOS_ALLOWED || WEBM_ALLOWED"/>
 
-	<!-- <library path="assets/videos/movie.swf" preload="true" id="movieid"/> --> <!-- template for swf -->
+	<section if="desktop">
+		<assets path="alsoft.ini" if="windows" />
+		<assets path="alsoft.ini" rename="alsoft.conf" unless="windows" />
+	</section>
 
 	<assets path="mods" embed="false" type="template" if="MODS_ALLOWED" />
 	<assets path="modsList.txt" if="MODS_ALLOWED" />
@@ -61,14 +63,11 @@
 	
 	<!-- [ Libraries ] -->
 
-	<haxedev set='webgl' />
-
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
 
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED" />
-	<haxelib name="hscript-ex" />
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
 	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION" />
@@ -100,6 +99,7 @@
 	<haxedef name="HXCPP_STACK_TRACE" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
 
+	<haxedef name="analyzer-optimize" />
 	<haxedef name="no-deprecation-warnings" />
 	<haxedef name="message.reporting" value="pretty" />
 

@@ -35,10 +35,6 @@ import meta.video.VideoSubState;
 import meta.video.WebmHandler;
 #end
 
-#if FLASH_MOVIE
-import meta.video.SwfVideo;
-#end
-
 #if HSCRIPT_ALLOWED
 import hscript.*;
 #end
@@ -1363,12 +1359,11 @@ class PlayState extends MusicBeatState
 				tintMap.set('roses', addATint(0.15, FlxColor.fromRGB(90, 20, 10))); 
 		}
 
-		var dialogueLangSuffix:String = (ClientPrefs.language != 'en') ? '-' + Localization.currentLanguage : '';
-		var file:String = Paths.json(songName + '/dialogue' + dialogueLangSuffix); //Checks for json/Psych Engine dialogue
+		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
 		if (Assets.exists(file))
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
 
-		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue' + dialogueLangSuffix); //Checks for vanilla/Senpai dialogue
+		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
 		if (Assets.exists(file))
 			dialogue = CoolUtil.coolTextFile(file);
 
@@ -2240,32 +2235,6 @@ class PlayState extends MusicBeatState
 		}
 
 		startAndEnd();
-	}
-	public function startMovie(name:String, sound:String) // I fixed it joalor
-	{
-		#if FLASH_MOVIE
-		inCutscene = true;
-
-		var filepath:String = Paths.flashMovie(name);
-		#if sys
-		if(!FileSystem.exists(filepath))
-		#else
-		if(!Assets.exists(filepath))
-		#end
-		{
-			FlxG.log.warn('Couldnt find swf file: ' + name);
-			startAndEnd();
-			return;
-		}
-		var video:SwfVideo = new SwfVideo(filepath, sound, function() {
-			startAndEnd();
-			return;
-		});
-		#else
-		FlxG.log.warn('Platform not supported!');
-		startAndEnd();
-		return;
-		#end
 	}
 
 	inline function startAndEnd(){

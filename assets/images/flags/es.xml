@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="es.png">
-	<!-- Created with Adobe Animate version 22.0.5.191 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="es0000" x="0" y="0" width="90" height="65" frameX="0" frameY="0" frameWidth="91" frameHeight="65"/>
-	<SubTexture name="es0001" x="0" y="0" width="90" height="65" frameX="0" frameY="0" frameWidth="91" frameHeight="65"/>
-	<SubTexture name="es0002" x="95" y="0" width="91" height="65"/>
-	<SubTexture name="es0003" x="95" y="0" width="91" height="65"/>
-</TextureAtlas>

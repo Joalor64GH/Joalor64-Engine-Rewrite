@@ -32,13 +32,11 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Minigames
 * Results Screen
 * RGB Note Coloring
-* Localization Support
 * Latin Alphabet Support
 * JSONI8 Sprite Support
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
-* SWF Support (Actionscript 3.0 Only)
 * HX and Hscript Support
 * Replay System
 * Reorganized Source/Assets

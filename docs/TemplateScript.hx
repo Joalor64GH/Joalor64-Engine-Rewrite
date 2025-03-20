@@ -1,1 +1,4 @@
-// placeholder until i actually make a template
+/*
+ * THERE IS NOTHING HERE YET, BUT THE HSCRIPT SYSTEM WILL BE UPDATED
+ * EXPECT SOMETHING SOON!
+ */

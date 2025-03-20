@@ -12,9 +12,6 @@ import meta.data.scripts.FunkinLua;
 #elseif (hxvlc) import hxvlc.flixel.FlxVideo as MP4Handler;
 #end
 #end
-#if FLASH_MOVIE
-import meta.video.SwfVideo;
-#end
 import flixel.system.macros.FlxMacroUtil;
 import openfl.text.TextFormat;
 import flixel.system.FlxAssets.FlxShader;
@@ -201,9 +198,6 @@ class FunkinHscript extends InterpEx {
 		#end
         #if VIDEOS_ALLOWED
         variables.set('MP4Handler', MP4Handler);
-        #end
-		#if FLASH_MOVIE
-        variables.set('SwfVideo', SwfVideo);
         #end
 
         //VARIABLES

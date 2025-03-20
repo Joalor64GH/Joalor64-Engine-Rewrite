@@ -277,14 +277,6 @@ class Paths
 	static public function webmSound(key:String)
 		return getPath('videos/$key.ogg');
 
-	static public function flashMovie(key:String)
-	{
-		#if MODS_ALLOWED
-		if (FileSystem.exists(modsFlashMovie(key))) return modsFlashMovie(key);
-		#end
-		return getPath('videos/$key.swf');
-	}
-
 	static public function sound(key:String):Sound
 		return returnSound('sounds', key);
 
@@ -566,9 +558,6 @@ class Paths
 	
 	inline static public function modsWebmSound(key:String)
 		return modFolders('videos/$key.ogg');
-
-	inline static public function modsFlashMovie(key:String)
-		return modFolders('videos/$key.swf');
 
 	inline static public function modsSounds(path:String, key:String)
 		return modFolders('$path/$key.$SOUND_EXT');

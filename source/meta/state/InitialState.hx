@@ -80,9 +80,6 @@ class InitialState extends FlxState
 
 	function loadEverything()	
 	{
-		Localization.loadLanguages();
-		Localization.switchLanguage(ClientPrefs.language);
-		
 		#if html5
 		Paths.initPaths();
 		#end

@@ -1,5 +1,9 @@
 package;
 
+#if desktop
+import backend.ALSoftConfig;
+#end
+
 import system.GameDimensions;
 import meta.ButtplugUtils;
 import macros.MacroUtil;
@@ -163,13 +167,12 @@ class Main extends Sprite
 		}
 		catch (e:Dynamic)
 		{
-			LimeLogger.println("Error!\nClouldn't save the crash dump because:\n" + e);
+			LimeLogger.println("Error!\nCouldn't save the crash dump because:\n" + e);
 		}
 		#end
 
 		LimeLogger.println(msg);
 
-		FlxG.bitmap.dumpCache();
 		FlxG.bitmap.clearCache();
 
 		if (FlxG.sound.music != null)

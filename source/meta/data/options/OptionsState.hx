@@ -7,8 +7,7 @@ class OptionsState extends MusicBeatState
 		'Controls', 
 		'Offsets',
 		'Visuals',
-		'Gameplay', 
-		'Language',
+		'Gameplay',
 		'Miscellaneous',
 		'Social Credit Check'
 	];
@@ -28,8 +27,6 @@ class OptionsState extends MusicBeatState
 				openSubState(new OptionsSubState.VisualsSubState());
 			case 'Gameplay':
 				openSubState(new OptionsSubState.GameplaySubState());
-			case 'Language':
-				MusicBeatState.switchState(new LanguageState());
 			case 'Miscellaneous':
 				openSubState(new OptionsSubState.MiscSubState());
 			case 'Social Credit Check':

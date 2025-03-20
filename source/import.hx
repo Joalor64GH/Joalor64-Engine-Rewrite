@@ -91,7 +91,6 @@ import llua.*;
 import llua.Lua;
 #end
 
-using Globals;
 using StringTools;
 using meta.CoolUtil;
 using meta.CoolUtil.MapUtil;

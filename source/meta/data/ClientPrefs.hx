@@ -37,7 +37,6 @@ class ClientPrefs {
 	public static var longBar:Bool = false;
 	public static var floatyLetters:Bool = false;
 	public static var songDisplay:String = 'Classic';
-	public static var language:String = 'en';
 	public static var displayMilliseconds:Bool = true;
 	public static var weekendScore:Bool = false;
 	public static var resultsScreen:Bool = true;
@@ -155,7 +154,6 @@ class ClientPrefs {
 		FlxG.save.data.longBar = longBar;
 		FlxG.save.data.floatyLetters = floatyLetters;
 		FlxG.save.data.songDisplay = songDisplay;
-		FlxG.save.data.language = language;
 		FlxG.save.data.displayMilliseconds = displayMilliseconds;
 		FlxG.save.data.weekendScore = weekendScore;
 		FlxG.save.data.resultsScreen = resultsScreen;
@@ -341,8 +339,6 @@ class ClientPrefs {
 			floatyLetters = FlxG.save.data.floatyLetters;
 		if(FlxG.save.data.songDisplay != null)
 			songDisplay = FlxG.save.data.songDisplay;
-		if(FlxG.save.data.language != null)
-			language = FlxG.save.data.language;
 		if(FlxG.save.data.displayMilliseconds != null)
 			displayMilliseconds = FlxG.save.data.displayMilliseconds;
 		if(FlxG.save.data.weekendScore != null)
