@@ -11,12 +11,12 @@ typedef Library = {
     var url:String;
 }
 
-class Libraries {
+class Main {
     public static function main():Void {
         if (!FileSystem.exists('.haxelib'))
             FileSystem.createDirectory('.haxelib');
 
-        final json:Array<Library> = Json.parse(File.getContent('./compileData/haxelibs.json')).dependencies;
+        final json:Array<Library> = Json.parse(File.getContent('./haxelibs.json')).dependencies;
 
         for (lib in json) {
             switch (lib.type) {
