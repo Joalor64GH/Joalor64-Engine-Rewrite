@@ -73,7 +73,6 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Former Engine Members'],
 			['bbpanzu', 'bb', 'Ex-Programmer of Psych Engine', 'https://twitter.com/bbsub3', '3E813A', 'JingleBB'],
-			['Yoshubs', 'none', 'Ex-Programmer of Psych Engine', 'https://gamebanana.com/members/1908070', '888888', ''],
 			[''],
 			['Engine Contributors'],
 			['iFlicky', 'flicky', 'Composer of Psync and Tea Time\nMade the Dialogue Sounds', 'https://twitter.com/flicky_i', '9E29CF', ''],

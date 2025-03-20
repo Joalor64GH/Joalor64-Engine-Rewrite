@@ -13,7 +13,7 @@
 
 	<!-- [ Window Settings ] -->
 	
-	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" /> <!-- All targets -->
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" /> <!-- All targets -->
 	<window if="html5" resizable="true" /> <!-- HTML5 -->
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/> <!-- Desktop -->
 	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" /> <!-- macOS -->

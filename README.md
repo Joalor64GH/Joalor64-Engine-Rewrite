@@ -16,8 +16,6 @@
 
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_itch-io.png?raw=true)](https://joalor64.itch.io/joalor64-engine-rewritten)
 
-  [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_discord.png?raw=true)](https://discord.gg/GnXqAVMFbA)
-
   [![](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/button_wiki.png?raw=true)](https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/wiki)
   
 </div>
@@ -55,7 +53,7 @@ You can check planned/upcoming features [here](/TODO).
 # Credits
 
 ## Joalor64 Engine
-* [Joalor64 YT](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
+* [Joalor64](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
 * [Moxie](https://github.com/moxie-coder) - Additional Programmer
 * [FoxLOID](https://github.com/FoxLOID) - Made the Epic New Logo
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
