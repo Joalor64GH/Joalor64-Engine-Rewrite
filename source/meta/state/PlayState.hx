@@ -35,10 +35,6 @@ import meta.video.VideoSubState;
 import meta.video.WebmHandler;
 #end
 
-#if HSCRIPT_ALLOWED
-import hscript.*;
-#end
-
 import meta.video.*;
 import meta.data.scripts.*;
 import meta.data.scripts.FunkinLua;
@@ -1204,15 +1200,10 @@ class PlayState extends MusicBeatState
 					luaArray.push(new FunkinLua(folder + file));
 				#end
 
-				#if HSCRIPT_ALLOWED
+				/*#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hscript'))
 					addHscript(folder + file);
-				#end
-
-				#if SCRIPT_EXTENSION
-				if(file.toLowerCase().endsWith('.hx'))
-					scriptArray.push(new FunkinSScript(folder + file));
-				#end
+				#end*/
 			}
 		}
 
@@ -1235,7 +1226,7 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(luaFile));
 		#end
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		var hscriptFile:String = 'stages/' + curStage + '.hscript';
 		if(FileSystem.exists(Paths.modFolders(hscriptFile))) {
 			hscriptFile = Paths.modFolders(hscriptFile);
@@ -1249,23 +1240,7 @@ class PlayState extends MusicBeatState
 
 		if(doPush)
 			addHscript(hscriptFile);
-		#end
-
-		#if SCRIPT_EXTENSION
-		var scriptFile:String = 'stages/' + curStage + '.hx';
-		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
-			scriptFile = Paths.modFolders(scriptFile);
-			doPush = true;
-		} else {
-			scriptFile = Paths.getPreloadPath(scriptFile);
-			if(FileSystem.exists(scriptFile)) {
-				doPush = true;
-			}
-		}
-
-		if(doPush)
-			scriptArray.push(new FunkinSScript(scriptFile));
-		#end
+		#end*/
 		#end
 
 		var gfVersion:String = SONG.gfVersion;
@@ -1567,7 +1542,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		for (notetype in noteTypes)
 		{
 			#if MODS_ALLOWED
@@ -1616,58 +1591,7 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-		#end
-
-		#if SCRIPT_EXTENSION
-		for (notetype in noteTypes)
-		{
-			#if MODS_ALLOWED
-			var hxToLoad:String = Paths.modFolders('notetypes/' + notetype + '.hx');
-			if(FileSystem.exists(hxToLoad))
-			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
-			}
-			else
-			{
-				hxToLoad = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
-				if(FileSystem.exists(hxToLoad))
-				{
-					scriptArray.push(new FunkinSScript(hxToLoad));
-				}
-			}
-			#elseif sys
-			var hxToLoad:String = Paths.getPreloadPath('notetypes/' + notetype + '.hx');
-			if(Assets.exists(hxToLoad))
-			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
-			}
-			#end
-		}
-		for (event in eventsPushed)
-		{
-			#if MODS_ALLOWED
-			var hxToLoad:String = Paths.modFolders('events/' + event + '.hx');
-			if(FileSystem.exists(hxToLoad))
-			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
-			}
-			else
-			{
-				hxToLoad = Paths.getPreloadPath('events/' + event + '.hx');
-				if(FileSystem.exists(hxToLoad))
-				{
-					scriptArray.push(new FunkinSScript(hxToLoad));
-				}
-			}
-			#elseif sys
-			var hxToLoad:String = Paths.getPreloadPath('events/' + event + '.hx');
-			if(Assets.exists(hxToLoad))
-			{
-				scriptArray.push(new FunkinSScript(hxToLoad));
-			}
-			#end
-		}
-		#end
+		#end*/
 		noteTypes = null;
 		eventsPushed = null;
 
@@ -1682,15 +1606,10 @@ class PlayState extends MusicBeatState
 					luaArray.push(new FunkinLua(folder + file));
 				#end
 
-				#if HSCRIPT_ALLOWED
+				/*#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hscript'))
 					addHscript(folder + file);
-				#end
-				
-				#if SCRIPT_EXTENSION
-				if(file.toLowerCase().endsWith('.hx'))
-					scriptArray.push(new FunkinSScript(folder + file));
-				#end
+				#end*/
 			}
 		}
 
@@ -1800,10 +1719,6 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		ModchartFuncs.loadLuaFunctions();
-
-		#if HSCRIPT_ALLOWED
-		postSetHscript();
-		#end
 		callOnLuas('onCreatePost', []);
 
 		// no point in these if antialiasing is off
@@ -1998,76 +1913,6 @@ class PlayState extends MusicBeatState
 				}
 		}
 	}
-	#if HSCRIPT_ALLOWED
-	public var hscriptMap:Map<String, FunkinHscript> = new Map();
-	public function addHscript(path:String) {
-		var parser = new ParserEx();
-		try {
-			var program = parser.parseString(Paths.getContent(path));
-			var interp = new FunkinHscript(path);
-
-			interp.execute(program);
-			hscriptMap.set(path, interp);
-			callHscript(path, 'onCreate', []);
-		} catch (e) {
-			trace(e);
-			addTextToDebug('$e');
-			addTextToDebug('Could not load script $path');
-		}
-	}
-
-	function callHscript(name:String, func:String, args:Array<Dynamic>) {
-		if (!hscriptMap.exists(name) || !hscriptMap.get(name).variables.exists(func)) {
-			return FunkinLua.Function_Continue;
-		}
-		var hscript = hscriptMap.get(name);
-		hscript.lastCalledFunction = func;
-		var method = hscript.variables.get(func);
-		var ret:Dynamic = Reflect.callMethod(null, method, args); // allows for infinite args
-
-		if (ret != null && ret != FunkinLua.Function_Continue) {
-			return ret;
-		}
-		return FunkinLua.Function_Continue;
-	}
-
-	function postSetHscript() {
-		setOnHscripts('boyfriend', boyfriend);
-		setOnHscripts('dad', dad);
-		setOnHscripts('gf', gf);
-		setOnHscripts('strumLineNotes', strumLineNotes);
-		setOnHscripts('playerStrums', playerStrums);
-		setOnHscripts('opponentStrums', opponentStrums);
-		setOnHscripts('iconP1', iconP1);
-		setOnHscripts('iconP2', iconP2);
-		setOnHscripts('grpNoteSplashes', grpNoteSplashes);
-		setOnHscripts('scoreTxt', scoreTxt);
-		setOnHscripts('healthBar', healthBar);
-		setOnHscripts('botplayTxt', botplayTxt);
-		setOnHscripts('timeBar', timeBar);
-		setOnHscripts('timeTxt', timeTxt);
-		setOnHscripts('boyfriendGroup', boyfriendGroup);
-		setOnHscripts('dadGroup', dadGroup);
-		setOnHscripts('gfGroup', gfGroup);
-		setOnHscripts('camGame', camGame);
-		setOnHscripts('camHUD', camHUD);
-		setOnHscripts('camOther', camOther);
-		setOnHscripts('camFollow', camFollow);
-		setOnHscripts('camFollowPos', camFollowPos);
-		setOnHscripts('strumLine', strumLine);
-		setOnHscripts('unspawnNotes', unspawnNotes);
-		setOnHscripts('eventNotes', eventNotes);
-		setOnHscripts('vocals', vocals);
-	}
-	#end
-
-	function setOnHscripts(variable:String, arg:Dynamic) {
-		#if HSCRIPT_ALLOWED
-		for (i in hscriptMap.keys()) {
-			hscriptMap.get(i).variables.set(variable, arg);
-		}
-		#end
-	}
 
 	function startCharacterLua(name:String)
 	{
@@ -2101,7 +1946,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		var doPush:Bool = false;
 		var hscriptFile:String = 'characters/$name.hscript';
 		#if MODS_ALLOWED
@@ -2122,37 +1967,7 @@ class PlayState extends MusicBeatState
 		{
 			addHscript(hscriptFile);
 		}
-		#end
-
-		#if SCRIPT_EXTENSION
-		var doPush:Bool = false;
-		var scriptFile:String = 'characters/' + name + '.hx';
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders(scriptFile))) {
-			scriptFile = Paths.modFolders(scriptFile);
-			doPush = true;
-		} else {
-			scriptFile = Paths.getPreloadPath(scriptFile);
-			if(FileSystem.exists(scriptFile)) {
-				doPush = true;
-			}
-		}
-		#else
-		scriptFile = Paths.getPreloadPath(scriptFile);
-		if(Assets.exists(scriptFile)) {
-			doPush = true;
-		}
-		#end
-
-		if(doPush)
-		{
-			for (script in scriptArray)
-			{
-				if(script.scriptFile == scriptFile) return;
-			}
-			scriptArray.push(new FunkinSScript(scriptFile));
-		}
-		#end
+		#end*/
 	}
 
 	public function getLuaObject(tag:String, text:Bool=true):FlxSprite {
@@ -2737,13 +2552,13 @@ class PlayState extends MusicBeatState
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
-				setOnHscripts('playerStrums', playerStrums);
+				// setOnHscripts('playerStrums', playerStrums);
 			}
 			for (i in 0...opponentStrums.length) {
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				setOnHscripts('opponentStrums', opponentStrums);
-				setOnHscripts('opponentStrums', opponentStrums);
+				// setOnHscripts('opponentStrums', opponentStrums);
 			}
 
 			startedCountdown = true;
@@ -4568,7 +4383,7 @@ class PlayState extends MusicBeatState
 							iconP1.changeIcon(boyfriend.healthIcon);
 						}
 						setOnLuas('boyfriendName', boyfriend.curCharacter);
-						setOnHscripts('boyfriend', boyfriend);
+						// setOnHscripts('boyfriend', boyfriend);
 
 					case 1:
 						if(dad.curCharacter != value2) {
@@ -4591,7 +4406,7 @@ class PlayState extends MusicBeatState
 							iconP2.changeIcon(dad.healthIcon);
 						}
 						setOnLuas('dadName', dad.curCharacter);
-						setOnHscripts('dad', dad);
+						// setOnHscripts('dad', dad);
 
 					case 2:
 						if(gf != null)
@@ -4609,7 +4424,7 @@ class PlayState extends MusicBeatState
 								gf.alpha = lastAlpha;
 							}
 							setOnLuas('gfName', gf.curCharacter);
-							setOnHscripts('gf', gf);
+							// setOnHscripts('gf', gf);
 						}
 				}
 				reloadHealthBarColors();
@@ -6175,7 +5990,7 @@ class PlayState extends MusicBeatState
 		luaArray = [];
 		#end
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		for (i in hscriptMap.keys()) {
 			callHscript(i, 'onDestroy', []);
 			var hscript = hscriptMap.get(i);
@@ -6183,7 +5998,7 @@ class PlayState extends MusicBeatState
 			hscript = null;
 		}
 		hscriptMap.clear();
-		#end
+		#end*/
 
 		#if hscript
 		if (FunkinLua.hscript != null) FunkinLua.hscript = null;
@@ -6535,23 +6350,7 @@ class PlayState extends MusicBeatState
 		callOnLuas('onSectionHit', []);
 	}
 
-	public function callOnScripts(event:String, args:Array<Dynamic>):Void
-	{
-		#if SCRIPT_EXTENSION
-		for (i in scriptArray) i.call(event, args);
-		#end
-	}
-	public function setOnScripts(key:String, value:Dynamic):Void
-	{
-		#if SCRIPT_EXTENSION
-		for (i in scriptArray) i.set(key, value);
-		#end
-	}
-
 	public function callOnLuas(event:String, args:Array<Dynamic>, ?callOnScript:Bool = true, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
-		if (callOnScript)
-			callOnScripts(event, args);
-
 		var returnVal:Dynamic = FunkinLua.Function_Continue;
 		#if LUA_ALLOWED
 		if(exclusions == null) exclusions = [];
@@ -6571,7 +6370,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		for (script in hscriptMap.keys()) {
 			var hscript = hscriptMap.get(script);
 			if(hscript.closed || exclusions.contains(hscript.scriptName))
@@ -6586,7 +6385,7 @@ class PlayState extends MusicBeatState
 		}
 		for (i in achievementsArray)
 		i.call(event, args);
-		#end
+		#end*/
 			
 		return returnVal;
 	}
@@ -6602,9 +6401,9 @@ class PlayState extends MusicBeatState
 		for(i in achievementsArray)
 			i.set(variable, arg);
 
-		#if HSCRIPT_ALLOWED
+		/*#if HSCRIPT_ALLOWED
 		setOnHscripts(variable, arg);
-		#end
+		#end*/
 	}
 
 	function StrumPlayAnim(isDad:Bool, id:Int, time:Float) {

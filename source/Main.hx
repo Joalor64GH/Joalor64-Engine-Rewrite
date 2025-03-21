@@ -70,6 +70,9 @@ class Main extends Sprite
 			cpp.NativeGc.run(true);
 			cpp.NativeGc.enable(true);
 			#end
+			#if (flixel < "6.0.0")
+			FlxG.bitmap.dumpCache();
+			#end
 			FlxG.bitmap.clearUnused();
 			Paths.clearStoredMemory();
 			System.gc();
@@ -172,6 +175,9 @@ class Main extends Sprite
 
 		LimeLogger.println(msg);
 
+		#if (flixel < "6.0.0")
+		FlxG.bitmap.dumpCache();
+		#end
 		FlxG.bitmap.clearCache();
 
 		if (FlxG.sound.music != null)

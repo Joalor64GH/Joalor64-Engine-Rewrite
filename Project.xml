@@ -25,7 +25,6 @@
 		<define name="MODS_ALLOWED" />
 		<define name="LUA_ALLOWED" />
 		<define name="HSCRIPT_ALLOWED" />
-		<define name="SCRIPT_EXTENSION" />
 		<define name="WEBM_ALLOWED" />
 		<define name="CHECK_FOR_UPDATES" />
 	</section>
@@ -67,10 +66,8 @@
 	<haxelib name="flixel-ui" />
 
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED" />
-	<haxelib name="hscript-ex" />
 	<haxelib name="fnf-modcharting-tools" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
-	<haxelib name="SScript-Latest" if="SCRIPT_EXTENSION" />
 	
 	<haxelib name="parallaxlt" />
 

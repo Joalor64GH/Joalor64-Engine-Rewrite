@@ -26,7 +26,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 
 ----------------------------------------------
 
-# Features
+## Features
 * Minigames
 * Results Screen
 * RGB Note Coloring
@@ -35,7 +35,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
-* HX and Hscript Support
+* Hscript Support
 * Replay System
 * Reorganized Source/Assets
 * MP4/WebM Video Support
@@ -45,20 +45,20 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 
 And a bunch more that ShadowMario will probably refuse to add.
 
-# Planned Features
+## Planned Features
 You can check planned/upcoming features [here](/TODO).
 
 ----------------------------------------------
 
-# Credits
+## Credits
 
-## Joalor64 Engine
+### Joalor64 Engine
 * [Joalor64](https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg/featured) - Main Programmer + Engine Creator
 * [Moxie](https://github.com/moxie-coder) - Additional Programmer
 * [FoxLOID](https://github.com/FoxLOID) - Made the Epic New Logo
 * [Bot 404](https://www.youtube.com/channel/UC9ntkZ4Nz3AVKrAnderJnOg) - Little Helper
 
-### Special Thanks
+#### Special Thanks
 * [steve-studios](https://github.com/steve-studios) - In-Game Mod Downloader
 * [TheZoroForce240](https://github.com/TheZoroForce240) - Modcharting Tools Haxelib
 * [MAJigsaw77](https://github.com/MAJigsaw77) - ToastCore
@@ -68,19 +68,19 @@ You can check planned/upcoming features [here](/TODO).
 * [Verwex](https://github.com/Verwex) - Mic'd Up Paths System
 * [ActualMandM](https://linktr.ee/ActualMandM) - RGB Note Coloring System
 
-## Psych Engine
+### Psych Engine
 * [ShadowMario](https://github.com/ShadowMario) - Main Programmer
 * [Riveren](https://twitter.com/riverennn) - Main Artist + Animator
 
-### Former Members
+#### Former Members
 * [bbpanzu](https://twitter.com/bbpanzu) - Ex-Programmer
 
-### Special Thanks
+#### Special Thanks
 * [gedehari](https://github.com/gedehari) - Crash Handler and Base code for Chart Editor's Waveform
 * [KadeDev](https://github.com/Kade-github) - Fixed Chart Editor and other PRs + Extension WebM Fork
 * [iFlicky](https://twitter.com/flicky_i) - Composer of Psync and Tea Time + Dialogue Sounds
 * [crowplexus](https://github.com/crowplexus) - Customizable Main Menu via JSON + Credits Sounds + Old Latin Support
-* [TahirKarabekiroglu](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + SScript + Replay System
+* [TahirKarabekiroglu](https://github.com/TahirKarabekiroglu) - Funkin Cocoa Code + Softcoded Achievements + Replay System
 * [EliteMasterEric](https://twitter.com/EliteMasterEric) - Runtime Shaders Support
 * [PolybiusProxy](https://github.com/polybiusproxy) - Creator of hxCodec
 * [Keoiki](https://twitter.com/Keoiki_) - Note Splash Animations + New Latin Support
