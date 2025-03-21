@@ -316,8 +316,6 @@ class PlayState extends MusicBeatState
 	#end
 	public var introSoundsSuffix:String = '';
 
-	public var scriptArray:Array<FunkinSScript> = [];
-
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
 	private var debugKeysCharacter:Array<FlxKey>;
