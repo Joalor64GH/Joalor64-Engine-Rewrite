@@ -2555,7 +2555,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...opponentStrums.length) {
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-				setOnHscripts('opponentStrums', opponentStrums);
+				// setOnHscripts('opponentStrums', opponentStrums);
 				// setOnHscripts('opponentStrums', opponentStrums);
 			}
 
@@ -6389,8 +6389,6 @@ class PlayState extends MusicBeatState
 	}
 
 	public function setOnLuas(variable:String, arg:Dynamic) {
-		setOnScripts(variable, arg);
-		
 		#if LUA_ALLOWED
 		for (i in 0...luaArray.length) {
 			luaArray[i].set(variable, arg);
