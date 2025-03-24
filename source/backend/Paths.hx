@@ -193,7 +193,7 @@ class Paths
 		for (ext in HSCRIPT_EXT)
 			extension = (exists(getPath(key + ext))) ? ext : extension;
 
-		return file(key + extension);
+		return getPath(key + extension);
 	}
 
 	static public function validScriptType(n:String):Bool

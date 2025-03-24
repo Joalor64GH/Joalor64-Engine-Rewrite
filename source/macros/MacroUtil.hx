@@ -55,7 +55,7 @@ class MacroUtil
         return macro $v{haxe.macro.Context.defined(key)};
     }
 
-    static macro function getDefines():haxe.macro.Expr
+    public static macro function getDefines():haxe.macro.Expr
     {
         var defines:Map<String, String> = haxe.macro.Context.getDefines();
         var map:Array<haxe.macro.Expr> = [];
