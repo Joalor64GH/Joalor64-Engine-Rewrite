@@ -250,6 +250,7 @@ class PlayState extends MusicBeatState
 	var gunsNoteTweens:Array<FlxTween> = [];
 
 	// the funny thing is, i am considering adding extra notes
+	// im actually not sure about this now
 	public static var mania(default, set):Int = 3;
 	public static function set_mania(newMania:Int) {
 		mania = newMania;
@@ -315,6 +316,10 @@ class PlayState extends MusicBeatState
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	#end
 	public var introSoundsSuffix:String = '';
+
+	#if HSCRIPT_ALLOWED
+	public var scriptArray:Array<FunkinHscript> = [];
+	#end
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -1198,10 +1203,10 @@ class PlayState extends MusicBeatState
 					luaArray.push(new FunkinLua(folder + file));
 				#end
 
-				/*#if HSCRIPT_ALLOWED
-				if(file.toLowerCase().endsWith('.hscript'))
-					addHscript(folder + file);
-				#end*/
+				#if HSCRIPT_ALLOWED
+				if (Paths.validScriptType(file))
+					scriptArray.push(new FunkinHscript(folder + file));
+				#end
 			}
 		}
 
@@ -1604,11 +1609,17 @@ class PlayState extends MusicBeatState
 					luaArray.push(new FunkinLua(folder + file));
 				#end
 
-				/*#if HSCRIPT_ALLOWED
-				if(file.toLowerCase().endsWith('.hscript'))
-					addHscript(folder + file);
-				#end*/
+				#if HSCRIPT_ALLOWED
+				if (Paths.validScriptType(file))
+					scriptArray.push(new FunkinHscript(folder + file));
+				#end
 			}
+		}
+
+		for (script in scriptArray) {
+			script?.setVariable('addScript', function(path:String) {
+				scriptArray.push(new FunkinHscript(Paths.script(path)));
+			});
 		}
 
 		switch (SONG.song.toLowerCase()) {
@@ -3339,6 +3350,7 @@ class PlayState extends MusicBeatState
 				timer.active = true;
 
 			paused = false;
+			callOnScripts('resume', []);
 			callOnLuas('onResume', []);
 
 			#if desktop
@@ -3364,6 +3376,7 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		callOnScripts('onFocus', []);
 		super.onFocus();
 	}
 
@@ -3374,6 +3387,7 @@ class PlayState extends MusicBeatState
 			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#end
 
+		callOnScripts('onFocusLost', []);
 		super.onFocusLost();
 	}
 
@@ -3402,6 +3416,8 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		callOnScripts('update', [elapsed]);
+
 		if (SONG.song.toLowerCase() == 'guns' && tankmanRainbow)
 			dad.y += (Math.sin(elapsedtime) * 0.2) * FlxG.elapsed * 244;
 
@@ -5988,15 +6004,14 @@ class PlayState extends MusicBeatState
 		luaArray = [];
 		#end
 
-		/*#if HSCRIPT_ALLOWED
-		for (i in hscriptMap.keys()) {
-			callHscript(i, 'onDestroy', []);
-			var hscript = hscriptMap.get(i);
-			hscriptMap.remove(i);
-			hscript = null;
-		}
-		hscriptMap.clear();
-		#end*/
+		#if HSCRIPT_ALLOWED
+		callOnScripts('destroy', []);
+		super.destroy();
+
+		for (script in scriptArray)
+			script?.destroy();
+		scriptArray = [];
+		#end
 
 		#if hscript
 		if (FunkinLua.hscript != null) FunkinLua.hscript = null;
@@ -6011,6 +6026,19 @@ class PlayState extends MusicBeatState
 		instance = null;
 		
 		super.destroy();
+	}
+
+	private function callOnScripts(funcName:String, args:Array<Dynamic>):Dynamic {
+		var value:Dynamic = FunkinHscript.Function_Continue;
+
+		for (i in 0...scriptArray.length) {
+			final call:Dynamic = scriptArray[i].executeFunc(funcName, args);
+			final bool:Bool = call == Hscript.Function_Continue;
+			if (!bool && call != null)
+				value = call;
+		}
+
+		return value;
 	}
 
 	public static function cancelMusicFadeTween() {
@@ -6173,6 +6201,7 @@ class PlayState extends MusicBeatState
 		}
 
 		lastStepHit = curStep;
+		callOnScripts('stepHit', [curStep]);
 
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -6312,6 +6341,8 @@ class PlayState extends MusicBeatState
 			if ((curStage == 'school') && SONG.song.toLowerCase() == 'roses' && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
 				rosesLightningStrike();
 		}
+
+		callOnScripts('beatHit', [curBeat]);
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);

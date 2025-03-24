@@ -71,8 +71,8 @@ class FunkinHscript extends FlxBasic {
 
 		setVariable('importScript', function(source:String) {
 			var name:String = StringTools.replace(source, '.', '/');
-			var script:FunkinHscript = new Hscript(Paths.hx(name), false);
-			script.execute(Paths.hx(name), false);
+			var script:FunkinHscript = new Hscript(Paths.script(name), false);
+			script.execute(Paths.script(name), false);
 			return script.getAll();
 		});
 

@@ -28,6 +28,7 @@ typedef I8frame = {
 class Paths
 {
 	inline public static final SOUND_EXT = #if !web "ogg" #else "mp3" #end;
+	public static var HSCRIPT_EXT:Array<String> = ['.hx', '.hxs', '.hxc', '.hscript'];
 
 	public static function excludeAsset(key:String) {
 		if (!dumpExclusions.contains(key))
@@ -186,11 +187,17 @@ class Paths
 	inline static public function lua(key:String)
 		return getPath('$key.lua');
 
-	inline static public function hscript(key:String)
-		return getPath('$key.hscript');
+	inline static public function script(key:String) {
+		var extension:String = '.hx';
 
-	inline static public function hx(key:String)
-		return getPath('$key.hx');
+		for (ext in HSCRIPT_EXT)
+			extension = (exists(getPath(key + ext))) ? ext : extension;
+
+		return file(key + extension);
+	}
+
+	static public function validScriptType(n:String):Bool
+		return n.endsWith('.hx') || n.endsWith('.hxs') || n.endsWith('.hxc') || n.endsWith('.hscript');
 
 	inline static public function exists(asset:String)
 	{
