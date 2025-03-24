@@ -26,7 +26,7 @@ class FunkinHscript extends FlxBasic {
 		super();
 
 		parser.allowJSON = parser.allowTypes = parser.allowMetadata = true;
-		parser.preprocesorValues = macros.Macros.getDefines();
+		parser.preprocesorValues = macros.MacroUtil.getDefines();
 
 		// Default Variables
 		setVariable('this', this);
@@ -34,7 +34,6 @@ class FunkinHscript extends FlxBasic {
 		setVariable('Function_Stop', Function_Stop);
 		setVariable('Function_Continue', Function_Continue);
 
-		setVariable('platform', PlatformUtil.getPlatform());
 		setVariable('version', Lib.application.meta.get('version'));
 
 		// Default Functions
@@ -71,7 +70,7 @@ class FunkinHscript extends FlxBasic {
 
 		setVariable('importScript', function(source:String) {
 			var name:String = StringTools.replace(source, '.', '/');
-			var script:FunkinHscript = new Hscript(Paths.script(name), false);
+			var script:FunkinHscript = new FunkinHscript(Paths.script(name), false);
 			script.execute(Paths.script(name), false);
 			return script.getAll();
 		});
@@ -122,8 +121,8 @@ class FunkinHscript extends FlxBasic {
 		setVariable('Assets', Assets);
 		setVariable('BitmapData', BitmapData);
 		setVariable('Lib', Lib);
-		setVariable('ShaderFilter', ShaderFilter);
-		setVariable('Sound', Sound);
+		setVariable('ShaderFilter', openfl.filters.ShaderFilter);
+		setVariable('Sound', openfl.media.Sound);
 
 		// Flixel
 		setVariable('FlxAxes', getFlxAxes());

@@ -6033,7 +6033,7 @@ class PlayState extends MusicBeatState
 
 		for (i in 0...scriptArray.length) {
 			final call:Dynamic = scriptArray[i].executeFunc(funcName, args);
-			final bool:Bool = call == Hscript.Function_Continue;
+			final bool:Bool = call == FunkinHscript.Function_Continue;
 			if (!bool && call != null)
 				value = call;
 		}
