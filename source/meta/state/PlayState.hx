@@ -6020,11 +6020,11 @@ class PlayState extends MusicBeatState
 	}
 
 	private function callOnScripts(funcName:String, args:Array<Dynamic>):Dynamic {
-		var value:Dynamic = FunkinHscript.Function_Continue;
+		var value:Dynamic = FunkinHScript.Function_Continue;
 
 		for (i in 0...scriptArray.length) {
 			final call:Dynamic = scriptArray[i].executeFunc(funcName, args);
-			final bool:Bool = call == FunkinHscript.Function_Continue;
+			final bool:Bool = call == FunkinHScript.Function_Continue;
 			if (!bool && call != null)
 				value = call;
 		}

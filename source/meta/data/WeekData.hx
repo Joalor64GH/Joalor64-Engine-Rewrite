@@ -15,7 +15,7 @@ typedef WeekFile =
 	var storyName:String;
 	var weekName:String;
 	var freeplayColor:Array<Int>;
-	// var storyColor:Array<Int>; // wip
+	var storyColor:Array<Int>;
 	var startUnlocked:Bool;
 	var hiddenUntilUnlocked:Bool;
 	var hideStoryMode:Bool;
@@ -36,6 +36,7 @@ class WeekData {
 	public var storyName:String;
 	public var weekName:String;
 	public var freeplayColor:Array<Int>;
+	public var storyColor:Array<Int>;
 	public var startUnlocked:Bool;
 	public var hiddenUntilUnlocked:Bool;
 	public var hideStoryMode:Bool;
@@ -57,6 +58,7 @@ class WeekData {
 			storyName: 'Your New Week',
 			weekName: 'Custom Week',
 			freeplayColor: [135, 131, 158],
+			storyColor: [135, 131, 158],
 			startUnlocked: true,
 			hiddenUntilUnlocked: false,
 			hideStoryMode: false,

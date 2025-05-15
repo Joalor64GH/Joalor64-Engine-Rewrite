@@ -12,7 +12,6 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
-import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import flixel.animation.FlxAnimation;
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
@@ -25,6 +24,13 @@ import lime.system.Clipboard;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
+#end
+
+#if (FLX_DEBUG || flixel < version("5.7.0"))
+typedef PointerGraphic = flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
+#else
+@:bitmap("assets/images/debugger/cursorCross.png")
+class PointerGraphic extends openfl.display.BitmapData {}
 #end
 
 /**
