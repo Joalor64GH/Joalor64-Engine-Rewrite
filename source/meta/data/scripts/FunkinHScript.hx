@@ -2,8 +2,9 @@ package meta.data.scripts;
 
 import hscript.*;
 
-// NEW HSCRIPT SYSTEM!! WORK IN PROGRESS!!
-class FunkinHscript extends FlxBasic {
+// NEW HSCRIPT SYSTEM!! YES!!
+// VERY BASIC ATM, BUT WILL ADD MORE STUFF LATER!!
+class FunkinHScript extends FlxBasic {
 	public var locals(get, set):Map<String, {r:Dynamic}>;
 
 	function get_locals():Map<String, {r:Dynamic}> {

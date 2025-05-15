@@ -249,15 +249,6 @@ class PlayState extends MusicBeatState
 	var stageGraphicArray:Array<FlxSprite> = [];
 	var gunsNoteTweens:Array<FlxTween> = [];
 
-	// the funny thing is, i am considering adding extra notes
-	// im actually not sure about this now
-	public static var mania(default, set):Int = 3;
-	public static function set_mania(newMania:Int) {
-		mania = newMania;
-		if (PlayState.instance == null) return mania;
-		return mania;
-	}
-
 	public var smoothScore:Float = 0;
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -318,7 +309,7 @@ class PlayState extends MusicBeatState
 	public var introSoundsSuffix:String = '';
 
 	#if HSCRIPT_ALLOWED
-	public var scriptArray:Array<FunkinHscript> = [];
+	public var scriptArray:Array<FunkinHScript> = [];
 	#end
 
 	// Debug buttons
@@ -1205,7 +1196,7 @@ class PlayState extends MusicBeatState
 
 				#if HSCRIPT_ALLOWED
 				if (Paths.validScriptType(file))
-					scriptArray.push(new FunkinHscript(folder + file));
+					scriptArray.push(new FunkinHScript(folder + file));
 				#end
 			}
 		}
@@ -1611,14 +1602,14 @@ class PlayState extends MusicBeatState
 
 				#if HSCRIPT_ALLOWED
 				if (Paths.validScriptType(file))
-					scriptArray.push(new FunkinHscript(folder + file));
+					scriptArray.push(new FunkinHScript(folder + file));
 				#end
 			}
 		}
 
 		for (script in scriptArray) {
 			script?.setVariable('addScript', function(path:String) {
-				scriptArray.push(new FunkinHscript(Paths.script(path)));
+				scriptArray.push(new FunkinHScript(Paths.script(path)));
 			});
 		}
 
@@ -6072,7 +6063,7 @@ class PlayState extends MusicBeatState
 				switch (curStep) {
 					case 896:
 						var moveVals:Array<Float> = [40];
-						for (i in 0...(mania * 2) + 1) moveVals.push(40);
+						for (i in 0...6 + 1) moveVals.push(40);
 						function tweenNote(note:StrumNote, delay:Float, id:Int) {
 							gunsNoteTweens[id] = FlxTween.tween(note, {y: strumLine.y + moveVals[id]}, 2 / playbackRate, {
 								ease: FlxEase.sineInOut,

@@ -13,6 +13,7 @@
 	"weekBackground": "limo",
 
 	"storyName": "MOMMY MUST MURDER",
+	"storyColor": [217, 46, 157],
 	"weekBefore": "week3",
 	"weekName": "Week 4",
 	"startUnlocked": true,

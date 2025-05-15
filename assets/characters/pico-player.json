@@ -1,26 +1,37 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				3,
 				0
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "Pico Idle Dance",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "Pico Idle Dance0"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				21,
 				27
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "pico Up note0",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "Pico NOTE UP0"
+		},
+		{
+			"offsets": [
+				28,
+				67
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "Pico NOTE UP miss"
 		},
 		{
 			"loop": false,
@@ -30,30 +41,19 @@
 			],
 			"anim": "singDOWN",
 			"fps": 24,
-			"name": "Pico Down Note0",
+			"name": "Pico NOTE DOWN0",
 			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
 				80,
 				-38
 			],
-			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "Pico Down Note MISS",
-			"indices": []
-		},
-		{
 			"loop": false,
-			"offsets": [
-				28,
-				67
-			],
-			"anim": "singUPmiss",
 			"fps": 24,
-			"name": "pico Up note miss",
-			"indices": []
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "Pico NOTE DOWN miss"
 		},
 		{
 			"offsets": [
@@ -64,7 +64,18 @@
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "Pico Note Right0"
+			"name": "Pico NOTE RIGHT0"
+		},
+		{
+			"offsets": [
+				-45,
+				50
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "Pico NOTE RIGHT miss"
 		},
 		{
 			"offsets": [
@@ -79,17 +90,6 @@
 		},
 		{
 			"offsets": [
-				-45,
-				50
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "Pico Note Right Miss"
-		},
-		{
-			"offsets": [
 				83,
 				28
 			],
@@ -98,10 +98,65 @@
 			"anim": "singLEFTmiss",
 			"indices": [],
 			"name": "Pico NOTE LEFT miss"
+		},
+		{
+			"offsets": [
+				38,
+				2
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "yeah",
+			"indices": [],
+			"name": "Pico Middle finger"
+		},
+		{
+			"offsets": [
+				-14,
+				-9
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "Pico gun reload"
+		},
+		{
+			"offsets": [
+				255,
+				231
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "Pico Shoot 1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "bum",
+			"indices": [],
+			"name": "Pico hit spray can"
+		},
+		{
+			"offsets": [
+				80,
+				-38
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss-alt",
+			"indices": [],
+			"name": "Pico NOTE DOWN miss"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Pico_FNF_assetss",
+	"image": "characters/pico/pico",
 	"position": [
 		0,
 		300
@@ -117,6 +172,6 @@
 		220,
 		0
 	],
-	"sing_duration": 4,
+	"sing_duration": 5.79999999999999,
 	"scale": 1
 }

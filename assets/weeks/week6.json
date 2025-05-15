@@ -13,6 +13,7 @@
 	"weekBackground": "school",
 
 	"storyName": "HATING SIMULATOR FT. MOAWLING",
+	"storyColor": [255, 164, 74],
 	"weekBefore": "week5",
 	"weekName": "Week 6",
 	"startUnlocked": true,

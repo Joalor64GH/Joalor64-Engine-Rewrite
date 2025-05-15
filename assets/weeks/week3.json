@@ -13,6 +13,7 @@
 	"weekBackground": "philly",
 
 	"storyName": "PICO",
+	"storyColor": [10, 145, 0],
 	"weekBefore": "week2",
 	"weekName": "Week 3",
 	"startUnlocked": true,

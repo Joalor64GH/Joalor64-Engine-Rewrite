@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="eyes.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="tweenPL0000" x="0" y="42" width="83" height="26" frameX="-56" frameY="-253" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenPL0001" x="0" y="42" width="83" height="26" frameX="-57" frameY="-253" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenPL0002" x="0" y="0" width="110" height="42" frameX="-61" frameY="-237" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenPL0003" x="0" y="0" width="110" height="42" frameX="-63" frameY="-237" frameWidth="824" frameHeight="365"/>
+
+
+
+
+	<SubTexture name="tweenOP0000" x="0" y="0" width="110" height="42" frameX="-63" frameY="-237" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenOP0001" x="0" y="0" width="110" height="42" frameX="-61" frameY="-237" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenOP0002" x="0" y="42" width="83" height="26" frameX="-57" frameY="-253" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="tweenOP0003" x="0" y="42" width="83" height="26" frameX="-56" frameY="-253" frameWidth="824" frameHeight="365"/>
+
+	<SubTexture name="middle0000" x="0" y="0" width="110" height="42" frameX="-50" frameY="-239" frameWidth="824" frameHeight="365"/>
+</TextureAtlas>

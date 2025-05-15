@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ABot.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="idle0000" x="0" y="366" width="816" height="361" frameX="-6" frameY="0" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="idle0001" x="0" y="366" width="816" height="361" frameX="-6" frameY="0" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="idle0002" x="0" y="0" width="827" height="366" frameX="2" frameY="1" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="idle0003" x="0" y="0" width="827" height="366" frameX="2" frameY="1" frameWidth="824" frameHeight="365"/>
+	<SubTexture name="idle0004" x="0" y="366" width="816" height="361" frameX="-6" frameY="0" frameWidth="824" frameHeight="365"/>
+</TextureAtlas>

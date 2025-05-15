@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Pico_Blazin.png">
+	<!-- Created with Adobe Animate version 23.0.2.103 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Pico Block Hit0000" x="1" y="1" width="426" height="472" frameX="0" frameY="-2" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0001" x="1" y="1" width="426" height="472" frameX="0" frameY="-2" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0002" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0003" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0004" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0005" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0006" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0007" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0008" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0009" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0010" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0011" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0012" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0013" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0014" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0015" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0016" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0017" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0018" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico Block Hit0019" x="428" y="1" width="420" height="474" frameX="0" frameY="0" frameWidth="426" frameHeight="474"/>
+	<SubTexture name="Pico fighting stance idle0000" x="849" y="1" width="377" height="466" frameX="0" frameY="-2" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0001" x="849" y="1" width="377" height="466" frameX="0" frameY="-2" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0002" x="849" y="1" width="377" height="466" frameX="0" frameY="-2" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0003" x="1227" y="1" width="377" height="466" frameX="0" frameY="-2" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0004" x="1605" y="1" width="377" height="469"/>
+	<SubTexture name="Pico fighting stance idle0005" x="1983" y="1" width="377" height="469"/>
+	<SubTexture name="Pico fighting stance idle0006" x="1983" y="1" width="377" height="469"/>
+	<SubTexture name="Pico fighting stance idle0007" x="2361" y="1" width="377" height="469"/>
+	<SubTexture name="Pico fighting stance idle0008" x="2361" y="1" width="377" height="469"/>
+	<SubTexture name="Pico fighting stance idle0009" x="2739" y="1" width="376" height="468" frameX="0" frameY="0" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0010" x="3116" y="1" width="376" height="463" frameX="0" frameY="-5" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0011" x="3493" y="1" width="376" height="463" frameX="0" frameY="-5" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0012" x="3493" y="1" width="376" height="463" frameX="0" frameY="-5" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pico fighting stance idle0013" x="3493" y="1" width="376" height="463" frameX="0" frameY="-5" frameWidth="377" frameHeight="469"/>
+	<SubTexture name="Pre-Uppercut Pico0000" x="1" y="476" width="448" height="322" frameX="-10" frameY="-9" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0001" x="1" y="476" width="448" height="322" frameX="-10" frameY="-9" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0002" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0003" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0004" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0005" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0006" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0007" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0008" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0009" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0010" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0011" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0012" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0013" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0014" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0015" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0016" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0017" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0018" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Pre-Uppercut Pico0019" x="450" y="476" width="451" height="332" frameX="0" frameY="0" frameWidth="458" frameHeight="332"/>
+	<SubTexture name="Punch High 2 Pico 0000" x="902" y="476" width="504" height="458" frameX="0" frameY="0" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0001" x="902" y="476" width="504" height="458" frameX="0" frameY="0" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0002" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0003" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0004" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0005" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0006" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0007" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0008" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0009" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0010" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0011" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0012" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0013" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0014" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0015" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0016" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0017" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0018" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch High 2 Pico 0019" x="1407" y="476" width="488" height="456" frameX="-21" frameY="-2" frameWidth="509" frameHeight="458"/>
+	<SubTexture name="Punch Low Pico0000" x="1896" y="476" width="510" height="456" frameX="0" frameY="-8" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0001" x="1896" y="476" width="510" height="456" frameX="0" frameY="-8" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0002" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0003" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0004" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0005" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0006" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0007" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0008" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0009" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0010" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0011" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0012" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0013" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0014" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0015" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0016" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0017" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0018" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="Punch Low Pico0019" x="2407" y="476" width="487" height="464" frameX="-23" frameY="0" frameWidth="510" frameHeight="464"/>
+	<SubTexture name="fake out pico0000" x="2895" y="476" width="423" height="440" frameX="-10" frameY="-11" frameWidth="434" frameHeight="451"/>
+	<SubTexture name="fake out pico0001" x="2895" y="476" width="423" height="440" frameX="-10" frameY="-11" frameWidth="434" frameHeight="451"/>
+	<SubTexture name="fake out pico0002" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0003" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0004" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0005" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0006" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0007" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0008" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0009" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0010" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0011" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0012" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0013" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0014" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0015" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0016" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0017" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0018" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0019" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0020" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0021" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0022" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0023" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0024" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0025" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0026" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0027" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0028" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="fake out pico0029" x="3319" y="476" width="434" height="451"/>
+	<SubTexture name="hit high pico0000" x="1" y="941" width="419" height="515" frameX="-10" frameY="-17" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0001" x="1" y="941" width="419" height="515" frameX="-10" frameY="-17" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0002" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0003" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0004" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0005" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0006" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0007" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0008" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0009" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0010" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0011" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0012" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0013" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0014" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0015" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0016" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0017" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0018" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit high pico0019" x="421" y="941" width="375" height="522" frameX="0" frameY="0" frameWidth="429" frameHeight="532"/>
+	<SubTexture name="hit low Pico0000" x="797" y="941" width="521" height="484" frameX="0" frameY="0" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0001" x="797" y="941" width="521" height="484" frameX="0" frameY="0" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0002" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0003" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0004" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0005" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0006" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0007" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0008" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0009" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0010" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0011" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0012" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0013" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0014" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0015" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0016" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0017" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0018" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="hit low Pico0019" x="1319" y="941" width="396" height="478" frameX="-69" frameY="-8" frameWidth="521" frameHeight="486"/>
+	<SubTexture name="laughing pico0000" x="1716" y="941" width="375" height="455" frameX="0" frameY="-11" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0001" x="1716" y="941" width="375" height="455" frameX="0" frameY="-11" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0002" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0003" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0004" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0005" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0006" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0007" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0008" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0009" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0010" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0011" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0012" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0013" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0014" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0015" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0016" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0017" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0018" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0019" x="2440" y="941" width="347" height="464" frameX="-29" frameY="-3" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0020" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0021" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="laughing pico0022" x="2092" y="941" width="347" height="467" frameX="-29" frameY="0" frameWidth="376" frameHeight="467"/>
+	<SubTexture name="pico dodge0000" x="2788" y="941" width="340" height="459" frameX="-2" frameY="0" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0001" x="2788" y="941" width="340" height="459" frameX="-2" frameY="0" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0002" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0003" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0004" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0005" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0006" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0007" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0008" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0009" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0010" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0011" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0012" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0013" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0014" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0015" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0016" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0017" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0018" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="pico dodge0019" x="3129" y="941" width="341" height="452" frameX="0" frameY="-3" frameWidth="342" frameHeight="459"/>
+	<SubTexture name="punch high pico0000" x="3471" y="941" width="524" height="457" frameX="0" frameY="-3" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0001" x="3471" y="941" width="524" height="457" frameX="0" frameY="-3" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0002" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0003" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0004" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0005" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0006" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0007" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0008" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0009" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0010" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0011" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0012" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0013" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0014" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0015" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0016" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0017" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0018" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch high pico0019" x="1" y="1464" width="490" height="460" frameX="-36" frameY="0" frameWidth="526" frameHeight="460"/>
+	<SubTexture name="punch low 2 pico 0000" x="492" y="1464" width="812" height="447" frameX="0" frameY="-3" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0001" x="492" y="1464" width="812" height="447" frameX="0" frameY="-3" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0002" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0003" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0004" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0005" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0006" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0007" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0008" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0009" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0010" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0011" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0012" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0013" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0014" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0015" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0016" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0017" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0018" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="punch low 2 pico 0019" x="1305" y="1464" width="789" height="450" frameX="-23" frameY="0" frameWidth="812" frameHeight="450"/>
+	<SubTexture name="spin pico 0000" x="2095" y="1464" width="369" height="465" frameX="0" frameY="0" frameWidth="372" frameHeight="465"/>
+	<SubTexture name="spin pico 0001" x="2465" y="1464" width="302" height="435" frameX="-65" frameY="-25" frameWidth="372" frameHeight="465"/>
+	<SubTexture name="spin pico 0002" x="2768" y="1464" width="305" height="434" frameX="-67" frameY="-31" frameWidth="372" frameHeight="465"/>
+	<SubTexture name="uppercut hit pico0000" x="3074" y="1464" width="417" height="560" frameX="0" frameY="-74" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0001" x="3492" y="1464" width="395" height="642" frameX="-11" frameY="0" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0002" x="3492" y="1464" width="395" height="642" frameX="-11" frameY="0" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0003" x="1" y="2107" width="402" height="491" frameX="-32" frameY="-152" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0004" x="1" y="2107" width="402" height="491" frameX="-32" frameY="-152" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0005" x="404" y="2107" width="403" height="492" frameX="-33" frameY="-152" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0006" x="404" y="2107" width="403" height="492" frameX="-33" frameY="-152" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0007" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0008" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0009" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0010" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0011" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0012" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0013" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0014" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0015" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0016" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0017" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0018" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut hit pico0019" x="808" y="2107" width="405" height="490" frameX="-33" frameY="-154" frameWidth="438" frameHeight="644"/>
+	<SubTexture name="uppercut pico0000" x="1214" y="2107" width="452" height="520" frameX="0" frameY="0" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0001" x="1667" y="2107" width="452" height="520" frameX="0" frameY="0" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0002" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0003" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0004" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0005" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0006" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0007" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0008" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0009" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0010" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0011" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0012" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0013" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0014" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0015" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0016" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0017" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0018" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0019" x="2996" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0020" x="2120" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+	<SubTexture name="uppercut pico0021" x="2558" y="2107" width="437" height="506" frameX="-20" frameY="-14" frameWidth="457" frameHeight="520"/>
+</TextureAtlas>

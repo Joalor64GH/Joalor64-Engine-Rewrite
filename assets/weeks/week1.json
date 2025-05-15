@@ -13,6 +13,7 @@
 	"weekBackground": "stage",
 
 	"storyName": "DADDY DEAREST",
+	"storyColor": [171, 15, 255],
 	"weekBefore": "tutorial",
 	"weekName": "Week 1",
 	"startUnlocked": true,

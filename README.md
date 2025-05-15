@@ -35,7 +35,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Dark Mode Application Bar
 * In-Game Mod Downloader
 * Custom Options
-* Hscript Support
+* Basic HScript Support
 * Replay System
 * Reorganized Source/Assets
 * MP4/WebM Video Support

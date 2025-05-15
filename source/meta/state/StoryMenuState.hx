@@ -396,12 +396,10 @@ class StoryMenuState extends MusicBeatState
 		var leWeek:WeekData = loadedWeeks[curWeek];
 		WeekData.setDirectoryFromWeek(leWeek);
 
-		// out of curiosity, can someone please test this?
-		/*
-		FlxTween.color(bgSprite, 0.65, bgSprite.color, leWeek.storyColor);
+		// out of curiosity, does this work?
+		FlxTween.color(bgSprite, 0.65, bgSprite.color, FlxColor.fromRGB(leWeek.storyColor[0], leWeek.storyColor[1], leWeek.storyColor[2]));
 		for (char in grpWeekCharacters.members)
-			FlxTween.color(char, 0.65, char.color, leWeek.storyColor);
-		*/
+			FlxTween.color(char, 0.65, char.color, FlxColor.fromRGB(leWeek.storyColor[0], leWeek.storyColor[1], leWeek.storyColor[2]));
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();

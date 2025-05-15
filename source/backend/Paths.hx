@@ -592,35 +592,5 @@ class Paths
 		
 		return 'mods/$key';
 	}
-
-	@:deprecated("please ignore this")
-	static public function optionsExist(?key:String = null)
-	{
-		var modsFolder:Array<String> = Mods.getModDirectories();
-		modsFolder.insert(0, '');
-
-		if (key == null) {
-			for(mod in modsFolder){
-				var directory:String = mods(mod + '/options');
-				if (FileSystem.exists(directory)) {
-					for(file in FileSystem.readDirectory(directory)) {
-						var fileToCheck:String = mods(mod + '/options/' + file);
-						if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
-							return true;
-					}
-				}
-			}
-		}
-
-		var directory:String = mods(key + '/options');
-		if (FileSystem.exists(directory)) {
-			for(file in FileSystem.readDirectory(directory)) {
-				var fileToCheck:String = mods(key + '/options/' + file);
-				if(FileSystem.exists(fileToCheck) && fileToCheck.endsWith('.json'))
-					return true;
-			}
-		}
-		return false;
-	}
 	#end
 }

@@ -13,6 +13,7 @@
 	"weekBackground": "halloween",
 
 	"storyName": "SPOOKY MONTH",
+	"storyColor": [133, 72, 37],
 	"weekBefore": "week1",
 	"weekName": "Week 2",
 	"startUnlocked": true,

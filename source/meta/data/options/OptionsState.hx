@@ -200,7 +200,7 @@ class OptionsState extends MusicBeatState
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;
 				selectorRight.y = item.y;
-				var add:Float = (grpOptions.members.length > 4 ? grpOptions.members.length * 8 : 0);
+				final add:Float = (grpOptions.members.length > 4 ? grpOptions.members.length * 8 : 0);
 				camFollow.setPosition(item.getGraphicMidpoint().x, item.getGraphicMidpoint().y - add);
 			}
 		}

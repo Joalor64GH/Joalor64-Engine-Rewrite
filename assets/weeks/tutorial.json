@@ -11,6 +11,7 @@
 	"weekBackground": "stage",
 
 	"storyName": "TEACHING TIME",
+	"storyColor": [120, 11, 62],
 	"weekBefore": "tutorial",
 	"weekName": "Tutorial",
 	"startUnlocked": true,

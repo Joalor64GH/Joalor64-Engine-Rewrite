@@ -12,7 +12,8 @@
 	"weekBackground": "stage",
 
 	"storyName": "Test",
-	"weekBefore": "week7",
+	"storyColor": [121, 215, 255],
+	"weekBefore": "weekend1",
 	"weekName": "Week 8",
 	"startUnlocked": true,
 

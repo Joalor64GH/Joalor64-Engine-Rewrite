@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				60,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "ohshit",
+			"indices": [],
+			"name": "Pico Gets Pissed"
+		},
+		{
+			"offsets": [
+				-14,
+				-9
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "reload",
+			"indices": [],
+			"name": "Pico gun reload"
+		},
+		{
+			"offsets": [
+				256,
+				231
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "ohshoot",
+			"indices": [],
+			"name": "shoot and return0"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/pico/Pico_W1cutscene",
+	"position": [
+		0,
+		300
+	],
+	"healthicon": "pico",
+	"flip_x": true,
+	"healthbar_colors": [
+		183,
+		216,
+		85
+	],
+	"camera_position": [
+		215,
+		0
+	],
+	"sing_duration": 5.79999999999999,
+	"scale": 1
+}

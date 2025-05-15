@@ -1,0 +1,15 @@
+{
+	"confirm_anim": "confirm",
+	"idle_anim": "idle",
+	"confirm_offsets": [
+		0,
+		0
+	],
+	"position": [
+		0,
+		0
+	],
+	"scale": 1,
+	"flipX": false,
+	"image": "Menu_Nene"
+}

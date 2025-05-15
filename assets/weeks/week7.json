@@ -13,6 +13,7 @@
 	"weekBackground": "tank",
 
 	"storyName": "TANKMAN FT. JOHNNYUTAH",
+	"storyColor": [43, 43, 39],
 	"weekBefore": "week6",
 	"weekName": "Week 7",
 	"startUnlocked": true,

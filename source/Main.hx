@@ -1,13 +1,9 @@
 package;
 
-#if desktop
-import backend.ALSoftConfig;
-#end
-
 import system.GameDimensions;
 import meta.ButtplugUtils;
 import macros.MacroUtil;
-import core.ToastCore;
+import backend.ToastCore;
 import meta.video.*;
 import debug.FPS;
 
@@ -24,7 +20,7 @@ import haxe.Exception;
 import haxe.CallStack;
 import haxe.io.Path;
 
-#if linux
+#if (linux && !debug)
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('#define GAMEMODE_AUTO')
 #end
@@ -51,6 +47,23 @@ class Main extends Sprite
 
 	public static function main():Void
 		Lib.current.addChild(new Main());
+	
+	#if desktop
+	static function __init__():Void {
+		var origin:String = #if hl Sys.getCwd() #else Sys.programPath() #end;
+
+		var configPath:String = Path.directory(Path.withoutExtension(origin));
+		#if windows
+		configPath += "/alsoft.ini";
+		#elseif mac
+		configPath = Path.directory(configPath) + "/Resources/alsoft.conf";
+		#else
+		configPath += "/alsoft.conf";
+		#end
+
+		Sys.putEnv("ALSOFT_CONF", configPath);
+	}
+	#end
 
 	public function new()
 	{
