@@ -4,12 +4,11 @@ Just wanted to say thanks for downloading!
 If you don't know already, this is just a remake of Joalor64 Engine.
 I started working on this because I sort of became bored one day.
 -------------------------------------------------------------
-Little Update Status:
+Update Status:
 
-I decided to finally get back to this project after finishing up another
-important project. Now, the engine is coming back with new features, some
-bug fixes, and a whole lot more! Maybe soon, I'll even make a version of the engine 
-that runs on the latest Psych version! But for now, enjoy the pre-release!
+I decided to finally get back to this project once again!
+Sure, it may have been about a year or so since the last update,
+but I'll still at least try to get Version 1.4.0 out as soon as I can!
 -------------------------------------------------------------
 So, yeah. That's pretty much it!
 I hope you enjoy!

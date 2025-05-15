@@ -43,7 +43,7 @@ NOTE: **WE ARE NOT RESPONSIBLE FOR ANY CRASHES WITH HTML5/ANDROID, NOR ARE WE RE
 * Epic Modcharting Tools
 * Softcoded Achievements
 
-And a bunch more that ShadowMario will probably refuse to add.
+And a bunch more that ShadowMario would've probably refused to add.
 
 ## Planned Features
 You can check planned/upcoming features [here](/TODO).
