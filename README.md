@@ -1,3 +1,17 @@
+# PLEASE READ!
+I honestly don't really feel like working on this project anymore. <br>
+Updates on this have been pretty slow to the point where I've barely gotten any progress on it. <br>
+So, as of September 4, 2025, Joalor64 Engine will stop receiving updates. <br>
+I'm not done with FNF in general, though. I'll probably still do *some* FNF stuff. <br>
+But yeah, I guess it ends here. <br>
+Even if you did or didn't like this project, thank you for at least checking it out!
+
+Check out my other projects:
+* [Rhythmo](https://github.com/JoaTH-Team/Rhythmo-SC)
+* [Journey Through Aubekhia](https://github.com/Joalor64GH/JTA)
+* [VS Rob: Rebooted!](https://github.com/Joalor64GH/VS-Rob-Rebooted/)
+* [Foreverbox](https://joalor64gh.github.io/foreverbox.html)
+
 <p align="center">
   <img src="https://github.com/Joalor64GH/Joalor64-Engine-Rewrite/blob/main/art/logoNew.png" width="750"/></a>
   <h1 align="center">Joalor64 Engine Rewritten</h1>
